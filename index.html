@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❄️ برفی</title>
-
+<title>❄️ برفی | دوز آفلاین</title>
 <style>
 * {
     margin: 0;
@@ -15,26 +14,22 @@
 
 body {
     background: linear-gradient(135deg, #00b4ff, #6dd5fa, #ffffff);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
+/* صفحه اصلی */
 header {
     text-align: center;
     margin-bottom: 30px;
     color: white;
 }
-
-header h1 {
-    font-size: 55px;
-}
-
-header p {
-    font-size: 20px;
-}
+header h1 { font-size: 55px; }
+header p { font-size: 20px; }
 
 .box {
     background: white;
@@ -42,17 +37,10 @@ header p {
     border-radius: 20px;
     width: 320px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-
-.box h2 {
-    margin-bottom: 10px;
-}
-
-.box p {
-    margin-bottom: 20px;
-    color: #555;
-}
+.box h2 { margin-bottom: 10px; font-size: 24px; }
+.box p { margin-bottom: 20px; color: #555; font-size: 16px; }
 
 button {
     background: #00b4ff;
@@ -64,55 +52,357 @@ button {
     cursor: pointer;
     transition: 0.3s;
 }
-
 button:hover {
     background: #008fd1;
     transform: scale(1.05);
 }
 
-#soon {
+/* صفحه دوم – منوی بازی */
+#menuPage, #gamePage {
     display: none;
-    margin-top: 20px;
-    font-size: 24px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.menu-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.menu-box h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+.menu-box button {
+    width: 80%;
+    margin: 8px auto;
+    font-size: 20px;
+}
+
+/* صفحه بازی */
+.game-container {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.back-btn:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+}
+
+.game-status {
+    font-size: 18px;
+    margin: 10px 0 15px;
+    text-align: center;
     font-weight: bold;
-    color: #00b4ff;
+    color: #333;
 }
 
-.dots::after {
-    content: "";
-    animation: dots 1.5s infinite;
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 10px auto;
+    max-width: 280px;
 }
 
-@keyframes dots {
-    0% { content: ""; }
-    25% { content: "."; }
-    50% { content: ".."; }
-    75% { content: "..."; }
-    100% { content: ""; }
+.cell {
+    background: #f0f8ff;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.cell:hover:not(.taken) {
+    background: #d4edff;
+    transform: scale(1.02);
+}
+.cell.taken {
+    cursor: default;
+}
+.cell.x { color: #2196F3; }
+.cell.o { color: #FF5722; }
+
+.reset-btn {
+    background: #f39c12;
+    margin-top: 12px;
+    padding: 8px 25px;
+    font-size: 16px;
+}
+.reset-btn:hover {
+    background: #e08e0b;
+}
+
+.hidden { display: none !important; }
+
+/* ریسپانسیو */
+@media(max-width: 480px) {
+    header h1 { font-size: 40px; }
+    .box { width: 90%; }
+    .menu-box button { width: 100%; }
 }
 </style>
-
 </head>
 <body>
 
-<header>
-    <h1>❄️ برفی</h1>
-    <p>به سایت برفی خوش آمدید</p>
-</header>
+<!-- ==================== صفحه اصلی ==================== -->
+<div id="homePage">
+    <header>
+        <h1>❄️ برفی</h1>
+        <p>به سایت برفی خوش آمدید</p>
+    </header>
+    <div class="box">
+        <h2>👋 سلام!</h2>
+        <p>این یک سایت زیبا و ساده است.</p>
+        <button onclick="goToMenu()">🚀 شروع</button>
+    </div>
+</div>
 
-<div class="box">
-    <h2>👋 سلام!</h2>
-    <p>این یک سایت زیبا و ساده است.</p>
-    <button onclick="showSoon()">🚀 شروع</button>
-    <p id="soon">
-        به زودی <span class="dots"></span>
-    </p>
+<!-- ==================== صفحه منوی بازی ==================== -->
+<div id="menuPage">
+    <div class="menu-box">
+        <h2>🎮 بازی‌ها</h2>
+        <button onclick="goToGame()">⚽ دوز آفلاین با ربات</button>
+        <br><br>
+        <button onclick="goToGame()">🚪 ورود به بازی</button>
+        <br><br>
+        <button style="background:#aaa;" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+    </div>
+</div>
+
+<!-- ==================== صفحه بازی دوز ==================== -->
+<div id="gamePage">
+    <div class="game-container">
+        <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+        <h3 style="text-align:center; margin-top:5px;">🎯 بازی دوز</h3>
+        <div class="game-status" id="statusMsg">ربات در حال فکر کردن...</div>
+        <div class="board" id="board"></div>
+        <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
+    </div>
 </div>
 
 <script>
-function showSoon() {
-    document.getElementById("soon").style.display = "block";
+// ============================================================
+//  منطق بازی دوز
+// ============================================================
+const boardEl = document.getElementById('board');
+const statusMsg = document.getElementById('statusMsg');
+let board = Array(9).fill('');
+let currentPlayer = 'X'; // X = انسان, O = ربات
+let gameOver = false;
+let isRobotTurn = false;
+
+// برنده‌های ممکن
+const winPatterns = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+];
+
+// ساخت تخته
+function renderBoard() {
+    boardEl.innerHTML = '';
+    board.forEach((val, idx) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (val) {
+            cell.classList.add('taken', val === 'X' ? 'x' : 'o');
+            cell.textContent = val;
+        } else {
+            cell.dataset.index = idx;
+            cell.addEventListener('click', () => handleHumanMove(idx));
+        }
+        boardEl.appendChild(cell);
+    });
 }
+
+// بررسی برنده یا مساوی
+function checkWinner() {
+    for (let p of winPatterns) {
+        const [a,b,c] = p;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a]; // 'X' یا 'O'
+        }
+    }
+    if (board.every(v => v !== '')) return 'draw';
+    return null;
+}
+
+// پایان بازی
+function endGame(result) {
+    gameOver = true;
+    if (result === 'X') {
+        statusMsg.textContent = '🎉 شما برنده شدید!';
+    } else if (result === 'O') {
+        statusMsg.textContent = '🤖 ربات برنده شد!';
+    } else if (result === 'draw') {
+        statusMsg.textContent = '🤝 مساوی!';
+    }
+    // غیرفعال کردن کلیک روی سلول‌ها (با کلاس taken)
+    document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
+}
+
+// حرکت انسان
+function handleHumanMove(index) {
+    if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
+    // حرکت انسان
+    board[index] = 'X';
+    renderBoard();
+    const winner = checkWinner();
+    if (winner) {
+        endGame(winner);
+        return;
+    }
+    // نوبت ربات
+    currentPlayer = 'O';
+    isRobotTurn = true;
+    statusMsg.textContent = '🤖 ربات در حال فکر...';
+    setTimeout(robotMove, 500);
+}
+
+// حرکت ربات (ساده: اولویت با برد/مسدود کردن، سپس تصادفی)
+function robotMove() {
+    if (gameOver) {
+        isRobotTurn = false;
+        return;
+    }
+    // 1. اگر ربات می‌تواند برنده شود
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+            board[i] = 'O';
+            if (checkWinner() === 'O') {
+                applyRobotMove(i);
+                return;
+            }
+            board[i] = '';
+        }
+    }
+    // 2. جلوگیری از برد انسان
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+            board[i] = 'X';
+            if (checkWinner() === 'X') {
+                board[i] = '';
+                applyRobotMove(i);
+                return;
+            }
+            board[i] = '';
+        }
+    }
+    // 3. حرکت تصادفی
+    const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
+    if (empty.length === 0) {
+        // مساوی (قبلاً باید چک شده باشد)
+        isRobotTurn = false;
+        return;
+    }
+    const randIdx = empty[Math.floor(Math.random() * empty.length)];
+    applyRobotMove(randIdx);
+}
+
+function applyRobotMove(index) {
+    board[index] = 'O';
+    renderBoard();
+    const winner = checkWinner();
+    if (winner) {
+        endGame(winner);
+        isRobotTurn = false;
+        return;
+    }
+    // نوبت انسان
+    currentPlayer = 'X';
+    isRobotTurn = false;
+    statusMsg.textContent = 'نوبت شما (X)';
+}
+
+// شروع بازی (ربات اول حرکت می‌کند)
+function startGame() {
+    board = Array(9).fill('');
+    gameOver = false;
+    currentPlayer = 'X';
+    isRobotTurn = false;
+    renderBoard();
+    statusMsg.textContent = 'ربات در حال شروع...';
+    // بعد از نیم ثانیه ربات حرکت می‌کند
+    setTimeout(() => {
+        if (!gameOver) {
+            // ربات اول حرکت کند (مرکز یا تصادفی)
+            const center = 4;
+            if (board[center] === '') {
+                applyRobotMove(center);
+            } else {
+                const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
+                if (empty.length > 0) {
+                    const rand = empty[Math.floor(Math.random() * empty.length)];
+                    applyRobotMove(rand);
+                }
+            }
+        }
+    }, 400);
+}
+
+// ریست بازی
+function resetGame() {
+    startGame();
+}
+
+// ============================================================
+//  نمایش صفحات
+// ============================================================
+function showPage(pageId) {
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('menuPage').style.display = 'none';
+    document.getElementById('gamePage').style.display = 'none';
+    document.getElementById(pageId).style.display = 'flex';
+}
+
+function goToMenu() {
+    showPage('menuPage');
+}
+
+function goToGame() {
+    showPage('gamePage');
+    startGame(); // ربات اول حرکت می‌کند
+}
+
+function goHome() {
+    showPage('homePage');
+}
+
+// ============================================================
+//  مقداردهی اولیه
+// ============================================================
+// صفحه اصلی را نشان بده
+showPage('homePage');
 </script>
 
 </body>
