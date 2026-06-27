@@ -274,7 +274,7 @@
         .connection-status {
             text-align: center;
             font-size: 13px;
-            padding: 5px;
+            padding: 8px;
             border-radius: 8px;
             margin-bottom: 10px;
         }
@@ -289,6 +289,33 @@
         .connection-status.waiting {
             background: #fff3cd;
             color: #856404;
+        }
+        .connection-status.searching {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        /* انیمیشن جستجو */
+        .searching-dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0% {
+                content: '';
+            }
+            25% {
+                content: '.';
+            }
+            50% {
+                content: '..';
+            }
+            75% {
+                content: '...';
+            }
+            100% {
+                content: '';
+            }
         }
     </style>
 </head>
@@ -318,13 +345,13 @@
         <div class="game-container">
             <button class="back-btn" onclick="goToMenu()">↩ بازگشت به منو</button>
 
-            <div class="connection-status online" id="connectionStatus">● متصل</div>
+            <div class="connection-status searching" id="connectionStatus">🔍 در جستجوی بازیکن...</div>
 
             <div class="player-info" id="playerInfo">
                 شما: <span id="mySymbol">X</span> | حریف: <span id="opponentSymbol">O</span>
             </div>
 
-            <div class="game-status" id="statusMsg">در انتظار حریف...</div>
+            <div class="game-status" id="statusMsg">⏳ در حال جستجوی بازیکن...</div>
 
             <div class="board" id="board"></div>
 
@@ -376,6 +403,8 @@
         let gameId = null;
         let playerId = null;
         let isRobotTurn = false;
+        let isSearching = false;
+        let searchChannel = null;
 
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -416,7 +445,12 @@
                 gameId = null;
                 playerId = null;
             }
+            if (searchChannel) {
+                searchChannel.unsubscribe();
+                searchChannel = null;
+            }
             isOnline = false;
+            isSearching = false;
             showPage('menuPage');
         }
 
@@ -597,22 +631,26 @@
         }
 
         // ==========================================================
-        //  بازی آنلاین
+        //  بازی آنلاین با جستجوی بازیکن
         // ==========================================================
         async function startOnlineGame() {
             isOnline = true;
+            isSearching = true;
             mySymbol = 'X';
             opponentSymbol = 'O';
             currentPlayer = 'X';
             gameOver = false;
             board = Array(9).fill('');
 
-            connectionStatus.className = 'connection-status waiting';
-            connectionStatus.textContent = '● در حال اتصال...';
+            connectionStatus.className = 'connection-status searching';
+            connectionStatus.textContent = '🔍 در جستجوی بازیکن...';
+            statusMsg.textContent = '⏳ در حال جستجوی بازیکن...';
 
             showPage('gamePage');
             renderBoard();
-            statusMsg.textContent = 'در حال ایجاد بازی...';
+
+            // غیرفعال کردن دکمه‌های بازی در حین جستجو
+            document.querySelectorAll('.cell').forEach(c => c.style.cursor = 'default');
 
             try {
                 // اول ببینیم بازی موجود با status waiting هست یا نه
@@ -620,11 +658,10 @@
                     .from('games')
                     .select('*')
                     .eq('status', 'waiting')
+                    .order('created_at', { ascending: true })
                     .limit(1);
 
                 if (searchError) throw searchError;
-
-                let gameData;
 
                 if (waitingGames && waitingGames.length > 0) {
                     // بازی موجود پیدا شد - به عنوان O وارد می‌شویم
@@ -646,14 +683,15 @@
 
                     document.getElementById('playerInfo').innerHTML = 'شما: <span>O</span> | حریف: <span>X</span>';
                     connectionStatus.className = 'connection-status online';
-                    connectionStatus.textContent = '● به بازی موجود پیوستید';
-                    statusMsg.textContent = 'نوبت حریف (X)...';
+                    connectionStatus.textContent = '✅ بازیکن پیدا شد!';
+                    statusMsg.textContent = '🎮 بازی شروع شد! نوبت حریف (X)...';
 
+                    isSearching = false;
                     await loadGameState(gameId);
                     listenToGame(gameId);
 
                 } else {
-                    // بازی جدید بساز
+                    // بازی جدید بساز - به عنوان X
                     const { data, error } = await supabase
                         .from('games')
                         .insert([{
@@ -674,19 +712,66 @@
                     opponentSymbol = 'O';
 
                     document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | حریف: <span>O</span>';
-                    connectionStatus.className = 'connection-status waiting';
-                    connectionStatus.textContent = '● منتظر حریف...';
-                    statusMsg.textContent = '⏳ منتظر ورود حریف...';
 
-                    listenToGame(gameId);
+                    // شروع جستجوی بازیکن
+                    statusMsg.textContent = '🔍 در جستجوی بازیکن...';
+                    connectionStatus.textContent = '🔍 در جستجوی بازیکن...';
+
+                    // گوش دادن به تغییرات بازی برای پیدا شدن حریف
+                    listenForOpponent(gameId);
                 }
 
             } catch (error) {
                 console.error('خطا:', error);
-                statusMsg.textContent = '❌ خطا در ایجاد بازی';
+                statusMsg.textContent = '❌ خطا در اتصال';
                 connectionStatus.textContent = '● خطا';
                 connectionStatus.className = 'connection-status offline';
+                isSearching = false;
             }
+        }
+
+        function listenForOpponent(gameId) {
+            if (searchChannel) {
+                searchChannel.unsubscribe();
+            }
+
+            searchChannel = supabase
+                .channel(`game_${gameId}_search`)
+                .on('postgres_changes', {
+                    event: 'UPDATE',
+                    schema: 'public',
+                    table: 'games',
+                    filter: `id=eq.${gameId}`
+                }, (payload) => {
+                    const data = payload.new;
+
+                    // اگر بازیکن O وارد شد
+                    if (data.player_o && playerId === 'player1' && mySymbol === 'X') {
+                        isSearching = false;
+                        connectionStatus.className = 'connection-status online';
+                        connectionStatus.textContent = '✅ بازیکن پیدا شد!';
+                        statusMsg.textContent = '🎮 بازی شروع شد! نوبت شماست!';
+
+                        // فعال کردن دکمه‌ها
+                        document.querySelectorAll('.cell').forEach(c => c.style.cursor = 'pointer');
+
+                        // بروزرسانی وضعیت بازی
+                        if (data.board) {
+                            board = data.board;
+                            renderBoard();
+                        }
+                        currentPlayer = data.current_player;
+                        gameOver = data.status === 'finished';
+
+                        // گوش دادن به بازی
+                        if (searchChannel) {
+                            searchChannel.unsubscribe();
+                            searchChannel = null;
+                        }
+                        listenToGame(gameId);
+                    }
+                })
+                .subscribe();
         }
 
         async function loadGameState(gameId) {
@@ -759,6 +844,11 @@
         }
 
         function listenToGame(gameId) {
+            if (searchChannel) {
+                searchChannel.unsubscribe();
+                searchChannel = null;
+            }
+
             supabase
                 .channel(`game_${gameId}`)
                 .on('postgres_changes', {
@@ -768,19 +858,6 @@
                     filter: `id=eq.${gameId}`
                 }, (payload) => {
                     const data = payload.new;
-
-                    // اگر بازیکن O وارد شد و ما X هستیم
-                    if (data.player_o && playerId === 'player1' && mySymbol === 'X') {
-                        connectionStatus.className = 'connection-status online';
-                        connectionStatus.textContent = '● حریف وارد شد!';
-                        statusMsg.textContent = '🎮 بازی شروع شد! نوبت شماست!';
-                    }
-
-                    // اگر ما O هستیم و بازی شروع شد
-                    if (data.status === 'playing' && mySymbol === 'O') {
-                        connectionStatus.className = 'connection-status online';
-                        connectionStatus.textContent = '● بازی شروع شد!';
-                    }
 
                     // بروزرسانی تخته
                     if (data.board) {
