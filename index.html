@@ -222,6 +222,14 @@
         .reset-btn:hover {
             background: #e08e0b;
         }
+
+        /* پیام خالی */
+        .empty-msg {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -236,7 +244,9 @@
         </div>
 
         <!-- بخش نمایش پیام‌ها -->
-        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="empty-msg">💬 پیامی برای نمایش وجود ندارد</div>
+        </div>
 
         <!-- بخش نوشتن و ارسال پیام -->
         <div class="chat-input-area">
@@ -288,6 +298,10 @@
                 return;
             }
             chatMessages.innerHTML = '';
+            if (data.length === 0) {
+                chatMessages.innerHTML = '<div class="empty-msg">💬 پیامی برای نمایش وجود ندارد</div>';
+                return;
+            }
             data.forEach(msg => {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = 'chat-msg other';
@@ -305,6 +319,10 @@
                 schema: 'public',
                 table: 'messages'
             }, (payload) => {
+                // حذف پیام خالی
+                const empty = chatMessages.querySelector('.empty-msg');
+                if (empty) empty.remove();
+
                 const msgDiv = document.createElement('div');
                 msgDiv.className = 'chat-msg other';
                 msgDiv.textContent = payload.new.text;
@@ -320,14 +338,29 @@
                 alert('لطفاً یک پیام بنویسید!');
                 return;
             }
+
+            // نمایش پیام شما در صفحه
+            const empty = chatMessages.querySelector('.empty-msg');
+            if (empty) empty.remove();
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-msg you';
+            msgDiv.textContent = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // ارسال به Supabase
             const { error } = await supabase
                 .from('messages')
                 .insert([{ text: text }]);
+
             if (error) {
+                console.error('خطا در ارسال:', error);
                 alert('خطا در ارسال پیام');
                 return;
             }
-            chatInput.value = ''; // خالی کردن فیلد بعد از ارسال
+
+            chatInput.value = ''; // خالی کردن فیلد
         }
 
         // ارسال با دکمه Enter
