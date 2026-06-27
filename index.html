@@ -1,811 +1,315 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❄️ برفی | دوز آنلاین</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: tahoma;
-        }
-        body {
-            background: linear-gradient(135deg, #00b4ff, #6dd5fa, #ffffff);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #00b4ff;
-        }
-        .header h1 {
-            font-size: 28px;
-        }
-        .header p {
-            font-size: 14px;
-            color: #555;
-        }
-        #menuPage {
-            display: block;
-        }
-        #gamePage {
-            display: none;
-        }
-        #chatPage {
-            display: none;
-        }
-        .menu-box {
-            text-align: center;
-        }
-        .menu-box h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .menu-box button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .menu-box .btn-online {
-            background: #00b4ff;
-            color: white;
-        }
-        .menu-box .btn-online:hover {
-            background: #008fd1;
-            transform: scale(1.02);
-        }
-        .menu-box .btn-offline {
-            background: #f39c12;
-            color: white;
-        }
-        .menu-box .btn-offline:hover {
-            background: #e08e0b;
-            transform: scale(1.02);
-        }
-        .menu-box .btn-chat {
-            background: #9b59b6;
-            color: white;
-        }
-        .menu-box .btn-chat:hover {
-            background: #8e44ad;
-            transform: scale(1.02);
-        }
-        .game-container {
-            position: relative;
-        }
-        .back-btn {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
-        .back-btn:hover {
-            background: #e74c3c;
-        }
-        .game-status {
-            font-size: 18px;
-            margin: 10px 0 15px;
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 10px auto;
-            max-width: 300px;
-        }
-        .cell {
-            background: #f0f8ff;
-            border-radius: 10px;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        .cell:hover:not(.taken) {
-            background: #d4edff;
-            transform: scale(1.02);
-        }
-        .cell.taken {
-            cursor: default;
-        }
-        .cell.x {
-            color: #2196F3;
-        }
-        .cell.o {
-            color: #FF5722;
-        }
-        .reset-btn {
-            background: #f39c12;
-            margin-top: 12px;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-        .reset-btn:hover {
-            background: #e08e0b;
-        }
-        .chat-messages {
-            height: 250px;
-            overflow-y: auto;
-            border: 1px solid #eee;
-            border-radius: 15px;
-            padding: 12px;
-            margin-bottom: 12px;
-            background: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-msg {
-            padding: 8px 14px;
-            margin-bottom: 6px;
-            border-radius: 18px;
-            max-width: 80%;
-            word-wrap: break-word;
-            font-size: 14px;
-        }
-        .chat-msg.other {
-            background: #e9ecef;
-            color: #333;
-            align-self: flex-start;
-        }
-        .chat-msg.you {
-            background: #00b4ff;
-            color: white;
-            align-self: flex-end;
-        }
-        .chat-input-area {
-            display: flex;
-            gap: 8px;
-        }
-        .chat-input-area input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 15px;
-            outline: none;
-        }
-        .chat-input-area input:focus {
-            border-color: #00b4ff;
-        }
-        .chat-input-area button {
-            background: #00b4ff;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .chat-input-area button:hover {
-            background: #008fd1;
-        }
-        .empty-msg {
-            text-align: center;
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 20px;
-        }
-        .footer-text {
-            font-size: 12px;
-            color: #999;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .player-info {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        .player-info span {
-            font-weight: bold;
-            color: #00b4ff;
-        }
-        .connection-status {
-            text-align: center;
-            font-size: 13px;
-            padding: 8px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .connection-status.online {
-            background: #d4edda;
-            color: #155724;
-        }
-        .connection-status.offline {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        .connection-status.waiting {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .connection-status.searching {
-            background: #cce5ff;
-            color: #004085;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❄️ برفی</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: tahoma;
+}
+
+body {
+    background: linear-gradient(135deg, #00b4ff, #6dd5fa, #ffffff);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+header h1 { font-size: 55px; }
+header p { font-size: 20px; }
+
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.box h2 { margin-bottom: 10px; font-size: 24px; }
+.box p { margin-bottom: 20px; color: #555; font-size: 16px; }
+
+button {
+    background: #00b4ff;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: #008fd1;
+    transform: scale(1.05);
+}
+
+#menuPage, #gamePage {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.menu-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.menu-box h2 { font-size: 28px; margin-bottom: 25px; }
+.menu-box button { width: 80%; margin: 8px auto; font-size: 20px; }
+.menu-box p { font-size: 22px; margin: 15px 0; color: #333; }
+
+.game-container {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.back-btn:hover { background: #e74c3c; transform: scale(1.05); }
+
+.game-status {
+    font-size: 18px;
+    margin: 10px 0 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 10px auto;
+    max-width: 280px;
+}
+
+.cell {
+    background: #f0f8ff;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.cell:hover:not(.taken) { background: #d4edff; transform: scale(1.02); }
+.cell.taken { cursor: default; }
+.cell.x { color: #2196F3; }
+.cell.o { color: #FF5722; }
+
+.reset-btn {
+    background: #f39c12;
+    margin-top: 12px;
+    padding: 8px 25px;
+    font-size: 16px;
+}
+.reset-btn:hover { background: #e08e0b; }
+
+.hidden { display: none !important; }
+
+@media(max-width: 480px) {
+    header h1 { font-size: 40px; }
+    .box { width: 90%; }
+    .menu-box button { width: 100%; }
+}
+</style>
 </head>
 <body>
 
-    <!-- ===== منو ===== -->
-    <div id="menuPage" class="container">
-        <div class="header">
-            <h1>❄️ برفی</h1>
-            <p>بازی دوز آنلاین</p>
-        </div>
-        <div class="menu-box">
-            <h2>🎮 انتخاب حالت بازی</h2>
-            <button class="btn-online" onclick="startOnline()">🌐 دوز آنلاین (دو نفره)</button>
-            <button class="btn-offline" onclick="startOffline()">🤖 دوز آفلاین (با ربات)</button>
-            <button class="btn-chat" onclick="goChat()">💬 چت گروهی</button>
-        </div>
+<!-- ======== صفحه اصلی ======== -->
+<div id="homePage">
+    <header>
+        <h1>❄️ برفی</h1>
+        <p>به سایت برفی خوش آمدید</p>
+    </header>
+    <div class="box">
+        <h2>👋 سلام!</h2>
+        <p>این یک سایت زیبا و ساده است.</p>
+        <button onclick="goToMenu()">🚀 شروع</button>
     </div>
+</div>
 
-    <!-- ===== بازی ===== -->
-    <div id="gamePage" class="container">
-        <div class="game-container">
-            <button class="back-btn" onclick="backMenu()">↩ بازگشت</button>
-            <div class="connection-status" id="connStatus">● متصل</div>
-            <div class="player-info" id="playerInfo">شما: <span id="mySymbol">X</span> | حریف: <span id="oppSymbol">O</span></div>
-            <div class="game-status" id="statusMsg">در انتظار...</div>
-            <div class="board" id="board"></div>
-            <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
-        </div>
+<!-- ======== صفحه منوی بازی ======== -->
+<div id="menuPage">
+    <div class="menu-box">
+        <h2>🎮 بازی‌ها</h2>
+        <p>⚽ دوز آفلاین با ربات</p>
+        <button onclick="goToGame()">🚪 ورود به بازی</button>
+        <br><br>
+        <button style="background:#aaa;" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
     </div>
+</div>
 
-    <!-- ===== چت ===== -->
-    <div id="chatPage" class="container">
-        <div class="chat-container">
-            <button class="back-btn" onclick="backMenu()">↩ بازگشت</button>
-            <h3 style="text-align:center; margin-bottom:10px; color:#00b4ff;">💬 چت گروهی</h3>
-            <div class="chat-messages" id="chatMessages"><div class="empty-msg">💬 پیامی نیست</div></div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="پیام خود را بنویسید...">
-                <button onclick="sendChat()">📤 ارسال</button>
-            </div>
-            <p class="footer-text">* پیام‌ها برای همه کاربران نمایش داده می‌شود.</p>
-        </div>
+<!-- ======== صفحه بازی دوز ======== -->
+<div id="gamePage">
+    <div class="game-container">
+        <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+        <h3 style="text-align:center; margin-top:5px;">🎯 بازی دوز</h3>
+        <div class="game-status" id="statusMsg">ربات در حال فکر کردن...</div>
+        <div class="board" id="board"></div>
+        <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
     </div>
+</div>
 
-    <script>
-        // ==========================================================
-        //  تنظیمات Supabase - اینجا کلید خودتون رو بذارید
-        // ==========================================================
-        const SUPABASE_URL = "https://uyfomwdjyvkyhoolo.subspace.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_jGPMijQTM3BqB9tp14FUzg_Sd4RReIx";
+<script>
+const boardEl = document.getElementById('board');
+const statusMsg = document.getElementById('statusMsg');
+let board = Array(9).fill('');
+let currentPlayer = 'X';
+let gameOver = false;
+let isRobotTurn = false;
+const winPatterns = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+];
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // ==========================================================
-        //  متغیرها
-        // ==========================================================
-        let board = Array(9).fill('');
-        let currentPlayer = 'X';
-        let gameOver = false;
-        let isOnline = false;
-        let mySymbol = 'X';
-        let oppSymbol = 'O';
-        let gameId = null;
-        let playerId = null;
-        let channel = null;
-
-        const boardEl = document.getElementById('board');
-        const statusMsg = document.getElementById('statusMsg');
-        const connStatus = document.getElementById('connStatus');
-
-        const winPatterns = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-
-        // ==========================================================
-        //  نمایش صفحات
-        // ==========================================================
-        function showPage(id) {
-            document.getElementById('menuPage').style.display = 'none';
-            document.getElementById('gamePage').style.display = 'none';
-            document.getElementById('chatPage').style.display = 'none';
-            document.getElementById(id).style.display = 'block';
+function renderBoard() {
+    boardEl.innerHTML = '';
+    board.forEach((val, idx) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (val) {
+            cell.classList.add('taken', val === 'X' ? 'x' : 'o');
+            cell.textContent = val;
+        } else {
+            cell.dataset.index = idx;
+            cell.addEventListener('click', () => handleHumanMove(idx));
         }
+        boardEl.appendChild(cell);
+    });
+}
 
-        function backMenu() {
-            if (channel) { channel.unsubscribe();
-                channel = null; }
-            gameId = null;
-            playerId = null;
-            isOnline = false;
-            showPage('menuPage');
+function checkWinner() {
+    for (let p of winPatterns) {
+        const [a,b,c] = p;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a];
         }
+    }
+    if (board.every(v => v !== '')) return 'draw';
+    return null;
+}
 
-        function goChat() {
-            showPage('chatPage');
-            loadChat();
+function endGame(result) {
+    gameOver = true;
+    if (result === 'X') statusMsg.textContent = '🎉 شما برنده شدید!';
+    else if (result === 'O') statusMsg.textContent = '🤖 ربات برنده شد!';
+    else if (result === 'draw') statusMsg.textContent = '🤝 مساوی!';
+    document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
+}
+
+function handleHumanMove(index) {
+    if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
+    board[index] = 'X';
+    renderBoard();
+    const winner = checkWinner();
+    if (winner) { endGame(winner); return; }
+    currentPlayer = 'O';
+    isRobotTurn = true;
+    statusMsg.textContent = '🤖 ربات در حال فکر...';
+    setTimeout(robotMove, 500);
+}
+
+function robotMove() {
+    if (gameOver) { isRobotTurn = false; return; }
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+            board[i] = 'O';
+            if (checkWinner() === 'O') { applyRobotMove(i); return; }
+            board[i] = '';
         }
-
-        // ==========================================================
-        //  بازی آفلاین
-        // ==========================================================
-        function startOffline() {
-            isOnline = false;
-            mySymbol = 'X';
-            oppSymbol = 'O';
-            currentPlayer = 'X';
-            gameOver = false;
-            board = Array(9).fill('');
-            document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | ربات: <span>O</span>';
-            connStatus.className = 'connection-status offline';
-            connStatus.textContent = '● آفلاین (ربات)';
-            showPage('gamePage');
-            renderBoard();
-            statusMsg.textContent = 'نوبت شما (X)';
-        }
-
-        function robotMove() {
-            if (gameOver || currentPlayer !== 'O') return;
-
-            // برد خودش
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'O';
-                    if (checkWinner() === 'O') {
-                        renderBoard();
-                        const w = checkWinner();
-                        if (w) endGame(w);
-                        currentPlayer = 'X';
-                        return;
-                    }
-                    board[i] = '';
-                }
+    }
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+            board[i] = 'X';
+            if (checkWinner() === 'X') {
+                board[i] = '';
+                applyRobotMove(i);
+                return;
             }
-
-            // جلوگیری از برد بازیکن
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'X';
-                    if (checkWinner() === 'X') {
-                        board[i] = '';
-                        board[i] = 'O';
-                        renderBoard();
-                        const w = checkWinner();
-                        if (w) { endGame(w); } else { currentPlayer = 'X';
-                            statusMsg.textContent = 'نوبت شما (X)'; }
-                        return;
-                    }
-                    board[i] = '';
-                }
-            }
-
-            // تصادفی
-            const empty = board.reduce((a, v, i) => v === '' ? [...a, i] : a, []);
-            if (empty.length > 0) {
-                const r = empty[Math.floor(Math.random() * empty.length)];
-                board[r] = 'O';
-                renderBoard();
-                const w = checkWinner();
-                if (w) { endGame(w); } else { currentPlayer = 'X';
-                    statusMsg.textContent = 'نوبت شما (X)'; }
-            }
+            board[i] = '';
         }
+    }
+    const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
+    if (empty.length === 0) { isRobotTurn = false; return; }
+    const randIdx = empty[Math.floor(Math.random() * empty.length)];
+    applyRobotMove(randIdx);
+}
 
-        // ==========================================================
-        //  بازی آنلاین
-        // ==========================================================
-        async function startOnline() {
-            isOnline = true;
-            mySymbol = 'X';
-            oppSymbol = 'O';
-            currentPlayer = 'X';
-            gameOver = false;
-            board = Array(9).fill('');
+function applyRobotMove(index) {
+    board[index] = 'O';
+    renderBoard();
+    const winner = checkWinner();
+    if (winner) { endGame(winner); isRobotTurn = false; return; }
+    currentPlayer = 'X';
+    isRobotTurn = false;
+    statusMsg.textContent = 'نوبت شما (X)';
+}
 
-            connStatus.className = 'connection-status searching';
-            connStatus.textContent = '🔍 در جستجوی بازیکن...';
-            statusMsg.textContent = '⏳ در حال جستجو...';
+function startGame() {
+    board = Array(9).fill('');
+    gameOver = false;
+    currentPlayer = 'X';
+    isRobotTurn = false;
+    renderBoard();
+    // تغییر اینجا: ربات دیگر اول حرکت نمی‌کند، خودتان شروع کنید
+    statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
+}
 
-            showPage('gamePage');
-            renderBoard();
+function resetGame() { startGame(); }
 
-            try {
-                // دنبال بازی موجود می‌گردیم
-                const { data: waiting, error: e1 } = await supabase
-                    .from('games')
-                    .select('*')
-                    .eq('status', 'waiting')
-                    .order('created_at', { ascending: true })
-                    .limit(1);
+function showPage(pageId) {
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('menuPage').style.display = 'none';
+    document.getElementById('gamePage').style.display = 'none';
+    document.getElementById(pageId).style.display = 'flex';
+}
 
-                if (e1) throw e1;
+function goToMenu() { showPage('menuPage'); }
+function goToGame() { showPage('gamePage'); startGame(); }
+function goHome() { showPage('homePage'); }
 
-                if (waiting && waiting.length > 0) {
-                    // بازی موجود - وارد می‌شیم به عنوان O
-                    const g = waiting[0];
-                    gameId = g.id;
-                    playerId = 'player2';
-                    mySymbol = 'O';
-                    oppSymbol = 'X';
+showPage('homePage');
+</script>
 
-                    await supabase
-                        .from('games')
-                        .update({ player_o: 'player2', status: 'playing' })
-                        .eq('id', gameId);
-
-                    document.getElementById('playerInfo').innerHTML = 'شما: <span>O</span> | حریف: <span>X</span>';
-                    connStatus.className = 'connection-status online';
-                    connStatus.textContent = '✅ بازیکن پیدا شد!';
-                    statusMsg.textContent = 'نوبت حریف (X)';
-
-                    await loadGame(gameId);
-                    listenGame(gameId);
-                } else {
-                    // بازی جدید می‌سازیم
-                    const { data: newGame, error: e2 } = await supabase
-                        .from('games')
-                        .insert([{
-                            board: board,
-                            status: 'waiting',
-                            current_player: 'X',
-                            player_x: 'player1',
-                            player_o: null
-                        }])
-                        .select()
-                        .single();
-
-                    if (e2) throw e2;
-
-                    gameId = newGame.id;
-                    playerId = 'player1';
-                    mySymbol = 'X';
-                    oppSymbol = 'O';
-
-                    document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | حریف: <span>O</span>';
-                    statusMsg.textContent = '⏳ منتظر ورود حریف...';
-                    connStatus.textContent = '🔍 در جستجوی بازیکن...';
-
-                    // گوش دادن برای ورود حریف
-                    listenOpponent(gameId);
-                }
-
-            } catch (err) {
-                console.error(err);
-                statusMsg.textContent = '❌ خطا در اتصال';
-                connStatus.textContent = '● خطا';
-                connStatus.className = 'connection-status offline';
-            }
-        }
-
-        function listenOpponent(gameId) {
-            if (channel) channel.unsubscribe();
-
-            channel = supabase
-                .channel(`game_${gameId}`)
-                .on('postgres_changes', {
-                    event: 'UPDATE',
-                    schema: 'public',
-                    table: 'games',
-                    filter: `id=eq.${gameId}`
-                }, (payload) => {
-                    const data = payload.new;
-                    if (data.player_o && playerId === 'player1') {
-                        connStatus.className = 'connection-status online';
-                        connStatus.textContent = '✅ بازیکن پیدا شد!';
-                        statusMsg.textContent = '🎮 بازی شروع شد! نوبت شماست!';
-                        if (channel) { channel.unsubscribe();
-                            channel = null; }
-                        listenGame(gameId);
-                        // بروزرسانی تخته
-                        if (data.board) {
-                            board = data.board;
-                            renderBoard();
-                        }
-                        currentPlayer = data.current_player;
-                        gameOver = data.status === 'finished';
-                        if (currentPlayer === mySymbol) {
-                            statusMsg.textContent = 'نوبت شما!';
-                        } else {
-                            statusMsg.textContent = '⏳ نوبت حریف...';
-                        }
-                    }
-                })
-                .subscribe();
-        }
-
-        async function loadGame(gameId) {
-            try {
-                const { data, error } = await supabase
-                    .from('games')
-                    .select('*')
-                    .eq('id', gameId)
-                    .single();
-                if (error) throw error;
-
-                if (data.board) {
-                    board = data.board;
-                    renderBoard();
-                }
-                currentPlayer = data.current_player;
-                gameOver = data.status === 'finished';
-
-                if (data.status === 'finished') {
-                    const w = data.winner;
-                    if (w) {
-                        statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-                    } else {
-                        statusMsg.textContent = '🤝 مساوی!';
-                    }
-                    document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-                } else {
-                    statusMsg.textContent = (currentPlayer === mySymbol) ? 'نوبت شما!' : '⏳ نوبت حریف...';
-                }
-                connStatus.textContent = '● متصل';
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
-        function listenGame(gameId) {
-            if (channel) channel.unsubscribe();
-
-            channel = supabase
-                .channel(`game_${gameId}`)
-                .on('postgres_changes', {
-                    event: 'UPDATE',
-                    schema: 'public',
-                    table: 'games',
-                    filter: `id=eq.${gameId}`
-                }, (payload) => {
-                    const data = payload.new;
-                    if (data.board) {
-                        board = data.board;
-                        renderBoard();
-                    }
-                    currentPlayer = data.current_player;
-                    gameOver = data.status === 'finished';
-
-                    if (data.status === 'finished') {
-                        const w = data.winner;
-                        if (w) {
-                            statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-                        } else {
-                            statusMsg.textContent = '🤝 مساوی!';
-                        }
-                        document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-                    } else {
-                        statusMsg.textContent = (currentPlayer === mySymbol) ? 'نوبت شما!' : '⏳ نوبت حریف...';
-                    }
-                })
-                .subscribe();
-        }
-
-        // ==========================================================
-        //  توابع اصلی بازی
-        // ==========================================================
-        function renderBoard() {
-            boardEl.innerHTML = '';
-            board.forEach((val, idx) => {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                if (val) {
-                    cell.classList.add('taken', val === 'X' ? 'x' : 'o');
-                    cell.textContent = val;
-                } else {
-                    cell.dataset.index = idx;
-                    cell.addEventListener('click', () => handleClick(idx));
-                }
-                boardEl.appendChild(cell);
-            });
-        }
-
-        function checkWinner() {
-            for (let p of winPatterns) {
-                const [a, b, c] = p;
-                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                    return board[a];
-                }
-            }
-            if (board.every(v => v !== '')) return 'draw';
-            return null;
-        }
-
-        function endGame(result) {
-            gameOver = true;
-            if (result === 'X') {
-                statusMsg.textContent = (mySymbol === 'X') ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-            } else if (result === 'O') {
-                statusMsg.textContent = (mySymbol === 'O') ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-            } else if (result === 'draw') {
-                statusMsg.textContent = '🤝 مساوی!';
-            }
-            document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-        }
-
-        async function handleClick(index) {
-            if (gameOver || board[index] !== '') return;
-
-            if (isOnline) {
-                if (currentPlayer !== mySymbol) {
-                    statusMsg.textContent = '⏳ نوبت حریف است!';
-                    return;
-                }
-                if (!gameId) return;
-
-                board[index] = mySymbol;
-                renderBoard();
-                const w = checkWinner();
-                if (w) {
-                    endGame(w);
-                    await updateGame(gameId, board, 'finished', w);
-                    return;
-                }
-                currentPlayer = oppSymbol;
-                statusMsg.textContent = '⏳ نوبت حریف...';
-                await updateGame(gameId, board, 'playing', null);
-            } else {
-                // آفلاین
-                if (currentPlayer !== 'X') return;
-                board[index] = 'X';
-                renderBoard();
-                const w = checkWinner();
-                if (w) { endGame(w); return; }
-                currentPlayer = 'O';
-                statusMsg.textContent = '🤖 ربات در حال فکر...';
-                setTimeout(() => {
-                    if (!gameOver) robotMove();
-                }, 500);
-            }
-        }
-
-        async function updateGame(gameId, board, status, winner) {
-            try {
-                const data = { board, status, current_player: currentPlayer };
-                if (winner) data.winner = winner;
-                await supabase.from('games').update(data).eq('id', gameId);
-            } catch (err) { console.error(err); }
-        }
-
-        function resetGame() {
-            if (isOnline && gameId) {
-                board = Array(9).fill('');
-                gameOver = false;
-                currentPlayer = 'X';
-                renderBoard();
-                statusMsg.textContent = '🔄 بازی جدید';
-                updateGame(gameId, board, 'playing', null);
-            } else {
-                startOffline();
-            }
-        }
-
-        // ==========================================================
-        //  چت
-        // ==========================================================
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-
-        async function loadChat() {
-            try {
-                const { data, error } = await supabase
-                    .from('messages')
-                    .select('*')
-                    .order('created_at', { ascending: true });
-                if (error) return;
-                chatMessages.innerHTML = '';
-                if (data.length === 0) {
-                    chatMessages.innerHTML = '<div class="empty-msg">💬 پیامی نیست</div>';
-                    return;
-                }
-                data.forEach(msg => {
-                    const d = document.createElement('div');
-                    d.className = 'chat-msg other';
-                    d.textContent = msg.text;
-                    chatMessages.appendChild(d);
-                });
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            } catch (err) { console.error(err); }
-        }
-
-        supabase
-            .channel('chat')
-            .on('postgres_changes', {
-                event: 'INSERT',
-                schema: 'public',
-                table: 'messages'
-            }, (payload) => {
-                const empty = chatMessages.querySelector('.empty-msg');
-                if (empty) empty.remove();
-                const d = document.createElement('div');
-                d.className = 'chat-msg other';
-                d.textContent = payload.new.text;
-                chatMessages.appendChild(d);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            })
-            .subscribe();
-
-        async function sendChat() {
-            const text = chatInput.value.trim();
-            if (text === '') { alert('لطفاً پیام بنویسید!'); return; }
-            try {
-                await supabase.from('messages').insert([{ text }]);
-                chatInput.value = '';
-            } catch (err) { alert('خطا در ارسال'); }
-        }
-
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendChat();
-        });
-
-        // ==========================================================
-        //  شروع
-        // ==========================================================
-        showPage('menuPage');
-
-        // ==========================================================
-        //  دستور SQL برای ایجاد جدول games (یک بار اجرا کنید)
-        // ==========================================================
-        /*
-        CREATE TABLE games (
-            id SERIAL PRIMARY KEY,
-            board JSONB DEFAULT '["","","","","","","","",""]',
-            status VARCHAR(20) DEFAULT 'waiting',
-            current_player VARCHAR(1) DEFAULT 'X',
-            player_x VARCHAR(50),
-            player_o VARCHAR(50),
-            winner VARCHAR(1),
-            created_at TIMESTAMP DEFAULT NOW(),
-            updated_at TIMESTAMP DEFAULT NOW()
-        );
-        */
-    </script>
 </body>
 </html>
