@@ -52,6 +52,9 @@
         #gamePage {
             display: none;
         }
+        #chatPage {
+            display: none;
+        }
 
         .menu-box {
             text-align: center;
@@ -178,10 +181,6 @@
         }
 
         /* ===== چت ===== */
-        #chatPage {
-            display: none;
-        }
-
         .chat-container {
             position: relative;
         }
@@ -272,7 +271,6 @@
             color: #00b4ff;
         }
 
-        /* وضعیت اتصال */
         .connection-status {
             text-align: center;
             font-size: 13px;
@@ -287,6 +285,10 @@
         .connection-status.offline {
             background: #f8d7da;
             color: #721c24;
+        }
+        .connection-status.waiting {
+            background: #fff3cd;
+            color: #856404;
         }
     </style>
 </head>
@@ -373,10 +375,10 @@
         let opponentSymbol = 'O';
         let gameId = null;
         let playerId = null;
+        let isRobotTurn = false;
 
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
-        const playerInfo = document.getElementById('playerInfo');
         const connectionStatus = document.getElementById('connectionStatus');
 
         const winPatterns = [
@@ -389,6 +391,38 @@
             [0, 4, 8],
             [2, 4, 6]
         ];
+
+        // ==========================================================
+        //  توابع عمومی
+        // ==========================================================
+        function showPage(pageId) {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('gamePage').style.display = 'none';
+            document.getElementById('chatPage').style.display = 'none';
+
+            if (pageId === 'menuPage') {
+                document.getElementById('menuPage').style.display = 'block';
+            } else if (pageId === 'gamePage') {
+                document.getElementById('gamePage').style.display = 'block';
+            } else if (pageId === 'chatPage') {
+                document.getElementById('chatPage').style.display = 'block';
+                loadChatMessages();
+            }
+        }
+
+        function goToMenu() {
+            if (gameId) {
+                supabase.channel(`game_${gameId}`).unsubscribe();
+                gameId = null;
+                playerId = null;
+            }
+            isOnline = false;
+            showPage('menuPage');
+        }
+
+        function goToChat() {
+            showPage('chatPage');
+        }
 
         // ==========================================================
         //  توابع بازی
@@ -441,25 +475,50 @@
         }
 
         async function handleCellClick(index) {
-            if (gameOver || board[index] !== '' || currentPlayer !== mySymbol || !isOnline) return;
+            if (gameOver || board[index] !== '') return;
 
-            board[index] = mySymbol;
-            renderBoard();
-
-            const winner = checkWinner();
-            if (winner) {
-                endGame(winner);
-                if (gameId) {
-                    await updateGameInDB(gameId, board, 'finished', winner);
+            if (isOnline) {
+                if (currentPlayer !== mySymbol) {
+                    statusMsg.textContent = '⏳ نوبت حریف است!';
+                    return;
                 }
-                return;
-            }
+                if (!gameId) return;
 
-            currentPlayer = opponentSymbol;
-            statusMsg.textContent = 'نوبت حریف...';
+                board[index] = mySymbol;
+                renderBoard();
 
-            if (gameId) {
+                const winner = checkWinner();
+                if (winner) {
+                    endGame(winner);
+                    await updateGameInDB(gameId, board, 'finished', winner);
+                    return;
+                }
+
+                currentPlayer = opponentSymbol;
+                statusMsg.textContent = '⏳ نوبت حریف...';
                 await updateGameInDB(gameId, board, 'playing', null);
+            } else {
+                // آفلاین
+                if (currentPlayer !== 'X') return;
+
+                board[index] = 'X';
+                renderBoard();
+
+                const winner = checkWinner();
+                if (winner) {
+                    endGame(winner);
+                    return;
+                }
+
+                currentPlayer = 'O';
+                statusMsg.textContent = '🤖 ربات در حال فکر...';
+                isRobotTurn = true;
+                setTimeout(() => {
+                    if (!gameOver) {
+                        robotMove();
+                    }
+                    isRobotTurn = false;
+                }, 500);
             }
         }
 
@@ -472,16 +531,16 @@
             opponentSymbol = 'O';
             currentPlayer = 'X';
             gameOver = false;
+            isRobotTurn = false;
             board = Array(9).fill('');
             document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | ربات: <span>O</span>';
-            document.getElementById('connectionStatus').className = 'connection-status offline';
-            document.getElementById('connectionStatus').textContent = '● آفلاین (ربات)';
+            connectionStatus.className = 'connection-status offline';
+            connectionStatus.textContent = '● آفلاین (ربات)';
             showPage('gamePage');
             renderBoard();
             statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
         }
 
-        // حرکت ربات (آفلاین)
         function robotMove() {
             if (gameOver || currentPlayer !== 'O') return;
 
@@ -493,6 +552,7 @@
                         renderBoard();
                         const winner = checkWinner();
                         if (winner) endGame(winner);
+                        currentPlayer = 'X';
                         return;
                     }
                     board[i] = '';
@@ -508,7 +568,12 @@
                         board[i] = 'O';
                         renderBoard();
                         const winner = checkWinner();
-                        if (winner) endGame(winner);
+                        if (winner) {
+                            endGame(winner);
+                        } else {
+                            currentPlayer = 'X';
+                            statusMsg.textContent = 'نوبت شما (X)';
+                        }
                         return;
                     }
                     board[i] = '';
@@ -522,7 +587,12 @@
                 board[randIdx] = 'O';
                 renderBoard();
                 const winner = checkWinner();
-                if (winner) endGame(winner);
+                if (winner) {
+                    endGame(winner);
+                } else {
+                    currentPlayer = 'X';
+                    statusMsg.textContent = 'نوبت شما (X)';
+                }
             }
         }
 
@@ -537,75 +607,85 @@
             gameOver = false;
             board = Array(9).fill('');
 
-            document.getElementById('connectionStatus').className = 'connection-status online';
-            document.getElementById('connectionStatus').textContent = '● در حال اتصال...';
+            connectionStatus.className = 'connection-status waiting';
+            connectionStatus.textContent = '● در حال اتصال...';
 
             showPage('gamePage');
             renderBoard();
             statusMsg.textContent = 'در حال ایجاد بازی...';
 
             try {
-                // ایجاد بازی جدید در دیتابیس
-                const { data, error } = await supabase
+                // اول ببینیم بازی موجود با status waiting هست یا نه
+                const { data: waitingGames, error: searchError } = await supabase
                     .from('games')
-                    .insert([{
-                        board: board,
-                        status: 'waiting',
-                        current_player: 'X',
-                        player_x: 'player1',
-                        player_o: null
-                    }])
-                    .select()
-                    .single();
+                    .select('*')
+                    .eq('status', 'waiting')
+                    .limit(1);
 
-                if (error) throw error;
+                if (searchError) throw searchError;
 
-                gameId = data.id;
-                playerId = 'player1';
-                mySymbol = 'X';
-                opponentSymbol = 'O';
+                let gameData;
 
-                document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | حریف: <span>O</span>';
-                connectionStatus.textContent = '● منتظر حریف...';
-                statusMsg.textContent = '⏳ منتظر ورود حریف...';
+                if (waitingGames && waitingGames.length > 0) {
+                    // بازی موجود پیدا شد - به عنوان O وارد می‌شویم
+                    const existingGame = waitingGames[0];
+                    gameId = existingGame.id;
+                    playerId = 'player2';
+                    mySymbol = 'O';
+                    opponentSymbol = 'X';
 
-                // گوش دادن به تغییرات بازی
-                listenToGame(gameId);
+                    const { error: updateError } = await supabase
+                        .from('games')
+                        .update({
+                            player_o: 'player2',
+                            status: 'playing'
+                        })
+                        .eq('id', gameId);
+
+                    if (updateError) throw updateError;
+
+                    document.getElementById('playerInfo').innerHTML = 'شما: <span>O</span> | حریف: <span>X</span>';
+                    connectionStatus.className = 'connection-status online';
+                    connectionStatus.textContent = '● به بازی موجود پیوستید';
+                    statusMsg.textContent = 'نوبت حریف (X)...';
+
+                    await loadGameState(gameId);
+                    listenToGame(gameId);
+
+                } else {
+                    // بازی جدید بساز
+                    const { data, error } = await supabase
+                        .from('games')
+                        .insert([{
+                            board: board,
+                            status: 'waiting',
+                            current_player: 'X',
+                            player_x: 'player1',
+                            player_o: null
+                        }])
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+
+                    gameId = data.id;
+                    playerId = 'player1';
+                    mySymbol = 'X';
+                    opponentSymbol = 'O';
+
+                    document.getElementById('playerInfo').innerHTML = 'شما: <span>X</span> | حریف: <span>O</span>';
+                    connectionStatus.className = 'connection-status waiting';
+                    connectionStatus.textContent = '● منتظر حریف...';
+                    statusMsg.textContent = '⏳ منتظر ورود حریف...';
+
+                    listenToGame(gameId);
+                }
 
             } catch (error) {
-                console.error('خطا در ایجاد بازی:', error);
+                console.error('خطا:', error);
                 statusMsg.textContent = '❌ خطا در ایجاد بازی';
                 connectionStatus.textContent = '● خطا';
-            }
-        }
-
-        async function joinGameAsO(gameId) {
-            try {
-                const { error } = await supabase
-                    .from('games')
-                    .update({
-                        player_o: 'player2',
-                        status: 'playing'
-                    })
-                    .eq('id', gameId);
-
-                if (error) throw error;
-
-                mySymbol = 'O';
-                opponentSymbol = 'X';
-                currentPlayer = 'X'; // X شروع می‌کند
-                playerId = 'player2';
-
-                document.getElementById('playerInfo').innerHTML = 'شما: <span>O</span> | حریف: <span>X</span>';
-                connectionStatus.textContent = '● متصل - نوبت حریف';
-                statusMsg.textContent = 'نوبت حریف (X)...';
-
-                // بارگذاری وضعیت فعلی بازی
-                await loadGameState(gameId);
-
-            } catch (error) {
-                console.error('خطا در پیوستن به بازی:', error);
-                statusMsg.textContent = '❌ خطا در پیوستن به بازی';
+                connectionStatus.className = 'connection-status offline';
             }
         }
 
@@ -643,10 +723,11 @@
                     if (currentPlayer === mySymbol) {
                         statusMsg.textContent = 'نوبت شما!';
                     } else {
-                        statusMsg.textContent = 'نوبت حریف...';
+                        statusMsg.textContent = '⏳ نوبت حریف...';
                     }
                 }
 
+                connectionStatus.className = 'connection-status online';
                 connectionStatus.textContent = '● متصل';
 
             } catch (error) {
@@ -688,16 +769,17 @@
                 }, (payload) => {
                     const data = payload.new;
 
-                    // اگر بازیکن O وارد شد
+                    // اگر بازیکن O وارد شد و ما X هستیم
                     if (data.player_o && playerId === 'player1' && mySymbol === 'X') {
+                        connectionStatus.className = 'connection-status online';
                         connectionStatus.textContent = '● حریف وارد شد!';
                         statusMsg.textContent = '🎮 بازی شروع شد! نوبت شماست!';
                     }
 
-                    // اگر بازیکن X هستیم و هنوز O وارد نشده
-                    if (data.player_o === null && mySymbol === 'X') {
-                        statusMsg.textContent = '⏳ منتظر ورود حریف...';
-                        return;
+                    // اگر ما O هستیم و بازی شروع شد
+                    if (data.status === 'playing' && mySymbol === 'O') {
+                        connectionStatus.className = 'connection-status online';
+                        connectionStatus.textContent = '● بازی شروع شد!';
                     }
 
                     // بروزرسانی تخته
@@ -709,7 +791,6 @@
                     currentPlayer = data.current_player;
                     gameOver = data.status === 'finished';
 
-                    // بروزرسانی status
                     if (data.status === 'finished') {
                         const winner = data.winner;
                         if (winner) {
@@ -726,11 +807,25 @@
                         if (currentPlayer === mySymbol) {
                             statusMsg.textContent = 'نوبت شما!';
                         } else {
-                            statusMsg.textContent = 'نوبت حریف...';
+                            statusMsg.textContent = '⏳ نوبت حریف...';
                         }
                     }
                 })
                 .subscribe();
+        }
+
+        function resetGame() {
+            if (isOnline && gameId) {
+                board = Array(9).fill('');
+                gameOver = false;
+                currentPlayer = 'X';
+                renderBoard();
+                statusMsg.textContent = '🔄 بازی جدید شروع شد!';
+                connectionStatus.textContent = '● بازی جدید';
+                updateGameInDB(gameId, board, 'playing', null);
+            } else {
+                startOfflineGame();
+            }
         }
 
         // ==========================================================
@@ -819,68 +914,13 @@
         });
 
         // ==========================================================
-        //  توابع عمومی و نمایش صفحات
-        // ==========================================================
-        function showPage(pageId) {
-            document.getElementById('menuPage').style.display = 'none';
-            document.getElementById('gamePage').style.display = 'none';
-            document.getElementById('chatPage').style.display = 'none';
-
-            if (pageId === 'menuPage') {
-                document.getElementById('menuPage').style.display = 'block';
-            } else if (pageId === 'gamePage') {
-                document.getElementById('gamePage').style.display = 'block';
-            } else if (pageId === 'chatPage') {
-                document.getElementById('chatPage').style.display = 'block';
-                loadChatMessages();
-            }
-        }
-
-        function goToMenu() {
-            if (gameId) {
-                // خروج از بازی
-                supabase.channel(`game_${gameId}`).unsubscribe();
-                gameId = null;
-                playerId = null;
-            }
-            isOnline = false;
-            showPage('menuPage');
-        }
-
-        function goToChat() {
-            showPage('chatPage');
-        }
-
-        function resetGame() {
-            if (isOnline && gameId) {
-                // شروع بازی جدید آنلاین
-                board = Array(9).fill('');
-                gameOver = false;
-                currentPlayer = 'X';
-                renderBoard();
-                statusMsg.textContent = 'در حال شروع بازی جدید...';
-                updateGameInDB(gameId, board, 'playing', null);
-                connectionStatus.textContent = '● بازی جدید شروع شد';
-            } else {
-                // آفلاین
-                startOfflineGame();
-            }
-        }
-
-        // ==========================================================
-        //  تابع برای بازی آنلاین: وقتی بازیکن O وارد می‌شود
-        // ==========================================================
-        // این تابع را می‌توان در صفحه قرار داد تا بازیکن O بتواند با وارد کردن ID بازی وارد شود
-        // اما برای سادگی، فعلاً بازیکن O با کلیک روی دکمه آنلاین وارد می‌شود
-        // و به طور خودکار به بازی موجود می‌پیوندد
-
-        // ==========================================================
         //  شروع
         // ==========================================================
         showPage('menuPage');
 
-        // ایجاد جدول games در Supabase (اگر وجود ندارد)
-        // دستور SQL برای ایجاد جدول games:
+        // ==========================================================
+        //  دستور SQL برای ایجاد جدول games در Supabase:
+        // ==========================================================
         /*
         CREATE TABLE games (
             id SERIAL PRIMARY KEY,
