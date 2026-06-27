@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❄️ برفی | دوز آفلاین</title>
+<title>❄️ برفی</title>
 <style>
 * {
     margin: 0;
@@ -22,7 +22,6 @@ body {
     padding: 20px;
 }
 
-/* صفحه اصلی */
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -57,7 +56,6 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* صفحه دوم – منوی بازی */
 #menuPage, #gamePage {
     display: none;
     flex-direction: column;
@@ -74,17 +72,10 @@ button:hover {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-.menu-box h2 {
-    font-size: 28px;
-    margin-bottom: 25px;
-}
-.menu-box button {
-    width: 80%;
-    margin: 8px auto;
-    font-size: 20px;
-}
+.menu-box h2 { font-size: 28px; margin-bottom: 25px; }
+.menu-box button { width: 80%; margin: 8px auto; font-size: 20px; }
+.menu-box p { font-size: 22px; margin: 15px 0; color: #333; }
 
-/* صفحه بازی */
 .game-container {
     background: white;
     padding: 20px;
@@ -108,10 +99,7 @@ button:hover {
     cursor: pointer;
     transition: 0.3s;
 }
-.back-btn:hover {
-    background: #e74c3c;
-    transform: scale(1.05);
-}
+.back-btn:hover { background: #e74c3c; transform: scale(1.05); }
 
 .game-status {
     font-size: 18px;
@@ -142,13 +130,8 @@ button:hover {
     transition: 0.2s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-.cell:hover:not(.taken) {
-    background: #d4edff;
-    transform: scale(1.02);
-}
-.cell.taken {
-    cursor: default;
-}
+.cell:hover:not(.taken) { background: #d4edff; transform: scale(1.02); }
+.cell.taken { cursor: default; }
 .cell.x { color: #2196F3; }
 .cell.o { color: #FF5722; }
 
@@ -158,13 +141,10 @@ button:hover {
     padding: 8px 25px;
     font-size: 16px;
 }
-.reset-btn:hover {
-    background: #e08e0b;
-}
+.reset-btn:hover { background: #e08e0b; }
 
 .hidden { display: none !important; }
 
-/* ریسپانسیو */
 @media(max-width: 480px) {
     header h1 { font-size: 40px; }
     .box { width: 90%; }
@@ -174,7 +154,7 @@ button:hover {
 </head>
 <body>
 
-<!-- ==================== صفحه اصلی ==================== -->
+<!-- ======== صفحه اصلی ======== -->
 <div id="homePage">
     <header>
         <h1>❄️ برفی</h1>
@@ -187,19 +167,18 @@ button:hover {
     </div>
 </div>
 
-<!-- ==================== صفحه منوی بازی ==================== -->
+<!-- ======== صفحه منوی بازی ======== -->
 <div id="menuPage">
     <div class="menu-box">
         <h2>🎮 بازی‌ها</h2>
-        <button onclick="goToGame()">⚽ دوز آفلاین با ربات</button>
-        <br><br>
+        <p>⚽ دوز آفلاین با ربات</p>
         <button onclick="goToGame()">🚪 ورود به بازی</button>
         <br><br>
         <button style="background:#aaa;" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
     </div>
 </div>
 
-<!-- ==================== صفحه بازی دوز ==================== -->
+<!-- ======== صفحه بازی دوز ======== -->
 <div id="gamePage">
     <div class="game-container">
         <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
@@ -211,24 +190,18 @@ button:hover {
 </div>
 
 <script>
-// ============================================================
-//  منطق بازی دوز
-// ============================================================
 const boardEl = document.getElementById('board');
 const statusMsg = document.getElementById('statusMsg');
 let board = Array(9).fill('');
-let currentPlayer = 'X'; // X = انسان, O = ربات
+let currentPlayer = 'X';
 let gameOver = false;
 let isRobotTurn = false;
-
-// برنده‌های ممکن
 const winPatterns = [
     [0,1,2], [3,4,5], [6,7,8],
     [0,3,6], [1,4,7], [2,5,8],
     [0,4,8], [2,4,6]
 ];
 
-// ساخت تخته
 function renderBoard() {
     boardEl.innerHTML = '';
     board.forEach((val, idx) => {
@@ -245,68 +218,46 @@ function renderBoard() {
     });
 }
 
-// بررسی برنده یا مساوی
 function checkWinner() {
     for (let p of winPatterns) {
         const [a,b,c] = p;
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return board[a]; // 'X' یا 'O'
+            return board[a];
         }
     }
     if (board.every(v => v !== '')) return 'draw';
     return null;
 }
 
-// پایان بازی
 function endGame(result) {
     gameOver = true;
-    if (result === 'X') {
-        statusMsg.textContent = '🎉 شما برنده شدید!';
-    } else if (result === 'O') {
-        statusMsg.textContent = '🤖 ربات برنده شد!';
-    } else if (result === 'draw') {
-        statusMsg.textContent = '🤝 مساوی!';
-    }
-    // غیرفعال کردن کلیک روی سلول‌ها (با کلاس taken)
+    if (result === 'X') statusMsg.textContent = '🎉 شما برنده شدید!';
+    else if (result === 'O') statusMsg.textContent = '🤖 ربات برنده شد!';
+    else if (result === 'draw') statusMsg.textContent = '🤝 مساوی!';
     document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
 }
 
-// حرکت انسان
 function handleHumanMove(index) {
     if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
-    // حرکت انسان
     board[index] = 'X';
     renderBoard();
     const winner = checkWinner();
-    if (winner) {
-        endGame(winner);
-        return;
-    }
-    // نوبت ربات
+    if (winner) { endGame(winner); return; }
     currentPlayer = 'O';
     isRobotTurn = true;
     statusMsg.textContent = '🤖 ربات در حال فکر...';
     setTimeout(robotMove, 500);
 }
 
-// حرکت ربات (ساده: اولویت با برد/مسدود کردن، سپس تصادفی)
 function robotMove() {
-    if (gameOver) {
-        isRobotTurn = false;
-        return;
-    }
-    // 1. اگر ربات می‌تواند برنده شود
+    if (gameOver) { isRobotTurn = false; return; }
     for (let i = 0; i < 9; i++) {
         if (board[i] === '') {
             board[i] = 'O';
-            if (checkWinner() === 'O') {
-                applyRobotMove(i);
-                return;
-            }
+            if (checkWinner() === 'O') { applyRobotMove(i); return; }
             board[i] = '';
         }
     }
-    // 2. جلوگیری از برد انسان
     for (let i = 0; i < 9; i++) {
         if (board[i] === '') {
             board[i] = 'X';
@@ -318,13 +269,8 @@ function robotMove() {
             board[i] = '';
         }
     }
-    // 3. حرکت تصادفی
     const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
-    if (empty.length === 0) {
-        // مساوی (قبلاً باید چک شده باشد)
-        isRobotTurn = false;
-        return;
-    }
+    if (empty.length === 0) { isRobotTurn = false; return; }
     const randIdx = empty[Math.floor(Math.random() * empty.length)];
     applyRobotMove(randIdx);
 }
@@ -333,51 +279,24 @@ function applyRobotMove(index) {
     board[index] = 'O';
     renderBoard();
     const winner = checkWinner();
-    if (winner) {
-        endGame(winner);
-        isRobotTurn = false;
-        return;
-    }
-    // نوبت انسان
+    if (winner) { endGame(winner); isRobotTurn = false; return; }
     currentPlayer = 'X';
     isRobotTurn = false;
     statusMsg.textContent = 'نوبت شما (X)';
 }
 
-// شروع بازی (ربات اول حرکت می‌کند)
 function startGame() {
     board = Array(9).fill('');
     gameOver = false;
     currentPlayer = 'X';
     isRobotTurn = false;
     renderBoard();
-    statusMsg.textContent = 'ربات در حال شروع...';
-    // بعد از نیم ثانیه ربات حرکت می‌کند
-    setTimeout(() => {
-        if (!gameOver) {
-            // ربات اول حرکت کند (مرکز یا تصادفی)
-            const center = 4;
-            if (board[center] === '') {
-                applyRobotMove(center);
-            } else {
-                const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
-                if (empty.length > 0) {
-                    const rand = empty[Math.floor(Math.random() * empty.length)];
-                    applyRobotMove(rand);
-                }
-            }
-        }
-    }, 400);
+    // تغییر اینجا: ربات دیگر اول حرکت نمی‌کند، خودتان شروع کنید
+    statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
 }
 
-// ریست بازی
-function resetGame() {
-    startGame();
-}
+function resetGame() { startGame(); }
 
-// ============================================================
-//  نمایش صفحات
-// ============================================================
 function showPage(pageId) {
     document.getElementById('homePage').style.display = 'none';
     document.getElementById('menuPage').style.display = 'none';
@@ -385,23 +304,10 @@ function showPage(pageId) {
     document.getElementById(pageId).style.display = 'flex';
 }
 
-function goToMenu() {
-    showPage('menuPage');
-}
+function goToMenu() { showPage('menuPage'); }
+function goToGame() { showPage('gamePage'); startGame(); }
+function goHome() { showPage('homePage'); }
 
-function goToGame() {
-    showPage('gamePage');
-    startGame(); // ربات اول حرکت می‌کند
-}
-
-function goHome() {
-    showPage('homePage');
-}
-
-// ============================================================
-//  مقداردهی اولیه
-// ============================================================
-// صفحه اصلی را نشان بده
 showPage('homePage');
 </script>
 
