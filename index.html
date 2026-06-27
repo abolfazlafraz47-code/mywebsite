@@ -33,14 +33,14 @@
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #00b4ff;
         }
         .header h1 {
-            font-size: 32px;
+            font-size: 30px;
         }
         .header p {
-            font-size: 16px;
+            font-size: 14px;
             color: #555;
         }
 
@@ -53,11 +53,13 @@
             padding: 12px;
             margin-bottom: 12px;
             background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
         }
 
         .chat-msg {
             padding: 8px 14px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             border-radius: 18px;
             max-width: 80%;
             word-wrap: break-word;
@@ -80,7 +82,7 @@
         }
         .chat-input-area input {
             flex: 1;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 12px;
             font-size: 16px;
@@ -93,9 +95,10 @@
             background: #00b4ff;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 22px;
             border-radius: 12px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -111,7 +114,7 @@
             margin-top: 10px;
         }
 
-        /* دکمه بازی */
+        /* ===== دکمه بازی ===== */
         .game-btn {
             display: block;
             width: 100%;
@@ -131,7 +134,7 @@
             transform: scale(1.02);
         }
 
-        /* صفحه بازی (پنهان) */
+        /* ===== صفحه بازی ===== */
         #gamePage {
             display: none;
         }
@@ -219,10 +222,6 @@
         .reset-btn:hover {
             background: #e08e0b;
         }
-
-        .hidden {
-            display: none !important;
-        }
     </style>
 </head>
 <body>
@@ -236,13 +235,16 @@
             <p>چت گروهی لحظه‌ای</p>
         </div>
 
+        <!-- بخش نمایش پیام‌ها -->
         <div class="chat-messages" id="chatMessages"></div>
 
+        <!-- بخش نوشتن و ارسال پیام -->
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." />
-            <button onclick="sendMessage()">📤</button>
+            <button onclick="sendMessage()">📤 ارسال</button>
         </div>
 
+        <!-- دکمه بازی -->
         <button class="game-btn" onclick="goToGame()">🎮 بازی دوز</button>
 
         <p class="footer-text">* پیام‌ها برای همه کاربران نمایش داده می‌شود.</p>
@@ -275,6 +277,7 @@
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
 
+        // بارگذاری پیام‌های قبلی
         async function loadMessages() {
             const { data, error } = await supabase
                 .from('messages')
@@ -294,6 +297,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
+        // گوش دادن به پیام‌های جدید (Real-time)
         supabase
             .channel('messages')
             .on('postgres_changes', {
@@ -309,9 +313,13 @@
             })
             .subscribe();
 
+        // ===== تابع ارسال پیام =====
         async function sendMessage() {
             const text = chatInput.value.trim();
-            if (text === '') return;
+            if (text === '') {
+                alert('لطفاً یک پیام بنویسید!');
+                return;
+            }
             const { error } = await supabase
                 .from('messages')
                 .insert([{ text: text }]);
@@ -319,9 +327,10 @@
                 alert('خطا در ارسال پیام');
                 return;
             }
-            chatInput.value = '';
+            chatInput.value = ''; // خالی کردن فیلد بعد از ارسال
         }
 
+        // ارسال با دکمه Enter
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
