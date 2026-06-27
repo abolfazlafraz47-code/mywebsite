@@ -38,6 +38,7 @@
         .reset-btn{background:#f39c12;margin-top:12px;padding:8px 25px;font-size:16px;border:none;border-radius:10px;color:white;cursor:pointer;transition:0.3s;width:100%}
         .reset-btn:hover{background:#e08e0b}
         .empty-msg{text-align:center;color:#aaa;font-size:14px;margin-top:20px}
+        .error-msg{color:#ff6b6b;text-align:center;font-size:13px;margin-top:8px;display:none}
     </style>
 </head>
 <body>
@@ -52,8 +53,9 @@
     </div>
     <div class="chat-input-area">
         <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." />
-        <button onclick="sendMessage()" id="sendBtn">📤 ارسال</button>
+        <button onclick="sendMessage()">📤 ارسال</button>
     </div>
+    <div class="error-msg" id="errorMsg">خطا در ارتباط با سرور</div>
     <button class="game-btn" onclick="goToGame()">🎮 بازی دوز</button>
     <p class="footer-text">* پیام‌ها برای همه کاربران نمایش داده می‌شود.</p>
 </div>
@@ -77,6 +79,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_jGPMijQTM3BqB9tp14FUzg_Sd4RReIx";
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
+const errorMsg = document.getElementById('errorMsg');
 
 // بارگذاری پیام‌های قبلی
 async function loadMessages() {
@@ -87,8 +90,10 @@ async function loadMessages() {
             .order('created_at', { ascending: true });
         if (error) {
             console.error('خطا در دریافت:', error);
+            errorMsg.style.display = 'block';
             return;
         }
+        errorMsg.style.display = 'none';
         chatMessages.innerHTML = '';
         if (data.length === 0) {
             chatMessages.innerHTML = '<div class="empty-msg">💬 پیامی برای نمایش وجود ندارد</div>';
@@ -103,6 +108,7 @@ async function loadMessages() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     } catch (e) {
         console.error('خطا:', e);
+        errorMsg.style.display = 'block';
     }
 }
 
@@ -148,13 +154,14 @@ async function sendMessage() {
             .insert([{ text: text }]);
         if (error) {
             console.error('خطا در ارسال:', error);
-            alert('خطا در ارسال پیام: ' + error.message);
+            errorMsg.style.display = 'block';
             return;
         }
+        errorMsg.style.display = 'none';
         chatInput.value = '';
     } catch (e) {
         console.error('خطا:', e);
-        alert('خطا در ارسال پیام');
+        errorMsg.style.display = 'block';
     }
 }
 
