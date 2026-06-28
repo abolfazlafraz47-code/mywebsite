@@ -711,7 +711,7 @@
                         </li>
                     </ul>
 
-                    <!-- ===== تغییر اسم سایت ===== -->
+                    <!-- ===== تغییر اسم سایت (همه ادمین‌ها) ===== -->
                     <div class="change-site-name">
                         <label>✏️ تغییر اسم سایت</label>
                         <div class="input-group">
@@ -776,25 +776,19 @@
         }
 
         function updateSiteNameUI(name) {
-            // تایتل صفحه
             document.title = name;
-            // هدر
             const headerTitle = document.getElementById('headerSiteTitle');
             if (headerTitle) headerTitle.textContent = name;
-            // صفحه ورود
             const loginTitle = document.getElementById('loginTitle');
             if (loginTitle) loginTitle.textContent = name;
-            // هر جای دیگه که اسم سایت هست رو به‌روز کن
-            // (مثلاً در صفحات دیگه اگر اسم سایت نوشته شده)
         }
 
-        // بارگذاری اسم سایت هنگام شروع
         function loadSiteName() {
             const name = getSiteName();
             updateSiteNameUI(name);
         }
 
-        // تغییر اسم سایت (فقط برای ادمین‌ها)
+        // ===== تغییر اسم سایت (همه ادمین‌ها مجاز هستند) =====
         function changeSiteName() {
             const input = document.getElementById('newSiteNameInput');
             const status = document.getElementById('siteNameStatus');
@@ -805,7 +799,6 @@
                 return;
             }
 
-            // بررسی اینکه کاربر ادمین هست یا نه
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             if (!admins.includes(username)) {
@@ -835,6 +828,7 @@
             localStorage.setItem('admins', JSON.stringify(admins));
         }
 
+        // حذف ادمین (فقط برای SUPER_ADMIN)
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
@@ -933,7 +927,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                loadSiteName(); // بارگذاری اسم سایت
+                loadSiteName();
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -960,7 +954,6 @@
                     }
                 }, 1500);
             } else {
-                // اگر کاربری وارد نشده، اسم سایت رو هم بارگذاری کن
                 loadSiteName();
             }
         });
@@ -1026,7 +1019,6 @@
             if (admins.includes(username)) {
                 updateAdminStats();
                 updateAdminPanelUI();
-                // نمایش اسم فعلی سایت در ورودی (اختیاری)
                 document.getElementById('newSiteNameInput').value = '';
                 showPage('adminPanel');
             } else {
