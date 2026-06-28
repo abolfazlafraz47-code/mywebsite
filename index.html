@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -580,6 +581,7 @@
                         <li>📊 تعداد کاربران: ۱ (شما)</li>
                         <li>🕹️ بازی‌های فعال: ۰</li>
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
+                        <li>👤 مدیر: رضا ممد</li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -590,9 +592,9 @@
 
     <script>
         // ==========================================================
-        //  نام کاربری ادمین (اینجا تغییر دهید)
+        //  نام کاربری ادمین (تغییر داده شد به "رضا ممد")
         // ==========================================================
-        const ADMIN_USERNAME = "abolfazl"; // <-- نام کاربری ادمین را اینجا وارد کنید
+        const ADMIN_USERNAME = "رضا ممد";
 
         // ==========================================================
         //  ۰. مدیریت ورود
@@ -696,7 +698,8 @@
         //  ۲. پنل ادمینی
         // ==========================================================
         function openAdminPanel() {
-            const username = document.getElementById('displayUsername').textContent;
+            const username = document.getElementById('displayUsername').textContent.trim();
+            // حذف فاصله‌های اضافی و مقایسه
             if (username === ADMIN_USERNAME) {
                 // ادمین است → پنل را نشان بده
                 showPage('adminPanel');
@@ -1000,3 +1003,4 @@
 
 </body>
 </html>
+```
