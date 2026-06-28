@@ -32,9 +32,104 @@
             position: relative;
         }
 
+        /* ===== صفحه لودینگ ===== */
+        #loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 300px;
+        }
+        #loader .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #e0e0e0;
+            border-top: 6px solid #00b4ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #loader .loading-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        #loader .dots::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            text-align: left;
+            animation: dots 1.5s infinite steps(1);
+        }
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+        #loader .sub-text {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* ===== صفحه خطا ===== */
+        #errorPage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 300px;
+        }
+        #errorPage .error-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        #errorPage .error-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+        #errorPage .error-desc {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        #errorPage .retry-btn {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #errorPage .retry-btn:hover {
+            background: #008fd1;
+            transform: scale(1.05);
+        }
+
         /* ===== محتوای اصلی ===== */
         #mainContent {
-            display: block;
+            display: none;
             width: 100%;
         }
 
@@ -187,12 +282,8 @@
             animation: pulse 0.5s infinite alternate;
         }
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.1);
-            }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         .game-status {
@@ -361,21 +452,11 @@
 
         /* ===== ریسپانسیو ===== */
         @media(max-width: 480px) {
-            header h1 {
-                font-size: 40px;
-            }
-            .box {
-                width: 90%;
-            }
-            .menu-box button {
-                width: 100%;
-            }
-            .online-code-box {
-                font-size: 22px;
-            }
-            .online-input-area input {
-                width: 120px;
-            }
+            header h1 { font-size: 40px; }
+            .box { width: 90%; }
+            .menu-box button { width: 100%; }
+            .online-code-box { font-size: 22px; }
+            .online-input-area input { width: 120px; }
         }
     </style>
 </head>
@@ -383,7 +464,22 @@
 
     <div class="page-container">
 
-        <!-- ======== محتوای اصلی (بدون لودینگ) ======== -->
+        <!-- ======== صفحه لودینگ ======== -->
+        <div id="loader">
+            <div class="spinner"></div>
+            <div class="loading-text">در حال اتصال<span class="dots"></span></div>
+            <div class="sub-text">لطفاً منتظر بمانید...</div>
+        </div>
+
+        <!-- ======== صفحه خطا ======== -->
+        <div id="errorPage">
+            <div class="error-icon">📡</div>
+            <div class="error-title">اتصال خود را چک کنید</div>
+            <div class="error-desc">امکان برقراری ارتباط با سرور وجود ندارد.</div>
+            <button class="retry-btn" onclick="retryConnection()">🔄 تلاش مجدد</button>
+        </div>
+
+        <!-- ======== محتوای اصلی ======== -->
         <div id="mainContent">
 
             <!-- صفحه اصلی -->
@@ -466,18 +562,66 @@
 
     <script>
         // ==========================================================
-        //  حذف کامل لودینگ - مستقیماً صفحه اصلی نمایش داده می‌شود
+        //  ۱. مدیریت لودینگ و اتصال
         // ==========================================================
+        const loader = document.getElementById('loader');
+        const errorPage = document.getElementById('errorPage');
+        const mainContent = document.getElementById('mainContent');
+
+        function checkConnection() {
+            return new Promise((resolve) => {
+                if (!navigator.onLine) {
+                    resolve(false);
+                    return;
+                }
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                fetch('https://httpbin.org/get', {
+                        method: 'HEAD',
+                        mode: 'no-cors',
+                        signal: controller.signal,
+                    })
+                    .then(() => {
+                        clearTimeout(timeoutId);
+                        resolve(true);
+                    })
+                    .catch(() => {
+                        clearTimeout(timeoutId);
+                        resolve(false);
+                    });
+            });
+        }
+
+        async function initConnection() {
+            loader.style.display = 'flex';
+            errorPage.style.display = 'none';
+            mainContent.style.display = 'none';
+
+            const isConnected = await checkConnection();
+
+            if (isConnected) {
+                loader.style.display = 'none';
+                mainContent.style.display = 'block';
+                showPage('homePage');
+            } else {
+                loader.style.display = 'none';
+                errorPage.style.display = 'flex';
+            }
+        }
+
+        function retryConnection() {
+            initConnection();
+        }
 
         // ==========================================================
-        //  ۱. تنظیمات Supabase
+        //  ۲. تنظیمات Supabase
         // ==========================================================
         const SUPABASE_URL = "https://uyfomwdjyvkyhoolo.subspace.co";
         const SUPABASE_ANON_KEY = "sb_publishable_jGPMijQTM3BqB9tp14FUzg_Sd4RReIx";
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ==========================================================
-        //  ۲. بازی آفلاین (با ربات + تایمر)
+        //  ۳. بازی آفلاین (با ربات + تایمر)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -518,8 +662,7 @@
                     osc.type = 'square';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note
-                    .duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.12);
@@ -555,8 +698,7 @@
                     osc.type = 'sawtooth';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note
-                    .duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.25);
@@ -588,9 +730,7 @@
                         statusMsg.textContent = '⏰ زمان شما تمام شد! نوبت ربات...';
                         currentPlayer = 'O';
                         isRobotTurn = true;
-                        setTimeout(() => {
-                            if (!gameOver) robotMove();
-                        }, 300);
+                        setTimeout(() => { if (!gameOver) robotMove(); }, 300);
                     } else if (!gameOver && isRobotTurn && currentPlayer === 'O') {
                         statusMsg.textContent = '⏰ زمان ربات تمام شد! نوبت شما...';
                         currentPlayer = 'X';
@@ -677,11 +817,7 @@
             isRobotTurn = true;
             statusMsg.textContent = '🤖 ربات در حال فکر...';
             clearTimer();
-            setTimeout(() => {
-                if (!gameOver) {
-                    robotMove();
-                }
-            }, 500);
+            setTimeout(() => { if (!gameOver) robotMove(); }, 500);
         }
 
         function robotMove() {
@@ -743,7 +879,7 @@
         }
 
         // ==========================================================
-        //  ۳. نمایش صفحات
+        //  ۴. نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const home = document.getElementById('homePage');
@@ -770,7 +906,7 @@
         }
 
         // ==========================================================
-        //  ۴. بازی آنلاین (بدون ربات)
+        //  ۵. بازی آنلاین (بدون ربات)
         // ==========================================================
         let currentGameId = null;
         let mySymbol = 'X';
@@ -873,8 +1009,7 @@
                         gameOver = data.status === 'finished';
                         if (gameOver) {
                             const w = data.winner;
-                            if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' :
-                                '😔 حریف برنده شد!';
+                            if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
                             else statusMsg.textContent = '🤝 مساوی!';
                             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
                         } else {
@@ -972,8 +1107,7 @@
                     gameOver = data.status === 'finished';
                     if (gameOver) {
                         const w = data.winner;
-                        if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' :
-                            '😔 حریف برنده شد!';
+                        if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
                         else statusMsg.textContent = '🤝 مساوی!';
                         document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
                     } else {
@@ -1046,7 +1180,7 @@
         }
 
         // ==========================================================
-        //  ۵. به‌روزرسانی بازی آنلاین در دیتابیس
+        //  ۶. به‌روزرسانی بازی آنلاین در دیتابیس
         // ==========================================================
         async function updateGameDB(gameId, board, status, winner) {
             const data = { board, status, current_player: currentPlayer };
@@ -1055,7 +1189,7 @@
         }
 
         // ==========================================================
-        //  ۶. اورراید توابع برای بازی آنلاین
+        //  ۷. اورراید توابع برای بازی آنلاین
         // ==========================================================
         const originalHandleHumanMove = handleHumanMove;
         handleHumanMove = function(index) {
@@ -1094,11 +1228,10 @@
         };
 
         // ==========================================================
-        //  ۷. شروع برنامه (بدون لودینگ)
+        //  ۸. شروع برنامه
         // ==========================================================
-        window.addEventListener('load', function() {
-            // مستقیماً صفحه اصلی را نشان بده
-            showPage('homePage');
+        window.addEventListener('load', () => {
+            initConnection();
         });
     </script>
 
