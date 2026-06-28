@@ -55,8 +55,12 @@
             margin-bottom: 20px;
         }
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
         #loader .loading-text {
             font-size: 22px;
@@ -72,11 +76,21 @@
             animation: dots 1.5s infinite steps(1);
         }
         @keyframes dots {
-            0% { content: ''; }
-            25% { content: '.'; }
-            50% { content: '..'; }
-            75% { content: '...'; }
-            100% { content: ''; }
+            0% {
+                content: '';
+            }
+            25% {
+                content: '.';
+            }
+            50% {
+                content: '..';
+            }
+            75% {
+                content: '...';
+            }
+            100% {
+                content: '';
+            }
         }
         #loader .sub-text {
             color: #888;
@@ -139,8 +153,12 @@
             margin-bottom: 30px;
             color: white;
         }
-        header h1 { font-size: 55px; }
-        header p { font-size: 20px; }
+        header h1 {
+            font-size: 55px;
+        }
+        header p {
+            font-size: 20px;
+        }
 
         .box {
             background: white;
@@ -150,8 +168,15 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        .box h2 { margin-bottom: 10px; font-size: 24px; }
-        .box p { margin-bottom: 20px; color: #555; font-size: 16px; }
+        .box h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .box p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 16px;
+        }
 
         button {
             background: #00b4ff;
@@ -168,7 +193,9 @@
             transform: scale(1.05);
         }
 
-        #menuPage, #gamePage, #onlinePage {
+        #menuPage,
+        #gamePage,
+        #onlinePage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -184,9 +211,20 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        .menu-box h2 { font-size: 28px; margin-bottom: 25px; }
-        .menu-box button { width: 80%; margin: 8px auto; font-size: 20px; }
-        .menu-box p { font-size: 22px; margin: 15px 0; color: #333; }
+        .menu-box h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+        .menu-box button {
+            width: 80%;
+            margin: 8px auto;
+            font-size: 20px;
+        }
+        .menu-box p {
+            font-size: 22px;
+            margin: 15px 0;
+            color: #333;
+        }
 
         /* ===== بازی آفلاین ===== */
         .game-container {
@@ -258,8 +296,12 @@
             animation: pulse 0.5s infinite alternate;
         }
         @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
         }
 
         .game-status {
@@ -295,9 +337,15 @@
             background: #d4edff;
             transform: scale(1.02);
         }
-        .cell.taken { cursor: default; }
-        .cell.x { color: #2196F3; }
-        .cell.o { color: #FF5722; }
+        .cell.taken {
+            cursor: default;
+        }
+        .cell.x {
+            color: #2196F3;
+        }
+        .cell.o {
+            color: #FF5722;
+        }
 
         .reset-btn {
             background: #f39c12;
@@ -422,11 +470,21 @@
 
         /* ===== ریسپانسیو ===== */
         @media(max-width: 480px) {
-            header h1 { font-size: 40px; }
-            .box { width: 90%; }
-            .menu-box button { width: 100%; }
-            .online-code-box { font-size: 22px; }
-            .online-input-area input { width: 120px; }
+            header h1 {
+                font-size: 40px;
+            }
+            .box {
+                width: 90%;
+            }
+            .menu-box button {
+                width: 100%;
+            }
+            .online-code-box {
+                font-size: 22px;
+            }
+            .online-input-area input {
+                width: 120px;
+            }
         }
     </style>
 </head>
@@ -483,7 +541,6 @@
                     <button class="online-btn" onclick="openOnlinePage()">🌐 آنلاین</button>
                     <h3 style="text-align:center; margin-top:5px;">🎯 بازی دوز</h3>
 
-                    <!-- نمایش تایمر -->
                     <div class="timer-container">
                         <div class="timer" id="timerDisplay">⏱ 20</div>
                     </div>
@@ -617,7 +674,6 @@
             [2, 4, 6]
         ];
 
-        // ===== صداها =====
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -633,7 +689,8 @@
                     osc.type = 'square';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.12);
@@ -669,7 +726,8 @@
                     osc.type = 'sawtooth';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.25);
@@ -678,7 +736,6 @@
             } catch (e) {}
         }
 
-        // ===== تایمر =====
         function startTimer() {
             clearTimer();
             timeLeft = MAX_TIME;
@@ -734,7 +791,6 @@
             startTimer();
         }
 
-        // ===== توابع بازی =====
         function renderBoard() {
             boardEl.innerHTML = '';
             board.forEach((val, idx) => {
@@ -883,7 +939,7 @@
         }
 
         // ==========================================================
-        //  ۵. بازی آنلاین
+        //  ۵. بازی آنلاین (بدون ربات)
         // ==========================================================
         let currentGameId = null;
         let mySymbol = 'X';
@@ -939,7 +995,6 @@
             document.getElementById('hostStatus').textContent = '⏳ منتظر ورود حریف...';
             document.getElementById('hostStatus').className = 'online-status';
 
-            // ایجاد بازی در دیتابیس
             const { data, error } = await supabase
                 .from('games')
                 .insert([{
@@ -965,7 +1020,6 @@
             mySymbol = 'X';
             opponentSymbol = 'O';
 
-            // گوش دادن به ورود مهمان
             if (gameChannel) gameChannel.unsubscribe();
             gameChannel = supabase
                 .channel(`game_${currentGameId}`)
@@ -988,13 +1042,13 @@
                         gameOver = data.status === 'finished';
                         if (gameOver) {
                             const w = data.winner;
-                            if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
+                            if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' :
+                                '😔 حریف برنده شد!';
                             else statusMsg.textContent = '🤝 مساوی!';
                             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
                         } else {
                             statusMsg.textContent = (currentPlayer === mySymbol) ? 'نوبت شما!' : '⏳ نوبت حریف...';
                         }
-                        // رفتن به صفحه بازی
                         goToOnlineGame();
                     }
                 })
@@ -1003,7 +1057,6 @@
 
         function goToOnlineGame() {
             showPage('gamePage');
-            // مخفی کردن دکمه آنلاین در بازی آفلاین
             document.querySelector('.online-btn').style.display = 'none';
             statusMsg.textContent = '🎮 بازی آنلاین شروع شد!';
             clearTimer();
@@ -1088,7 +1141,8 @@
                     gameOver = data.status === 'finished';
                     if (gameOver) {
                         const w = data.winner;
-                        if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
+                        if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' :
+                            '😔 حریف برنده شد!';
                         else statusMsg.textContent = '🤝 مساوی!';
                         document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
                     } else {
@@ -1161,7 +1215,7 @@
         }
 
         // ==========================================================
-        //  ۶. به‌روزرسانی بازی در دیتابیس (برای بازی آنلاین)
+        //  ۶. به‌روزرسانی بازی آنلاین در دیتابیس
         // ==========================================================
         async function updateGameDB(gameId, board, status, winner) {
             const data = { board, status, current_player: currentPlayer };
@@ -1170,7 +1224,7 @@
         }
 
         // ==========================================================
-        //  ۷. اورراید توابع برای پشتیبانی از بازی آنلاین
+        //  ۷. اورراید توابع برای بازی آنلاین
         // ==========================================================
         const originalHandleHumanMove = handleHumanMove;
         handleHumanMove = function(index) {
@@ -1215,6 +1269,7 @@
             initConnection();
         });
     </script>
+
 </body>
 </html>
 ```
