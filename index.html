@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -763,7 +764,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="adminList">
                             👤 مدیران: 
-                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل</span>
+                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -778,6 +779,7 @@
                         <span class="rank-title" style="color:#e74c3c;">سازنده</span>
                         <span class="rank-name">ابوالفضل</span>
                         <span class="rank-name">رضا ممد</span>
+                        <span class="rank-name">محمد رضا</span>
                     </div>
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
@@ -817,6 +819,29 @@
 
     <script>
         // ==========================================================
+        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا"
+        // ==========================================================
+        (function initAdmins() {
+            const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا"];
+            let admins = [];
+            try {
+                const stored = localStorage.getItem('admins');
+                if (stored) {
+                    admins = JSON.parse(stored);
+                    // اگر "محمد رضا" در لیست نبود، اضافه کن
+                    if (!admins.includes("محمد رضا")) {
+                        admins.push("محمد رضا");
+                        localStorage.setItem('admins', JSON.stringify(admins));
+                    }
+                } else {
+                    localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+                }
+            } catch {
+                localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+            }
+        })();
+
+        // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
         function getProfileAvatar() {
@@ -844,7 +869,6 @@
         function loadProfile() {
             const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
-            // نام کاربری در هدر نمایش داده می‌شود (توسط displayUsername)
         }
 
         // تغییر نام کاربری
@@ -855,7 +879,6 @@
                 alert('لطفاً نام جدید را وارد کنید!');
                 return;
             }
-            // ذخیره در localStorage
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
             input.value = '';
@@ -883,8 +906,8 @@
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
-                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل"];
-            } catch { return ["رضا ممد", "ابوالفضل"]; }
+                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا"];
+            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا"]; }
         }
 
         function setAdmins(admins) {
@@ -1400,3 +1423,4 @@
 
 </body>
 </html>
+```
