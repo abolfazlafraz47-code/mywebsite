@@ -778,12 +778,12 @@
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک ها</button>
-                    <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="mod-btn" id="modBtn" onclick="showModPage()">🛡️ پنل مود</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
                         پروفایل
                     </button>
-                    <button class="mod-btn" id="modBtn" onclick="showModPage()">🛡️ مود</button>
                 </div>
             </div>
 
@@ -976,7 +976,6 @@
         function setProfileAvatar(dataUrl) {
             localStorage.setItem('profileAvatar', dataUrl);
             updateAvatarUI(dataUrl);
-            checkModButtonVisibility();
         }
 
         function updateAvatarUI(dataUrl) {
@@ -993,16 +992,30 @@
         function loadProfile() {
             const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
-            checkModButtonVisibility();
+            updateButtonsVisibility();
         }
 
-        // نمایش یا مخفی کردن دکمه مود (فقط برای "آراد تریاکی")
-        function checkModButtonVisibility() {
-            const modBtn = document.getElementById('modBtn');
+        // ==========================================================
+        //  نمایش/مخفی کردن دکمه‌ها بر اساس کاربر
+        // ==========================================================
+        function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            const avatar = getProfileAvatar();
-            // فقط اگر نام کاربری "آراد تریاکی" باشد و عکس داشته باشد، دکمه مود نمایش داده شود
-            if (username === "آراد تریاکی" && avatar && avatar !== '') {
+            const admins = getAdmins();
+            const isAdmin = admins.includes(username);
+            const isArad = (username === "آراد تریاکی");
+
+            const adminBtn = document.getElementById('adminBtn');
+            const modBtn = document.getElementById('modBtn');
+
+            // دکمه ادمینی: برای همه ادمین‌ها به جز آراد تریاکی
+            if (isAdmin && !isArad) {
+                adminBtn.style.display = 'inline-block';
+            } else {
+                adminBtn.style.display = 'none';
+            }
+
+            // دکمه مود: فقط برای آراد تریاکی
+            if (isArad) {
                 modBtn.style.display = 'inline-block';
             } else {
                 modBtn.style.display = 'none';
@@ -1043,6 +1056,7 @@
             loadProfile();
             updateAdminPanelUI();
             updateModPanelUI();
+            updateButtonsVisibility();
         }
 
         // آپلود عکس
@@ -1145,6 +1159,15 @@
                 updateModPanelUI();
                 updateModStats();
             }
+            if (pageId === 'adminPanel') {
+                // جلوگیری از ورود آراد تریاکی به پنل ادمینی
+                const username = document.getElementById('displayUsername').textContent.trim();
+                if (username === "آراد تریاکی") {
+                    alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
+                    showPage('homePage');
+                    return;
+                }
+            }
         }
 
         function updateModStats() {
@@ -1156,7 +1179,10 @@
         }
 
         function showRankPage() { showPage('rankPage'); }
-        function showProfilePage() { showPage('profilePage'); }
+        function showProfilePage() {
+            loadProfile();
+            showPage('profilePage');
+        }
         function showModPage() { showPage('modPage'); }
 
         function goToMenu() { showPage('menuPage'); }
@@ -1215,7 +1241,7 @@
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
                 }
-                checkModButtonVisibility();
+                updateButtonsVisibility();
             }, 2000);
         }
 
@@ -1238,7 +1264,7 @@
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
                     }
-                    checkModButtonVisibility();
+                    updateButtonsVisibility();
                 }, 1500);
             }
         });
@@ -1301,6 +1327,13 @@
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
+
+            // جلوگیری از ورود آراد تریاکی
+            if (username === "آراد تریاکی") {
+                alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
+                return;
+            }
+
             if (admins.includes(username)) {
                 updateAdminStats();
                 updateAdminPanelUI();
