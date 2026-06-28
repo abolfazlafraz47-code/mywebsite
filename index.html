@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -590,20 +589,24 @@
 
     <script>
         // ==========================================================
-        //  ۱. مدیریت لودینگ و اتصال
+        //  ۱. مدیریت لودینگ و اتصال (رفع گیر کردن)
         // ==========================================================
         const loader = document.getElementById('loader');
         const errorPage = document.getElementById('errorPage');
         const mainContent = document.getElementById('mainContent');
 
+        // تابع بررسی اتصال با تایم‌اوت کوتاه‌تر (۳ ثانیه)
         function checkConnection() {
             return new Promise((resolve) => {
+                // اگر مرورگر آفلاین را گزارش دهد، سریعاً رد می‌کنیم
                 if (!navigator.onLine) {
                     resolve(false);
                     return;
                 }
+
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                const timeoutId = setTimeout(() => controller.abort(), 3000);
+
                 fetch('https://httpbin.org/get', {
                         method: 'HEAD',
                         mode: 'no-cors',
@@ -620,23 +623,41 @@
             });
         }
 
+        // تابع اصلی با مدیریت خطا و تایم‌اوت
         async function initConnection() {
+            // نمایش لودینگ
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
 
-            const isConnected = await checkConnection();
+            try {
+                // با تایم‌اوت ۴ ثانیه برای کل عملیات
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('زمان اتصال به پایان رسید')), 4000)
+                );
 
-            if (isConnected) {
-                loader.style.display = 'none';
-                mainContent.style.display = 'block';
-                showPage('homePage');
-            } else {
+                const connectionPromise = checkConnection();
+                const isConnected = await Promise.race([connectionPromise, timeoutPromise]);
+
+                if (isConnected) {
+                    // اتصال موفق
+                    loader.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    showPage('homePage');
+                } else {
+                    // اتصال ناموفق
+                    loader.style.display = 'none';
+                    errorPage.style.display = 'flex';
+                }
+            } catch (error) {
+                // در صورت بروز هرگونه خطا (از جمله تایم‌اوت)
+                console.log('خطا در اتصال:', error);
                 loader.style.display = 'none';
                 errorPage.style.display = 'flex';
             }
         }
 
+        // تابع تلاش مجدد
         function retryConnection() {
             initConnection();
         }
@@ -1271,5 +1292,4 @@
     </script>
 
 </body>
-</html>
-```
+    </html>
