@@ -409,7 +409,7 @@
             background: #e74c3c;
         }
 
-        /* ===== صفحه رنک ها ===== */
+        /* ===== صفحه رنک ها با اسامی ===== */
         .rank-box {
             background: white;
             padding: 30px 20px;
@@ -423,22 +423,23 @@
             margin-bottom: 20px;
             font-size: 24px;
         }
-        .rank-item {
+        .rank-group {
+            margin-bottom: 15px;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .rank-title {
             font-size: 20px;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
             font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
         }
-        .rank-item:last-child {
-            border-bottom: none;
-        }
-        .rank-item .rank-color {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            margin-left: 10px;
-            vertical-align: middle;
+        .rank-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+            padding-right: 20px;
+            display: block;
         }
         .rank-box .back-home-btn {
             margin-top: 20px;
@@ -660,30 +661,37 @@
                 </div>
             </div>
 
-            <!-- ===== صفحه رنک ها ===== -->
+            <!-- ===== صفحه رنک ها با اسامی ===== -->
             <div id="rankPage">
                 <div class="rank-box">
                     <h2>🏅 رنک‌های سایت</h2>
-                    <div class="rank-item">
-                        <span class="rank-color" style="background:#e74c3c;"></span>
-                        <span style="color:#e74c3c;">سازنده</span>
+
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#e74c3c;">سازنده</span>
+                        <span class="rank-name">ابوالفضل</span>
+                        <span class="rank-name">رضا ممد</span>
                     </div>
-                    <div class="rank-item">
-                        <span class="rank-color" style="background:#2ecc71;"></span>
-                        <span style="color:#2ecc71;">هد ادمین</span>
+
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
+                        <!-- بدون اسم -->
                     </div>
-                    <div class="rank-item">
-                        <span class="rank-color" style="background:#f39c12;"></span>
-                        <span style="color:#f39c12;">سوپر ادمین</span>
+
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
+                        <!-- بدون اسم -->
                     </div>
-                    <div class="rank-item">
-                        <span class="rank-color" style="background:#f1c40f;"></span>
-                        <span style="color:#f1c40f;">ادمینیتور</span>
+
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
+                        <!-- بدون اسم -->
                     </div>
-                    <div class="rank-item">
-                        <span class="rank-color" style="background:#2ecc71;"></span>
-                        <span style="color:#2ecc71;">مود</span>
+
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#2ecc71;">مود</span>
+                        <!-- بدون اسم -->
                     </div>
+
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
