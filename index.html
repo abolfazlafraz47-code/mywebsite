@@ -996,13 +996,13 @@
             checkModButtonVisibility();
         }
 
-        // نمایش یا مخفی کردن دکمه مود (فقط برای "محمد رضا")
+        // نمایش یا مخفی کردن دکمه مود (فقط برای "آراد تریاکی")
         function checkModButtonVisibility() {
             const modBtn = document.getElementById('modBtn');
             const username = document.getElementById('displayUsername').textContent.trim();
             const avatar = getProfileAvatar();
-            // فقط اگر نام کاربری "محمد رضا" باشد و عکس داشته باشد، دکمه مود نمایش داده شود
-            if (username === "محمد رضا" && avatar && avatar !== '') {
+            // فقط اگر نام کاربری "آراد تریاکی" باشد و عکس داشته باشد، دکمه مود نمایش داده شود
+            if (username === "آراد تریاکی" && avatar && avatar !== '') {
                 modBtn.style.display = 'inline-block';
             } else {
                 modBtn.style.display = 'none';
