@@ -835,7 +835,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="adminList">
                             👤 مدیران: 
-                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
+                            <span id="adminNamesDisplay"></span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -899,7 +899,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="modAdminList">
                             👤 مدیران: 
-                            <span id="modAdminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
+                            <span id="modAdminNamesDisplay"></span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -944,17 +944,17 @@
         }
 
         // ==========================================================
-        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا"
+        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا" و "آراد تریاکی"
         // ==========================================================
         (function initAdmins() {
-            const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا"];
+            const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
             let admins = [];
             try {
                 const stored = localStorage.getItem('admins');
                 if (stored) {
                     admins = JSON.parse(stored);
-                    if (!admins.includes("محمد رضا")) {
-                        admins.push("محمد رضا");
+                    if (!admins.includes("آراد تریاکی")) {
+                        admins.push("آراد تریاکی");
                         localStorage.setItem('admins', JSON.stringify(admins));
                     }
                 } else {
@@ -966,9 +966,18 @@
         })();
 
         // ==========================================================
-        //  لیست کاربران مجاز برای پنل مود
+        //  لیست کاربران مجاز برای پنل مود (با ذخیره در localStorage)
         // ==========================================================
-        const MOD_ALLOWED_USERS = ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
+        function getModAllowedUsers() {
+            try {
+                const data = localStorage.getItem('modAllowedUsers');
+                return data ? JSON.parse(data) : ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
+            } catch { return ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; }
+        }
+
+        function setModAllowedUsers(list) {
+            localStorage.setItem('modAllowedUsers', JSON.stringify(list));
+        }
 
         // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
@@ -1012,8 +1021,7 @@
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
 
-            // دکمه ادمینی: برای همه ادمین‌ها (رضا ممد، ابوالفضل، محمد رضا)
-            // آراد تریاکی ادمین نیست پس این دکمه را نمی‌بیند
+            // دکمه ادمینی: برای همه ادمین‌ها (رضا ممد، ابوالفضل، محمد رضا، آراد تریاکی)
             if (isAdmin) {
                 adminBtn.style.display = 'inline-block';
             } else {
@@ -1087,14 +1095,15 @@
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
-                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا"];
-            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا"]; }
+                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
         }
 
         function setAdmins(admins) {
             localStorage.setItem('admins', JSON.stringify(admins));
         }
 
+        // حذف ادمین (فقط برای SUPER_ADMIN)
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
@@ -1113,6 +1122,30 @@
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
 
+        // ===== حذف کاربر از پنل مود (فقط برای محمد رضا و ابوالفضل) =====
+        function removeFromModAllowed(userToRemove) {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const allowedToRemove = ["محمد رضا", "ابوالفضل"];
+            if (!allowedToRemove.includes(currentUser)) {
+                alert('⛔ شما مجاز به حذف کاربران از پنل مود نیستید!');
+                return;
+            }
+            if (userToRemove === currentUser) {
+                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
+                return;
+            }
+            let modUsers = getModAllowedUsers();
+            if (!modUsers.includes(userToRemove)) {
+                alert('⚠️ این کاربر در لیست مجازین پنل مود نیست.');
+                return;
+            }
+            modUsers = modUsers.filter(u => u !== userToRemove);
+            setModAllowedUsers(modUsers);
+            updateAdminPanelUI();
+            updateModPanelUI();
+            alert(`✅ کاربر "${userToRemove}" از دسترسی به پنل مود حذف شد!`);
+        }
+
         function updateAdminPanelUI() {
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
@@ -1120,26 +1153,37 @@
 
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
+            const modAllowed = getModAllowedUsers();
 
             let html = '';
             admins.forEach(admin => {
+                let isMod = modAllowed.includes(admin);
+                let color = admin === "آراد تریاکی" ? '#2ecc71' : 'inherit';
+                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
                 html += admin;
-                if (isSuperAdmin && admin !== SUPER_ADMIN) {
+                // دکمه حذف از پنل مود فقط برای "آراد تریاکی" و فقط برای محمد رضا یا ابوالفضل
+                if (admin === "آراد تریاکی" && (currentUser === "محمد رضا" || currentUser === "ابوالفضل")) {
+                    if (isMod) {
+                        html += ` <button class="remove-admin-btn" style="background:#e74c3c;" onclick="removeFromModAllowed('${admin}')">✕</button>`;
+                    } else {
+                        html += ` <span style="color:#999;font-size:12px;">(حذف شده از مود)</span>`;
+                    }
+                }
+                if (isSuperAdmin && admin !== SUPER_ADMIN && admin !== "آراد تریاکی") {
                     html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌ حذف</button>`;
                 }
-                html += ' ، ';
+                html += `</span>`;
             });
-            html = html.slice(0, -3);
             adminListEl.innerHTML = html;
         }
 
         function updateModPanelUI() {
-            const admins = getAdmins();
+            const modAllowed = getModAllowedUsers();
             const modAdminListEl = document.getElementById('modAdminNamesDisplay');
             if (!modAdminListEl) return;
 
             let html = '';
-            admins.forEach(admin => {
+            modAllowed.forEach(admin => {
                 html += admin;
                 html += ' ، ';
             });
@@ -1165,6 +1209,10 @@
                 updateModPanelUI();
                 updateModStats();
             }
+            if (pageId === 'adminPanel') {
+                updateAdminPanelUI();
+                updateAdminStats();
+            }
         }
 
         function updateModStats() {
@@ -1182,7 +1230,8 @@
                 alert('لطفاً ابتدا وارد شوید!');
                 return;
             }
-            if (MOD_ALLOWED_USERS.includes(username)) {
+            const modAllowed = getModAllowedUsers();
+            if (modAllowed.includes(username)) {
                 showPage('modPage');
             } else {
                 alert('⛔ شما دسترسی به پنل مود ندارید!');
@@ -1196,12 +1245,6 @@
 
             if (!username) {
                 alert('لطفاً ابتدا وارد شوید!');
-                return;
-            }
-
-            // جلوگیری از ورود آراد تریاکی (چون ادمین نیست)
-            if (username === "آراد تریاکی") {
-                alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
                 return;
             }
 
