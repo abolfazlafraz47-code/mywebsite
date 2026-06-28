@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="siteTitle">❄️ برفی</title>
+    <!-- سورس Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
     <style>
         /* ===== ریست و پایه ===== */
         * {
@@ -409,7 +412,7 @@
             background: #e74c3c;
         }
 
-        /* ===== بخش تغییر اسم سایت ===== */
+        /* ===== بخش تغییر اسم سایت (فقط برای ادمین‌ها نمایش داده می‌شود) ===== */
         .change-site-name {
             background: #f8f9fa;
             padding: 15px;
@@ -711,8 +714,8 @@
                         </li>
                     </ul>
 
-                    <!-- ===== تغییر اسم سایت (همه ادمین‌ها) ===== -->
-                    <div class="change-site-name">
+                    <!-- ===== تغییر اسم سایت (فقط ادمین‌ها) ===== -->
+                    <div class="change-site-name" id="changeSiteSection">
                         <label>✏️ تغییر اسم سایت</label>
                         <div class="input-group">
                             <input type="text" id="newSiteNameInput" placeholder="اسم جدید سایت..." />
@@ -761,35 +764,98 @@
 
     <script>
         // ==========================================================
-        //  مدیریت نام سایت (ذخیره در localStorage)
+        //  تنظیمات Supabase (از پروژه قبلی)
         // ==========================================================
-        function getSiteName() {
+        const SUPABASE_URL = "https://uyfomwdjyvkyhoolo.subspace.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_jGPMijQTM3BqB9tp14FUzg_Sd4RReIx";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ==========================================================
+        //  مدیریت نام سایت با Supabase (آنلاین برای همه)
+        // ==========================================================
+        const SITE_SETTINGS_TABLE = 'site_settings';
+
+        // تابع دریافت اسم سایت از دیتابیس
+        async function fetchSiteName() {
             try {
-                const name = localStorage.getItem('siteName');
-                return name ? name : '❄️ برفی';
-            } catch { return '❄️ برفی'; }
+                const { data, error } = await supabase
+                    .from(SITE_SETTINGS_TABLE)
+                    .select('value')
+                    .eq('key', 'site_name')
+                    .single();
+
+                if (error) {
+                    // اگر خطا بود، مقدار پیش‌فرض رو برگردون
+                    console.warn('خطا در دریافت اسم سایت:', error);
+                    return '❄️ برفی';
+                }
+                return data ? data.value : '❄️ برفی';
+            } catch (e) {
+                console.error('خطا:', e);
+                return '❄️ برفی';
+            }
         }
 
-        function setSiteName(name) {
-            localStorage.setItem('siteName', name);
-            updateSiteNameUI(name);
+        // تابع به‌روزرسانی اسم سایت در دیتابیس
+        async function updateSiteNameInDB(newName) {
+            try {
+                // اول ببینیم رکوردی وجود داره یا نه
+                const { data, error: selectError } = await supabase
+                    .from(SITE_SETTINGS_TABLE)
+                    .select('id')
+                    .eq('key', 'site_name')
+                    .maybeSingle();
+
+                if (selectError) throw selectError;
+
+                if (data) {
+                    // بروزرسانی
+                    const { error: updateError } = await supabase
+                        .from(SITE_SETTINGS_TABLE)
+                        .update({ value: newName })
+                        .eq('id', data.id);
+                    if (updateError) throw updateError;
+                } else {
+                    // درج جدید
+                    const { error: insertError } = await supabase
+                        .from(SITE_SETTINGS_TABLE)
+                        .insert([{ key: 'site_name', value: newName }]);
+                    if (insertError) throw insertError;
+                }
+                return true;
+            } catch (e) {
+                console.error('خطا در ذخیره اسم سایت:', e);
+                return false;
+            }
         }
 
+        // به‌روزرسانی UI با اسم جدید
         function updateSiteNameUI(name) {
             document.title = name;
             const headerTitle = document.getElementById('headerSiteTitle');
             if (headerTitle) headerTitle.textContent = name;
             const loginTitle = document.getElementById('loginTitle');
             if (loginTitle) loginTitle.textContent = name;
+            // همچنین می‌توانید در جای دیگر که اسم سایت نوشته شده، به‌روز کنید
         }
 
-        function loadSiteName() {
-            const name = getSiteName();
+        // بارگذاری اولیه اسم سایت
+        async function loadSiteName() {
+            const name = await fetchSiteName();
             updateSiteNameUI(name);
+            // اگر کاربر ادمین است، بخش تغییر اسم رو نشون بده
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+            const changeSection = document.getElementById('changeSiteSection');
+            if (admins.includes(username) && changeSection) {
+                changeSection.style.display = 'block';
+            } else if (changeSection) {
+                changeSection.style.display = 'none';
+            }
         }
 
-        // ===== تغییر اسم سایت (همه ادمین‌ها مجاز هستند) =====
-        function changeSiteName() {
+        // تابع تغییر اسم سایت (توسط ادمین)
+        async function changeSiteName() {
             const input = document.getElementById('newSiteNameInput');
             const status = document.getElementById('siteNameStatus');
             const newName = input.value.trim();
@@ -806,10 +872,33 @@
                 return;
             }
 
-            setSiteName(newName);
-            input.value = '';
-            status.style.display = 'block';
-            setTimeout(() => { status.style.display = 'none'; }, 3000);
+            const success = await updateSiteNameInDB(newName);
+            if (success) {
+                // به‌روزرسانی UI
+                updateSiteNameUI(newName);
+                input.value = '';
+                status.style.display = 'block';
+                setTimeout(() => { status.style.display = 'none'; }, 3000);
+            } else {
+                alert('❌ خطا در تغییر اسم سایت!');
+            }
+        }
+
+        // گوش دادن به تغییرات Real-time برای اسم سایت
+        function subscribeToSiteNameChanges() {
+            supabase
+                .channel('site_settings_changes')
+                .on('postgres_changes', {
+                    event: '*',
+                    schema: 'public',
+                    table: SITE_SETTINGS_TABLE,
+                    filter: 'key=eq.site_name'
+                }, (payload) => {
+                    // وقتی اسم سایت تغییر کرد، برای همه به‌روز کن
+                    const newValue = payload.new?.value || '❄️ برفی';
+                    updateSiteNameUI(newValue);
+                })
+                .subscribe();
         }
 
         // ==========================================================
@@ -828,7 +917,6 @@
             localStorage.setItem('admins', JSON.stringify(admins));
         }
 
-        // حذف ادمین (فقط برای SUPER_ADMIN)
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
@@ -864,6 +952,14 @@
             });
             html = html.slice(0, -3);
             adminListEl.innerHTML = html;
+
+            // همچنین نمایش/مخفی کردن بخش تغییر اسم سایت بر اساس ادمین بودن
+            const changeSection = document.getElementById('changeSiteSection');
+            if (admins.includes(currentUser) && changeSection) {
+                changeSection.style.display = 'block';
+            } else if (changeSection) {
+                changeSection.style.display = 'none';
+            }
         }
 
         // ==========================================================
@@ -923,11 +1019,11 @@
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                loadSiteName();
+                await loadSiteName(); // بارگذاری اسم سایت از دیتابیس
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -942,11 +1038,11 @@
                 currentUsername = saved;
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
-                setTimeout(() => {
+                setTimeout(async () => {
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    loadSiteName();
+                    await loadSiteName();
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
@@ -954,8 +1050,11 @@
                     }
                 }, 1500);
             } else {
+                // اگر کاربری وارد نشده، فقط اسم سایت رو بارگذاری کن
                 loadSiteName();
             }
+            // شروع گوش دادن به تغییرات اسم سایت
+            subscribeToSiteNameChanges();
         });
 
         // ==========================================================
