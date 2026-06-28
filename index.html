@@ -71,6 +71,10 @@
             cursor: pointer;
             transition: 0.3s;
             white-space: nowrap;
+            display: none; /* به‌طور پیش‌فرض مخفی، فقط برای ادمین نمایش داده می‌شود */
+        }
+        .main-header .admin-btn.show {
+            display: inline-block;
         }
         .main-header .admin-btn:hover {
             background: #e74c3c;
@@ -525,7 +529,7 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
-                    <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
                 </div>
             </div>
 
@@ -575,7 +579,7 @@
                         <li>📊 تعداد کاربران آنلاین: <span id="userCount">0</span></li>
                         <li>🕹️ بازی‌های فعال: <span id="gameCount">0</span></li>
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
-                        <li>👤 مدیر: ابوالفضل</li>
+                        <li>👤 مدیر: رضا ممد</li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -586,9 +590,9 @@
 
     <script>
         // ==========================================================
-        //  نام کاربری ادمین (ابوالفضل)
+        //  نام کاربری ادمین - برای همیشه "رضا ممد" است
         // ==========================================================
-        const ADMIN_USERNAME = "ابوالفضل";
+        const ADMIN_USERNAME = "رضا ممد";
 
         // ==========================================================
         //  ۰. مدیریت کاربران آنلاین و بازی‌های فعال (با localStorage)
@@ -623,6 +627,10 @@
                 setOnlineUsers(users);
             }
             updateAdminStats();
+            // اگر کاربر ادمین است، دکمه پنل ادمینی را نشان بده
+            if (username === ADMIN_USERNAME) {
+                document.getElementById('adminBtn').classList.add('show');
+            }
         }
 
         // حذف کاربر از لیست آنلاین
@@ -704,8 +712,6 @@
         function logoutUser() {
             if (currentUsername) {
                 removeOnlineUser(currentUsername);
-                // حذف بازی‌های فعال این کاربر (در صورت وجود)
-                // فعلاً بازی‌ها را پاک نمی‌کنیم تا کاربر بتواند ادامه دهد
             }
         }
 
@@ -788,10 +794,11 @@
         }
 
         // ==========================================================
-        //  ۳. پنل ادمینی
+        //  ۳. پنل ادمینی - برای ادمین همیشه باز است
         // ==========================================================
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
+            // اگر کاربر ادمین است (رضا ممد)، پنل را باز کن
             if (username === ADMIN_USERNAME) {
                 updateAdminStats();
                 showPage('adminPanel');
