@@ -139,13 +139,13 @@
             transform: scale(1.05);
         }
 
-        /* ===== محتوای اصلی (همان کد قبلی) ===== */
+        /* ===== محتوای اصلی ===== */
         #mainContent {
             display: none;
             width: 100%;
         }
 
-        /* ===== استایل‌های اصلی (بدون تغییر) ===== */
+        /* ===== استایل‌های اصلی ===== */
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -330,7 +330,7 @@
             <div class="sub-text">لطفاً منتظر بمانید...</div>
         </div>
 
-        <!-- ======== صفحه خطا (اتصال ناموفق) ======== -->
+        <!-- ======== صفحه خطا ======== -->
         <div id="errorPage">
             <div class="error-icon">📡</div>
             <div class="error-title">اتصال خود را چک کنید</div>
@@ -349,7 +349,6 @@
                 </header>
                 <div class="box">
                     <h2>👋 سلام!</h2>
-                    <!-- متن زیر تغییر کرد -->
                     <p>خوش آمدید.</p>
                     <button onclick="goToMenu()">🚀 شروع</button>
                 </div>
@@ -371,7 +370,7 @@
                 <div class="game-container">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h3 style="text-align:center; margin-top:5px;">🎯 بازی دوز</h3>
-                    <div class="game-status" id="statusMsg">ربات در حال فکر کردن...</div>
+                    <div class="game-status" id="statusMsg">نوبت شما (X) - شروع کنید!</div>
                     <div class="board" id="board"></div>
                     <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
                 </div>
@@ -382,28 +381,23 @@
 
     <script>
         // ==========================================================
-        //  ۱. مدیریت صفحه لودینگ و اتصال
+        //  ۱. مدیریت لودینگ و اتصال
         // ==========================================================
         const loader = document.getElementById('loader');
         const errorPage = document.getElementById('errorPage');
         const mainContent = document.getElementById('mainContent');
 
-        // تابع بررسی اتصال با استفاده از navigator.onLine + درخواست fetch
         function checkConnection() {
             return new Promise((resolve) => {
-                // اگر مرورگر آفلاین را گزارش دهد، سریعاً رد می‌کنیم
                 if (!navigator.onLine) {
                     resolve(false);
                     return;
                 }
-
-                // در غیر این صورت با یک درخواست به یک آدرس معتبر تست می‌کنیم
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 ثانیه تایم‌اوت
-
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
                 fetch('https://httpbin.org/get', {
                         method: 'HEAD',
-                        mode: 'no-cors', // برای جلوگیری از خطای CORS
+                        mode: 'no-cors',
                         signal: controller.signal,
                     })
                     .then(() => {
@@ -417,9 +411,7 @@
             });
         }
 
-        // تابع اصلی برای شروع اتصال
         async function initConnection() {
-            // نمایش لودینگ و مخفی کردن سایر صفحات
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
@@ -427,25 +419,21 @@
             const isConnected = await checkConnection();
 
             if (isConnected) {
-                // اتصال برقرار است
                 loader.style.display = 'none';
                 mainContent.style.display = 'block';
-                // صفحه اصلی را نشان بده (به‌طور پیش‌فرض homePage نمایش داده می‌شود)
                 showPage('homePage');
             } else {
-                // اتصال ناموفق
                 loader.style.display = 'none';
                 errorPage.style.display = 'flex';
             }
         }
 
-        // تابع تلاش مجدد
         function retryConnection() {
             initConnection();
         }
 
         // ==========================================================
-        //  ۲. کدهای قبلی بازی دوز (بدون تغییر)
+        //  ۲. بازی دوز + صدای برنده شدن
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -463,6 +451,56 @@
             [0, 4, 8],
             [2, 4, 6]
         ];
+
+        // ==== تابع پخش صدای برنده شدن (با Web Audio API) ====
+        function playWinSound() {
+            try {
+                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+
+                // نت‌های شاد (پاپ و سوت)
+                const notes = [
+                    { freq: 523, duration: 0.15 }, // C5
+                    { freq: 659, duration: 0.15 }, // E5
+                    { freq: 784, duration: 0.15 }, // G5
+                    { freq: 1047, duration: 0.25 }, // C6
+                ];
+
+                notes.forEach((note, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+
+                    osc.type = 'square';
+                    osc.frequency.value = note.freq;
+
+                    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
+
+                    osc.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+
+                    osc.start(audioCtx.currentTime + index * 0.12);
+                    osc.stop(audioCtx.currentTime + index * 0.12 + note.duration);
+                });
+
+                // یک نت سوت بلند برای شادی
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.type = 'sine';
+                    osc2.frequency.value = 1200;
+                    gain2.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.5);
+                }, 400);
+
+            } catch (e) {
+                // اگر مرورگر از Web Audio پشتیبانی نکرد، بی‌صدا ادامه بده
+                console.log('صدا پشتیبانی نمی‌شود');
+            }
+        }
 
         function renderBoard() {
             boardEl.innerHTML = '';
@@ -493,9 +531,19 @@
 
         function endGame(result) {
             gameOver = true;
-            if (result === 'X') statusMsg.textContent = '🎉 شما برنده شدید!';
-            else if (result === 'O') statusMsg.textContent = '🤖 ربات برنده شد!';
-            else if (result === 'draw') statusMsg.textContent = '🤝 مساوی!';
+
+            // پخش صدا برای هر دو حالت برد (بازیکن یا ربات)
+            if (result === 'X' || result === 'O') {
+                playWinSound();
+            }
+
+            if (result === 'X') {
+                statusMsg.textContent = '🎉 شما برنده شدید!';
+            } else if (result === 'O') {
+                statusMsg.textContent = '🤖 ربات برنده شد!';
+            } else if (result === 'draw') {
+                statusMsg.textContent = '🤝 مساوی!';
+            }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
@@ -560,7 +608,7 @@
         function resetGame() { startGame(); }
 
         // ==========================================================
-        //  ۳. نمایش صفحات (home, menu, game)
+        //  ۳. نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const home = document.getElementById('homePage');
@@ -584,7 +632,6 @@
         // ==========================================================
         //  ۴. شروع برنامه
         // ==========================================================
-        // وقتی صفحه بارگذاری کامل شد، اتصال را بررسی کن
         window.addEventListener('load', () => {
             initConnection();
         });
