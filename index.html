@@ -30,7 +30,7 @@
             position: relative;
         }
 
-        /* ===== هدر (فقط نام کاربری بالا سمت راست) ===== */
+        /* ===== هدر ===== */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -364,6 +364,7 @@
             padding: 8px 0;
             border-bottom: 1px solid #eee;
             color: #333;
+            font-size: 15px;
         }
         .admin-panel-box ul li:last-child {
             border-bottom: none;
@@ -571,10 +572,10 @@
                     <h2>🔐 پنل مدیریت</h2>
                     <p style="color: #2ecc71; font-weight: bold;">به پنل مدیریت خوش آمدید!</p>
                     <ul>
-                        <li>📊 تعداد کاربران: ۱ (شما)</li>
-                        <li>🕹️ بازی‌های فعال: ۰</li>
+                        <li>📊 تعداد کاربران آنلاین: <span id="userCount">0</span></li>
+                        <li>🕹️ بازی‌های فعال: <span id="gameCount">0</span></li>
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
-                        <li>👤 مدیر: <span id="adminNameDisplay">ابوالفضل</span></li>
+                        <li>👤 مدیر: ابوالفضل</li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -585,12 +586,87 @@
 
     <script>
         // ==========================================================
-        //  نام کاربری ادمین (تنظیم برای ابوالفضل)
+        //  نام کاربری ادمین (ابوالفضل)
         // ==========================================================
         const ADMIN_USERNAME = "ابوالفضل";
 
         // ==========================================================
-        //  ۰. مدیریت ورود
+        //  ۰. مدیریت کاربران آنلاین و بازی‌های فعال (با localStorage)
+        // ==========================================================
+        function getOnlineUsers() {
+            try {
+                const data = localStorage.getItem('onlineUsers');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function setOnlineUsers(users) {
+            localStorage.setItem('onlineUsers', JSON.stringify(users));
+        }
+
+        function getActiveGames() {
+            try {
+                const data = localStorage.getItem('activeGames');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function setActiveGames(games) {
+            localStorage.setItem('activeGames', JSON.stringify(games));
+        }
+
+        // اضافه کردن کاربر به لیست آنلاین
+        function addOnlineUser(username) {
+            let users = getOnlineUsers();
+            if (!users.includes(username)) {
+                users.push(username);
+                setOnlineUsers(users);
+            }
+            updateAdminStats();
+        }
+
+        // حذف کاربر از لیست آنلاین
+        function removeOnlineUser(username) {
+            let users = getOnlineUsers();
+            users = users.filter(u => u !== username);
+            setOnlineUsers(users);
+            updateAdminStats();
+        }
+
+        // اضافه کردن بازی فعال
+        function addActiveGame(gameId) {
+            let games = getActiveGames();
+            if (!games.includes(gameId)) {
+                games.push(gameId);
+                setActiveGames(games);
+            }
+            updateAdminStats();
+        }
+
+        // حذف بازی فعال
+        function removeActiveGame(gameId) {
+            let games = getActiveGames();
+            games = games.filter(g => g !== gameId);
+            setActiveGames(games);
+            updateAdminStats();
+        }
+
+        // به‌روزرسانی آمار در پنل ادمینی
+        function updateAdminStats() {
+            const userCount = document.getElementById('userCount');
+            const gameCount = document.getElementById('gameCount');
+            if (userCount) {
+                const users = getOnlineUsers();
+                userCount.textContent = users.length;
+            }
+            if (gameCount) {
+                const games = getActiveGames();
+                gameCount.textContent = games.length;
+            }
+        }
+
+        // ==========================================================
+        //  ۱. مدیریت ورود و خروج
         // ==========================================================
         let currentUsername = '';
 
@@ -607,7 +683,10 @@
             error.style.display = 'none';
             currentUsername = username;
 
+            // ذخیره نام کاربری در localStorage
             localStorage.setItem('username', username);
+            // اضافه کردن به لیست آنلاین
+            addOnlineUser(username);
 
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
@@ -617,13 +696,33 @@
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
                 showPage('homePage');
+                updateAdminStats();
             }, 2000);
         }
 
-        // اگر قبلاً نام کاربری ذخیره شده بود، مستقیماً برو به صفحه اصلی
+        // خروج از سایت (حذف کاربر از لیست آنلاین)
+        function logoutUser() {
+            if (currentUsername) {
+                removeOnlineUser(currentUsername);
+                // حذف بازی‌های فعال این کاربر (در صورت وجود)
+                // فعلاً بازی‌ها را پاک نمی‌کنیم تا کاربر بتواند ادامه دهد
+            }
+        }
+
+        // وقتی برگه مرورگر بسته می‌شود، کاربر را از لیست آنلاین حذف کن
+        window.addEventListener('beforeunload', function() {
+            if (currentUsername) {
+                removeOnlineUser(currentUsername);
+            }
+        });
+
+        // وقتی کاربر دوباره به صفحه برمی‌گردد (اگر قبلاً وارد شده بود)
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
+                // کاربر قبلاً وارد شده، دوباره به لیست آنلاین اضافه کن
+                currentUsername = saved;
+                addOnlineUser(saved);
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
@@ -631,12 +730,13 @@
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
                     showPage('homePage');
+                    updateAdminStats();
                 }, 1500);
             }
         });
 
         // ==========================================================
-        //  ۱. مدیریت لودینگ و اتصال (برای صفحه خطا)
+        //  ۲. مدیریت لودینگ و اتصال (برای صفحه خطا)
         // ==========================================================
         const loader = document.getElementById('loader');
         const errorPage = document.getElementById('errorPage');
@@ -688,22 +788,20 @@
         }
 
         // ==========================================================
-        //  ۲. پنل ادمینی
+        //  ۳. پنل ادمینی
         // ==========================================================
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            // مقایسه نام کاربری با ادمین
             if (username === ADMIN_USERNAME) {
-                // ادمین است → پنل را نشان بده
+                updateAdminStats();
                 showPage('adminPanel');
             } else {
-                // کاربر عادی → پیغام خطا
                 alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
             }
         }
 
         // ==========================================================
-        //  ۳. بازی دوز + تایمر + صداها
+        //  ۴. بازی دوز + تایمر + صداها (با مدیریت بازی فعال)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -716,6 +814,7 @@
         let timerInterval = null;
         let timeLeft = 20;
         const MAX_TIME = 20;
+        let gameId = null;
 
         const winPatterns = [
             [0, 1, 2],
@@ -876,6 +975,11 @@
         function endGame(result) {
             gameOver = true;
             clearTimer();
+            // حذف بازی از لیست فعال
+            if (gameId) {
+                removeActiveGame(gameId);
+                gameId = null;
+            }
 
             if (result === 'X') {
                 playWinSound();
@@ -953,6 +1057,11 @@
             gameOver = false;
             currentPlayer = 'X';
             isRobotTurn = false;
+
+            // تولید شناسه یکتا برای بازی و اضافه به لیست فعال
+            gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+            addActiveGame(gameId);
+
             renderBoard();
             statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
             clearTimer();
@@ -963,11 +1072,16 @@
         }
 
         function resetGame() {
+            // حذف بازی قبلی از لیست فعال
+            if (gameId) {
+                removeActiveGame(gameId);
+                gameId = null;
+            }
             startGame();
         }
 
         // ==========================================================
-        //  ۴. نمایش صفحات
+        //  ۵. نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const home = document.getElementById('homePage');
@@ -978,20 +1092,49 @@
             menu.style.display = 'none';
             game.style.display = 'none';
             admin.style.display = 'none';
+
+            // اگر از صفحه بازی خارج می‌شویم، بازی را از لیست فعال حذف کن
+            if (pageId !== 'gamePage' && gameId) {
+                removeActiveGame(gameId);
+                gameId = null;
+                clearTimer();
+            }
+
             document.getElementById(pageId).style.display = 'flex';
+            // اگر به صفحه بازی می‌رویم، بازی جدید شروع کن
+            if (pageId === 'gamePage') {
+                startGame();
+            }
         }
 
         function goToMenu() { showPage('menuPage'); }
 
         function goToGame() {
             showPage('gamePage');
-            startGame();
         }
 
         function goHome() {
             clearTimer();
             showPage('homePage');
         }
+
+        // اورراید کردن goHome برای مدیریت خروج از بازی
+        const originalGoHome = goHome;
+        goHome = function() {
+            // حذف بازی از لیست فعال
+            if (gameId) {
+                removeActiveGame(gameId);
+                gameId = null;
+            }
+            clearTimer();
+            showPage('homePage');
+        };
+
+        // اورراید کردن back-btn در صفحه بازی
+        document.querySelector('.back-btn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            goHome();
+        });
     </script>
 
 </body>
