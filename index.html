@@ -71,10 +71,6 @@
             cursor: pointer;
             transition: 0.3s;
             white-space: nowrap;
-            display: none; /* به‌طور پیش‌فرض مخفی، فقط برای ادمین نمایش داده می‌شود */
-        }
-        .main-header .admin-btn.show {
-            display: inline-block;
         }
         .main-header .admin-btn:hover {
             background: #e74c3c;
@@ -529,7 +525,7 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
-                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
                 </div>
             </div>
 
@@ -579,7 +575,7 @@
                         <li>📊 تعداد کاربران آنلاین: <span id="userCount">0</span></li>
                         <li>🕹️ بازی‌های فعال: <span id="gameCount">0</span></li>
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
-                        <li>👤 مدیر: رضا ممد</li>
+                        <li>👤 مدیران: رضا ممد ، ابوالفضل</li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -590,9 +586,9 @@
 
     <script>
         // ==========================================================
-        //  نام کاربری ادمین - برای همیشه "رضا ممد" است
+        //  لیست ادمین‌ها (برای این کاربران پنل ادمینی باز می‌شود)
         // ==========================================================
-        const ADMIN_USERNAME = "رضا ممد";
+        const ADMIN_USERNAMES = ["رضا ممد", "ابوالفضل"];
 
         // ==========================================================
         //  ۰. مدیریت کاربران آنلاین و بازی‌های فعال (با localStorage)
@@ -619,7 +615,6 @@
             localStorage.setItem('activeGames', JSON.stringify(games));
         }
 
-        // اضافه کردن کاربر به لیست آنلاین
         function addOnlineUser(username) {
             let users = getOnlineUsers();
             if (!users.includes(username)) {
@@ -627,13 +622,8 @@
                 setOnlineUsers(users);
             }
             updateAdminStats();
-            // اگر کاربر ادمین است، دکمه پنل ادمینی را نشان بده
-            if (username === ADMIN_USERNAME) {
-                document.getElementById('adminBtn').classList.add('show');
-            }
         }
 
-        // حذف کاربر از لیست آنلاین
         function removeOnlineUser(username) {
             let users = getOnlineUsers();
             users = users.filter(u => u !== username);
@@ -641,7 +631,6 @@
             updateAdminStats();
         }
 
-        // اضافه کردن بازی فعال
         function addActiveGame(gameId) {
             let games = getActiveGames();
             if (!games.includes(gameId)) {
@@ -651,7 +640,6 @@
             updateAdminStats();
         }
 
-        // حذف بازی فعال
         function removeActiveGame(gameId) {
             let games = getActiveGames();
             games = games.filter(g => g !== gameId);
@@ -659,7 +647,6 @@
             updateAdminStats();
         }
 
-        // به‌روزرسانی آمار در پنل ادمینی
         function updateAdminStats() {
             const userCount = document.getElementById('userCount');
             const gameCount = document.getElementById('gameCount');
@@ -691,9 +678,7 @@
             error.style.display = 'none';
             currentUsername = username;
 
-            // ذخیره نام کاربری در localStorage
             localStorage.setItem('username', username);
-            // اضافه کردن به لیست آنلاین
             addOnlineUser(username);
 
             document.getElementById('loginPage').style.display = 'none';
@@ -708,25 +693,15 @@
             }, 2000);
         }
 
-        // خروج از سایت (حذف کاربر از لیست آنلاین)
-        function logoutUser() {
-            if (currentUsername) {
-                removeOnlineUser(currentUsername);
-            }
-        }
-
-        // وقتی برگه مرورگر بسته می‌شود، کاربر را از لیست آنلاین حذف کن
         window.addEventListener('beforeunload', function() {
             if (currentUsername) {
                 removeOnlineUser(currentUsername);
             }
         });
 
-        // وقتی کاربر دوباره به صفحه برمی‌گردد (اگر قبلاً وارد شده بود)
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
-                // کاربر قبلاً وارد شده، دوباره به لیست آنلاین اضافه کن
                 currentUsername = saved;
                 addOnlineUser(saved);
                 document.getElementById('loginPage').style.display = 'none';
@@ -794,12 +769,12 @@
         }
 
         // ==========================================================
-        //  ۳. پنل ادمینی - برای ادمین همیشه باز است
+        //  ۳. پنل ادمینی - برای ادمین‌ها باز می‌شود
         // ==========================================================
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            // اگر کاربر ادمین است (رضا ممد)، پنل را باز کن
-            if (username === ADMIN_USERNAME) {
+            // بررسی اینکه آیا کاربر در لیست ادمین‌ها هست
+            if (ADMIN_USERNAMES.includes(username)) {
                 updateAdminStats();
                 showPage('adminPanel');
             } else {
@@ -834,7 +809,6 @@
             [2, 4, 6]
         ];
 
-        // ===== صداها =====
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -868,7 +842,7 @@
                     osc2.start();
                     osc2.stop(audioCtx.currentTime + 0.5);
                 }, 400);
-            } catch (e) { /* بی‌صدا */ }
+            } catch (e) {}
         }
 
         function playLoseSound() {
@@ -892,10 +866,9 @@
                     osc.start(audioCtx.currentTime + index * 0.25);
                     osc.stop(audioCtx.currentTime + index * 0.25 + note.duration);
                 });
-            } catch (e) { /* بی‌صدا */ }
+            } catch (e) {}
         }
 
-        // ===== تایمر =====
         function startTimer() {
             clearTimer();
             timeLeft = MAX_TIME;
@@ -951,7 +924,6 @@
             startTimer();
         }
 
-        // ===== توابع بازی =====
         function renderBoard() {
             boardEl.innerHTML = '';
             board.forEach((val, idx) => {
@@ -982,7 +954,6 @@
         function endGame(result) {
             gameOver = true;
             clearTimer();
-            // حذف بازی از لیست فعال
             if (gameId) {
                 removeActiveGame(gameId);
                 gameId = null;
@@ -1065,7 +1036,6 @@
             currentPlayer = 'X';
             isRobotTurn = false;
 
-            // تولید شناسه یکتا برای بازی و اضافه به لیست فعال
             gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
             addActiveGame(gameId);
 
@@ -1079,7 +1049,6 @@
         }
 
         function resetGame() {
-            // حذف بازی قبلی از لیست فعال
             if (gameId) {
                 removeActiveGame(gameId);
                 gameId = null;
@@ -1100,7 +1069,6 @@
             game.style.display = 'none';
             admin.style.display = 'none';
 
-            // اگر از صفحه بازی خارج می‌شویم، بازی را از لیست فعال حذف کن
             if (pageId !== 'gamePage' && gameId) {
                 removeActiveGame(gameId);
                 gameId = null;
@@ -1108,7 +1076,6 @@
             }
 
             document.getElementById(pageId).style.display = 'flex';
-            // اگر به صفحه بازی می‌رویم، بازی جدید شروع کن
             if (pageId === 'gamePage') {
                 startGame();
             }
@@ -1125,10 +1092,8 @@
             showPage('homePage');
         }
 
-        // اورراید کردن goHome برای مدیریت خروج از بازی
         const originalGoHome = goHome;
         goHome = function() {
-            // حذف بازی از لیست فعال
             if (gameId) {
                 removeActiveGame(gameId);
                 gameId = null;
@@ -1137,7 +1102,6 @@
             showPage('homePage');
         };
 
-        // اورراید کردن back-btn در صفحه بازی
         document.querySelector('.back-btn')?.addEventListener('click', function(e) {
             e.preventDefault();
             goHome();
