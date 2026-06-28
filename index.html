@@ -203,16 +203,36 @@
 
         /* ===== استایل‌های اصلی ===== */
         header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
             margin-bottom: 30px;
             color: white;
         }
-        header h1 {
-            font-size: 55px;
+        header .title-group {
+            text-align: center;
+            flex: 1;
         }
-        header p {
-            font-size: 20px;
+        header .title-group h1 {
+            font-size: 40px;
         }
+        header .title-group p {
+            font-size: 16px;
+            margin-top: 2px;
+        }
+        header .user-info {
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+        header .user-info i {
+            margin-left: 6px;
+        }
+
         .box {
             background: white;
             padding: 30px;
@@ -230,6 +250,7 @@
             color: #555;
             font-size: 16px;
         }
+
         button {
             background: #00b4ff;
             color: white;
@@ -391,9 +412,22 @@
         }
 
         @media(max-width: 480px) {
-            header h1 { font-size: 40px; }
-            .box { width: 90%; }
-            .menu-box button { width: 100%; }
+            header .title-group h1 {
+                font-size: 30px;
+            }
+            header .title-group p {
+                font-size: 13px;
+            }
+            header .user-info {
+                font-size: 14px;
+                padding: 4px 10px;
+            }
+            .box {
+                padding: 20px;
+            }
+            .menu-box button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -434,12 +468,17 @@
             <!-- صفحه اصلی -->
             <div id="homePage">
                 <header>
-                    <h1>❄️ برفی</h1>
-                    <p>به سایت برفی خوش آمدید</p>
+                    <div class="title-group">
+                        <h1>❄️ برفی</h1>
+                        <p>به سایت برفی خوش آمدید</p>
+                    </div>
+                    <div class="user-info">
+                        👤 <span id="displayUsername">کاربر</span>
+                    </div>
                 </header>
                 <div class="box">
-                    <h2>👋 سلام، <span id="displayUsername">کاربر</span>!</h2>
-                    <p>خوش آمدید.</p>
+                    <h2>👋 خوش آمدید!</h2>
+                    <p>از حضور شما خوشحالیم.</p>
                     <button onclick="goToMenu()">🚀 شروع</button>
                 </div>
             </div>
@@ -867,11 +906,6 @@
             clearTimer();
             showPage('homePage');
         }
-
-        // ==========================================================
-        //  ۴. شروع برنامه (اکنون توسط ورود مدیریت می‌شود)
-        // ==========================================================
-        // دیگر نیازی به initConnection در load نیست چون توسط ورود کنترل می‌شود
     </script>
 
 </body>
