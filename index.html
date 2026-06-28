@@ -23,7 +23,6 @@
             padding: 20px;
         }
 
-        /* ===== اشتراک‌گذاری کانتینر ===== */
         .page-container {
             width: 100%;
             max-width: 400px;
@@ -74,21 +73,11 @@
             animation: dots 1.5s infinite steps(1);
         }
         @keyframes dots {
-            0% {
-                content: '';
-            }
-            25% {
-                content: '.';
-            }
-            50% {
-                content: '..';
-            }
-            75% {
-                content: '...';
-            }
-            100% {
-                content: '';
-            }
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
         }
         #loader .sub-text {
             color: #888;
@@ -189,8 +178,7 @@
             transform: scale(1.05);
         }
 
-        #menuPage,
-        #gamePage {
+        #menuPage, #gamePage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -297,25 +285,21 @@
             margin-top: 12px;
             padding: 8px 25px;
             font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
         }
         .reset-btn:hover {
             background: #e08e0b;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
         @media(max-width: 480px) {
-            header h1 {
-                font-size: 40px;
-            }
-            .box {
-                width: 90%;
-            }
-            .menu-box button {
-                width: 100%;
-            }
+            header h1 { font-size: 40px; }
+            .box { width: 90%; }
+            .menu-box button { width: 100%; }
         }
     </style>
 </head>
@@ -433,7 +417,7 @@
         }
 
         // ==========================================================
-        //  ۲. بازی دوز + صدای برنده شدن
+        //  ۲. بازی دوز + صدای برد و باخت
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -452,37 +436,28 @@
             [2, 4, 6]
         ];
 
-        // ==== تابع پخش صدای برنده شدن (با Web Audio API) ====
+        // ===== صدای برد (شاد) =====
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-
-                // نت‌های شاد (پاپ و سوت)
                 const notes = [
-                    { freq: 523, duration: 0.15 }, // C5
-                    { freq: 659, duration: 0.15 }, // E5
-                    { freq: 784, duration: 0.15 }, // G5
-                    { freq: 1047, duration: 0.25 }, // C6
+                    { freq: 523, duration: 0.15 },
+                    { freq: 659, duration: 0.15 },
+                    { freq: 784, duration: 0.15 },
+                    { freq: 1047, duration: 0.25 },
                 ];
-
                 notes.forEach((note, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
-
                     osc.type = 'square';
                     osc.frequency.value = note.freq;
-
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
-
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
-
                     osc.start(audioCtx.currentTime + index * 0.12);
                     osc.stop(audioCtx.currentTime + index * 0.12 + note.duration);
                 });
-
-                // یک نت سوت بلند برای شادی
                 setTimeout(() => {
                     const osc2 = audioCtx.createOscillator();
                     const gain2 = audioCtx.createGain();
@@ -495,9 +470,35 @@
                     osc2.start();
                     osc2.stop(audioCtx.currentTime + 0.5);
                 }, 400);
-
             } catch (e) {
-                // اگر مرورگر از Web Audio پشتیبانی نکرد، بی‌صدا ادامه بده
+                console.log('صدا پشتیبانی نمی‌شود');
+            }
+        }
+
+        // ===== صدای باخت (غمگین) =====
+        function playLoseSound() {
+            try {
+                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                // نت‌های نزولی و غمگین
+                const notes = [
+                    { freq: 500, duration: 0.3 },
+                    { freq: 450, duration: 0.3 },
+                    { freq: 400, duration: 0.3 },
+                    { freq: 350, duration: 0.5 },
+                ];
+                notes.forEach((note, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = note.freq;
+                    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
+                    osc.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + index * 0.25);
+                    osc.stop(audioCtx.currentTime + index * 0.25 + note.duration);
+                });
+            } catch (e) {
                 console.log('صدا پشتیبانی نمی‌شود');
             }
         }
@@ -532,14 +533,11 @@
         function endGame(result) {
             gameOver = true;
 
-            // پخش صدا برای هر دو حالت برد (بازیکن یا ربات)
-            if (result === 'X' || result === 'O') {
-                playWinSound();
-            }
-
             if (result === 'X') {
+                playWinSound(); // صدای برد
                 statusMsg.textContent = '🎉 شما برنده شدید!';
             } else if (result === 'O') {
+                playLoseSound(); // صدای باخت
                 statusMsg.textContent = '🤖 ربات برنده شد!';
             } else if (result === 'draw') {
                 statusMsg.textContent = '🤝 مساوی!';
