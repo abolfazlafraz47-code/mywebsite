@@ -320,6 +320,53 @@
             max-width: 400px;
         }
 
+        /* ===== صفحه اصلی با پس‌زمینه مشکی ===== */
+        #homePage {
+            background: #000000;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            min-height: 400px;
+            justify-content: center;
+        }
+        #homePage .box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+        #homePage .box h2 {
+            color: white;
+        }
+        #homePage .box p {
+            color: #ccc;
+        }
+        #homePage .box button {
+            background: #00b4ff;
+            color: white;
+        }
+        #homePage .box button:hover {
+            background: #008fd1;
+        }
+        /* هدر در صفحه اصلی */
+        #homePage .main-header {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        #homePage .main-header .site-title,
+        #homePage .main-header .user-name,
+        #homePage .main-header .header-btn,
+        #homePage .main-header .admin-btn,
+        #homePage .main-header .profile-btn,
+        #homePage .main-header .mod-btn {
+            color: white;
+        }
+        #homePage .main-header .header-btn:hover,
+        #homePage .main-header .admin-btn:hover,
+        #homePage .main-header .profile-btn:hover,
+        #homePage .main-header .mod-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
         .box {
             background: white;
             padding: 30px;
@@ -770,8 +817,8 @@
         <!-- ======== محتوای اصلی ======== -->
         <div id="mainContent">
 
-            <!-- ===== هدر ===== -->
-            <div class="main-header">
+            <!-- ===== هدر (برای همه صفحات به جز صفحه اصلی) ===== -->
+            <div class="main-header" id="globalHeader">
                 <div class="site-title">❄️ برفی</div>
                 <div class="header-left">
                     <div class="user-name">
@@ -787,8 +834,24 @@
                 </div>
             </div>
 
-            <!-- صفحه اصلی -->
+            <!-- ===== صفحه اصلی با پس‌زمینه مشکی ===== -->
             <div id="homePage">
+                <!-- هدر اختصاصی صفحه اصلی با رنگ سفید -->
+                <div class="main-header" style="border-bottom:1px solid rgba(255,255,255,0.2); margin-bottom:20px; color:white;">
+                    <div class="site-title">❄️ برفی</div>
+                    <div class="header-left">
+                        <div class="user-name" style="background:rgba(255,255,255,0.2);">
+                            👤 <span id="displayUsernameHome">کاربر</span>
+                        </div>
+                        <button class="header-btn" style="background:rgba(255,255,255,0.15); color:white;" onclick="showRankPage()">🏅 رنک ها</button>
+                        <button class="admin-btn" id="adminBtnHome" style="background:#ff6b6b; color:white; display:none;" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                        <button class="mod-btn" id="modBtnHome" style="background:#9b59b6; color:white; display:none;" onclick="openModPanel()">🛡️ پنل مود</button>
+                        <button class="profile-btn" style="background:rgba(255,255,255,0.25); color:white;" onclick="showProfilePage()">
+                            <span class="avatar" id="headerAvatarHome" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
+                            پروفایل
+                        </button>
+                    </div>
+                </div>
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
@@ -996,11 +1059,15 @@
         function updateAvatarUI(dataUrl) {
             const preview = document.getElementById('avatarPreview');
             const headerAvatar = document.getElementById('headerAvatar');
+            const headerAvatarHome = document.getElementById('headerAvatarHome');
             if (preview) {
                 preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
             if (headerAvatar) {
                 headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            }
+            if (headerAvatarHome) {
+                headerAvatarHome.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
         }
 
@@ -1019,20 +1086,26 @@
             const isAdmin = admins.includes(username);
 
             const adminBtn = document.getElementById('adminBtn');
+            const adminBtnHome = document.getElementById('adminBtnHome');
             const modBtn = document.getElementById('modBtn');
+            const modBtnHome = document.getElementById('modBtnHome');
 
             // دکمه ادمینی: برای همه ادمین‌ها (رضا ممد، ابوالفضل، محمد رضا، آراد تریاکی)
             if (isAdmin) {
-                adminBtn.style.display = 'inline-block';
+                if (adminBtn) adminBtn.style.display = 'inline-block';
+                if (adminBtnHome) adminBtnHome.style.display = 'inline-block';
             } else {
-                adminBtn.style.display = 'none';
+                if (adminBtn) adminBtn.style.display = 'none';
+                if (adminBtnHome) adminBtnHome.style.display = 'none';
             }
 
             // دکمه مود: برای همه کاربران نمایش داده می‌شود (اگر لاگین باشند)
             if (username && username !== '') {
-                modBtn.style.display = 'inline-block';
+                if (modBtn) modBtn.style.display = 'inline-block';
+                if (modBtnHome) modBtnHome.style.display = 'inline-block';
             } else {
-                modBtn.style.display = 'none';
+                if (modBtn) modBtn.style.display = 'none';
+                if (modBtnHome) modBtnHome.style.display = 'none';
             }
         }
 
@@ -1064,6 +1137,8 @@
 
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
+            const homeUsername = document.getElementById('displayUsernameHome');
+            if (homeUsername) homeUsername.textContent = newName;
             input.value = '';
             alert('✅ نام کاربری با موفقیت تغییر کرد!');
 
@@ -1213,6 +1288,13 @@
                 updateAdminPanelUI();
                 updateAdminStats();
             }
+            // برای صفحه اصلی، هدر اختصاصی آن نمایش داده می‌شود و هدر عمومی مخفی می‌شود
+            const globalHeader = document.getElementById('globalHeader');
+            if (pageId === 'homePage') {
+                if (globalHeader) globalHeader.style.display = 'none';
+            } else {
+                if (globalHeader) globalHeader.style.display = 'flex';
+            }
         }
 
         function updateModStats() {
@@ -1313,6 +1395,8 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
+                const homeUsername = document.getElementById('displayUsernameHome');
+                if (homeUsername) homeUsername.textContent = username;
                 loadProfile();
                 showPage('homePage');
                 updateAdminStats();
@@ -1336,6 +1420,8 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
+                    const homeUsername = document.getElementById('displayUsernameHome');
+                    if (homeUsername) homeUsername.textContent = saved;
                     loadProfile();
                     showPage('homePage');
                     updateAdminStats();
