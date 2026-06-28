@@ -29,7 +29,7 @@
             position: relative;
         }
 
-        /* ===== هدر ثابت (نام کاربری بالا سمت راست) ===== */
+        /* ===== هدر (نام کاربری + دکمه پنل ادمینی) ===== */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -39,6 +39,8 @@
             color: white;
             border-bottom: 1px solid rgba(255,255,255,0.2);
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .main-header .site-title {
             font-size: 22px;
@@ -49,6 +51,11 @@
             font-weight: normal;
             opacity: 0.8;
         }
+        .main-header .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .main-header .user-name {
             font-size: 16px;
             font-weight: bold;
@@ -56,6 +63,22 @@
             padding: 4px 14px;
             border-radius: 30px;
             white-space: nowrap;
+        }
+        .main-header .admin-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-header .admin-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.05);
         }
 
         /* ===== صفحه ورود ===== */
@@ -231,7 +254,7 @@
         }
 
         /* ===== صفحات داخلی ===== */
-        #homePage, #menuPage, #gamePage {
+        #homePage, #menuPage, #gamePage, #adminPanel {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -321,6 +344,40 @@
         .back-btn:hover {
             background: #e74c3c;
             transform: scale(1.05);
+        }
+
+        /* ===== پنل ادمینی ===== */
+        .admin-panel-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .admin-panel-box h2 {
+            color: #00b4ff;
+            margin-bottom: 15px;
+        }
+        .admin-panel-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+        .admin-panel-box ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+        .admin-panel-box ul li:last-child {
+            border-bottom: none;
+        }
+        .admin-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .admin-panel-box .back-home-btn:hover {
+            background: #e74c3c;
         }
 
         /* ===== تایمر ===== */
@@ -417,6 +474,10 @@
                 font-size: 13px;
                 padding: 3px 10px;
             }
+            .main-header .admin-btn {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
             .box {
                 padding: 20px;
             }
@@ -460,13 +521,16 @@
         <!-- ======== محتوای اصلی ======== -->
         <div id="mainContent">
 
-            <!-- ===== هدر ثابت با نام کاربری بالا سمت راست ===== -->
+            <!-- ===== هدر (نام کاربری + دکمه پنل ادمینی) ===== -->
             <div class="main-header">
                 <div class="site-title">
                     ❄️ برفی <span>| بازی</span>
                 </div>
-                <div class="user-name">
-                    👤 <span id="displayUsername">کاربر</span>
+                <div class="header-left">
+                    <div class="user-name">
+                        👤 <span id="displayUsername">کاربر</span>
+                    </div>
+                    <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
                 </div>
             </div>
 
@@ -507,10 +571,29 @@
                 </div>
             </div>
 
+            <!-- ===== پنل ادمینی ===== -->
+            <div id="adminPanel">
+                <div class="admin-panel-box">
+                    <h2>🔐 پنل مدیریت</h2>
+                    <p style="color: #2ecc71; font-weight: bold;">به پنل مدیریت خوش آمدید!</p>
+                    <ul>
+                        <li>📊 تعداد کاربران: ۱ (شما)</li>
+                        <li>🕹️ بازی‌های فعال: ۰</li>
+                        <li>⚙️ تنظیمات: نسخه ۱.۰</li>
+                    </ul>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
     <script>
+        // ==========================================================
+        //  نام کاربری ادمین (اینجا تغییر دهید)
+        // ==========================================================
+        const ADMIN_USERNAME = "abolfazl"; // <-- نام کاربری ادمین را اینجا وارد کنید
+
         // ==========================================================
         //  ۰. مدیریت ورود
         // ==========================================================
@@ -529,14 +612,11 @@
             error.style.display = 'none';
             currentUsername = username;
 
-            // ذخیره در localStorage برای نمایش در صفحه اصلی
             localStorage.setItem('username', username);
 
-            // رفتن به لودینگ
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
 
-            // بعد از ۲ ثانیه شبیه‌سازی لودینگ، وارد سایت می‌شیم
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
@@ -549,7 +629,6 @@
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
-                // اگر نام کاربری ذخیره شده، صفحه ورود را مخفی و مستقیماً به لودینگ برو
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
@@ -593,7 +672,6 @@
         }
 
         async function initConnection() {
-            // این تابع برای مواقعی که نیاز به چک مجدد اتصال داریم
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
@@ -615,7 +693,21 @@
         }
 
         // ==========================================================
-        //  ۲. بازی دوز + تایمر + صداها
+        //  ۲. پنل ادمینی
+        // ==========================================================
+        function openAdminPanel() {
+            const username = document.getElementById('displayUsername').textContent;
+            if (username === ADMIN_USERNAME) {
+                // ادمین است → پنل را نشان بده
+                showPage('adminPanel');
+            } else {
+                // کاربر عادی → پیغام خطا
+                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
+            }
+        }
+
+        // ==========================================================
+        //  ۳. بازی دوز + تایمر + صداها
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -879,15 +971,17 @@
         }
 
         // ==========================================================
-        //  ۳. نمایش صفحات
+        //  ۴. نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const home = document.getElementById('homePage');
             const menu = document.getElementById('menuPage');
             const game = document.getElementById('gamePage');
+            const admin = document.getElementById('adminPanel');
             home.style.display = 'none';
             menu.style.display = 'none';
             game.style.display = 'none';
+            admin.style.display = 'none';
             document.getElementById(pageId).style.display = 'flex';
         }
 
