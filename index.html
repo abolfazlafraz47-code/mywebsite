@@ -29,9 +29,80 @@
             position: relative;
         }
 
+        /* ===== صفحه ورود ===== */
+        #loginPage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 350px;
+            width: 100%;
+        }
+        #loginPage h1 {
+            font-size: 32px;
+            color: #00b4ff;
+            margin-bottom: 10px;
+        }
+        #loginPage p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        #loginPage .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        #loginPage .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        #loginPage .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 18px;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+        #loginPage .input-group input:focus {
+            border-color: #00b4ff;
+        }
+        #loginPage .login-btn {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        #loginPage .login-btn:hover {
+            background: #008fd1;
+            transform: scale(1.02);
+        }
+        #loginPage .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
         /* ===== صفحه لودینگ ===== */
         #loader {
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -330,6 +401,18 @@
 
     <div class="page-container">
 
+        <!-- ======== صفحه ورود ======== -->
+        <div id="loginPage">
+            <h1>❄️ برفی</h1>
+            <p>برای ورود، نام کاربری خود را وارد کنید</p>
+            <div class="input-group">
+                <label for="usernameInput">نام کاربری</label>
+                <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
+            </div>
+            <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
+            <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
+        </div>
+
         <!-- ======== صفحه لودینگ ======== -->
         <div id="loader">
             <div class="spinner"></div>
@@ -355,7 +438,7 @@
                     <p>به سایت برفی خوش آمدید</p>
                 </header>
                 <div class="box">
-                    <h2>👋 سلام!</h2>
+                    <h2>👋 سلام، <span id="displayUsername">کاربر</span>!</h2>
                     <p>خوش آمدید.</p>
                     <button onclick="goToMenu()">🚀 شروع</button>
                 </div>
@@ -394,7 +477,57 @@
 
     <script>
         // ==========================================================
-        //  ۱. مدیریت لودینگ و اتصال
+        //  ۰. مدیریت ورود
+        // ==========================================================
+        let currentUsername = '';
+
+        function handleLogin() {
+            const input = document.getElementById('usernameInput');
+            const error = document.getElementById('loginError');
+            const username = input.value.trim();
+
+            if (username === '') {
+                error.style.display = 'block';
+                return;
+            }
+
+            error.style.display = 'none';
+            currentUsername = username;
+
+            // ذخیره در localStorage برای نمایش در صفحه اصلی
+            localStorage.setItem('username', username);
+
+            // رفتن به لودینگ
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('loader').style.display = 'flex';
+
+            // بعد از ۲ ثانیه شبیه‌سازی لودینگ، وارد سایت می‌شیم
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('displayUsername').textContent = username;
+                showPage('homePage');
+            }, 2000);
+        }
+
+        // اگر قبلاً نام کاربری ذخیره شده بود، مستقیماً برو به صفحه اصلی
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('username');
+            if (saved && saved.trim() !== '') {
+                // اگر نام کاربری ذخیره شده، صفحه ورود را مخفی و مستقیماً به لودینگ برو
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('displayUsername').textContent = saved;
+                    showPage('homePage');
+                }, 1500);
+            }
+        });
+
+        // ==========================================================
+        //  ۱. مدیریت لودینگ و اتصال (برای صفحه خطا)
         // ==========================================================
         const loader = document.getElementById('loader');
         const errorPage = document.getElementById('errorPage');
@@ -425,6 +558,7 @@
         }
 
         async function initConnection() {
+            // این تابع برای مواقعی که نیاز به چک مجدد اتصال داریم
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
@@ -551,9 +685,7 @@
                 if (timeLeft <= 0) {
                     clearTimer();
                     timerDisplay.classList.remove('warning');
-                    // تایمر تموم شد → نوبت عوض میشه
                     if (!gameOver && !isRobotTurn && currentPlayer === 'X') {
-                        // نوبت کاربر بود و تموم شد → نوبت ربات
                         statusMsg.textContent = '⏰ زمان شما تمام شد! نوبت ربات...';
                         currentPlayer = 'O';
                         isRobotTurn = true;
@@ -561,11 +693,10 @@
                             if (!gameOver) robotMove();
                         }, 300);
                     } else if (!gameOver && isRobotTurn && currentPlayer === 'O') {
-                        // نوبت ربات بود و تموم شد (احتمالاً ربات کار نمیکنه) → نوبت کاربر
                         statusMsg.textContent = '⏰ زمان ربات تمام شد! نوبت شما...';
                         currentPlayer = 'X';
                         isRobotTurn = false;
-                        startTimer(); // تایمر جدید برای کاربر
+                        startTimer();
                     }
                 }
             }, 1000);
@@ -646,7 +777,7 @@
             currentPlayer = 'O';
             isRobotTurn = true;
             statusMsg.textContent = '🤖 ربات در حال فکر...';
-            clearTimer(); // تایمر کاربر متوقف شد
+            clearTimer();
             setTimeout(() => {
                 if (!gameOver) {
                     robotMove();
@@ -657,7 +788,6 @@
         function robotMove() {
             if (gameOver) { isRobotTurn = false; return; }
 
-            // حرکت ربات
             for (let i = 0; i < 9; i++) {
                 if (board[i] === '') {
                     board[i] = 'O';
@@ -692,7 +822,7 @@
             currentPlayer = 'X';
             isRobotTurn = false;
             statusMsg.textContent = 'نوبت شما (X)';
-            resetTimer(); // تایمر جدید برای کاربر
+            resetTimer();
         }
 
         function startGame() {
@@ -739,11 +869,9 @@
         }
 
         // ==========================================================
-        //  ۴. شروع برنامه
+        //  ۴. شروع برنامه (اکنون توسط ورود مدیریت می‌شود)
         // ==========================================================
-        window.addEventListener('load', () => {
-            initConnection();
-        });
+        // دیگر نیازی به initConnection در load نیست چون توسط ورود کنترل می‌شود
     </script>
 
 </body>
