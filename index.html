@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -436,21 +435,6 @@
         .admin-panel-box .back-home-btn:hover {
             background: #e74c3c;
         }
-        .admin-panel-box .profile-link-btn {
-            background: #00b4ff;
-            color: white;
-            border: none;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: 0.3s;
-        }
-        .admin-panel-box .profile-link-btn:hover {
-            background: #008fd1;
-            transform: scale(1.05);
-        }
 
         /* ===== صفحه رنک ها با اسامی ===== */
         .rank-box {
@@ -500,12 +484,6 @@
             width: 100%;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        .profile-box .profile-username {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00b4ff;
-            margin-bottom: 15px;
         }
         .profile-box .avatar-upload {
             margin-bottom: 20px;
@@ -566,11 +544,6 @@
         }
         .profile-box .back-home-btn:hover {
             background: #e74c3c;
-        }
-        .profile-box .view-only-msg {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 15px;
         }
 
         /* ===== تایمر ===== */
@@ -790,7 +763,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="adminList">
                             👤 مدیران: 
-                            <span id="adminNamesDisplay"></span>
+                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل</span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -826,8 +799,6 @@
             <div id="profilePage">
                 <div class="profile-box">
                     <h2 style="color:#00b4ff;">👤 پروفایل</h2>
-                    <div class="profile-username" id="profileUsernameDisplay">کاربر</div>
-                    <div class="view-only-msg" id="viewOnlyMsg"></div>
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
                         <input type="file" id="avatarInput" accept="image/*" />
@@ -848,51 +819,35 @@
         // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
-        let profileViewUser = null; // نام کاربری که پروفایل آن نمایش داده می‌شود
-
-        function getProfileAvatar(username) {
+        function getProfileAvatar() {
             try {
-                const key = 'profileAvatar_' + username;
-                return localStorage.getItem(key) || '';
+                return localStorage.getItem('profileAvatar') || '';
             } catch { return ''; }
         }
 
-        function setProfileAvatar(username, dataUrl) {
-            const key = 'profileAvatar_' + username;
-            localStorage.setItem(key, dataUrl);
-            if (username === getCurrentUsername()) {
-                updateAvatarUI(dataUrl);
-            }
+        function setProfileAvatar(dataUrl) {
+            localStorage.setItem('profileAvatar', dataUrl);
+            updateAvatarUI(dataUrl);
         }
 
         function updateAvatarUI(dataUrl) {
             const preview = document.getElementById('avatarPreview');
             const headerAvatar = document.getElementById('headerAvatar');
-            const defaultAvatar = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             if (preview) {
-                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
             if (headerAvatar) {
-                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
         }
 
-        function loadProfileForUser(username) {
-            const avatar = getProfileAvatar(username);
+        function loadProfile() {
+            const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
-            document.getElementById('profileUsernameDisplay').textContent = username || 'کاربر';
-            const currentUser = getCurrentUsername();
-            const isOwn = (username === currentUser);
-            document.getElementById('viewOnlyMsg').textContent = isOwn ? '' : '👀 مشاهده پروفایل کاربر دیگر';
-            document.getElementById('avatarInput').style.display = isOwn ? 'block' : 'none';
-            document.querySelector('.username-change').style.display = isOwn ? 'block' : 'none';
-            document.querySelector('.profile-box .back-home-btn').textContent = isOwn ? '🔙 بازگشت به صفحه اصلی' : '🔙 بازگشت';
+            // نام کاربری در هدر نمایش داده می‌شود (توسط displayUsername)
         }
 
-        function getCurrentUsername() {
-            return document.getElementById('displayUsername').textContent.trim() || localStorage.getItem('username') || '';
-        }
-
+        // تغییر نام کاربری
         function changeUsername() {
             const input = document.getElementById('newUsernameInput');
             const newName = input.value.trim();
@@ -900,20 +855,11 @@
                 alert('لطفاً نام جدید را وارد کنید!');
                 return;
             }
-            const currentUser = getCurrentUsername();
+            // ذخیره در localStorage
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
-            // اگر نام کاربری تغییر کرد، عکس را هم با نام جدید منتقل می‌کنیم
-            const oldAvatar = getProfileAvatar(currentUser);
-            if (oldAvatar) {
-                setProfileAvatar(newName, oldAvatar);
-                localStorage.removeItem('profileAvatar_' + currentUser);
-            }
             input.value = '';
             alert('✅ نام کاربری با موفقیت تغییر کرد!');
-            // به‌روزرسانی پروفایل
-            loadProfileForUser(newName);
-            updateAdminPanelUI(); // برای به‌روزرسانی لیست مدیران
         }
 
         // آپلود عکس
@@ -923,9 +869,7 @@
             const reader = new FileReader();
             reader.onload = function(event) {
                 const dataUrl = event.target.result;
-                const username = getCurrentUsername();
-                setProfileAvatar(username, dataUrl);
-                loadProfileForUser(username);
+                setProfileAvatar(dataUrl);
                 alert('✅ عکس پروفایل با موفقیت آپلود شد!');
             };
             reader.readAsDataURL(file);
@@ -948,7 +892,7 @@
         }
 
         function removeAdmin(adminToRemove) {
-            const currentUser = getCurrentUsername();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
                 alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
                 return;
@@ -964,30 +908,23 @@
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
 
-        function showProfileForUser(username) {
-            profileViewUser = username;
-            loadProfileForUser(username);
-            showPage('profilePage');
-        }
-
         function updateAdminPanelUI() {
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
 
-            const currentUser = getCurrentUsername();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
 
             let html = '';
             admins.forEach(admin => {
-                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;">`;
-                html +=
-                    `<button class="profile-link-btn" onclick="showProfileForUser('${admin}')">👤 ${admin}</button>`;
+                html += admin;
                 if (isSuperAdmin && admin !== SUPER_ADMIN) {
                     html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌ حذف</button>`;
                 }
-                html += `</span>`;
+                html += ' ، ';
             });
+            html = html.slice(0, -3);
             adminListEl.innerHTML = html;
         }
 
@@ -1001,17 +938,13 @@
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') {
-                const username = profileViewUser || getCurrentUsername();
-                loadProfileForUser(username);
+                loadProfile();
                 document.getElementById('newUsernameInput').value = '';
             }
         }
 
         function showRankPage() { showPage('rankPage'); }
-        function showProfilePage() {
-            profileViewUser = getCurrentUsername();
-            showPage('profilePage');
-        }
+        function showProfilePage() { showPage('profilePage'); }
 
         function goToMenu() { showPage('menuPage'); }
 
@@ -1059,7 +992,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                profileViewUser = username;
+                loadProfile();
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -1078,7 +1011,7 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    profileViewUser = saved;
+                    loadProfile();
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
@@ -1144,7 +1077,7 @@
         //  ۳. پنل ادمینی
         // ==========================================================
         function openAdminPanel() {
-            const username = getCurrentUsername();
+            const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             if (admins.includes(username)) {
                 updateAdminStats();
@@ -1467,4 +1400,3 @@
 
 </body>
 </html>
-```
