@@ -121,6 +121,22 @@
             background-size: cover;
             background-position: center;
         }
+        .main-header .mod-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-header .mod-btn:hover {
+            background: #8e44ad;
+            transform: scale(1.05);
+        }
 
         /* ===== صفحه ورود ===== */
         #loginPage {
@@ -295,7 +311,7 @@
         }
 
         /* ===== صفحات داخلی ===== */
-        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage {
+        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #modPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -436,21 +452,6 @@
         .admin-panel-box .back-home-btn:hover {
             background: #e74c3c;
         }
-        .admin-panel-box .profile-link-btn {
-            background: #00b4ff;
-            color: white;
-            border: none;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: 0.3s;
-        }
-        .admin-panel-box .profile-link-btn:hover {
-            background: #008fd1;
-            transform: scale(1.05);
-        }
 
         /* ===== صفحه رنک ها با اسامی ===== */
         .rank-box {
@@ -567,10 +568,48 @@
             margin-top: 5px;
             display: none;
         }
-        .profile-box .view-only-msg {
-            color: #888;
-            font-size: 14px;
+
+        /* ===== صفحه مود ===== */
+        .mod-panel-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .mod-panel-box h2 {
+            color: #9b59b6;
             margin-bottom: 15px;
+        }
+        .mod-panel-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+        .mod-panel-box ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 15px;
+        }
+        .mod-panel-box ul li:last-child {
+            border-bottom: none;
+        }
+        .mod-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: #9b59b6;
+        }
+        .mod-panel-box .back-home-btn:hover {
+            background: #8e44ad;
+        }
+        .mod-panel-box .online-games {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 18px;
+            color: #333;
         }
 
         /* ===== تایمر ===== */
@@ -679,6 +718,10 @@
                 font-size: 11px;
                 padding: 3px 10px;
             }
+            .main-header .mod-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
             .box {
                 padding: 20px;
             }
@@ -739,6 +782,7 @@
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
                         پروفایل
                     </button>
+                    <button class="mod-btn" id="modBtn" onclick="showModPage()" style="display:none;">🛡️ مود</button>
                 </div>
             </div>
 
@@ -790,7 +834,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="adminList">
                             👤 مدیران: 
-                            <span id="adminNamesDisplay"></span>
+                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -826,8 +870,6 @@
             <div id="profilePage">
                 <div class="profile-box">
                     <h2 style="color:#00b4ff;">👤 پروفایل</h2>
-                    <div class="profile-username" id="profileUsernameDisplay">کاربر</div>
-                    <div class="view-only-msg" id="viewOnlyMsg"></div>
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
                         <input type="file" id="avatarInput" accept="image/*" />
@@ -838,6 +880,26 @@
                         <button onclick="changeUsername()">ذخیره</button>
                         <div class="username-error" id="usernameError">⚠️ این نام کاربری قبلاً انتخاب شده است!</div>
                     </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه مود ===== -->
+            <div id="modPage">
+                <div class="mod-panel-box">
+                    <h2>🛡️ پنل مود</h2>
+                    <div class="online-games">
+                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
+                    </div>
+                    <ul>
+                        <li>📊 تعداد کاربران آنلاین: <span id="modUserCount">0</span></li>
+                        <li>🕹️ بازی‌های فعال: <span id="modGameCount2">0</span></li>
+                        <li>⚙️ تنظیمات: نسخه ۱.۰</li>
+                        <li id="modAdminList">
+                            👤 مدیران: 
+                            <span id="modAdminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
+                        </li>
+                    </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -904,56 +966,52 @@
         // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
-        let profileViewUser = null; // نام کاربری که پروفایل آن نمایش داده می‌شود
-
-        function getProfileAvatar(username) {
+        function getProfileAvatar() {
             try {
-                const key = 'profileAvatar_' + username;
-                return localStorage.getItem(key) || '';
+                return localStorage.getItem('profileAvatar') || '';
             } catch { return ''; }
         }
 
-        function setProfileAvatar(username, dataUrl) {
-            const key = 'profileAvatar_' + username;
-            localStorage.setItem(key, dataUrl);
-            if (username === getCurrentUsername()) {
-                updateAvatarUI(dataUrl);
-            }
+        function setProfileAvatar(dataUrl) {
+            localStorage.setItem('profileAvatar', dataUrl);
+            updateAvatarUI(dataUrl);
+            checkModButtonVisibility();
         }
 
         function updateAvatarUI(dataUrl) {
             const preview = document.getElementById('avatarPreview');
             const headerAvatar = document.getElementById('headerAvatar');
-            const defaultAvatar = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             if (preview) {
-                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
             if (headerAvatar) {
-                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             }
         }
 
-        function loadProfileForUser(username) {
-            const avatar = getProfileAvatar(username);
+        function loadProfile() {
+            const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
-            document.getElementById('profileUsernameDisplay').textContent = username || 'کاربر';
-            const currentUser = getCurrentUsername();
-            const isOwn = (username === currentUser);
-            document.getElementById('viewOnlyMsg').textContent = isOwn ? '' : '👀 مشاهده پروفایل کاربر دیگر';
-            document.getElementById('avatarInput').style.display = isOwn ? 'block' : 'none';
-            document.querySelector('.username-change').style.display = isOwn ? 'block' : 'none';
-            document.querySelector('.profile-box .back-home-btn').textContent = isOwn ? '🔙 بازگشت به صفحه اصلی' : '🔙 بازگشت';
+            checkModButtonVisibility();
         }
 
-        function getCurrentUsername() {
-            return document.getElementById('displayUsername').textContent.trim() || localStorage.getItem('username') || '';
+        // نمایش یا مخفی کردن دکمه مود بر اساس وجود عکس پروفایل
+        function checkModButtonVisibility() {
+            const modBtn = document.getElementById('modBtn');
+            const avatar = getProfileAvatar();
+            if (avatar && avatar !== '') {
+                modBtn.style.display = 'inline-block';
+            } else {
+                modBtn.style.display = 'none';
+            }
         }
 
+        // تغییر نام کاربری با بررسی تکراری نبودن
         function changeUsername() {
             const input = document.getElementById('newUsernameInput');
             const error = document.getElementById('usernameError');
             const newName = input.value.trim();
-            const currentUser = getCurrentUsername();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
 
             if (newName === '') {
                 alert('لطفاً نام جدید را وارد کنید!');
@@ -974,31 +1032,26 @@
             removeUsername(currentUser);
             addUsername(newName);
 
-            const oldAvatar = getProfileAvatar(currentUser);
-            if (oldAvatar) {
-                setProfileAvatar(newName, oldAvatar);
-                localStorage.removeItem('profileAvatar_' + currentUser);
-            }
-
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
             input.value = '';
             alert('✅ نام کاربری با موفقیت تغییر کرد!');
 
-            loadProfileForUser(newName);
+            loadProfile();
             updateAdminPanelUI();
+            updateModPanelUI();
         }
 
+        // آپلود عکس
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = function(event) {
                 const dataUrl = event.target.result;
-                const username = getCurrentUsername();
-                setProfileAvatar(username, dataUrl);
-                loadProfileForUser(username);
+                setProfileAvatar(dataUrl);
                 alert('✅ عکس پروفایل با موفقیت آپلود شد!');
+                loadProfile();
             };
             reader.readAsDataURL(file);
         });
@@ -1020,7 +1073,7 @@
         }
 
         function removeAdmin(adminToRemove) {
-            const currentUser = getCurrentUsername();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
                 alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
                 return;
@@ -1033,13 +1086,8 @@
             admins = admins.filter(a => a !== adminToRemove);
             setAdmins(admins);
             updateAdminPanelUI();
+            updateModPanelUI();
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
-        }
-
-        function showProfileForUser(username) {
-            profileViewUser = username;
-            loadProfileForUser(username);
-            showPage('profilePage');
         }
 
         function updateAdminPanelUI() {
@@ -1047,44 +1095,66 @@
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
 
-            const currentUser = getCurrentUsername();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
 
             let html = '';
             admins.forEach(admin => {
-                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;">`;
-                html +=
-                    `<button class="profile-link-btn" onclick="showProfileForUser('${admin}')">👤 ${admin}</button>`;
+                html += admin;
                 if (isSuperAdmin && admin !== SUPER_ADMIN) {
                     html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌ حذف</button>`;
                 }
-                html += `</span>`;
+                html += ' ، ';
             });
+            html = html.slice(0, -3);
             adminListEl.innerHTML = html;
+        }
+
+        function updateModPanelUI() {
+            const admins = getAdmins();
+            const modAdminListEl = document.getElementById('modAdminNamesDisplay');
+            if (!modAdminListEl) return;
+
+            let html = '';
+            admins.forEach(admin => {
+                html += admin;
+                html += ' ، ';
+            });
+            html = html.slice(0, -3);
+            modAdminListEl.innerHTML = html;
         }
 
         // ==========================================================
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
-            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage'];
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage'];
             pages.forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') {
-                const username = profileViewUser || getCurrentUsername();
-                loadProfileForUser(username);
+                loadProfile();
                 document.getElementById('newUsernameInput').value = '';
                 document.getElementById('usernameError').style.display = 'none';
             }
+            if (pageId === 'modPage') {
+                updateModPanelUI();
+                updateModStats();
+            }
+        }
+
+        function updateModStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            document.getElementById('modUserCount').textContent = users.length;
+            document.getElementById('modGameCount2').textContent = games.length;
+            document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
         }
 
         function showRankPage() { showPage('rankPage'); }
-        function showProfilePage() {
-            profileViewUser = getCurrentUsername();
-            showPage('profilePage');
-        }
+        function showProfilePage() { showPage('profilePage'); }
+        function showModPage() { showPage('modPage'); }
 
         function goToMenu() { showPage('menuPage'); }
 
@@ -1136,12 +1206,13 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                profileViewUser = username;
+                loadProfile();
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
                 }
+                checkModButtonVisibility();
             }, 2000);
         }
 
@@ -1158,12 +1229,13 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    profileViewUser = saved;
+                    loadProfile();
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
                     }
+                    checkModButtonVisibility();
                 }, 1500);
             }
         });
@@ -1224,7 +1296,7 @@
         //  ۳. پنل ادمینی
         // ==========================================================
         function openAdminPanel() {
-            const username = getCurrentUsername();
+            const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             if (admins.includes(username)) {
                 updateAdminStats();
