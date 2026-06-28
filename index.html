@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>❄️ برفی</title>
+    <title id="siteTitle">❄️ برفی</title>
     <style>
         /* ===== ریست و پایه ===== */
         * {
@@ -409,6 +409,59 @@
             background: #e74c3c;
         }
 
+        /* ===== بخش تغییر اسم سایت ===== */
+        .change-site-name {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .change-site-name label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+        .change-site-name .input-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .change-site-name .input-group input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+        .change-site-name .input-group input:focus {
+            border-color: #00b4ff;
+        }
+        .change-site-name .input-group button {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .change-site-name .input-group button:hover {
+            background: #008fd1;
+            transform: scale(1.02);
+        }
+        .change-site-name .status-msg {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #2ecc71;
+            display: none;
+        }
+
         /* ===== صفحه رنک ها با اسامی ===== */
         .rank-box {
             background: white;
@@ -566,7 +619,7 @@
 
         <!-- ======== صفحه ورود ======== -->
         <div id="loginPage">
-            <h1>❄️ برفی</h1>
+            <h1 id="loginTitle">❄️ برفی</h1>
             <p>برای ورود، نام کاربری خود را وارد کنید</p>
             <div class="input-group">
                 <label for="usernameInput">نام کاربری</label>
@@ -596,7 +649,7 @@
 
             <!-- ===== هدر ===== -->
             <div class="main-header">
-                <div class="site-title">❄️ برفی</div>
+                <div class="site-title" id="headerSiteTitle">❄️ برفی</div>
                 <div class="header-left">
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
@@ -657,6 +710,17 @@
                             <span id="adminNamesDisplay">رضا ممد ، ابوالفضل</span>
                         </li>
                     </ul>
+
+                    <!-- ===== تغییر اسم سایت ===== -->
+                    <div class="change-site-name">
+                        <label>✏️ تغییر اسم سایت</label>
+                        <div class="input-group">
+                            <input type="text" id="newSiteNameInput" placeholder="اسم جدید سایت..." />
+                            <button onclick="changeSiteName()">تغییر</button>
+                        </div>
+                        <div class="status-msg" id="siteNameStatus">✅ اسم سایت با موفقیت تغییر کرد!</div>
+                    </div>
+
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -674,22 +738,18 @@
 
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
-                        <!-- بدون اسم -->
                     </div>
 
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
-                        <!-- بدون اسم -->
                     </div>
 
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
-                        <!-- بدون اسم -->
                     </div>
 
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">مود</span>
-                        <!-- بدون اسم -->
                     </div>
 
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -701,11 +761,69 @@
 
     <script>
         // ==========================================================
+        //  مدیریت نام سایت (ذخیره در localStorage)
+        // ==========================================================
+        function getSiteName() {
+            try {
+                const name = localStorage.getItem('siteName');
+                return name ? name : '❄️ برفی';
+            } catch { return '❄️ برفی'; }
+        }
+
+        function setSiteName(name) {
+            localStorage.setItem('siteName', name);
+            updateSiteNameUI(name);
+        }
+
+        function updateSiteNameUI(name) {
+            // تایتل صفحه
+            document.title = name;
+            // هدر
+            const headerTitle = document.getElementById('headerSiteTitle');
+            if (headerTitle) headerTitle.textContent = name;
+            // صفحه ورود
+            const loginTitle = document.getElementById('loginTitle');
+            if (loginTitle) loginTitle.textContent = name;
+            // هر جای دیگه که اسم سایت هست رو به‌روز کن
+            // (مثلاً در صفحات دیگه اگر اسم سایت نوشته شده)
+        }
+
+        // بارگذاری اسم سایت هنگام شروع
+        function loadSiteName() {
+            const name = getSiteName();
+            updateSiteNameUI(name);
+        }
+
+        // تغییر اسم سایت (فقط برای ادمین‌ها)
+        function changeSiteName() {
+            const input = document.getElementById('newSiteNameInput');
+            const status = document.getElementById('siteNameStatus');
+            const newName = input.value.trim();
+
+            if (newName === '') {
+                alert('لطفاً یک نام برای سایت وارد کنید!');
+                return;
+            }
+
+            // بررسی اینکه کاربر ادمین هست یا نه
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+            if (!admins.includes(username)) {
+                alert('⛔ فقط ادمین‌ها می‌توانند اسم سایت را تغییر دهند!');
+                return;
+            }
+
+            setSiteName(newName);
+            input.value = '';
+            status.style.display = 'block';
+            setTimeout(() => { status.style.display = 'none'; }, 3000);
+        }
+
+        // ==========================================================
         //  لیست ادمین‌ها و نقش‌ها (با localStorage)
         // ==========================================================
         const SUPER_ADMIN = "ابوالفضل";
 
-        // تابع دریافت لیست ادمین‌ها از localStorage
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
@@ -713,12 +831,10 @@
             } catch { return ["رضا ممد", "ابوالفضل"]; }
         }
 
-        // تابع ذخیره لیست ادمین‌ها در localStorage
         function setAdmins(admins) {
             localStorage.setItem('admins', JSON.stringify(admins));
         }
 
-        // تابع حذف ادمین (فقط برای SUPER_ADMIN)
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
@@ -736,13 +852,10 @@
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
 
-        // به‌روزرسانی UI پنل ادمینی
         function updateAdminPanelUI() {
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
-            const adminContainer = document.getElementById('adminList');
-
-            if (!adminListEl || !adminContainer) return;
+            if (!adminListEl) return;
 
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
@@ -820,6 +933,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
+                loadSiteName(); // بارگذاری اسم سایت
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -838,12 +952,16 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
+                    loadSiteName();
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
                     }
                 }, 1500);
+            } else {
+                // اگر کاربری وارد نشده، اسم سایت رو هم بارگذاری کن
+                loadSiteName();
             }
         });
 
@@ -908,6 +1026,8 @@
             if (admins.includes(username)) {
                 updateAdminStats();
                 updateAdminPanelUI();
+                // نمایش اسم فعلی سایت در ورودی (اختیاری)
+                document.getElementById('newSiteNameInput').value = '';
                 showPage('adminPanel');
             } else {
                 alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
