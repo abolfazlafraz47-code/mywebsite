@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -49,7 +50,8 @@
         .main-header .header-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .main-header .user-name {
             font-size: 16px;
@@ -59,13 +61,29 @@
             border-radius: 30px;
             white-space: nowrap;
         }
+        .main-header .header-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-header .header-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
         .main-header .admin-btn {
             background: #ff6b6b;
             color: white;
             border: none;
-            padding: 5px 14px;
+            padding: 4px 14px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
@@ -249,7 +267,7 @@
         }
 
         /* ===== صفحات داخلی ===== */
-        #homePage, #menuPage, #gamePage, #adminPanel {
+        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -391,6 +409,45 @@
             background: #e74c3c;
         }
 
+        /* ===== صفحه رنک ها ===== */
+        .rank-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .rank-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .rank-item {
+            font-size: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-weight: bold;
+        }
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+        .rank-item .rank-color {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .rank-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .rank-box .back-home-btn:hover {
+            background: #e74c3c;
+        }
+
         /* ===== تایمر ===== */
         .timer-container {
             text-align: center;
@@ -485,8 +542,12 @@
                 font-size: 13px;
                 padding: 3px 10px;
             }
+            .main-header .header-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
             .main-header .admin-btn {
-                font-size: 12px;
+                font-size: 11px;
                 padding: 3px 10px;
             }
             .box {
@@ -539,6 +600,7 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
+                    <button class="header-btn" onclick="showRankPage()">🏅 رنک ها</button>
                     <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
                 </div>
             </div>
@@ -598,6 +660,34 @@
                 </div>
             </div>
 
+            <!-- ===== صفحه رنک ها ===== -->
+            <div id="rankPage">
+                <div class="rank-box">
+                    <h2>🏅 رنک‌های سایت</h2>
+                    <div class="rank-item">
+                        <span class="rank-color" style="background:#e74c3c;"></span>
+                        <span style="color:#e74c3c;">سازنده</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-color" style="background:#2ecc71;"></span>
+                        <span style="color:#2ecc71;">هد ادمین</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-color" style="background:#f39c12;"></span>
+                        <span style="color:#f39c12;">سوپر ادمین</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-color" style="background:#f1c40f;"></span>
+                        <span style="color:#f1c40f;">ادمینیتور</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-color" style="background:#2ecc71;"></span>
+                        <span style="color:#2ecc71;">مود</span>
+                    </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
@@ -634,7 +724,6 @@
             let admins = getAdmins();
             admins = admins.filter(a => a !== adminToRemove);
             setAdmins(admins);
-            // به‌روزرسانی نمایش
             updateAdminPanelUI();
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
@@ -647,7 +736,6 @@
 
             if (!adminListEl || !adminContainer) return;
 
-            // نمایش اسامی ادمین‌ها با دکمه حذف (فقط برای SUPER_ADMIN)
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
 
@@ -659,11 +747,42 @@
                 }
                 html += ' ، ';
             });
-            // حذف ویرگول آخر
             html = html.slice(0, -3);
             adminListEl.innerHTML = html;
+        }
 
-            // اگر کاربر SUPER_ADMIN نیست، دکمه حذف را نمی‌بیند
+        // ==========================================================
+        //  توابع نمایش صفحات
+        // ==========================================================
+        function showPage(pageId) {
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage'];
+            pages.forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'flex';
+        }
+
+        function showRankPage() {
+            showPage('rankPage');
+        }
+
+        function goToMenu() { showPage('menuPage'); }
+
+        function goToGame() {
+            showPage('gamePage');
+            startGame();
+        }
+
+        function goHome() {
+            clearTimer();
+            if (gameId) {
+                let games = getActiveGames();
+                games = games.filter(g => g !== gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                gameId = null;
+                updateAdminStats();
+            }
+            showPage('homePage');
         }
 
         // ==========================================================
@@ -695,7 +814,6 @@
                 document.getElementById('displayUsername').textContent = username;
                 showPage('homePage');
                 updateAdminStats();
-                // اگر ادمین است، پنل را به‌روزرسانی کن
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
                 }
@@ -985,7 +1103,6 @@
             gameOver = true;
             clearTimer();
             if (gameId) {
-                // حذف بازی از لیست فعال
                 let games = getActiveGames();
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
@@ -1097,65 +1214,8 @@
             }
             startGame();
         }
-
-        // ==========================================================
-        //  ۶. نمایش صفحات
-        // ==========================================================
-        function showPage(pageId) {
-            const home = document.getElementById('homePage');
-            const menu = document.getElementById('menuPage');
-            const game = document.getElementById('gamePage');
-            const admin = document.getElementById('adminPanel');
-            home.style.display = 'none';
-            menu.style.display = 'none';
-            game.style.display = 'none';
-            admin.style.display = 'none';
-
-            if (pageId !== 'gamePage' && gameId) {
-                let games = getActiveGames();
-                games = games.filter(g => g !== gameId);
-                localStorage.setItem('activeGames', JSON.stringify(games));
-                gameId = null;
-                clearTimer();
-                updateAdminStats();
-            }
-
-            document.getElementById(pageId).style.display = 'flex';
-            if (pageId === 'gamePage') {
-                startGame();
-            }
-        }
-
-        function goToMenu() { showPage('menuPage'); }
-
-        function goToGame() {
-            showPage('gamePage');
-        }
-
-        function goHome() {
-            clearTimer();
-            showPage('homePage');
-        }
-
-        // اورراید کردن goHome برای مدیریت خروج از بازی
-        const originalGoHome = goHome;
-        goHome = function() {
-            if (gameId) {
-                let games = getActiveGames();
-                games = games.filter(g => g !== gameId);
-                localStorage.setItem('activeGames', JSON.stringify(games));
-                gameId = null;
-                updateAdminStats();
-            }
-            clearTimer();
-            showPage('homePage');
-        };
-
-        document.querySelector('.back-btn')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            goHome();
-        });
     </script>
 
 </body>
 </html>
+```
