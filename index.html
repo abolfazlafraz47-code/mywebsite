@@ -546,6 +546,12 @@
         .profile-box .back-home-btn:hover {
             background: #e74c3c;
         }
+        .profile-box .username-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
 
         /* ===== تایمر ===== */
         .timer-container {
@@ -779,7 +785,6 @@
                         <span class="rank-title" style="color:#e74c3c;">سازنده</span>
                         <span class="rank-name">ابوالفضل</span>
                         <span class="rank-name">محمد رضا</span>
-                        <!-- رضا ممد حذف شد -->
                     </div>
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
@@ -809,6 +814,7 @@
                         <label>تغییر نام کاربری</label>
                         <input type="text" id="newUsernameInput" placeholder="نام جدید..." />
                         <button onclick="changeUsername()">ذخیره</button>
+                        <div class="username-error" id="usernameError">⚠️ این نام کاربری قبلاً انتخاب شده است!</div>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -818,6 +824,39 @@
     </div><!-- /page-container -->
 
     <script>
+        // ==========================================================
+        //  مدیریت نام‌های کاربری (ذخیره لیست در localStorage)
+        // ==========================================================
+        function getRegisteredUsernames() {
+            try {
+                const data = localStorage.getItem('registeredUsernames');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function setRegisteredUsernames(list) {
+            localStorage.setItem('registeredUsernames', JSON.stringify(list));
+        }
+
+        function addUsername(username) {
+            const list = getRegisteredUsernames();
+            if (!list.includes(username)) {
+                list.push(username);
+                setRegisteredUsernames(list);
+            }
+        }
+
+        function removeUsername(username) {
+            let list = getRegisteredUsernames();
+            list = list.filter(u => u !== username);
+            setRegisteredUsernames(list);
+        }
+
+        function isUsernameTaken(username) {
+            const list = getRegisteredUsernames();
+            return list.includes(username);
+        }
+
         // ==========================================================
         //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا"
         // ==========================================================
@@ -870,18 +909,44 @@
             updateAvatarUI(avatar);
         }
 
-        // تغییر نام کاربری
+        // تغییر نام کاربری با بررسی تکراری نبودن
         function changeUsername() {
             const input = document.getElementById('newUsernameInput');
+            const error = document.getElementById('usernameError');
             const newName = input.value.trim();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+
             if (newName === '') {
                 alert('لطفاً نام جدید را وارد کنید!');
                 return;
             }
+
+            // اگر نام جدید با نام فعلی یکی است، نیازی به بررسی نیست
+            if (newName === currentUser) {
+                alert('نام جدید با نام فعلی شما یکسان است.');
+                return;
+            }
+
+            // بررسی تکراری بودن
+            if (isUsernameTaken(newName)) {
+                error.style.display = 'block';
+                return;
+            }
+            error.style.display = 'none';
+
+            // نام قدیمی را از لیست حذف و نام جدید را اضافه کن
+            removeUsername(currentUser);
+            addUsername(newName);
+
+            // ذخیره نام جدید در localStorage
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
             input.value = '';
             alert('✅ نام کاربری با موفقیت تغییر کرد!');
+
+            // به‌روزرسانی پروفایل
+            loadProfile();
+            updateAdminPanelUI(); // برای به‌روزرسانی لیست مدیران
         }
 
         // آپلود عکس
@@ -962,6 +1027,7 @@
             if (pageId === 'profilePage') {
                 loadProfile();
                 document.getElementById('newUsernameInput').value = '';
+                document.getElementById('usernameError').style.display = 'none';
             }
         }
 
@@ -988,7 +1054,7 @@
         }
 
         // ==========================================================
-        //  ۱. مدیریت ورود و خروج
+        //  ۱. مدیریت ورود و خروج (با ثبت نام کاربری)
         // ==========================================================
         let currentUsername = '';
 
@@ -1000,6 +1066,18 @@
             if (username === '') {
                 error.style.display = 'block';
                 return;
+            }
+
+            // بررسی تکراری نبودن نام کاربری هنگام ورود
+            if (isUsernameTaken(username)) {
+                // اگر نام قبلاً ثبت شده، اجازه ورود بده (چون همان کاربر است)
+                // اما اگر کاربر دیگری با این نام هست، باید پیام خطا بدهد
+                // فعلاً فرض می‌کنیم که اگر نام در لیست است، اجازه ورود بده
+                // (در یک سیستم واقعی باید با رمز عبور یا شناسه دیگر تأیید شود)
+                // برای سادگی، فقط اجازه ورود می‌دهیم
+            } else {
+                // نام جدید است، آن را ثبت کن
+                addUsername(username);
             }
 
             error.style.display = 'none';
@@ -1027,6 +1105,10 @@
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 currentUsername = saved;
+                // اگر نام در لیست نیست، اضافه کن (برای کاربرانی که قبلاً ثبت نشده‌اند)
+                if (!isUsernameTaken(saved)) {
+                    addUsername(saved);
+                }
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
