@@ -412,7 +412,7 @@
             background: #e74c3c;
         }
 
-        /* ===== بخش تغییر اسم سایت (فقط برای ادمین‌ها نمایش داده می‌شود) ===== */
+        /* ===== بخش تغییر اسم سایت (فقط برای ادمین‌ها) ===== */
         .change-site-name {
             background: #f8f9fa;
             padding: 15px;
@@ -714,9 +714,9 @@
                         </li>
                     </ul>
 
-                    <!-- ===== تغییر اسم سایت (فقط ادمین‌ها) ===== -->
+                    <!-- ===== تغییر اسم سایت (همه ادمین‌ها) ===== -->
                     <div class="change-site-name" id="changeSiteSection">
-                        <label>✏️ تغییر اسم سایت</label>
+                        <label>✏️ تغییر اسم سایت (همه کاربران)</label>
                         <div class="input-group">
                             <input type="text" id="newSiteNameInput" placeholder="اسم جدید سایت..." />
                             <button onclick="changeSiteName()">تغییر</button>
@@ -785,7 +785,6 @@
                     .single();
 
                 if (error) {
-                    // اگر خطا بود، مقدار پیش‌فرض رو برگردون
                     console.warn('خطا در دریافت اسم سایت:', error);
                     return '❄️ برفی';
                 }
@@ -799,7 +798,6 @@
         // تابع به‌روزرسانی اسم سایت در دیتابیس
         async function updateSiteNameInDB(newName) {
             try {
-                // اول ببینیم رکوردی وجود داره یا نه
                 const { data, error: selectError } = await supabase
                     .from(SITE_SETTINGS_TABLE)
                     .select('id')
@@ -809,14 +807,12 @@
                 if (selectError) throw selectError;
 
                 if (data) {
-                    // بروزرسانی
                     const { error: updateError } = await supabase
                         .from(SITE_SETTINGS_TABLE)
                         .update({ value: newName })
                         .eq('id', data.id);
                     if (updateError) throw updateError;
                 } else {
-                    // درج جدید
                     const { error: insertError } = await supabase
                         .from(SITE_SETTINGS_TABLE)
                         .insert([{ key: 'site_name', value: newName }]);
@@ -836,7 +832,6 @@
             if (headerTitle) headerTitle.textContent = name;
             const loginTitle = document.getElementById('loginTitle');
             if (loginTitle) loginTitle.textContent = name;
-            // همچنین می‌توانید در جای دیگر که اسم سایت نوشته شده، به‌روز کنید
         }
 
         // بارگذاری اولیه اسم سایت
@@ -894,7 +889,6 @@
                     table: SITE_SETTINGS_TABLE,
                     filter: 'key=eq.site_name'
                 }, (payload) => {
-                    // وقتی اسم سایت تغییر کرد، برای همه به‌روز کن
                     const newValue = payload.new?.value || '❄️ برفی';
                     updateSiteNameUI(newValue);
                 })
@@ -1023,7 +1017,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                await loadSiteName(); // بارگذاری اسم سایت از دیتابیس
+                await loadSiteName();
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -1433,6 +1427,18 @@
             }
             startGame();
         }
+
+        // ==========================================================
+        //  ایجاد جدول site_settings در Supabase (یک بار اجرا شود)
+        // ==========================================================
+        // دستور SQL:
+        // CREATE TABLE IF NOT EXISTS site_settings (
+        //     id SERIAL PRIMARY KEY,
+        //     key TEXT UNIQUE NOT NULL,
+        //     value TEXT NOT NULL
+        // );
+        // INSERT INTO site_settings (key, value) VALUES ('site_name', '❄️ برفی')
+        // ON CONFLICT (key) DO NOTHING;
     </script>
 
 </body>
