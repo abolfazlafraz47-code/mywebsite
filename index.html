@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -91,6 +92,34 @@
         .main-header .admin-btn:hover {
             background: #e74c3c;
             transform: scale(1.05);
+        }
+        .main-header .profile-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .main-header .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .main-header .profile-btn .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ddd;
+            display: inline-block;
+            background-size: cover;
+            background-position: center;
         }
 
         /* ===== صفحه ورود ===== */
@@ -266,7 +295,7 @@
         }
 
         /* ===== صفحات داخلی ===== */
-        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage {
+        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -448,6 +477,76 @@
             background: #e74c3c;
         }
 
+        /* ===== صفحه پروفایل ===== */
+        .profile-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .profile-box .avatar-upload {
+            margin-bottom: 20px;
+        }
+        .profile-box .avatar-upload .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #00b4ff;
+        }
+        .profile-box .avatar-upload input[type="file"] {
+            display: block;
+            margin: 0 auto;
+        }
+        .profile-box .username-change {
+            margin-top: 15px;
+        }
+        .profile-box .username-change label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .profile-box .username-change input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 10px;
+        }
+        .profile-box .username-change input:focus {
+            border-color: #00b4ff;
+        }
+        .profile-box .username-change button {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 8px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .profile-box .username-change button:hover {
+            background: #008fd1;
+            transform: scale(1.02);
+        }
+        .profile-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .profile-box .back-home-btn:hover {
+            background: #e74c3c;
+        }
+
         /* ===== تایمر ===== */
         .timer-container {
             text-align: center;
@@ -550,11 +649,19 @@
                 font-size: 11px;
                 padding: 3px 10px;
             }
+            .main-header .profile-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
             .box {
                 padding: 20px;
             }
             .menu-box button {
                 width: 100%;
+            }
+            .profile-box .avatar-upload .avatar-preview {
+                width: 80px;
+                height: 80px;
             }
         }
     </style>
@@ -602,6 +709,10 @@
                     </div>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک ها</button>
                     <button class="admin-btn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="profile-btn" onclick="showProfilePage()">
+                        <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
+                        پروفایل
+                    </button>
                 </div>
             </div>
 
@@ -660,37 +771,44 @@
                 </div>
             </div>
 
-            <!-- ===== صفحه رنک ها با اسامی ===== -->
+            <!-- ===== صفحه رنک ها ===== -->
             <div id="rankPage">
                 <div class="rank-box">
                     <h2>🏅 رنک‌های سایت</h2>
-
                     <div class="rank-group">
                         <span class="rank-title" style="color:#e74c3c;">سازنده</span>
                         <span class="rank-name">ابوالفضل</span>
                         <span class="rank-name">رضا ممد</span>
                     </div>
-
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
-                        <!-- بدون اسم -->
                     </div>
-
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
-                        <!-- بدون اسم -->
                     </div>
-
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
-                        <!-- بدون اسم -->
                     </div>
-
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">مود</span>
-                        <!-- بدون اسم -->
                     </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
 
+            <!-- ===== صفحه پروفایل ===== -->
+            <div id="profilePage">
+                <div class="profile-box">
+                    <h2 style="color:#00b4ff;">👤 پروفایل</h2>
+                    <div class="avatar-upload">
+                        <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
+                        <input type="file" id="avatarInput" accept="image/*" />
+                    </div>
+                    <div class="username-change">
+                        <label>تغییر نام کاربری</label>
+                        <input type="text" id="newUsernameInput" placeholder="نام جدید..." />
+                        <button onclick="changeUsername()">ذخیره</button>
+                    </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -700,11 +818,69 @@
 
     <script>
         // ==========================================================
+        //  مدیریت پروفایل (تصویر و نام کاربری)
+        // ==========================================================
+        function getProfileAvatar() {
+            try {
+                return localStorage.getItem('profileAvatar') || '';
+            } catch { return ''; }
+        }
+
+        function setProfileAvatar(dataUrl) {
+            localStorage.setItem('profileAvatar', dataUrl);
+            updateAvatarUI(dataUrl);
+        }
+
+        function updateAvatarUI(dataUrl) {
+            const preview = document.getElementById('avatarPreview');
+            const headerAvatar = document.getElementById('headerAvatar');
+            if (preview) {
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            }
+            if (headerAvatar) {
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            }
+        }
+
+        function loadProfile() {
+            const avatar = getProfileAvatar();
+            updateAvatarUI(avatar);
+            // نام کاربری در هدر نمایش داده می‌شود (توسط displayUsername)
+        }
+
+        // تغییر نام کاربری
+        function changeUsername() {
+            const input = document.getElementById('newUsernameInput');
+            const newName = input.value.trim();
+            if (newName === '') {
+                alert('لطفاً نام جدید را وارد کنید!');
+                return;
+            }
+            // ذخیره در localStorage
+            localStorage.setItem('username', newName);
+            document.getElementById('displayUsername').textContent = newName;
+            input.value = '';
+            alert('✅ نام کاربری با موفقیت تغییر کرد!');
+        }
+
+        // آپلود عکس
+        document.getElementById('avatarInput')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const dataUrl = event.target.result;
+                setProfileAvatar(dataUrl);
+                alert('✅ عکس پروفایل با موفقیت آپلود شد!');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ==========================================================
         //  لیست ادمین‌ها و نقش‌ها (با localStorage)
         // ==========================================================
         const SUPER_ADMIN = "ابوالفضل";
 
-        // تابع دریافت لیست ادمین‌ها از localStorage
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
@@ -712,12 +888,10 @@
             } catch { return ["رضا ممد", "ابوالفضل"]; }
         }
 
-        // تابع ذخیره لیست ادمین‌ها در localStorage
         function setAdmins(admins) {
             localStorage.setItem('admins', JSON.stringify(admins));
         }
 
-        // تابع حذف ادمین (فقط برای SUPER_ADMIN)
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
@@ -735,13 +909,10 @@
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
 
-        // به‌روزرسانی UI پنل ادمینی
         function updateAdminPanelUI() {
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
-            const adminContainer = document.getElementById('adminList');
-
-            if (!adminListEl || !adminContainer) return;
+            if (!adminListEl) return;
 
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
@@ -762,16 +933,19 @@
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
-            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage'];
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage'];
             pages.forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             document.getElementById(pageId).style.display = 'flex';
+            if (pageId === 'profilePage') {
+                loadProfile();
+                document.getElementById('newUsernameInput').value = '';
+            }
         }
 
-        function showRankPage() {
-            showPage('rankPage');
-        }
+        function showRankPage() { showPage('rankPage'); }
+        function showProfilePage() { showPage('profilePage'); }
 
         function goToMenu() { showPage('menuPage'); }
 
@@ -819,6 +993,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
+                loadProfile();
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -837,6 +1012,7 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
+                    loadProfile();
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
@@ -1224,4 +1400,5 @@
     </script>
 
 </body>
-                                                </html>
+</html>
+```
