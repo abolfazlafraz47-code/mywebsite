@@ -1,4 +1,3 @@
-```
 ```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -574,7 +573,7 @@
                     <p style="color: #2ecc71; font-weight: bold;">به پنل مدیریت خوش آمدید!</p>
                     <ul>
                         <li>📊 تعداد کاربران آنلاین: <span id="userCount">0</span></li>
-                        <li>🕹️ بازی‌های فعال: <span id="gameCount">0</span></li>
+                        <li>🕹️ بازی‌های فعال: <span id="gameCount">1</span></li>
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li>👤 مدیران: رضا ممد ، ابوالفضل</li>
                     </ul>
@@ -657,7 +656,8 @@
             }
             if (gameCount) {
                 const games = getActiveGames();
-                gameCount.textContent = games.length;
+                // اطمینان از اینکه حداقل 1 نمایش داده شود
+                gameCount.textContent = games.length > 0 ? games.length : 1;
             }
         }
 
