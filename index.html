@@ -436,6 +436,21 @@
         .admin-panel-box .back-home-btn:hover {
             background: #e74c3c;
         }
+        .admin-panel-box .profile-link-btn {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+        .admin-panel-box .profile-link-btn:hover {
+            background: #008fd1;
+            transform: scale(1.05);
+        }
 
         /* ===== صفحه رنک ها با اسامی ===== */
         .rank-box {
@@ -551,6 +566,11 @@
             font-size: 14px;
             margin-top: 5px;
             display: none;
+        }
+        .profile-box .view-only-msg {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
 
         /* ===== تایمر ===== */
@@ -770,7 +790,7 @@
                         <li>⚙️ تنظیمات: نسخه ۱.۰</li>
                         <li id="adminList">
                             👤 مدیران: 
-                            <span id="adminNamesDisplay">رضا ممد ، ابوالفضل ، محمد رضا</span>
+                            <span id="adminNamesDisplay"></span>
                         </li>
                     </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -806,6 +826,8 @@
             <div id="profilePage">
                 <div class="profile-box">
                     <h2 style="color:#00b4ff;">👤 پروفایل</h2>
+                    <div class="profile-username" id="profileUsernameDisplay">کاربر</div>
+                    <div class="view-only-msg" id="viewOnlyMsg"></div>
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
                         <input type="file" id="avatarInput" accept="image/*" />
@@ -882,81 +904,100 @@
         // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
-        function getProfileAvatar() {
+        let profileViewUser = null; // نام کاربری که پروفایل آن نمایش داده می‌شود
+
+        function getProfileAvatar(username) {
             try {
-                return localStorage.getItem('profileAvatar') || '';
+                const key = 'profileAvatar_' + username;
+                return localStorage.getItem(key) || '';
             } catch { return ''; }
         }
 
-        function setProfileAvatar(dataUrl) {
-            localStorage.setItem('profileAvatar', dataUrl);
-            updateAvatarUI(dataUrl);
+        function setProfileAvatar(username, dataUrl) {
+            const key = 'profileAvatar_' + username;
+            localStorage.setItem(key, dataUrl);
+            if (username === getCurrentUsername()) {
+                updateAvatarUI(dataUrl);
+            }
         }
 
         function updateAvatarUI(dataUrl) {
             const preview = document.getElementById('avatarPreview');
             const headerAvatar = document.getElementById('headerAvatar');
+            const defaultAvatar = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             if (preview) {
-                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
             }
             if (headerAvatar) {
-                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
             }
         }
 
-        function loadProfile() {
-            const avatar = getProfileAvatar();
+        function loadProfileForUser(username) {
+            const avatar = getProfileAvatar(username);
             updateAvatarUI(avatar);
+            document.getElementById('profileUsernameDisplay').textContent = username || 'کاربر';
+            const currentUser = getCurrentUsername();
+            const isOwn = (username === currentUser);
+            document.getElementById('viewOnlyMsg').textContent = isOwn ? '' : '👀 مشاهده پروفایل کاربر دیگر';
+            document.getElementById('avatarInput').style.display = isOwn ? 'block' : 'none';
+            document.querySelector('.username-change').style.display = isOwn ? 'block' : 'none';
+            document.querySelector('.profile-box .back-home-btn').textContent = isOwn ? '🔙 بازگشت به صفحه اصلی' : '🔙 بازگشت';
         }
 
-        // تغییر نام کاربری با بررسی تکراری نبودن
+        function getCurrentUsername() {
+            return document.getElementById('displayUsername').textContent.trim() || localStorage.getItem('username') || '';
+        }
+
         function changeUsername() {
             const input = document.getElementById('newUsernameInput');
             const error = document.getElementById('usernameError');
             const newName = input.value.trim();
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const currentUser = getCurrentUsername();
 
             if (newName === '') {
                 alert('لطفاً نام جدید را وارد کنید!');
                 return;
             }
 
-            // اگر نام جدید با نام فعلی یکی است، نیازی به بررسی نیست
             if (newName === currentUser) {
                 alert('نام جدید با نام فعلی شما یکسان است.');
                 return;
             }
 
-            // بررسی تکراری بودن
             if (isUsernameTaken(newName)) {
                 error.style.display = 'block';
                 return;
             }
             error.style.display = 'none';
 
-            // نام قدیمی را از لیست حذف و نام جدید را اضافه کن
             removeUsername(currentUser);
             addUsername(newName);
 
-            // ذخیره نام جدید در localStorage
+            const oldAvatar = getProfileAvatar(currentUser);
+            if (oldAvatar) {
+                setProfileAvatar(newName, oldAvatar);
+                localStorage.removeItem('profileAvatar_' + currentUser);
+            }
+
             localStorage.setItem('username', newName);
             document.getElementById('displayUsername').textContent = newName;
             input.value = '';
             alert('✅ نام کاربری با موفقیت تغییر کرد!');
 
-            // به‌روزرسانی پروفایل
-            loadProfile();
-            updateAdminPanelUI(); // برای به‌روزرسانی لیست مدیران
+            loadProfileForUser(newName);
+            updateAdminPanelUI();
         }
 
-        // آپلود عکس
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = function(event) {
                 const dataUrl = event.target.result;
-                setProfileAvatar(dataUrl);
+                const username = getCurrentUsername();
+                setProfileAvatar(username, dataUrl);
+                loadProfileForUser(username);
                 alert('✅ عکس پروفایل با موفقیت آپلود شد!');
             };
             reader.readAsDataURL(file);
@@ -979,7 +1020,7 @@
         }
 
         function removeAdmin(adminToRemove) {
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const currentUser = getCurrentUsername();
             if (currentUser !== SUPER_ADMIN) {
                 alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
                 return;
@@ -995,23 +1036,30 @@
             alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
         }
 
+        function showProfileForUser(username) {
+            profileViewUser = username;
+            loadProfileForUser(username);
+            showPage('profilePage');
+        }
+
         function updateAdminPanelUI() {
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
 
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const currentUser = getCurrentUsername();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
 
             let html = '';
             admins.forEach(admin => {
-                html += admin;
+                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;">`;
+                html +=
+                    `<button class="profile-link-btn" onclick="showProfileForUser('${admin}')">👤 ${admin}</button>`;
                 if (isSuperAdmin && admin !== SUPER_ADMIN) {
                     html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌ حذف</button>`;
                 }
-                html += ' ، ';
+                html += `</span>`;
             });
-            html = html.slice(0, -3);
             adminListEl.innerHTML = html;
         }
 
@@ -1025,14 +1073,18 @@
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') {
-                loadProfile();
+                const username = profileViewUser || getCurrentUsername();
+                loadProfileForUser(username);
                 document.getElementById('newUsernameInput').value = '';
                 document.getElementById('usernameError').style.display = 'none';
             }
         }
 
         function showRankPage() { showPage('rankPage'); }
-        function showProfilePage() { showPage('profilePage'); }
+        function showProfilePage() {
+            profileViewUser = getCurrentUsername();
+            showPage('profilePage');
+        }
 
         function goToMenu() { showPage('menuPage'); }
 
@@ -1068,15 +1120,7 @@
                 return;
             }
 
-            // بررسی تکراری نبودن نام کاربری هنگام ورود
-            if (isUsernameTaken(username)) {
-                // اگر نام قبلاً ثبت شده، اجازه ورود بده (چون همان کاربر است)
-                // اما اگر کاربر دیگری با این نام هست، باید پیام خطا بدهد
-                // فعلاً فرض می‌کنیم که اگر نام در لیست است، اجازه ورود بده
-                // (در یک سیستم واقعی باید با رمز عبور یا شناسه دیگر تأیید شود)
-                // برای سادگی، فقط اجازه ورود می‌دهیم
-            } else {
-                // نام جدید است، آن را ثبت کن
+            if (!isUsernameTaken(username)) {
                 addUsername(username);
             }
 
@@ -1092,7 +1136,7 @@
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('displayUsername').textContent = username;
-                loadProfile();
+                profileViewUser = username;
                 showPage('homePage');
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
@@ -1105,7 +1149,6 @@
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 currentUsername = saved;
-                // اگر نام در لیست نیست، اضافه کن (برای کاربرانی که قبلاً ثبت نشده‌اند)
                 if (!isUsernameTaken(saved)) {
                     addUsername(saved);
                 }
@@ -1115,7 +1158,7 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    loadProfile();
+                    profileViewUser = saved;
                     showPage('homePage');
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
@@ -1181,7 +1224,7 @@
         //  ۳. پنل ادمینی
         // ==========================================================
         function openAdminPanel() {
-            const username = document.getElementById('displayUsername').textContent.trim();
+            const username = getCurrentUsername();
             const admins = getAdmins();
             if (admins.includes(username)) {
                 updateAdminStats();
