@@ -778,8 +778,8 @@
                     <div class="rank-group">
                         <span class="rank-title" style="color:#e74c3c;">سازنده</span>
                         <span class="rank-name">ابوالفضل</span>
-                        <span class="rank-name">رضا ممد</span>
                         <span class="rank-name">محمد رضا</span>
+                        <!-- رضا ممد حذف شد -->
                     </div>
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
@@ -828,7 +828,6 @@
                 const stored = localStorage.getItem('admins');
                 if (stored) {
                     admins = JSON.parse(stored);
-                    // اگر "محمد رضا" در لیست نبود، اضافه کن
                     if (!admins.includes("محمد رضا")) {
                         admins.push("محمد رضا");
                         localStorage.setItem('admins', JSON.stringify(admins));
