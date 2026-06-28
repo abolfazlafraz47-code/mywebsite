@@ -779,7 +779,7 @@
                     </div>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک ها</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
-                    <button class="mod-btn" id="modBtn" onclick="showModPage()">🛡️ پنل مود</button>
+                    <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ پنل مود</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
                         پروفایل
@@ -965,6 +965,11 @@
         })();
 
         // ==========================================================
+        //  لیست کاربران مجاز برای پنل مود
+        // ==========================================================
+        const MOD_ALLOWED_USERS = ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
+
+        // ==========================================================
         //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
         function getProfileAvatar() {
@@ -1002,20 +1007,20 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             const isAdmin = admins.includes(username);
-            const isArad = (username === "آراد تریاکی");
 
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
 
-            // دکمه ادمینی: برای همه ادمین‌ها به جز آراد تریاکی
-            if (isAdmin && !isArad) {
+            // دکمه ادمینی: برای همه ادمین‌ها (رضا ممد، ابوالفضل، محمد رضا)
+            // آراد تریاکی ادمین نیست پس این دکمه را نمی‌بیند
+            if (isAdmin) {
                 adminBtn.style.display = 'inline-block';
             } else {
                 adminBtn.style.display = 'none';
             }
 
-            // دکمه مود: فقط برای آراد تریاکی
-            if (isArad) {
+            // دکمه مود: برای همه کاربران نمایش داده می‌شود (اگر لاگین باشند)
+            if (username && username !== '') {
                 modBtn.style.display = 'inline-block';
             } else {
                 modBtn.style.display = 'none';
@@ -1142,7 +1147,7 @@
         }
 
         // ==========================================================
-        //  توابع نمایش صفحات
+        //  توابع نمایش صفحات و کنترل دسترسی
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage'];
@@ -1159,15 +1164,6 @@
                 updateModPanelUI();
                 updateModStats();
             }
-            if (pageId === 'adminPanel') {
-                // جلوگیری از ورود آراد تریاکی به پنل ادمینی
-                const username = document.getElementById('displayUsername').textContent.trim();
-                if (username === "آراد تریاکی") {
-                    alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
-                    showPage('homePage');
-                    return;
-                }
-            }
         }
 
         function updateModStats() {
@@ -1178,12 +1174,50 @@
             document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
         }
 
+        // ===== پنل مود با بررسی دسترسی =====
+        function openModPanel() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) {
+                alert('لطفاً ابتدا وارد شوید!');
+                return;
+            }
+            if (MOD_ALLOWED_USERS.includes(username)) {
+                showPage('modPage');
+            } else {
+                alert('⛔ شما دسترسی به پنل مود ندارید!');
+            }
+        }
+
+        // ===== پنل ادمینی =====
+        function openAdminPanel() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+
+            if (!username) {
+                alert('لطفاً ابتدا وارد شوید!');
+                return;
+            }
+
+            // جلوگیری از ورود آراد تریاکی (چون ادمین نیست)
+            if (username === "آراد تریاکی") {
+                alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
+                return;
+            }
+
+            if (admins.includes(username)) {
+                updateAdminStats();
+                updateAdminPanelUI();
+                showPage('adminPanel');
+            } else {
+                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
+            }
+        }
+
         function showRankPage() { showPage('rankPage'); }
         function showProfilePage() {
             loadProfile();
             showPage('profilePage');
         }
-        function showModPage() { showPage('modPage'); }
 
         function goToMenu() { showPage('menuPage'); }
 
@@ -1319,28 +1353,6 @@
 
         function retryConnection() {
             initConnection();
-        }
-
-        // ==========================================================
-        //  ۳. پنل ادمینی
-        // ==========================================================
-        function openAdminPanel() {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const admins = getAdmins();
-
-            // جلوگیری از ورود آراد تریاکی
-            if (username === "آراد تریاکی") {
-                alert('⛔ شما دسترسی به پنل ادمینی ندارید!');
-                return;
-            }
-
-            if (admins.includes(username)) {
-                updateAdminStats();
-                updateAdminPanelUI();
-                showPage('adminPanel');
-            } else {
-                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
-            }
         }
 
         // ==========================================================
