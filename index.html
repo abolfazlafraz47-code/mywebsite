@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>❄️ دوز آنلاین</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت غیرفعال</title>
     <style>
         * {
             margin: 0;
@@ -13,6 +11,7 @@
             box-sizing: border-box;
             font-family: tahoma;
         }
+
         body {
             background: linear-gradient(135deg, #00b4ff, #6dd5fa, #ffffff);
             min-height: 100vh;
@@ -21,469 +20,49 @@
             align-items: center;
             padding: 20px;
         }
+
         .container {
             background: white;
             border-radius: 25px;
-            padding: 25px;
+            padding: 50px 30px;
             width: 100%;
             max-width: 400px;
+            text-align: center;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        .header {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #00b4ff;
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
         }
-        .header h1 {
+
+        .title {
             font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
         }
-        .header p {
-            font-size: 14px;
+
+        .sub {
+            font-size: 18px;
             color: #555;
+            margin-bottom: 10px;
         }
-        button {
-            background: #00b4ff;
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            margin: 5px 0;
-        }
-        button:hover {
-            background: #008fd1;
-            transform: scale(1.02);
-        }
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 10px auto;
-            max-width: 280px;
-        }
-        .cell {
-            background: #f0f8ff;
-            border-radius: 10px;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        .cell:hover:not(.taken) {
-            background: #d4edff;
-            transform: scale(1.02);
-        }
-        .cell.taken {
-            cursor: default;
-        }
-        .cell.x {
-            color: #2196F3;
-        }
-        .cell.o {
-            color: #FF5722;
-        }
-        .status {
-            font-size: 18px;
-            margin: 10px 0;
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
-        .back-btn {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
+
+        .sub2 {
             font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: auto;
-        }
-        .back-btn:hover {
-            background: #e74c3c;
-        }
-        .flex {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .hidden {
-            display: none !important;
+            color: #999;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="app">
-        <div class="header">
-            <h1>❄️ دوز آنلاین</h1>
-            <p>اتصال به سرور...</p>
-        </div>
-
-        <!-- منو -->
-        <div id="menu">
-            <button onclick="findOrCreateGame()">🎮 شروع بازی آنلاین</button>
-            <button onclick="goOffline()">🤖 بازی با ربات (آفلاین)</button>
-        </div>
-
-        <!-- صفحه بازی -->
-        <div id="gamePage" class="hidden">
-            <div class="flex">
-                <button class="back-btn" onclick="backToMenu()">↩ بازگشت</button>
-                <span style="flex:1;text-align:center;font-size:14px;color:#555;" id="playerLabel">شما: X</span>
-            </div>
-            <div class="status" id="statusMsg">در انتظار حریف...</div>
-            <div class="board" id="board"></div>
-            <button onclick="resetGame()">🔄 بازی جدید</button>
-        </div>
+    <div class="container">
+        <div class="icon">⛔</div>
+        <div class="title">سایت غیرفعال است</div>
+        <div class="sub">به زودی فعال می‌شود</div>
+        <div class="sub2">❄️ برفی</div>
     </div>
-
-    <script>
-        // ===== تنظیمات Supabase (کلیدهای خودت رو بذار) =====
-        const SUPABASE_URL = "https://uyfomwdjyvkyhoolo.subspace.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_jGPMijQTM3BqB9tp14FUzg_Sd4RReIx";
-
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // ===== متغیرها =====
-        let board = Array(9).fill('');
-        let currentPlayer = 'X';
-        let gameOver = false;
-        let mySymbol = 'X';
-        let gameId = null;
-        let channel = null;
-        let isOnline = false;
-        let isRobotGame = false;
-
-        const boardEl = document.getElementById('board');
-        const statusMsg = document.getElementById('statusMsg');
-        const playerLabel = document.getElementById('playerLabel');
-
-        const winPatterns = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-
-        // ===== توابع نمایش =====
-        function showPage(id) {
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('gamePage').classList.add('hidden');
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        function backToMenu() {
-            if (channel) { channel.unsubscribe();
-                channel = null; }
-            gameId = null;
-            isOnline = false;
-            showPage('menu');
-        }
-
-        // ===== رندر تخته =====
-        function renderBoard() {
-            boardEl.innerHTML = '';
-            board.forEach((val, idx) => {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                if (val) {
-                    cell.classList.add('taken', val === 'X' ? 'x' : 'o');
-                    cell.textContent = val;
-                } else {
-                    cell.dataset.index = idx;
-                    cell.onclick = () => handleClick(idx);
-                }
-                boardEl.appendChild(cell);
-            });
-        }
-
-        // ===== بررسی برنده =====
-        function checkWinner() {
-            for (let p of winPatterns) {
-                const [a, b, c] = p;
-                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                    return board[a];
-                }
-            }
-            if (board.every(v => v !== '')) return 'draw';
-            return null;
-        }
-
-        function endGame(result) {
-            gameOver = true;
-            if (result === 'X') statusMsg.textContent = (mySymbol === 'X') ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-            else if (result === 'O') statusMsg.textContent = (mySymbol === 'O') ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-            else if (result === 'draw') statusMsg.textContent = '🤝 مساوی!';
-            document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-        }
-
-        // ===== کلیک روی خانه =====
-        async function handleClick(index) {
-            if (gameOver || board[index] !== '') return;
-
-            if (isOnline) {
-                if (currentPlayer !== mySymbol) {
-                    statusMsg.textContent = '⏳ نوبت حریف!';
-                    return;
-                }
-                if (!gameId) return;
-
-                board[index] = mySymbol;
-                renderBoard();
-                const winner = checkWinner();
-                if (winner) { endGame(winner);
-                    await updateGame(gameId, board, 'finished', winner); return; }
-
-                currentPlayer = (mySymbol === 'X') ? 'O' : 'X';
-                statusMsg.textContent = '⏳ نوبت حریف...';
-                await updateGame(gameId, board, 'playing', null);
-            } else {
-                // بازی با ربات (آفلاین)
-                if (currentPlayer !== 'X') return;
-                board[index] = 'X';
-                renderBoard();
-                const winner = checkWinner();
-                if (winner) { endGame(winner); return; }
-                currentPlayer = 'O';
-                statusMsg.textContent = '🤖 ربات در حال فکر...';
-                setTimeout(() => { if (!gameOver) robotMove(); }, 400);
-            }
-        }
-
-        // ===== ربات آفلاین =====
-        function robotMove() {
-            if (gameOver || currentPlayer !== 'O') return;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'O';
-                    if (checkWinner() === 'O') { renderBoard();
-                        endGame('O'); return; }
-                    board[i] = '';
-                }
-            }
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'X';
-                    if (checkWinner() === 'X') {
-                        board[i] = '';
-                        board[i] = 'O';
-                        renderBoard();
-                        const w = checkWinner();
-                        if (w) endGame(w);
-                        else { currentPlayer = 'X';
-                            statusMsg.textContent = 'نوبت شما (X)'; }
-                        return;
-                    }
-                    board[i] = '';
-                }
-            }
-            const empty = board.reduce((a, v, i) => v === '' ? [...a, i] : a, []);
-            if (empty.length > 0) {
-                const r = empty[Math.floor(Math.random() * empty.length)];
-                board[r] = 'O';
-                renderBoard();
-                const w = checkWinner();
-                if (w) endGame(w);
-                else { currentPlayer = 'X';
-                    statusMsg.textContent = 'نوبت شما (X)'; }
-            }
-        }
-
-        // ===== بازی آفلاین =====
-        function goOffline() {
-            isOnline = false;
-            isRobotGame = true;
-            mySymbol = 'X';
-            currentPlayer = 'X';
-            gameOver = false;
-            board = Array(9).fill('');
-            playerLabel.textContent = 'شما: X | ربات: O';
-            showPage('gamePage');
-            renderBoard();
-            statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
-        }
-
-        // ===== بازی آنلاین =====
-        async function findOrCreateGame() {
-            isOnline = true;
-            isRobotGame = false;
-            mySymbol = 'X';
-            currentPlayer = 'X';
-            gameOver = false;
-            board = Array(9).fill('');
-            playerLabel.textContent = 'شما: X | حریف: O';
-            showPage('gamePage');
-            renderBoard();
-            statusMsg.textContent = '⏳ در حال جستجوی حریف...';
-
-            try {
-                // دنبال بازی موجود
-                const { data: waiting, error: e1 } = await supabase
-                    .from('games')
-                    .select('*')
-                    .eq('status', 'waiting')
-                    .order('created_at', { ascending: true })
-                    .limit(1);
-
-                if (e1) throw e1;
-
-                if (waiting && waiting.length > 0) {
-                    // بازی موجود - وارد میشیم به عنوان O
-                    const g = waiting[0];
-                    gameId = g.id;
-                    mySymbol = 'O';
-                    currentPlayer = 'X';
-                    playerLabel.textContent = 'شما: O | حریف: X';
-
-                    await supabase
-                        .from('games')
-                        .update({ player_o: 'player2', status: 'playing' })
-                        .eq('id', gameId);
-
-                    statusMsg.textContent = '✅ به بازی پیوستید! نوبت حریف...';
-                    await loadGame(gameId);
-                    listenGame(gameId);
-                } else {
-                    // بازی جدید میسازیم
-                    const { data: newGame, error: e2 } = await supabase
-                        .from('games')
-                        .insert([{
-                            board: board,
-                            status: 'waiting',
-                            current_player: 'X',
-                            player_x: 'player1',
-                            player_o: null
-                        }])
-                        .select()
-                        .single();
-
-                    if (e2) throw e2;
-
-                    gameId = newGame.id;
-                    mySymbol = 'X';
-                    playerLabel.textContent = 'شما: X | حریف: O';
-                    statusMsg.textContent = '⏳ منتظر ورود حریف...';
-                    listenOpponent(gameId);
-                }
-            } catch (err) {
-                console.error(err);
-                statusMsg.textContent = '❌ خطا در اتصال';
-            }
-        }
-
-        function listenOpponent(gameId) {
-            if (channel) channel.unsubscribe();
-            channel = supabase
-                .channel(`game_${gameId}`)
-                .on('postgres_changes', {
-                    event: 'UPDATE',
-                    schema: 'public',
-                    table: 'games',
-                    filter: `id=eq.${gameId}`
-                }, (payload) => {
-                    const data = payload.new;
-                    if (data.player_o) {
-                        statusMsg.textContent = '✅ حریف پیدا شد! نوبت شماست!';
-                        if (channel) { channel.unsubscribe();
-                            channel = null; }
-                        listenGame(gameId);
-                        if (data.board) {
-                            board = data.board;
-                            renderBoard();
-                        }
-                        currentPlayer = data.current_player;
-                        gameOver = data.status === 'finished';
-                        if (currentPlayer === mySymbol) statusMsg.textContent = 'نوبت شما!';
-                        else statusMsg.textContent = '⏳ نوبت حریف...';
-                    }
-                })
-                .subscribe();
-        }
-
-        async function loadGame(gameId) {
-            const { data, error } = await supabase
-                .from('games')
-                .select('*')
-                .eq('id', gameId)
-                .single();
-            if (error) return;
-            if (data.board) { board = data.board;
-                renderBoard(); }
-            currentPlayer = data.current_player;
-            gameOver = data.status === 'finished';
-            if (data.status === 'finished') {
-                const w = data.winner;
-                if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-                else statusMsg.textContent = '🤝 مساوی!';
-                document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-            } else {
-                statusMsg.textContent = (currentPlayer === mySymbol) ? 'نوبت شما!' : '⏳ نوبت حریف...';
-            }
-        }
-
-        function listenGame(gameId) {
-            if (channel) channel.unsubscribe();
-            channel = supabase
-                .channel(`game_${gameId}`)
-                .on('postgres_changes', {
-                    event: 'UPDATE',
-                    schema: 'public',
-                    table: 'games',
-                    filter: `id=eq.${gameId}`
-                }, (payload) => {
-                    const data = payload.new;
-                    if (data.board) { board = data.board;
-                        renderBoard(); }
-                    currentPlayer = data.current_player;
-                    gameOver = data.status === 'finished';
-                    if (data.status === 'finished') {
-                        const w = data.winner;
-                        if (w) statusMsg.textContent = (w === mySymbol) ? '🎉 شما برنده شدید!' : '😔 حریف برنده شد!';
-                        else statusMsg.textContent = '🤝 مساوی!';
-                        document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
-                    } else {
-                        statusMsg.textContent = (currentPlayer === mySymbol) ? 'نوبت شما!' : '⏳ نوبت حریف...';
-                    }
-                })
-                .subscribe();
-        }
-
-        async function updateGame(gameId, board, status, winner) {
-            const data = { board, status, current_player: currentPlayer };
-            if (winner) data.winner = winner;
-            await supabase.from('games').update(data).eq('id', gameId);
-        }
-
-        function resetGame() {
-            if (isOnline && gameId) {
-                board = Array(9).fill('');
-                gameOver = false;
-                currentPlayer = 'X';
-                renderBoard();
-                statusMsg.textContent = '🔄 بازی جدید';
-                updateGame(gameId, board, 'playing', null);
-            } else {
-                goOffline();
-            }
-        }
-
-        // ===== شروع =====
-        showPage('menu');
-    </script>
 
 </body>
 </html>
