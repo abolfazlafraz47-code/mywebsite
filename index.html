@@ -29,6 +29,35 @@
             position: relative;
         }
 
+        /* ===== هدر ثابت (نام کاربری بالا سمت راست) ===== */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 8px 0 15px 0;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+        }
+        .main-header .site-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .main-header .site-title span {
+            font-size: 14px;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+        .main-header .user-name {
+            font-size: 16px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+
         /* ===== صفحه ورود ===== */
         #loginPage {
             display: flex;
@@ -201,36 +230,13 @@
             width: 100%;
         }
 
-        /* ===== استایل‌های اصلی ===== */
-        header {
-            display: flex;
-            justify-content: space-between;
+        /* ===== صفحات داخلی ===== */
+        #homePage, #menuPage, #gamePage {
+            display: none;
+            flex-direction: column;
             align-items: center;
             width: 100%;
-            margin-bottom: 30px;
-            color: white;
-        }
-        header .title-group {
-            text-align: center;
-            flex: 1;
-        }
-        header .title-group h1 {
-            font-size: 40px;
-        }
-        header .title-group p {
-            font-size: 16px;
-            margin-top: 2px;
-        }
-        header .user-info {
-            font-size: 18px;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 14px;
-            border-radius: 30px;
-            white-space: nowrap;
-        }
-        header .user-info i {
-            margin-left: 6px;
+            max-width: 400px;
         }
 
         .box {
@@ -264,14 +270,6 @@
         button:hover {
             background: #008fd1;
             transform: scale(1.05);
-        }
-
-        #menuPage, #gamePage {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
         }
 
         .menu-box {
@@ -412,15 +410,12 @@
         }
 
         @media(max-width: 480px) {
-            header .title-group h1 {
-                font-size: 30px;
+            .main-header .site-title {
+                font-size: 18px;
             }
-            header .title-group p {
+            .main-header .user-name {
                 font-size: 13px;
-            }
-            header .user-info {
-                font-size: 14px;
-                padding: 4px 10px;
+                padding: 3px 10px;
             }
             .box {
                 padding: 20px;
@@ -465,17 +460,18 @@
         <!-- ======== محتوای اصلی ======== -->
         <div id="mainContent">
 
+            <!-- ===== هدر ثابت با نام کاربری بالا سمت راست ===== -->
+            <div class="main-header">
+                <div class="site-title">
+                    ❄️ برفی <span>| بازی</span>
+                </div>
+                <div class="user-name">
+                    👤 <span id="displayUsername">کاربر</span>
+                </div>
+            </div>
+
             <!-- صفحه اصلی -->
             <div id="homePage">
-                <header>
-                    <div class="title-group">
-                        <h1>❄️ برفی</h1>
-                        <p>به سایت برفی خوش آمدید</p>
-                    </div>
-                    <div class="user-info">
-                        👤 <span id="displayUsername">کاربر</span>
-                    </div>
-                </header>
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
