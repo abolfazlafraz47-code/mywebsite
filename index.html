@@ -589,13 +589,13 @@
 
     <script>
         // ==========================================================
-        //  ۱. مدیریت لودینگ و اتصال (رفع گیر کردن)
+        //  ۱. مدیریت لودینگ و اتصال (رفع کامل گیر کردن)
         // ==========================================================
         const loader = document.getElementById('loader');
         const errorPage = document.getElementById('errorPage');
         const mainContent = document.getElementById('mainContent');
 
-        // تابع بررسی اتصال با تایم‌اوت کوتاه‌تر (۳ ثانیه)
+        // تابع بررسی اتصال با تایم‌اوت ۳ ثانیه
         function checkConnection() {
             return new Promise((resolve) => {
                 // اگر مرورگر آفلاین را گزارش دهد، سریعاً رد می‌کنیم
@@ -623,15 +623,15 @@
             });
         }
 
-        // تابع اصلی با مدیریت خطا و تایم‌اوت
+        // تابع اصلی با تایم‌اوت کلی ۴ ثانیه و مدیریت خطا
         async function initConnection() {
-            // نمایش لودینگ
+            // نمایش لودینگ و مخفی کردن سایر صفحات
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
 
             try {
-                // با تایم‌اوت ۴ ثانیه برای کل عملیات
+                // تایم‌اوت کلی ۴ ثانیه
                 const timeoutPromise = new Promise((_, reject) =>
                     setTimeout(() => reject(new Error('زمان اتصال به پایان رسید')), 4000)
                 );
@@ -650,7 +650,7 @@
                     errorPage.style.display = 'flex';
                 }
             } catch (error) {
-                // در صورت بروز هرگونه خطا (از جمله تایم‌اوت)
+                // در صورت بروز هرگونه خطا (تایم‌اوت یا غیره)
                 console.log('خطا در اتصال:', error);
                 loader.style.display = 'none';
                 errorPage.style.display = 'flex';
@@ -695,6 +695,7 @@
             [2, 4, 6]
         ];
 
+        // صداها (بدون تغییر)
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -757,6 +758,7 @@
             } catch (e) {}
         }
 
+        // تایمر
         function startTimer() {
             clearTimer();
             timeLeft = MAX_TIME;
@@ -812,6 +814,7 @@
             startTimer();
         }
 
+        // توابع بازی
         function renderBoard() {
             boardEl.innerHTML = '';
             board.forEach((val, idx) => {
@@ -1292,4 +1295,4 @@
     </script>
 
 </body>
-    </html>
+</html>
