@@ -238,7 +238,27 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
         }
-        /* دکمه پشتیبانی حذف شد و آنلاین بج نیز حذف شد */
+
+        /* ===== دکمه هدیه (در هدر) ===== */
+        .main-header .gift-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+        }
+        .main-header .gift-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
+        }
+
+        /* دکمه بن کاربر حذف شده است */
 
         /* ===== صفحات با افکت شیشه‌ای ===== */
         #loginPage,
@@ -250,7 +270,8 @@
         .admin-panel-box,
         .rank-box,
         .profile-box,
-        .mod-panel-box {
+        .mod-panel-box,
+        .gift-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -496,7 +517,8 @@
         #adminPanel,
         #rankPage,
         #profilePage,
-        #modPage {
+        #modPage,
+        #giftPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1060,6 +1082,133 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== صفحه کد هدیه (Gift Page) ===== */
+        .gift-box {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .gift-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .gift-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .gift-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .gift-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .gift-box .gift-input-area {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gift-box .gift-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+            letter-spacing: 2px;
+        }
+        .gift-box .gift-input-area input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .gift-box .gift-input-area input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .gift-box .gift-input-area .gift-submit-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+            white-space: nowrap;
+        }
+        .gift-box .gift-input-area .gift-submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
+        }
+        .gift-box .gift-result {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            display: none;
+            width: 100%;
+        }
+        .gift-box .gift-result.success {
+            display: block;
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+        .gift-box .gift-result.error {
+            display: block;
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+        .gift-box .gift-result .gift-prize {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+        .gift-box .back-home-btn {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .gift-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
         /* ===== واکنش‌گرایی ===== */
         @media(max-width: 480px) {
             body {
@@ -1099,6 +1248,10 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .main-header .gift-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
             #loginPage {
                 padding: 30px 20px;
                 min-height: 320px;
@@ -1114,9 +1267,6 @@
             }
             .menu-box button {
                 width: 100%;
-                font-size: 17px;
-            }
-            .menu-box p {
                 font-size: 17px;
             }
             .game-container {
@@ -1151,7 +1301,8 @@
             .admin-panel-box,
             .rank-box,
             .profile-box,
-            .mod-panel-box {
+            .mod-panel-box,
+            .gift-box {
                 padding: 24px 16px;
             }
         }
@@ -1180,6 +1331,10 @@
                 height: 18px;
             }
             .main-header .mod-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .gift-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -1250,7 +1405,8 @@
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
 
-                    <!-- دکمه آنلاین حذف شد -->
+                    <!-- ===== دکمه کد هدیه (در هدر) ===== -->
+                    <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
 
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
@@ -1375,6 +1531,24 @@
                 </div>
             </div>
 
+            <!-- ===== صفحه کد هدیه (Gift Page) ===== -->
+            <div id="giftPage">
+                <div class="gift-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🎁 کد هدیه</h2>
+                    <p>کد هدیه خود را وارد کنید</p>
+                    <div class="gift-input-area">
+                        <input type="text" id="giftCodeInputUser" placeholder="کد هدیه را وارد کنید..." maxlength="20" />
+                        <button class="gift-submit-btn" onclick="checkGiftCode()">📤 ثبت</button>
+                    </div>
+                    <div class="gift-result" id="giftResult">
+                        <div id="giftResultText"></div>
+                        <div class="gift-prize" id="giftResultPrize"></div>
+                    </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
@@ -1397,15 +1571,83 @@
         })();
 
         // ==========================================================
-        //  🟢 اتصال Socket.IO و نمایش کاربران آنلاین (حذف شده از هدر)
+        //  🟢 اتصال Socket.IO و نمایش کاربران آنلاین (فقط در پنل‌ها)
         // ==========================================================
         const socket = io("https://آدرس-سرور-تو"); // <-- آدرس سرور خود را اینجا قرار دهید
 
         socket.on("onlineUsers", (count) => {
-            // فقط در پنل ادمین و مود به‌روزرسانی شود
             document.getElementById("userCount").textContent = count;
             document.getElementById("modUserCount").textContent = count;
         });
+
+        // ==========================================================
+        //  سیستم کد هدیه (Gift System)
+        // ==========================================================
+        // کد هدیه پیش‌فرض: 1234 (قابل تغییر در پنل ادمین)
+        // کد 877 همیشه خطا است
+
+        function getGiftSettings() {
+            try {
+                const data = localStorage.getItem('giftSettings');
+                if (data) {
+                    return JSON.parse(data);
+                }
+            } catch {}
+            return { code: '1234', prize: '۱۰۰ سکه طلا' };
+        }
+
+        function setGiftSettings(code, prize) {
+            localStorage.setItem('giftSettings', JSON.stringify({ code, prize }));
+        }
+
+        function getCurrentGiftCode() {
+            const settings = getGiftSettings();
+            return settings.code || '1234';
+        }
+
+        function getCurrentGiftPrize() {
+            const settings = getGiftSettings();
+            return settings.prize || '۱۰۰ سکه طلا';
+        }
+
+        function showGiftPage() {
+            showPage('giftPage');
+            const result = document.getElementById('giftResult');
+            result.className = 'gift-result';
+            result.style.display = 'none';
+            document.getElementById('giftCodeInputUser').value = '';
+        }
+
+        function checkGiftCode() {
+            const input = document.getElementById('giftCodeInputUser');
+            const code = input.value.trim();
+            const correctCode = getCurrentGiftCode();
+
+            const result = document.getElementById('giftResult');
+            const textEl = document.getElementById('giftResultText');
+            const prizeEl = document.getElementById('giftResultPrize');
+
+            // کد 877 همیشه اشتباه است
+            if (code === '877') {
+                result.className = 'gift-result error';
+                result.style.display = 'block';
+                textEl.textContent = '❌ کد هدیه اشتباه است!';
+                prizeEl.textContent = '';
+                return;
+            }
+
+            if (code === correctCode) {
+                result.className = 'gift-result success';
+                result.style.display = 'block';
+                textEl.textContent = '✅ کد هدیه درست است!';
+                prizeEl.textContent = `🎁 جایزه شما: ${getCurrentGiftPrize()}`;
+            } else {
+                result.className = 'gift-result error';
+                result.style.display = 'block';
+                textEl.textContent = '❌ کد هدیه اشتباه است!';
+                prizeEl.textContent = '';
+            }
+        }
 
         // ==========================================================
         //  مدیریت نام‌های کاربری (ذخیره لیست در localStorage)
@@ -1651,7 +1893,9 @@
         //  توابع نمایش صفحات و کنترل دسترسی
         // ==========================================================
         function showPage(pageId) {
-            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage'];
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
+                'giftPage'
+            ];
             pages.forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
@@ -1666,6 +1910,12 @@
             if (pageId === 'adminPanel') {
                 updateAdminPanelUI();
                 updateAdminStats();
+            }
+            if (pageId === 'giftPage') {
+                const result = document.getElementById('giftResult');
+                result.className = 'gift-result';
+                result.style.display = 'none';
+                document.getElementById('giftCodeInputUser').value = '';
             }
         }
 
