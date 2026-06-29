@@ -170,6 +170,8 @@
             box-shadow: 0 4px 20px rgba(100, 200, 255, 0.2);
             border-color: rgba(100, 200, 255, 0.3);
         }
+
+        /* دکمه‌های نقش‌ها */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
@@ -183,11 +185,32 @@
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
             position: relative;
+            display: none;
         }
         .main-header .admin-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
         }
+
+        .main-header .moderator-btn {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(161, 140, 209, 0.3);
+            display: none;
+        }
+        .main-header .moderator-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
+        }
+
         .main-header .profile-btn {
             background: rgba(255, 255, 255, 0.08);
             color: #e0f0ff;
@@ -221,8 +244,8 @@
             flex-shrink: 0;
         }
         .main-header .mod-btn {
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-            color: #1a1a3a;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
             border: none;
             padding: 4px 14px;
             border-radius: 30px;
@@ -232,14 +255,14 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             display: none;
-            box-shadow: 0 2px 12px rgba(161, 140, 209, 0.3);
+            box-shadow: 0 2px 12px rgba(46, 204, 113, 0.3);
         }
         .main-header .mod-btn:hover {
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
+            box-shadow: 0 6px 24px rgba(46, 204, 113, 0.5);
         }
 
-        /* ===== دکمه کد هدیه (در هدر) ===== */
+        /* ===== دکمه کد هدیه ===== */
         .main-header .gift-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -258,8 +281,6 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
 
-        /* دکمه بن کاربر حذف شد */
-
         /* ===== صفحات با افکت شیشه‌ای ===== */
         #loginPage,
         #loader,
@@ -271,6 +292,7 @@
         .rank-box,
         .profile-box,
         .mod-panel-box,
+        .moderator-panel-box,
         .country-select-box,
         .football-game-box,
         .gift-box {
@@ -519,7 +541,8 @@
         #adminPanel,
         #rankPage,
         #profilePage,
-        #modPage,
+        #modPanel,
+        #moderatorPanel,
         #countrySelectPage,
         #footballGamePage,
         #giftPage {
@@ -789,7 +812,7 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== پنل ادمینی ===== */
+        /* ===== پنل سوپر ادمین (ابوالفضل) ===== */
         .admin-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -860,6 +883,389 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
         .admin-panel-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .admin-panel-box .ban-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: right;
+        }
+        .admin-panel-box .ban-section h4 {
+            color: #ff6b6b;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .admin-panel-box .ban-section .ban-search {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin: 8px 0;
+            flex-wrap: wrap;
+        }
+        .admin-panel-box .ban-section .ban-search input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+        .admin-panel-box .ban-section .ban-search input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .admin-panel-box .ban-section .ban-search input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .admin-panel-box .ban-section .ban-search .search-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .admin-panel-box .ban-section .ban-search .search-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+        .admin-panel-box .ban-section .ban-list {
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: right;
+            margin-top: 6px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .admin-panel-box .ban-section .ban-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .admin-panel-box .ban-section .ban-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .admin-panel-box .ban-section .ban-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+        .admin-panel-box .ban-section .ban-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-right: 3px solid rgba(255, 107, 107, 0.3);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+        }
+        .admin-panel-box .ban-section .ban-item .ban-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-panel-box .ban-section .ban-item .ban-user .ban-flag {
+            font-size: 18px;
+        }
+        .admin-panel-box .ban-section .ban-item .ban-user .ban-name {
+            font-weight: 600;
+        }
+        .admin-panel-box .ban-section .ban-item .ban-btn {
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.15);
+            padding: 3px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+        }
+        .admin-panel-box .ban-section .ban-item .ban-btn:hover {
+            background: rgba(255, 107, 107, 0.3);
+            transform: scale(1.05);
+        }
+        .admin-panel-box .ban-section .ban-item .ban-btn.unban {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.15);
+        }
+        .admin-panel-box .ban-section .ban-item .ban-btn.unban:hover {
+            background: rgba(46, 204, 113, 0.3);
+        }
+        .admin-panel-box .ban-section .ban-empty {
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+        }
+        .admin-panel-box .gift-setting {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: right;
+        }
+        .admin-panel-box .gift-setting h4 {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .admin-panel-box .gift-setting .gift-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .admin-panel-box .gift-setting .gift-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+        .admin-panel-box .gift-setting .gift-row input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .admin-panel-box .gift-setting .gift-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .admin-panel-box .gift-setting .gift-row .save-gift-btn {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .admin-panel-box .gift-setting .gift-row .save-gift-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+        .admin-panel-box .gift-setting .gift-info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            margin-top: 4px;
+        }
+        .admin-panel-box .gift-setting .gift-info span {
+            color: #ffd700;
+        }
+
+        /* ===== پنل مود (کاربران عادی با دسترسی ویژه) ===== */
+        .mod-panel-box {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+        }
+        .mod-panel-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .mod-panel-box .online-games {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin: 12px 0 16px 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .mod-panel-box .online-games span {
+            color: #2ecc71;
+        }
+        .mod-panel-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+        .mod-panel-box ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .mod-panel-box ul li:last-child {
+            border-bottom: none;
+        }
+        .mod-panel-box ul li span:first-child {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .mod-panel-box ul li span:last-child {
+            font-weight: 600;
+            color: #fff;
+        }
+        .mod-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .mod-panel-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== پنل مدیر ارشد (آراد تریاکی) ===== */
+        .moderator-panel-box {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+        }
+        .moderator-panel-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .moderator-panel-box p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .moderator-panel-box .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .moderator-panel-box .stats-grid .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 14px 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+        }
+        .moderator-panel-box .stats-grid .stat-card .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #a78bfa;
+        }
+        .moderator-panel-box .stats-grid .stat-card .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 2px;
+        }
+        .moderator-panel-box .support-messages {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: right;
+        }
+        .moderator-panel-box .support-messages h4 {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .moderator-panel-box .support-messages .msg-list {
+            max-height: 180px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .moderator-panel-box .support-messages .msg-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .moderator-panel-box .support-messages .msg-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .moderator-panel-box .support-messages .msg-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+        .moderator-panel-box .support-messages .msg-item {
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-right: 3px solid rgba(255, 215, 0, 0.2);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-from {
+            font-weight: 600;
+            color: #ffd700;
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-text {
+            margin: 2px 0;
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-time {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-status {
+            font-size: 10px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-status.answered {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+        }
+        .moderator-panel-box .support-messages .msg-item .msg-status.waiting {
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+        }
+        .moderator-panel-box .support-messages .msg-empty {
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+        }
+        .moderator-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .moderator-panel-box .back-home-btn:hover {
             background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
@@ -1012,75 +1418,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== صفحه مود ===== */
-        .mod-panel-box {
-            padding: 32px 24px;
-            width: 100%;
-            text-align: center;
-        }
-        .mod-panel-box h2 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-        }
-        .mod-panel-box .online-games {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 16px;
-            border-radius: 16px;
-            margin: 12px 0 16px 0;
-            font-size: 17px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .mod-panel-box .online-games span {
-            color: #a78bfa;
-        }
-        .mod-panel-box ul {
-            list-style: none;
-            padding: 0;
-            text-align: right;
-        }
-        .mod-panel-box ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        .mod-panel-box ul li:last-child {
-            border-bottom: none;
-        }
-        .mod-panel-box ul li span:first-child {
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .mod-panel-box ul li span:last-child {
-            font-weight: 600;
-            color: #fff;
-        }
-        .mod-panel-box .back-home-btn {
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .mod-panel-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ===== انتخاب کشور (فوتبال) ===== */
+        /* ===== انتخاب کشور ===== */
         .country-select-box {
             padding: 28px 20px;
             width: 100%;
@@ -1571,6 +1909,10 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .main-header .moderator-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
             .main-header .profile-btn {
                 font-size: 10px;
                 padding: 3px 10px 3px 6px;
@@ -1637,6 +1979,7 @@
             .rank-box,
             .profile-box,
             .mod-panel-box,
+            .moderator-panel-box,
             .country-select-box,
             .football-game-box,
             .gift-box {
@@ -1682,6 +2025,13 @@
             .goal-message .sub {
                 font-size: 11px;
             }
+            .moderator-panel-box .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .moderator-panel-box .stats-grid .stat-card .stat-number {
+                font-size: 22px;
+            }
         }
         @media(max-width: 380px) {
             .main-header .site-title {
@@ -1696,6 +2046,10 @@
                 padding: 2px 8px;
             }
             .main-header .admin-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .moderator-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -1748,6 +2102,9 @@
             }
             .football-game-box .game-header h3 {
                 font-size: 15px;
+            }
+            .moderator-panel-box .stats-grid .stat-card .stat-number {
+                font-size: 18px;
             }
         }
     </style>
@@ -1803,11 +2160,12 @@
                     <!-- ===== دکمه کد هدیه ===== -->
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
 
-                    <!-- ===== دکمه بن کاربر حذف شد ===== -->
+                    <!-- ===== دکمه‌های نقش‌ها ===== -->
+                    <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
+                    <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 مدیر ارشد</button>
 
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
-                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
-                    <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
                         پروفایل
@@ -1852,7 +2210,7 @@
                 </div>
             </div>
 
-            <!-- ===== انتخاب کشور (فوتبال) ===== -->
+            <!-- ===== انتخاب کشور ===== -->
             <div id="countrySelectPage">
                 <div class="country-select-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
@@ -1911,8 +2269,8 @@
             <!-- ===== پنل ادمینی ===== -->
             <div id="adminPanel">
                 <div class="admin-panel-box">
-                    <h2>🔐 پنل مدیریت</h2>
-                    <p style="color: rgba(255,255,255,0.5); font-weight: 500;">به پنل مدیریت خوش آمدید!</p>
+                    <h2>🔐 پنل مدیریت (سوپر ادمین)</h2>
+                    <p style="color: rgba(255,255,255,0.5); font-weight: 500;">دسترسی کامل به تمام قابلیت‌ها</p>
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="gameCount">0</span></li>
@@ -1922,7 +2280,90 @@
                             <span id="adminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
                         </li>
                     </ul>
-                    <!-- بخش بن کاربر حذف شد -->
+
+                    <!-- بخش بن کاربر -->
+                    <div class="ban-section">
+                        <h4>🚫 مدیریت بن</h4>
+                        <div class="ban-search">
+                            <input type="text" id="banSearchInput" placeholder="جستجوی نام کاربری..." />
+                            <button class="search-btn" onclick="searchUsers()">🔍 جستجو</button>
+                        </div>
+                        <div class="ban-list" id="banList"></div>
+                    </div>
+
+                    <!-- بخش کد هدیه -->
+                    <div class="gift-setting">
+                        <h4>🎁 تنظیم کد هدیه</h4>
+                        <div class="gift-row">
+                            <input type="text" id="giftCodeInput" placeholder="کد هدیه" value="1234" />
+                        </div>
+                        <div class="gift-row">
+                            <input type="text" id="giftPrizeInput" placeholder="جایزه" value="۱۰۰ سکه طلا" />
+                            <button class="save-gift-btn" onclick="saveGiftSettings()">💾 ذخیره</button>
+                        </div>
+                        <div class="gift-info">
+                            کد فعلی: <span id="currentGiftCodeDisplay">1234</span> | جایزه: <span id="currentGiftPrizeDisplay">۱۰۰ سکه طلا</span>
+                            <br>
+                            <span style="color:#ff6b6b;">⚠️ کد 877 همیشه خطا است</span>
+                        </div>
+                    </div>
+
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== پنل مود ===== -->
+            <div id="modPanel">
+                <div class="mod-panel-box">
+                    <h2>🛡️ پنل مود</h2>
+                    <div class="online-games">
+                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
+                    </div>
+                    <ul>
+                        <li><span>📊 تعداد کاربران آنلاین</span> <span id="modUserCount">0</span></li>
+                        <li><span>🕹️ بازی‌های فعال</span> <span id="modGameCount2">0</span></li>
+                        <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
+                        <li id="modAdminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
+                            <span style="font-weight:500; color:rgba(255,255,255,0.5);">👤 مدیران</span>
+                            <span id="modAdminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
+                        </li>
+                    </ul>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== پنل مدیر ارشد (آراد تریاکی) ===== -->
+            <div id="moderatorPanel">
+                <div class="moderator-panel-box">
+                    <h2>👑 پنل مدیر ارشد</h2>
+                    <p style="color: rgba(255,255,255,0.4); font-size: 13px;">دسترسی مدیریتی سطح متوسط</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="moderatorUserCount">0</div>
+                            <div class="stat-label">کاربران آنلاین</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="moderatorGameCount">0</div>
+                            <div class="stat-label">بازی‌های فعال</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="moderatorTotalUsers">0</div>
+                            <div class="stat-label">کل کاربران</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="moderatorBannedCount">0</div>
+                            <div class="stat-label">کاربران بن شده</div>
+                        </div>
+                    </div>
+
+                    <div class="support-messages">
+                        <h4>📩 پیام‌های پشتیبانی (فقط خواندن)</h4>
+                        <div class="msg-list" id="moderatorSupportMessages">
+                            <!-- توسط JS پر می‌شود -->
+                        </div>
+                    </div>
+
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -1962,26 +2403,6 @@
                         <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
                         <input type="file" id="avatarInput" accept="image/*" />
                     </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه مود ===== -->
-            <div id="modPage">
-                <div class="mod-panel-box">
-                    <h2>🛡️ پنل مود</h2>
-                    <div class="online-games">
-                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
-                    </div>
-                    <ul>
-                        <li><span>📊 تعداد کاربران آنلاین</span> <span id="modUserCount">0</span></li>
-                        <li><span>🕹️ بازی‌های فعال</span> <span id="modGameCount2">0</span></li>
-                        <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
-                        <li id="modAdminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
-                            <span style="font-weight:500; color:rgba(255,255,255,0.5);">👤 مدیران</span>
-                            <span id="modAdminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
-                        </li>
-                    </ul>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -2026,13 +2447,14 @@
         })();
 
         // ==========================================================
-        //  🟢 اتصال Socket.IO (فقط در پنل ادمین و مود)
+        //  🟢 اتصال Socket.IO
         // ==========================================================
-        const socket = io("https://آدرس-سرور-تو"); // آدرس سرور خود را قرار دهید
+        const socket = io("https://آدرس-سرور-تو");
 
         socket.on("onlineUsers", (count) => {
             document.getElementById("userCount").textContent = count;
             document.getElementById("modUserCount").textContent = count;
+            document.getElementById("moderatorUserCount").textContent = count;
         });
 
         // ==========================================================
@@ -2046,6 +2468,10 @@
             return { code: '1234', prize: '۱۰۰ سکه طلا' };
         }
 
+        function setGiftSettings(code, prize) {
+            localStorage.setItem('giftSettings', JSON.stringify({ code, prize }));
+        }
+
         function getCurrentGiftCode() {
             const settings = getGiftSettings();
             return settings.code || '1234';
@@ -2054,6 +2480,17 @@
         function getCurrentGiftPrize() {
             const settings = getGiftSettings();
             return settings.prize || '۱۰۰ سکه طلا';
+        }
+
+        function saveGiftSettings() {
+            const codeInput = document.getElementById('giftCodeInput');
+            const prizeInput = document.getElementById('giftPrizeInput');
+            const code = codeInput.value.trim() || '1234';
+            const prize = prizeInput.value.trim() || '۱۰۰ سکه طلا';
+            setGiftSettings(code, prize);
+            document.getElementById('currentGiftCodeDisplay').textContent = code;
+            document.getElementById('currentGiftPrizeDisplay').textContent = prize;
+            alert('✅ تنظیمات کد هدیه ذخیره شد!');
         }
 
         function showGiftPage() {
@@ -2122,19 +2559,79 @@
         }
 
         // ==========================================================
+        //  سیستم بن (برای سوپر ادمین)
+        // ==========================================================
+        function getBannedUsers() {
+            try {
+                const data = localStorage.getItem('bannedUsers');
+                return data ? JSON.parse(data) : {};
+            } catch { return {}; }
+        }
+
+        function setBannedUsers(banned) {
+            localStorage.setItem('bannedUsers', JSON.stringify(banned));
+        }
+
+        function isUserBanned(username) {
+            const banned = getBannedUsers();
+            if (banned[username]) {
+                if (Date.now() - banned[username] < 24 * 60 * 60 * 1000) {
+                    return true;
+                } else {
+                    delete banned[username];
+                    setBannedUsers(banned);
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function banUser(username) {
+            const banned = getBannedUsers();
+            banned[username] = Date.now();
+            setBannedUsers(banned);
+            return true;
+        }
+
+        function unbanUser(username) {
+            const banned = getBannedUsers();
+            delete banned[username];
+            setBannedUsers(banned);
+            return true;
+        }
+
+        function getBanRemainingTime(username) {
+            const banned = getBannedUsers();
+            if (banned[username]) {
+                const elapsed = Date.now() - banned[username];
+                const remaining = 24 * 60 * 60 * 1000 - elapsed;
+                if (remaining > 0) {
+                    const hours = Math.floor(remaining / (60 * 60 * 1000));
+                    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                    const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+                    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                return '00:00:00';
+            }
+            return null;
+        }
+
+        // ==========================================================
         //  تنظیم اولیه لیست مدیران
         // ==========================================================
         (function initAdmins() {
-            const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            const defaultAdmins = ["ابوالفضل", "محمد رضا", "آراد تریاکی"];
             let admins = [];
             try {
                 const stored = localStorage.getItem('admins');
                 if (stored) {
                     admins = JSON.parse(stored);
-                    if (!admins.includes("آراد تریاکی")) {
-                        admins.push("آراد تریاکی");
-                        localStorage.setItem('admins', JSON.stringify(admins));
-                    }
+                    defaultAdmins.forEach(u => {
+                        if (!admins.includes(u)) {
+                            admins.push(u);
+                        }
+                    });
+                    localStorage.setItem('admins', JSON.stringify(admins));
                 } else {
                     localStorage.setItem('admins', JSON.stringify(defaultAdmins));
                 }
@@ -2142,17 +2639,6 @@
                 localStorage.setItem('admins', JSON.stringify(defaultAdmins));
             }
         })();
-
-        function getModAllowedUsers() {
-            try {
-                const data = localStorage.getItem('modAllowedUsers');
-                return data ? JSON.parse(data) : ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
-            } catch { return ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; }
-        }
-
-        function setModAllowedUsers(list) {
-            localStorage.setItem('modAllowedUsers', JSON.stringify(list));
-        }
 
         // ==========================================================
         //  مدیریت پروفایل
@@ -2189,21 +2675,33 @@
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
-            const isAdmin = admins.includes(username);
 
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
+            const moderatorBtn = document.getElementById('moderatorBtn');
 
-            if (isAdmin) {
-                adminBtn.style.display = 'inline-block';
-            } else {
-                adminBtn.style.display = 'none';
-            }
+            // همه دکمه‌ها مخفی
+            adminBtn.style.display = 'none';
+            modBtn.style.display = 'none';
+            moderatorBtn.style.display = 'none';
 
-            if (username && username !== '') {
+            if (!username) return;
+
+            // تشخیص نقش کاربر
+            if (username === "ابوالفضل") {
+                adminBtn.style.display = 'inline-block'; // سوپر ادمین
+                modBtn.style.display = 'inline-block';
+                moderatorBtn.style.display = 'inline-block';
+            } else if (username === "محمد رضا") {
+                adminBtn.style.display = 'inline-block'; // ادمین معمولی
+                modBtn.style.display = 'inline-block';
+                moderatorBtn.style.display = 'inline-block';
+            } else if (username === "آراد تریاکی") {
+                moderatorBtn.style.display = 'inline-block'; // فقط مدیر ارشد
                 modBtn.style.display = 'inline-block';
             } else {
-                modBtn.style.display = 'none';
+                // کاربر عادی - فقط مود
+                modBtn.style.display = 'inline-block';
             }
         }
 
@@ -2214,7 +2712,7 @@
             reader.onload = function(event) {
                 const dataUrl = event.target.result;
                 setProfileAvatar(dataUrl);
-                alert('✅ عکس پروفایل با موفقیت آپلود شد!');
+                alert('✅ عکس پروفایل آپلود شد!');
                 loadProfile();
             };
             reader.readAsDataURL(file);
@@ -2228,8 +2726,8 @@
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
-                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
-            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
+                return data ? JSON.parse(data) : ["ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            } catch { return ["ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
         }
 
         function setAdmins(admins) {
@@ -2239,7 +2737,7 @@
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (currentUser !== SUPER_ADMIN) {
-                alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
+                alert('⛔ فقط سوپر ادمین (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
                 return;
             }
             if (adminToRemove === SUPER_ADMIN) {
@@ -2250,31 +2748,7 @@
             admins = admins.filter(a => a !== adminToRemove);
             setAdmins(admins);
             updateAdminPanelUI();
-            updateModPanelUI();
-            alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
-        }
-
-        function removeFromModAllowed(userToRemove) {
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
-            const allowedToRemove = ["محمد رضا", "ابوالفضل"];
-            if (!allowedToRemove.includes(currentUser)) {
-                alert('⛔ شما مجاز به حذف کاربران از پنل مود نیستید!');
-                return;
-            }
-            if (userToRemove === currentUser) {
-                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
-                return;
-            }
-            let modUsers = getModAllowedUsers();
-            if (!modUsers.includes(userToRemove)) {
-                alert('⚠️ این کاربر در لیست مجازین پنل مود نیست.');
-                return;
-            }
-            modUsers = modUsers.filter(u => u !== userToRemove);
-            setModAllowedUsers(modUsers);
-            updateAdminPanelUI();
-            updateModPanelUI();
-            alert(`✅ کاربر "${userToRemove}" از دسترسی به پنل مود حذف شد!`);
+            alert(`✅ ادمین "${adminToRemove}" حذف شد!`);
         }
 
         function updateAdminPanelUI() {
@@ -2284,23 +2758,15 @@
 
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
-            const modAllowed = getModAllowedUsers();
 
             let html = '';
             admins.forEach(admin => {
-                let isMod = modAllowed.includes(admin);
-                let color = admin === "آراد تریاکی" ? '#a78bfa' : '#fff';
+                let color = '#fff';
+                if (admin === "آراد تریاکی") color = '#a78bfa';
+                if (admin === "ابوالفضل") color = '#ff6b6b';
                 html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
                 html += admin;
-                if (admin === "آراد تریاکی" && (currentUser === "محمد رضا" || currentUser === "ابوالفضل")) {
-                    if (isMod) {
-                        html +=
-                            ` <button class="remove-admin-btn" style="background:rgba(255,107,138,0.2);color:#ff6b8a;border:1px solid rgba(255,107,138,0.15);padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;" onclick="removeFromModAllowed('${admin}')">✕</button>`;
-                    } else {
-                        html += ` <span style="color:rgba(255,255,255,0.3);font-size:11px;">(حذف شده)</span>`;
-                    }
-                }
-                if (isSuperAdmin && admin !== SUPER_ADMIN && admin !== "آراد تریاکی") {
+                if (isSuperAdmin && admin !== SUPER_ADMIN) {
                     html +=
                         ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌</button>`;
                 }
@@ -2309,24 +2775,12 @@
             adminListEl.innerHTML = html;
         }
 
-        function updateModPanelUI() {
-            const modAllowed = getModAllowedUsers();
-            const modAdminListEl = document.getElementById('modAdminNamesDisplay');
-            if (!modAdminListEl) return;
-
-            let html = '';
-            modAllowed.forEach(admin => {
-                html += `<span style="color:#a78bfa;margin-left:6px;">${admin}</span>`;
-            });
-            modAdminListEl.innerHTML = html;
-        }
-
         // ==========================================================
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
-            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
-                'countrySelectPage', 'footballGamePage', 'giftPage'
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
+                'modPanel', 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2334,10 +2788,21 @@
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') { loadProfile(); }
-            if (pageId === 'modPage') { updateModPanelUI();
-                updateModStats(); }
-            if (pageId === 'adminPanel') { updateAdminPanelUI();
-                updateAdminStats(); }
+            if (pageId === 'modPanel') { updateModStats(); }
+            if (pageId === 'adminPanel') {
+                updateAdminStats();
+                updateAdminPanelUI();
+                renderBanList();
+                const settings = getGiftSettings();
+                document.getElementById('giftCodeInput').value = settings.code || '1234';
+                document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
+                document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
+                document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
+            }
+            if (pageId === 'moderatorPanel') {
+                updateModeratorStats();
+                renderModeratorSupportMessages();
+            }
             if (pageId === 'countrySelectPage') { renderCountries(); }
             if (pageId === 'giftPage') {
                 const result = document.getElementById('giftResult');
@@ -2353,30 +2818,268 @@
             document.getElementById('modUserCount').textContent = users.length;
             document.getElementById('modGameCount2').textContent = games.length;
             document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
+            // به‌روزرسانی لیست مدیران در پنل مود
+            const admins = getAdmins();
+            const modAdminListEl = document.getElementById('modAdminNamesDisplay');
+            if (modAdminListEl) {
+                let html = '';
+                admins.forEach(a => {
+                    html += `<span style="color:#a78bfa;margin-left:6px;">${a}</span>`;
+                });
+                modAdminListEl.innerHTML = html;
+            }
         }
 
+        function updateModeratorStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            const allUsers = getRegisteredUsernames();
+            const banned = getBannedUsers();
+
+            document.getElementById('moderatorUserCount').textContent = users.length;
+            document.getElementById('moderatorGameCount').textContent = games.length;
+            document.getElementById('moderatorTotalUsers').textContent = allUsers.length;
+            document.getElementById('moderatorBannedCount').textContent = Object.keys(banned).length;
+        }
+
+        function renderModeratorSupportMessages() {
+            const container = document.getElementById('moderatorSupportMessages');
+            if (!container) return;
+
+            const messages = getSupportMessages();
+
+            if (messages.length === 0) {
+                container.innerHTML = `<div class="msg-empty">هیچ پیامی وجود ندارد</div>`;
+                return;
+            }
+
+            const sorted = [...messages].sort((a, b) => b.timestamp - a.timestamp);
+            const latest = sorted.slice(0, 5); // فقط ۵ پیام آخر
+
+            let html = '';
+            latest.forEach(msg => {
+                const date = new Date(msg.timestamp);
+                const dateStr = date.toLocaleDateString('fa-IR') + ' ' + date.toLocaleTimeString('fa-IR', { hour: '2-digit',
+                    minute: '2-digit' });
+
+                html += `
+                    <div class="msg-item">
+                        <div class="msg-from">👤 ${msg.from}</div>
+                        <div class="msg-text">${msg.text}</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2px;">
+                            <span class="msg-time">${dateStr}</span>
+                            <span class="msg-status ${msg.answered ? 'answered' : 'waiting'}">${msg.answered ? '✅ پاسخ داده شده' : '⏳ در انتظار'}</span>
+                        </div>
+                        ${msg.answered && msg.reply ? `<div style="margin-top:4px; font-size:12px; color:rgba(255,255,255,0.5); border-top:1px solid rgba(255,255,255,0.04); padding-top:4px;">💬 پاسخ: ${msg.reply}</div>` : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================================
+        //  سیستم پشتیبانی (برای نمایش در پنل مدیر ارشد)
+        // ==========================================================
+        function getSupportMessages() {
+            try {
+                const data = localStorage.getItem('supportMessages');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function setSupportMessages(messages) {
+            localStorage.setItem('supportMessages', JSON.stringify(messages));
+        }
+
+        function sendSupportMessage() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) { alert('لطفاً وارد شوید!'); return; }
+
+            const input = document.getElementById('supportInput');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) { alert('لطفاً متن پیام را وارد کنید!'); return; }
+
+            const messages = getSupportMessages();
+            const newMsg = {
+                id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+                from: username,
+                text: text,
+                timestamp: Date.now(),
+                answered: false,
+                reply: null,
+                replyTimestamp: null,
+                repliedBy: null
+            };
+            messages.push(newMsg);
+            setSupportMessages(messages);
+
+            input.value = '';
+            alert('✅ پیام شما ارسال شد!');
+        }
+
+        function replyToSupportMessage(msgId) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+            if (!admins.includes(username)) {
+                alert('⛔ فقط ادمین‌ها می‌توانند پاسخ دهند!');
+                return;
+            }
+
+            const replyText = prompt('پاسخ خود را وارد کنید:');
+            if (replyText === null) return;
+            if (!replyText.trim()) { alert('لطفاً متن پاسخ را وارد کنید!'); return; }
+
+            let messages = getSupportMessages();
+            const msgIndex = messages.findIndex(m => m.id === msgId);
+            if (msgIndex === -1) { alert('⚠️ پیام یافت نشد!'); return; }
+
+            messages[msgIndex].answered = true;
+            messages[msgIndex].reply = replyText.trim();
+            messages[msgIndex].replyTimestamp = Date.now();
+            messages[msgIndex].repliedBy = username;
+            setSupportMessages(messages);
+
+            alert('✅ پاسخ شما ارسال شد!');
+        }
+
+        // ==========================================================
+        //  پنل بن (برای سوپر ادمین)
+        // ==========================================================
+        function searchUsers() {
+            renderBanList();
+        }
+
+        function renderBanList() {
+            const container = document.getElementById('banList');
+            if (!container) return;
+
+            const searchInput = document.getElementById('banSearchInput');
+            const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+            const allUsers = getRegisteredUsernames();
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+
+            let filteredUsers = allUsers;
+            if (searchTerm) {
+                filteredUsers = allUsers.filter(u => u.toLowerCase().includes(searchTerm));
+            }
+
+            const banned = getBannedUsers();
+            filteredUsers.sort((a, b) => {
+                const aBanned = !!banned[a];
+                const bBanned = !!banned[b];
+                if (aBanned && !bBanned) return -1;
+                if (!aBanned && bBanned) return 1;
+                return a.localeCompare(b);
+            });
+
+            if (filteredUsers.length === 0) {
+                container.innerHTML = `<div class="ban-empty">هیچ کاربری یافت نشد</div>`;
+                return;
+            }
+
+            let html = '';
+            filteredUsers.forEach(username => {
+                const isBanned = !!banned[username];
+                const isCurrentUser = username === currentUser;
+                const isSuperAdmin = username === "ابوالفضل";
+
+                let canBan = true;
+                if (isCurrentUser) canBan = false;
+                if (isSuperAdmin) canBan = false;
+                if (currentUser !== "ابوالفضل") canBan = false;
+
+                const remaining = isBanned ? getBanRemainingTime(username) : null;
+
+                html += `
+                    <div class="ban-item">
+                        <div class="ban-user">
+                            <span class="ban-flag">${isBanned ? '🚫' : '👤'}</span>
+                            <span class="ban-name">${username}</span>
+                            ${isBanned ? `<span style="font-size:11px; color:#ff6b6b; margin-right:8px;">(${remaining})</span>` : ''}
+                        </div>
+                        ${canBan ? `
+                            <button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}">
+                                ${isBanned ? '✅ آنبَن' : '🚫 بن ۲۴ساعته'}
+                            </button>
+                        ` : `
+                            <span style="font-size:11px; color:rgba(255,255,255,0.3);">غیرقابل بن</span>
+                        `}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function banUserAction(username) {
+            if (!username) return;
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+
+            if (username === currentUser) { alert('⛔ نمی‌توانید خودتان را بن کنید!'); return; }
+            if (username === "ابوالفضل") { alert('⛔ نمی‌توانید سوپر ادمین را بن کنید!'); return; }
+
+            if (confirm(`آیا کاربر "${username}" را به مدت 24 ساعت بن کنید؟`)) {
+                banUser(username);
+                renderBanList();
+                alert(`✅ کاربر "${username}" بن شد.`);
+            }
+        }
+
+        function unbanUserAction(username) {
+            if (!username) return;
+            if (confirm(`آیا بن کاربر "${username}" را لغو کنید؟`)) {
+                unbanUser(username);
+                renderBanList();
+                alert(`✅ بن کاربر "${username}" لغو شد.`);
+            }
+        }
+
+        // ==========================================================
+        //  توابع باز کردن پنل‌ها
+        // ==========================================================
         function openModPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
-            const modAllowed = getModAllowedUsers();
-            if (modAllowed.includes(username)) { showPage('modPage'); } else { alert('⛔ شما دسترسی به پنل مود ندارید!'); }
+            if (!username) { alert('لطفاً وارد شوید!'); return; }
+            // همه کاربران لاگین شده می‌توانند مود باز کنند
+            showPage('modPanel');
+            updateModStats();
         }
 
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            const admins = getAdmins();
-
-            if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
-
-            if (admins.includes(username)) {
+            if (!username) { alert('لطفاً وارد شوید!'); return; }
+            if (username === "ابوالفضل" || username === "محمد رضا") {
                 updateAdminStats();
                 updateAdminPanelUI();
+                renderBanList();
+                const settings = getGiftSettings();
+                document.getElementById('giftCodeInput').value = settings.code || '1234';
+                document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
+                document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
+                document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
                 showPage('adminPanel');
             } else {
-                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
+                alert('⛔ شما دسترسی به پنل ادمین ندارید!');
             }
         }
 
+        function openModeratorPanel() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) { alert('لطفاً وارد شوید!'); return; }
+            if (username === "آراد تریاکی") {
+                updateModeratorStats();
+                renderModeratorSupportMessages();
+                showPage('moderatorPanel');
+            } else {
+                alert('⛔ فقط آراد تریاکی دسترسی به این پنل را دارد!');
+            }
+        }
+
+        // ==========================================================
+        //  سایر توابع (ورود، منو، بازی‌ها، ...)
+        // ==========================================================
         function showRankPage() { showPage('rankPage'); }
 
         function showProfilePage() {
@@ -2421,11 +3124,18 @@
 
             if (username === '') { error.style.display = 'block'; return; }
 
+            if (isUserBanned(username)) {
+                localStorage.setItem('username', username);
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('bannedPage').style.display = 'flex';
+                updateBanTimer();
+                return;
+            }
+
             if (!isUsernameTaken(username)) { addUsername(username); }
 
             error.style.display = 'none';
             currentUsername = username;
-
             localStorage.setItem('username', username);
 
             document.getElementById('loginPage').style.display = 'none';
@@ -2448,6 +3158,13 @@
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
+                if (isUserBanned(saved)) {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('bannedPage').style.display = 'flex';
+                    updateBanTimer();
+                    return;
+                }
+
                 currentUsername = saved;
                 if (!isUsernameTaken(saved)) { addUsername(saved); }
                 document.getElementById('loginPage').style.display = 'none';
@@ -2491,9 +3208,7 @@
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
-
             const isConnected = await checkConnection();
-
             if (isConnected) {
                 loader.style.display = 'none';
                 mainContent.style.display = 'block';
@@ -2510,17 +3225,11 @@
         //  ۴. آمار کاربران و بازی‌ها
         // ==========================================================
         function getOnlineUsers() {
-            try {
-                const data = localStorage.getItem('onlineUsers');
-                return data ? JSON.parse(data) : [];
-            } catch { return []; }
+            try { const data = localStorage.getItem('onlineUsers'); return data ? JSON.parse(data) : []; } catch { return []; }
         }
 
         function getActiveGames() {
-            try {
-                const data = localStorage.getItem('activeGames');
-                return data ? JSON.parse(data) : [];
-            } catch { return []; }
+            try { const data = localStorage.getItem('activeGames'); return data ? JSON.parse(data) : []; } catch { return []; }
         }
 
         function updateAdminStats() {
@@ -2536,7 +3245,6 @@
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
         const timerDisplay = document.getElementById('timerDisplay');
-
         let board = Array(9).fill('');
         let currentPlayer = 'X';
         let gameOver = false;
@@ -2545,7 +3253,6 @@
         let timeLeft = 20;
         const MAX_TIME = 20;
         let gameId = null;
-
         const winPatterns = [
             [0, 1, 2],
             [3, 4, 5],
@@ -2560,19 +3267,16 @@
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                const notes = [
-                    { freq: 523, duration: 0.15 },
-                    { freq: 659, duration: 0.15 },
-                    { freq: 784, duration: 0.15 },
-                    { freq: 1047, duration: 0.25 },
-                ];
+                const notes = [{ freq: 523, duration: 0.15 }, { freq: 659, duration: 0.15 }, { freq: 784,
+                        duration: 0.15 }, { freq: 1047, duration: 0.25 }];
                 notes.forEach((note, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     osc.type = 'square';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.12);
@@ -2596,19 +3300,16 @@
         function playLoseSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                const notes = [
-                    { freq: 500, duration: 0.3 },
-                    { freq: 450, duration: 0.3 },
-                    { freq: 400, duration: 0.3 },
-                    { freq: 350, duration: 0.5 },
-                ];
+                const notes = [{ freq: 500, duration: 0.3 }, { freq: 450, duration: 0.3 }, { freq: 400,
+                    duration: 0.3 }, { freq: 350, duration: 0.5 }];
                 notes.forEach((note, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     osc.type = 'sawtooth';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.25);
@@ -2621,17 +3322,11 @@
             clearTimer();
             timeLeft = MAX_TIME;
             updateTimerDisplay();
-
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateTimerDisplay();
-
-                if (timeLeft <= 5) {
-                    timerDisplay.classList.add('warning');
-                } else {
-                    timerDisplay.classList.remove('warning');
-                }
-
+                if (timeLeft <= 5) { timerDisplay.classList.add('warning'); } else { timerDisplay.classList.remove(
+                        'warning'); }
                 if (timeLeft <= 0) {
                     clearTimer();
                     timerDisplay.classList.remove('warning');
@@ -2639,9 +3334,7 @@
                         statusMsg.textContent = '⏰ زمان شما تمام شد! نوبت ربات...';
                         currentPlayer = 'O';
                         isRobotTurn = true;
-                        setTimeout(() => {
-                            if (!gameOver) robotMove();
-                        }, 300);
+                        setTimeout(() => { if (!gameOver) robotMove(); }, 300);
                     } else if (!gameOver && isRobotTurn && currentPlayer === 'O') {
                         statusMsg.textContent = '⏰ زمان ربات تمام شد! نوبت شما...';
                         currentPlayer = 'X';
@@ -2653,16 +3346,12 @@
         }
 
         function clearTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
+            if (timerInterval) { clearInterval(timerInterval);
+                timerInterval = null; }
             timerDisplay.classList.remove('warning');
         }
 
-        function updateTimerDisplay() {
-            timerDisplay.textContent = '⏱ ' + timeLeft;
-        }
+        function updateTimerDisplay() { timerDisplay.textContent = '⏱ ' + timeLeft; }
 
         function resetTimer() {
             clearTimer();
@@ -2691,9 +3380,7 @@
         function checkWinner() {
             for (let p of winPatterns) {
                 const [a, b, c] = p;
-                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                    return board[a];
-                }
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) { return board[a]; }
             }
             if (board.every(v => v !== '')) return 'draw';
             return null;
@@ -2709,41 +3396,28 @@
                 gameId = null;
                 updateAdminStats();
             }
-
-            if (result === 'X') {
-                playWinSound();
-                statusMsg.textContent = '🎉 شما برنده شدید!';
-            } else if (result === 'O') {
-                playLoseSound();
-                statusMsg.textContent = '🤖 ربات برنده شد!';
-            } else if (result === 'draw') {
-                statusMsg.textContent = '🤝 مساوی!';
-            }
+            if (result === 'X') { playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید!'; } else if (result === 'O') { playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!'; } else if (result === 'draw') { statusMsg.textContent =
+                    '🤝 مساوی!'; }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
         function handleHumanMove(index) {
             if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
-
             board[index] = 'X';
             renderBoard();
             const winner = checkWinner();
             if (winner) { endGame(winner); return; }
-
             currentPlayer = 'O';
             isRobotTurn = true;
             statusMsg.textContent = '🤖 ربات در حال فکر...';
             clearTimer();
-            setTimeout(() => {
-                if (!gameOver) {
-                    robotMove();
-                }
-            }, 500);
+            setTimeout(() => { if (!gameOver) { robotMove(); } }, 500);
         }
 
         function robotMove() {
             if (gameOver) { isRobotTurn = false; return; }
-
             for (let i = 0; i < 9; i++) {
                 if (board[i] === '') {
                     board[i] = 'O';
@@ -2774,7 +3448,6 @@
             const winner = checkWinner();
             if (winner) { endGame(winner);
                 isRobotTurn = false; return; }
-
             currentPlayer = 'X';
             isRobotTurn = false;
             statusMsg.textContent = 'نوبت شما (X)';
@@ -2786,7 +3459,6 @@
             gameOver = false;
             currentPlayer = 'X';
             isRobotTurn = false;
-
             gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
             let games = getActiveGames();
             if (!games.includes(gameId)) {
@@ -2794,7 +3466,6 @@
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 updateAdminStats();
             }
-
             renderBoard();
             statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
             clearTimer();
@@ -2816,9 +3487,8 @@
         }
 
         // ==========================================================
-        //  ۶. بازی فوتبال کشوری
+        //  ۶. بازی فوتبال کشوری (کد کامل)
         // ==========================================================
-
         const countries = [
             { name: 'ایران', flag: '🇮🇷' },
             { name: 'آلمان', flag: '🇩🇪' },
@@ -3246,8 +3916,12 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با بازی فوتبال کشوری و کد هدیه آماده است!');
+        console.log('❄️ برفی با سیستم مدیریت سه‌سطحی آماده است!');
+        console.log('👑 سوپر ادمین: ابوالفضل');
+        console.log('🛡️ ادمین: محمد رضا');
+        console.log('⭐ مدیر ارشد: آراد تریاکی');
     </script>
+
 </body>
 </html>
 ```
