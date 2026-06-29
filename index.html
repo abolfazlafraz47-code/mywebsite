@@ -86,12 +86,13 @@
             z-index: 1;
         }
 
+        /* ===== هدر ===== */
         .main-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding: 12px 18px;
+            padding: 12px 18px 12px 18px;
             color: white;
             margin-bottom: 18px;
             flex-wrap: wrap;
@@ -102,6 +103,11 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .main-header:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 40px rgba(0, 100, 255, 0.15);
         }
         .main-header .site-title {
             font-size: 22px;
@@ -109,6 +115,8 @@
             background: linear-gradient(135deg, #64d8ff, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -130,6 +138,7 @@
             border-radius: 30px;
             white-space: nowrap;
             border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
             color: #e0f0ff;
         }
         .main-header .header-btn {
@@ -150,6 +159,7 @@
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 4px 20px rgba(100, 200, 255, 0.2);
+            border-color: rgba(100, 200, 255, 0.3);
         }
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
@@ -188,6 +198,7 @@
         .main-header .profile-btn:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px) scale(1.05);
+            border-color: rgba(100, 200, 255, 0.3);
         }
         .main-header .profile-btn .avatar {
             width: 26px;
@@ -219,6 +230,7 @@
             box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
         }
 
+        /* ===== صفحات با افکت شیشه‌ای ===== */
         #loginPage,
         #loader,
         #errorPage,
@@ -240,6 +252,7 @@
             transition: all 0.4s ease;
         }
 
+        /* ===== صفحه ورود ===== */
         #loginPage {
             display: flex;
             flex-direction: column;
@@ -354,6 +367,7 @@
             font-weight: 500;
         }
 
+        /* ===== صفحه لودینگ ===== */
         #loader {
             display: none;
             flex-direction: column;
@@ -419,6 +433,7 @@
             font-size: 14px;
         }
 
+        /* ===== صفحه خطا ===== */
         #errorPage {
             display: none;
             flex-direction: column;
@@ -460,11 +475,13 @@
             box-shadow: 0 8px 40px rgba(79, 172, 254, 0.5);
         }
 
+        /* ===== محتوای اصلی ===== */
         #mainContent {
             display: none;
             width: 100%;
         }
 
+        /* ===== صفحات داخلی ===== */
         #homePage,
         #menuPage,
         #gamePage,
@@ -529,6 +546,7 @@
             box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
         }
 
+        /* ===== منو ===== */
         .menu-box {
             padding: 40px 28px;
             width: 100%;
@@ -561,6 +579,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== بازی دوز ===== */
         .game-container {
             padding: 24px 20px 28px;
             width: 100%;
@@ -578,6 +597,7 @@
             background: radial-gradient(circle, rgba(100, 200, 255, 0.03), transparent 70%);
             pointer-events: none;
         }
+
         .back-btn {
             position: absolute;
             top: 14px;
@@ -599,6 +619,7 @@
             color: #fff;
             transform: scale(1.05);
         }
+
         .game-container h3 {
             text-align: center;
             margin-top: 4px;
@@ -609,6 +630,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .timer-container {
             text-align: center;
             margin: 4px 0 8px 0;
@@ -642,6 +664,7 @@
                 transform: scale(1.08);
             }
         }
+
         .game-status {
             font-size: 17px;
             margin: 6px 0 12px 0;
@@ -650,6 +673,7 @@
             color: rgba(255, 255, 255, 0.8);
             min-height: 28px;
         }
+
         .board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -657,6 +681,7 @@
             margin: 8px auto 14px;
             max-width: 280px;
         }
+
         .cell {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
@@ -709,6 +734,7 @@
         .cell.taken.o {
             background: rgba(240, 147, 251, 0.06);
         }
+
         .reset-btn {
             background: rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.7);
@@ -731,6 +757,7 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== پنل ادمینی ===== */
         .admin-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -807,6 +834,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== صفحه رنک ===== */
         .rank-box {
             padding: 32px 20px;
             width: 100%;
@@ -878,6 +906,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== پروفایل ===== */
         .profile-box {
             padding: 32px 24px;
             width: 100%;
@@ -951,6 +980,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== صفحه مود ===== */
         .mod-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -1118,20 +1148,20 @@
 
         /* ===== بازی فوتبال ===== */
         .football-game-box {
-            padding: 16px 12px 20px;
+            padding: 20px 16px 24px;
             width: 100%;
             position: relative;
         }
         .football-game-box .back-btn {
             position: absolute;
-            top: 10px;
-            right: 12px;
+            top: 14px;
+            right: 16px;
             background: rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 10px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -1143,95 +1173,84 @@
             color: #fff;
             transform: scale(1.05);
         }
-        .football-game-box .game-header {
+        .football-game-box h3 {
             text-align: center;
-            margin-top: 6px;
-            margin-bottom: 4px;
-        }
-        .football-game-box .game-header h3 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             background: linear-gradient(135deg, #64d8ff, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+            margin-top: 6px;
         }
-        .football-game-box .game-header .turn-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffd700;
-            margin-top: 2px;
-        }
-
-        /* Scoreboard مانند تصویر */
-        .scoreboard {
+        .football-game-box .game-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding: 8px 12px;
-            margin: 6px 0 8px 0;
-            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 8px;
+            margin: 4px 0 8px 0;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+            gap: 4px;
         }
-        .scoreboard .team-info {
+        .football-game-box .game-info .team {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 2px;
-        }
-        .scoreboard .team-info .flag {
-            font-size: 28px;
-        }
-        .scoreboard .team-info .name {
-            font-size: 11px;
-            font-weight: 700;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
             color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-        .scoreboard .team-info .label {
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 500;
+        .football-game-box .game-info .team .flag {
+            font-size: 22px;
         }
-        .scoreboard .score-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .football-game-box .game-info .team .name {
+            font-size: 13px;
         }
-        .scoreboard .score-center .score {
-            font-size: 28px;
-            font-weight: 900;
+        .football-game-box .game-info .score {
+            font-size: 18px;
+            font-weight: 800;
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.08);
+            padding: 2px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
         }
-        .scoreboard .score-center .goals-label {
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.3);
+        .football-game-box .game-status {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
             font-weight: 500;
-            letter-spacing: 0.5px;
         }
-        .scoreboard .team-info.active {
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 2px;
+        .football-game-box .turn-indicator {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 8px;
+            padding: 4px 12px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 30px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* زمین فوتبال */
-        .pitch-container {
-            position: relative;
-            width: 100%;
-            max-width: 340px;
-            margin: 4px auto;
-        }
         .pitch {
             width: 100%;
-            aspect-ratio: 1/1;
+            max-width: 320px;
+            height: 320px;
             background: radial-gradient(ellipse at center, #1a7a3a, #0d4a22);
             border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.08);
+            border: 4px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), inset 0 0 60px rgba(0, 0, 0, 0.2);
+            margin: 4px auto;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.3), inset 0 0 80px rgba(0, 0, 0, 0.2);
             touch-action: none;
             cursor: grab;
             overflow: hidden;
@@ -1244,31 +1263,30 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 25%;
-            height: 25%;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            border: 1.5px dashed rgba(255, 255, 255, 0.08);
+            border: 2px dashed rgba(255, 255, 255, 0.12);
         }
         .pitch-center-line {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 1.5px;
+            width: 2px;
             height: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
-
         /* دروازه‌ها */
-        .goal {
+        .goal-left, .goal-right {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 8px;
-            height: 30%;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 3px;
-            opacity: 0.5;
+            width: 10px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            opacity: 0.6;
         }
         .goal-left {
             left: -2px;
@@ -1280,14 +1298,36 @@
             border-left: none;
             border-radius: 0 4px 4px 0;
         }
+        .goal-left::before, .goal-right::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+        .goal-left::after, .goal-right::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
 
         .ball {
             position: absolute;
-            width: 11%;
-            height: 11%;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #fff, #ddd);
-            border: 1.5px solid #bbb;
+            border: 2px solid #bbb;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 -4px 8px rgba(0,0,0,0.1);
             transform: translate(-50%, -50%);
             transition: none;
@@ -1295,15 +1335,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60%;
+            font-size: 18px;
             font-weight: 900;
             color: #333;
             user-select: none;
             touch-action: none;
-            cursor: grab;
         }
-        .ball:active {
-            cursor: grabbing;
+        .ball .country-flag {
+            font-size: 20px;
+            line-height: 1;
         }
 
         .goal-message {
@@ -1311,104 +1351,235 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.88);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(12px);
-            padding: 16px 22px;
-            border-radius: 18px;
+            padding: 18px 24px;
+            border-radius: 20px;
             border: 2px solid #ffd700;
             color: #ffd700;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 900;
             z-index: 10;
             text-align: center;
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.2);
             display: none;
-            min-width: 140px;
+            min-width: 160px;
         }
         .goal-message .sub {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
             margin-top: 4px;
         }
         .goal-message .reset-game-btn {
             margin-top: 10px;
-            background: rgba(255, 215, 0, 0.12);
+            background: rgba(255, 215, 0, 0.15);
             color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            padding: 5px 18px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 6px 20px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: none;
         }
         .goal-message .reset-game-btn:hover {
-            background: rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.25);
             transform: scale(1.05);
-        }
-
-        .football-status {
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 4px;
-            font-weight: 500;
-            min-height: 20px;
         }
 
         /* ===== واکنش‌گرایی ===== */
         @media(max-width: 480px) {
-            body { padding: 12px; }
-            .page-container { max-width: 100%; }
-            .main-header { padding: 10px 14px; border-radius: 16px; }
-            .main-header .site-title { font-size: 18px; }
-            .main-header .user-name { font-size: 12px; padding: 3px 10px; }
-            .main-header .header-btn { font-size: 10px; padding: 3px 10px; }
-            .main-header .admin-btn { font-size: 10px; padding: 3px 10px; }
-            .main-header .profile-btn { font-size: 10px; padding: 3px 10px 3px 6px; }
-            .main-header .profile-btn .avatar { width: 22px; height: 22px; }
-            .main-header .mod-btn { font-size: 10px; padding: 3px 10px; }
-            #loginPage { padding: 30px 20px; min-height: 320px; }
-            #loginPage h1 { font-size: 32px; }
-            .box { padding: 24px 18px; }
-            .menu-box { padding: 28px 18px; }
-            .menu-box button { width: 100%; font-size: 17px; }
-            .game-container { padding: 18px 14px 22px; }
-            .board { gap: 8px; max-width: 240px; }
-            .cell { font-size: 38px; border-radius: 12px; }
-            .timer { font-size: 22px; padding: 3px 16px; min-width: 70px; }
-            .game-status { font-size: 15px; }
-            .profile-box .avatar-upload .avatar-preview { width: 90px; height: 90px; }
-            .rank-box .rubika-btn { font-size: 10px; padding: 3px 10px; top: 10px; left: 10px; }
-            .admin-panel-box, .rank-box, .profile-box, .mod-panel-box,
-            .country-select-box, .football-game-box { padding: 14px 10px; }
-            .country-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .country-btn { font-size: 14px; padding: 10px 4px; }
-            .country-btn .flag { font-size: 26px; }
-            .scoreboard .team-info .flag { font-size: 22px; }
-            .scoreboard .team-info .name { font-size: 10px; }
-            .scoreboard .score-center .score { font-size: 22px; }
-            .football-game-box .game-header h3 { font-size: 17px; }
-            .goal-message { font-size: 18px; padding: 12px 16px; min-width: 120px; }
-            .goal-message .sub { font-size: 11px; }
+            body {
+                padding: 12px;
+            }
+            .page-container {
+                max-width: 100%;
+            }
+            .main-header {
+                padding: 10px 14px;
+                border-radius: 16px;
+            }
+            .main-header .site-title {
+                font-size: 18px;
+            }
+            .main-header .user-name {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+            .main-header .header-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            .main-header .admin-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            .main-header .profile-btn {
+                font-size: 10px;
+                padding: 3px 10px 3px 6px;
+            }
+            .main-header .profile-btn .avatar {
+                width: 22px;
+                height: 22px;
+            }
+            .main-header .mod-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            #loginPage {
+                padding: 30px 20px;
+                min-height: 320px;
+            }
+            #loginPage h1 {
+                font-size: 32px;
+            }
+            .box {
+                padding: 24px 18px;
+            }
+            .menu-box {
+                padding: 28px 18px;
+            }
+            .menu-box button {
+                width: 100%;
+                font-size: 17px;
+            }
+            .game-container {
+                padding: 18px 14px 22px;
+            }
+            .board {
+                gap: 8px;
+                max-width: 240px;
+            }
+            .cell {
+                font-size: 38px;
+                border-radius: 12px;
+            }
+            .timer {
+                font-size: 22px;
+                padding: 3px 16px;
+                min-width: 70px;
+            }
+            .game-status {
+                font-size: 15px;
+            }
+            .profile-box .avatar-upload .avatar-preview {
+                width: 90px;
+                height: 90px;
+            }
+            .rank-box .rubika-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+                top: 10px;
+                left: 10px;
+            }
+            .admin-panel-box,
+            .rank-box,
+            .profile-box,
+            .mod-panel-box,
+            .country-select-box,
+            .football-game-box {
+                padding: 16px 12px;
+            }
+            .country-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .country-btn {
+                font-size: 14px;
+                padding: 10px 4px;
+            }
+            .country-btn .flag {
+                font-size: 26px;
+            }
+            .pitch {
+                height: 260px;
+                max-width: 260px;
+            }
+            .ball {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            .ball .country-flag {
+                font-size: 16px;
+            }
+            .football-game-box .game-info .team .flag {
+                font-size: 18px;
+            }
+            .football-game-box .game-info .team .name {
+                font-size: 11px;
+            }
+            .football-game-box .game-info .score {
+                font-size: 15px;
+                padding: 2px 10px;
+            }
+            .goal-left, .goal-right {
+                height: 40px;
+                width: 8px;
+            }
         }
         @media(max-width: 380px) {
-            .main-header .site-title { font-size: 15px; }
-            .main-header .user-name { font-size: 10px; padding: 2px 8px; }
-            .main-header .header-btn { font-size: 9px; padding: 2px 8px; }
-            .main-header .admin-btn { font-size: 9px; padding: 2px 8px; }
-            .main-header .profile-btn { font-size: 9px; padding: 2px 8px 2px 4px; }
-            .main-header .profile-btn .avatar { width: 18px; height: 18px; }
-            .main-header .mod-btn { font-size: 9px; padding: 2px 8px; }
-            .board { gap: 6px; max-width: 200px; }
-            .cell { font-size: 30px; border-radius: 10px; }
-            #loginPage h1 { font-size: 26px; }
-            .timer { font-size: 18px; padding: 2px 12px; min-width: 60px; }
-            .scoreboard .team-info .flag { font-size: 18px; }
-            .scoreboard .score-center .score { font-size: 18px; }
-            .football-game-box .game-header h3 { font-size: 15px; }
+            .main-header .site-title {
+                font-size: 15px;
+            }
+            .main-header .user-name {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            .main-header .header-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .admin-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .profile-btn {
+                font-size: 9px;
+                padding: 2px 8px 2px 4px;
+            }
+            .main-header .profile-btn .avatar {
+                width: 18px;
+                height: 18px;
+            }
+            .main-header .mod-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .board {
+                gap: 6px;
+                max-width: 200px;
+            }
+            .cell {
+                font-size: 30px;
+                border-radius: 10px;
+            }
+            #loginPage h1 {
+                font-size: 26px;
+            }
+            .timer {
+                font-size: 18px;
+                padding: 2px 12px;
+                min-width: 60px;
+            }
+            .pitch {
+                height: 200px;
+                max-width: 200px;
+            }
+            .ball {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            .ball .country-flag {
+                font-size: 12px;
+            }
+            .goal-left, .goal-right {
+                height: 32px;
+                width: 6px;
+            }
         }
     </style>
 </head>
@@ -1453,7 +1624,9 @@
             <div class="main-header">
                 <div class="site-title">❄️ <span>برفی</span></div>
                 <div class="header-left">
-                    <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
+                    <div class="user-name">
+                        👤 <span id="displayUsername">کاربر</span>
+                    </div>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
@@ -1479,7 +1652,7 @@
                     <h2>🎮 بازی‌ها</h2>
                     <button onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
                     <br>
-                    <button onclick="goToCountrySelect()" style="background: linear-gradient(135deg, #ffd700, #f093fb); color: #1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
+                    <button onclick="goToCountrySelect()" style="background: linear-gradient(135deg, #ffd700, #f093fb); color: #1a1a3a;">⚽ ورود به بازی فوتبال کشوری آفلاین</button>
                     <br><br>
                     <button class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1504,60 +1677,48 @@
                 <div class="country-select-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🌍 انتخاب کشور</h2>
-                    <p>کشور خود را برای بازی انتخاب کنید</p>
+                    <p>کشور خود را برای بازی فوتبال انتخاب کنید</p>
                     <div class="country-grid" id="countryGrid"></div>
                     <button class="start-game-btn" id="startFootballBtn" onclick="startFootballGame()" disabled>⚽ شروع بازی</button>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
-            <!-- ===== بازی فوتبال ===== -->
+            <!-- ===== بازی فوتبال کشوری ===== -->
             <div id="footballGamePage">
                 <div class="football-game-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h3>⚽ فوتبال کشوری</h3>
 
-                    <div class="game-header">
-                        <h3>⚽ فوتبال کشوری</h3>
-                        <div class="turn-text" id="turnText">🎯 Your Turn</div>
-                    </div>
-
-                    <!-- Scoreboard مانند تصویر -->
-                    <div class="scoreboard">
-                        <div class="team-info" id="playerTeam">
+                    <div class="game-info">
+                        <div class="team">
                             <span class="flag" id="playerFlag">🇮🇷</span>
-                            <span class="name" id="playerName">IRAN</span>
-                            <span class="label">My Team</span>
+                            <span class="name" id="playerName">شما</span>
                         </div>
-                        <div class="score-center">
-                            <span class="score" id="scoreDisplay">0 - 0</span>
-                            <span class="goals-label">Goals to Win: 3</span>
-                        </div>
-                        <div class="team-info" id="robotTeam">
-                            <span class="flag" id="robotFlag">🇯🇵</span>
-                            <span class="name" id="robotName">JAPAN</span>
-                            <span class="label">Opponent</span>
+                        <div class="score" id="scoreDisplay">0 - 0</div>
+                        <div class="team">
+                            <span class="flag" id="robotFlag">🇩🇪</span>
+                            <span class="name" id="robotName">ربات</span>
                         </div>
                     </div>
 
-                    <!-- زمین -->
-                    <div class="pitch-container">
-                        <div class="pitch" id="pitch">
-                            <div class="pitch-center-circle"></div>
-                            <div class="pitch-center-line"></div>
-                            <div class="goal goal-left"></div>
-                            <div class="goal goal-right"></div>
-                            <div class="ball" id="ball">
-                                <span class="country-flag" id="ballFlag">⚽</span>
-                            </div>
-                            <div class="goal-message" id="goalMessage">
-                                <div id="goalText">🎉 گل!</div>
-                                <div class="sub" id="goalSub">تبریک!</div>
-                                <button class="reset-game-btn" onclick="resetFootballGame()">🔄 بازی جدید</button>
-                            </div>
+                    <div class="game-status" id="footballStatus">⏳ در حال آماده‌سازی...</div>
+                    <div class="turn-indicator" id="turnIndicator">🎯 نوبت: شما</div>
+
+                    <div class="pitch" id="pitch">
+                        <div class="pitch-center-circle"></div>
+                        <div class="pitch-center-line"></div>
+                        <div class="goal-left"></div>
+                        <div class="goal-right"></div>
+                        <div class="ball" id="ball">
+                            <span class="country-flag" id="ballFlag">⚽</span>
+                        </div>
+                        <div class="goal-message" id="goalMessage">
+                            <div id="goalText">🎉 گل!</div>
+                            <div class="sub" id="goalSub">تبریک!</div>
+                            <button class="reset-game-btn" onclick="resetFootballGame()">🔄 بازی جدید</button>
                         </div>
                     </div>
-
-                    <div class="football-status" id="footballStatus">👆 توپ را بکشید تا حرکت کند</div>
                 </div>
             </div>
 
@@ -1579,7 +1740,7 @@
                 </div>
             </div>
 
-            <!-- ===== صفحه رنک ===== -->
+            <!-- ===== صفحه رنک ها ===== -->
             <div id="rankPage">
                 <div class="rank-box">
                     <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
@@ -1661,14 +1822,24 @@
         //  مدیریت نام‌های کاربری
         // ==========================================================
         function getRegisteredUsernames() {
-            try { const data = localStorage.getItem('registeredUsernames'); return data ? JSON.parse(data) : []; } catch { return []; }
+            try {
+                const data = localStorage.getItem('registeredUsernames');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
         }
-        function setRegisteredUsernames(list) { localStorage.setItem('registeredUsernames', JSON.stringify(list)); }
+
+        function setRegisteredUsernames(list) {
+            localStorage.setItem('registeredUsernames', JSON.stringify(list));
+        }
+
         function addUsername(username) {
             const list = getRegisteredUsernames();
-            if (!list.includes(username)) { list.push(username);
-                setRegisteredUsernames(list); }
+            if (!list.includes(username)) {
+                list.push(username);
+                setRegisteredUsernames(list);
+            }
         }
+
         function isUsernameTaken(username) {
             const list = getRegisteredUsernames();
             return list.includes(username);
@@ -1696,17 +1867,29 @@
             }
         })();
 
+        // ==========================================================
+        //  لیست کاربران مجاز برای پنل مود
+        // ==========================================================
         function getModAllowedUsers() {
-            try { const data = localStorage.getItem('modAllowedUsers'); return data ? JSON.parse(data) : ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; } catch { return ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; }
+            try {
+                const data = localStorage.getItem('modAllowedUsers');
+                return data ? JSON.parse(data) : ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
+            } catch { return ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; }
         }
-        function setModAllowedUsers(list) { localStorage.setItem('modAllowedUsers', JSON.stringify(list)); }
+
+        function setModAllowedUsers(list) {
+            localStorage.setItem('modAllowedUsers', JSON.stringify(list));
+        }
 
         // ==========================================================
         //  مدیریت پروفایل
         // ==========================================================
         function getProfileAvatar() {
-            try { return localStorage.getItem('profileAvatar') || ''; } catch { return ''; }
+            try {
+                return localStorage.getItem('profileAvatar') || '';
+            } catch { return ''; }
         }
+
         function setProfileAvatar(dataUrl) {
             localStorage.setItem('profileAvatar', dataUrl);
             updateAvatarUI(dataUrl);
@@ -1716,8 +1899,12 @@
             const preview = document.getElementById('avatarPreview');
             const headerAvatar = document.getElementById('headerAvatar');
             const defaultAvatar = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
-            if (preview) { preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar; }
-            if (headerAvatar) { headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar; }
+            if (preview) {
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+            }
+            if (headerAvatar) {
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : defaultAvatar;
+            }
         }
 
         function loadProfile() {
@@ -1726,6 +1913,9 @@
             updateButtonsVisibility();
         }
 
+        // ==========================================================
+        //  نمایش/مخفی کردن دکمه‌ها
+        // ==========================================================
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
@@ -1733,7 +1923,8 @@
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
             if (isAdmin) { adminBtn.style.display = 'inline-block'; } else { adminBtn.style.display = 'none'; }
-            if (username && username !== '') { modBtn.style.display = 'inline-block'; } else { modBtn.style.display = 'none'; }
+            if (username && username !== '') { modBtn.style.display = 'inline-block'; } else { modBtn.style.display =
+                'none'; }
         }
 
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
@@ -1755,14 +1946,26 @@
         const SUPER_ADMIN = "ابوالفضل";
 
         function getAdmins() {
-            try { const data = localStorage.getItem('admins'); return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
+            try {
+                const data = localStorage.getItem('admins');
+                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
         }
-        function setAdmins(admins) { localStorage.setItem('admins', JSON.stringify(admins)); }
+
+        function setAdmins(admins) {
+            localStorage.setItem('admins', JSON.stringify(admins));
+        }
 
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
-            if (currentUser !== SUPER_ADMIN) { alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!'); return; }
-            if (adminToRemove === SUPER_ADMIN) { alert('⛔ نمی‌توانید خودتان را حذف کنید!'); return; }
+            if (currentUser !== SUPER_ADMIN) {
+                alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
+                return;
+            }
+            if (adminToRemove === SUPER_ADMIN) {
+                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
+                return;
+            }
             let admins = getAdmins();
             admins = admins.filter(a => a !== adminToRemove);
             setAdmins(admins);
@@ -1774,10 +1977,19 @@
         function removeFromModAllowed(userToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const allowedToRemove = ["محمد رضا", "ابوالفضل"];
-            if (!allowedToRemove.includes(currentUser)) { alert('⛔ شما مجاز به حذف کاربران از پنل مود نیستید!'); return; }
-            if (userToRemove === currentUser) { alert('⛔ نمی‌توانید خودتان را حذف کنید!'); return; }
+            if (!allowedToRemove.includes(currentUser)) {
+                alert('⛔ شما مجاز به حذف کاربران از پنل مود نیستید!');
+                return;
+            }
+            if (userToRemove === currentUser) {
+                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
+                return;
+            }
             let modUsers = getModAllowedUsers();
-            if (!modUsers.includes(userToRemove)) { alert('⚠️ این کاربر در لیست مجازین پنل مود نیست.'); return; }
+            if (!modUsers.includes(userToRemove)) {
+                alert('⚠️ این کاربر در لیست مجازین پنل مود نیست.');
+                return;
+            }
             modUsers = modUsers.filter(u => u !== userToRemove);
             setModAllowedUsers(modUsers);
             updateAdminPanelUI();
@@ -1820,7 +2032,9 @@
             const modAdminListEl = document.getElementById('modAdminNamesDisplay');
             if (!modAdminListEl) return;
             let html = '';
-            modAllowed.forEach(admin => { html += `<span style="color:#a78bfa;margin-left:6px;">${admin}</span>`; });
+            modAllowed.forEach(admin => {
+                html += `<span style="color:#a78bfa;margin-left:6px;">${admin}</span>`;
+            });
             modAdminListEl.innerHTML = html;
         }
 
@@ -1831,7 +2045,10 @@
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
                 'countrySelectPage', 'footballGamePage'
             ];
-            pages.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') { loadProfile(); }
             if (pageId === 'modPage') { updateModPanelUI();
@@ -2274,10 +2491,12 @@
             isDragging: false,
             dragStartX: 0,
             dragStartY: 0,
-            hasStarted: false,
-            isSpinning: false
+            dragCurrentX: 0,
+            dragCurrentY: 0,
+            hasStarted: false
         };
 
+        // متغیرهای برای مدیریت رویدادهای کشیدن
         let dragHandlers = {
             onStart: null,
             onMove: null,
@@ -2318,6 +2537,7 @@
         function startFootballGame() {
             if (!selectedCountry) return;
 
+            // انتخاب تصادفی کشور برای ربات (متفاوت از کاربر)
             let robotCountry;
             do {
                 robotCountry = countries[Math.floor(Math.random() * countries.length)];
@@ -2334,11 +2554,11 @@
             footballState.isGameOver = false;
             footballState.hasStarted = true;
 
-            // به‌روزرسانی Scoreboard
+            // نمایش در صفحه
             document.getElementById('playerFlag').textContent = selectedCountry.flag;
-            document.getElementById('playerName').textContent = selectedCountry.name.toUpperCase();
+            document.getElementById('playerName').textContent = 'شما';
             document.getElementById('robotFlag').textContent = robotCountry.flag;
-            document.getElementById('robotName').textContent = robotCountry.name.toUpperCase();
+            document.getElementById('robotName').textContent = 'ربات';
             updateScoreDisplay();
 
             // تنظیم توپ با کشور کاربر
@@ -2348,16 +2568,15 @@
             ball.style.left = '50%';
             ball.style.top = '50%';
 
+            // مخفی کردن پیام گل
             document.getElementById('goalMessage').style.display = 'none';
-            document.getElementById('footballStatus').textContent = '👆 توپ را بکشید تا حرکت کند';
-            document.getElementById('turnText').textContent = '🎯 Your Turn';
-            document.getElementById('turnText').style.color = '#ffd700';
+            document.getElementById('footballStatus').textContent = '🎯 بازی شروع شد! نوبت شما';
+            document.getElementById('turnIndicator').textContent = '🎯 نوبت: شما';
+            document.getElementById('turnIndicator').style.color = '#ffd700';
 
-            // هایلایت تیم فعال
-            document.getElementById('playerTeam').classList.add('active');
-            document.getElementById('robotTeam').classList.remove('active');
-
+            // فعال کردن کشیدن توپ برای کاربر
             enableBallDrag();
+
             showPage('footballGamePage');
         }
 
@@ -2370,6 +2589,7 @@
             const ball = document.getElementById('ball');
             const pitch = document.getElementById('pitch');
 
+            // غیرفعال کردن کشیدن قبلی
             disableBallDrag();
 
             ball.style.cursor = 'grab';
@@ -2386,14 +2606,19 @@
                 footballState.dragStartY = clientY;
                 ball.style.cursor = 'grabbing';
                 pitch.style.cursor = 'grabbing';
+
+                // ایجاد فلش راهنما
                 createArrow(clientX, clientY);
             };
 
             const onMove = (e) => {
                 if (!footballState.isDragging || footballState.isGameOver || footballState.turn !== 'player') return;
                 e.preventDefault();
+                const rect = pitch.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                // به‌روزرسانی فلش
                 updateArrow(clientX, clientY);
             };
 
@@ -2402,17 +2627,22 @@
                 footballState.isDragging = false;
                 ball.style.cursor = 'grab';
                 pitch.style.cursor = 'grab';
+
+                // حذف فلش
                 removeArrow();
 
+                // محاسبه جابجایی برای حرکت توپ
                 const rect = pitch.getBoundingClientRect();
                 const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
                 const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
 
                 const dx = (clientX - footballState.dragStartX) / rect.width * 100;
                 const dy = (clientY - footballState.dragStartY) / rect.height * 100;
-                const distance = Math.sqrt(dx * dx + dy * dy);
 
+                // اگر جابجایی کافی بود، توپ حرکت کنه
+                const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance > 2) {
+                    // حرکت توپ به سمت جهت کشیدن
                     const newX = Math.min(Math.max(footballState.ballX + dx * 1.2, 5), 95);
                     const newY = Math.min(Math.max(footballState.ballY + dy * 1.2, 5), 95);
 
@@ -2423,19 +2653,20 @@
                     ballEl.style.left = newX + '%';
                     ballEl.style.top = newY + '%';
 
+                    // بررسی گل
                     checkGoal();
 
+                    // اگر گل نشد، نوبت ربات
                     if (!footballState.isGameOver && footballState.turn === 'player') {
                         footballState.turn = 'robot';
-                        document.getElementById('turnText').textContent = '🤖 Robot Turn';
-                        document.getElementById('turnText').style.color = '#f093fb';
-                        document.getElementById('playerTeam').classList.remove('active');
-                        document.getElementById('robotTeam').classList.add('active');
+                        document.getElementById('turnIndicator').textContent = '🤖 نوبت: ربات';
+                        document.getElementById('turnIndicator').style.color = '#f093fb';
                         document.getElementById('footballStatus').textContent = '🤖 نوبت ربات...';
 
                         setTimeout(() => robotMoveBall(), 800);
                     }
                 } else {
+                    // جابجایی کم، پیام خطا
                     document.getElementById('footballStatus').textContent = '👆 بیشتر بکشید!';
                     setTimeout(() => {
                         if (!footballState.isGameOver) {
@@ -2445,18 +2676,23 @@
                 }
             };
 
+            // ذخیره توابع برای پاکسازی
             dragHandlers.onStart = onStart;
             dragHandlers.onMove = onMove;
             dragHandlers.onEnd = onEnd;
 
+            // رویدادهای ماوس
             ball.addEventListener('mousedown', onStart);
             document.addEventListener('mousemove', onMove);
             document.addEventListener('mouseup', onEnd);
+
+            // رویدادهای لمسی
             ball.addEventListener('touchstart', onStart, { passive: false });
             document.addEventListener('touchmove', onMove, { passive: false });
             document.addEventListener('touchend', onEnd, { passive: false });
         }
 
+        // فلش راهنما
         let arrowElement = null;
         let arrowStartX = 0;
         let arrowStartY = 0;
@@ -2470,12 +2706,13 @@
             arrowElement.style.position = 'absolute';
             arrowElement.style.pointerEvents = 'none';
             arrowElement.style.zIndex = '6';
-            arrowElement.style.fontSize = '28px';
+            arrowElement.style.fontSize = '30px';
             arrowElement.style.color = '#ffd700';
-            arrowElement.style.textShadow = '0 0 20px rgba(255,215,0,0.4)';
+            arrowElement.style.textShadow = '0 0 20px rgba(255,215,0,0.5)';
             arrowElement.textContent = '➡️';
             arrowElement.style.transition = 'none';
 
+            // موقعیت اولیه فلش
             const ball = document.getElementById('ball');
             const ballRect = ball.getBoundingClientRect();
             const centerX = ballRect.left + ballRect.width / 2 - rect.left;
@@ -2483,8 +2720,10 @@
 
             arrowStartX = centerX;
             arrowStartY = centerY;
+
             arrowElement.style.left = (centerX) + 'px';
             arrowElement.style.top = (centerY) + 'px';
+
             pitch.appendChild(arrowElement);
         }
 
@@ -2495,14 +2734,18 @@
 
             const dx = clientX - rect.left - arrowStartX;
             const dy = clientY - rect.top - arrowStartY;
+
             const angle = Math.atan2(dy, dx);
             const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 80);
 
+            // چرخش فلش به سمت حرکت
             arrowElement.style.transform = `rotate(${angle}rad)`;
             arrowElement.style.left = (arrowStartX + Math.cos(angle) * 10) + 'px';
             arrowElement.style.top = (arrowStartY + Math.sin(angle) * 10) + 'px';
+
+            // تغییر اندازه بر اساس فاصله
             const scale = 0.6 + (distance / 80) * 0.6;
-            arrowElement.style.fontSize = (18 + scale * 22) + 'px';
+            arrowElement.style.fontSize = (20 + scale * 20) + 'px';
         }
 
         function removeArrow() {
@@ -2514,6 +2757,8 @@
 
         function disableBallDrag() {
             const ball = document.getElementById('ball');
+            const pitch = document.getElementById('pitch');
+
             if (dragHandlers.onStart) {
                 ball.removeEventListener('mousedown', dragHandlers.onStart);
                 ball.removeEventListener('touchstart', dragHandlers.onStart);
@@ -2526,8 +2771,9 @@
                 document.removeEventListener('mouseup', dragHandlers.onEnd);
                 document.removeEventListener('touchend', dragHandlers.onEnd);
             }
+
             ball.style.cursor = 'default';
-            document.getElementById('pitch').style.cursor = 'default';
+            pitch.style.cursor = 'default';
             footballState.isDragging = false;
             removeArrow();
         }
@@ -2536,8 +2782,9 @@
             if (footballState.isGameOver || footballState.turn !== 'robot') return;
 
             const status = document.getElementById('footballStatus');
-            status.textContent = '🤖 ربات در حال حرکت...';
+            status.textContent = '🤖 ربات در حال حرکت توپ...';
 
+            // هدف ربات: حرکت به سمت دروازه چپ (x کوچک)
             const targetX = 5 + Math.random() * 15;
             const targetY = 20 + Math.random() * 60;
 
@@ -2548,11 +2795,10 @@
                 if (footballState.isGameOver || steps >= maxSteps) {
                     clearInterval(moveInterval);
                     if (!footballState.isGameOver) {
+                        // بعد از حرکت ربات، نوبت کاربر
                         footballState.turn = 'player';
-                        document.getElementById('turnText').textContent = '🎯 Your Turn';
-                        document.getElementById('turnText').style.color = '#ffd700';
-                        document.getElementById('playerTeam').classList.add('active');
-                        document.getElementById('robotTeam').classList.remove('active');
+                        document.getElementById('turnIndicator').textContent = '🎯 نوبت: شما';
+                        document.getElementById('turnIndicator').style.color = '#ffd700';
                         document.getElementById('footballStatus').textContent = '👆 نوبت شما! توپ را بکشید.';
                         enableBallDrag();
                     }
@@ -2572,11 +2818,14 @@
                 ballEl.style.top = footballState.ballY + '%';
 
                 steps++;
+
+                // بررسی گل در حین حرکت
                 checkGoal();
 
                 if (footballState.isGameOver) {
                     clearInterval(moveInterval);
                 }
+
             }, 120);
         }
 
@@ -2589,11 +2838,13 @@
             const goalYRange = { min: 30, max: 70 };
 
             if ((x < goalThreshold || x > 100 - goalThreshold) && y > goalYRange.min && y < goalYRange.max) {
+                // گل شد!
                 footballState.isGameOver = true;
                 footballState.isGoal = true;
                 disableBallDrag();
 
                 const isPlayerGoal = x < goalThreshold;
+                const scorer = isPlayerGoal ? footballState.playerCountry : footballState.robotCountry;
 
                 if (isPlayerGoal) {
                     footballState.playerScore++;
@@ -2606,42 +2857,26 @@
                 const goalText = document.getElementById('goalText');
                 const goalSub = document.getElementById('goalSub');
 
-                const scorer = isPlayerGoal ? footballState.playerCountry : footballState.robotCountry;
-
                 goalText.textContent = isPlayerGoal ? `🎉 گل! ${scorer.flag}` : `😅 گل خوردی! ${scorer.flag}`;
                 goalSub.textContent = isPlayerGoal ? 'تبریک! شما گل زدید!' : 'ربات گل زد!';
                 goalMsg.style.display = 'block';
 
                 const status = document.getElementById('footballStatus');
+                const turnIndicator = document.getElementById('turnIndicator');
+
                 if (isPlayerGoal) {
                     status.textContent = '🎉 شما گل زدید!';
-                    document.getElementById('turnText').textContent = '✅ شما';
-                    document.getElementById('turnText').style.color = '#2ecc71';
+                    turnIndicator.textContent = '✅ شما';
+                    turnIndicator.style.color = '#2ecc71';
                     playWinSound();
                 } else {
                     status.textContent = '😅 ربات گل زد!';
-                    document.getElementById('turnText').textContent = '❌ ربات';
-                    document.getElementById('turnText').style.color = '#ff6b8a';
+                    turnIndicator.textContent = '❌ ربات';
+                    turnIndicator.style.color = '#ff6b8a';
                     playLoseSound();
                 }
 
-                // بررسی برنده شدن با 3 گل
-                if (footballState.playerScore >= 3) {
-                    setTimeout(() => {
-                        goalText.textContent = '🏆 شما برنده شدید!';
-                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
-                        goalMsg.style.display = 'block';
-                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان شدید!';
-                    }, 800);
-                } else if (footballState.robotScore >= 3) {
-                    setTimeout(() => {
-                        goalText.textContent = '😔 ربات برنده شد!';
-                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
-                        goalMsg.style.display = 'block';
-                        document.getElementById('footballStatus').textContent = '😔 ربات قهرمان شد!';
-                    }, 800);
-                }
-
+                // غیرفعال کردن کشیدن
                 disableBallDrag();
             }
         }
@@ -2653,20 +2888,17 @@
             footballState.ballX = 50;
             footballState.ballY = 50;
             footballState.hasStarted = false;
-            footballState.playerScore = 0;
-            footballState.robotScore = 0;
-            updateScoreDisplay();
 
             const ball = document.getElementById('ball');
             ball.style.left = '50%';
             ball.style.top = '50%';
 
             document.getElementById('footballStatus').textContent = '🔄 بازی جدید! کشور خود را انتخاب کنید';
-            document.getElementById('turnText').textContent = '⏳ انتخاب کشور';
-            document.getElementById('playerTeam').classList.remove('active');
-            document.getElementById('robotTeam').classList.remove('active');
+            document.getElementById('turnIndicator').textContent = '⏳ انتخاب کشور';
 
             disableBallDrag();
+
+            // بازگشت به صفحه انتخاب کشور
             showPage('countrySelectPage');
             renderCountries();
         }
@@ -2680,6 +2912,9 @@
             disableBallDrag();
         }
 
+        // ==========================================================
+        //  بارگذاری اولیه
+        // ==========================================================
         console.log('❄️ برفی با بازی فوتبال کشوری آماده است!');
     </script>
 
