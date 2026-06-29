@@ -232,6 +232,7 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
         }
+        /* دکمه پشتیبانی */
         .main-header .support-btn {
             background: rgba(255, 215, 0, 0.15);
             color: #ffd700;
@@ -252,6 +253,7 @@
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
             border-color: rgba(255, 215, 0, 0.3);
         }
+        /* نشانگر پیام جدید برای ادمین */
         .badge-new {
             position: absolute;
             top: -6px;
@@ -1547,7 +1549,7 @@
                     <h2>🔐 پنل مدیریت</h2>
                     <p style="color: rgba(255,255,255,0.5); font-weight: 500;">به پنل مدیریت خوش آمدید!</p>
                     <ul>
-                        <li><span>📊 کاربران آنلاین</span> <span id="userCount" style="color:#ffd700; font-weight:700;">0</span></li>
+                        <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="gameCount">0</span></li>
                         <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
                         <li id="adminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
@@ -1613,7 +1615,7 @@
                         🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
                     </div>
                     <ul>
-                        <li><span>📊 کاربران آنلاین</span> <span id="modUserCount" style="color:#ffd700; font-weight:700;">0</span></li>
+                        <li><span>📊 تعداد کاربران آنلاین</span> <span id="modUserCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="modGameCount2">0</span></li>
                         <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
                         <li id="modAdminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
@@ -1644,19 +1646,8 @@
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
-        // ==========================================================
-        //  🟢 اتصال به سرور Socket.io
-        // ==========================================================
-        const socket = io('http://localhost:3000');
-
-        let currentUsername = '';
-        let currentUserId = null;
-
-        // ==========================================================
-        //  تولید برف
-        // ==========================================================
+        // ===== تولید برف =====
         (function createSnow() {
             const container = document.getElementById('snowflakes');
             const flakes = ['❄', '❅', '❆', '✦'];
@@ -1672,28 +1663,6 @@
                 container.appendChild(el);
             }
         })();
-
-        // ==========================================================
-        //  دریافت تعداد کاربران آنلاین از سرور
-        // ==========================================================
-        socket.on('online-update', (data) => {
-            const count = data.count || 0;
-            const usersList = data.users || [];
-
-            // به‌روزرسانی پنل ادمین
-            const userCountEl = document.getElementById('userCount');
-            const modUserCountEl = document.getElementById('modUserCount');
-            if (userCountEl) userCountEl.textContent = count;
-            if (modUserCountEl) modUserCountEl.textContent = count;
-
-            // به‌روزرسانی بازی‌های فعال (شبیه‌سازی)
-            const gameCount = getActiveGames().length;
-            document.getElementById('gameCount').textContent = gameCount > 0 ? gameCount : 1;
-            document.getElementById('modGameCount2').textContent = gameCount;
-            document.getElementById('modGameCount').textContent = gameCount > 0 ? gameCount : 1;
-
-            console.log(`📊 کاربران آنلاین: ${count}`, usersList);
-        });
 
         // ==========================================================
         //  مدیریت نام‌های کاربری (ذخیره لیست در localStorage)
@@ -1717,13 +1686,19 @@
             }
         }
 
+        function removeUsername(username) {
+            let list = getRegisteredUsernames();
+            list = list.filter(u => u !== username);
+            setRegisteredUsernames(list);
+        }
+
         function isUsernameTaken(username) {
             const list = getRegisteredUsernames();
             return list.includes(username);
         }
 
         // ==========================================================
-        //  تنظیم اولیه لیست مدیران
+        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا" و "آراد تریاکی"
         // ==========================================================
         (function initAdmins() {
             const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
@@ -1745,7 +1720,7 @@
         })();
 
         // ==========================================================
-        //  لیست کاربران مجاز برای پنل مود
+        //  لیست کاربران مجاز برای پنل مود (با ذخیره در localStorage)
         // ==========================================================
         function getModAllowedUsers() {
             try {
@@ -1759,7 +1734,7 @@
         }
 
         // ==========================================================
-        //  مدیریت پروفایل
+        //  مدیریت پروفایل (تصویر و نام کاربری)
         // ==========================================================
         function getProfileAvatar() {
             try {
@@ -1791,7 +1766,7 @@
         }
 
         // ==========================================================
-        //  نمایش/مخفی کردن دکمه‌ها
+        //  نمایش/مخفی کردن دکمه‌ها بر اساس کاربر
         // ==========================================================
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
@@ -1829,7 +1804,7 @@
         });
 
         // ==========================================================
-        //  لیست ادمین‌ها
+        //  لیست ادمین‌ها و نقش‌ها (با localStorage)
         // ==========================================================
         const SUPER_ADMIN = "ابوالفضل";
 
@@ -1930,7 +1905,7 @@
         }
 
         // ==========================================================
-        //  توابع نمایش صفحات
+        //  توابع نمایش صفحات و کنترل دسترسی
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
@@ -1946,15 +1921,26 @@
             }
             if (pageId === 'modPage') {
                 updateModPanelUI();
+                updateModStats();
             }
             if (pageId === 'adminPanel') {
                 updateAdminPanelUI();
+                updateAdminStats();
                 renderAdminSupportMessages();
+                // وقتی ادمین وارد پنل میشه، شمارنده پیام جدید رو صفر می‌کنیم
                 clearNewSupportCount();
             }
             if (pageId === 'supportPage') {
                 renderSupportMessages();
             }
+        }
+
+        function updateModStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            document.getElementById('modUserCount').textContent = users.length;
+            document.getElementById('modGameCount2').textContent = games.length;
+            document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
         }
 
         function openModPanel() {
@@ -1981,6 +1967,7 @@
             }
 
             if (admins.includes(username)) {
+                updateAdminStats();
                 updateAdminPanelUI();
                 renderAdminSupportMessages();
                 clearNewSupportCount();
@@ -2020,13 +2007,16 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
+                updateAdminStats();
             }
             showPage('homePage');
         }
 
         // ==========================================================
-        //  ۱. مدیریت ورود و خروج
+        //  ۱. مدیریت ورود و خروج (با ثبت نام کاربری)
         // ==========================================================
+        let currentUsername = '';
+
         function handleLogin() {
             const input = document.getElementById('usernameInput');
             const error = document.getElementById('loginError');
@@ -2046,9 +2036,6 @@
 
             localStorage.setItem('username', username);
 
-            // 🔥 ارسال نام کاربری به سرور
-            socket.emit('user-connected', username);
-
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
 
@@ -2058,31 +2045,15 @@
                 document.getElementById('displayUsername').textContent = username;
                 loadProfile();
                 showPage('homePage');
+                updateAdminStats();
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
                     updateSupportBadge();
                 }
                 updateButtonsVisibility();
-
-                // شروع تایمر تمدید آنلاین
-                startOnlineRefreshTimer();
             }, 2000);
         }
 
-        // تایمر تمدید آنلاین (هر ۳۰ ثانیه)
-        let onlineRefreshInterval = null;
-
-        function startOnlineRefreshTimer() {
-            if (onlineRefreshInterval) clearInterval(onlineRefreshInterval);
-            onlineRefreshInterval = setInterval(() => {
-                // ارسال درخواست تمدید به سرور
-                socket.emit('refresh-online');
-            }, 30000);
-        }
-
-        // ==========================================================
-        //  بارگذاری اولیه
-        // ==========================================================
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
@@ -2090,10 +2061,6 @@
                 if (!isUsernameTaken(saved)) {
                     addUsername(saved);
                 }
-
-                // 🔥 ارسال نام کاربری به سرور
-                socket.emit('user-connected', saved);
-
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
@@ -2102,12 +2069,12 @@
                     document.getElementById('displayUsername').textContent = saved;
                     loadProfile();
                     showPage('homePage');
+                    updateAdminStats();
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
                         updateSupportBadge();
                     }
                     updateButtonsVisibility();
-                    startOnlineRefreshTimer();
                 }, 1500);
             }
         });
@@ -2165,8 +2132,15 @@
         }
 
         // ==========================================================
-        //  ۴. آمار بازی‌ها (ساده)
+        //  ۴. آمار کاربران و بازی‌ها (ساده)
         // ==========================================================
+        function getOnlineUsers() {
+            try {
+                const data = localStorage.getItem('onlineUsers');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
         function getActiveGames() {
             try {
                 const data = localStorage.getItem('activeGames');
@@ -2174,8 +2148,15 @@
             } catch { return []; }
         }
 
+        function updateAdminStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            document.getElementById('userCount').textContent = users.length;
+            document.getElementById('gameCount').textContent = games.length > 0 ? games.length : 1;
+        }
+
         // ==========================================================
-        //  ۵. بازی دوز (همان کد قبلی)
+        //  ۵. بازی دوز (همان کد قبلی با کمی تغییر)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -2351,6 +2332,7 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
+                updateAdminStats();
             }
 
             if (result === 'X') {
@@ -2435,6 +2417,7 @@
             if (!games.includes(gameId)) {
                 games.push(gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
+                updateAdminStats();
             }
 
             renderBoard();
@@ -2452,13 +2435,17 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
+                updateAdminStats();
             }
             startGame();
         }
 
         // ==========================================================
-        //  ۶. سیستم پشتیبانی
+        //  ۶. سیستم پشتیبانی (پیام‌ها و پاسخ‌ها) با شمارنده
         // ==========================================================
+
+        // ساختار هر پیام:
+        // { id, from, text, timestamp, answered, reply, replyTimestamp, repliedBy }
 
         function getSupportMessages() {
             try {
@@ -2471,6 +2458,7 @@
             localStorage.setItem('supportMessages', JSON.stringify(messages));
         }
 
+        // شمارنده پیام‌های جدید برای ادمین‌ها
         function getNewSupportCount() {
             try {
                 const count = localStorage.getItem('newSupportCount');
@@ -2492,6 +2480,7 @@
             setNewSupportCount(0);
         }
 
+        // به‌روزرسانی نشانگرهای پیام جدید
         function updateSupportBadge() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
@@ -2505,6 +2494,7 @@
             if (isAdmin && count > 0) {
                 adminBadge.style.display = 'flex';
                 adminBadge.textContent = count;
+                // همچنین روی دکمه پشتیبانی هم نمایش بدیم (اختیاری)
                 supportBadge.style.display = 'flex';
                 supportBadge.textContent = count;
             } else {
@@ -2513,6 +2503,7 @@
             }
         }
 
+        // ارسال پیام جدید از سمت کاربر
         function sendSupportMessage() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) {
@@ -2541,6 +2532,7 @@
             messages.push(newMsg);
             setSupportMessages(messages);
 
+            // افزایش شمارنده پیام جدید برای ادمین‌ها
             incrementNewSupportCount();
 
             input.value = '';
@@ -2549,6 +2541,7 @@
             alert('✅ پیام شما با موفقیت ارسال شد. در اسرع وقت پاسخ داده می‌شود.');
         }
 
+        // پاسخ دادن به پیام (فقط ادمین‌ها)
         function replyToSupportMessage(msgId) {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
@@ -2582,6 +2575,7 @@
             alert('✅ پاسخ شما با موفقیت ارسال شد.');
         }
 
+        // نمایش پیام‌ها در صفحه پشتیبانی (برای کاربر عادی)
         function renderSupportMessages() {
             const container = document.getElementById('supportMessages');
             if (!container) return;
@@ -2636,6 +2630,7 @@
             container.scrollTop = container.scrollHeight;
         }
 
+        // نمایش پیام‌ها در پنل ادمینی (همه پیام‌ها + دکمه پاسخ)
         function renderAdminSupportMessages() {
             const container = document.getElementById('adminSupportMessages');
             if (!container) return;
@@ -2698,15 +2693,20 @@
             container.scrollTop = container.scrollHeight;
         }
 
+        // به‌روزرسانی شمارنده در هدر
+        // در ابتدا و بعد از هر تغییری صدا زده می‌شود
+        // تابع updateSupportBadge قبلاً تعریف شده
+
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
+        // به‌روزرسانی شمارنده در شروع
         setTimeout(() => {
             updateSupportBadge();
         }, 500);
 
-        console.log('❄️ برفی با سرور Socket.io آماده است!');
-        console.log('📡 متصل به سرور: http://localhost:3000');
+        console.log('❄️ برفی با سیستم پشتیبانی کامل و شمارنده پیام جدید آماده است!');
     </script>
+
 </body>
 </html>
