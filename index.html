@@ -1644,8 +1644,19 @@
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        // ===== تولید برف =====
+        // ==========================================================
+        //  🟢 اتصال به سرور Socket.io
+        // ==========================================================
+        const socket = io('http://localhost:3000');
+
+        let currentUsername = '';
+        let currentUserId = null;
+
+        // ==========================================================
+        //  تولید برف
+        // ==========================================================
         (function createSnow() {
             const container = document.getElementById('snowflakes');
             const flakes = ['❄', '❅', '❆', '✦'];
@@ -1663,89 +1674,15 @@
         })();
 
         // ==========================================================
-        //  🟢 سیستم کاربران آنلاین (با Broadcast Channel و localStorage)
+        //  دریافت تعداد کاربران آنلاین از سرور
         // ==========================================================
-        const ONLINE_USERS_KEY = 'onlineUsersData';
-        const BROADCAST_CHANNEL = 'snow_online_channel';
+        socket.on('online-update', (data) => {
+            const count = data.count || 0;
+            const usersList = data.users || [];
 
-        // دریافت لیست کاربران آنلاین از localStorage
-        function getOnlineUsersList() {
-            try {
-                const data = localStorage.getItem(ONLINE_USERS_KEY);
-                return data ? JSON.parse(data) : {};
-            } catch { return {}; }
-        }
-
-        // ذخیره لیست کاربران آنلاین در localStorage
-        function setOnlineUsersList(users) {
-            localStorage.setItem(ONLINE_USERS_KEY, JSON.stringify(users));
-            // ارسال پیام به Broadcast Channel برای همگام‌سازی
-            try {
-                const channel = new BroadcastChannel(BROADCAST_CHANNEL);
-                channel.postMessage({ type: 'update', users: users });
-                channel.close();
-            } catch (e) { /* مرورگر不支持 */ }
-        }
-
-        // افزودن کاربر آنلاین جدید (با شناسه یکتا)
-        function addOnlineUser(username) {
-            const users = getOnlineUsersList();
-            const userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
-            users[userId] = {
-                username: username,
-                timestamp: Date.now()
-            };
-            setOnlineUsersList(users);
-            updateOnlineCountUI();
-            return userId;
-        }
-
-        // حذف کاربر آنلاین
-        function removeOnlineUser(userId) {
-            const users = getOnlineUsersList();
-            if (users[userId]) {
-                delete users[userId];
-                setOnlineUsersList(users);
-                updateOnlineCountUI();
-            }
-        }
-
-        // پاک کردن کاربران منقضی (بیشتر از ۵ دقیقه)
-        function cleanExpiredUsers() {
-            const users = getOnlineUsersList();
-            const now = Date.now();
-            const EXPIRY_TIME = 5 * 60 * 1000; // 5 دقیقه
-            let changed = false;
-            for (const [id, data] of Object.entries(users)) {
-                if (now - data.timestamp > EXPIRY_TIME) {
-                    delete users[id];
-                    changed = true;
-                }
-            }
-            if (changed) {
-                setOnlineUsersList(users);
-                updateOnlineCountUI();
-            }
-        }
-
-        // تمدید زمان کاربر فعلی
-        function refreshOnlineUser(userId) {
-            if (!userId) return;
-            const users = getOnlineUsersList();
-            if (users[userId]) {
-                users[userId].timestamp = Date.now();
-                setOnlineUsersList(users);
-            }
-        }
-
-        // به‌روزرسانی نمایش تعداد کاربران آنلاین در UI
-        function updateOnlineCountUI() {
-            const users = getOnlineUsersList();
-            const count = Object.keys(users).length;
-
+            // به‌روزرسانی پنل ادمین
             const userCountEl = document.getElementById('userCount');
             const modUserCountEl = document.getElementById('modUserCount');
-
             if (userCountEl) userCountEl.textContent = count;
             if (modUserCountEl) modUserCountEl.textContent = count;
 
@@ -1754,32 +1691,9 @@
             document.getElementById('gameCount').textContent = gameCount > 0 ? gameCount : 1;
             document.getElementById('modGameCount2').textContent = gameCount;
             document.getElementById('modGameCount').textContent = gameCount > 0 ? gameCount : 1;
-        }
 
-        // دریافت تعداد کاربران آنلاین
-        function getOnlineUsersCount() {
-            const users = getOnlineUsersList();
-            return Object.keys(users).length;
-        }
-
-        // ==========================================================
-        //  راه‌اندازی Broadcast Channel برای همگام‌سازی بین پنجره‌ها
-        // ==========================================================
-        function initBroadcastChannel() {
-            try {
-                const channel = new BroadcastChannel(BROADCAST_CHANNEL);
-                channel.onmessage = (event) => {
-                    if (event.data && event.data.type === 'update') {
-                        // بروزرسانی UI از داده‌های دریافتی
-                        updateOnlineCountUI();
-                    }
-                };
-                // بستن کانال بعد از 1 ثانیه (فقط برای دریافت پیام‌ها)
-                setTimeout(() => {
-                    try { channel.close(); } catch (e) {}
-                }, 1000);
-            } catch (e) { /* مرورگر不支持 */ }
-        }
+            console.log(`📊 کاربران آنلاین: ${count}`, usersList);
+        });
 
         // ==========================================================
         //  مدیریت نام‌های کاربری (ذخیره لیست در localStorage)
@@ -1809,7 +1723,7 @@
         }
 
         // ==========================================================
-        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا" و "آراد تریاکی"
+        //  تنظیم اولیه لیست مدیران
         // ==========================================================
         (function initAdmins() {
             const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
@@ -1831,7 +1745,7 @@
         })();
 
         // ==========================================================
-        //  لیست کاربران مجاز برای پنل مود (با ذخیره در localStorage)
+        //  لیست کاربران مجاز برای پنل مود
         // ==========================================================
         function getModAllowedUsers() {
             try {
@@ -1845,7 +1759,7 @@
         }
 
         // ==========================================================
-        //  مدیریت پروفایل (تصویر و نام کاربری)
+        //  مدیریت پروفایل
         // ==========================================================
         function getProfileAvatar() {
             try {
@@ -1877,7 +1791,7 @@
         }
 
         // ==========================================================
-        //  نمایش/مخفی کردن دکمه‌ها بر اساس کاربر
+        //  نمایش/مخفی کردن دکمه‌ها
         // ==========================================================
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
@@ -1915,7 +1829,7 @@
         });
 
         // ==========================================================
-        //  لیست ادمین‌ها و نقش‌ها (با localStorage)
+        //  لیست ادمین‌ها
         // ==========================================================
         const SUPER_ADMIN = "ابوالفضل";
 
@@ -2016,7 +1930,7 @@
         }
 
         // ==========================================================
-        //  توابع نمایش صفحات و کنترل دسترسی
+        //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
@@ -2032,11 +1946,9 @@
             }
             if (pageId === 'modPage') {
                 updateModPanelUI();
-                updateOnlineCountUI();
             }
             if (pageId === 'adminPanel') {
                 updateAdminPanelUI();
-                updateOnlineCountUI();
                 renderAdminSupportMessages();
                 clearNewSupportCount();
             }
@@ -2069,7 +1981,6 @@
             }
 
             if (admins.includes(username)) {
-                updateOnlineCountUI();
                 updateAdminPanelUI();
                 renderAdminSupportMessages();
                 clearNewSupportCount();
@@ -2109,17 +2020,13 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
-                updateOnlineCountUI();
             }
             showPage('homePage');
         }
 
         // ==========================================================
-        //  ۱. مدیریت ورود و خروج (با ثبت نام کاربری و آنلاین)
+        //  ۱. مدیریت ورود و خروج
         // ==========================================================
-        let currentUsername = '';
-        let currentUserId = null;
-
         function handleLogin() {
             const input = document.getElementById('usernameInput');
             const error = document.getElementById('loginError');
@@ -2139,8 +2046,8 @@
 
             localStorage.setItem('username', username);
 
-            // افزودن کاربر به لیست آنلاین
-            currentUserId = addOnlineUser(username);
+            // 🔥 ارسال نام کاربری به سرور
+            socket.emit('user-connected', username);
 
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
@@ -2151,7 +2058,6 @@
                 document.getElementById('displayUsername').textContent = username;
                 loadProfile();
                 showPage('homePage');
-                updateOnlineCountUI();
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
                     updateSupportBadge();
@@ -2163,35 +2069,30 @@
             }, 2000);
         }
 
-        // تایمر تمدید آنلاین (هر 30 ثانیه)
+        // تایمر تمدید آنلاین (هر ۳۰ ثانیه)
         let onlineRefreshInterval = null;
 
         function startOnlineRefreshTimer() {
             if (onlineRefreshInterval) clearInterval(onlineRefreshInterval);
             onlineRefreshInterval = setInterval(() => {
-                if (currentUserId) {
-                    refreshOnlineUser(currentUserId);
-                    // پاکسازی کاربران منقضی
-                    cleanExpiredUsers();
-                }
-            }, 30000); // هر 30 ثانیه
+                // ارسال درخواست تمدید به سرور
+                socket.emit('refresh-online');
+            }, 30000);
         }
 
+        // ==========================================================
+        //  بارگذاری اولیه
+        // ==========================================================
         window.addEventListener('load', function() {
-            // راه‌اندازی Broadcast Channel
-            initBroadcastChannel();
-
-            // پاکسازی کاربران منقضی در شروع
-            cleanExpiredUsers();
-
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 currentUsername = saved;
                 if (!isUsernameTaken(saved)) {
                     addUsername(saved);
                 }
-                // افزودن کاربر به لیست آنلاین
-                currentUserId = addOnlineUser(saved);
+
+                // 🔥 ارسال نام کاربری به سرور
+                socket.emit('user-connected', saved);
 
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
@@ -2201,7 +2102,6 @@
                     document.getElementById('displayUsername').textContent = saved;
                     loadProfile();
                     showPage('homePage');
-                    updateOnlineCountUI();
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
                         updateSupportBadge();
@@ -2275,7 +2175,7 @@
         }
 
         // ==========================================================
-        //  ۵. بازی دوز
+        //  ۵. بازی دوز (همان کد قبلی)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -2451,7 +2351,6 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
-                updateOnlineCountUI();
             }
 
             if (result === 'X') {
@@ -2536,7 +2435,6 @@
             if (!games.includes(gameId)) {
                 games.push(gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
-                updateOnlineCountUI();
             }
 
             renderBoard();
@@ -2554,13 +2452,12 @@
                 games = games.filter(g => g !== gameId);
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 gameId = null;
-                updateOnlineCountUI();
             }
             startGame();
         }
 
         // ==========================================================
-        //  ۶. سیستم پشتیبانی (پیام‌ها و پاسخ‌ها) با شمارنده
+        //  ۶. سیستم پشتیبانی
         // ==========================================================
 
         function getSupportMessages() {
@@ -2806,16 +2703,10 @@
         // ==========================================================
         setTimeout(() => {
             updateSupportBadge();
-            updateOnlineCountUI();
-            // پاکسازی کاربران منقضی هر ۱ دقیقه
-            setInterval(() => {
-                cleanExpiredUsers();
-            }, 60000);
         }, 500);
 
-        console.log('❄️ برفی با سیستم آنلاین کاربران (Broadcast Channel + localStorage) آماده است!');
-        console.log('📊 تعداد کاربران آنلاین در همه پنجره‌ها همگام‌سازی می‌شود.');
+        console.log('❄️ برفی با سرور Socket.io آماده است!');
+        console.log('📡 متصل به سرور: http://localhost:3000');
     </script>
-
 </body>
 </html>
