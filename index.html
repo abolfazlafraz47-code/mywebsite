@@ -238,48 +238,7 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
         }
-        /* دکمه پشتیبانی حذف شد */
-
-        /* ===== نشانگر کاربران آنلاین (جای دکمه پشتیبانی) ===== */
-        .online-badge {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            border: 1px solid rgba(46, 204, 113, 0.2);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: default;
-            white-space: nowrap;
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-        .online-badge .dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #2ecc71;
-            animation: pulse-dot 1.5s infinite;
-        }
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.8);
-            }
-        }
-        .online-badge .count {
-            font-weight: 700;
-            color: #fff;
-        }
+        /* دکمه پشتیبانی حذف شد و آنلاین بج نیز حذف شد */
 
         /* ===== صفحات با افکت شیشه‌ای ===== */
         #loginPage,
@@ -1140,10 +1099,6 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
-            .online-badge {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
             #loginPage {
                 padding: 30px 20px;
                 min-height: 320px;
@@ -1228,10 +1183,6 @@
                 font-size: 9px;
                 padding: 2px 8px;
             }
-            .online-badge {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
             .board {
                 gap: 6px;
                 max-width: 200px;
@@ -1299,11 +1250,7 @@
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
 
-                    <!-- ===== نشانگر کاربران آنلاین (جای دکمه پشتیبانی) ===== -->
-                    <div class="online-badge">
-                        <span class="dot"></span>
-                        <span>آنلاین: <span class="count" id="online">0</span></span>
-                    </div>
+                    <!-- دکمه آنلاین حذف شد -->
 
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
@@ -1450,14 +1397,12 @@
         })();
 
         // ==========================================================
-        //  🟢 اتصال Socket.IO و نمایش کاربران آنلاین
-        //  آدرس سرور را با آدرس واقعی جایگزین کنید
+        //  🟢 اتصال Socket.IO و نمایش کاربران آنلاین (حذف شده از هدر)
         // ==========================================================
         const socket = io("https://آدرس-سرور-تو"); // <-- آدرس سرور خود را اینجا قرار دهید
 
         socket.on("onlineUsers", (count) => {
-            document.getElementById("online").textContent = count;
-            // همچنین در پنل ادمین و مود نیز به‌روزرسانی شود
+            // فقط در پنل ادمین و مود به‌روزرسانی شود
             document.getElementById("userCount").textContent = count;
             document.getElementById("modUserCount").textContent = count;
         });
