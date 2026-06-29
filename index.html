@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -217,10 +218,27 @@
             background: rgba(255, 0, 0, 0.3);
             transform: translateY(-2px) scale(1.05);
         }
+        .main-header .gift-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+        }
+        .main-header .gift-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
+        }
 
         #loginPage, #loader, #errorPage, .box, .menu-box, .game-container,
         .admin-panel-box, .rank-box, .profile-box, .mod-panel-box,
-        .country-select-box, .football-game-box, .ban-panel-box {
+        .country-select-box, .football-game-box, .ban-panel-box, .gift-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -336,7 +354,6 @@
             font-weight: 500;
         }
 
-        /* صفحه بن شده */
         #bannedPage {
             display: none;
             flex-direction: column;
@@ -445,7 +462,7 @@
         #mainContent { display: none; width: 100%; }
 
         #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #modPage,
-        #countrySelectPage, #footballGamePage, #banPage {
+        #countrySelectPage, #footballGamePage, #banPage, #giftPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -667,7 +684,6 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== پنل ادمینی ===== */
         .admin-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -711,6 +727,60 @@
             font-weight: 600;
             color: #fff;
         }
+        .admin-panel-box .admin-gift-setting {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: right;
+        }
+        .admin-panel-box .admin-gift-setting h4 {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .admin-panel-box .admin-gift-setting .gift-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .admin-panel-box .admin-gift-setting .gift-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+        .admin-panel-box .admin-gift-setting .gift-row input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .admin-panel-box .admin-gift-setting .gift-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .admin-panel-box .admin-gift-setting .gift-row .save-gift-btn {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .admin-panel-box .admin-gift-setting .gift-row .save-gift-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
         .admin-panel-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -725,11 +795,31 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== پنل بن ===== */
         .ban-panel-box {
             padding: 32px 24px;
             width: 100%;
             text-align: center;
+        }
+        .ban-panel-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .ban-panel-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
         }
         .ban-panel-box h2 {
             font-size: 26px;
@@ -855,6 +945,133 @@
             text-align: center;
             padding: 20px;
             font-size: 14px;
+        }
+
+        /* ===== Gift Page ===== */
+        .gift-box {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .gift-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .gift-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .gift-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .gift-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .gift-box .gift-input-area {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gift-box .gift-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+            letter-spacing: 2px;
+        }
+        .gift-box .gift-input-area input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .gift-box .gift-input-area input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .gift-box .gift-input-area .gift-submit-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+            white-space: nowrap;
+        }
+        .gift-box .gift-input-area .gift-submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
+        }
+        .gift-box .gift-result {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            display: none;
+            width: 100%;
+        }
+        .gift-box .gift-result.success {
+            display: block;
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+        .gift-box .gift-result.error {
+            display: block;
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+        .gift-box .gift-result .gift-prize {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+        .gift-box .back-home-btn {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .gift-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .rank-box {
@@ -1057,7 +1274,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== انتخاب کشور ===== */
         .country-select-box {
             padding: 28px 20px;
             width: 100%;
@@ -1151,7 +1367,6 @@
         }
         .start-game-btn:hover { box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3); }
 
-        /* ===== بازی فوتبال ===== */
         .football-game-box {
             padding: 16px 12px 20px;
             width: 100%;
@@ -1384,6 +1599,7 @@
             .main-header .profile-btn .avatar { width: 22px; height: 22px; }
             .main-header .mod-btn { font-size: 10px; padding: 3px 10px; }
             .main-header .ban-btn { font-size: 10px; padding: 3px 10px; }
+            .main-header .gift-btn { font-size: 10px; padding: 3px 10px; }
             #loginPage { padding: 30px 20px; min-height: 320px; }
             #loginPage h1 { font-size: 32px; }
             .box { padding: 24px 18px; }
@@ -1397,7 +1613,7 @@
             .profile-box .avatar-upload .avatar-preview { width: 90px; height: 90px; }
             .rank-box .rubika-btn { font-size: 10px; padding: 3px 10px; top: 10px; left: 10px; }
             .admin-panel-box, .rank-box, .profile-box, .mod-panel-box,
-            .country-select-box, .football-game-box, .ban-panel-box { padding: 14px 10px; }
+            .country-select-box, .football-game-box, .ban-panel-box, .gift-box { padding: 14px 10px; }
             .country-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .country-btn { font-size: 14px; padding: 10px 4px; }
             .country-btn .flag { font-size: 26px; }
@@ -1409,6 +1625,8 @@
             .goal-message .sub { font-size: 11px; }
             .ban-item { font-size: 13px; padding: 8px 12px; }
             .ban-panel-box .ban-search input { font-size: 13px; padding: 8px 12px; }
+            .gift-box .gift-input-area input { font-size: 16px; padding: 10px 14px; }
+            .gift-box .gift-input-area .gift-submit-btn { font-size: 14px; padding: 10px 20px; }
         }
         @media(max-width: 380px) {
             .main-header .site-title { font-size: 15px; }
@@ -1419,6 +1637,7 @@
             .main-header .profile-btn .avatar { width: 18px; height: 18px; }
             .main-header .mod-btn { font-size: 9px; padding: 2px 8px; }
             .main-header .ban-btn { font-size: 9px; padding: 2px 8px; }
+            .main-header .gift-btn { font-size: 9px; padding: 2px 8px; }
             .board { gap: 6px; max-width: 200px; }
             .cell { font-size: 30px; border-radius: 10px; }
             #loginPage h1 { font-size: 26px; }
@@ -1479,6 +1698,7 @@
                 <div class="site-title">❄️ <span>برفی</span></div>
                 <div class="header-left">
                     <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
+                    <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
                     <button class="ban-btn" id="banBtn" onclick="openBanPanel()">🚫 بن کاربر</button>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
@@ -1595,6 +1815,22 @@
                             <span id="adminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
                         </li>
                     </ul>
+
+                    <!-- بخش تنظیم کد هدیه -->
+                    <div class="admin-gift-setting">
+                        <h4>🎁 تنظیم کد هدیه</h4>
+                        <div class="gift-row">
+                            <input type="text" id="giftCodeInput" placeholder="کد هدیه" value="877" />
+                        </div>
+                        <div class="gift-row">
+                            <input type="text" id="giftPrizeInput" placeholder="جایزه (مثلاً: ۱۰۰ سکه)" value="۱۰۰ سکه طلا" />
+                            <button class="save-gift-btn" onclick="saveGiftSettings()">💾 ذخیره</button>
+                        </div>
+                        <div style="font-size:12px; color:rgba(255,255,255,0.3); text-align:center; margin-top:4px;">
+                            کد فعلی: <span id="currentGiftCodeDisplay" style="color:#ffd700;">877</span> | جایزه: <span id="currentGiftPrizeDisplay" style="color:#ffd700;">۱۰۰ سکه طلا</span>
+                        </div>
+                    </div>
+
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -1602,7 +1838,7 @@
             <!-- ===== پنل بن ===== -->
             <div id="banPage">
                 <div class="ban-panel-box">
-                    <button class="back-btn" onclick="goHome()" style="position:absolute; top:14px; right:16px; background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.06); padding:5px 14px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; z-index:2; box-shadow:none;">↩ بازگشت</button>
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🚫 مدیریت بن</h2>
                     <p style="color:rgba(255,255,255,0.4); font-size:14px;">کاربران را برای 24 ساعت بن کنید</p>
                     <div class="ban-search">
@@ -1611,6 +1847,24 @@
                     </div>
                     <div class="ban-list" id="banList">
                         <!-- لیست کاربران توسط JS پر می‌شود -->
+                    </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه کد هدیه ===== -->
+            <div id="giftPage">
+                <div class="gift-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🎁 کد هدیه</h2>
+                    <p>کد هدیه خود را وارد کنید</p>
+                    <div class="gift-input-area">
+                        <input type="text" id="giftCodeInputUser" placeholder="کد هدیه را وارد کنید..." maxlength="20" />
+                        <button class="gift-submit-btn" onclick="checkGiftCode()">📤 ثبت</button>
+                    </div>
+                    <div class="gift-result" id="giftResult">
+                        <div id="giftResultText"></div>
+                        <div class="gift-prize" id="giftResultPrize"></div>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1715,7 +1969,6 @@
                 if (Date.now() - banTime < 24 * 60 * 60 * 1000) {
                     return true;
                 } else {
-                    // بن منقضی شده
                     delete banned[username];
                     setBannedUsers(banned);
                     return false;
@@ -1757,12 +2010,10 @@
         function checkBannedUser() {
             const username = localStorage.getItem('username');
             if (username && isUserBanned(username)) {
-                // کاربر بن شده، نمایش صفحه بن
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('bannedPage').style.display = 'flex';
-                // شروع تایمر
                 updateBanTimer();
                 return true;
             }
@@ -1781,12 +2032,81 @@
                     if (remaining && remaining !== '00:00:00') {
                         document.getElementById('banTimeDisplay').textContent = `⏳ زمان باقی‌مانده: ${remaining}`;
                     } else if (remaining === '00:00:00') {
-                        // بن تمام شد، رفرش صفحه
                         clearInterval(banTimerInterval);
                         location.reload();
                     }
                 }
             }, 1000);
+        }
+
+        // ==========================================================
+        //  سیستم کد هدیه (Gift System)
+        // ==========================================================
+        function getGiftSettings() {
+            try {
+                const data = localStorage.getItem('giftSettings');
+                if (data) {
+                    return JSON.parse(data);
+                }
+            } catch {}
+            return { code: '877', prize: '۱۰۰ سکه طلا' };
+        }
+
+        function setGiftSettings(code, prize) {
+            localStorage.setItem('giftSettings', JSON.stringify({ code, prize }));
+        }
+
+        function getCurrentGiftCode() {
+            const settings = getGiftSettings();
+            return settings.code || '877';
+        }
+
+        function getCurrentGiftPrize() {
+            const settings = getGiftSettings();
+            return settings.prize || '۱۰۰ سکه طلا';
+        }
+
+        function saveGiftSettings() {
+            const codeInput = document.getElementById('giftCodeInput');
+            const prizeInput = document.getElementById('giftPrizeInput');
+            const code = codeInput.value.trim() || '877';
+            const prize = prizeInput.value.trim() || '۱۰۰ سکه طلا';
+            setGiftSettings(code, prize);
+            document.getElementById('currentGiftCodeDisplay').textContent = code;
+            document.getElementById('currentGiftPrizeDisplay').textContent = prize;
+            alert('✅ تنظیمات کد هدیه با موفقیت ذخیره شد!');
+        }
+
+        function showGiftPage() {
+            showPage('giftPage');
+            // ریست نتیجه
+            const result = document.getElementById('giftResult');
+            result.className = 'gift-result';
+            result.style.display = 'none';
+            document.getElementById('giftCodeInputUser').value = '';
+        }
+
+        function checkGiftCode() {
+            const input = document.getElementById('giftCodeInputUser');
+            const code = input.value.trim();
+            const correctCode = getCurrentGiftCode();
+            const prize = getCurrentGiftPrize();
+
+            const result = document.getElementById('giftResult');
+            const textEl = document.getElementById('giftResultText');
+            const prizeEl = document.getElementById('giftResultPrize');
+
+            if (code === correctCode) {
+                result.className = 'gift-result success';
+                result.style.display = 'block';
+                textEl.textContent = '✅ کد هدیه درست است!';
+                prizeEl.textContent = `🎁 جایزه شما: ${prize}`;
+            } else {
+                result.className = 'gift-result error';
+                result.style.display = 'block';
+                textEl.textContent = '❌ کد هدیه اشتباه است!';
+                prizeEl.textContent = '';
+            }
         }
 
         // ==========================================================
@@ -1885,7 +2205,6 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             const isAdmin = admins.includes(username);
-            const isSuperAdmin = username === "ابوالفضل";
 
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
@@ -1905,7 +2224,7 @@
                 modBtn.style.display = 'none';
             }
 
-            // دکمه بن: فقط برای ابوالفضل و محمد رضا (اما محمد رضا نمی‌تونه من رو بن کنه)
+            // دکمه بن: فقط برای ابوالفضل و محمد رضا
             if (username === "ابوالفضل" || username === "محمد رضا") {
                 banBtn.style.display = 'inline-block';
             } else {
@@ -2029,7 +2348,7 @@
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
-                'countrySelectPage', 'footballGamePage', 'banPage'
+                'countrySelectPage', 'footballGamePage', 'banPage', 'giftPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2039,10 +2358,25 @@
             if (pageId === 'profilePage') { loadProfile(); }
             if (pageId === 'modPage') { updateModPanelUI();
                 updateModStats(); }
-            if (pageId === 'adminPanel') { updateAdminPanelUI();
-                updateAdminStats(); }
+            if (pageId === 'adminPanel') {
+                updateAdminPanelUI();
+                updateAdminStats();
+                // نمایش تنظیمات فعلی
+                const settings = getGiftSettings();
+                document.getElementById('giftCodeInput').value = settings.code || '877';
+                document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
+                document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '877';
+                document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
+            }
             if (pageId === 'countrySelectPage') { renderCountries(); }
             if (pageId === 'banPage') { renderBanList(); }
+            if (pageId === 'giftPage') {
+                // ریست نتیجه
+                const result = document.getElementById('giftResult');
+                result.className = 'gift-result';
+                result.style.display = 'none';
+                document.getElementById('giftCodeInputUser').value = '';
+            }
         }
 
         function updateModStats() {
@@ -2064,7 +2398,6 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
-            // فقط ابوالفضل و محمد رضا
             if (username === "ابوالفضل" || username === "محمد رضا") {
                 updateAdminStats();
                 updateAdminPanelUI();
@@ -2077,7 +2410,6 @@
         function openBanPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
-            // فقط ابوالفضل و محمد رضا
             if (username === "ابوالفضل" || username === "محمد رضا") {
                 renderBanList();
                 showPage('banPage');
@@ -2123,7 +2455,6 @@
             const username = input.value.trim();
             if (username === '') { error.style.display = 'block'; return; }
 
-            // بررسی بن بودن کاربر
             if (isUserBanned(username)) {
                 localStorage.setItem('username', username);
                 document.getElementById('loginPage').style.display = 'none';
@@ -2153,7 +2484,6 @@
         window.addEventListener('load', function() {
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
-                // بررسی بن
                 if (isUserBanned(saved)) {
                     document.getElementById('loginPage').style.display = 'none';
                     document.getElementById('bannedPage').style.display = 'flex';
@@ -2935,13 +3265,11 @@
             const allUsers = getRegisteredUsernames();
             const currentUser = document.getElementById('displayUsername').textContent.trim();
 
-            // فیلتر کاربران
             let filteredUsers = allUsers;
             if (searchTerm) {
                 filteredUsers = allUsers.filter(u => u.toLowerCase().includes(searchTerm));
             }
 
-            // مرتب‌سازی: کاربران بن شده اول
             const banned = getBannedUsers();
             filteredUsers.sort((a, b) => {
                 const aBanned = !!banned[a];
@@ -2961,13 +3289,20 @@
                 const isBanned = !!banned[username];
                 const isCurrentUser = username === currentUser;
                 const isSuperAdmin = username === "ابوالفضل";
+                const isMohammadReza = username === "محمد رضا";
+                const isArad = username === "آراد تریاکی";
 
-                // جلوگیری از بن کردن خود و ابوالفضل (فقط برای محمد رضا)
+                // قوانین بن:
+                // - ابوالفضل می‌تونه همه رو بن کنه
+                // - محمد رضا نمی‌تونه ابوالفضل رو بن کنه، ولی می‌تونه آراد تریاکی رو بن کنه
+                // - هیچکس نمی‌تونه خودش رو بن کنه
                 let canBan = true;
                 if (isCurrentUser) canBan = false;
-                if (isSuperAdmin && currentUser === "محمد رضا") canBan = false;
-                if (username === "محمد رضا" && currentUser === "محمد رضا") canBan = false;
-                if (username === "ابوالفضل" && currentUser !== "ابوالفضل") canBan = false;
+                if (currentUser === "محمد رضا" && isSuperAdmin) canBan = false;
+                if (currentUser === "محمد رضا" && username === "محمد رضا") canBan = false;
+                if (currentUser !== "ابوالفضل" && isSuperAdmin) canBan = false;
+                // اگر کاربر لاگین شده نه ابوالفضل باشه و نه محمد رضا، نمی‌تونه بن کنه
+                if (currentUser !== "ابوالفضل" && currentUser !== "محمد رضا") canBan = false;
 
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
 
@@ -2996,7 +3331,6 @@
             if (!username) return;
             const currentUser = document.getElementById('displayUsername').textContent.trim();
 
-            // جلوگیری از بن کردن خود و ابوالفضل توسط محمد رضا
             if (username === currentUser) {
                 alert('⛔ نمی‌توانید خودتان را بن کنید!');
                 return;
@@ -3029,7 +3363,9 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با سیستم بن کاربران آماده است!');
+        console.log('❄️ برفی با سیستم کد هدیه و بن کاربران آماده است!');
     </script>
+
 </body>
 </html>
+```
