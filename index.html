@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>❄️ برفی</title>
     <style>
-        /* ===== ریست و پایه ===== */
         * {
             margin: 0;
             padding: 0;
@@ -26,7 +24,6 @@
             position: relative;
         }
 
-        /* ===== برف‌های متحرک ===== */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -57,7 +54,6 @@
             }
         }
 
-        /* ===== پس‌زمینه گرادیان متحرک ===== */
         .bg-glow {
             position: fixed;
             top: 0;
@@ -1059,6 +1055,27 @@
             text-align: center;
             position: relative;
         }
+        .country-select-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .country-select-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
         .country-select-box h2 {
             font-size: 26px;
             font-weight: 800;
@@ -1066,6 +1083,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
+        }
+        .country-select-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 12px;
         }
         .country-grid {
             display: grid;
@@ -1124,15 +1146,11 @@
             box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
         }
 
-        /* ===== بازی فوتبال کشوری ===== */
+        /* ===== بازی فوتبال ===== */
         .football-game-box {
-            padding: 24px 18px 28px;
+            padding: 20px 16px 24px;
             width: 100%;
             position: relative;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         .football-game-box .back-btn {
             position: absolute;
@@ -1156,139 +1174,70 @@
             transform: scale(1.05);
         }
         .football-game-box h3 {
+            text-align: center;
             font-size: 22px;
             font-weight: 800;
             background: linear-gradient(135deg, #64d8ff, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             margin-top: 6px;
         }
-        .game-info {
+        .football-game-box .game-info {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 100%;
-            padding: 0 4px;
-            margin: 6px 0 12px 0;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
+            padding: 8px 8px;
+            margin: 4px 0 8px 0;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
             flex-wrap: wrap;
             gap: 4px;
         }
-        .game-info .player-tag {
+        .football-game-box .game-info .team {
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        .game-info .player-tag .flag-small {
-            font-size: 18px;
-        }
-        .game-info .player-tag.active-turn {
-            border: 1px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-        }
-
-        /* گردونه انتخاب شروع کننده */
-        .wheel-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 10px auto 20px;
-        }
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 215, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.05);
-        }
-        .wheel-segment {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            top: 0;
-            left: 50%;
-            transform-origin: 0% 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-            clip-path: polygon(0 0, 100% 0, 0 100%);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
         }
-        .wheel-segment:nth-child(1) {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            transform: rotate(0deg);
+        .football-game-box .game-info .team .flag {
+            font-size: 22px;
         }
-        .wheel-segment:nth-child(2) {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            transform: rotate(180deg);
-            left: 0;
-            top: 50%;
-            transform-origin: 100% 0%;
+        .football-game-box .game-info .team .name {
+            font-size: 13px;
         }
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
+        .football-game-box .game-info .score {
+            font-size: 18px;
+            font-weight: 800;
             color: #ffd700;
-            z-index: 2;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.08);
+            padding: 2px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
         }
-        .wheel-pointer {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 14px solid transparent;
-            border-right: 14px solid transparent;
-            border-top: 24px solid #ffd700;
-            z-index: 3;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        .football-game-box .game-status {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            font-weight: 500;
         }
-        .spin-wheel-btn {
-            background: linear-gradient(135deg, #ffd700, #f093fb);
-            color: #1a1a3a;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 30px;
+        .football-game-box .turn-indicator {
+            text-align: center;
             font-size: 16px;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
-            margin: 4px auto 8px;
-        }
-        .spin-wheel-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
-        }
-        .spin-wheel-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
+            color: #ffd700;
+            margin-bottom: 8px;
+            padding: 4px 12px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 30px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* زمین فوتبال */
@@ -1300,10 +1249,11 @@
             border-radius: 50%;
             border: 4px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            margin: 8px auto;
+            margin: 4px auto;
             box-shadow: 0 0 60px rgba(0, 0, 0, 0.3), inset 0 0 80px rgba(0, 0, 0, 0.2);
             touch-action: none;
             cursor: grab;
+            overflow: hidden;
         }
         .pitch:active {
             cursor: grabbing;
@@ -1316,7 +1266,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border: 2px dashed rgba(255, 255, 255, 0.12);
         }
         .pitch-center-line {
             position: absolute;
@@ -1325,12 +1275,56 @@
             transform: translateX(-50%);
             width: 2px;
             height: 100%;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
         }
+        /* دروازه‌ها */
+        .goal-left, .goal-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+        .goal-left {
+            left: -2px;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .goal-right {
+            right: -2px;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+        }
+        .goal-left::before, .goal-right::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+        .goal-left::after, .goal-right::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+
         .ball {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #fff, #ddd);
             border: 2px solid #bbb;
@@ -1348,7 +1342,7 @@
             touch-action: none;
         }
         .ball .country-flag {
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1;
         }
 
@@ -1359,48 +1353,40 @@
             transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(12px);
-            padding: 20px 30px;
+            padding: 18px 24px;
             border-radius: 20px;
             border: 2px solid #ffd700;
             color: #ffd700;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 900;
             z-index: 10;
             text-align: center;
             box-shadow: 0 0 60px rgba(255, 215, 0, 0.2);
             display: none;
-            min-width: 180px;
+            min-width: 160px;
         }
         .goal-message .sub {
-            font-size: 16px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
             margin-top: 4px;
         }
         .goal-message .reset-game-btn {
-            margin-top: 12px;
+            margin-top: 10px;
             background: rgba(255, 215, 0, 0.15);
             color: #ffd700;
             border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 8px 24px;
+            padding: 6px 20px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: none;
         }
         .goal-message .reset-game-btn:hover {
             background: rgba(255, 215, 0, 0.25);
             transform: scale(1.05);
-        }
-
-        .football-status {
-            font-size: 16px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            margin: 4px 0 6px 0;
-            min-height: 24px;
         }
 
         /* ===== واکنش‌گرایی ===== */
@@ -1494,28 +1480,7 @@
             .mod-panel-box,
             .country-select-box,
             .football-game-box {
-                padding: 20px 14px;
-            }
-            .pitch {
-                height: 260px;
-                max-width: 260px;
-            }
-            .ball {
-                width: 34px;
-                height: 34px;
-                font-size: 16px;
-            }
-            .ball .country-flag {
-                font-size: 18px;
-            }
-            .wheel-container {
-                width: 160px;
-                height: 160px;
-            }
-            .wheel-center {
-                width: 32px;
-                height: 32px;
-                font-size: 12px;
+                padding: 16px 12px;
             }
             .country-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1527,6 +1492,32 @@
             }
             .country-btn .flag {
                 font-size: 26px;
+            }
+            .pitch {
+                height: 260px;
+                max-width: 260px;
+            }
+            .ball {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            .ball .country-flag {
+                font-size: 16px;
+            }
+            .football-game-box .game-info .team .flag {
+                font-size: 18px;
+            }
+            .football-game-box .game-info .team .name {
+                font-size: 11px;
+            }
+            .football-game-box .game-info .score {
+                font-size: 15px;
+                padding: 2px 10px;
+            }
+            .goal-left, .goal-right {
+                height: 40px;
+                width: 8px;
             }
         }
         @media(max-width: 380px) {
@@ -1574,35 +1565,27 @@
                 min-width: 60px;
             }
             .pitch {
-                height: 220px;
-                max-width: 220px;
+                height: 200px;
+                max-width: 200px;
             }
             .ball {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
             }
             .ball .country-flag {
-                font-size: 14px;
+                font-size: 12px;
             }
-            .wheel-container {
-                width: 130px;
-                height: 130px;
-            }
-            .wheel-center {
-                width: 26px;
-                height: 26px;
-                font-size: 10px;
+            .goal-left, .goal-right {
+                height: 32px;
+                width: 6px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== پس‌زمینه ===== -->
     <div class="bg-glow"></div>
-
-    <!-- ===== برف‌های متحرک ===== -->
     <div class="snowflakes" id="snowflakes"></div>
 
     <div class="page-container">
@@ -1680,11 +1663,9 @@
                 <div class="game-container">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h3>🎯 بازی دوز</h3>
-
                     <div class="timer-container">
                         <div class="timer" id="timerDisplay">⏱ 20</div>
                     </div>
-
                     <div class="game-status" id="statusMsg">نوبت شما (X) - شروع کنید!</div>
                     <div class="board" id="board"></div>
                     <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
@@ -1694,12 +1675,10 @@
             <!-- ===== انتخاب کشور ===== -->
             <div id="countrySelectPage">
                 <div class="country-select-box">
-                    <button class="back-btn" onclick="goHome()" style="position:absolute; top:14px; right:16px; background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.06); padding:5px 14px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; z-index:2; box-shadow:none;">↩ بازگشت</button>
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🌍 انتخاب کشور</h2>
-                    <p style="color:rgba(255,255,255,0.4); font-size:14px;">کشور خود را برای بازی فوتبال انتخاب کنید</p>
-                    <div class="country-grid" id="countryGrid">
-                        <!-- کشورها توسط JS ساخته می‌شوند -->
-                    </div>
+                    <p>کشور خود را برای بازی فوتبال انتخاب کنید</p>
+                    <div class="country-grid" id="countryGrid"></div>
                     <button class="start-game-btn" id="startFootballBtn" onclick="startFootballGame()" disabled>⚽ شروع بازی</button>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1710,30 +1689,27 @@
                 <div class="football-game-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h3>⚽ فوتبال کشوری</h3>
+
                     <div class="game-info">
-                        <span class="player-tag" id="player1Tag">👤 شما: <span id="player1Country">🇮🇷</span></span>
-                        <span class="player-tag" id="player2Tag">🤖 ربات: <span id="player2Country">🇩🇪</span></span>
-                    </div>
-
-                    <!-- گردونه انتخاب شروع کننده -->
-                    <div style="text-align:center; width:100%;">
-                        <div class="wheel-container" id="wheelContainer">
-                            <div class="wheel-pointer"></div>
-                            <div class="wheel" id="wheel">
-                                <div class="wheel-segment" id="segment1">شما</div>
-                                <div class="wheel-segment" id="segment2">ربات</div>
-                                <div class="wheel-center">🎯</div>
-                            </div>
+                        <div class="team">
+                            <span class="flag" id="playerFlag">🇮🇷</span>
+                            <span class="name" id="playerName">شما</span>
                         </div>
-                        <button class="spin-wheel-btn" id="spinWheelBtn" onclick="spinWheel()">🎲 چرخش</button>
+                        <div class="score" id="scoreDisplay">0 - 0</div>
+                        <div class="team">
+                            <span class="flag" id="robotFlag">🇩🇪</span>
+                            <span class="name" id="robotName">ربات</span>
+                        </div>
                     </div>
 
-                    <div class="football-status" id="footballStatus">برای شروع، گردونه را بچرخانید</div>
+                    <div class="game-status" id="footballStatus">⏳ در حال آماده‌سازی...</div>
+                    <div class="turn-indicator" id="turnIndicator">🎯 نوبت: شما</div>
 
-                    <!-- زمین فوتبال -->
                     <div class="pitch" id="pitch">
                         <div class="pitch-center-circle"></div>
                         <div class="pitch-center-line"></div>
+                        <div class="goal-left"></div>
+                        <div class="goal-right"></div>
                         <div class="ball" id="ball">
                             <span class="country-flag" id="ballFlag">⚽</span>
                         </div>
@@ -1807,9 +1783,7 @@
             <div id="modPage">
                 <div class="mod-panel-box">
                     <h2>🛡️ پنل مود</h2>
-                    <div class="online-games">
-                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
-                    </div>
+                    <div class="online-games">🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span></div>
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="modUserCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="modGameCount2">0</span></li>
@@ -1827,9 +1801,7 @@
     </div><!-- /page-container -->
 
     <script>
-        // ==========================================================
-        //  تولید برف
-        // ==========================================================
+        // ===== تولید برف =====
         (function createSnow() {
             const container = document.getElementById('snowflakes');
             const flakes = ['❄', '❅', '❆', '✦'];
@@ -1948,24 +1920,13 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
             const isAdmin = admins.includes(username);
-
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
-
-            if (isAdmin) {
-                adminBtn.style.display = 'inline-block';
-            } else {
-                adminBtn.style.display = 'none';
-            }
-
-            if (username && username !== '') {
-                modBtn.style.display = 'inline-block';
-            } else {
-                modBtn.style.display = 'none';
-            }
+            if (isAdmin) { adminBtn.style.display = 'inline-block'; } else { adminBtn.style.display = 'none'; }
+            if (username && username !== '') { modBtn.style.display = 'inline-block'; } else { modBtn.style.display =
+                'none'; }
         }
 
-        // آپلود عکس
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -2040,11 +2001,9 @@
             const admins = getAdmins();
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
-
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             const isSuperAdmin = currentUser === SUPER_ADMIN;
             const modAllowed = getModAllowedUsers();
-
             let html = '';
             admins.forEach(admin => {
                 let isMod = modAllowed.includes(admin);
@@ -2072,7 +2031,6 @@
             const modAllowed = getModAllowedUsers();
             const modAdminListEl = document.getElementById('modAdminNamesDisplay');
             if (!modAdminListEl) return;
-
             let html = '';
             modAllowed.forEach(admin => {
                 html += `<span style="color:#a78bfa;margin-left:6px;">${admin}</span>`;
@@ -2084,26 +2042,20 @@
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
-            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage', 'countrySelectPage', 'footballGamePage'];
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage',
+                'countrySelectPage', 'footballGamePage'
+            ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
             });
             document.getElementById(pageId).style.display = 'flex';
-            if (pageId === 'profilePage') {
-                loadProfile();
-            }
-            if (pageId === 'modPage') {
-                updateModPanelUI();
-                updateModStats();
-            }
-            if (pageId === 'adminPanel') {
-                updateAdminPanelUI();
-                updateAdminStats();
-            }
-            if (pageId === 'countrySelectPage') {
-                renderCountries();
-            }
+            if (pageId === 'profilePage') { loadProfile(); }
+            if (pageId === 'modPage') { updateModPanelUI();
+                updateModStats(); }
+            if (pageId === 'adminPanel') { updateAdminPanelUI();
+                updateAdminStats(); }
+            if (pageId === 'countrySelectPage') { renderCountries(); }
         }
 
         function updateModStats() {
@@ -2116,42 +2068,32 @@
 
         function openModPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) {
-                alert('لطفاً ابتدا وارد شوید!');
-                return;
-            }
+            if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
             const modAllowed = getModAllowedUsers();
-            if (modAllowed.includes(username)) {
-                showPage('modPage');
-            } else {
-                alert('⛔ شما دسترسی به پنل مود ندارید!');
-            }
+            if (modAllowed.includes(username)) { showPage('modPage'); } else { alert('⛔ شما دسترسی به پنل مود ندارید!'); }
         }
 
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
-
-            if (!username) {
-                alert('لطفاً ابتدا وارد شوید!');
-                return;
-            }
-
+            if (!username) { alert('لطفاً ابتدا وارد شوید!'); return; }
             if (admins.includes(username)) {
                 updateAdminStats();
                 updateAdminPanelUI();
                 showPage('adminPanel');
-            } else {
-                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
-            }
+            } else { alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!'); }
         }
 
         function showRankPage() { showPage('rankPage'); }
+
         function showProfilePage() { loadProfile();
             showPage('profilePage'); }
+
         function goToMenu() { showPage('menuPage'); }
+
         function goToGame() { showPage('gamePage');
             startGame(); }
+
         function goToCountrySelect() { showPage('countrySelectPage');
             renderCountries(); }
 
@@ -2164,7 +2106,6 @@
                 gameId = null;
                 updateAdminStats();
             }
-            // ریست بازی فوتبال
             resetFootballGameState();
             showPage('homePage');
         }
@@ -2178,24 +2119,13 @@
             const input = document.getElementById('usernameInput');
             const error = document.getElementById('loginError');
             const username = input.value.trim();
-
-            if (username === '') {
-                error.style.display = 'block';
-                return;
-            }
-
-            if (!isUsernameTaken(username)) {
-                addUsername(username);
-            }
-
+            if (username === '') { error.style.display = 'block'; return; }
+            if (!isUsernameTaken(username)) { addUsername(username); }
             error.style.display = 'none';
             currentUsername = username;
-
             localStorage.setItem('username', username);
-
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
-
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
@@ -2203,9 +2133,7 @@
                 loadProfile();
                 showPage('homePage');
                 updateAdminStats();
-                if (getAdmins().includes(username)) {
-                    updateAdminPanelUI();
-                }
+                if (getAdmins().includes(username)) { updateAdminPanelUI(); }
                 updateButtonsVisibility();
             }, 2000);
         }
@@ -2214,9 +2142,7 @@
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 currentUsername = saved;
-                if (!isUsernameTaken(saved)) {
-                    addUsername(saved);
-                }
+                if (!isUsernameTaken(saved)) { addUsername(saved); }
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
@@ -2226,9 +2152,7 @@
                     loadProfile();
                     showPage('homePage');
                     updateAdminStats();
-                    if (getAdmins().includes(saved)) {
-                        updateAdminPanelUI();
-                    }
+                    if (getAdmins().includes(saved)) { updateAdminPanelUI(); }
                     updateButtonsVisibility();
                 }, 1500);
             }
@@ -2243,25 +2167,14 @@
 
         function checkConnection() {
             return new Promise((resolve) => {
-                if (!navigator.onLine) {
-                    resolve(false);
-                    return;
-                }
+                if (!navigator.onLine) { resolve(false); return; }
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 5000);
-                fetch('https://httpbin.org/get', {
-                        method: 'HEAD',
-                        mode: 'no-cors',
-                        signal: controller.signal,
-                    })
-                    .then(() => {
-                        clearTimeout(timeoutId);
-                        resolve(true);
-                    })
-                    .catch(() => {
-                        clearTimeout(timeoutId);
-                        resolve(false);
-                    });
+                fetch('https://httpbin.org/get', { method: 'HEAD', mode: 'no-cors', signal: controller.signal })
+                    .then(() => { clearTimeout(timeoutId);
+                        resolve(true); })
+                    .catch(() => { clearTimeout(timeoutId);
+                        resolve(false); });
             });
         }
 
@@ -2269,9 +2182,7 @@
             loader.style.display = 'flex';
             errorPage.style.display = 'none';
             mainContent.style.display = 'none';
-
             const isConnected = await checkConnection();
-
             if (isConnected) {
                 loader.style.display = 'none';
                 mainContent.style.display = 'block';
@@ -2282,25 +2193,17 @@
             }
         }
 
-        function retryConnection() {
-            initConnection();
-        }
+        function retryConnection() { initConnection(); }
 
         // ==========================================================
         //  ۴. آمار کاربران و بازی‌ها
         // ==========================================================
         function getOnlineUsers() {
-            try {
-                const data = localStorage.getItem('onlineUsers');
-                return data ? JSON.parse(data) : [];
-            } catch { return []; }
+            try { const data = localStorage.getItem('onlineUsers'); return data ? JSON.parse(data) : []; } catch { return []; }
         }
 
         function getActiveGames() {
-            try {
-                const data = localStorage.getItem('activeGames');
-                return data ? JSON.parse(data) : [];
-            } catch { return []; }
+            try { const data = localStorage.getItem('activeGames'); return data ? JSON.parse(data) : []; } catch { return []; }
         }
 
         function updateAdminStats() {
@@ -2316,7 +2219,6 @@
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
         const timerDisplay = document.getElementById('timerDisplay');
-
         let board = Array(9).fill('');
         let currentPlayer = 'X';
         let gameOver = false;
@@ -2325,7 +2227,6 @@
         let timeLeft = 20;
         const MAX_TIME = 20;
         let gameId = null;
-
         const winPatterns = [
             [0, 1, 2],
             [3, 4, 5],
@@ -2340,19 +2241,16 @@
         function playWinSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                const notes = [
-                    { freq: 523, duration: 0.15 },
-                    { freq: 659, duration: 0.15 },
-                    { freq: 784, duration: 0.15 },
-                    { freq: 1047, duration: 0.25 },
-                ];
+                const notes = [{ freq: 523, duration: 0.15 }, { freq: 659, duration: 0.15 }, { freq: 784,
+                        duration: 0.15 }, { freq: 1047, duration: 0.25 }];
                 notes.forEach((note, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     osc.type = 'square';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.12);
@@ -2376,19 +2274,16 @@
         function playLoseSound() {
             try {
                 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                const notes = [
-                    { freq: 500, duration: 0.3 },
-                    { freq: 450, duration: 0.3 },
-                    { freq: 400, duration: 0.3 },
-                    { freq: 350, duration: 0.5 },
-                ];
+                const notes = [{ freq: 500, duration: 0.3 }, { freq: 450, duration: 0.3 }, { freq: 400,
+                    duration: 0.3 }, { freq: 350, duration: 0.5 }];
                 notes.forEach((note, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     osc.type = 'sawtooth';
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note
+                    .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.25);
@@ -2401,17 +2296,11 @@
             clearTimer();
             timeLeft = MAX_TIME;
             updateTimerDisplay();
-
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateTimerDisplay();
-
-                if (timeLeft <= 5) {
-                    timerDisplay.classList.add('warning');
-                } else {
-                    timerDisplay.classList.remove('warning');
-                }
-
+                if (timeLeft <= 5) { timerDisplay.classList.add('warning'); } else { timerDisplay.classList.remove(
+                        'warning'); }
                 if (timeLeft <= 0) {
                     clearTimer();
                     timerDisplay.classList.remove('warning');
@@ -2419,9 +2308,7 @@
                         statusMsg.textContent = '⏰ زمان شما تمام شد! نوبت ربات...';
                         currentPlayer = 'O';
                         isRobotTurn = true;
-                        setTimeout(() => {
-                            if (!gameOver) robotMove();
-                        }, 300);
+                        setTimeout(() => { if (!gameOver) robotMove(); }, 300);
                     } else if (!gameOver && isRobotTurn && currentPlayer === 'O') {
                         statusMsg.textContent = '⏰ زمان ربات تمام شد! نوبت شما...';
                         currentPlayer = 'X';
@@ -2433,16 +2320,12 @@
         }
 
         function clearTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
+            if (timerInterval) { clearInterval(timerInterval);
+                timerInterval = null; }
             timerDisplay.classList.remove('warning');
         }
 
-        function updateTimerDisplay() {
-            timerDisplay.textContent = '⏱ ' + timeLeft;
-        }
+        function updateTimerDisplay() { timerDisplay.textContent = '⏱ ' + timeLeft; }
 
         function resetTimer() {
             clearTimer();
@@ -2471,9 +2354,7 @@
         function checkWinner() {
             for (let p of winPatterns) {
                 const [a, b, c] = p;
-                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                    return board[a];
-                }
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) { return board[a]; }
             }
             if (board.every(v => v !== '')) return 'draw';
             return null;
@@ -2489,41 +2370,28 @@
                 gameId = null;
                 updateAdminStats();
             }
-
-            if (result === 'X') {
-                playWinSound();
-                statusMsg.textContent = '🎉 شما برنده شدید!';
-            } else if (result === 'O') {
-                playLoseSound();
-                statusMsg.textContent = '🤖 ربات برنده شد!';
-            } else if (result === 'draw') {
-                statusMsg.textContent = '🤝 مساوی!';
-            }
+            if (result === 'X') { playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید!'; } else if (result === 'O') { playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!'; } else if (result === 'draw') { statusMsg.textContent =
+                    '🤝 مساوی!'; }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
         function handleHumanMove(index) {
             if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
-
             board[index] = 'X';
             renderBoard();
             const winner = checkWinner();
             if (winner) { endGame(winner); return; }
-
             currentPlayer = 'O';
             isRobotTurn = true;
             statusMsg.textContent = '🤖 ربات در حال فکر...';
             clearTimer();
-            setTimeout(() => {
-                if (!gameOver) {
-                    robotMove();
-                }
-            }, 500);
+            setTimeout(() => { if (!gameOver) { robotMove(); } }, 500);
         }
 
         function robotMove() {
             if (gameOver) { isRobotTurn = false; return; }
-
             for (let i = 0; i < 9; i++) {
                 if (board[i] === '') {
                     board[i] = 'O';
@@ -2554,7 +2422,6 @@
             const winner = checkWinner();
             if (winner) { endGame(winner);
                 isRobotTurn = false; return; }
-
             currentPlayer = 'X';
             isRobotTurn = false;
             statusMsg.textContent = 'نوبت شما (X)';
@@ -2566,7 +2433,6 @@
             gameOver = false;
             currentPlayer = 'X';
             isRobotTurn = false;
-
             gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
             let games = getActiveGames();
             if (!games.includes(gameId)) {
@@ -2574,7 +2440,6 @@
                 localStorage.setItem('activeGames', JSON.stringify(games));
                 updateAdminStats();
             }
-
             renderBoard();
             statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
             clearTimer();
@@ -2600,31 +2465,42 @@
         // ==========================================================
 
         const countries = [
-            { name: 'ایران', flag: '🇮🇷', code: 'ir' },
-            { name: 'آلمان', flag: '🇩🇪', code: 'de' },
-            { name: 'برزیل', flag: '🇧🇷', code: 'br' },
-            { name: 'ایتالیا', flag: '🇮🇹', code: 'it' },
-            { name: 'فرانسه', flag: '🇫🇷', code: 'fr' },
-            { name: 'انگلیس', flag: '🇬🇧', code: 'gb' },
-            { name: 'اسپانیا', flag: '🇪🇸', code: 'es' },
-            { name: 'آرژانتین', flag: '🇦🇷', code: 'ar' }
+            { name: 'ایران', flag: '🇮🇷' },
+            { name: 'آلمان', flag: '🇩🇪' },
+            { name: 'برزیل', flag: '🇧🇷' },
+            { name: 'ایتالیا', flag: '🇮🇹' },
+            { name: 'فرانسه', flag: '🇫🇷' },
+            { name: 'انگلیس', flag: '🇬🇧' },
+            { name: 'اسپانیا', flag: '🇪🇸' },
+            { name: 'آرژانتین', flag: '🇦🇷' },
+            { name: 'ژاپن', flag: '🇯🇵' },
+            { name: 'کره جنوبی', flag: '🇰🇷' }
         ];
 
         let selectedCountry = null;
-        let footballGameState = {
+        let footballState = {
             playerCountry: null,
             robotCountry: null,
+            playerScore: 0,
+            robotScore: 0,
             ballX: 50,
             ballY: 50,
-            turn: 'player', // 'player' یا 'robot'
+            turn: 'player',
             isGoal: false,
-            isSpinning: false,
             isGameOver: false,
             isDragging: false,
             dragStartX: 0,
             dragStartY: 0,
             dragCurrentX: 0,
-            dragCurrentY: 0
+            dragCurrentY: 0,
+            hasStarted: false
+        };
+
+        // متغیرهای برای مدیریت رویدادهای کشیدن
+        let dragHandlers = {
+            onStart: null,
+            onMove: null,
+            onEnd: null
         };
 
         function renderCountries() {
@@ -2635,9 +2511,9 @@
                 const btn = document.createElement('button');
                 btn.className = 'country-btn';
                 btn.innerHTML = `<span class="flag">${c.flag}</span><span>${c.name}</span>`;
-                btn.dataset.code = c.code;
+                btn.dataset.name = c.name;
                 btn.onclick = () => selectCountry(c);
-                if (selectedCountry && selectedCountry.code === c.code) {
+                if (selectedCountry && selectedCountry.name === c.name) {
                     btn.classList.add('selected');
                 }
                 grid.appendChild(btn);
@@ -2648,7 +2524,7 @@
         function selectCountry(country) {
             selectedCountry = country;
             document.querySelectorAll('.country-btn').forEach(btn => {
-                btn.classList.toggle('selected', btn.dataset.code === country.code);
+                btn.classList.toggle('selected', btn.dataset.name === country.name);
             });
             updateStartButton();
         }
@@ -2660,24 +2536,32 @@
 
         function startFootballGame() {
             if (!selectedCountry) return;
-            // انتخاب تصادفی کشور برای ربات
-            const robotCountry = countries[Math.floor(Math.random() * countries.length)];
 
-            footballGameState.playerCountry = selectedCountry;
-            footballGameState.robotCountry = robotCountry;
-            footballGameState.ballX = 50;
-            footballGameState.ballY = 50;
-            footballGameState.turn = 'player';
-            footballGameState.isGoal = false;
-            footballGameState.isGameOver = false;
-            footballGameState.isSpinning = false;
-            footballGameState.isDragging = false;
+            // انتخاب تصادفی کشور برای ربات (متفاوت از کاربر)
+            let robotCountry;
+            do {
+                robotCountry = countries[Math.floor(Math.random() * countries.length)];
+            } while (robotCountry.name === selectedCountry.name);
 
-            // نمایش در صفحه بازی
-            document.getElementById('player1Country').textContent = selectedCountry.flag;
-            document.getElementById('player2Country').textContent = robotCountry.flag;
+            footballState.playerCountry = selectedCountry;
+            footballState.robotCountry = robotCountry;
+            footballState.playerScore = 0;
+            footballState.robotScore = 0;
+            footballState.ballX = 50;
+            footballState.ballY = 50;
+            footballState.turn = 'player';
+            footballState.isGoal = false;
+            footballState.isGameOver = false;
+            footballState.hasStarted = true;
 
-            // تنظیم توپ
+            // نمایش در صفحه
+            document.getElementById('playerFlag').textContent = selectedCountry.flag;
+            document.getElementById('playerName').textContent = 'شما';
+            document.getElementById('robotFlag').textContent = robotCountry.flag;
+            document.getElementById('robotName').textContent = 'ربات';
+            updateScoreDisplay();
+
+            // تنظیم توپ با کشور کاربر
             const ball = document.getElementById('ball');
             const ballFlag = document.getElementById('ballFlag');
             ballFlag.textContent = selectedCountry.flag;
@@ -2686,142 +2570,116 @@
 
             // مخفی کردن پیام گل
             document.getElementById('goalMessage').style.display = 'none';
+            document.getElementById('footballStatus').textContent = '🎯 بازی شروع شد! نوبت شما';
+            document.getElementById('turnIndicator').textContent = '🎯 نوبت: شما';
+            document.getElementById('turnIndicator').style.color = '#ffd700';
 
-            // نمایش گردونه
-            document.getElementById('wheelContainer').style.display = 'block';
-            document.getElementById('spinWheelBtn').style.display = 'inline-block';
-            document.getElementById('footballStatus').textContent = '🎲 گردونه را بچرخانید تا مشخص شود چه کسی شروع کند';
-
-            // ریست چرخش گردونه
-            document.getElementById('wheel').style.transform = 'rotate(0deg)';
-            document.getElementById('spinWheelBtn').disabled = false;
+            // فعال کردن کشیدن توپ برای کاربر
+            enableBallDrag();
 
             showPage('footballGamePage');
         }
 
-        function spinWheel() {
-            if (footballGameState.isSpinning || footballGameState.isGameOver) return;
-
-            const wheel = document.getElementById('wheel');
-            const spinBtn = document.getElementById('spinWheelBtn');
-            spinBtn.disabled = true;
-            footballGameState.isSpinning = true;
-
-            // چرخش تصادفی بین 5 تا 10 دور کامل + زاویه تصادفی
-            const randomAngle = Math.floor(Math.random() * 360);
-            const fullSpins = 5 + Math.floor(Math.random() * 5);
-            const totalDegrees = fullSpins * 360 + randomAngle;
-
-            wheel.style.transform = `rotate(${totalDegrees}deg)`;
-
-            // تعیین برنده بر اساس زاویه نهایی
-            // بخش شما: 0-180 درجه، بخش ربات: 180-360 درجه
-            const finalAngle = randomAngle % 360;
-            const winner = finalAngle < 180 ? 'player' : 'robot';
-
-            setTimeout(() => {
-                footballGameState.isSpinning = false;
-                footballGameState.turn = winner;
-
-                const status = document.getElementById('footballStatus');
-                if (winner === 'player') {
-                    status.textContent = `✅ شما شروع کننده هستید! (${footballGameState.playerCountry.flag})`;
-                    document.getElementById('player1Tag').classList.add('active-turn');
-                    document.getElementById('player2Tag').classList.remove('active-turn');
-                } else {
-                    status.textContent = `🤖 ربات شروع کننده است! (${footballGameState.robotCountry.flag})`;
-                    document.getElementById('player2Tag').classList.add('active-turn');
-                    document.getElementById('player1Tag').classList.remove('active-turn');
-                }
-
-                // مخفی کردن گردونه بعد از مشخص شدن
-                setTimeout(() => {
-                    document.getElementById('wheelContainer').style.display = 'none';
-                    document.getElementById('spinWheelBtn').style.display = 'none';
-                    status.textContent = winner === 'player' ? '👆 توپ را به سمت دروازه حریف بکشید!' :
-                        '🤖 ربات در حال حرکت توپ...';
-
-                    if (winner === 'robot') {
-                        // حرکت ربات
-                        setTimeout(() => robotMoveBall(), 1000);
-                    } else {
-                        // فعال کردن کشیدن توپ برای کاربر
-                        enableBallDrag();
-                    }
-                }, 1000);
-
-            }, 4500); // زمان چرخش
+        function updateScoreDisplay() {
+            document.getElementById('scoreDisplay').textContent =
+                `${footballState.playerScore} - ${footballState.robotScore}`;
         }
 
         function enableBallDrag() {
             const ball = document.getElementById('ball');
             const pitch = document.getElementById('pitch');
 
+            // غیرفعال کردن کشیدن قبلی
+            disableBallDrag();
+
             ball.style.cursor = 'grab';
             pitch.style.cursor = 'grab';
 
             const onStart = (e) => {
-                if (footballGameState.isGameOver || footballGameState.turn !== 'player') return;
+                if (footballState.isGameOver || footballState.turn !== 'player' || !footballState.hasStarted) return;
                 e.preventDefault();
-                footballGameState.isDragging = true;
+                footballState.isDragging = true;
                 const rect = pitch.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                footballGameState.dragStartX = clientX;
-                footballGameState.dragStartY = clientY;
-                footballGameState.dragCurrentX = clientX;
-                footballGameState.dragCurrentY = clientY;
+                footballState.dragStartX = clientX;
+                footballState.dragStartY = clientY;
                 ball.style.cursor = 'grabbing';
                 pitch.style.cursor = 'grabbing';
+
+                // ایجاد فلش راهنما
+                createArrow(clientX, clientY);
             };
 
             const onMove = (e) => {
-                if (!footballGameState.isDragging || footballGameState.isGameOver || footballGameState.turn !== 'player')
-                    return;
+                if (!footballState.isDragging || footballState.isGameOver || footballState.turn !== 'player') return;
                 e.preventDefault();
                 const rect = pitch.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-                const dx = clientX - footballGameState.dragStartX;
-                const dy = clientY - footballGameState.dragStartY;
-
-                // محاسبه موقعیت جدید توپ بر اساس جابجایی ماوس
-                const newX = Math.min(Math.max(footballGameState.ballX + (dx / rect.width) * 100, 5), 95);
-                const newY = Math.min(Math.max(footballGameState.ballY + (dy / rect.height) * 100, 5), 95);
-
-                footballGameState.ballX = newX;
-                footballGameState.ballY = newY;
-
-                // به‌روزرسانی موقعیت توپ
-                const ballEl = document.getElementById('ball');
-                ballEl.style.left = newX + '%';
-                ballEl.style.top = newY + '%';
-
-                footballGameState.dragStartX = clientX;
-                footballGameState.dragStartY = clientY;
-
-                // بررسی گل
-                checkGoal();
+                // به‌روزرسانی فلش
+                updateArrow(clientX, clientY);
             };
 
             const onEnd = (e) => {
-                if (!footballGameState.isDragging) return;
-                footballGameState.isDragging = false;
+                if (!footballState.isDragging) return;
+                footballState.isDragging = false;
                 ball.style.cursor = 'grab';
                 pitch.style.cursor = 'grab';
 
-                // بعد از حرکت، نوبت ربات
-                if (!footballGameState.isGameOver && footballGameState.turn === 'player') {
-                    footballGameState.turn = 'robot';
-                    document.getElementById('player1Tag').classList.remove('active-turn');
-                    document.getElementById('player2Tag').classList.add('active-turn');
-                    document.getElementById('footballStatus').textContent = '🤖 نوبت ربات...';
+                // حذف فلش
+                removeArrow();
 
-                    // حرکت ربات با تاخیر
-                    setTimeout(() => robotMoveBall(), 800);
+                // محاسبه جابجایی برای حرکت توپ
+                const rect = pitch.getBoundingClientRect();
+                const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+                const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+                const dx = (clientX - footballState.dragStartX) / rect.width * 100;
+                const dy = (clientY - footballState.dragStartY) / rect.height * 100;
+
+                // اگر جابجایی کافی بود، توپ حرکت کنه
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance > 2) {
+                    // حرکت توپ به سمت جهت کشیدن
+                    const newX = Math.min(Math.max(footballState.ballX + dx * 1.2, 5), 95);
+                    const newY = Math.min(Math.max(footballState.ballY + dy * 1.2, 5), 95);
+
+                    footballState.ballX = newX;
+                    footballState.ballY = newY;
+
+                    const ballEl = document.getElementById('ball');
+                    ballEl.style.left = newX + '%';
+                    ballEl.style.top = newY + '%';
+
+                    // بررسی گل
+                    checkGoal();
+
+                    // اگر گل نشد، نوبت ربات
+                    if (!footballState.isGameOver && footballState.turn === 'player') {
+                        footballState.turn = 'robot';
+                        document.getElementById('turnIndicator').textContent = '🤖 نوبت: ربات';
+                        document.getElementById('turnIndicator').style.color = '#f093fb';
+                        document.getElementById('footballStatus').textContent = '🤖 نوبت ربات...';
+
+                        setTimeout(() => robotMoveBall(), 800);
+                    }
+                } else {
+                    // جابجایی کم، پیام خطا
+                    document.getElementById('footballStatus').textContent = '👆 بیشتر بکشید!';
+                    setTimeout(() => {
+                        if (!footballState.isGameOver) {
+                            document.getElementById('footballStatus').textContent = '👆 توپ را بکشید';
+                        }
+                    }, 600);
                 }
             };
+
+            // ذخیره توابع برای پاکسازی
+            dragHandlers.onStart = onStart;
+            dragHandlers.onMove = onMove;
+            dragHandlers.onEnd = onEnd;
 
             // رویدادهای ماوس
             ball.addEventListener('mousedown', onStart);
@@ -2832,107 +2690,168 @@
             ball.addEventListener('touchstart', onStart, { passive: false });
             document.addEventListener('touchmove', onMove, { passive: false });
             document.addEventListener('touchend', onEnd, { passive: false });
+        }
 
-            // ذخیره توابع برای پاکسازی
-            ball._onStart = onStart;
-            document._onMove = onMove;
-            document._onEnd = onEnd;
+        // فلش راهنما
+        let arrowElement = null;
+        let arrowStartX = 0;
+        let arrowStartY = 0;
+
+        function createArrow(clientX, clientY) {
+            removeArrow();
+            const pitch = document.getElementById('pitch');
+            const rect = pitch.getBoundingClientRect();
+
+            arrowElement = document.createElement('div');
+            arrowElement.style.position = 'absolute';
+            arrowElement.style.pointerEvents = 'none';
+            arrowElement.style.zIndex = '6';
+            arrowElement.style.fontSize = '30px';
+            arrowElement.style.color = '#ffd700';
+            arrowElement.style.textShadow = '0 0 20px rgba(255,215,0,0.5)';
+            arrowElement.textContent = '➡️';
+            arrowElement.style.transition = 'none';
+
+            // موقعیت اولیه فلش
+            const ball = document.getElementById('ball');
+            const ballRect = ball.getBoundingClientRect();
+            const centerX = ballRect.left + ballRect.width / 2 - rect.left;
+            const centerY = ballRect.top + ballRect.height / 2 - rect.top;
+
+            arrowStartX = centerX;
+            arrowStartY = centerY;
+
+            arrowElement.style.left = (centerX) + 'px';
+            arrowElement.style.top = (centerY) + 'px';
+
+            pitch.appendChild(arrowElement);
+        }
+
+        function updateArrow(clientX, clientY) {
+            if (!arrowElement) return;
+            const pitch = document.getElementById('pitch');
+            const rect = pitch.getBoundingClientRect();
+
+            const dx = clientX - rect.left - arrowStartX;
+            const dy = clientY - rect.top - arrowStartY;
+
+            const angle = Math.atan2(dy, dx);
+            const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 80);
+
+            // چرخش فلش به سمت حرکت
+            arrowElement.style.transform = `rotate(${angle}rad)`;
+            arrowElement.style.left = (arrowStartX + Math.cos(angle) * 10) + 'px';
+            arrowElement.style.top = (arrowStartY + Math.sin(angle) * 10) + 'px';
+
+            // تغییر اندازه بر اساس فاصله
+            const scale = 0.6 + (distance / 80) * 0.6;
+            arrowElement.style.fontSize = (20 + scale * 20) + 'px';
+        }
+
+        function removeArrow() {
+            if (arrowElement && arrowElement.parentNode) {
+                arrowElement.parentNode.removeChild(arrowElement);
+                arrowElement = null;
+            }
         }
 
         function disableBallDrag() {
             const ball = document.getElementById('ball');
             const pitch = document.getElementById('pitch');
 
-            // حذف رویدادها
-            if (ball._onStart) {
-                ball.removeEventListener('mousedown', ball._onStart);
-                ball.removeEventListener('touchstart', ball._onStart);
+            if (dragHandlers.onStart) {
+                ball.removeEventListener('mousedown', dragHandlers.onStart);
+                ball.removeEventListener('touchstart', dragHandlers.onStart);
             }
-            if (document._onMove) {
-                document.removeEventListener('mousemove', document._onMove);
-                document.removeEventListener('touchmove', document._onMove);
+            if (dragHandlers.onMove) {
+                document.removeEventListener('mousemove', dragHandlers.onMove);
+                document.removeEventListener('touchmove', dragHandlers.onMove);
             }
-            if (document._onEnd) {
-                document.removeEventListener('mouseup', document._onEnd);
-                document.removeEventListener('touchend', document._onEnd);
+            if (dragHandlers.onEnd) {
+                document.removeEventListener('mouseup', dragHandlers.onEnd);
+                document.removeEventListener('touchend', dragHandlers.onEnd);
             }
 
             ball.style.cursor = 'default';
             pitch.style.cursor = 'default';
-            footballGameState.isDragging = false;
+            footballState.isDragging = false;
+            removeArrow();
         }
 
         function robotMoveBall() {
-            if (footballGameState.isGameOver) return;
+            if (footballState.isGameOver || footballState.turn !== 'robot') return;
 
             const status = document.getElementById('footballStatus');
             status.textContent = '🤖 ربات در حال حرکت توپ...';
 
-            // حرکت تصادفی ربات به سمت دروازه (سمت چپ یا راست)
-            const targetX = Math.random() > 0.5 ? 5 + Math.random() * 20 : 80 + Math.random() * 15;
-            const targetY = 10 + Math.random() * 80;
+            // هدف ربات: حرکت به سمت دروازه چپ (x کوچک)
+            const targetX = 5 + Math.random() * 15;
+            const targetY = 20 + Math.random() * 60;
 
-            // حرکت تدریجی
             let steps = 0;
-            const maxSteps = 15 + Math.floor(Math.random() * 10);
+            const maxSteps = 12 + Math.floor(Math.random() * 8);
 
             const moveInterval = setInterval(() => {
-                if (footballGameState.isGameOver || steps >= maxSteps) {
+                if (footballState.isGameOver || steps >= maxSteps) {
                     clearInterval(moveInterval);
-                    // بعد از حرکت ربات، نوبت کاربر
-                    if (!footballGameState.isGameOver) {
-                        footballGameState.turn = 'player';
-                        document.getElementById('player2Tag').classList.remove('active-turn');
-                        document.getElementById('player1Tag').classList.add('active-turn');
-                        status.textContent = '👆 نوبت شماست! توپ را بکشید.';
+                    if (!footballState.isGameOver) {
+                        // بعد از حرکت ربات، نوبت کاربر
+                        footballState.turn = 'player';
+                        document.getElementById('turnIndicator').textContent = '🎯 نوبت: شما';
+                        document.getElementById('turnIndicator').style.color = '#ffd700';
+                        document.getElementById('footballStatus').textContent = '👆 نوبت شما! توپ را بکشید.';
                         enableBallDrag();
                     }
                     return;
                 }
 
-                const currentX = footballGameState.ballX;
-                const currentY = footballGameState.ballY;
+                const currentX = footballState.ballX;
+                const currentY = footballState.ballY;
                 const dx = (targetX - currentX) / (maxSteps - steps);
                 const dy = (targetY - currentY) / (maxSteps - steps);
 
-                footballGameState.ballX += dx;
-                footballGameState.ballY += dy;
+                footballState.ballX += dx;
+                footballState.ballY += dy;
 
                 const ballEl = document.getElementById('ball');
-                ballEl.style.left = footballGameState.ballX + '%';
-                ballEl.style.top = footballGameState.ballY + '%';
+                ballEl.style.left = footballState.ballX + '%';
+                ballEl.style.top = footballState.ballY + '%';
 
                 steps++;
 
                 // بررسی گل در حین حرکت
                 checkGoal();
 
-                // اگر گل شد، متوقف کن
-                if (footballGameState.isGameOver) {
+                if (footballState.isGameOver) {
                     clearInterval(moveInterval);
                 }
 
-            }, 100);
+            }, 120);
         }
 
         function checkGoal() {
-            if (footballGameState.isGameOver) return;
+            if (footballState.isGameOver) return;
 
-            const x = footballGameState.ballX;
-            const y = footballGameState.ballY;
-
-            // دروازه‌ها در سمت چپ (x < 10) و راست (x > 90)
-            const goalThreshold = 12;
+            const x = footballState.ballX;
+            const y = footballState.ballY;
+            const goalThreshold = 10;
             const goalYRange = { min: 30, max: 70 };
 
             if ((x < goalThreshold || x > 100 - goalThreshold) && y > goalYRange.min && y < goalYRange.max) {
                 // گل شد!
-                footballGameState.isGameOver = true;
-                footballGameState.isGoal = true;
+                footballState.isGameOver = true;
+                footballState.isGoal = true;
                 disableBallDrag();
 
                 const isPlayerGoal = x < goalThreshold;
-                const scorer = isPlayerGoal ? footballGameState.playerCountry : footballGameState.robotCountry;
+                const scorer = isPlayerGoal ? footballState.playerCountry : footballState.robotCountry;
+
+                if (isPlayerGoal) {
+                    footballState.playerScore++;
+                } else {
+                    footballState.robotScore++;
+                }
+                updateScoreDisplay();
 
                 const goalMsg = document.getElementById('goalMessage');
                 const goalText = document.getElementById('goalText');
@@ -2942,13 +2861,18 @@
                 goalSub.textContent = isPlayerGoal ? 'تبریک! شما گل زدید!' : 'ربات گل زد!';
                 goalMsg.style.display = 'block';
 
-                document.getElementById('footballStatus').textContent = isPlayerGoal ? '🎉 شما برنده شدید!' :
-                '🤖 ربات برنده شد!';
+                const status = document.getElementById('footballStatus');
+                const turnIndicator = document.getElementById('turnIndicator');
 
-                // انیمیشن جشن
                 if (isPlayerGoal) {
+                    status.textContent = '🎉 شما گل زدید!';
+                    turnIndicator.textContent = '✅ شما';
+                    turnIndicator.style.color = '#2ecc71';
                     playWinSound();
                 } else {
+                    status.textContent = '😅 ربات گل زد!';
+                    turnIndicator.textContent = '❌ ربات';
+                    turnIndicator.style.color = '#ff6b8a';
                     playLoseSound();
                 }
 
@@ -2959,33 +2883,31 @@
 
         function resetFootballGame() {
             document.getElementById('goalMessage').style.display = 'none';
-            footballGameState.isGameOver = false;
-            footballGameState.isGoal = false;
-            footballGameState.ballX = 50;
-            footballGameState.ballY = 50;
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.ballX = 50;
+            footballState.ballY = 50;
+            footballState.hasStarted = false;
 
             const ball = document.getElementById('ball');
             ball.style.left = '50%';
             ball.style.top = '50%';
 
-            document.getElementById('player1Tag').classList.remove('active-turn');
-            document.getElementById('player2Tag').classList.remove('active-turn');
-
-            // نمایش مجدد گردونه
-            document.getElementById('wheelContainer').style.display = 'block';
-            document.getElementById('spinWheelBtn').style.display = 'inline-block';
-            document.getElementById('spinWheelBtn').disabled = false;
-            document.getElementById('wheel').style.transform = 'rotate(0deg)';
-            document.getElementById('footballStatus').textContent = '🎲 گردونه را بچرخانید تا مشخص شود چه کسی شروع کند';
+            document.getElementById('footballStatus').textContent = '🔄 بازی جدید! کشور خود را انتخاب کنید';
+            document.getElementById('turnIndicator').textContent = '⏳ انتخاب کشور';
 
             disableBallDrag();
+
+            // بازگشت به صفحه انتخاب کشور
+            showPage('countrySelectPage');
+            renderCountries();
         }
 
         function resetFootballGameState() {
-            footballGameState.isGameOver = false;
-            footballGameState.isGoal = false;
-            footballGameState.isSpinning = false;
-            footballGameState.isDragging = false;
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.isDragging = false;
+            footballState.hasStarted = false;
             document.getElementById('goalMessage').style.display = 'none';
             disableBallDrag();
         }
@@ -2998,4 +2920,3 @@
 
 </body>
 </html>
-```
