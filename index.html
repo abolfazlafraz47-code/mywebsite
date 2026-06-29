@@ -830,6 +830,11 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 12px;
         }
+        .ban-panel-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
         .ban-panel-box .ban-search {
             display: flex;
             gap: 8px;
@@ -1844,7 +1849,7 @@
                 <div class="ban-panel-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🚫 مدیریت بن</h2>
-                    <p style="color:rgba(255,255,255,0.4); font-size:14px;">کاربران را برای 24 ساعت بن کنید</p>
+                    <p>کاربران را برای 24 ساعت بن کنید</p>
                     <div class="ban-search">
                         <input type="text" id="banSearchInput" placeholder="جستجوی نام کاربری..." />
                         <button class="search-btn" onclick="searchUsers()">🔍 جستجو</button>
@@ -2121,13 +2126,32 @@
         }
 
         // ==========================================================
-        //  مدیریت نام‌های کاربری
+        //  مدیریت نام‌های کاربری - اضافه کردن کاربران پیش‌فرض
         // ==========================================================
         function getRegisteredUsernames() {
             try {
                 const data = localStorage.getItem('registeredUsernames');
-                return data ? JSON.parse(data) : [];
-            } catch { return []; }
+                if (data) {
+                    const list = JSON.parse(data);
+                    // اطمینان از وجود کاربران اصلی
+                    const defaultUsers = ['ابوالفضل', 'محمد رضا', 'آراد تریاکی'];
+                    let changed = false;
+                    defaultUsers.forEach(u => {
+                        if (!list.includes(u)) {
+                            list.push(u);
+                            changed = true;
+                        }
+                    });
+                    if (changed) {
+                        setRegisteredUsernames(list);
+                    }
+                    return list;
+                }
+            } catch {}
+            // اگر داده‌ای نبود، لیست پیش‌فرض را ایجاد کن
+            const defaultList = ['ابوالفضل', 'محمد رضا', 'آراد تریاکی'];
+            setRegisteredUsernames(defaultList);
+            return defaultList;
         }
 
         function setRegisteredUsernames(list) {
@@ -2215,7 +2239,6 @@
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const admins = getAdmins();
-            const isAdmin = admins.includes(username);
 
             const adminBtn = document.getElementById('adminBtn');
             const modBtn = document.getElementById('modBtn');
@@ -2488,6 +2511,9 @@
         }
 
         window.addEventListener('load', function() {
+            // اطمینان از وجود کاربران پیش‌فرض
+            getRegisteredUsernames();
+
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 if (isUserBanned(saved)) {
@@ -3296,12 +3322,9 @@
                 const isCurrentUser = username === currentUser;
                 const isSuperAdmin = username === "ابوالفضل";
 
-                // فقط ابوالفضل قابل بن نیست (محمد رضا و آراد تریاکی قابل بن هستند)
-                // همچنین کاربر نمی‌تونه خودش رو بن کنه
                 let canBan = true;
                 if (isCurrentUser) canBan = false;
-                if (isSuperAdmin) canBan = false; // ابوالفضل قابل بن نیست
-                // اگر کاربر لاگین شده نه ابوالفضل باشه و نه محمد رضا، نمی‌تونه بن کنه
+                if (isSuperAdmin) canBan = false;
                 if (currentUser !== "ابوالفضل" && currentUser !== "محمد رضا") canBan = false;
 
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
