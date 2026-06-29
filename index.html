@@ -799,6 +799,7 @@
             padding: 32px 24px;
             width: 100%;
             text-align: center;
+            position: relative;
         }
         .ban-panel-box .back-btn {
             position: absolute;
@@ -1820,14 +1821,17 @@
                     <div class="admin-gift-setting">
                         <h4>🎁 تنظیم کد هدیه</h4>
                         <div class="gift-row">
-                            <input type="text" id="giftCodeInput" placeholder="کد هدیه" value="877" />
+                            <input type="text" id="giftCodeInput" placeholder="کد هدیه" value="1234" />
                         </div>
                         <div class="gift-row">
                             <input type="text" id="giftPrizeInput" placeholder="جایزه (مثلاً: ۱۰۰ سکه)" value="۱۰۰ سکه طلا" />
                             <button class="save-gift-btn" onclick="saveGiftSettings()">💾 ذخیره</button>
                         </div>
                         <div style="font-size:12px; color:rgba(255,255,255,0.3); text-align:center; margin-top:4px;">
-                            کد فعلی: <span id="currentGiftCodeDisplay" style="color:#ffd700;">877</span> | جایزه: <span id="currentGiftPrizeDisplay" style="color:#ffd700;">۱۰۰ سکه طلا</span>
+                            کد فعلی: <span id="currentGiftCodeDisplay" style="color:#ffd700;">1234</span> | جایزه: <span id="currentGiftPrizeDisplay" style="color:#ffd700;">۱۰۰ سکه طلا</span>
+                        </div>
+                        <div style="font-size:11px; color:rgba(255,107,107,0.5); text-align:center; margin-top:2px;">
+                            ⚠️ کد 877 همیشه اشتباه است!
                         </div>
                     </div>
 
@@ -2040,7 +2044,7 @@
         }
 
         // ==========================================================
-        //  سیستم کد هدیه (Gift System)
+        //  سیستم کد هدیه (Gift System) - کد 877 همیشه اشتباه
         // ==========================================================
         function getGiftSettings() {
             try {
@@ -2049,7 +2053,7 @@
                     return JSON.parse(data);
                 }
             } catch {}
-            return { code: '877', prize: '۱۰۰ سکه طلا' };
+            return { code: '1234', prize: '۱۰۰ سکه طلا' };
         }
 
         function setGiftSettings(code, prize) {
@@ -2058,7 +2062,7 @@
 
         function getCurrentGiftCode() {
             const settings = getGiftSettings();
-            return settings.code || '877';
+            return settings.code || '1234';
         }
 
         function getCurrentGiftPrize() {
@@ -2069,7 +2073,7 @@
         function saveGiftSettings() {
             const codeInput = document.getElementById('giftCodeInput');
             const prizeInput = document.getElementById('giftPrizeInput');
-            const code = codeInput.value.trim() || '877';
+            const code = codeInput.value.trim() || '1234';
             const prize = prizeInput.value.trim() || '۱۰۰ سکه طلا';
             setGiftSettings(code, prize);
             document.getElementById('currentGiftCodeDisplay').textContent = code;
@@ -2079,7 +2083,6 @@
 
         function showGiftPage() {
             showPage('giftPage');
-            // ریست نتیجه
             const result = document.getElementById('giftResult');
             result.className = 'gift-result';
             result.style.display = 'none';
@@ -2090,17 +2093,25 @@
             const input = document.getElementById('giftCodeInputUser');
             const code = input.value.trim();
             const correctCode = getCurrentGiftCode();
-            const prize = getCurrentGiftPrize();
 
             const result = document.getElementById('giftResult');
             const textEl = document.getElementById('giftResultText');
             const prizeEl = document.getElementById('giftResultPrize');
 
+            // کد 877 همیشه اشتباه است
+            if (code === '877') {
+                result.className = 'gift-result error';
+                result.style.display = 'block';
+                textEl.textContent = '❌ کد هدیه اشتباه است!';
+                prizeEl.textContent = '';
+                return;
+            }
+
             if (code === correctCode) {
                 result.className = 'gift-result success';
                 result.style.display = 'block';
                 textEl.textContent = '✅ کد هدیه درست است!';
-                prizeEl.textContent = `🎁 جایزه شما: ${prize}`;
+                prizeEl.textContent = `🎁 جایزه شما: ${getCurrentGiftPrize()}`;
             } else {
                 result.className = 'gift-result error';
                 result.style.display = 'block';
@@ -2210,21 +2221,18 @@
             const modBtn = document.getElementById('modBtn');
             const banBtn = document.getElementById('banBtn');
 
-            // دکمه ادمین: فقط برای ابوالفضل و محمد رضا
             if (username === "ابوالفضل" || username === "محمد رضا") {
                 adminBtn.style.display = 'inline-block';
             } else {
                 adminBtn.style.display = 'none';
             }
 
-            // دکمه مود: برای همه کاربران لاگین شده
             if (username && username !== '') {
                 modBtn.style.display = 'inline-block';
             } else {
                 modBtn.style.display = 'none';
             }
 
-            // دکمه بن: فقط برای ابوالفضل و محمد رضا
             if (username === "ابوالفضل" || username === "محمد رضا") {
                 banBtn.style.display = 'inline-block';
             } else {
@@ -2361,17 +2369,15 @@
             if (pageId === 'adminPanel') {
                 updateAdminPanelUI();
                 updateAdminStats();
-                // نمایش تنظیمات فعلی
                 const settings = getGiftSettings();
-                document.getElementById('giftCodeInput').value = settings.code || '877';
+                document.getElementById('giftCodeInput').value = settings.code || '1234';
                 document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
-                document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '877';
+                document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
                 document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
             }
             if (pageId === 'countrySelectPage') { renderCountries(); }
             if (pageId === 'banPage') { renderBanList(); }
             if (pageId === 'giftPage') {
-                // ریست نتیجه
                 const result = document.getElementById('giftResult');
                 result.className = 'gift-result';
                 result.style.display = 'none';
@@ -3249,7 +3255,7 @@
         }
 
         // ==========================================================
-        //  ۷. پنل بن
+        //  ۷. پنل بن - کاربران قابل بن: همه به جز ابوالفضل و خود کاربر
         // ==========================================================
 
         function searchUsers() {
@@ -3289,18 +3295,12 @@
                 const isBanned = !!banned[username];
                 const isCurrentUser = username === currentUser;
                 const isSuperAdmin = username === "ابوالفضل";
-                const isMohammadReza = username === "محمد رضا";
-                const isArad = username === "آراد تریاکی";
 
-                // قوانین بن:
-                // - ابوالفضل می‌تونه همه رو بن کنه
-                // - محمد رضا نمی‌تونه ابوالفضل رو بن کنه، ولی می‌تونه آراد تریاکی رو بن کنه
-                // - هیچکس نمی‌تونه خودش رو بن کنه
+                // فقط ابوالفضل قابل بن نیست (محمد رضا و آراد تریاکی قابل بن هستند)
+                // همچنین کاربر نمی‌تونه خودش رو بن کنه
                 let canBan = true;
                 if (isCurrentUser) canBan = false;
-                if (currentUser === "محمد رضا" && isSuperAdmin) canBan = false;
-                if (currentUser === "محمد رضا" && username === "محمد رضا") canBan = false;
-                if (currentUser !== "ابوالفضل" && isSuperAdmin) canBan = false;
+                if (isSuperAdmin) canBan = false; // ابوالفضل قابل بن نیست
                 // اگر کاربر لاگین شده نه ابوالفضل باشه و نه محمد رضا، نمی‌تونه بن کنه
                 if (currentUser !== "ابوالفضل" && currentUser !== "محمد رضا") canBan = false;
 
@@ -3335,12 +3335,8 @@
                 alert('⛔ نمی‌توانید خودتان را بن کنید!');
                 return;
             }
-            if (username === "ابوالفضل" && currentUser !== "ابوالفضل") {
+            if (username === "ابوالفضل") {
                 alert('⛔ شما اجازه بن کردن ابوالفضل را ندارید!');
-                return;
-            }
-            if (username === "محمد رضا" && currentUser === "محمد رضا") {
-                alert('⛔ نمی‌توانید خودتان را بن کنید!');
                 return;
             }
 
@@ -3363,7 +3359,7 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با سیستم کد هدیه و بن کاربران آماده است!');
+        console.log('❄️ برفی با سیستم کد هدیه (877 خطا) و بن کاربران آماده است!');
     </script>
 
 </body>
