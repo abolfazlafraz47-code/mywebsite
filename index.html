@@ -1,14 +1,1659 @@
-import re
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>❄️ برفی</title>
+    <style>
+        /* ===== ریست و پایه ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: tahoma;
+        }
 
-text = "سایت غیرفعال  @lta-seven.vercel.app  سایت غیرفعال است"
+        body {
+            background: linear-gradient(135deg, #00b4ff, #6dd5fa, #ffffff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* ===== تغییر سه‌بعدی ===== */
+            perspective: 1200px;
+            transform: rotateY(3deg) rotateX(1deg);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
 
-# روش ۱: حذف دقیق همان آدرس
-cleaned = text.replace("@lta-seven.vercel.app", "").strip()
+        /* برای اینکه فرزندان نیز در فضای سه‌بعدی قرار گیرند */
+        .page-container {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
 
-# روش ۲: حذف تمام کاراکترهای انگلیسی، عدد، @ و نقطه و خط تیره
-cleaned = re.sub(r'[a-zA-Z0-9@.\-/_]+', '', text).strip()
+        /* ===== هدر ===== */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 8px 0 15px 0;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .main-header .site-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .main-header .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .main-header .user-name {
+            font-size: 16px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+        .main-header .header-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-header .header-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        .main-header .admin-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-header .admin-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.05);
+        }
+        .main-header .profile-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .main-header .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .main-header .profile-btn .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ddd;
+            display: inline-block;
+            background-size: cover;
+            background-position: center;
+        }
+        .main-header .mod-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            display: none;
+        }
+        .main-header .mod-btn:hover {
+            background: #8e44ad;
+            transform: scale(1.05);
+        }
 
-# حذف فاصله‌های اضافی
-cleaned = re.sub(r'\s+', ' ', cleaned)
+        /* ===== صفحه ورود ===== */
+        #loginPage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 350px;
+            width: 100%;
+            transform: translateZ(20px);
+        }
+        #loginPage h1 {
+            font-size: 32px;
+            color: #00b4ff;
+            margin-bottom: 10px;
+        }
+        #loginPage p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        #loginPage .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        #loginPage .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        #loginPage .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 18px;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+        #loginPage .input-group input:focus {
+            border-color: #00b4ff;
+        }
+        #loginPage .login-btn {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        #loginPage .login-btn:hover {
+            background: #008fd1;
+            transform: scale(1.02);
+        }
+        #loginPage .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
 
-print(cleaned)  # خروجی: سایت غیرفعال سایت غیرفعال است
+        /* ===== صفحه لودینگ ===== */
+        #loader {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 300px;
+        }
+        #loader .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #e0e0e0;
+            border-top: 6px solid #00b4ff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #loader .loading-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        #loader .dots::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            text-align: left;
+            animation: dots 1.5s infinite steps(1);
+        }
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+        #loader .sub-text {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* ===== صفحه خطا ===== */
+        #errorPage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            min-height: 300px;
+        }
+        #errorPage .error-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        #errorPage .error-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+        #errorPage .error-desc {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        #errorPage .retry-btn {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #errorPage .retry-btn:hover {
+            background: #008fd1;
+            transform: scale(1.05);
+        }
+
+        /* ===== محتوای اصلی ===== */
+        #mainContent {
+            display: none;
+            width: 100%;
+        }
+
+        /* ===== صفحات داخلی ===== */
+        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #modPage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            transform: translateZ(10px);
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .box h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .box p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        button {
+            background: #00b4ff;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #008fd1;
+            transform: scale(1.05);
+        }
+
+        .menu-box {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .menu-box h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+        .menu-box button {
+            width: 80%;
+            margin: 8px auto;
+            font-size: 20px;
+        }
+        .menu-box p {
+            font-size: 22px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .game-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.05);
+        }
+
+        /* ===== پنل ادمینی ===== */
+        .admin-panel-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .admin-panel-box h2 {
+            color: #00b4ff;
+            margin-bottom: 15px;
+        }
+        .admin-panel-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+        .admin-panel-box ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 15px;
+        }
+        .admin-panel-box ul li:last-child {
+            border-bottom: none;
+        }
+        .admin-panel-box .remove-admin-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+        .admin-panel-box .remove-admin-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+        .admin-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .admin-panel-box .back-home-btn:hover {
+            background: #e74c3c;
+        }
+
+        /* ===== صفحه رنک ها با اسامی ===== */
+        .rank-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .rank-box .rubika-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .rank-box .rubika-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.05);
+        }
+        .rank-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .rank-group {
+            margin-bottom: 15px;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .rank-title {
+            font-size: 20px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .rank-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+            padding-right: 20px;
+            display: block;
+        }
+        .rank-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .rank-box .back-home-btn:hover {
+            background: #e74c3c;
+        }
+
+        /* ===== صفحه پروفایل ===== */
+        .profile-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .profile-box .avatar-upload {
+            margin-bottom: 20px;
+        }
+        .profile-box .avatar-upload .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #00b4ff;
+        }
+        .profile-box .avatar-upload input[type="file"] {
+            display: block;
+            margin: 0 auto;
+        }
+        .profile-box .back-home-btn {
+            margin-top: 20px;
+            background: #ff6b6b;
+        }
+        .profile-box .back-home-btn:hover {
+            background: #e74c3c;
+        }
+
+        /* ===== صفحه مود ===== */
+        .mod-panel-box {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .mod-panel-box h2 {
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        .mod-panel-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+        .mod-panel-box ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 15px;
+        }
+        .mod-panel-box ul li:last-child {
+            border-bottom: none;
+        }
+        .mod-panel-box .back-home-btn {
+            margin-top: 20px;
+            background: #9b59b6;
+        }
+        .mod-panel-box .back-home-btn:hover {
+            background: #8e44ad;
+        }
+        .mod-panel-box .online-games {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* ===== تایمر ===== */
+        .timer-container {
+            text-align: center;
+            margin: 10px 0 5px 0;
+        }
+        .timer {
+            display: inline-block;
+            background: #2d2d44;
+            color: #ffd700;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 4px 20px;
+            border-radius: 30px;
+            min-width: 80px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+        .timer.warning {
+            color: #ff6b6b;
+            animation: pulse 0.5s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .game-status {
+            font-size: 18px;
+            margin: 5px 0 10px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 10px auto;
+            max-width: 280px;
+        }
+
+        .cell {
+            background: #f0f8ff;
+            border-radius: 10px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cell:hover:not(.taken) {
+            background: #d4edff;
+            transform: scale(1.02);
+        }
+        .cell.taken {
+            cursor: default;
+        }
+        .cell.x {
+            color: #2196F3;
+        }
+        .cell.o {
+            color: #FF5722;
+        }
+
+        .reset-btn {
+            background: #f39c12;
+            margin-top: 12px;
+            padding: 8px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .reset-btn:hover {
+            background: #e08e0b;
+        }
+
+        @media(max-width: 480px) {
+            .main-header .site-title {
+                font-size: 18px;
+            }
+            .main-header .user-name {
+                font-size: 13px;
+                padding: 3px 10px;
+            }
+            .main-header .header-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .main-header .admin-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .main-header .profile-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .main-header .mod-btn {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .box {
+                padding: 20px;
+            }
+            .menu-box button {
+                width: 100%;
+            }
+            .profile-box .avatar-upload .avatar-preview {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+
+        <!-- ======== صفحه ورود ======== -->
+        <div id="loginPage">
+            <h1>❄️ برفی</h1>
+            <p>برای ورود، نام کاربری خود را وارد کنید</p>
+            <div class="input-group">
+                <label for="usernameInput">نام کاربری</label>
+                <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
+            </div>
+            <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
+            <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
+        </div>
+
+        <!-- ======== صفحه لودینگ ======== -->
+        <div id="loader">
+            <div class="spinner"></div>
+            <div class="loading-text">در حال اتصال<span class="dots"></span></div>
+            <div class="sub-text">لطفاً منتظر بمانید...</div>
+        </div>
+
+        <!-- ======== صفحه خطا ======== -->
+        <div id="errorPage">
+            <div class="error-icon">📡</div>
+            <div class="error-title">اتصال خود را چک کنید</div>
+            <div class="error-desc">امکان برقراری ارتباط با سرور وجود ندارد.</div>
+            <button class="retry-btn" onclick="retryConnection()">🔄 تلاش مجدد</button>
+        </div>
+
+        <!-- ======== محتوای اصلی ======== -->
+        <div id="mainContent">
+
+            <!-- ===== هدر ===== -->
+            <div class="main-header">
+                <div class="site-title">❄️ برفی</div>
+                <div class="header-left">
+                    <div class="user-name">
+                        👤 <span id="displayUsername">کاربر</span>
+                    </div>
+                    <button class="header-btn" onclick="showRankPage()">🏅 رنک ها</button>
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل ادمینی</button>
+                    <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ پنل مود</button>
+                    <button class="profile-btn" onclick="showProfilePage()">
+                        <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
+                        پروفایل
+                    </button>
+                </div>
+            </div>
+
+            <!-- صفحه اصلی -->
+            <div id="homePage">
+                <div class="box">
+                    <h2>👋 خوش آمدید!</h2>
+                    <p>از حضور شما خوشحالیم.</p>
+                    <button onclick="goToMenu()">🚀 شروع</button>
+                </div>
+            </div>
+
+            <!-- صفحه منوی بازی -->
+            <div id="menuPage">
+                <div class="menu-box">
+                    <h2>🎮 بازی‌ها</h2>
+                    <p>⚽ دوز آفلاین با ربات</p>
+                    <button onclick="goToGame()">🚪 ورود به بازی</button>
+                    <br><br>
+                    <button style="background:#aaa;" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- صفحه بازی دوز -->
+            <div id="gamePage">
+                <div class="game-container">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h3 style="text-align:center; margin-top:5px;">🎯 بازی دوز</h3>
+
+                    <!-- نمایش تایمر -->
+                    <div class="timer-container">
+                        <div class="timer" id="timerDisplay">⏱ 20</div>
+                    </div>
+
+                    <div class="game-status" id="statusMsg">نوبت شما (X) - شروع کنید!</div>
+                    <div class="board" id="board"></div>
+                    <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
+                </div>
+            </div>
+
+            <!-- ===== پنل ادمینی ===== -->
+            <div id="adminPanel">
+                <div class="admin-panel-box">
+                    <h2>🔐 پنل مدیریت</h2>
+                    <p style="color: #2ecc71; font-weight: bold;">به پنل مدیریت خوش آمدید!</p>
+                    <ul>
+                        <li>📊 تعداد کاربران آنلاین: <span id="userCount">0</span></li>
+                        <li>🕹️ بازی‌های فعال: <span id="gameCount">0</span></li>
+                        <li>⚙️ تنظیمات: نسخه ۱.۰</li>
+                        <li id="adminList">
+                            👤 مدیران: 
+                            <span id="adminNamesDisplay"></span>
+                        </li>
+                    </ul>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه رنک ها ===== -->
+            <div id="rankPage">
+                <div class="rank-box">
+                    <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
+                    <h2>🏅 رنک‌های سایت</h2>
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#e74c3c;">سازنده</span>
+                        <span class="rank-name">ابوالفضل</span>
+                        <span class="rank-name">محمد رضا</span>
+                    </div>
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
+                    </div>
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
+                    </div>
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
+                    </div>
+                    <div class="rank-group">
+                        <span class="rank-title" style="color:#2ecc71;">مود</span>
+                        <span class="rank-name" style="color:#2ecc71;">آراد</span>
+                    </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه پروفایل ===== -->
+            <div id="profilePage">
+                <div class="profile-box">
+                    <h2 style="color:#00b4ff;">👤 پروفایل</h2>
+                    <div class="avatar-upload">
+                        <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
+                        <input type="file" id="avatarInput" accept="image/*" />
+                    </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه مود ===== -->
+            <div id="modPage">
+                <div class="mod-panel-box">
+                    <h2>🛡️ پنل مود</h2>
+                    <div class="online-games">
+                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
+                    </div>
+                    <ul>
+                        <li>📊 تعداد کاربران آنلاین: <span id="modUserCount">0</span></li>
+                        <li>🕹️ بازی‌های فعال: <span id="modGameCount2">0</span></li>
+                        <li>⚙️ تنظیمات: نسخه ۱.۰</li>
+                        <li id="modAdminList">
+                            👤 مدیران: 
+                            <span id="modAdminNamesDisplay"></span>
+                        </li>
+                    </ul>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+        </div><!-- /mainContent -->
+    </div><!-- /page-container -->
+
+    <script>
+        // ==========================================================
+        //  مدیریت نام‌های کاربری (ذخیره لیست در localStorage)
+        // ==========================================================
+        function getRegisteredUsernames() {
+            try {
+                const data = localStorage.getItem('registeredUsernames');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function setRegisteredUsernames(list) {
+            localStorage.setItem('registeredUsernames', JSON.stringify(list));
+        }
+
+        function addUsername(username) {
+            const list = getRegisteredUsernames();
+            if (!list.includes(username)) {
+                list.push(username);
+                setRegisteredUsernames(list);
+            }
+        }
+
+        function removeUsername(username) {
+            let list = getRegisteredUsernames();
+            list = list.filter(u => u !== username);
+            setRegisteredUsernames(list);
+        }
+
+        function isUsernameTaken(username) {
+            const list = getRegisteredUsernames();
+            return list.includes(username);
+        }
+
+        // ==========================================================
+        //  تنظیم اولیه لیست مدیران – افزودن "محمد رضا" و "آراد تریاکی"
+        // ==========================================================
+        (function initAdmins() {
+            const defaultAdmins = ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            let admins = [];
+            try {
+                const stored = localStorage.getItem('admins');
+                if (stored) {
+                    admins = JSON.parse(stored);
+                    if (!admins.includes("آراد تریاکی")) {
+                        admins.push("آراد تریاکی");
+                        localStorage.setItem('admins', JSON.stringify(admins));
+                    }
+                } else {
+                    localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+                }
+            } catch {
+                localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+            }
+        })();
+
+        // ==========================================================
+        //  لیست کاربران مجاز برای پنل مود (با ذخیره در localStorage)
+        // ==========================================================
+        function getModAllowedUsers() {
+            try {
+                const data = localStorage.getItem('modAllowedUsers');
+                return data ? JSON.parse(data) : ["محمد رضا", "ابوالفضل", "آراد تریاکی"];
+            } catch { return ["محمد رضا", "ابوالفضل", "آراد تریاکی"]; }
+        }
+
+        function setModAllowedUsers(list) {
+            localStorage.setItem('modAllowedUsers', JSON.stringify(list));
+        }
+
+        // ==========================================================
+        //  مدیریت پروفایل (تصویر و نام کاربری)
+        // ==========================================================
+        function getProfileAvatar() {
+            try {
+                return localStorage.getItem('profileAvatar') || '';
+            } catch { return ''; }
+        }
+
+        function setProfileAvatar(dataUrl) {
+            localStorage.setItem('profileAvatar', dataUrl);
+            updateAvatarUI(dataUrl);
+        }
+
+        function updateAvatarUI(dataUrl) {
+            const preview = document.getElementById('avatarPreview');
+            const headerAvatar = document.getElementById('headerAvatar');
+            if (preview) {
+                preview.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            }
+            if (headerAvatar) {
+                headerAvatar.style.backgroundImage = dataUrl ? `url('${dataUrl}')` : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            }
+        }
+
+        function loadProfile() {
+            const avatar = getProfileAvatar();
+            updateAvatarUI(avatar);
+            updateButtonsVisibility();
+        }
+
+        // ==========================================================
+        //  نمایش/مخفی کردن دکمه‌ها بر اساس کاربر
+        // ==========================================================
+        function updateButtonsVisibility() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+            const isAdmin = admins.includes(username);
+
+            const adminBtn = document.getElementById('adminBtn');
+            const modBtn = document.getElementById('modBtn');
+
+            // دکمه ادمینی: برای همه ادمین‌ها (رضا ممد، ابوالفضل، محمد رضا، آراد تریاکی)
+            if (isAdmin) {
+                adminBtn.style.display = 'inline-block';
+            } else {
+                adminBtn.style.display = 'none';
+            }
+
+            // دکمه مود: برای همه کاربران نمایش داده می‌شود (اگر لاگین باشند)
+            if (username && username !== '') {
+                modBtn.style.display = 'inline-block';
+            } else {
+                modBtn.style.display = 'none';
+            }
+        }
+
+        // ===== حذف تغییر نام کاربری و دکمه ذخیره =====
+        // دیگر تابع changeUsername وجود ندارد
+
+        // آپلود عکس
+        document.getElementById('avatarInput')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const dataUrl = event.target.result;
+                setProfileAvatar(dataUrl);
+                alert('✅ عکس پروفایل با موفقیت آپلود شد!');
+                loadProfile();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ==========================================================
+        //  لیست ادمین‌ها و نقش‌ها (با localStorage)
+        // ==========================================================
+        const SUPER_ADMIN = "ابوالفضل";
+
+        function getAdmins() {
+            try {
+                const data = localStorage.getItem('admins');
+                return data ? JSON.parse(data) : ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            } catch { return ["رضا ممد", "ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
+        }
+
+        function setAdmins(admins) {
+            localStorage.setItem('admins', JSON.stringify(admins));
+        }
+
+        // حذف ادمین (فقط برای SUPER_ADMIN)
+        function removeAdmin(adminToRemove) {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            if (currentUser !== SUPER_ADMIN) {
+                alert('⛔ فقط ادمین ارشد (ابوالفضل) می‌تواند ادمین‌ها را حذف کند!');
+                return;
+            }
+            if (adminToRemove === SUPER_ADMIN) {
+                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
+                return;
+            }
+            let admins = getAdmins();
+            admins = admins.filter(a => a !== adminToRemove);
+            setAdmins(admins);
+            updateAdminPanelUI();
+            updateModPanelUI();
+            alert(`✅ ادمین "${adminToRemove}" با موفقیت حذف شد!`);
+        }
+
+        // ===== حذف کاربر از پنل مود (فقط برای محمد رضا و ابوالفضل) =====
+        function removeFromModAllowed(userToRemove) {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const allowedToRemove = ["محمد رضا", "ابوالفضل"];
+            if (!allowedToRemove.includes(currentUser)) {
+                alert('⛔ شما مجاز به حذف کاربران از پنل مود نیستید!');
+                return;
+            }
+            if (userToRemove === currentUser) {
+                alert('⛔ نمی‌توانید خودتان را حذف کنید!');
+                return;
+            }
+            let modUsers = getModAllowedUsers();
+            if (!modUsers.includes(userToRemove)) {
+                alert('⚠️ این کاربر در لیست مجازین پنل مود نیست.');
+                return;
+            }
+            modUsers = modUsers.filter(u => u !== userToRemove);
+            setModAllowedUsers(modUsers);
+            updateAdminPanelUI();
+            updateModPanelUI();
+            alert(`✅ کاربر "${userToRemove}" از دسترسی به پنل مود حذف شد!`);
+        }
+
+        function updateAdminPanelUI() {
+            const admins = getAdmins();
+            const adminListEl = document.getElementById('adminNamesDisplay');
+            if (!adminListEl) return;
+
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            const isSuperAdmin = currentUser === SUPER_ADMIN;
+            const modAllowed = getModAllowedUsers();
+
+            let html = '';
+            admins.forEach(admin => {
+                let isMod = modAllowed.includes(admin);
+                let color = admin === "آراد تریاکی" ? '#2ecc71' : 'inherit';
+                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
+                html += admin;
+                // دکمه حذف از پنل مود فقط برای "آراد تریاکی" و فقط برای محمد رضا یا ابوالفضل
+                if (admin === "آراد تریاکی" && (currentUser === "محمد رضا" || currentUser === "ابوالفضل")) {
+                    if (isMod) {
+                        html += ` <button class="remove-admin-btn" style="background:#e74c3c;" onclick="removeFromModAllowed('${admin}')">✕</button>`;
+                    } else {
+                        html += ` <span style="color:#999;font-size:12px;">(حذف شده از مود)</span>`;
+                    }
+                }
+                if (isSuperAdmin && admin !== SUPER_ADMIN && admin !== "آراد تریاکی") {
+                    html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌ حذف</button>`;
+                }
+                html += `</span>`;
+            });
+            adminListEl.innerHTML = html;
+        }
+
+        function updateModPanelUI() {
+            const modAllowed = getModAllowedUsers();
+            const modAdminListEl = document.getElementById('modAdminNamesDisplay');
+            if (!modAdminListEl) return;
+
+            let html = '';
+            modAllowed.forEach(admin => {
+                html += admin;
+                html += ' ، ';
+            });
+            html = html.slice(0, -3);
+            modAdminListEl.innerHTML = html;
+        }
+
+        // ==========================================================
+        //  توابع نمایش صفحات و کنترل دسترسی
+        // ==========================================================
+        function showPage(pageId) {
+            const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage', 'modPage'];
+            pages.forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'flex';
+            if (pageId === 'profilePage') {
+                loadProfile();
+            }
+            if (pageId === 'modPage') {
+                updateModPanelUI();
+                updateModStats();
+            }
+            if (pageId === 'adminPanel') {
+                updateAdminPanelUI();
+                updateAdminStats();
+            }
+        }
+
+        function updateModStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            document.getElementById('modUserCount').textContent = users.length;
+            document.getElementById('modGameCount2').textContent = games.length;
+            document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
+        }
+
+        // ===== پنل مود با بررسی دسترسی =====
+        function openModPanel() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) {
+                alert('لطفاً ابتدا وارد شوید!');
+                return;
+            }
+            const modAllowed = getModAllowedUsers();
+            if (modAllowed.includes(username)) {
+                showPage('modPage');
+            } else {
+                alert('⛔ شما دسترسی به پنل مود ندارید!');
+            }
+        }
+
+        // ===== پنل ادمینی =====
+        function openAdminPanel() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+
+            if (!username) {
+                alert('لطفاً ابتدا وارد شوید!');
+                return;
+            }
+
+            if (admins.includes(username)) {
+                updateAdminStats();
+                updateAdminPanelUI();
+                showPage('adminPanel');
+            } else {
+                alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
+            }
+        }
+
+        function showRankPage() { showPage('rankPage'); }
+        function showProfilePage() {
+            loadProfile();
+            showPage('profilePage');
+        }
+
+        function goToMenu() { showPage('menuPage'); }
+
+        function goToGame() {
+            showPage('gamePage');
+            startGame();
+        }
+
+        function goHome() {
+            clearTimer();
+            if (gameId) {
+                let games = getActiveGames();
+                games = games.filter(g => g !== gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                gameId = null;
+                updateAdminStats();
+            }
+            showPage('homePage');
+        }
+
+        // ==========================================================
+        //  ۱. مدیریت ورود و خروج (با ثبت نام کاربری)
+        // ==========================================================
+        let currentUsername = '';
+
+        function handleLogin() {
+            const input = document.getElementById('usernameInput');
+            const error = document.getElementById('loginError');
+            const username = input.value.trim();
+
+            if (username === '') {
+                error.style.display = 'block';
+                return;
+            }
+
+            if (!isUsernameTaken(username)) {
+                addUsername(username);
+            }
+
+            error.style.display = 'none';
+            currentUsername = username;
+
+            localStorage.setItem('username', username);
+
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('loader').style.display = 'flex';
+
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('displayUsername').textContent = username;
+                loadProfile();
+                showPage('homePage');
+                updateAdminStats();
+                if (getAdmins().includes(username)) {
+                    updateAdminPanelUI();
+                }
+                updateButtonsVisibility();
+            }, 2000);
+        }
+
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('username');
+            if (saved && saved.trim() !== '') {
+                currentUsername = saved;
+                if (!isUsernameTaken(saved)) {
+                    addUsername(saved);
+                }
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('displayUsername').textContent = saved;
+                    loadProfile();
+                    showPage('homePage');
+                    updateAdminStats();
+                    if (getAdmins().includes(saved)) {
+                        updateAdminPanelUI();
+                    }
+                    updateButtonsVisibility();
+                }, 1500);
+            }
+        });
+
+        // ==========================================================
+        //  ۲. مدیریت لودینگ و اتصال (برای صفحه خطا)
+        // ==========================================================
+        const loader = document.getElementById('loader');
+        const errorPage = document.getElementById('errorPage');
+        const mainContent = document.getElementById('mainContent');
+
+        function checkConnection() {
+            return new Promise((resolve) => {
+                if (!navigator.onLine) {
+                    resolve(false);
+                    return;
+                }
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                fetch('https://httpbin.org/get', {
+                        method: 'HEAD',
+                        mode: 'no-cors',
+                        signal: controller.signal,
+                    })
+                    .then(() => {
+                        clearTimeout(timeoutId);
+                        resolve(true);
+                    })
+                    .catch(() => {
+                        clearTimeout(timeoutId);
+                        resolve(false);
+                    });
+            });
+        }
+
+        async function initConnection() {
+            loader.style.display = 'flex';
+            errorPage.style.display = 'none';
+            mainContent.style.display = 'none';
+
+            const isConnected = await checkConnection();
+
+            if (isConnected) {
+                loader.style.display = 'none';
+                mainContent.style.display = 'block';
+                showPage('homePage');
+            } else {
+                loader.style.display = 'none';
+                errorPage.style.display = 'flex';
+            }
+        }
+
+        function retryConnection() {
+            initConnection();
+        }
+
+        // ==========================================================
+        //  ۴. آمار کاربران و بازی‌ها (ساده)
+        // ==========================================================
+        function getOnlineUsers() {
+            try {
+                const data = localStorage.getItem('onlineUsers');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function getActiveGames() {
+            try {
+                const data = localStorage.getItem('activeGames');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function updateAdminStats() {
+            const users = getOnlineUsers();
+            const games = getActiveGames();
+            document.getElementById('userCount').textContent = users.length;
+            document.getElementById('gameCount').textContent = games.length > 0 ? games.length : 1;
+        }
+
+        // ==========================================================
+        //  ۵. بازی دوز (همان کد قبلی با کمی تغییر)
+        // ==========================================================
+        const boardEl = document.getElementById('board');
+        const statusMsg = document.getElementById('statusMsg');
+        const timerDisplay = document.getElementById('timerDisplay');
+
+        let board = Array(9).fill('');
+        let currentPlayer = 'X';
+        let gameOver = false;
+        let isRobotTurn = false;
+        let timerInterval = null;
+        let timeLeft = 20;
+        const MAX_TIME = 20;
+        let gameId = null;
+
+        const winPatterns = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function playWinSound() {
+            try {
+                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                const notes = [
+                    { freq: 523, duration: 0.15 },
+                    { freq: 659, duration: 0.15 },
+                    { freq: 784, duration: 0.15 },
+                    { freq: 1047, duration: 0.25 },
+                ];
+                notes.forEach((note, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.value = note.freq;
+                    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note.duration);
+                    osc.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + index * 0.12);
+                    osc.stop(audioCtx.currentTime + index * 0.12 + note.duration);
+                });
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.type = 'sine';
+                    osc2.frequency.value = 1200;
+                    gain2.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.5);
+                }, 400);
+            } catch (e) {}
+        }
+
+        function playLoseSound() {
+            try {
+                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                const notes = [
+                    { freq: 500, duration: 0.3 },
+                    { freq: 450, duration: 0.3 },
+                    { freq: 400, duration: 0.3 },
+                    { freq: 350, duration: 0.5 },
+                ];
+                notes.forEach((note, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = note.freq;
+                    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note.duration);
+                    osc.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + index * 0.25);
+                    osc.stop(audioCtx.currentTime + index * 0.25 + note.duration);
+                });
+            } catch (e) {}
+        }
+
+        function startTimer() {
+            clearTimer();
+            timeLeft = MAX_TIME;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 5) {
+                    timerDisplay.classList.add('warning');
+                } else {
+                    timerDisplay.classList.remove('warning');
+                }
+
+                if (timeLeft <= 0) {
+                    clearTimer();
+                    timerDisplay.classList.remove('warning');
+                    if (!gameOver && !isRobotTurn && currentPlayer === 'X') {
+                        statusMsg.textContent = '⏰ زمان شما تمام شد! نوبت ربات...';
+                        currentPlayer = 'O';
+                        isRobotTurn = true;
+                        setTimeout(() => {
+                            if (!gameOver) robotMove();
+                        }, 300);
+                    } else if (!gameOver && isRobotTurn && currentPlayer === 'O') {
+                        statusMsg.textContent = '⏰ زمان ربات تمام شد! نوبت شما...';
+                        currentPlayer = 'X';
+                        isRobotTurn = false;
+                        startTimer();
+                    }
+                }
+            }, 1000);
+        }
+
+        function clearTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            timerDisplay.classList.remove('warning');
+        }
+
+        function updateTimerDisplay() {
+            timerDisplay.textContent = '⏱ ' + timeLeft;
+        }
+
+        function resetTimer() {
+            clearTimer();
+            timeLeft = MAX_TIME;
+            updateTimerDisplay();
+            timerDisplay.classList.remove('warning');
+            startTimer();
+        }
+
+        function renderBoard() {
+            boardEl.innerHTML = '';
+            board.forEach((val, idx) => {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                if (val) {
+                    cell.classList.add('taken', val === 'X' ? 'x' : 'o');
+                    cell.textContent = val;
+                } else {
+                    cell.dataset.index = idx;
+                    cell.addEventListener('click', () => handleHumanMove(idx));
+                }
+                boardEl.appendChild(cell);
+            });
+        }
+
+        function checkWinner() {
+            for (let p of winPatterns) {
+                const [a, b, c] = p;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return board[a];
+                }
+            }
+            if (board.every(v => v !== '')) return 'draw';
+            return null;
+        }
+
+        function endGame(result) {
+            gameOver = true;
+            clearTimer();
+            if (gameId) {
+                let games = getActiveGames();
+                games = games.filter(g => g !== gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                gameId = null;
+                updateAdminStats();
+            }
+
+            if (result === 'X') {
+                playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید!';
+            } else if (result === 'O') {
+                playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!';
+            } else if (result === 'draw') {
+                statusMsg.textContent = '🤝 مساوی!';
+            }
+            document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
+        }
+
+        function handleHumanMove(index) {
+            if (gameOver || isRobotTurn || board[index] !== '' || currentPlayer !== 'X') return;
+
+            board[index] = 'X';
+            renderBoard();
+            const winner = checkWinner();
+            if (winner) { endGame(winner); return; }
+
+            currentPlayer = 'O';
+            isRobotTurn = true;
+            statusMsg.textContent = '🤖 ربات در حال فکر...';
+            clearTimer();
+            setTimeout(() => {
+                if (!gameOver) {
+                    robotMove();
+                }
+            }, 500);
+        }
+
+        function robotMove() {
+            if (gameOver) { isRobotTurn = false; return; }
+
+            for (let i = 0; i < 9; i++) {
+                if (board[i] === '') {
+                    board[i] = 'O';
+                    if (checkWinner() === 'O') { applyRobotMove(i); return; }
+                    board[i] = '';
+                }
+            }
+            for (let i = 0; i < 9; i++) {
+                if (board[i] === '') {
+                    board[i] = 'X';
+                    if (checkWinner() === 'X') {
+                        board[i] = '';
+                        applyRobotMove(i);
+                        return;
+                    }
+                    board[i] = '';
+                }
+            }
+            const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
+            if (empty.length === 0) { isRobotTurn = false; return; }
+            const randIdx = empty[Math.floor(Math.random() * empty.length)];
+            applyRobotMove(randIdx);
+        }
+
+        function applyRobotMove(index) {
+            board[index] = 'O';
+            renderBoard();
+            const winner = checkWinner();
+            if (winner) { endGame(winner);
+                isRobotTurn = false; return; }
+
+            currentPlayer = 'X';
+            isRobotTurn = false;
+            statusMsg.textContent = 'نوبت شما (X)';
+            resetTimer();
+        }
+
+        function startGame() {
+            board = Array(9).fill('');
+            gameOver = false;
+            currentPlayer = 'X';
+            isRobotTurn = false;
+
+            gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+            let games = getActiveGames();
+            if (!games.includes(gameId)) {
+                games.push(gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                updateAdminStats();
+            }
+
+            renderBoard();
+            statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
+            clearTimer();
+            timeLeft = MAX_TIME;
+            updateTimerDisplay();
+            timerDisplay.classList.remove('warning');
+            startTimer();
+        }
+
+        function resetGame() {
+            if (gameId) {
+                let games = getActiveGames();
+                games = games.filter(g => g !== gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                gameId = null;
+                updateAdminStats();
+            }
+            startGame();
+        }
+    </script>
+
+</body>
+</html>
+```
