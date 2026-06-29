@@ -462,6 +462,25 @@
             width: 100%;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .rank-box .rubika-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .rank-box .rubika-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.05);
         }
         .rank-box h2 {
             color: #333;
@@ -520,54 +539,12 @@
             display: block;
             margin: 0 auto;
         }
-        .profile-box .username-change {
-            margin-top: 15px;
-        }
-        .profile-box .username-change label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        .profile-box .username-change input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            text-align: center;
-            outline: none;
-            margin-bottom: 10px;
-        }
-        .profile-box .username-change input:focus {
-            border-color: #00b4ff;
-        }
-        .profile-box .username-change button {
-            background: #00b4ff;
-            color: white;
-            border: none;
-            padding: 8px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .profile-box .username-change button:hover {
-            background: #008fd1;
-            transform: scale(1.02);
-        }
         .profile-box .back-home-btn {
             margin-top: 20px;
             background: #ff6b6b;
         }
         .profile-box .back-home-btn:hover {
             background: #e74c3c;
-        }
-        .profile-box .username-error {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
         }
 
         /* ===== صفحه مود ===== */
@@ -845,6 +822,7 @@
             <!-- ===== صفحه رنک ها ===== -->
             <div id="rankPage">
                 <div class="rank-box">
+                    <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
                     <h2>🏅 رنک‌های سایت</h2>
                     <div class="rank-group">
                         <span class="rank-title" style="color:#e74c3c;">سازنده</span>
@@ -875,12 +853,6 @@
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatarPreview" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></div>
                         <input type="file" id="avatarInput" accept="image/*" />
-                    </div>
-                    <div class="username-change">
-                        <label>تغییر نام کاربری</label>
-                        <input type="text" id="newUsernameInput" placeholder="نام جدید..." />
-                        <button onclick="changeUsername()">ذخیره</button>
-                        <div class="username-error" id="usernameError">⚠️ این نام کاربری قبلاً انتخاب شده است!</div>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1036,42 +1008,8 @@
             }
         }
 
-        // تغییر نام کاربری با بررسی تکراری نبودن
-        function changeUsername() {
-            const input = document.getElementById('newUsernameInput');
-            const error = document.getElementById('usernameError');
-            const newName = input.value.trim();
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
-
-            if (newName === '') {
-                alert('لطفاً نام جدید را وارد کنید!');
-                return;
-            }
-
-            if (newName === currentUser) {
-                alert('نام جدید با نام فعلی شما یکسان است.');
-                return;
-            }
-
-            if (isUsernameTaken(newName)) {
-                error.style.display = 'block';
-                return;
-            }
-            error.style.display = 'none';
-
-            removeUsername(currentUser);
-            addUsername(newName);
-
-            localStorage.setItem('username', newName);
-            document.getElementById('displayUsername').textContent = newName;
-            input.value = '';
-            alert('✅ نام کاربری با موفقیت تغییر کرد!');
-
-            loadProfile();
-            updateAdminPanelUI();
-            updateModPanelUI();
-            updateButtonsVisibility();
-        }
+        // ===== حذف تغییر نام کاربری و دکمه ذخیره =====
+        // دیگر تابع changeUsername وجود ندارد
 
         // آپلود عکس
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
@@ -1202,8 +1140,6 @@
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') {
                 loadProfile();
-                document.getElementById('newUsernameInput').value = '';
-                document.getElementById('usernameError').style.display = 'none';
             }
             if (pageId === 'modPage') {
                 updateModPanelUI();
