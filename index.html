@@ -1147,7 +1147,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== پنل مدیر ارشد (آراد تریاکی) ===== */
+        /* ===== پنل ادمینیتور (آراد) ===== */
         .moderator-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -1156,7 +1156,7 @@
         .moderator-panel-box h2 {
             font-size: 26px;
             font-weight: 800;
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 12px;
@@ -1182,7 +1182,7 @@
         .moderator-panel-box .stats-grid .stat-card .stat-number {
             font-size: 28px;
             font-weight: 800;
-            color: #a78bfa;
+            color: #f1c40f;
         }
         .moderator-panel-box .stats-grid .stat-card .stat-label {
             font-size: 12px;
@@ -2163,7 +2163,7 @@
                     <!-- ===== دکمه‌های نقش‌ها ===== -->
                     <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
-                    <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 مدیر ارشد</button>
+                    <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="profile-btn" onclick="showProfilePage()">
@@ -2332,10 +2332,10 @@
                 </div>
             </div>
 
-            <!-- ===== پنل مدیر ارشد (آراد تریاکی) ===== -->
+            <!-- ===== پنل ادمینیتور (آراد) ===== -->
             <div id="moderatorPanel">
                 <div class="moderator-panel-box">
-                    <h2>👑 پنل مدیر ارشد</h2>
+                    <h2>👑 پنل ادمینیتور</h2>
                     <p style="color: rgba(255,255,255,0.4); font-size: 13px;">دسترسی مدیریتی سطح متوسط</p>
 
                     <div class="stats-grid">
@@ -2373,24 +2373,30 @@
                 <div class="rank-box">
                     <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
                     <h2>🏅 رنک‌های سایت</h2>
+
                     <div class="rank-group">
                         <span class="rank-title" style="color:#ff6b8a;">سازنده</span>
                         <span class="rank-name">ابوالفضل</span>
                         <span class="rank-name">محمد رضا</span>
                     </div>
+
                     <div class="rank-group">
                         <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
                     </div>
+
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
                     </div>
+
                     <div class="rank-group">
                         <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
+                        <span class="rank-name" style="color:#f1c40f;">آراد</span>
                     </div>
+
                     <div class="rank-group">
                         <span class="rank-title" style="color:#a78bfa;">مود</span>
-                        <span class="rank-name" style="color:#a78bfa;">آراد</span>
                     </div>
+
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -2620,7 +2626,7 @@
         //  تنظیم اولیه لیست مدیران
         // ==========================================================
         (function initAdmins() {
-            const defaultAdmins = ["ابوالفضل", "محمد رضا", "آراد تریاکی"];
+            const defaultAdmins = ["ابوالفضل", "محمد رضا", "آراد"];
             let admins = [];
             try {
                 const stored = localStorage.getItem('admins');
@@ -2696,8 +2702,8 @@
                 adminBtn.style.display = 'inline-block'; // ادمین معمولی
                 modBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
-            } else if (username === "آراد تریاکی") {
-                moderatorBtn.style.display = 'inline-block'; // فقط مدیر ارشد
+            } else if (username === "آراد") {
+                moderatorBtn.style.display = 'inline-block'; // فقط پنل ادمینیتور
                 modBtn.style.display = 'inline-block';
             } else {
                 // کاربر عادی - فقط مود
@@ -2726,8 +2732,8 @@
         function getAdmins() {
             try {
                 const data = localStorage.getItem('admins');
-                return data ? JSON.parse(data) : ["ابوالفضل", "محمد رضا", "آراد تریاکی"];
-            } catch { return ["ابوالفضل", "محمد رضا", "آراد تریاکی"]; }
+                return data ? JSON.parse(data) : ["ابوالفضل", "محمد رضا", "آراد"];
+            } catch { return ["ابوالفضل", "محمد رضا", "آراد"]; }
         }
 
         function setAdmins(admins) {
@@ -2762,7 +2768,7 @@
             let html = '';
             admins.forEach(admin => {
                 let color = '#fff';
-                if (admin === "آراد تریاکی") color = '#a78bfa';
+                if (admin === "آراد") color = '#f1c40f';
                 if (admin === "ابوالفضل") color = '#ff6b6b';
                 html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
                 html += admin;
@@ -2879,7 +2885,7 @@
         }
 
         // ==========================================================
-        //  سیستم پشتیبانی (برای نمایش در پنل مدیر ارشد)
+        //  سیستم پشتیبانی (برای نمایش در پنل ادمینیتور)
         // ==========================================================
         function getSupportMessages() {
             try {
@@ -2890,58 +2896,6 @@
 
         function setSupportMessages(messages) {
             localStorage.setItem('supportMessages', JSON.stringify(messages));
-        }
-
-        function sendSupportMessage() {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) { alert('لطفاً وارد شوید!'); return; }
-
-            const input = document.getElementById('supportInput');
-            if (!input) return;
-            const text = input.value.trim();
-            if (!text) { alert('لطفاً متن پیام را وارد کنید!'); return; }
-
-            const messages = getSupportMessages();
-            const newMsg = {
-                id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-                from: username,
-                text: text,
-                timestamp: Date.now(),
-                answered: false,
-                reply: null,
-                replyTimestamp: null,
-                repliedBy: null
-            };
-            messages.push(newMsg);
-            setSupportMessages(messages);
-
-            input.value = '';
-            alert('✅ پیام شما ارسال شد!');
-        }
-
-        function replyToSupportMessage(msgId) {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const admins = getAdmins();
-            if (!admins.includes(username)) {
-                alert('⛔ فقط ادمین‌ها می‌توانند پاسخ دهند!');
-                return;
-            }
-
-            const replyText = prompt('پاسخ خود را وارد کنید:');
-            if (replyText === null) return;
-            if (!replyText.trim()) { alert('لطفاً متن پاسخ را وارد کنید!'); return; }
-
-            let messages = getSupportMessages();
-            const msgIndex = messages.findIndex(m => m.id === msgId);
-            if (msgIndex === -1) { alert('⚠️ پیام یافت نشد!'); return; }
-
-            messages[msgIndex].answered = true;
-            messages[msgIndex].reply = replyText.trim();
-            messages[msgIndex].replyTimestamp = Date.now();
-            messages[msgIndex].repliedBy = username;
-            setSupportMessages(messages);
-
-            alert('✅ پاسخ شما ارسال شد!');
         }
 
         // ==========================================================
@@ -3068,12 +3022,12 @@
         function openModeratorPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
-            if (username === "آراد تریاکی") {
+            if (username === "آراد") {
                 updateModeratorStats();
                 renderModeratorSupportMessages();
                 showPage('moderatorPanel');
             } else {
-                alert('⛔ فقط آراد تریاکی دسترسی به این پنل را دارد!');
+                alert('⛔ فقط آراد دسترسی به پنل ادمینیتور را دارد!');
             }
         }
 
@@ -3919,7 +3873,7 @@
         console.log('❄️ برفی با سیستم مدیریت سه‌سطحی آماده است!');
         console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
-        console.log('⭐ مدیر ارشد: آراد تریاکی');
+        console.log('⭐ ادمینیتور: آراد');
     </script>
 
 </body>
