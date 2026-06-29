@@ -232,27 +232,6 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
         }
-        /* دکمه پشتیبانی */
-        .main-header .support-btn {
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            backdrop-filter: blur(4px);
-            position: relative;
-        }
-        .main-header .support-btn:hover {
-            background: rgba(255, 215, 0, 0.25);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
-            border-color: rgba(255, 215, 0, 0.3);
-        }
         /* نشانگر پیام جدید برای ادمین */
         .badge-new {
             position: absolute;
@@ -1300,10 +1279,6 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
-            .main-header .support-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
             .badge-new {
                 width: 16px;
                 height: 16px;
@@ -1413,10 +1388,6 @@
                 font-size: 9px;
                 padding: 2px 8px;
             }
-            .main-header .support-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
             .badge-new {
                 width: 14px;
                 height: 14px;
@@ -1490,10 +1461,6 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
-                    <button class="support-btn" onclick="showSupportPage()" id="supportBtn">
-                        💬 پشتیبانی
-                        <span class="badge-new" id="supportBadge" style="display:none;">0</span>
-                    </button>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">
                         ⚙️ ادمین
@@ -1927,7 +1894,6 @@
                 updateAdminPanelUI();
                 updateAdminStats();
                 renderAdminSupportMessages();
-                // وقتی ادمین وارد پنل میشه، شمارنده پیام جدید رو صفر می‌کنیم
                 clearNewSupportCount();
             }
             if (pageId === 'supportPage') {
@@ -2491,15 +2457,19 @@
 
             const count = getNewSupportCount();
 
+            // فقط برای ادمین‌ها و فقط اگر المان supportBadge وجود داشته باشد
             if (isAdmin && count > 0) {
-                adminBadge.style.display = 'flex';
-                adminBadge.textContent = count;
-                // همچنین روی دکمه پشتیبانی هم نمایش بدیم (اختیاری)
-                supportBadge.style.display = 'flex';
-                supportBadge.textContent = count;
+                if (adminBadge) {
+                    adminBadge.style.display = 'flex';
+                    adminBadge.textContent = count;
+                }
+                if (supportBadge) {
+                    supportBadge.style.display = 'flex';
+                    supportBadge.textContent = count;
+                }
             } else {
-                adminBadge.style.display = 'none';
-                supportBadge.style.display = 'none';
+                if (adminBadge) adminBadge.style.display = 'none';
+                if (supportBadge) supportBadge.style.display = 'none';
             }
         }
 
