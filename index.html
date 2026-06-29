@@ -1927,7 +1927,6 @@
                 updateAdminPanelUI();
                 updateAdminStats();
                 renderAdminSupportMessages();
-                // وقتی ادمین وارد پنل میشه، شمارنده پیام جدید رو صفر می‌کنیم
                 clearNewSupportCount();
             }
             if (pageId === 'supportPage') {
@@ -2494,7 +2493,6 @@
             if (isAdmin && count > 0) {
                 adminBadge.style.display = 'flex';
                 adminBadge.textContent = count;
-                // همچنین روی دکمه پشتیبانی هم نمایش بدیم (اختیاری)
                 supportBadge.style.display = 'flex';
                 supportBadge.textContent = count;
             } else {
@@ -2532,7 +2530,6 @@
             messages.push(newMsg);
             setSupportMessages(messages);
 
-            // افزایش شمارنده پیام جدید برای ادمین‌ها
             incrementNewSupportCount();
 
             input.value = '';
@@ -2693,19 +2690,67 @@
             container.scrollTop = container.scrollHeight;
         }
 
-        // به‌روزرسانی شمارنده در هدر
-        // در ابتدا و بعد از هر تغییری صدا زده می‌شود
-        // تابع updateSupportBadge قبلاً تعریف شده
+        // ==========================================================
+        //  ۷. سرور ابری برای تعداد کاربران آنلاین (JSONBin.io)
+        // ==========================================================
+        // برای استفاده، یک Bin رایگان در JSONBin.io بسازید و کلید API را جایگزین کنید
+        // لینک: https://jsonbin.io/
+        const BIN_ID = 'YOUR_BIN_ID'; // شناسه Bin خود را اینجا قرار دهید
+        const API_KEY = 'YOUR_API_KEY'; // کلید API خود را اینجا قرار دهید
+
+        async function updateOnlineUsers(count) {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify({ onlineUsers: count })
+                });
+                if (!response.ok) throw new Error('خطا در بروزرسانی');
+                console.log('✅ تعداد کاربران آنلاین بروز شد:', count);
+            } catch (err) {
+                console.warn('⚠️ خطا در اتصال به سرور:', err);
+            }
+        }
+
+        async function getOnlineUsersFromServer() {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (!response.ok) throw new Error('خطا در دریافت');
+                const data = await response.json();
+                const count = data.record?.onlineUsers || 0;
+                console.log('📊 تعداد کاربران آنلاین از سرور:', count);
+                return count;
+            } catch (err) {
+                console.warn('⚠️ خطا در دریافت از سرور:', err);
+                return 0;
+            }
+        }
 
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        // به‌روزرسانی شمارنده در شروع
         setTimeout(() => {
             updateSupportBadge();
+            // دریافت تعداد کاربران از سرور و نمایش در پنل ادمین
+            getOnlineUsersFromServer().then(count => {
+                document.getElementById('userCount').textContent = count;
+                document.getElementById('modUserCount').textContent = count;
+            });
         }, 500);
 
-        console.log('❄️ برفی با سیستم پشتیبانی کامل و شمارنده پیام جدید آماده است!');
+        // شبیه‌سازی افزایش کاربر هنگام ورود
+        // در تابع handleLogin و window.load بعد از ورود، تعداد را افزایش دهید
+        // برای سادگی، اینجا فقط یک نمونه می‌زنیم:
+        // پس از ورود کاربر، تعداد را +1 کرده و به سرور ارسال می‌کنیم
+        // اما برای جلوگیری از افزایش بی‌رویه، فقط یک بار در روز یا با بازدید جدید
+
+        console.log('❄️ برفی با سرور JSONBin.io برای تعداد کاربران آنلاین آماده است!');
+        console.log('🔑 برای فعال‌سازی سرور، BIN_ID و API_KEY خود را در کد قرار دهید.');
     </script>
 
 </body>
