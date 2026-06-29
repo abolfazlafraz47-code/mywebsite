@@ -156,6 +156,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             backdrop-filter: blur(4px);
+            position: relative;
         }
         .main-header .header-btn:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -175,6 +176,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
+            position: relative;
         }
         .main-header .admin-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -243,12 +245,31 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             backdrop-filter: blur(4px);
+            position: relative;
         }
         .main-header .support-btn:hover {
             background: rgba(255, 215, 0, 0.25);
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
             border-color: rgba(255, 215, 0, 0.3);
+        }
+        /* نشانگر پیام جدید برای ادمین */
+        .badge-new {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            background: #ff6b8a;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(255, 107, 138, 0.4);
+            border: 2px solid #0b0e2a;
         }
 
         /* ===== صفحات با افکت شیشه‌ای ===== */
@@ -1283,6 +1304,13 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .badge-new {
+                width: 16px;
+                height: 16px;
+                font-size: 9px;
+                top: -5px;
+                left: -5px;
+            }
             #loginPage {
                 padding: 30px 20px;
                 min-height: 320px;
@@ -1389,6 +1417,13 @@
                 font-size: 9px;
                 padding: 2px 8px;
             }
+            .badge-new {
+                width: 14px;
+                height: 14px;
+                font-size: 8px;
+                top: -4px;
+                left: -4px;
+            }
             .board {
                 gap: 6px;
                 max-width: 200px;
@@ -1455,9 +1490,15 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
-                    <button class="support-btn" onclick="showSupportPage()">💬 پشتیبانی</button>
+                    <button class="support-btn" onclick="showSupportPage()" id="supportBtn">
+                        💬 پشتیبانی
+                        <span class="badge-new" id="supportBadge" style="display:none;">0</span>
+                    </button>
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
-                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">
+                        ⚙️ ادمین
+                        <span class="badge-new" id="adminBadge" style="display:none;">0</span>
+                    </button>
                     <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
@@ -1886,6 +1927,8 @@
                 updateAdminPanelUI();
                 updateAdminStats();
                 renderAdminSupportMessages();
+                // وقتی ادمین وارد پنل میشه، شمارنده پیام جدید رو صفر می‌کنیم
+                clearNewSupportCount();
             }
             if (pageId === 'supportPage') {
                 renderSupportMessages();
@@ -1927,6 +1970,7 @@
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderAdminSupportMessages();
+                clearNewSupportCount();
                 showPage('adminPanel');
             } else {
                 alert('⛔ شما اجازه ورود به پنل ادمینی را ندارید!');
@@ -2004,6 +2048,7 @@
                 updateAdminStats();
                 if (getAdmins().includes(username)) {
                     updateAdminPanelUI();
+                    updateSupportBadge();
                 }
                 updateButtonsVisibility();
             }, 2000);
@@ -2027,6 +2072,7 @@
                     updateAdminStats();
                     if (getAdmins().includes(saved)) {
                         updateAdminPanelUI();
+                        updateSupportBadge();
                     }
                     updateButtonsVisibility();
                 }, 1500);
@@ -2395,7 +2441,7 @@
         }
 
         // ==========================================================
-        //  ۶. سیستم پشتیبانی (پیام‌ها و پاسخ‌ها)
+        //  ۶. سیستم پشتیبانی (پیام‌ها و پاسخ‌ها) با شمارنده
         // ==========================================================
 
         // ساختار هر پیام:
@@ -2410,6 +2456,51 @@
 
         function setSupportMessages(messages) {
             localStorage.setItem('supportMessages', JSON.stringify(messages));
+        }
+
+        // شمارنده پیام‌های جدید برای ادمین‌ها
+        function getNewSupportCount() {
+            try {
+                const count = localStorage.getItem('newSupportCount');
+                return count ? parseInt(count, 10) : 0;
+            } catch { return 0; }
+        }
+
+        function setNewSupportCount(count) {
+            localStorage.setItem('newSupportCount', String(count));
+            updateSupportBadge();
+        }
+
+        function incrementNewSupportCount() {
+            const current = getNewSupportCount();
+            setNewSupportCount(current + 1);
+        }
+
+        function clearNewSupportCount() {
+            setNewSupportCount(0);
+        }
+
+        // به‌روزرسانی نشانگرهای پیام جدید
+        function updateSupportBadge() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const admins = getAdmins();
+            const isAdmin = admins.includes(username);
+
+            const adminBadge = document.getElementById('adminBadge');
+            const supportBadge = document.getElementById('supportBadge');
+
+            const count = getNewSupportCount();
+
+            if (isAdmin && count > 0) {
+                adminBadge.style.display = 'flex';
+                adminBadge.textContent = count;
+                // همچنین روی دکمه پشتیبانی هم نمایش بدیم (اختیاری)
+                supportBadge.style.display = 'flex';
+                supportBadge.textContent = count;
+            } else {
+                adminBadge.style.display = 'none';
+                supportBadge.style.display = 'none';
+            }
         }
 
         // ارسال پیام جدید از سمت کاربر
@@ -2441,11 +2532,12 @@
             messages.push(newMsg);
             setSupportMessages(messages);
 
+            // افزایش شمارنده پیام جدید برای ادمین‌ها
+            incrementNewSupportCount();
+
             input.value = '';
             renderSupportMessages();
-            // اگر ادمین صفحه باز باشد، رفرش می‌شود
             renderAdminSupportMessages();
-            // نمایش اعلان برای ادمین‌ها (در عمل، با localStorage کار می‌کند)
             alert('✅ پیام شما با موفقیت ارسال شد. در اسرع وقت پاسخ داده می‌شود.');
         }
 
@@ -2496,7 +2588,6 @@
             }
 
             const messages = getSupportMessages();
-            // فقط پیام‌های خود کاربر را نشان بده
             const userMsgs = messages.filter(m => m.from === username);
 
             if (userMsgs.length === 0) {
@@ -2505,7 +2596,6 @@
                 return;
             }
 
-            // مرتب‌سازی از قدیم به جدید
             userMsgs.sort((a, b) => a.timestamp - b.timestamp);
 
             let html = '';
@@ -2537,7 +2627,6 @@
             });
 
             container.innerHTML = html;
-            // اسکرول به پایین
             container.scrollTop = container.scrollHeight;
         }
 
@@ -2558,7 +2647,6 @@
                 return;
             }
 
-            // مرتب‌سازی از جدید به قدیم برای ادمین
             const sorted = [...messages].sort((a, b) => b.timestamp - a.timestamp);
 
             let html = '';
@@ -2590,7 +2678,6 @@
                     html += `</div>`;
                 }
 
-                // دکمه پاسخ فقط برای ادمین‌ها و پیام‌های پاسخ داده نشده
                 if (isAdmin && !msg.answered) {
                     html +=
                         `<button onclick="replyToSupportMessage('${msg.id}')" style="margin-top:8px; background:rgba(255,215,0,0.15); color:#ffd700; border:1px solid rgba(255,215,0,0.2); padding:4px 16px; border-radius:12px; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.3s ease; box-shadow:none;">💬 پاسخ</button>`;
@@ -2603,23 +2690,22 @@
             });
 
             container.innerHTML = html;
-            // اسکرول به پایین
             container.scrollTop = container.scrollHeight;
         }
+
+        // به‌روزرسانی شمارنده در هدر
+        // در ابتدا و بعد از هر تغییری صدا زده می‌شود
+        // تابع updateSupportBadge قبلاً تعریف شده
 
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        // با تغییرات، تابع renderSupportMessages در showPage صدا زده می‌شود
-        // همچنین renderAdminSupportMessages در openAdminPanel
+        // به‌روزرسانی شمارنده در شروع
+        setTimeout(() => {
+            updateSupportBadge();
+        }, 500);
 
-        // برای رفرش خودکار در صورت باز بودن صفحات، از setInterval استفاده نمی‌کنیم
-        // اما یک تابع برای رفرش دستی در پنل ادمین اضافه می‌کنیم
-
-        // اضافه کردن یک دکمه رفرش مخفی در پنل ادمین (اختیاری)
-        // در عوض، هر بار که صفحه ادمین باز می‌شود، رندر می‌شود.
-
-        console.log('❄️ برفی با سیستم پشتیبانی کامل آماده است!');
+        console.log('❄️ برفی با سیستم پشتیبانی کامل و شمارنده پیام جدید آماده است!');
     </script>
 
 </body>
