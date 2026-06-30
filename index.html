@@ -171,7 +171,7 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
-        /* دکمه‌های نقش‌ها */
+        /* دکمه‌های نقش‌ها - دکمه مود حذف شد */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
@@ -243,24 +243,6 @@
             border: 2px solid rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
         }
-        .main-header .mod-btn {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            color: white;
-            border: none;
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            display: none;
-            box-shadow: 0 2px 12px rgba(46, 204, 113, 0.3);
-        }
-        .main-header .mod-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 24px rgba(46, 204, 113, 0.5);
-        }
 
         /* ===== دکمه کد هدیه ===== */
         .main-header .gift-btn {
@@ -291,7 +273,6 @@
         .admin-panel-box,
         .rank-box,
         .profile-box,
-        .mod-panel-box,
         .moderator-panel-box,
         .country-select-box,
         .football-game-box,
@@ -541,7 +522,6 @@
         #adminPanel,
         #rankPage,
         #profilePage,
-        #modPanel,
         #moderatorPanel,
         #countrySelectPage,
         #footballGamePage,
@@ -1077,74 +1057,6 @@
         }
         .admin-panel-box .gift-setting .gift-info span {
             color: #ffd700;
-        }
-
-        /* ===== پنل مود (کاربران عادی با دسترسی ویژه) ===== */
-        .mod-panel-box {
-            padding: 32px 24px;
-            width: 100%;
-            text-align: center;
-        }
-        .mod-panel-box h2 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-        }
-        .mod-panel-box .online-games {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 16px;
-            border-radius: 16px;
-            margin: 12px 0 16px 0;
-            font-size: 17px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .mod-panel-box .online-games span {
-            color: #2ecc71;
-        }
-        .mod-panel-box ul {
-            list-style: none;
-            padding: 0;
-            text-align: right;
-        }
-        .mod-panel-box ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        .mod-panel-box ul li:last-child {
-            border-bottom: none;
-        }
-        .mod-panel-box ul li span:first-child {
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .mod-panel-box ul li span:last-child {
-            font-weight: 600;
-            color: #fff;
-        }
-        .mod-panel-box .back-home-btn {
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .mod-panel-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* ===== پنل ادمینیتور (آراد) ===== */
@@ -1921,10 +1833,6 @@
                 width: 22px;
                 height: 22px;
             }
-            .main-header .mod-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
             .main-header .gift-btn {
                 font-size: 10px;
                 padding: 3px 10px;
@@ -1978,7 +1886,6 @@
             .admin-panel-box,
             .rank-box,
             .profile-box,
-            .mod-panel-box,
             .moderator-panel-box,
             .country-select-box,
             .football-game-box,
@@ -2060,10 +1967,6 @@
             .main-header .profile-btn .avatar {
                 width: 18px;
                 height: 18px;
-            }
-            .main-header .mod-btn {
-                font-size: 9px;
-                padding: 2px 8px;
             }
             .main-header .gift-btn {
                 font-size: 9px;
@@ -2160,8 +2063,7 @@
                     <!-- ===== دکمه کد هدیه ===== -->
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
 
-                    <!-- ===== دکمه‌های نقش‌ها ===== -->
-                    <button class="mod-btn" id="modBtn" onclick="openModPanel()">🛡️ مود</button>
+                    <!-- ===== دکمه‌های نقش‌ها - دکمه مود حذف شد ===== -->
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
@@ -2312,26 +2214,6 @@
                 </div>
             </div>
 
-            <!-- ===== پنل مود ===== -->
-            <div id="modPanel">
-                <div class="mod-panel-box">
-                    <h2>🛡️ پنل مود</h2>
-                    <div class="online-games">
-                        🎮 تعداد بازی‌های آنلاین: <span id="modGameCount">1</span>
-                    </div>
-                    <ul>
-                        <li><span>📊 تعداد کاربران آنلاین</span> <span id="modUserCount">0</span></li>
-                        <li><span>🕹️ بازی‌های فعال</span> <span id="modGameCount2">0</span></li>
-                        <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
-                        <li id="modAdminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
-                            <span style="font-weight:500; color:rgba(255,255,255,0.5);">👤 مدیران</span>
-                            <span id="modAdminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
-                        </li>
-                    </ul>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
             <!-- ===== پنل ادمینیتور (آراد) ===== -->
             <div id="moderatorPanel">
                 <div class="moderator-panel-box">
@@ -2459,7 +2341,6 @@
 
         socket.on("onlineUsers", (count) => {
             document.getElementById("userCount").textContent = count;
-            document.getElementById("modUserCount").textContent = count;
             document.getElementById("moderatorUserCount").textContent = count;
         });
 
@@ -2678,37 +2559,34 @@
             updateButtonsVisibility();
         }
 
+        // ===== پنل مود برای همه بسته شد =====
+        function openModPanel() {
+            alert('⛔ پنل مود بسته است!');
+        }
+
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            const admins = getAdmins();
 
             const adminBtn = document.getElementById('adminBtn');
-            const modBtn = document.getElementById('modBtn');
             const moderatorBtn = document.getElementById('moderatorBtn');
 
             // همه دکمه‌ها مخفی
             adminBtn.style.display = 'none';
-            modBtn.style.display = 'none';
             moderatorBtn.style.display = 'none';
 
             if (!username) return;
 
             // تشخیص نقش کاربر
             if (username === "ابوالفضل") {
-                adminBtn.style.display = 'inline-block'; // سوپر ادمین
-                modBtn.style.display = 'inline-block';
+                adminBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
             } else if (username === "محمد رضا") {
-                adminBtn.style.display = 'inline-block'; // ادمین معمولی
-                modBtn.style.display = 'inline-block';
+                adminBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
             } else if (username === "آراد") {
-                moderatorBtn.style.display = 'inline-block'; // فقط پنل ادمینیتور
-                modBtn.style.display = 'inline-block';
-            } else {
-                // کاربر عادی - فقط مود
-                modBtn.style.display = 'inline-block';
+                moderatorBtn.style.display = 'inline-block';
             }
+            // کاربران عادی هیچ دکمه مدیریتی نمی‌بینند
         }
 
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
@@ -2786,7 +2664,7 @@
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
-                'modPanel', 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage'
+                'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2794,7 +2672,6 @@
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') { loadProfile(); }
-            if (pageId === 'modPanel') { updateModStats(); }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
                 updateAdminPanelUI();
@@ -2815,24 +2692,6 @@
                 result.className = 'gift-result';
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
-            }
-        }
-
-        function updateModStats() {
-            const users = getOnlineUsers();
-            const games = getActiveGames();
-            document.getElementById('modUserCount').textContent = users.length;
-            document.getElementById('modGameCount2').textContent = games.length;
-            document.getElementById('modGameCount').textContent = games.length > 0 ? games.length : 1;
-            // به‌روزرسانی لیست مدیران در پنل مود
-            const admins = getAdmins();
-            const modAdminListEl = document.getElementById('modAdminNamesDisplay');
-            if (modAdminListEl) {
-                let html = '';
-                admins.forEach(a => {
-                    html += `<span style="color:#a78bfa;margin-left:6px;">${a}</span>`;
-                });
-                modAdminListEl.innerHTML = html;
             }
         }
 
@@ -2860,7 +2719,7 @@
             }
 
             const sorted = [...messages].sort((a, b) => b.timestamp - a.timestamp);
-            const latest = sorted.slice(0, 5); // فقط ۵ پیام آخر
+            const latest = sorted.slice(0, 5);
 
             let html = '';
             latest.forEach(msg => {
@@ -2885,7 +2744,7 @@
         }
 
         // ==========================================================
-        //  سیستم پشتیبانی (برای نمایش در پنل ادمینیتور)
+        //  سیستم پشتیبانی
         // ==========================================================
         function getSupportMessages() {
             try {
@@ -2993,14 +2852,6 @@
         // ==========================================================
         //  توابع باز کردن پنل‌ها
         // ==========================================================
-        function openModPanel() {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) { alert('لطفاً وارد شوید!'); return; }
-            // همه کاربران لاگین شده می‌توانند مود باز کنند
-            showPage('modPanel');
-            updateModStats();
-        }
-
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
@@ -3870,7 +3721,7 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با سیستم مدیریت سه‌سطحی آماده است!');
+        console.log('❄️ برفی با پنل مود بسته شده!');
         console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
