@@ -600,6 +600,40 @@
             margin: 8px auto;
             font-size: 20px;
         }
+        /* دکمه غیرفعال با برچسب "به زودی" */
+        .menu-box .disabled-btn {
+            width: 85%;
+            margin: 8px auto;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.5;
+            pointer-events: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 14px 35px;
+            border-radius: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: none;
+        }
+        .menu-box .disabled-btn .coming-soon {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            font-size: 12px;
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
         .menu-box .back-btn-menu {
             background: rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.6);
@@ -1854,6 +1888,10 @@
                 width: 100%;
                 font-size: 17px;
             }
+            .menu-box .disabled-btn {
+                width: 100%;
+                font-size: 17px;
+            }
             .game-container {
                 padding: 18px 14px 22px;
             }
@@ -2091,6 +2129,12 @@
                     <button onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
                     <br>
                     <button onclick="goToCountrySelect()" style="background: linear-gradient(135deg, #ffd700, #f093fb); color: #1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
+                    <br>
+                    <!-- دکمه جدید غیرفعال با برچسب "به زودی" -->
+                    <button class="disabled-btn">
+                        🎯 ورود به بازی تفنگی آفلاین
+                        <span class="coming-soon">به زودی</span>
+                    </button>
                     <br><br>
                     <button class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -2168,7 +2212,7 @@
                 </div>
             </div>
 
-            <!-- ===== پنل ادمینی ===== -->
+            <!-- ===== پنل ادمینی (سوپر ادمین) ===== -->
             <div id="adminPanel">
                 <div class="admin-panel-box">
                     <h2>🔐 پنل مدیریت (سوپر ادمین)</h2>
@@ -3721,7 +3765,7 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با پنل مود بسته شده!');
+        console.log('❄️ برفی با دکمه غیرفعال "ورود به بازی تفنگی آفلاین" آماده است!');
         console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
