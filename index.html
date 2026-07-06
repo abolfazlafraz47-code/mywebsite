@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -171,7 +170,7 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
-        /* دکمه‌های نقش‌ها */
+        /* دکمه‌ها */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
@@ -298,8 +297,7 @@
         .country-select-box,
         .football-game-box,
         .gift-box,
-        .chat-box,
-        .welcome-box {
+        .chat-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -585,29 +583,6 @@
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 20px;
             font-size: 15px;
-        }
-
-        /* ===== پیام خوش‌آمدگویی ===== */
-        .welcome-box {
-            padding: 20px 24px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 16px;
-            border-right: 4px solid #ffd700;
-        }
-        .welcome-box .welcome-text {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.8;
-        }
-        .welcome-box .welcome-text span {
-            color: #ffd700;
-        }
-        .welcome-box .welcome-sub {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 4px;
         }
 
         button {
@@ -1987,12 +1962,6 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
-            .welcome-box {
-                padding: 16px 18px;
-            }
-            .welcome-box .welcome-text {
-                font-size: 16px;
-            }
             #loginPage {
                 padding: 30px 20px;
                 min-height: 320px;
@@ -2133,9 +2102,6 @@
                 font-size: 9px;
                 padding: 2px 8px;
             }
-            .welcome-box .welcome-text {
-                font-size: 14px;
-            }
             .board {
                 gap: 6px;
                 max-width: 200px;
@@ -2247,14 +2213,6 @@
 
             <!-- صفحه اصلی -->
             <div id="homePage">
-                <!-- پیام خوش‌آمدگویی -->
-                <div class="welcome-box">
-                    <div class="welcome-text">
-                        ❄️ به <span>برفی</span> خوش آمدید، <span id="welcomeUsername">کاربر</span>! 🌨️
-                    </div>
-                    <div class="welcome-sub">⚡ آماده‌ای تا بازی کنی و لذت ببری؟</div>
-                </div>
-
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
@@ -2346,7 +2304,7 @@
                 </div>
             </div>
 
-            <!-- ===== پنل سازنده (سوپر ادمین - ابوالفضل) ===== -->
+            <!-- ===== پنل سازنده (سوپر ادمین) ===== -->
             <div id="adminPanel">
                 <div class="admin-panel-box">
                     <h2>🔐 پنل سازنده</h2>
@@ -2891,10 +2849,8 @@
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
             }
-            if (pageId === 'homePage') {
-                // به‌روزرسانی پیام خوش‌آمدگویی با نام کاربر
-                const username = document.getElementById('displayUsername').textContent.trim();
-                document.getElementById('welcomeUsername').textContent = username || 'کاربر';
+            if (pageId === 'chatPage') {
+                // صفحه چت خالی
             }
         }
 
@@ -3441,4 +3397,523 @@
                 }
             }
             for (let i = 0; i < 9; i++) {
-                if (board[i]
+                if (board[i] === '') {
+                    board[i] = 'X';
+                    if (checkWinner() === 'X') {
+                        board[i] = '';
+                        applyRobotMove(i);
+                        return;
+                    }
+                    board[i] = '';
+                }
+            }
+            const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
+            if (empty.length === 0) { isRobotTurn = false; return; }
+            const randIdx = empty[Math.floor(Math.random() * empty.length)];
+            applyRobotMove(randIdx);
+        }
+
+        function applyRobotMove(index) {
+            board[index] = 'O';
+            renderBoard();
+            const winner = checkWinner();
+            if (winner) { endGame(winner);
+                isRobotTurn = false; return; }
+            currentPlayer = 'X';
+            isRobotTurn = false;
+            statusMsg.textContent = 'نوبت شما (X)';
+            resetTimer();
+        }
+
+        function startGame() {
+            board = Array(9).fill('');
+            gameOver = false;
+            currentPlayer = 'X';
+            isRobotTurn = false;
+            gameId = 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+            let games = getActiveGames();
+            if (!games.includes(gameId)) {
+                games.push(gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                updateAdminStats();
+            }
+            renderBoard();
+            statusMsg.textContent = 'نوبت شما (X) - شروع کنید!';
+            clearTimer();
+            timeLeft = MAX_TIME;
+            updateTimerDisplay();
+            timerDisplay.classList.remove('warning');
+            startTimer();
+        }
+
+        function resetGame() {
+            if (gameId) {
+                let games = getActiveGames();
+                games = games.filter(g => g !== gameId);
+                localStorage.setItem('activeGames', JSON.stringify(games));
+                gameId = null;
+                updateAdminStats();
+            }
+            startGame();
+        }
+
+        // ==========================================================
+        //  ۶. بازی فوتبال کشوری (کد کامل)
+        // ==========================================================
+        const countries = [
+            { name: 'ایران', flag: '🇮🇷' },
+            { name: 'آلمان', flag: '🇩🇪' },
+            { name: 'برزیل', flag: '🇧🇷' },
+            { name: 'ایتالیا', flag: '🇮🇹' },
+            { name: 'فرانسه', flag: '🇫🇷' },
+            { name: 'انگلیس', flag: '🇬🇧' },
+            { name: 'اسپانیا', flag: '🇪🇸' },
+            { name: 'آرژانتین', flag: '🇦🇷' },
+            { name: 'ژاپن', flag: '🇯🇵' },
+            { name: 'کره جنوبی', flag: '🇰🇷' }
+        ];
+
+        let selectedCountry = null;
+        let footballState = {
+            playerCountry: null,
+            robotCountry: null,
+            playerScore: 0,
+            robotScore: 0,
+            ballX: 50,
+            ballY: 50,
+            turn: 'player',
+            isGoal: false,
+            isGameOver: false,
+            isDragging: false,
+            dragStartX: 0,
+            dragStartY: 0,
+            hasStarted: false
+        };
+
+        let dragHandlers = { onStart: null, onMove: null, onEnd: null };
+
+        function renderCountries() {
+            const grid = document.getElementById('countryGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            countries.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'country-btn';
+                btn.innerHTML = `<span class="flag">${c.flag}</span><span>${c.name}</span>`;
+                btn.dataset.name = c.name;
+                btn.onclick = () => selectCountry(c);
+                if (selectedCountry && selectedCountry.name === c.name) {
+                    btn.classList.add('selected');
+                }
+                grid.appendChild(btn);
+            });
+            updateStartButton();
+        }
+
+        function selectCountry(country) {
+            selectedCountry = country;
+            document.querySelectorAll('.country-btn').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.name === country.name);
+            });
+            updateStartButton();
+        }
+
+        function updateStartButton() {
+            const btn = document.getElementById('startFootballBtn');
+            btn.disabled = !selectedCountry;
+        }
+
+        function startFootballGame() {
+            if (!selectedCountry) return;
+
+            let robotCountry;
+            do {
+                robotCountry = countries[Math.floor(Math.random() * countries.length)];
+            } while (robotCountry.name === selectedCountry.name);
+
+            footballState.playerCountry = selectedCountry;
+            footballState.robotCountry = robotCountry;
+            footballState.playerScore = 0;
+            footballState.robotScore = 0;
+            footballState.ballX = 50;
+            footballState.ballY = 50;
+            footballState.turn = 'player';
+            footballState.isGoal = false;
+            footballState.isGameOver = false;
+            footballState.hasStarted = true;
+
+            document.getElementById('playerFlag').textContent = selectedCountry.flag;
+            document.getElementById('playerName').textContent = selectedCountry.name.toUpperCase();
+            document.getElementById('robotFlag').textContent = robotCountry.flag;
+            document.getElementById('robotName').textContent = robotCountry.name.toUpperCase();
+            updateScoreDisplay();
+
+            const ball = document.getElementById('ball');
+            const ballFlag = document.getElementById('ballFlag');
+            ballFlag.textContent = selectedCountry.flag;
+            ball.style.left = '50%';
+            ball.style.top = '50%';
+
+            document.getElementById('goalMessage').style.display = 'none';
+            document.getElementById('footballStatus').textContent = '👆 توپ را بکشید تا حرکت کند';
+            document.getElementById('turnText').textContent = '🎯 Your Turn';
+            document.getElementById('turnText').style.color = '#ffd700';
+
+            document.getElementById('playerTeam').classList.add('active');
+            document.getElementById('robotTeam').classList.remove('active');
+
+            enableBallDrag();
+            showPage('footballGamePage');
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('scoreDisplay').textContent =
+                `${footballState.playerScore} - ${footballState.robotScore}`;
+        }
+
+        function enableBallDrag() {
+            const ball = document.getElementById('ball');
+            const pitch = document.getElementById('pitch');
+
+            disableBallDrag();
+
+            ball.style.cursor = 'grab';
+            pitch.style.cursor = 'grab';
+
+            const onStart = (e) => {
+                if (footballState.isGameOver || footballState.turn !== 'player' || !footballState.hasStarted) return;
+                e.preventDefault();
+                footballState.isDragging = true;
+                const rect = pitch.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                footballState.dragStartX = clientX;
+                footballState.dragStartY = clientY;
+                ball.style.cursor = 'grabbing';
+                pitch.style.cursor = 'grabbing';
+                createArrow(clientX, clientY);
+            };
+
+            const onMove = (e) => {
+                if (!footballState.isDragging || footballState.isGameOver || footballState.turn !== 'player') return;
+                e.preventDefault();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                updateArrow(clientX, clientY);
+            };
+
+            const onEnd = (e) => {
+                if (!footballState.isDragging) return;
+                footballState.isDragging = false;
+                ball.style.cursor = 'grab';
+                pitch.style.cursor = 'grab';
+                removeArrow();
+
+                const rect = pitch.getBoundingClientRect();
+                const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+                const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+                const dx = (clientX - footballState.dragStartX) / rect.width * 100;
+                const dy = (clientY - footballState.dragStartY) / rect.height * 100;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance > 2) {
+                    const newX = Math.min(Math.max(footballState.ballX + dx * 1.2, 5), 95);
+                    const newY = Math.min(Math.max(footballState.ballY + dy * 1.2, 5), 95);
+
+                    footballState.ballX = newX;
+                    footballState.ballY = newY;
+
+                    const ballEl = document.getElementById('ball');
+                    ballEl.style.left = newX + '%';
+                    ballEl.style.top = newY + '%';
+
+                    checkGoal();
+
+                    if (!footballState.isGameOver && footballState.turn === 'player') {
+                        footballState.turn = 'robot';
+                        document.getElementById('turnText').textContent = '🤖 Robot Turn';
+                        document.getElementById('turnText').style.color = '#f093fb';
+                        document.getElementById('playerTeam').classList.remove('active');
+                        document.getElementById('robotTeam').classList.add('active');
+                        document.getElementById('footballStatus').textContent = '🤖 نوبت ربات...';
+
+                        setTimeout(() => robotMoveBall(), 800);
+                    }
+                } else {
+                    document.getElementById('footballStatus').textContent = '👆 بیشتر بکشید!';
+                    setTimeout(() => {
+                        if (!footballState.isGameOver) {
+                            document.getElementById('footballStatus').textContent = '👆 توپ را بکشید';
+                        }
+                    }, 600);
+                }
+            };
+
+            dragHandlers.onStart = onStart;
+            dragHandlers.onMove = onMove;
+            dragHandlers.onEnd = onEnd;
+
+            ball.addEventListener('mousedown', onStart);
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+            ball.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onEnd, { passive: false });
+        }
+
+        let arrowElement = null;
+        let arrowStartX = 0;
+        let arrowStartY = 0;
+
+        function createArrow(clientX, clientY) {
+            removeArrow();
+            const pitch = document.getElementById('pitch');
+            const rect = pitch.getBoundingClientRect();
+
+            arrowElement = document.createElement('div');
+            arrowElement.style.position = 'absolute';
+            arrowElement.style.pointerEvents = 'none';
+            arrowElement.style.zIndex = '6';
+            arrowElement.style.fontSize = '28px';
+            arrowElement.style.color = '#ffd700';
+            arrowElement.style.textShadow = '0 0 20px rgba(255,215,0,0.4)';
+            arrowElement.textContent = '➡️';
+            arrowElement.style.transition = 'none';
+
+            const ball = document.getElementById('ball');
+            const ballRect = ball.getBoundingClientRect();
+            const centerX = ballRect.left + ballRect.width / 2 - rect.left;
+            const centerY = ballRect.top + ballRect.height / 2 - rect.top;
+
+            arrowStartX = centerX;
+            arrowStartY = centerY;
+            arrowElement.style.left = (centerX) + 'px';
+            arrowElement.style.top = (centerY) + 'px';
+            pitch.appendChild(arrowElement);
+        }
+
+        function updateArrow(clientX, clientY) {
+            if (!arrowElement) return;
+            const pitch = document.getElementById('pitch');
+            const rect = pitch.getBoundingClientRect();
+
+            const dx = clientX - rect.left - arrowStartX;
+            const dy = clientY - rect.top - arrowStartY;
+            const angle = Math.atan2(dy, dx);
+            const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 80);
+
+            arrowElement.style.transform = `rotate(${angle}rad)`;
+            arrowElement.style.left = (arrowStartX + Math.cos(angle) * 10) + 'px';
+            arrowElement.style.top = (arrowStartY + Math.sin(angle) * 10) + 'px';
+            const scale = 0.6 + (distance / 80) * 0.6;
+            arrowElement.style.fontSize = (18 + scale * 22) + 'px';
+        }
+
+        function removeArrow() {
+            if (arrowElement && arrowElement.parentNode) {
+                arrowElement.parentNode.removeChild(arrowElement);
+                arrowElement = null;
+            }
+        }
+
+        function disableBallDrag() {
+            const ball = document.getElementById('ball');
+            if (dragHandlers.onStart) {
+                ball.removeEventListener('mousedown', dragHandlers.onStart);
+                ball.removeEventListener('touchstart', dragHandlers.onStart);
+            }
+            if (dragHandlers.onMove) {
+                document.removeEventListener('mousemove', dragHandlers.onMove);
+                document.removeEventListener('touchmove', dragHandlers.onMove);
+            }
+            if (dragHandlers.onEnd) {
+                document.removeEventListener('mouseup', dragHandlers.onEnd);
+                document.removeEventListener('touchend', dragHandlers.onEnd);
+            }
+            ball.style.cursor = 'default';
+            document.getElementById('pitch').style.cursor = 'default';
+            footballState.isDragging = false;
+            removeArrow();
+        }
+
+        function robotMoveBall() {
+            if (footballState.isGameOver || footballState.turn !== 'robot') return;
+
+            const status = document.getElementById('footballStatus');
+            status.textContent = '🤖 ربات در حال حرکت...';
+
+            const targetX = 5 + Math.random() * 15;
+            const targetY = 20 + Math.random() * 60;
+
+            let steps = 0;
+            const maxSteps = 12 + Math.floor(Math.random() * 8);
+
+            const moveInterval = setInterval(() => {
+                if (footballState.isGameOver || steps >= maxSteps) {
+                    clearInterval(moveInterval);
+                    if (!footballState.isGameOver) {
+                        footballState.turn = 'player';
+                        document.getElementById('turnText').textContent = '🎯 Your Turn';
+                        document.getElementById('turnText').style.color = '#ffd700';
+                        document.getElementById('playerTeam').classList.add('active');
+                        document.getElementById('robotTeam').classList.remove('active');
+                        document.getElementById('footballStatus').textContent = '👆 نوبت شما! توپ را بکشید.';
+                        enableBallDrag();
+                    }
+                    return;
+                }
+
+                const currentX = footballState.ballX;
+                const currentY = footballState.ballY;
+                const dx = (targetX - currentX) / (maxSteps - steps);
+                const dy = (targetY - currentY) / (maxSteps - steps);
+
+                footballState.ballX += dx;
+                footballState.ballY += dy;
+
+                const ballEl = document.getElementById('ball');
+                ballEl.style.left = footballState.ballX + '%';
+                ballEl.style.top = footballState.ballY + '%';
+
+                steps++;
+                checkGoal();
+
+                if (footballState.isGameOver) {
+                    clearInterval(moveInterval);
+                }
+            }, 120);
+        }
+
+        function checkGoal() {
+            if (footballState.isGameOver) return;
+
+            const x = footballState.ballX;
+            const y = footballState.ballY;
+            const goalThreshold = 10;
+            const goalYRange = { min: 30, max: 70 };
+
+            if ((x < goalThreshold || x > 100 - goalThreshold) && y > goalYRange.min && y < goalYRange.max) {
+                footballState.isGameOver = true;
+                footballState.isGoal = true;
+                disableBallDrag();
+
+                const isPlayerGoal = x < goalThreshold;
+
+                if (isPlayerGoal) {
+                    footballState.playerScore++;
+                } else {
+                    footballState.robotScore++;
+                }
+                updateScoreDisplay();
+
+                const goalMsg = document.getElementById('goalMessage');
+                const goalText = document.getElementById('goalText');
+                const goalSub = document.getElementById('goalSub');
+
+                const scorer = isPlayerGoal ? footballState.playerCountry : footballState.robotCountry;
+
+                goalText.textContent = isPlayerGoal ? `🎉 گل! ${scorer.flag}` : `😅 گل خوردی! ${scorer.flag}`;
+                goalSub.textContent = isPlayerGoal ? 'تبریک! شما گل زدید!' : 'ربات گل زد!';
+                goalMsg.style.display = 'block';
+
+                const status = document.getElementById('footballStatus');
+                if (isPlayerGoal) {
+                    status.textContent = '🎉 شما گل زدید!';
+                    document.getElementById('turnText').textContent = '✅ شما';
+                    document.getElementById('turnText').style.color = '#2ecc71';
+                    playWinSound();
+                } else {
+                    status.textContent = '😅 ربات گل زد!';
+                    document.getElementById('turnText').textContent = '❌ ربات';
+                    document.getElementById('turnText').style.color = '#ff6b8a';
+                    playLoseSound();
+                }
+
+                if (footballState.playerScore >= 3) {
+                    setTimeout(() => {
+                        goalText.textContent = '🏆 شما برنده شدید!';
+                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
+                        goalMsg.style.display = 'block';
+                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان شدید!';
+                    }, 800);
+                } else if (footballState.robotScore >= 3) {
+                    setTimeout(() => {
+                        goalText.textContent = '😔 ربات برنده شد!';
+                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
+                        goalMsg.style.display = 'block';
+                        document.getElementById('footballStatus').textContent = '😔 ربات قهرمان شد!';
+                    }, 800);
+                }
+
+                disableBallDrag();
+            }
+        }
+
+        function resetFootballGame() {
+            document.getElementById('goalMessage').style.display = 'none';
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.ballX = 50;
+            footballState.ballY = 50;
+            footballState.hasStarted = false;
+            footballState.playerScore = 0;
+            footballState.robotScore = 0;
+            updateScoreDisplay();
+
+            const ball = document.getElementById('ball');
+            ball.style.left = '50%';
+            ball.style.top = '50%';
+
+            document.getElementById('footballStatus').textContent = '🔄 بازی جدید! کشور خود را انتخاب کنید';
+            document.getElementById('turnText').textContent = '⏳ انتخاب کشور';
+            document.getElementById('playerTeam').classList.remove('active');
+            document.getElementById('robotTeam').classList.remove('active');
+
+            disableBallDrag();
+            showPage('countrySelectPage');
+            renderCountries();
+        }
+
+        function resetFootballGameState() {
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.isDragging = false;
+            footballState.hasStarted = false;
+            document.getElementById('goalMessage').style.display = 'none';
+            disableBallDrag();
+        }
+
+        // ==========================================================
+        //  تایمر بن
+        // ==========================================================
+        let banTimerInterval = null;
+
+        function updateBanTimer() {
+            if (banTimerInterval) clearInterval(banTimerInterval);
+            banTimerInterval = setInterval(() => {
+                const username = localStorage.getItem('username');
+                if (username) {
+                    const remaining = getBanRemainingTime(username);
+                    if (remaining && remaining !== '00:00:00') {
+                        document.getElementById('banTimeDisplay').textContent =
+                            `⏳ زمان باقی‌مانده: ${remaining}`;
+                    } else if (remaining === '00:00:00') {
+                        clearInterval(banTimerInterval);
+                        location.reload();
+                    }
+                }
+            }, 1000);
+        }
+
+        // ==========================================================
+        //  بارگذاری اولیه
+        // ==========================================================
+        console.log('❄️ برفی با سیستم کامل آماده است!');
+        console.log('👑 سوپر ادمین (سازنده): ابوالفضل');
+        console.log('🛡️ ادمین: محمد رضا');
+        console.log('⭐ ادمینیتور: آراد');
+    </script>
+
+</body>
+</html>
