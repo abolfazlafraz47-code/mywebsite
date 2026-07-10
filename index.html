@@ -170,7 +170,38 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
-        /* دکمه‌ها */
+        /* ===== دکمه فروشگاه (غیرفعال) ===== */
+        .main-header .store-btn {
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: default;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            position: relative;
+            opacity: 0.5;
+            transition: none;
+            pointer-events: none;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .main-header .store-btn .soon-badge {
+            font-size: 7px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1px 6px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        /* ===== دکمه‌های نقش‌ها - دکمه مود حذف شد ===== */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
@@ -262,27 +293,6 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
 
-        /* ===== دکمه چت ===== */
-        .main-header .chat-btn {
-            background: rgba(100, 200, 255, 0.08);
-            color: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(100, 200, 255, 0.06);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            backdrop-filter: blur(4px);
-            position: relative;
-            opacity: 0.5;
-        }
-        .main-header .chat-btn:hover {
-            background: rgba(100, 200, 255, 0.12);
-            transform: translateY(-2px) scale(1.05);
-        }
-
         /* ===== صفحات با افکت شیشه‌ای ===== */
         #loginPage,
         #loader,
@@ -296,8 +306,7 @@
         .moderator-panel-box,
         .country-select-box,
         .football-game-box,
-        .gift-box,
-        .chat-box {
+        .gift-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -546,8 +555,7 @@
         #moderatorPanel,
         #countrySelectPage,
         #footballGamePage,
-        #giftPage,
-        #chatPage {
+        #giftPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -814,7 +822,7 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== پنل سازنده (سوپر ادمین - ابوالفضل) ===== */
+        /* ===== پنل سوپر ادمین (ابوالفضل) ===== */
         .admin-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -1081,7 +1089,7 @@
             color: #ffd700;
         }
 
-        /* ===== پنل ادمینیتور (آراد، محمد رضا، ابوالفضل) ===== */
+        /* ===== پنل ادمینیتور (آراد) ===== */
         .moderator-panel-box {
             padding: 32px 24px;
             width: 100%;
@@ -1816,105 +1824,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== صفحه چت ===== */
-        .chat-box {
-            padding: 32px 24px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .chat-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .chat-box h2 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #64d8ff, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            margin-top: 6px;
-        }
-        .chat-box .chat-messages {
-            flex: 1;
-            min-height: 200px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
-            margin-bottom: 16px;
-            padding: 10px;
-        }
-        .chat-box .chat-input-area {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            flex-wrap: wrap;
-        }
-        .chat-box .chat-input-area input {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 14px;
-            border: 2px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-            min-width: 120px;
-            opacity: 0.4;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        .chat-box .chat-input-area input::placeholder {
-            color: rgba(255, 255, 255, 0.15);
-        }
-        .chat-box .chat-input-area .chat-send-btn {
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-            box-shadow: none;
-            opacity: 0.4;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        .chat-box .coming-soon-badge {
-            display: inline-block;
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
-            font-size: 14px;
-            padding: 6px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
         /* ===== واکنش‌گرایی ===== */
         @media(max-width: 480px) {
             body {
@@ -1938,6 +1847,14 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .main-header .store-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            .main-header .store-btn .soon-badge {
+                font-size: 6px;
+                padding: 0px 4px;
+            }
             .main-header .admin-btn {
                 font-size: 10px;
                 padding: 3px 10px;
@@ -1955,10 +1872,6 @@
                 height: 22px;
             }
             .main-header .gift-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .chat-btn {
                 font-size: 10px;
                 padding: 3px 10px;
             }
@@ -2014,8 +1927,7 @@
             .moderator-panel-box,
             .country-select-box,
             .football-game-box,
-            .gift-box,
-            .chat-box {
+            .gift-box {
                 padding: 20px 14px;
             }
             .country-grid {
@@ -2078,6 +1990,14 @@
                 font-size: 9px;
                 padding: 2px 8px;
             }
+            .main-header .store-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .store-btn .soon-badge {
+                font-size: 5px;
+                padding: 0px 3px;
+            }
             .main-header .admin-btn {
                 font-size: 9px;
                 padding: 2px 8px;
@@ -2095,10 +2015,6 @@
                 height: 18px;
             }
             .main-header .gift-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .chat-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -2164,14 +2080,6 @@
             <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
         </div>
 
-        <!-- ======== صفحه بن شده ======== -->
-        <div id="bannedPage" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding:40px 30px; text-align:center; min-height:380px; width:100%; background:rgba(255,255,255,0.05); backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,0.08); border-radius:28px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-            <div class="ban-icon" style="font-size:60px; margin-bottom:16px;">🚫</div>
-            <div class="ban-title" style="font-size:28px; font-weight:900; color:#ff6b6b; margin-bottom:8px;">شما بن شدید!</div>
-            <div class="ban-desc" style="font-size:16px; color:rgba(255,255,255,0.6); margin-bottom:20px;">به دلیل تخلف از قوانین سایت، دسترسی شما به مدت 24 ساعت مسدود شده است.</div>
-            <div class="ban-time" style="font-size:18px; color:#ffd700; font-weight:700;" id="banTimeDisplay">⏳ زمان باقی‌مانده: 23:59:59</div>
-        </div>
-
         <!-- ======== صفحه لودینگ ======== -->
         <div id="loader">
             <div class="spinner"></div>
@@ -2198,11 +2106,19 @@
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
 
-                    <!-- ===== دکمه‌ها ===== -->
+                    <!-- ===== دکمه فروشگاه (غیرفعال با برچسب به زودی) ===== -->
+                    <button class="store-btn" disabled>
+                        🏪 فروشگاه
+                        <span class="soon-badge">به زودی</span>
+                    </button>
+
+                    <!-- ===== دکمه کد هدیه ===== -->
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
-                    <button class="chat-btn" onclick="showChatPage()">💬 چت</button>
-                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ پنل سازنده</button>
+
+                    <!-- ===== دکمه‌های نقش‌ها - دکمه مود حذف شد ===== -->
+                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
+
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
@@ -2304,10 +2220,10 @@
                 </div>
             </div>
 
-            <!-- ===== پنل سازنده (سوپر ادمین) ===== -->
+            <!-- ===== پنل ادمینی ===== -->
             <div id="adminPanel">
                 <div class="admin-panel-box">
-                    <h2>🔐 پنل سازنده</h2>
+                    <h2>🔐 پنل مدیریت (سوپر ادمین)</h2>
                     <p style="color: rgba(255,255,255,0.5); font-weight: 500;">دسترسی کامل به تمام قابلیت‌ها</p>
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
@@ -2350,7 +2266,7 @@
                 </div>
             </div>
 
-            <!-- ===== پنل ادمینیتور (آراد، محمد رضا، ابوالفضل) ===== -->
+            <!-- ===== پنل ادمینیتور (آراد) ===== -->
             <div id="moderatorPanel">
                 <div class="moderator-panel-box">
                     <h2>👑 پنل ادمینیتور</h2>
@@ -2386,7 +2302,7 @@
                 </div>
             </div>
 
-            <!-- ===== صفحه رنک ===== -->
+            <!-- ===== صفحه رنک ها ===== -->
             <div id="rankPage">
                 <div class="rank-box">
                     <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
@@ -2394,8 +2310,8 @@
 
                     <div class="rank-group">
                         <span class="rank-title" style="color:#ff6b8a;">سازنده</span>
-                        <span class="rank-name" style="color:#ff6b8a;">ابوالفضل</span>
-                        <span class="rank-name" style="color:#ff6b8a;">محمد رضا</span>
+                        <span class="rank-name">ابوالفضل</span>
+                        <span class="rank-name">محمد رضا</span>
                     </div>
 
                     <div class="rank-group">
@@ -2446,22 +2362,6 @@
                         <div class="gift-prize" id="giftResultPrize"></div>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه چت ===== -->
-            <div id="chatPage">
-                <div class="chat-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <h2>💬 چت</h2>
-                    <div class="coming-soon-badge">به زودی</div>
-                    <div class="chat-messages">
-                        <div style="color:rgba(255,255,255,0.2); text-align:center; padding:20px;">پیامی وجود ندارد</div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" placeholder="متن پیام..." disabled />
-                        <button class="chat-send-btn" disabled>📤 ارسال</button>
-                    </div>
                 </div>
             </div>
 
@@ -2728,12 +2628,12 @@
 
             if (!username) return;
 
-            // پنل سازنده برای ابوالفضل
+            // تشخیص نقش کاربر
             if (username === "ابوالفضل") {
                 adminBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
             } else if (username === "محمد رضا") {
-                // محمد رضا فقط پنل ادمینیتور
+                adminBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
             } else if (username === "آراد") {
                 moderatorBtn.style.display = 'inline-block';
@@ -2798,13 +2698,9 @@
             let html = '';
             admins.forEach(admin => {
                 let color = '#fff';
-                let textColor = '';
-                if (admin === "آراد") { color = '#f1c40f';
-                    textColor = 'color:#f1c40f;'; }
-                if (admin === "ابوالفضل") { color = '#ff6b6b';
-                    textColor = 'color:#ff6b6b;'; }
-                if (admin === "محمد رضا") { textColor = 'color:#ff6b6b;'; }
-                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;${textColor}">`;
+                if (admin === "آراد") color = '#f1c40f';
+                if (admin === "ابوالفضل") color = '#ff6b6b';
+                html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
                 html += admin;
                 if (isSuperAdmin && admin !== SUPER_ADMIN) {
                     html +=
@@ -2820,7 +2716,7 @@
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
-                'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'chatPage'
+                'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2848,9 +2744,6 @@
                 result.className = 'gift-result';
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
-            }
-            if (pageId === 'chatPage') {
-                // صفحه چت خالی
             }
         }
 
@@ -3014,7 +2907,7 @@
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
-            if (username === "ابوالفضل") {
+            if (username === "ابوالفضل" || username === "محمد رضا") {
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderBanList();
@@ -3025,27 +2918,20 @@
                 document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
                 showPage('adminPanel');
             } else {
-                alert('⛔ شما دسترسی به پنل سازنده را ندارید!');
+                alert('⛔ شما دسترسی به پنل ادمین ندارید!');
             }
         }
 
         function openModeratorPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
-            if (username === "آراد" || username === "محمد رضا" || username === "ابوالفضل") {
+            if (username === "آراد") {
                 updateModeratorStats();
                 renderModeratorSupportMessages();
                 showPage('moderatorPanel');
             } else {
-                alert('⛔ شما دسترسی به پنل ادمینیتور را ندارید!');
+                alert('⛔ فقط آراد دسترسی به پنل ادمینیتور را دارد!');
             }
-        }
-
-        // ==========================================================
-        //  توابع صفحه چت
-        // ==========================================================
-        function showChatPage() {
-            showPage('chatPage');
         }
 
         // ==========================================================
@@ -3885,34 +3771,13 @@
         }
 
         // ==========================================================
-        //  تایمر بن
-        // ==========================================================
-        let banTimerInterval = null;
-
-        function updateBanTimer() {
-            if (banTimerInterval) clearInterval(banTimerInterval);
-            banTimerInterval = setInterval(() => {
-                const username = localStorage.getItem('username');
-                if (username) {
-                    const remaining = getBanRemainingTime(username);
-                    if (remaining && remaining !== '00:00:00') {
-                        document.getElementById('banTimeDisplay').textContent =
-                            `⏳ زمان باقی‌مانده: ${remaining}`;
-                    } else if (remaining === '00:00:00') {
-                        clearInterval(banTimerInterval);
-                        location.reload();
-                    }
-                }
-            }, 1000);
-        }
-
-        // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی با سیستم کامل آماده است!');
-        console.log('👑 سوپر ادمین (سازنده): ابوالفضل');
+        console.log('❄️ برفی با پنل مود بسته شده!');
+        console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
+        console.log('🏪 فروشگاه: به زودی');
     </script>
 
 </body>
