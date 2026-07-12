@@ -170,37 +170,28 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
-        /* ===== دکمه فروشگاه (غیرفعال) ===== */
+        /* ===== دکمه فروشگاه (فعال) ===== */
         .main-header .store-btn {
-            background: rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
             padding: 4px 12px;
             border-radius: 30px;
             font-size: 12px;
-            font-weight: 600;
-            cursor: default;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            backdrop-filter: blur(4px);
-            position: relative;
-            opacity: 0.5;
-            transition: none;
-            pointer-events: none;
-            user-select: none;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
             display: inline-flex;
             align-items: center;
             gap: 4px;
         }
-        .main-header .store-btn .soon-badge {
-            font-size: 7px;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1px 6px;
-            border-radius: 8px;
-            color: rgba(255, 255, 255, 0.2);
-            letter-spacing: 0.5px;
-            line-height: 1.4;
+        .main-header .store-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
+
         /* ===== دکمه‌های نقش‌ها - دکمه مود حذف شد ===== */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
@@ -306,7 +297,8 @@
         .moderator-panel-box,
         .country-select-box,
         .football-game-box,
-        .gift-box {
+        .gift-box,
+        .store-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -314,6 +306,49 @@
             border-radius: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
+        }
+
+        /* ===== صفحه فروشگاه ===== */
+        .store-box {
+            padding: 40px 28px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+        .store-box .store-message {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+        }
+        .store-box .store-sub {
+            font-size: 18px;
+            color: rgba(255, 215, 0, 0.8);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .store-box .back-home-btn {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .store-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* ===== صفحه ورود ===== */
@@ -555,7 +590,8 @@
         #moderatorPanel,
         #countrySelectPage,
         #footballGamePage,
-        #giftPage {
+        #giftPage,
+        #storePage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1851,10 +1887,6 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
-            .main-header .store-btn .soon-badge {
-                font-size: 6px;
-                padding: 0px 4px;
-            }
             .main-header .admin-btn {
                 font-size: 10px;
                 padding: 3px 10px;
@@ -1927,7 +1959,8 @@
             .moderator-panel-box,
             .country-select-box,
             .football-game-box,
-            .gift-box {
+            .gift-box,
+            .store-box {
                 padding: 20px 14px;
             }
             .country-grid {
@@ -1993,10 +2026,6 @@
             .main-header .store-btn {
                 font-size: 9px;
                 padding: 2px 8px;
-            }
-            .main-header .store-btn .soon-badge {
-                font-size: 5px;
-                padding: 0px 3px;
             }
             .main-header .admin-btn {
                 font-size: 9px;
@@ -2106,10 +2135,9 @@
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
 
-                    <!-- ===== دکمه فروشگاه (غیرفعال با برچسب به زودی) ===== -->
-                    <button class="store-btn" disabled>
+                    <!-- ===== دکمه فروشگاه (فعال) ===== -->
+                    <button class="store-btn" onclick="showStorePage()">
                         🏪 فروشگاه
-                        <span class="soon-badge">به زودی</span>
                     </button>
 
                     <!-- ===== دکمه کد هدیه ===== -->
@@ -2361,6 +2389,15 @@
                         <div id="giftResultText"></div>
                         <div class="gift-prize" id="giftResultPrize"></div>
                     </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه فروشگاه ===== -->
+            <div id="storePage">
+                <div class="store-box">
+                    <div class="store-message">بیاین پیوی بگین چی اضافه کنم</div>
+                    <div class="store-sub">@A87hskgd</div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -2716,7 +2753,7 @@
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
-                'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage'
+                'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2745,6 +2782,10 @@
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
             }
+        }
+
+        function showStorePage() {
+            showPage('storePage');
         }
 
         function updateModeratorStats() {
@@ -3777,7 +3818,7 @@
         console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
-        console.log('🏪 فروشگاه: به زودی');
+        console.log('🏪 فروشگاه: فعال - صفحه نمایش پیام');
     </script>
 
 </body>
