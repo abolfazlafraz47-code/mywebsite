@@ -437,109 +437,6 @@
             color: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== بخش کپچا (من ربات نیستم) ===== */
-        .captcha-section {
-            width: 100%;
-            margin: 8px 0 12px 0;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        .captcha-section .captcha-question {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 15px;
-            margin-bottom: 6px;
-        }
-        .captcha-section .captcha-question span {
-            color: #ffd700;
-            font-weight: 700;
-            font-size: 18px;
-        }
-        .captcha-section .captcha-row {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .captcha-section .captcha-row input {
-            flex: 1;
-            min-width: 80px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.04);
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .captcha-section .captcha-row input:focus {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
-        }
-        .captcha-section .captcha-row input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-        .captcha-section .captcha-row .captcha-btn {
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            padding: 8px 18px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: none;
-            white-space: nowrap;
-        }
-        .captcha-section .captcha-row .captcha-btn:hover {
-            background: rgba(255, 215, 0, 0.25);
-            transform: scale(1.05);
-        }
-        .captcha-section .captcha-error {
-            color: #ff6b6b;
-            font-size: 13px;
-            margin-top: 6px;
-            display: none;
-        }
-        .captcha-section .captcha-success {
-            color: #2ecc71;
-            font-size: 13px;
-            margin-top: 6px;
-            display: none;
-        }
-
-        /* دکمه "من ربات نیستم" */
-        .show-captcha-btn {
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 6px;
-            box-shadow: none;
-            position: relative;
-            z-index: 1;
-        }
-        .show-captcha-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* پنهان‌سازی بخش کپچا در ابتدا */
-        .captcha-section.hidden {
-            display: none;
-        }
-
         #loginPage .login-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: white;
@@ -775,6 +672,110 @@
         button:hover {
             transform: translateY(-3px) scale(1.03);
             box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
+        }
+
+        /* ===== بخش کپچا در صفحه اصلی ===== */
+        .captcha-section-home {
+            width: 100%;
+            margin: 10px 0 14px 0;
+            text-align: center;
+            display: none;
+            /* پنهان در ابتدا */
+        }
+        .captcha-section-home.visible {
+            display: block;
+        }
+        .captcha-section-home .captcha-question {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .captcha-section-home .captcha-question span {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .captcha-section-home .captcha-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .captcha-section-home .captcha-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .captcha-section-home .captcha-row input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .captcha-section-home .captcha-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .captcha-section-home .captcha-row .captcha-btn {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .captcha-section-home .captcha-row .captcha-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+        .captcha-section-home .captcha-error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+        .captcha-section-home .captcha-success {
+            color: #2ecc71;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* دکمه "من ربات نیستم" در صفحه اصلی */
+        .show-captcha-home-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 6px;
+            box-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+        .show-captcha-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .show-captcha-home-btn.hidden {
+            display: none;
         }
 
         /* ===== منو ===== */
@@ -2149,11 +2150,11 @@
             #deviceInfo .device-icon {
                 font-size: 12px;
             }
-            .captcha-section .captcha-row input {
+            .captcha-section-home .captcha-row input {
                 font-size: 14px;
                 padding: 6px 10px;
             }
-            .captcha-section .captcha-row .captcha-btn {
+            .captcha-section-home .captcha-row .captcha-btn {
                 font-size: 12px;
                 padding: 6px 14px;
             }
@@ -2262,23 +2263,6 @@
                 <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
             </div>
 
-            <!-- ===== بخش کپچا (من ربات نیستم) ===== -->
-            <div class="captcha-section hidden" id="captchaSection">
-                <div class="captcha-question">
-                    لطفاً برای اثبات اینکه ربات نیستید، معادله را حل کنید:
-                    <span id="captchaQuestion">۲ + ۳ = ؟</span>
-                </div>
-                <div class="captcha-row">
-                    <input type="text" id="captchaInput" placeholder="پاسخ" />
-                    <button class="captcha-btn" id="captchaBtn">✅ تأیید</button>
-                </div>
-                <div class="captcha-error" id="captchaError">❌ پاسخ اشتباه است، دوباره تلاش کنید.</div>
-                <div class="captcha-success" id="captchaSuccess">✅ تأیید شد! در حال ورود...</div>
-            </div>
-
-            <!-- دکمه نمایش کپچا -->
-            <button class="show-captcha-btn" id="showCaptchaBtn">🤖 من ربات نیستم</button>
-
             <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
             <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
         </div>
@@ -2340,7 +2324,25 @@
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
-                    <button onclick="goToMenu()">🚀 شروع</button>
+
+                    <!-- ===== بخش کپچا در صفحه اصلی ===== -->
+                    <div class="captcha-section-home" id="captchaSectionHome">
+                        <div class="captcha-question">
+                            لطفاً برای اثبات اینکه ربات نیستید، معادله را حل کنید:
+                            <span id="captchaQuestionHome">۲ + ۳ = ؟</span>
+                        </div>
+                        <div class="captcha-row">
+                            <input type="text" id="captchaInputHome" placeholder="پاسخ" />
+                            <button class="captcha-btn" id="captchaBtnHome">✅ تأیید</button>
+                        </div>
+                        <div class="captcha-error" id="captchaErrorHome">❌ پاسخ اشتباه است، دوباره تلاش کنید.</div>
+                        <div class="captcha-success" id="captchaSuccessHome">✅ تأیید شد! در حال انتقال...</div>
+                    </div>
+
+                    <!-- دکمه نمایش کپچا در صفحه اصلی -->
+                    <button class="show-captcha-home-btn" id="showCaptchaHomeBtn">🤖 من ربات نیستم</button>
+
+                    <button onclick="goToMenu()" id="startBtnMain" style="margin-top:12px;">🚀 شروع</button>
                 </div>
             </div>
 
@@ -2980,6 +2982,8 @@
             if (pageId === 'profilePage') { loadProfile(); }
             if (pageId === 'homePage') {
                 detectDevice(); // به‌روزرسانی نشانگر دستگاه
+                // بررسی وضعیت کپچا و مخفی کردن دکمه اگر قبلاً تأیید شده
+                updateCaptchaUI();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3205,14 +3209,29 @@
             showPage('profilePage');
         }
 
-        function goToMenu() { showPage('menuPage'); }
+        function goToMenu() {
+            // قبل از رفتن به منو، بررسی کن که کاربر کپچا رو تایید کرده یا نه
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
+            showPage('menuPage');
+        }
 
         function goToGame() {
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
             showPage('gamePage');
             startGame();
         }
 
         function goToCountrySelect() {
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
             showPage('countrySelectPage');
             renderCountries();
         }
@@ -3251,13 +3270,6 @@
                 return;
             }
 
-            // بررسی اینکه آیا کاربر کپچا را قبلاً تأیید کرده است؟
-            if (!isHumanVerified()) {
-                error.textContent = '⚠️ لطفاً ابتدا روی "من ربات نیستم" کلیک کنید و معادله را حل کنید.';
-                error.style.display = 'block';
-                return;
-            }
-
             error.style.display = 'none';
             currentUsername = username;
             localStorage.setItem('username', username);
@@ -3276,19 +3288,21 @@
                     updateAdminPanelUI();
                 }
                 updateButtonsVisibility();
-            }, 2000);
+                // بعد از ورود، وضعیت کپچا رو به‌روز کن
+                updateCaptchaUI();
+            }, 1500);
         }
 
         // ==========================================================
-        //  سیستم کپچا (من ربات نیستم)
+        //  سیستم کپچا (من ربات نیستم) - در صفحه اصلی
         // ==========================================================
-        let captchaAnswer = 5; // مقدار پیش‌فرض
+        let captchaAnswerHome = 5;
 
-        function generateCaptcha() {
+        function generateCaptchaHome() {
             const num1 = Math.floor(Math.random() * 9) + 1;
             const num2 = Math.floor(Math.random() * 9) + 1;
-            captchaAnswer = num1 + num2;
-            document.getElementById('captchaQuestion').textContent = `${num1} + ${num2} = ؟`;
+            captchaAnswerHome = num1 + num2;
+            document.getElementById('captchaQuestionHome').textContent = `${num1} + ${num2} = ؟`;
         }
 
         function isHumanVerified() {
@@ -3299,29 +3313,41 @@
             localStorage.setItem('isHumanVerified', 'true');
         }
 
-        function showCaptcha() {
-            // اگر قبلاً تأیید شده، دکمه را مخفی کن
+        function updateCaptchaUI() {
+            const btn = document.getElementById('showCaptchaHomeBtn');
+            const section = document.getElementById('captchaSectionHome');
             if (isHumanVerified()) {
-                document.getElementById('showCaptchaBtn').style.display = 'none';
-                document.getElementById('captchaSection').classList.add('hidden');
+                btn.classList.add('hidden');
+                section.classList.remove('visible');
+            } else {
+                btn.classList.remove('hidden');
+                section.classList.remove('visible');
+            }
+        }
+
+        function showCaptchaHome() {
+            // اگر قبلاً تأیید شده، هیچ کاری نکن
+            if (isHumanVerified()) {
+                document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
+                document.getElementById('captchaSectionHome').classList.remove('visible');
                 return;
             }
 
             // نمایش بخش کپچا و مخفی کردن دکمه
-            document.getElementById('showCaptchaBtn').style.display = 'none';
-            const section = document.getElementById('captchaSection');
-            section.classList.remove('hidden');
-            generateCaptcha();
-            document.getElementById('captchaInput').value = '';
-            document.getElementById('captchaError').style.display = 'none';
-            document.getElementById('captchaSuccess').style.display = 'none';
+            document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
+            const section = document.getElementById('captchaSectionHome');
+            section.classList.add('visible');
+            generateCaptchaHome();
+            document.getElementById('captchaInputHome').value = '';
+            document.getElementById('captchaErrorHome').style.display = 'none';
+            document.getElementById('captchaSuccessHome').style.display = 'none';
         }
 
-        function verifyCaptcha() {
-            const input = document.getElementById('captchaInput');
+        function verifyCaptchaHome() {
+            const input = document.getElementById('captchaInputHome');
             const userAnswer = parseInt(input.value.trim());
-            const errorEl = document.getElementById('captchaError');
-            const successEl = document.getElementById('captchaSuccess');
+            const errorEl = document.getElementById('captchaErrorHome');
+            const successEl = document.getElementById('captchaSuccessHome');
 
             if (isNaN(userAnswer)) {
                 errorEl.textContent = '❌ لطفاً یک عدد وارد کنید.';
@@ -3330,90 +3356,33 @@
                 return;
             }
 
-            if (userAnswer === captchaAnswer) {
+            if (userAnswer === captchaAnswerHome) {
                 // درست
                 errorEl.style.display = 'none';
                 successEl.style.display = 'block';
                 setHumanVerified();
 
-                // مخفی کردن بخش کپچا
-                document.getElementById('captchaSection').classList.add('hidden');
-                // دکمه "من ربات نیستم" نیز برای همیشه مخفی می‌شود (چون قبلاً setHumanVerified true شده)
-                document.getElementById('showCaptchaBtn').style.display = 'none';
+                // مخفی کردن بخش کپچا و دکمه برای همیشه
+                document.getElementById('captchaSectionHome').classList.remove('visible');
+                document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
 
-                // به‌طور خودکار وارد شو (اگر نام کاربری پر شده باشد)
-                const username = document.getElementById('usernameInput').value.trim();
-                if (username !== '') {
-                    // اگر نام کاربری پر است، تابع ورود را صدا بزن
-                    handleLogin();
-                } else {
-                    // در غیر این صورت پیام بده
-                    document.getElementById('loginError').textContent = '✅ کپچا تأیید شد، حالا نام کاربری را وارد کنید.';
-                    document.getElementById('loginError').style.display = 'block';
-                    document.getElementById('loginError').style.color = '#2ecc71';
-                }
+                // نمایش لودینگ کوتاه
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    // پیام موفقیت
+                    alert('✅ شما تأیید شدید! حالا می‌توانید از بازی‌ها استفاده کنید.');
+                }, 1200);
             } else {
                 errorEl.textContent = '❌ پاسخ اشتباه است، دوباره تلاش کنید.';
                 errorEl.style.display = 'block';
                 successEl.style.display = 'none';
                 // دوباره سوال جدید
-                generateCaptcha();
+                generateCaptchaHome();
                 input.value = '';
                 input.focus();
             }
         }
-
-        // ==========================================================
-        //  بارگذاری اولیه صفحه - بررسی وضعیت کپچا
-        // ==========================================================
-        window.addEventListener('load', function() {
-            // اگر قبلاً تأیید شده، دکمه و بخش کپچا را مخفی کن
-            if (isHumanVerified()) {
-                document.getElementById('showCaptchaBtn').style.display = 'none';
-                document.getElementById('captchaSection').classList.add('hidden');
-            } else {
-                // دکمه نمایش داده شود، بخش کپچا مخفی
-                document.getElementById('showCaptchaBtn').style.display = 'block';
-                document.getElementById('captchaSection').classList.add('hidden');
-            }
-
-            // رویدادهای کپچا
-            document.getElementById('showCaptchaBtn').addEventListener('click', showCaptcha);
-            document.getElementById('captchaBtn').addEventListener('click', verifyCaptcha);
-            document.getElementById('captchaInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    verifyCaptcha();
-                }
-            });
-
-            // بررسی نام کاربری ذخیره شده
-            const saved = localStorage.getItem('username');
-            if (saved && saved.trim() !== '') {
-                if (isUserBanned(saved)) {
-                    document.getElementById('loginPage').style.display = 'none';
-                    document.getElementById('bannedPage').style.display = 'flex';
-                    updateBanTimer();
-                    return;
-                }
-
-                currentUsername = saved;
-                if (!isUsernameTaken(saved)) { addUsername(saved); }
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('loader').style.display = 'flex';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('displayUsername').textContent = saved;
-                    loadProfile();
-                    showPage('homePage');
-                    updateAdminStats();
-                    if (getAdmins().includes(saved)) {
-                        updateAdminPanelUI();
-                    }
-                    updateButtonsVisibility();
-                }, 1500);
-            }
-        });
 
         // ==========================================================
         //  ۲. مدیریت لودینگ و اتصال
@@ -4147,13 +4116,56 @@
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
+        window.addEventListener('load', function() {
+            // رویدادهای کپچا (صفحه اصلی)
+            document.getElementById('showCaptchaHomeBtn').addEventListener('click', showCaptchaHome);
+            document.getElementById('captchaBtnHome').addEventListener('click', verifyCaptchaHome);
+            document.getElementById('captchaInputHome').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyCaptchaHome();
+                }
+            });
+
+            // بررسی نام کاربری ذخیره شده
+            const saved = localStorage.getItem('username');
+            if (saved && saved.trim() !== '') {
+                if (isUserBanned(saved)) {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('bannedPage').style.display = 'flex';
+                    updateBanTimer();
+                    return;
+                }
+
+                currentUsername = saved;
+                if (!isUsernameTaken(saved)) { addUsername(saved); }
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('displayUsername').textContent = saved;
+                    loadProfile();
+                    showPage('homePage');
+                    updateAdminStats();
+                    if (getAdmins().includes(saved)) {
+                        updateAdminPanelUI();
+                    }
+                    updateButtonsVisibility();
+                    updateCaptchaUI();
+                }, 1500);
+            } else {
+                // صفحه ورود نمایش داده میشه
+                document.getElementById('loginPage').style.display = 'flex';
+            }
+        });
+
         console.log('❄️ برفی با پنل مود بسته شده!');
         console.log('👑 سوپر ادمین: ابوالفضل');
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
         console.log('🏪 فروشگاه: فعال - صفحه نمایش پیام');
         console.log('📱 نشانگر دستگاه در بالا سمت چپ صفحه اصلی');
-        console.log('🤖 دکمه "من ربات نیستم" اضافه شد - پس از تأیید، برای همیشه ناپدید می‌شود.');
+        console.log('🤖 دکمه "من ربات نیستم" در صفحه اصلی - پس از تأیید، برای همیشه ناپدید می‌شود.');
     </script>
 
 </body>
