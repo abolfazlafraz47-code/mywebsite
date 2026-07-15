@@ -598,6 +598,7 @@
             width: 100%;
             max-width: 420px;
             animation: fadeSlideUp 0.5s ease;
+            position: relative; /* برای قرارگیری device-info */
         }
         @keyframes fadeSlideUp {
             0% {
@@ -608,6 +609,30 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* ===== نشانگر دستگاه (بالا سمت چپ صفحه اصلی) ===== */
+        #deviceInfo {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+        #deviceInfo .device-icon {
+            font-size: 14px;
         }
 
         .box {
@@ -2010,6 +2035,15 @@
             .moderator-panel-box .stats-grid .stat-card .stat-number {
                 font-size: 22px;
             }
+            #deviceInfo {
+                font-size: 10px;
+                padding: 2px 10px;
+                top: 8px;
+                left: 8px;
+            }
+            #deviceInfo .device-icon {
+                font-size: 12px;
+            }
         }
         @media(max-width: 380px) {
             .main-header .site-title {
@@ -2084,6 +2118,15 @@
             .moderator-panel-box .stats-grid .stat-card .stat-number {
                 font-size: 18px;
             }
+            #deviceInfo {
+                font-size: 9px;
+                padding: 2px 8px;
+                top: 6px;
+                left: 6px;
+            }
+            #deviceInfo .device-icon {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -2157,6 +2200,12 @@
 
             <!-- صفحه اصلی -->
             <div id="homePage">
+                <!-- نشانگر دستگاه (بالا سمت چپ) -->
+                <div id="deviceInfo">
+                    <span class="device-icon" id="deviceIcon">📱</span>
+                    <span id="deviceName">گوشی</span>
+                </div>
+
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
@@ -2432,6 +2481,43 @@
             document.getElementById("userCount").textContent = count;
             document.getElementById("moderatorUserCount").textContent = count;
         });
+
+        // ==========================================================
+        //  تشخیص دستگاه (نشانگر بالا سمت چپ)
+        // ==========================================================
+        function detectDevice() {
+            const ua = navigator.userAgent;
+            let device = 'کامپیوتر';
+            let icon = '💻';
+            const width = window.innerWidth;
+
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
+                if (width < 768) {
+                    device = 'گوشی';
+                    icon = '📱';
+                } else if (width < 1024) {
+                    device = 'تبلت';
+                    icon = '📟';
+                } else {
+                    device = 'تبلت';
+                    icon = '📟';
+                }
+            } else {
+                if (width < 768) {
+                    device = 'گوشی';
+                    icon = '📱';
+                } else if (width < 1024) {
+                    device = 'تبلت';
+                    icon = '📟';
+                } else {
+                    device = 'کامپیوتر';
+                    icon = '💻';
+                }
+            }
+
+            document.getElementById('deviceIcon').textContent = icon;
+            document.getElementById('deviceName').textContent = device;
+        }
 
         // ==========================================================
         //  سیستم کد هدیه
@@ -2761,6 +2847,9 @@
             });
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') { loadProfile(); }
+            if (pageId === 'homePage') {
+                detectDevice(); // به‌روزرسانی نشانگر دستگاه
+            }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
                 updateAdminPanelUI();
@@ -3819,6 +3908,7 @@
         console.log('🛡️ ادمین: محمد رضا');
         console.log('⭐ ادمینیتور: آراد');
         console.log('🏪 فروشگاه: فعال - صفحه نمایش پیام');
+        console.log('📱 نشانگر دستگاه در بالا سمت چپ صفحه اصلی');
     </script>
 
 </body>
