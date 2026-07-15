@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>❄️ برفی</title>
 
+    <!-- ===== اضافه کردن Socket.IO ===== -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js">
+    </script>
+
     <style>
         /* ===== ریست و پایه ===== */
         * {
@@ -347,7 +351,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== صفحه ورود (فقط نام کاربری و دکمه ورود) ===== */
+        /* ===== صفحه ورود ===== */
         #loginPage {
             display: flex;
             flex-direction: column;
@@ -652,55 +656,6 @@
             font-size: 15px;
         }
 
-        /* ===== دکمه شروع با قابلیت کلید E برای ویندوز ===== */
-        .start-btn-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-        .start-btn-wrapper .key-hint {
-            font-size: 13px;
-            color: rgba(255, 215, 0, 0.7);
-            margin-top: 6px;
-            display: none;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .start-btn-wrapper .key-hint.show {
-            display: block;
-        }
-        .start-btn-wrapper .start-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.25);
-            letter-spacing: 0.5px;
-        }
-        .start-btn-wrapper .start-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
-        }
-        /* حالت ویندوز: دکمه غیرفعال و کمرنگ */
-        .start-btn-wrapper .start-btn.windows-mode {
-            cursor: default;
-            opacity: 0.6;
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: none;
-            transform: none !important;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .start-btn-wrapper .start-btn.windows-mode:hover {
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
         button {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: white;
@@ -717,6 +672,110 @@
         button:hover {
             transform: translateY(-3px) scale(1.03);
             box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
+        }
+
+        /* ===== بخش کپچا در صفحه اصلی ===== */
+        .captcha-section-home {
+            width: 100%;
+            margin: 10px 0 14px 0;
+            text-align: center;
+            display: none;
+            /* پنهان در ابتدا */
+        }
+        .captcha-section-home.visible {
+            display: block;
+        }
+        .captcha-section-home .captcha-question {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .captcha-section-home .captcha-question span {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .captcha-section-home .captcha-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .captcha-section-home .captcha-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .captcha-section-home .captcha-row input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .captcha-section-home .captcha-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .captcha-section-home .captcha-row .captcha-btn {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .captcha-section-home .captcha-row .captcha-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+        .captcha-section-home .captcha-error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+        .captcha-section-home .captcha-success {
+            color: #2ecc71;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* دکمه "من ربات نیستم" در صفحه اصلی */
+        .show-captcha-home-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 6px;
+            box-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+        .show-captcha-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .show-captcha-home-btn.hidden {
+            display: none;
         }
 
         /* ===== منو ===== */
@@ -2091,8 +2150,13 @@
             #deviceInfo .device-icon {
                 font-size: 12px;
             }
-            .start-btn-wrapper .key-hint {
-                font-size: 11px;
+            .captcha-section-home .captcha-row input {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            .captcha-section-home .captcha-row .captcha-btn {
+                font-size: 12px;
+                padding: 6px 14px;
             }
         }
         @media(max-width: 380px) {
@@ -2177,9 +2241,6 @@
             #deviceInfo .device-icon {
                 font-size: 10px;
             }
-            .start-btn-wrapper .key-hint {
-                font-size: 10px;
-            }
         }
     </style>
 </head>
@@ -2201,6 +2262,7 @@
                 <label for="usernameInput">نام کاربری</label>
                 <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
             </div>
+
             <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
             <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
         </div>
@@ -2263,11 +2325,24 @@
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
 
-                    <!-- ===== دکمه شروع با قابلیت کلید E برای ویندوز ===== -->
-                    <div class="start-btn-wrapper">
-                        <button class="start-btn" id="startBtn">🚀 شروع</button>
-                        <div class="key-hint" id="keyHint">⌨️ برای شروع کلید <strong>E</strong> را بزنید</div>
+                    <!-- ===== بخش کپچا در صفحه اصلی ===== -->
+                    <div class="captcha-section-home" id="captchaSectionHome">
+                        <div class="captcha-question">
+                            لطفاً برای اثبات اینکه ربات نیستید، معادله را حل کنید:
+                            <span id="captchaQuestionHome">۲ + ۳ = ؟</span>
+                        </div>
+                        <div class="captcha-row">
+                            <input type="text" id="captchaInputHome" placeholder="پاسخ" />
+                            <button class="captcha-btn" id="captchaBtnHome">✅ تأیید</button>
+                        </div>
+                        <div class="captcha-error" id="captchaErrorHome">❌ پاسخ اشتباه است، دوباره تلاش کنید.</div>
+                        <div class="captcha-success" id="captchaSuccessHome">✅ تأیید شد! در حال انتقال...</div>
                     </div>
+
+                    <!-- دکمه نمایش کپچا در صفحه اصلی -->
+                    <button class="show-captcha-home-btn" id="showCaptchaHomeBtn">🤖 من ربات نیستم</button>
+
+                    <button onclick="goToMenu()" id="startBtnMain" style="margin-top:12px;">🚀 شروع</button>
                 </div>
             </div>
 
@@ -2531,55 +2606,14 @@
         })();
 
         // ==========================================================
-        //  تشخیص ویندوز 10/11 و کامپیوتر
+        //  🟢 اتصال Socket.IO
         // ==========================================================
-        function isWindowsDesktop() {
-            const ua = navigator.userAgent;
-            // تشخیص ویندوز
-            const isWindows = /Windows NT (10\.0|10\.1)/i.test(ua);
-            // تشخیص کامپیوتر (نه موبایل و نه تبلت)
-            const isDesktop = !/Mobi|Android|iPhone|iPad|iPod|Tablet/i.test(ua);
-            return isWindows && isDesktop;
-        }
+        const socket = io("https://آدرس-سرور-تو");
 
-        // ==========================================================
-        //  راه‌اندازی دکمه شروع با کلید E
-        // ==========================================================
-        function setupStartButton() {
-            const startBtn = document.getElementById('startBtn');
-            const keyHint = document.getElementById('keyHint');
-
-            if (isWindowsDesktop()) {
-                // حالت ویندوز: دکمه غیرفعال با کلیک، فقط با کلید E
-                startBtn.classList.add('windows-mode');
-                keyHint.classList.add('show');
-
-                // کلیک ماوس روی دکمه کاری نمی‌کند
-                startBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // هیچ کاری نکن
-                });
-
-                // گوش دادن به کلید E
-                document.addEventListener('keydown', function(e) {
-                    // فقط اگر صفحه اصلی نمایش داده شده باشد و کلید E زده شود
-                    const homePage = document.getElementById('homePage');
-                    if (homePage && homePage.style.display !== 'none' && e.key === 'E' && !e.ctrlKey && !e.altKey && !e
-                        .metaKey) {
-                        e.preventDefault();
-                        goToMenu();
-                    }
-                });
-
-                // همچنین وقتی کاربر روی دکمه کلیک می‌کنه، پیام نمایش بدیم
-                startBtn.title = 'برای شروع کلید E را بزنید';
-            } else {
-                // حالت عادی: دکمه با کلیک کار می‌کند
-                startBtn.classList.remove('windows-mode');
-                keyHint.classList.remove('show');
-                startBtn.addEventListener('click', goToMenu);
-            }
-        }
+        socket.on("onlineUsers", (count) => {
+            document.getElementById("userCount").textContent = count;
+            document.getElementById("moderatorUserCount").textContent = count;
+        });
 
         // ==========================================================
         //  تشخیص دستگاه (نشانگر بالا سمت چپ)
@@ -2609,13 +2643,8 @@
                     device = 'تبلت';
                     icon = '📟';
                 } else {
-                    if (isWindowsDesktop()) {
-                        device = 'ویندوز';
-                        icon = '🪟';
-                    } else {
-                        device = 'کامپیوتر';
-                        icon = '💻';
-                    }
+                    device = 'کامپیوتر';
+                    icon = '💻';
                 }
             }
 
@@ -2849,11 +2878,13 @@
             const adminBtn = document.getElementById('adminBtn');
             const moderatorBtn = document.getElementById('moderatorBtn');
 
+            // همه دکمه‌ها مخفی
             adminBtn.style.display = 'none';
             moderatorBtn.style.display = 'none';
 
             if (!username) return;
 
+            // تشخیص نقش کاربر
             if (username === "ابوالفضل") {
                 adminBtn.style.display = 'inline-block';
                 moderatorBtn.style.display = 'inline-block';
@@ -2863,6 +2894,7 @@
             } else if (username === "آراد") {
                 moderatorBtn.style.display = 'inline-block';
             }
+            // کاربران عادی هیچ دکمه مدیریتی نمی‌بینند
         }
 
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
@@ -2949,9 +2981,9 @@
             document.getElementById(pageId).style.display = 'flex';
             if (pageId === 'profilePage') { loadProfile(); }
             if (pageId === 'homePage') {
-                detectDevice();
-                // دکمه شروع رو دوباره راه‌اندازی کن (برای حالت ویندوز)
-                setupStartButton();
+                detectDevice(); // به‌روزرسانی نشانگر دستگاه
+                // بررسی وضعیت کپچا و مخفی کردن دکمه اگر قبلاً تأیید شده
+                updateCaptchaUI();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3178,15 +3210,28 @@
         }
 
         function goToMenu() {
+            // قبل از رفتن به منو، بررسی کن که کاربر کپچا رو تایید کرده یا نه
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
             showPage('menuPage');
         }
 
         function goToGame() {
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
             showPage('gamePage');
             startGame();
         }
 
         function goToCountrySelect() {
+            if (!isHumanVerified()) {
+                alert('⚠️ لطفاً ابتدا روی دکمه "من ربات نیستم" کلیک کنید و معادله را حل کنید.');
+                return;
+            }
             showPage('countrySelectPage');
             renderCountries();
         }
@@ -3216,6 +3261,7 @@
 
             if (username === '') { error.style.display = 'block'; return; }
 
+            // بررسی بن
             if (isUserBanned(username)) {
                 localStorage.setItem('username', username);
                 document.getElementById('loginPage').style.display = 'none';
@@ -3223,8 +3269,6 @@
                 updateBanTimer();
                 return;
             }
-
-            if (!isUsernameTaken(username)) { addUsername(username); }
 
             error.style.display = 'none';
             currentUsername = username;
@@ -3244,43 +3288,101 @@
                     updateAdminPanelUI();
                 }
                 updateButtonsVisibility();
+                // بعد از ورود، وضعیت کپچا رو به‌روز کن
+                updateCaptchaUI();
             }, 1500);
         }
 
         // ==========================================================
-        //  بارگذاری اولیه
+        //  سیستم کپچا (من ربات نیستم) - در صفحه اصلی
         // ==========================================================
-        window.addEventListener('load', function() {
-            // راه‌اندازی دکمه شروع
-            setupStartButton();
+        let captchaAnswerHome = 5;
 
-            const saved = localStorage.getItem('username');
-            if (saved && saved.trim() !== '') {
-                if (isUserBanned(saved)) {
-                    document.getElementById('loginPage').style.display = 'none';
-                    document.getElementById('bannedPage').style.display = 'flex';
-                    updateBanTimer();
-                    return;
-                }
+        function generateCaptchaHome() {
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            captchaAnswerHome = num1 + num2;
+            document.getElementById('captchaQuestionHome').textContent = `${num1} + ${num2} = ؟`;
+        }
 
-                currentUsername = saved;
-                if (!isUsernameTaken(saved)) { addUsername(saved); }
-                document.getElementById('loginPage').style.display = 'none';
+        function isHumanVerified() {
+            return localStorage.getItem('isHumanVerified') === 'true';
+        }
+
+        function setHumanVerified() {
+            localStorage.setItem('isHumanVerified', 'true');
+        }
+
+        function updateCaptchaUI() {
+            const btn = document.getElementById('showCaptchaHomeBtn');
+            const section = document.getElementById('captchaSectionHome');
+            if (isHumanVerified()) {
+                btn.classList.add('hidden');
+                section.classList.remove('visible');
+            } else {
+                btn.classList.remove('hidden');
+                section.classList.remove('visible');
+            }
+        }
+
+        function showCaptchaHome() {
+            // اگر قبلاً تأیید شده، هیچ کاری نکن
+            if (isHumanVerified()) {
+                document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
+                document.getElementById('captchaSectionHome').classList.remove('visible');
+                return;
+            }
+
+            // نمایش بخش کپچا و مخفی کردن دکمه
+            document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
+            const section = document.getElementById('captchaSectionHome');
+            section.classList.add('visible');
+            generateCaptchaHome();
+            document.getElementById('captchaInputHome').value = '';
+            document.getElementById('captchaErrorHome').style.display = 'none';
+            document.getElementById('captchaSuccessHome').style.display = 'none';
+        }
+
+        function verifyCaptchaHome() {
+            const input = document.getElementById('captchaInputHome');
+            const userAnswer = parseInt(input.value.trim());
+            const errorEl = document.getElementById('captchaErrorHome');
+            const successEl = document.getElementById('captchaSuccessHome');
+
+            if (isNaN(userAnswer)) {
+                errorEl.textContent = '❌ لطفاً یک عدد وارد کنید.';
+                errorEl.style.display = 'block';
+                successEl.style.display = 'none';
+                return;
+            }
+
+            if (userAnswer === captchaAnswerHome) {
+                // درست
+                errorEl.style.display = 'none';
+                successEl.style.display = 'block';
+                setHumanVerified();
+
+                // مخفی کردن بخش کپچا و دکمه برای همیشه
+                document.getElementById('captchaSectionHome').classList.remove('visible');
+                document.getElementById('showCaptchaHomeBtn').classList.add('hidden');
+
+                // نمایش لودینگ کوتاه
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
                     document.getElementById('loader').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('displayUsername').textContent = saved;
-                    loadProfile();
-                    showPage('homePage');
-                    updateAdminStats();
-                    if (getAdmins().includes(saved)) {
-                        updateAdminPanelUI();
-                    }
-                    updateButtonsVisibility();
-                }, 1500);
+                    // پیام موفقیت
+                    alert('✅ شما تأیید شدید! حالا می‌توانید از بازی‌ها استفاده کنید.');
+                }, 1200);
+            } else {
+                errorEl.textContent = '❌ پاسخ اشتباه است، دوباره تلاش کنید.';
+                errorEl.style.display = 'block';
+                successEl.style.display = 'none';
+                // دوباره سوال جدید
+                generateCaptchaHome();
+                input.value = '';
+                input.focus();
             }
-        });
+        }
 
         // ==========================================================
         //  ۲. مدیریت لودینگ و اتصال
@@ -3585,7 +3687,7 @@
         }
 
         // ==========================================================
-        //  ۶. بازی فوتبال کشوری
+        //  ۶. بازی فوتبال کشوری (کد کامل)
         // ==========================================================
         const countries = [
             { name: 'ایران', flag: '🇮🇷' },
@@ -4012,10 +4114,58 @@
         }
 
         // ==========================================================
-        //  نهایی
+        //  بارگذاری اولیه
         // ==========================================================
-        console.log('❄️ برفی');
-        console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
+        window.addEventListener('load', function() {
+            // رویدادهای کپچا (صفحه اصلی)
+            document.getElementById('showCaptchaHomeBtn').addEventListener('click', showCaptchaHome);
+            document.getElementById('captchaBtnHome').addEventListener('click', verifyCaptchaHome);
+            document.getElementById('captchaInputHome').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyCaptchaHome();
+                }
+            });
+
+            // بررسی نام کاربری ذخیره شده
+            const saved = localStorage.getItem('username');
+            if (saved && saved.trim() !== '') {
+                if (isUserBanned(saved)) {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('bannedPage').style.display = 'flex';
+                    updateBanTimer();
+                    return;
+                }
+
+                currentUsername = saved;
+                if (!isUsernameTaken(saved)) { addUsername(saved); }
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('displayUsername').textContent = saved;
+                    loadProfile();
+                    showPage('homePage');
+                    updateAdminStats();
+                    if (getAdmins().includes(saved)) {
+                        updateAdminPanelUI();
+                    }
+                    updateButtonsVisibility();
+                    updateCaptchaUI();
+                }, 1500);
+            } else {
+                // صفحه ورود نمایش داده میشه
+                document.getElementById('loginPage').style.display = 'flex';
+            }
+        });
+
+        console.log('❄️ برفی با پنل مود بسته شده!');
+        console.log('👑 سوپر ادمین: ابوالفضل');
+        console.log('🛡️ ادمین: محمد رضا');
+        console.log('⭐ ادمینیتور: آراد');
+        console.log('🏪 فروشگاه: فعال - صفحه نمایش پیام');
+        console.log('📱 نشانگر دستگاه در بالا سمت چپ صفحه اصلی');
+        console.log('🤖 دکمه "من ربات نیستم" در صفحه اصلی - پس از تأیید، برای همیشه ناپدید می‌شود.');
     </script>
 
 </body>
