@@ -403,7 +403,7 @@
         }
         #loginPage .input-group {
             width: 100%;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
             text-align: right;
             position: relative;
             z-index: 1;
@@ -436,6 +436,110 @@
         #loginPage .input-group input::placeholder {
             color: rgba(255, 255, 255, 0.2);
         }
+
+        /* ===== بخش کپچا (من ربات نیستم) ===== */
+        .captcha-section {
+            width: 100%;
+            margin: 8px 0 12px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .captcha-section .captcha-question {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .captcha-section .captcha-question span {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .captcha-section .captcha-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .captcha-section .captcha-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .captcha-section .captcha-row input:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        .captcha-section .captcha-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .captcha-section .captcha-row .captcha-btn {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .captcha-section .captcha-row .captcha-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+        .captcha-section .captcha-error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+        .captcha-section .captcha-success {
+            color: #2ecc71;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* دکمه "من ربات نیستم" */
+        .show-captcha-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 6px;
+            box-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+        .show-captcha-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* پنهان‌سازی بخش کپچا در ابتدا */
+        .captcha-section.hidden {
+            display: none;
+        }
+
         #loginPage .login-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: white;
@@ -451,6 +555,7 @@
             z-index: 1;
             box-shadow: 0 4px 24px rgba(79, 172, 254, 0.3);
             letter-spacing: 1px;
+            margin-top: 6px;
         }
         #loginPage .login-btn:hover {
             transform: translateY(-3px) scale(1.02);
@@ -598,7 +703,7 @@
             width: 100%;
             max-width: 420px;
             animation: fadeSlideUp 0.5s ease;
-            position: relative; /* برای قرارگیری device-info */
+            position: relative;
         }
         @keyframes fadeSlideUp {
             0% {
@@ -2044,6 +2149,14 @@
             #deviceInfo .device-icon {
                 font-size: 12px;
             }
+            .captcha-section .captcha-row input {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            .captcha-section .captcha-row .captcha-btn {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
         }
         @media(max-width: 380px) {
             .main-header .site-title {
@@ -2148,6 +2261,24 @@
                 <label for="usernameInput">نام کاربری</label>
                 <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
             </div>
+
+            <!-- ===== بخش کپچا (من ربات نیستم) ===== -->
+            <div class="captcha-section hidden" id="captchaSection">
+                <div class="captcha-question">
+                    لطفاً برای اثبات اینکه ربات نیستید، معادله را حل کنید:
+                    <span id="captchaQuestion">۲ + ۳ = ؟</span>
+                </div>
+                <div class="captcha-row">
+                    <input type="text" id="captchaInput" placeholder="پاسخ" />
+                    <button class="captcha-btn" id="captchaBtn">✅ تأیید</button>
+                </div>
+                <div class="captcha-error" id="captchaError">❌ پاسخ اشتباه است، دوباره تلاش کنید.</div>
+                <div class="captcha-success" id="captchaSuccess">✅ تأیید شد! در حال ورود...</div>
+            </div>
+
+            <!-- دکمه نمایش کپچا -->
+            <button class="show-captcha-btn" id="showCaptchaBtn">🤖 من ربات نیستم</button>
+
             <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
             <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
         </div>
@@ -3111,6 +3242,7 @@
 
             if (username === '') { error.style.display = 'block'; return; }
 
+            // بررسی بن
             if (isUserBanned(username)) {
                 localStorage.setItem('username', username);
                 document.getElementById('loginPage').style.display = 'none';
@@ -3119,7 +3251,12 @@
                 return;
             }
 
-            if (!isUsernameTaken(username)) { addUsername(username); }
+            // بررسی اینکه آیا کاربر کپچا را قبلاً تأیید کرده است؟
+            if (!isHumanVerified()) {
+                error.textContent = '⚠️ لطفاً ابتدا روی "من ربات نیستم" کلیک کنید و معادله را حل کنید.';
+                error.style.display = 'block';
+                return;
+            }
 
             error.style.display = 'none';
             currentUsername = username;
@@ -3142,7 +3279,114 @@
             }, 2000);
         }
 
+        // ==========================================================
+        //  سیستم کپچا (من ربات نیستم)
+        // ==========================================================
+        let captchaAnswer = 5; // مقدار پیش‌فرض
+
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            captchaAnswer = num1 + num2;
+            document.getElementById('captchaQuestion').textContent = `${num1} + ${num2} = ؟`;
+        }
+
+        function isHumanVerified() {
+            return localStorage.getItem('isHumanVerified') === 'true';
+        }
+
+        function setHumanVerified() {
+            localStorage.setItem('isHumanVerified', 'true');
+        }
+
+        function showCaptcha() {
+            // اگر قبلاً تأیید شده، دکمه را مخفی کن
+            if (isHumanVerified()) {
+                document.getElementById('showCaptchaBtn').style.display = 'none';
+                document.getElementById('captchaSection').classList.add('hidden');
+                return;
+            }
+
+            // نمایش بخش کپچا و مخفی کردن دکمه
+            document.getElementById('showCaptchaBtn').style.display = 'none';
+            const section = document.getElementById('captchaSection');
+            section.classList.remove('hidden');
+            generateCaptcha();
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaError').style.display = 'none';
+            document.getElementById('captchaSuccess').style.display = 'none';
+        }
+
+        function verifyCaptcha() {
+            const input = document.getElementById('captchaInput');
+            const userAnswer = parseInt(input.value.trim());
+            const errorEl = document.getElementById('captchaError');
+            const successEl = document.getElementById('captchaSuccess');
+
+            if (isNaN(userAnswer)) {
+                errorEl.textContent = '❌ لطفاً یک عدد وارد کنید.';
+                errorEl.style.display = 'block';
+                successEl.style.display = 'none';
+                return;
+            }
+
+            if (userAnswer === captchaAnswer) {
+                // درست
+                errorEl.style.display = 'none';
+                successEl.style.display = 'block';
+                setHumanVerified();
+
+                // مخفی کردن بخش کپچا
+                document.getElementById('captchaSection').classList.add('hidden');
+                // دکمه "من ربات نیستم" نیز برای همیشه مخفی می‌شود (چون قبلاً setHumanVerified true شده)
+                document.getElementById('showCaptchaBtn').style.display = 'none';
+
+                // به‌طور خودکار وارد شو (اگر نام کاربری پر شده باشد)
+                const username = document.getElementById('usernameInput').value.trim();
+                if (username !== '') {
+                    // اگر نام کاربری پر است، تابع ورود را صدا بزن
+                    handleLogin();
+                } else {
+                    // در غیر این صورت پیام بده
+                    document.getElementById('loginError').textContent = '✅ کپچا تأیید شد، حالا نام کاربری را وارد کنید.';
+                    document.getElementById('loginError').style.display = 'block';
+                    document.getElementById('loginError').style.color = '#2ecc71';
+                }
+            } else {
+                errorEl.textContent = '❌ پاسخ اشتباه است، دوباره تلاش کنید.';
+                errorEl.style.display = 'block';
+                successEl.style.display = 'none';
+                // دوباره سوال جدید
+                generateCaptcha();
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        // ==========================================================
+        //  بارگذاری اولیه صفحه - بررسی وضعیت کپچا
+        // ==========================================================
         window.addEventListener('load', function() {
+            // اگر قبلاً تأیید شده، دکمه و بخش کپچا را مخفی کن
+            if (isHumanVerified()) {
+                document.getElementById('showCaptchaBtn').style.display = 'none';
+                document.getElementById('captchaSection').classList.add('hidden');
+            } else {
+                // دکمه نمایش داده شود، بخش کپچا مخفی
+                document.getElementById('showCaptchaBtn').style.display = 'block';
+                document.getElementById('captchaSection').classList.add('hidden');
+            }
+
+            // رویدادهای کپچا
+            document.getElementById('showCaptchaBtn').addEventListener('click', showCaptcha);
+            document.getElementById('captchaBtn').addEventListener('click', verifyCaptcha);
+            document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyCaptcha();
+                }
+            });
+
+            // بررسی نام کاربری ذخیره شده
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 if (isUserBanned(saved)) {
@@ -3909,6 +4153,7 @@
         console.log('⭐ ادمینیتور: آراد');
         console.log('🏪 فروشگاه: فعال - صفحه نمایش پیام');
         console.log('📱 نشانگر دستگاه در بالا سمت چپ صفحه اصلی');
+        console.log('🤖 دکمه "من ربات نیستم" اضافه شد - پس از تأیید، برای همیشه ناپدید می‌شود.');
     </script>
 
 </body>
