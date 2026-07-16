@@ -664,6 +664,35 @@
             color: #fff;
             transform: translateY(-2px);
         }
+        .face-verify-box .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .face-verify-box .loading-overlay.show {
+            display: flex;
+        }
+        .face-verify-box .loading-overlay .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.05);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .face-verify-box .loading-overlay .loading-text {
+            color: #fff;
+            margin-top: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
 
         /* ===== صفحه ورود ===== */
         #loginPage {
@@ -3300,43 +3329,50 @@
         }
 
         // ==========================================================
-        //  تایید چهره (با face-api.js) - بدون پیام بارگذاری مدل
+        //  تایید چهره (با face-api.js) - بارگذاری کامل مدل
         // ==========================================================
         let videoElement = null;
         let canvasElement = null;
         let isFaceModelLoaded = false;
         let detectedFaceAge = null;
         let isCameraRunning = false;
-        let modelLoadingStarted = false;
+        let modelLoadingPromise = null;
 
-        async function loadFaceModelsSilent() {
-            if (modelLoadingStarted) return;
-            modelLoadingStarted = true;
-            try {
-                const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
-                await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
-                await faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL);
-                isFaceModelLoaded = true;
-                document.getElementById('detectStatus').textContent = '✅ مدل آماده است. دوربین را روشن کنید.';
-            } catch (err) {
-                document.getElementById('detectStatus').textContent = '❌ خطا در بارگذاری مدل. از اتصال اینترنت مطمئن شوید.';
-                console.error(err);
-            }
+        async function loadFaceModels() {
+            if (isFaceModelLoaded) return true;
+            if (modelLoadingPromise) return modelLoadingPromise;
+
+            modelLoadingPromise = new Promise(async (resolve) => {
+                try {
+                    // استفاده از مدل‌های رسمی face-api.js
+                    const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
+                    await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
+                    await faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL);
+                    isFaceModelLoaded = true;
+                    document.getElementById('detectStatus').textContent = '✅ مدل بارگذاری شد. دوربین را روشن کنید.';
+                    resolve(true);
+                } catch (err) {
+                    console.error('خطا در بارگذاری مدل:', err);
+                    document.getElementById('detectStatus').textContent = '❌ خطا در بارگذاری مدل. از اتصال اینترنت مطمئن شوید.';
+                    resolve(false);
+                }
+            });
+            return modelLoadingPromise;
         }
 
         async function startCamera() {
+            // بررسی اینترنت
             const isOnline = await checkInternet();
             if (!isOnline) {
                 document.getElementById('detectStatus').textContent = '❌ بدون اتصال اینترنت نمی‌توان دوربین را راه‌اندازی کرد.';
                 return;
             }
 
-            if (!isFaceModelLoaded) {
-                await loadFaceModelsSilent();
-                if (!isFaceModelLoaded) {
-                    document.getElementById('detectStatus').textContent = '❌ مدل بارگذاری نشد. لطفاً دوباره تلاش کنید.';
-                    return;
-                }
+            // بارگذاری مدل
+            const loaded = await loadFaceModels();
+            if (!loaded) {
+                document.getElementById('detectStatus').textContent = '❌ مدل بارگذاری نشد. لطفاً دوباره تلاش کنید.';
+                return;
             }
 
             if (isCameraRunning) {
@@ -3348,7 +3384,8 @@
             canvasElement = document.getElementById('overlayCanvas');
 
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640,
+                        height: 480 } });
                 videoElement.srcObject = stream;
                 await videoElement.play();
                 isCameraRunning = true;
@@ -3697,8 +3734,8 @@
             document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
             document.getElementById('faceVerifyBtn').addEventListener('click', function() {
                 showPage('faceVerifyPage');
-                // مدل‌ها در پس‌زمینه بارگذاری می‌شوند (بدون نمایش پیام)
-                loadFaceModelsSilent();
+                // پیش‌بارگذاری مدل در پس‌زمینه
+                loadFaceModels();
             });
 
             document.getElementById('startCameraBtn').addEventListener('click', startCamera);
@@ -4409,9 +4446,9 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - تایید چهره بدون پیام بارگذاری مدل');
+        console.log('❄️ برفی - تایید چهره با بارگذاری کامل مدل');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('📸 تایید چهره با face-api.js - مدل در پس‌زمینه بارگذاری می‌شود.');
+        console.log('📸 تایید چهره با face-api.js - مدل از CDN بارگذاری می‌شود.');
     </script>
 
 </body>
