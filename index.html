@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>❄️ برفی</title>
 
-    <!-- ===== اضافه کردن Socket.IO ===== -->
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js">
-    </script>
-
-    <!-- ===== face-api.js برای تشخیص چهره و سن ===== -->
+    <!-- ===== face-api.js ===== -->
     <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js">
     </script>
 
@@ -65,7 +61,7 @@
             }
         }
 
-        /* ===== پس‌زمینه گرادیان متحرک ===== */
+        /* ===== پس‌زمینه گرادیان ===== */
         .bg-glow {
             position: fixed;
             top: 0;
@@ -104,17 +100,16 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding: 12px 18px 12px 18px;
+            padding: 12px 18px;
             color: white;
             margin-bottom: 18px;
             flex-wrap: wrap;
             gap: 8px;
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
         }
         .main-header:hover {
@@ -127,8 +122,6 @@
             background: linear-gradient(135deg, #64d8ff, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: none;
-            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -150,7 +143,6 @@
             border-radius: 30px;
             white-space: nowrap;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
             color: #e0f0ff;
         }
         .main-header .header-btn {
@@ -165,7 +157,6 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             backdrop-filter: blur(4px);
-            position: relative;
         }
         .main-header .header-btn:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -174,7 +165,6 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
-        /* ===== دکمه فروشگاه ===== */
         .main-header .store-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -187,16 +177,12 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
         .main-header .store-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
 
-        /* ===== دکمه انتخاب سن ===== */
         .main-header .age-btn {
             background: linear-gradient(135deg, #a8e063, #56ab2f);
             color: white;
@@ -209,16 +195,12 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(86, 171, 47, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
         .main-header .age-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(86, 171, 47, 0.5);
         }
 
-        /* ===== دکمه‌های نقش‌ها ===== */
         .main-header .admin-btn {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
@@ -231,7 +213,6 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            position: relative;
             display: none;
         }
         .main-header .admin-btn:hover {
@@ -300,7 +281,6 @@
             font-weight: 700;
         }
 
-        /* ===== دکمه کد هدیه ===== */
         .main-header .gift-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -563,6 +543,7 @@
             font-size: 14px;
             margin-bottom: 12px;
         }
+
         .face-verify-box .video-container {
             position: relative;
             width: 100%;
@@ -572,10 +553,13 @@
             overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.08);
             background: #000;
+            aspect-ratio: 4/3;
         }
         .face-verify-box .video-container video {
             width: 100%;
+            height: 100%;
             display: block;
+            object-fit: cover;
         }
         .face-verify-box .video-container canvas {
             position: absolute;
@@ -584,6 +568,7 @@
             width: 100%;
             height: 100%;
         }
+
         .face-verify-box .detect-status {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
@@ -606,15 +591,19 @@
             background: rgba(255, 107, 107, 0.1);
         }
         .face-verify-box .detected-age {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             color: #ffd700;
-            margin: 4px 0 12px 0;
+            margin: 6px 0 10px 0;
             display: none;
         }
         .face-verify-box .detected-age.show {
             display: block;
         }
+        .face-verify-box .detected-age .age-value {
+            font-size: 28px;
+        }
+
         .face-verify-box .action-row {
             display: flex;
             gap: 10px;
@@ -674,35 +663,6 @@
             background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
-        }
-        .face-verify-box .loading-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-        .face-verify-box .loading-overlay.show {
-            display: flex;
-        }
-        .face-verify-box .loading-overlay .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.05);
-            border-top: 4px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        .face-verify-box .loading-overlay .loading-text {
-            color: #fff;
-            margin-top: 12px;
-            font-size: 16px;
-            font-weight: 600;
         }
 
         /* ===== صفحه ورود ===== */
@@ -969,7 +929,6 @@
             }
         }
 
-        /* ===== نشانگر دستگاه ===== */
         #deviceInfo {
             position: absolute;
             top: 12px;
@@ -2314,10 +2273,7 @@
         }
 
         /* ===== واکنش‌گرایی ===== */
-        @media(max-width: 480px) {
-            body {
-                padding: 12px;
-            }
+        @media(max-width:480px) {
             .page-container {
                 max-width: 100%;
             }
@@ -2332,23 +2288,10 @@
                 font-size: 12px;
                 padding: 3px 10px;
             }
-            .main-header .header-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .store-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .age-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .admin-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .moderator-btn {
+            .main-header .header-btn,
+            .main-header .store-btn,
+            .main-header .age-btn,
+            .main-header .gift-btn {
                 font-size: 10px;
                 padding: 3px 10px;
             }
@@ -2363,10 +2306,6 @@
             .main-header .profile-btn .age-badge {
                 font-size: 8px;
                 padding: 0px 4px;
-            }
-            .main-header .gift-btn {
-                font-size: 10px;
-                padding: 3px 10px;
             }
             #loginPage {
                 padding: 30px 20px;
@@ -2401,18 +2340,9 @@
                 padding: 3px 16px;
                 min-width: 70px;
             }
-            .game-status {
-                font-size: 15px;
-            }
             .profile-box .avatar-upload .avatar-preview {
                 width: 90px;
                 height: 90px;
-            }
-            .rank-box .rubika-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-                top: 10px;
-                left: 10px;
             }
             .admin-panel-box,
             .rank-box,
@@ -2457,9 +2387,6 @@
             .scoreboard .team-info .flag {
                 font-size: 22px;
             }
-            .scoreboard .team-info .name {
-                font-size: 10px;
-            }
             .scoreboard .score-center .score {
                 font-size: 22px;
             }
@@ -2470,16 +2397,6 @@
                 font-size: 18px;
                 padding: 12px 16px;
                 min-width: 120px;
-            }
-            .goal-message .sub {
-                font-size: 11px;
-            }
-            .moderator-panel-box .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .moderator-panel-box .stats-grid .stat-card .stat-number {
-                font-size: 22px;
             }
             #deviceInfo {
                 font-size: 10px;
@@ -2499,12 +2416,8 @@
                 padding: 8px 14px;
                 min-width: 80px;
             }
-            .face-verify-box .internet-status {
-                font-size: 11px;
-                padding: 3px 10px;
-            }
         }
-        @media(max-width: 380px) {
+        @media(max-width:380px) {
             .main-header .site-title {
                 font-size: 15px;
             }
@@ -2512,23 +2425,10 @@
                 font-size: 10px;
                 padding: 2px 8px;
             }
-            .main-header .header-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .store-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .age-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .admin-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .moderator-btn {
+            .main-header .header-btn,
+            .main-header .store-btn,
+            .main-header .age-btn,
+            .main-header .gift-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -2543,10 +2443,6 @@
             .main-header .profile-btn .age-badge {
                 font-size: 7px;
                 padding: 0px 3px;
-            }
-            .main-header .gift-btn {
-                font-size: 9px;
-                padding: 2px 8px;
             }
             .board {
                 gap: 6px;
@@ -2579,12 +2475,6 @@
             .scoreboard .score-center .score {
                 font-size: 18px;
             }
-            .football-game-box .game-header h3 {
-                font-size: 15px;
-            }
-            .moderator-panel-box .stats-grid .stat-card .stat-number {
-                font-size: 18px;
-            }
             #deviceInfo {
                 font-size: 9px;
                 padding: 2px 8px;
@@ -2610,10 +2500,6 @@
                 font-size: 12px;
                 padding: 6px 10px;
                 min-width: 60px;
-            }
-            .face-verify-box .internet-status {
-                font-size: 10px;
-                padding: 2px 8px;
             }
         }
     </style>
@@ -2665,24 +2551,11 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
-
-                    <!-- ===== دکمه فروشگاه ===== -->
-                    <button class="store-btn" onclick="showStorePage()">
-                        🏪 فروشگاه
-                    </button>
-
-                    <!-- ===== دکمه انتخاب سن ===== -->
-                    <button class="age-btn" onclick="showAgeSelectionPage()">
-                        🎂 انتخاب سن
-                    </button>
-
-                    <!-- ===== دکمه کد هدیه ===== -->
+                    <button class="store-btn" onclick="showStorePage()">🏪 فروشگاه</button>
+                    <button class="age-btn" onclick="showAgeSelectionPage()">🎂 انتخاب سن</button>
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
-
-                    <!-- ===== دکمه‌های نقش‌ها ===== -->
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
-
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
@@ -2714,7 +2587,7 @@
                     <h2>🎮 بازی‌ها</h2>
                     <button onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
                     <br>
-                    <button onclick="goToCountrySelect()" style="background: linear-gradient(135deg, #ffd700, #f093fb); color: #1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
+                    <button onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
                     <br><br>
                     <button class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -2794,14 +2667,14 @@
             <div id="adminPanel">
                 <div class="admin-panel-box">
                     <h2>🔐 پنل مدیریت (سوپر ادمین)</h2>
-                    <p style="color: rgba(255,255,255,0.5); font-weight: 500;">دسترسی کامل به تمام قابلیت‌ها</p>
+                    <p style="color:rgba(255,255,255,0.5);font-weight:500;">دسترسی کامل به تمام قابلیت‌ها</p>
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="gameCount">0</span></li>
                         <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
-                        <li id="adminList" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;">
-                            <span style="font-weight:500; color:rgba(255,255,255,0.5);">👤 مدیران</span>
-                            <span id="adminNamesDisplay" style="font-weight:600; color:#fff; display:flex; flex-wrap:wrap; gap:4px;"></span>
+                        <li id="adminList" style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;">
+                            <span style="font-weight:500;color:rgba(255,255,255,0.5);">👤 مدیران</span>
+                            <span id="adminNamesDisplay" style="font-weight:600;color:#fff;display:flex;flex-wrap:wrap;gap:4px;"></span>
                         </li>
                     </ul>
                     <div class="ban-section">
@@ -2835,7 +2708,7 @@
             <div id="moderatorPanel">
                 <div class="moderator-panel-box">
                     <h2>👑 پنل ادمینیتور</h2>
-                    <p style="color: rgba(255,255,255,0.4); font-size: 13px;">دسترسی مدیریتی سطح متوسط</p>
+                    <p style="color:rgba(255,255,255,0.4);font-size:13px;">دسترسی مدیریتی سطح متوسط</p>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-number" id="moderatorUserCount">0</div>
@@ -2865,7 +2738,7 @@
             <!-- ===== صفحه رنک ها ===== -->
             <div id="rankPage">
                 <div class="rank-box">
-                    <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd', '_blank')">ورود به پیوی سازنده روبیکا</button>
+                    <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd','_blank')">ورود به پیوی سازنده روبیکا</button>
                     <h2>🏅 رنک‌های سایت</h2>
                     <div class="rank-group">
                         <span class="rank-title" style="color:#ff6b8a;">سازنده</span>
@@ -2940,7 +2813,6 @@
                     <h2>📸 تایید چهره</h2>
                     <p>دوربین خود را روشن کنید و چهره خود را نشان دهید</p>
 
-                    <!-- وضعیت اینترنت -->
                     <div class="internet-status" id="internetStatus">⏳ در حال بررسی اتصال...</div>
 
                     <div class="video-container">
@@ -2948,16 +2820,14 @@
                         <canvas id="overlayCanvas"></canvas>
                     </div>
                     <div class="detect-status" id="detectStatus">⏳ در انتظار شروع...</div>
-                    <div class="detected-age" id="detectedAge">🎂 سن تشخیص داده شده: <span id="detectedAgeValue">--</span></div>
+                    <div class="detected-age" id="detectedAge">
+                        🎂 سن تشخیص داده شده: <span class="age-value" id="detectedAgeValue">--</span>
+                    </div>
                     <div class="action-row">
                         <button class="start-camera-btn" id="startCameraBtn" disabled>📷 شروع دوربین</button>
                         <button class="confirm-face-btn" id="confirmFaceBtn">✅ تایید چهره</button>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                    <div class="loading-overlay" id="faceLoadingOverlay">
-                        <div class="spinner"></div>
-                        <div class="loading-text">در حال بارگذاری مدل...</div>
-                    </div>
                 </div>
             </div>
 
@@ -3029,9 +2899,7 @@
             if (isWindowsDesktop()) {
                 startBtn.classList.add('windows-mode');
                 keyHint.classList.add('show');
-                startBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                });
+                startBtn.addEventListener('click', function(e) { e.preventDefault(); });
                 document.addEventListener('keydown', function(e) {
                     const homePage = document.getElementById('homePage');
                     if (homePage && homePage.style.display !== 'none' && e.key === 'E' && !e.ctrlKey && !e.altKey && !e
@@ -3049,7 +2917,7 @@
         }
 
         // ==========================================================
-        //  تشخیص دستگاه (نشانگر بالا سمت چپ)
+        //  تشخیص دستگاه
         // ==========================================================
         function detectDevice() {
             const ua = navigator.userAgent;
@@ -3082,13 +2950,10 @@
             try {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 3000);
-                const response = await fetch('https://httpbin.org/get', { method: 'HEAD', mode: 'no-cors',
-                    signal: controller.signal });
+                await fetch('https://httpbin.org/get', { method: 'HEAD', mode: 'no-cors', signal: controller.signal });
                 clearTimeout(timeoutId);
                 return true;
-            } catch {
-                return false;
-            }
+            } catch { return false; }
         }
 
         // ==========================================================
@@ -3366,7 +3231,6 @@
                 }
             }
             if (pageId === 'faceVerifyPage') {
-                // بررسی وضعیت اینترنت هنگام ورود به صفحه تایید چهره
                 checkInternetStatus();
             }
         }
@@ -3436,33 +3300,31 @@
         }
 
         // ==========================================================
-        //  تایید چهره (با face-api.js)
+        //  تایید چهره (با face-api.js) - بدون پیام بارگذاری مدل
         // ==========================================================
         let videoElement = null;
         let canvasElement = null;
         let isFaceModelLoaded = false;
         let detectedFaceAge = null;
         let isCameraRunning = false;
+        let modelLoadingStarted = false;
 
-        async function loadFaceModels() {
-            const overlay = document.getElementById('faceLoadingOverlay');
-            overlay.classList.add('show');
+        async function loadFaceModelsSilent() {
+            if (modelLoadingStarted) return;
+            modelLoadingStarted = true;
             try {
                 const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
                 await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
                 await faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL);
                 isFaceModelLoaded = true;
-                overlay.classList.remove('show');
-                document.getElementById('detectStatus').textContent = '✅ مدل بارگذاری شد. دوربین را روشن کنید.';
+                document.getElementById('detectStatus').textContent = '✅ مدل آماده است. دوربین را روشن کنید.';
             } catch (err) {
-                overlay.classList.remove('show');
                 document.getElementById('detectStatus').textContent = '❌ خطا در بارگذاری مدل. از اتصال اینترنت مطمئن شوید.';
                 console.error(err);
             }
         }
 
         async function startCamera() {
-            // قبل از هر چیز دوباره وضعیت اینترنت رو چک کن
             const isOnline = await checkInternet();
             if (!isOnline) {
                 document.getElementById('detectStatus').textContent = '❌ بدون اتصال اینترنت نمی‌توان دوربین را راه‌اندازی کرد.';
@@ -3470,8 +3332,11 @@
             }
 
             if (!isFaceModelLoaded) {
-                await loadFaceModels();
-                if (!isFaceModelLoaded) return;
+                await loadFaceModelsSilent();
+                if (!isFaceModelLoaded) {
+                    document.getElementById('detectStatus').textContent = '❌ مدل بارگذاری نشد. لطفاً دوباره تلاش کنید.';
+                    return;
+                }
             }
 
             if (isCameraRunning) {
@@ -3621,11 +3486,11 @@
                     <div class="msg-item">
                         <div class="msg-from">👤 ${msg.from}</div>
                         <div class="msg-text">${msg.text}</div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2px;">
                             <span class="msg-time">${dateStr}</span>
-                            <span class="msg-status ${msg.answered ? 'answered' : 'waiting'}">${msg.answered ? '✅ پاسخ داده شده' : '⏳ در انتظار'}</span>
+                            <span class="msg-status ${msg.answered?'answered':'waiting'}">${msg.answered?'✅ پاسخ داده شده':'⏳ در انتظار'}</span>
                         </div>
-                        ${msg.answered && msg.reply ? `<div style="margin-top:4px; font-size:12px; color:rgba(255,255,255,0.5); border-top:1px solid rgba(255,255,255,0.04); padding-top:4px;">💬 پاسخ: ${msg.reply}</div>` : ''}
+                        ${msg.answered && msg.reply ? `<div style="margin-top:4px;font-size:12px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.04);padding-top:4px;">💬 پاسخ: ${msg.reply}</div>` : ''}
                     </div>
                 `;
             });
@@ -3677,16 +3542,16 @@
                 html += `
                     <div class="ban-item">
                         <div class="ban-user">
-                            <span class="ban-flag">${isBanned ? '🚫' : '👤'}</span>
+                            <span class="ban-flag">${isBanned?'🚫':'👤'}</span>
                             <span class="ban-name">${username}</span>
-                            ${isBanned ? `<span style="font-size:11px; color:#ff6b6b; margin-right:8px;">(${remaining})</span>` : ''}
+                            ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
                         </div>
                         ${canBan ? `
-                            <button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}">
-                                ${isBanned ? '✅ آنبَن' : '🚫 بن ۲۴ساعته'}
+                            <button class="ban-btn ${isBanned?'unban':''}" onclick="${isBanned?`unbanUserAction('${username}')`:`banUserAction('${username}')`}">
+                                ${isBanned?'✅ آنبَن':'🚫 بن ۲۴ساعته'}
                             </button>
                         ` : `
-                            <span style="font-size:11px; color:rgba(255,255,255,0.3);">غیرقابل بن</span>
+                            <span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>
                         `}
                     </div>
                 `;
@@ -3829,20 +3694,15 @@
         window.addEventListener('load', function() {
             setupStartButton();
 
-            // رویدادهای صفحه انتخاب سن
             document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
             document.getElementById('faceVerifyBtn').addEventListener('click', function() {
                 showPage('faceVerifyPage');
-                // مدل‌ها در پس‌زمینه بارگذاری می‌شوند
-                loadFaceModels();
+                // مدل‌ها در پس‌زمینه بارگذاری می‌شوند (بدون نمایش پیام)
+                loadFaceModelsSilent();
             });
 
-            // رویدادهای صفحه تایید چهره
             document.getElementById('startCameraBtn').addEventListener('click', startCamera);
             document.getElementById('confirmFaceBtn').addEventListener('click', confirmFaceAge);
-
-            // بررسی دسترسی به دوربین هنگام ورود به صفحه (برای نمایش پیام)
-            // و همچنین وضعیت اینترنت
 
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
@@ -3963,7 +3823,7 @@
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + index * 0.12);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.12 + note
-                    .duration);
+                        .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.12);
@@ -3996,7 +3856,7 @@
                     osc.frequency.value = note.freq;
                     gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime + index * 0.25);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + index * 0.25 + note
-                    .duration);
+                        .duration);
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     osc.start(audioCtx.currentTime + index * 0.25);
@@ -4549,11 +4409,9 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - با انتخاب سن و تایید چهره');
+        console.log('❄️ برفی - تایید چهره بدون پیام بارگذاری مدل');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('🎂 دکمه "انتخاب سن" در هدر اضافه شد.');
-        console.log('📸 تایید چهره با face-api.js - نیاز به اینترنت');
-        console.log('🌐 دکمه شروع دوربین فقط در صورت اتصال اینترنت فعال می‌شود.');
+        console.log('📸 تایید چهره با face-api.js - مدل در پس‌زمینه بارگذاری می‌شود.');
     </script>
 
 </body>
