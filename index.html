@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>❄️ برفی</title>
 
-    <!-- ===== face-api.js ===== -->
-    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js">
-    </script>
-
     <style>
         /* ===== ریست و پایه ===== */
         * {
@@ -314,8 +310,7 @@
         .football-game-box,
         .gift-box,
         .store-box,
-        .age-selection-box,
-        .face-verify-box {
+        .age-selection-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -464,14 +459,6 @@
             transform: scale(1.05);
             box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
         }
-        .age-selection-box .action-row .face-verify-btn {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-        }
-        .age-selection-box .action-row .face-verify-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.3);
-        }
         .age-selection-box .selected-age-display {
             margin-top: 12px;
             font-size: 14px;
@@ -499,199 +486,6 @@
             background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
-        }
-
-        /* ===== صفحه تایید چهره ===== */
-        .face-verify-box {
-            padding: 28px 20px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            min-height: 400px;
-        }
-        .face-verify-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .face-verify-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .face-verify-box h2 {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-        .face-verify-box p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .face-verify-box .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto 12px;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            background: #000;
-            aspect-ratio: 4/3;
-        }
-        .face-verify-box .video-container video {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
-        .face-verify-box .video-container canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .face-verify-box .detect-status {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
-            margin: 6px 0;
-            min-height: 24px;
-        }
-        .face-verify-box .internet-status {
-            font-size: 13px;
-            margin: 4px 0 8px 0;
-            padding: 4px 12px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        .face-verify-box .internet-status.online {
-            color: #2ecc71;
-            background: rgba(46, 204, 113, 0.1);
-        }
-        .face-verify-box .internet-status.offline {
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.1);
-        }
-        .face-verify-box .detected-age {
-            font-size: 22px;
-            font-weight: 800;
-            color: #ffd700;
-            margin: 6px 0 10px 0;
-            display: none;
-        }
-        .face-verify-box .detected-age.show {
-            display: block;
-        }
-        .face-verify-box .detected-age .age-value {
-            font-size: 28px;
-        }
-
-        .face-verify-box .action-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 6px;
-        }
-        .face-verify-box .action-row button {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 18px;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-        .face-verify-box .action-row .start-camera-btn {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-        }
-        .face-verify-box .action-row .start-camera-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.3);
-        }
-        .face-verify-box .action-row .start-camera-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-        .face-verify-box .action-row .confirm-face-btn {
-            background: linear-gradient(135deg, #ffd700, #f093fb);
-            color: #1a1a3a;
-        }
-        .face-verify-box .action-row .confirm-face-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
-        }
-        .face-verify-box .back-home-btn {
-            margin-top: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .face-verify-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-        .face-verify-box .loading-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-        .face-verify-box .loading-overlay.show {
-            display: flex;
-        }
-        .face-verify-box .loading-overlay .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.05);
-            border-top: 4px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        .face-verify-box .loading-overlay .loading-text {
-            color: #fff;
-            margin-top: 12px;
-            font-size: 16px;
-            font-weight: 600;
         }
 
         /* ===== صفحه ورود ===== */
@@ -937,8 +731,7 @@
         #footballGamePage,
         #giftPage,
         #storePage,
-        #ageSelectionPage,
-        #faceVerifyPage {
+        #ageSelectionPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -2381,8 +2174,7 @@
             .football-game-box,
             .gift-box,
             .store-box,
-            .age-selection-box,
-            .face-verify-box {
+            .age-selection-box {
                 padding: 20px 14px;
             }
             .age-grid {
@@ -2439,8 +2231,7 @@
             .start-btn-wrapper .key-hint {
                 font-size: 11px;
             }
-            .age-selection-box .action-row button,
-            .face-verify-box .action-row button {
+            .age-selection-box .action-row button {
                 font-size: 13px;
                 padding: 8px 14px;
                 min-width: 80px;
@@ -2524,8 +2315,7 @@
                 font-size: 12px;
                 padding: 6px 0;
             }
-            .age-selection-box .action-row button,
-            .face-verify-box .action-row button {
+            .age-selection-box .action-row button {
                 font-size: 12px;
                 padding: 6px 10px;
                 min-width: 60px;
@@ -2829,32 +2619,6 @@
                     </div>
                     <div class="action-row">
                         <button class="confirm-age-btn" id="confirmAgeBtn">✅ تایید سن</button>
-                        <button class="face-verify-btn" id="faceVerifyBtn">📸 تایید چهره</button>
-                    </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه تایید چهره ===== -->
-            <div id="faceVerifyPage">
-                <div class="face-verify-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <h2>📸 تایید چهره</h2>
-                    <p>دوربین خود را روشن کنید و چهره خود را نشان دهید</p>
-
-                    <div class="internet-status" id="internetStatus">⏳ در حال بررسی اتصال...</div>
-
-                    <div class="video-container">
-                        <video id="video" autoplay muted playsinline></video>
-                        <canvas id="overlayCanvas"></canvas>
-                    </div>
-                    <div class="detect-status" id="detectStatus">⏳ در انتظار شروع...</div>
-                    <div class="detected-age" id="detectedAge">
-                        🎂 سن تشخیص داده شده: <span class="age-value" id="detectedAgeValue">--</span>
-                    </div>
-                    <div class="action-row">
-                        <button class="start-camera-btn" id="startCameraBtn" disabled>📷 شروع دوربین</button>
-                        <button class="confirm-face-btn" id="confirmFaceBtn">✅ تایید چهره</button>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -2970,19 +2734,6 @@
             }
             document.getElementById('deviceIcon').textContent = icon;
             document.getElementById('deviceName').textContent = device;
-        }
-
-        // ==========================================================
-        //  بررسی اتصال اینترنت
-        // ==========================================================
-        async function checkInternet() {
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 3000);
-                await fetch('https://httpbin.org/get', { method: 'HEAD', mode: 'no-cors', signal: controller.signal });
-                clearTimeout(timeoutId);
-                return true;
-            } catch { return false; }
         }
 
         // ==========================================================
@@ -3215,7 +2966,7 @@
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
-                'ageSelectionPage', 'faceVerifyPage'
+                'ageSelectionPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -3259,39 +3010,11 @@
                     });
                 }
             }
-            if (pageId === 'faceVerifyPage') {
-                checkInternetStatus();
-            }
         }
 
         function showStorePage() { showPage('storePage'); }
 
         function showAgeSelectionPage() { showPage('ageSelectionPage'); }
-
-        // ==========================================================
-        //  بررسی وضعیت اینترنت برای دکمه شروع دوربین
-        // ==========================================================
-        async function checkInternetStatus() {
-            const statusEl = document.getElementById('internetStatus');
-            const startBtn = document.getElementById('startCameraBtn');
-
-            statusEl.textContent = '⏳ در حال بررسی اتصال...';
-            statusEl.className = 'internet-status';
-
-            const isOnline = await checkInternet();
-
-            if (isOnline) {
-                statusEl.textContent = '✅ اتصال اینترنت برقرار است';
-                statusEl.className = 'internet-status online';
-                startBtn.disabled = false;
-                document.getElementById('detectStatus').textContent = '📸 برای شروع دوربین، روی دکمه کلیک کنید.';
-            } else {
-                statusEl.textContent = '❌ اتصال اینترنت برقرار نیست';
-                statusEl.className = 'internet-status offline';
-                startBtn.disabled = true;
-                document.getElementById('detectStatus').textContent = '⚠️ برای استفاده از تایید چهره، اتصال اینترنت لازم است.';
-            }
-        }
 
         // ==========================================================
         //  صفحه انتخاب سن
@@ -3325,138 +3048,6 @@
             setUserAge(selectedAge);
             loadProfile();
             alert(`✅ سن ${selectedAge} سال ثبت شد!`);
-            goHome();
-        }
-
-        // ==========================================================
-        //  تایید چهره (با face-api.js) - بارگذاری کامل مدل
-        // ==========================================================
-        let videoElement = null;
-        let canvasElement = null;
-        let isFaceModelLoaded = false;
-        let detectedFaceAge = null;
-        let isCameraRunning = false;
-        let modelLoadingPromise = null;
-
-        async function loadFaceModels() {
-            if (isFaceModelLoaded) return true;
-            if (modelLoadingPromise) return modelLoadingPromise;
-
-            modelLoadingPromise = new Promise(async (resolve) => {
-                try {
-                    // استفاده از مدل‌های رسمی face-api.js
-                    const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models';
-                    await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
-                    await faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL);
-                    isFaceModelLoaded = true;
-                    document.getElementById('detectStatus').textContent = '✅ مدل بارگذاری شد. دوربین را روشن کنید.';
-                    resolve(true);
-                } catch (err) {
-                    console.error('خطا در بارگذاری مدل:', err);
-                    document.getElementById('detectStatus').textContent = '❌ خطا در بارگذاری مدل. از اتصال اینترنت مطمئن شوید.';
-                    resolve(false);
-                }
-            });
-            return modelLoadingPromise;
-        }
-
-        async function startCamera() {
-            // بررسی اینترنت
-            const isOnline = await checkInternet();
-            if (!isOnline) {
-                document.getElementById('detectStatus').textContent = '❌ بدون اتصال اینترنت نمی‌توان دوربین را راه‌اندازی کرد.';
-                return;
-            }
-
-            // بارگذاری مدل
-            const loaded = await loadFaceModels();
-            if (!loaded) {
-                document.getElementById('detectStatus').textContent = '❌ مدل بارگذاری نشد. لطفاً دوباره تلاش کنید.';
-                return;
-            }
-
-            if (isCameraRunning) {
-                document.getElementById('detectStatus').textContent = '📸 دوربین در حال اجراست.';
-                return;
-            }
-
-            videoElement = document.getElementById('video');
-            canvasElement = document.getElementById('overlayCanvas');
-
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640,
-                        height: 480 } });
-                videoElement.srcObject = stream;
-                await videoElement.play();
-                isCameraRunning = true;
-                document.getElementById('detectStatus').textContent = '📸 دوربین روشن شد، در حال تشخیص چهره...';
-                detectFace();
-            } catch (err) {
-                document.getElementById('detectStatus').textContent = '❌ دسترسی به دوربین امکان‌پذیر نیست.';
-                console.error(err);
-            }
-        }
-
-        async function detectFace() {
-            if (!videoElement || videoElement.paused || !isCameraRunning) return;
-            const displaySize = { width: videoElement.videoWidth, height: videoElement.videoHeight };
-            if (displaySize.width === 0 || displaySize.height === 0) {
-                requestAnimationFrame(detectFace);
-                return;
-            }
-            faceapi.matchDimensions(canvasElement, displaySize);
-
-            try {
-                const detections = await faceapi.detectAllFaces(videoElement)
-                    .withAgeAndGender();
-
-                const ctx = canvasElement.getContext('2d');
-                ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-                if (detections.length > 0) {
-                    const resized = faceapi.resizeResults(detections, displaySize);
-                    faceapi.draw.drawDetections(canvasElement, resized);
-                    const age = Math.round(resized[0].age);
-                    detectedFaceAge = age;
-                    document.getElementById('detectedAgeValue').textContent = age;
-                    document.getElementById('detectedAge').classList.add('show');
-                    document.getElementById('detectStatus').textContent = `✅ چهره تشخیص داده شد، سن تقریبی: ${age} سال`;
-                } else {
-                    document.getElementById('detectedAge').classList.remove('show');
-                    document.getElementById('detectStatus').textContent = '👤 چهره‌ای تشخیص داده نشد. لطفاً رو به دوربین باشید.';
-                    detectedFaceAge = null;
-                }
-            } catch (err) {
-                console.error('خطا در تشخیص چهره:', err);
-            }
-
-            if (isCameraRunning) {
-                requestAnimationFrame(detectFace);
-            }
-        }
-
-        function stopCamera() {
-            isCameraRunning = false;
-            if (videoElement && videoElement.srcObject) {
-                const stream = videoElement.srcObject;
-                const tracks = stream.getTracks();
-                tracks.forEach(track => track.stop());
-                videoElement.srcObject = null;
-            }
-            const ctx = canvasElement?.getContext('2d');
-            if (ctx) ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-            document.getElementById('detectStatus').textContent = '⏹️ دوربین متوقف شد.';
-        }
-
-        function confirmFaceAge() {
-            if (detectedFaceAge === null) {
-                alert('⚠️ لطفاً ابتدا چهره خود را با دوربین ثبت کنید.');
-                return;
-            }
-            setUserAge(detectedFaceAge);
-            loadProfile();
-            stopCamera();
-            alert(`✅ سن ${detectedFaceAge} سال از طریق چهره تأیید شد!`);
             goHome();
         }
 
@@ -3678,7 +3269,6 @@
                 updateAdminStats();
             }
             resetFootballGameState();
-            stopCamera();
             showPage('homePage');
         }
 
@@ -3732,14 +3322,6 @@
             setupStartButton();
 
             document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
-            document.getElementById('faceVerifyBtn').addEventListener('click', function() {
-                showPage('faceVerifyPage');
-                // پیش‌بارگذاری مدل در پس‌زمینه
-                loadFaceModels();
-            });
-
-            document.getElementById('startCameraBtn').addEventListener('click', startCamera);
-            document.getElementById('confirmFaceBtn').addEventListener('click', confirmFaceAge);
 
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
@@ -4446,9 +4028,8 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - تایید چهره با بارگذاری کامل مدل');
+        console.log('❄️ برفی - انتخاب سن (بدون تایید چهره)');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('📸 تایید چهره با face-api.js - مدل از CDN بارگذاری می‌شود.');
     </script>
 
 </body>
