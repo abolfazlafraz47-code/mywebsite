@@ -161,6 +161,43 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
+        /* ===== دکمه‌های جدید ===== */
+        .main-header .account-btn {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(161, 140, 209, 0.3);
+        }
+        .main-header .account-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
+        }
+
+        .main-header .create-pass-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
+        }
+        .main-header .create-pass-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
+        }
+
         .main-header .store-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -310,7 +347,9 @@
         .football-game-box,
         .gift-box,
         .store-box,
-        .age-selection-box {
+        .age-selection-box,
+        .create-pass-box,
+        .account-login-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -318,6 +357,256 @@
             border-radius: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
+        }
+
+        /* ===== صفحه ساخت رمز عبور ===== */
+        .create-pass-box {
+            padding: 40px 28px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .create-pass-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .create-pass-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .create-pass-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .create-pass-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .create-pass-box .input-group {
+            width: 100%;
+            margin-bottom: 16px;
+            text-align: right;
+        }
+        .create-pass-box .input-group label {
+            display: block;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .create-pass-box .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-weight: 500;
+        }
+        .create-pass-box .input-group input:focus {
+            border-color: rgba(245, 87, 108, 0.3);
+            box-shadow: 0 0 30px rgba(245, 87, 108, 0.05);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .create-pass-box .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .create-pass-box .action-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.25);
+            width: 100%;
+        }
+        .create-pass-box .action-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.4);
+        }
+        .create-pass-box .status-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+        .create-pass-box .status-msg.success {
+            display: block;
+            color: #2ecc71;
+        }
+        .create-pass-box .status-msg.error {
+            display: block;
+            color: #ff6b6b;
+        }
+        .create-pass-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .create-pass-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== صفحه ورود با اکانت ===== */
+        .account-login-box {
+            padding: 40px 28px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .account-login-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .account-login-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .account-login-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .account-login-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .account-login-box .input-group {
+            width: 100%;
+            margin-bottom: 16px;
+            text-align: right;
+        }
+        .account-login-box .input-group label {
+            display: block;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .account-login-box .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-weight: 500;
+        }
+        .account-login-box .input-group input:focus {
+            border-color: rgba(161, 140, 209, 0.3);
+            box-shadow: 0 0 30px rgba(161, 140, 209, 0.05);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .account-login-box .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .account-login-box .action-btn {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: #1a1a3a;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(161, 140, 209, 0.25);
+            width: 100%;
+        }
+        .account-login-box .action-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 32px rgba(161, 140, 209, 0.4);
+        }
+        .account-login-box .status-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+        .account-login-box .status-msg.error {
+            display: block;
+            color: #ff6b6b;
+        }
+        .account-login-box .status-msg.success {
+            display: block;
+            color: #2ecc71;
+        }
+        .account-login-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .account-login-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         /* ===== صفحه فروشگاه ===== */
@@ -731,7 +1020,9 @@
         #footballGamePage,
         #giftPage,
         #storePage,
-        #ageSelectionPage {
+        #ageSelectionPage,
+        #createPassPage,
+        #accountLoginPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1616,6 +1907,11 @@
         .profile-box .profile-info .info-item .value.age-value {
             color: #ffd700;
         }
+        .profile-box .profile-info .info-item .value.pass-value {
+            color: #f093fb;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
         .profile-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -2113,7 +2409,9 @@
             .main-header .header-btn,
             .main-header .store-btn,
             .main-header .age-btn,
-            .main-header .gift-btn {
+            .main-header .gift-btn,
+            .main-header .account-btn,
+            .main-header .create-pass-btn {
                 font-size: 10px;
                 padding: 3px 10px;
             }
@@ -2174,7 +2472,9 @@
             .football-game-box,
             .gift-box,
             .store-box,
-            .age-selection-box {
+            .age-selection-box,
+            .create-pass-box,
+            .account-login-box {
                 padding: 20px 14px;
             }
             .age-grid {
@@ -2236,6 +2536,11 @@
                 padding: 8px 14px;
                 min-width: 80px;
             }
+            .create-pass-box .input-group input,
+            .account-login-box .input-group input {
+                font-size: 14px;
+                padding: 10px 14px;
+            }
         }
         @media(max-width:380px) {
             .main-header .site-title {
@@ -2248,7 +2553,9 @@
             .main-header .header-btn,
             .main-header .store-btn,
             .main-header .age-btn,
-            .main-header .gift-btn {
+            .main-header .gift-btn,
+            .main-header .account-btn,
+            .main-header .create-pass-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -2370,11 +2677,18 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
+
+                    <!-- ===== دکمه‌های جدید ===== -->
+                    <button class="account-btn" onclick="showAccountLoginPage()">🔑 اکانت</button>
+                    <button class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
+
                     <button class="store-btn" onclick="showStorePage()">🏪 فروشگاه</button>
                     <button class="age-btn" onclick="showAgeSelectionPage()">🎂 انتخاب سن</button>
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
+
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
+
                     <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
@@ -2599,6 +2913,10 @@
                             <span class="value age-value" id="profileAge">ثبت نشده</span>
                         </div>
                         <div class="info-item">
+                            <span class="label">🔒 رمز عبور</span>
+                            <span class="value pass-value" id="profilePassword">ثبت نشده</span>
+                        </div>
+                        <div class="info-item">
                             <span class="label">✅ وضعیت</span>
                             <span class="value" id="profileStatus">فعال</span>
                         </div>
@@ -2620,6 +2938,42 @@
                     <div class="action-row">
                         <button class="confirm-age-btn" id="confirmAgeBtn">✅ تایید سن</button>
                     </div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه ساخت رمز عبور ===== -->
+            <div id="createPassPage">
+                <div class="create-pass-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🔒 ساخت رمز عبور</h2>
+                    <p id="createPassDesc">یک رمز عبور برای اکانت خود بسازید</p>
+                    <div class="input-group">
+                        <label for="newPasswordInput">رمز عبور جدید</label>
+                        <input type="text" id="newPasswordInput" placeholder="رمز عبور را وارد کنید..." />
+                    </div>
+                    <button class="action-btn" id="createPassActionBtn">🔐 ساخت</button>
+                    <div class="status-msg" id="createPassStatus"></div>
+                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه ورود با اکانت ===== -->
+            <div id="accountLoginPage">
+                <div class="account-login-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🔑 ورود با اکانت</h2>
+                    <p>با نام کاربری و رمز عبور وارد شوید</p>
+                    <div class="input-group">
+                        <label for="loginUsernameInput">نام کاربری</label>
+                        <input type="text" id="loginUsernameInput" placeholder="نام کاربری را وارد کنید..." />
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPasswordInput">رمز عبور</label>
+                        <input type="text" id="loginPasswordInput" placeholder="رمز عبور را وارد کنید..." />
+                    </div>
+                    <button class="action-btn" id="loginAccountBtn">🚪 ورود</button>
+                    <div class="status-msg" id="loginAccountStatus"></div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -2910,7 +3264,7 @@
         }
 
         // ==========================================================
-        //  مدیریت پروفایل و سن
+        //  مدیریت پروفایل و سن و رمز عبور
         // ==========================================================
         function getProfileAvatar() {
             try { return localStorage.getItem('profileAvatar') || ''; } catch { return ''; }
@@ -2950,6 +3304,57 @@
             }
         }
 
+        // ===== مدیریت رمز عبور =====
+        function getUserPassword() {
+            try { return localStorage.getItem('userPassword') || ''; } catch { return ''; }
+        }
+
+        function setUserPassword(password) {
+            localStorage.setItem('userPassword', password);
+            updatePasswordUI(password);
+            updateCreatePassButton(password);
+        }
+
+        function updatePasswordUI(password) {
+            const passEl = document.getElementById('profilePassword');
+            if (password && password.length > 0) {
+                passEl.textContent = '••••••••';
+                passEl.title = password;
+            } else {
+                passEl.textContent = 'ثبت نشده';
+                passEl.title = '';
+            }
+        }
+
+        function updateCreatePassButton(password) {
+            const btn = document.getElementById('createPassBtn');
+            if (password && password.length > 0) {
+                btn.textContent = '🔄 تغییر رمز عبور';
+            } else {
+                btn.textContent = '🔒 ساخت رمز عبور';
+            }
+        }
+
+        // ===== سیستم اکانت‌ها (ذخیره رمز برای هر کاربر) =====
+        function getUsersData() {
+            try { const data = localStorage.getItem('usersData'); return data ? JSON.parse(data) : {}; } catch { return {}; }
+        }
+
+        function setUsersData(users) {
+            localStorage.setItem('usersData', JSON.stringify(users));
+        }
+
+        function getUserPasswordByUsername(username) {
+            const users = getUsersData();
+            return users[username] || '';
+        }
+
+        function setUserPasswordForUsername(username, password) {
+            const users = getUsersData();
+            users[username] = password;
+            setUsersData(users);
+        }
+
         function loadProfile() {
             const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
@@ -2957,6 +3362,12 @@
             document.getElementById('profileUsername').textContent = username || '---';
             const age = getUserAge();
             updateAgeUI(age);
+
+            // رمز عبور کاربر فعلی
+            const pass = getUserPasswordByUsername(username);
+            updatePasswordUI(pass);
+            updateCreatePassButton(pass);
+
             updateButtonsVisibility();
         }
 
@@ -2966,7 +3377,7 @@
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
-                'ageSelectionPage'
+                'ageSelectionPage', 'createPassPage', 'accountLoginPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -3010,11 +3421,35 @@
                     });
                 }
             }
+            if (pageId === 'createPassPage') {
+                const currentUser = document.getElementById('displayUsername').textContent.trim();
+                const currentPass = getUserPasswordByUsername(currentUser);
+                if (currentPass) {
+                    document.getElementById('createPassDesc').textContent = 'رمز عبور فعلی خود را تغییر دهید';
+                    document.getElementById('createPassActionBtn').textContent = '🔄 تغییر رمز';
+                } else {
+                    document.getElementById('createPassDesc').textContent = 'یک رمز عبور برای اکانت خود بسازید';
+                    document.getElementById('createPassActionBtn').textContent = '🔐 ساخت';
+                }
+                document.getElementById('newPasswordInput').value = '';
+                document.getElementById('createPassStatus').className = 'status-msg';
+                document.getElementById('createPassStatus').textContent = '';
+            }
+            if (pageId === 'accountLoginPage') {
+                document.getElementById('loginUsernameInput').value = '';
+                document.getElementById('loginPasswordInput').value = '';
+                document.getElementById('loginAccountStatus').className = 'status-msg';
+                document.getElementById('loginAccountStatus').textContent = '';
+            }
         }
 
         function showStorePage() { showPage('storePage'); }
 
         function showAgeSelectionPage() { showPage('ageSelectionPage'); }
+
+        function showCreatePassPage() { showPage('createPassPage'); }
+
+        function showAccountLoginPage() { showPage('accountLoginPage'); }
 
         // ==========================================================
         //  صفحه انتخاب سن
@@ -3049,6 +3484,89 @@
             loadProfile();
             alert(`✅ سن ${selectedAge} سال ثبت شد!`);
             goHome();
+        }
+
+        // ==========================================================
+        //  ساخت رمز عبور
+        // ==========================================================
+        function createPassword() {
+            const input = document.getElementById('newPasswordInput');
+            const password = input.value.trim();
+            const status = document.getElementById('createPassStatus');
+
+            if (!password) {
+                status.className = 'status-msg error';
+                status.textContent = '⚠️ لطفاً یک رمز عبور وارد کنید.';
+                return;
+            }
+
+            if (password.length < 4) {
+                status.className = 'status-msg error';
+                status.textContent = '⚠️ رمز عبور باید حداقل ۴ کاراکتر باشد.';
+                return;
+            }
+
+            const username = document.getElementById('displayUsername').textContent.trim();
+            setUserPasswordForUsername(username, password);
+            loadProfile();
+            status.className = 'status-msg success';
+            status.textContent = '✅ رمز عبور با موفقیت ذخیره شد!';
+
+            // به‌روزرسانی دکمه در هدر
+            updateCreatePassButton(password);
+
+            setTimeout(() => {
+                goHome();
+            }, 1500);
+        }
+
+        // ==========================================================
+        //  ورود با اکانت
+        // ==========================================================
+        function loginWithAccount() {
+            const usernameInput = document.getElementById('loginUsernameInput');
+            const passwordInput = document.getElementById('loginPasswordInput');
+            const status = document.getElementById('loginAccountStatus');
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!username || !password) {
+                status.className = 'status-msg error';
+                status.textContent = '⚠️ لطفاً نام کاربری و رمز عبور را وارد کنید.';
+                return;
+            }
+
+            // بررسی وجود کاربر
+            if (!isUsernameTaken(username)) {
+                status.className = 'status-msg error';
+                status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.';
+                return;
+            }
+
+            const correctPass = getUserPasswordByUsername(username);
+            if (!correctPass) {
+                status.className = 'status-msg error';
+                status.textContent = '❌ این کاربر رمز عبور ندارد. ابتدا رمز بسازید.';
+                return;
+            }
+
+            if (password === correctPass) {
+                status.className = 'status-msg success';
+                status.textContent = '✅ ورود موفق! در حال انتقال...';
+
+                // ذخیره کاربر فعلی
+                localStorage.setItem('username', username);
+                document.getElementById('displayUsername').textContent = username;
+                loadProfile();
+
+                setTimeout(() => {
+                    goHome();
+                }, 1200);
+            } else {
+                status.className = 'status-msg error';
+                status.textContent = '❌ اشتباه است';
+            }
         }
 
         // ==========================================================
@@ -3322,6 +3840,16 @@
             setupStartButton();
 
             document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
+            document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
+            document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
+
+            // Enter key for password input
+            document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') createPassword();
+            });
+            document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginWithAccount();
+            });
 
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
@@ -4028,8 +4556,10 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - انتخاب سن (بدون تایید چهره)');
+        console.log('❄️ برفی - با سیستم ساخت رمز عبور و ورود با اکانت');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
+        console.log('🔑 دکمه‌های "اکانت" و "ساخت رمز عبور" به هدر اضافه شدند.');
+        console.log('📝 هر کاربر می‌تواند رمز عبور خود را بسازد و با آن وارد شود.');
     </script>
 
 </body>
