@@ -193,6 +193,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(161, 140, 209, 0.3);
+            display: none;
         }
         .main-header .account-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -211,6 +212,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
+            display: none;
         }
         .main-header .create-pass-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -229,6 +231,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+            display: none;
         }
         .main-header .store-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -247,6 +250,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(86, 171, 47, 0.3);
+            display: none;
         }
         .main-header .age-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -306,6 +310,7 @@
             align-items: center;
             gap: 6px;
             backdrop-filter: blur(4px);
+            display: none;
         }
         .main-header .profile-btn:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -345,14 +350,35 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+            display: none;
         }
         .main-header .gift-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
 
+        .main-header .rank-btn {
+            background: rgba(255, 255, 255, 0.07);
+            color: #c8dfff;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            display: none;
+        }
+        .main-header .rank-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 20px rgba(100, 200, 255, 0.2);
+            border-color: rgba(100, 200, 255, 0.3);
+        }
+
         /* ===== صفحات با افکت شیشه‌ای ===== */
-        #loginPage,
         #loader,
         #errorPage,
         .box,
@@ -379,46 +405,31 @@
             transition: all 0.4s ease;
         }
 
-        /* ===== صفحه ورود جدید (با نام کاربری و رمز) ===== */
+        /* ===== صفحه ورود با نام کاربری و رمز عبور (صفحه اصلی ورود) ===== */
         .account-login-box {
             padding: 40px 28px;
             width: 100%;
             text-align: center;
             position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .account-login-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .account-login-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .account-login-box h2 {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+        .account-login-box h1 {
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #64d8ff, #a78bfa, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
         .account-login-box p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 25px;
+            font-size: 15px;
         }
         .account-login-box .input-group {
             width: 100%;
@@ -498,25 +509,6 @@
             color: #00f2fe;
             transform: scale(1.05);
         }
-        .account-login-box .back-home-btn {
-            margin-top: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .account-login-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
 
         /* ===== صفحه ثبت نام ===== */
         .register-box {
@@ -524,40 +516,25 @@
             width: 100%;
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
         }
-        .register-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .register-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .register-box h2 {
-            font-size: 24px;
-            font-weight: 800;
+        .register-box h1 {
+            font-size: 40px;
+            font-weight: 900;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
         .register-box p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 25px;
+            font-size: 15px;
         }
         .register-box .input-group {
             width: 100%;
@@ -636,25 +613,6 @@
         .register-box .switch-link:hover {
             color: #00f2fe;
             transform: scale(1.05);
-        }
-        .register-box .back-home-btn {
-            margin-top: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .register-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
         }
 
         /* ===== صفحه فروشگاه ===== */
@@ -950,123 +908,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== صفحه ورود (قبلی) ===== */
-        #loginPage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 30px;
-            text-align: center;
-            min-height: 380px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        #loginPage::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(100, 200, 255, 0.05), transparent 60%);
-            animation: rotateGlow 20s linear infinite;
-            pointer-events: none;
-        }
-        @keyframes rotateGlow {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        #loginPage h1 {
-            font-size: 40px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #64d8ff, #a78bfa, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 1px;
-        }
-        #loginPage p {
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 25px;
-            font-size: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        #loginPage .input-group {
-            width: 100%;
-            margin-bottom: 12px;
-            text-align: right;
-            position: relative;
-            z-index: 1;
-        }
-        #loginPage .input-group label {
-            display: block;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-        #loginPage .input-group input {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            font-size: 18px;
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.04);
-            color: #fff;
-            font-weight: 500;
-        }
-        #loginPage .input-group input:focus {
-            border-color: rgba(100, 200, 255, 0.4);
-            box-shadow: 0 0 30px rgba(100, 200, 255, 0.06);
-            background: rgba(255, 255, 255, 0.06);
-        }
-        #loginPage .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        #loginPage .login-btn {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 16px;
-            font-size: 20px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 24px rgba(79, 172, 254, 0.3);
-            letter-spacing: 1px;
-            margin-top: 6px;
-        }
-        #loginPage .login-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 40px rgba(79, 172, 254, 0.5);
-        }
-        #loginPage .error-msg {
-            color: #ff6b8a;
-            font-size: 14px;
-            margin-top: 12px;
-            display: none;
-            position: relative;
-            z-index: 1;
-            font-weight: 500;
-        }
-
         /* ===== صفحه لودینگ ===== */
         #loader {
             display: none;
@@ -1175,7 +1016,7 @@
             box-shadow: 0 8px 40px rgba(79, 172, 254, 0.5);
         }
 
-        /* ===== محتوای اصلی ===== */
+        /* ===== محتوای اصلی (بعد از ورود) ===== */
         #mainContent {
             display: none;
             width: 100%;
@@ -1194,9 +1035,7 @@
         #giftPage,
         #storePage,
         #ageSelectionPage,
-        #createPassPage,
-        #accountLoginPage,
-        #registerPage {
+        #createPassPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -2584,7 +2423,7 @@
             .main-header .store-btn,
             .main-header .age-btn,
             .main-header .gift-btn,
-            .main-header .account-btn,
+            .main-header .rank-btn,
             .main-header .create-pass-btn,
             .main-header .logout-btn {
                 font-size: 10px;
@@ -2602,11 +2441,13 @@
                 font-size: 8px;
                 padding: 0px 4px;
             }
-            #loginPage {
+            .account-login-box,
+            .register-box {
                 padding: 30px 20px;
-                min-height: 320px;
+                min-height: 350px;
             }
-            #loginPage h1 {
+            .account-login-box h1,
+            .register-box h1 {
                 font-size: 32px;
             }
             .box {
@@ -2648,9 +2489,7 @@
             .gift-box,
             .store-box,
             .age-selection-box,
-            .create-pass-box,
-            .account-login-box,
-            .register-box {
+            .create-pass-box {
                 padding: 20px 14px;
             }
             .age-grid {
@@ -2731,7 +2570,7 @@
             .main-header .store-btn,
             .main-header .age-btn,
             .main-header .gift-btn,
-            .main-header .account-btn,
+            .main-header .rank-btn,
             .main-header .create-pass-btn,
             .main-header .logout-btn {
                 font-size: 9px;
@@ -2749,6 +2588,10 @@
                 font-size: 7px;
                 padding: 0px 3px;
             }
+            .account-login-box h1,
+            .register-box h1 {
+                font-size: 26px;
+            }
             .board {
                 gap: 6px;
                 max-width: 200px;
@@ -2756,9 +2599,6 @@
             .cell {
                 font-size: 30px;
                 border-radius: 10px;
-            }
-            #loginPage h1 {
-                font-size: 26px;
             }
             .timer {
                 font-size: 18px;
@@ -2818,16 +2658,42 @@
 
     <div class="page-container">
 
-        <!-- ======== صفحه ورود قدیمی ======== -->
-        <div id="loginPage">
-            <h1>❄️ برفی</h1>
-            <p>برای ورود، نام کاربری خود را وارد کنید</p>
-            <div class="input-group">
-                <label for="usernameInput">نام کاربری</label>
-                <input type="text" id="usernameInput" placeholder="مثلاً: علی" />
+        <!-- ======== صفحه ورود با نام کاربری و رمز عبور ======== -->
+        <div id="accountLoginPage" style="display:flex;">
+            <div class="account-login-box">
+                <h1>❄️ برفی</h1>
+                <p>با نام کاربری و رمز عبور وارد شوید</p>
+                <div class="input-group">
+                    <label for="loginUsernameInput">نام کاربری</label>
+                    <input type="text" id="loginUsernameInput" placeholder="نام کاربری خود را وارد کنید..." />
+                </div>
+                <div class="input-group">
+                    <label for="loginPasswordInput">رمز عبور</label>
+                    <input type="text" id="loginPasswordInput" placeholder="رمز عبور خود را وارد کنید..." />
+                </div>
+                <button class="action-btn" id="loginAccountBtn">🚪 ورود</button>
+                <div class="status-msg" id="loginAccountStatus"></div>
+                <a class="switch-link" onclick="showRegisterPage()">📝 ثبت نام</a>
             </div>
-            <button class="login-btn" onclick="handleLogin()">🚪 ورود</button>
-            <div class="error-msg" id="loginError">⚠️ لطفاً نام کاربری را وارد کنید!</div>
+        </div>
+
+        <!-- ======== صفحه ثبت نام ======== -->
+        <div id="registerPage" style="display:none;">
+            <div class="register-box">
+                <h1>❄️ برفی</h1>
+                <p>برای ساخت اکانت جدید، اطلاعات را وارد کنید</p>
+                <div class="input-group">
+                    <label for="registerUsernameInput">نام کاربری</label>
+                    <input type="text" id="registerUsernameInput" placeholder="نام کاربری جدید..." />
+                </div>
+                <div class="input-group">
+                    <label for="registerPasswordInput">رمز عبور</label>
+                    <input type="text" id="registerPasswordInput" placeholder="رمز عبور جدید..." />
+                </div>
+                <button class="action-btn" id="registerBtn">✅ ثبت نام</button>
+                <div class="status-msg" id="registerStatus"></div>
+                <a class="switch-link" onclick="showAccountLoginPage()">🔑 ورود</a>
+            </div>
         </div>
 
         <!-- ======== صفحه لودینگ ======== -->
@@ -2845,7 +2711,7 @@
             <button class="retry-btn" onclick="retryConnection()">🔄 تلاش مجدد</button>
         </div>
 
-        <!-- ======== محتوای اصلی ======== -->
+        <!-- ======== محتوای اصلی (بعد از ورود) ======== -->
         <div id="mainContent">
 
             <!-- ===== هدر ===== -->
@@ -2859,23 +2725,21 @@
                     <!-- ===== دکمه خروج از اکانت ===== -->
                     <button class="logout-btn" id="logoutBtn" onclick="logoutAccount()">🚪 خروج از اکانت</button>
 
-                    <!-- ===== دکمه‌های دیگر ===== -->
-                    <button class="account-btn" onclick="showAccountLoginPage()">🔑 اکانت</button>
-                    <button class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
-
                     <button class="store-btn" onclick="showStorePage()">🏪 فروشگاه</button>
                     <button class="age-btn" onclick="showAgeSelectionPage()">🎂 انتخاب سن</button>
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
+                    <button class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
 
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
-                    <button class="header-btn" onclick="showRankPage()">🏅 رنک</button>
                     <button class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
                         پروفایل
                         <span class="age-badge" id="profileAgeBadge"></span>
                     </button>
+
+                    <button class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
                 </div>
             </div>
 
@@ -3135,48 +2999,6 @@
                     </div>
                     <button class="action-btn" id="createPassActionBtn">🔐 ساخت</button>
                     <div class="status-msg" id="createPassStatus"></div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه ورود با اکانت ===== -->
-            <div id="accountLoginPage">
-                <div class="account-login-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <h2>🔑 ورود با اکانت</h2>
-                    <p>با نام کاربری و رمز عبور وارد شوید</p>
-                    <div class="input-group">
-                        <label for="loginUsernameInput">نام کاربری</label>
-                        <input type="text" id="loginUsernameInput" placeholder="نام کاربری را وارد کنید..." />
-                    </div>
-                    <div class="input-group">
-                        <label for="loginPasswordInput">رمز عبور</label>
-                        <input type="text" id="loginPasswordInput" placeholder="رمز عبور را وارد کنید..." />
-                    </div>
-                    <button class="action-btn" id="loginAccountBtn">🚪 ورود</button>
-                    <div class="status-msg" id="loginAccountStatus"></div>
-                    <a class="switch-link" onclick="showRegisterPage()">📝 ثبت نام</a>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه ثبت نام ===== -->
-            <div id="registerPage">
-                <div class="register-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <h2>📝 ثبت نام</h2>
-                    <p>برای ساخت اکانت جدید، اطلاعات را وارد کنید</p>
-                    <div class="input-group">
-                        <label for="registerUsernameInput">نام کاربری</label>
-                        <input type="text" id="registerUsernameInput" placeholder="نام کاربری جدید..." />
-                    </div>
-                    <div class="input-group">
-                        <label for="registerPasswordInput">رمز عبور</label>
-                        <input type="text" id="registerPasswordInput" placeholder="رمز عبور جدید..." />
-                    </div>
-                    <button class="action-btn" id="registerBtn">✅ ثبت نام</button>
-                    <div class="status-msg" id="registerStatus"></div>
-                    <a class="switch-link" onclick="showAccountLoginPage()">🔑 ورود</a>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -3565,12 +3387,25 @@
                 document.getElementById('displayUsername').textContent = 'کاربر';
                 document.getElementById('logoutBtn').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('loginPage').style.display = 'flex';
-                document.getElementById('usernameInput').value = '';
-                document.getElementById('loginError').style.display = 'none';
-                // بازنشانی دکمه‌های مدیریتی
+                // نمایش صفحه ورود
+                showAccountLoginPage();
+                document.getElementById('loginUsernameInput').value = '';
+                document.getElementById('loginPasswordInput').value = '';
+                document.getElementById('loginAccountStatus').className = 'status-msg';
+                document.getElementById('loginAccountStatus').textContent = '';
+                // مخفی کردن دکمه‌های هدر
+                document.querySelectorAll('.main-header .header-left button:not(.logout-btn)').forEach(btn => {
+                    if (btn.id !== 'logoutBtn') btn.style.display = 'none';
+                });
+                document.querySelector('.main-header .profile-btn').style.display = 'none';
+                document.querySelector('.main-header .create-pass-btn').style.display = 'none';
+                document.querySelector('.main-header .store-btn').style.display = 'none';
+                document.querySelector('.main-header .age-btn').style.display = 'none';
+                document.querySelector('.main-header .gift-btn').style.display = 'none';
+                document.querySelector('.main-header .rank-btn').style.display = 'none';
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
+                document.querySelector('.main-header .logout-btn').style.display = 'none';
             }
         }
 
@@ -3605,7 +3440,7 @@
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
-                'ageSelectionPage', 'createPassPage', 'accountLoginPage', 'registerPage'
+                'ageSelectionPage', 'createPassPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -3617,6 +3452,16 @@
                 detectDevice();
                 setupStartButton();
                 loadProfile();
+                // نمایش دکمه‌های هدر
+                document.querySelectorAll('.main-header .header-left button').forEach(btn => {
+                    if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
+                });
+                document.querySelector('.main-header .profile-btn').style.display = 'flex';
+                document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .store-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .age-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3663,18 +3508,6 @@
                 document.getElementById('createPassStatus').className = 'status-msg';
                 document.getElementById('createPassStatus').textContent = '';
             }
-            if (pageId === 'accountLoginPage') {
-                document.getElementById('loginUsernameInput').value = '';
-                document.getElementById('loginPasswordInput').value = '';
-                document.getElementById('loginAccountStatus').className = 'status-msg';
-                document.getElementById('loginAccountStatus').textContent = '';
-            }
-            if (pageId === 'registerPage') {
-                document.getElementById('registerUsernameInput').value = '';
-                document.getElementById('registerPasswordInput').value = '';
-                document.getElementById('registerStatus').className = 'status-msg';
-                document.getElementById('registerStatus').textContent = '';
-            }
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -3683,9 +3516,29 @@
 
         function showCreatePassPage() { showPage('createPassPage'); }
 
-        function showAccountLoginPage() { showPage('accountLoginPage'); }
+        function showAccountLoginPage() {
+            document.getElementById('accountLoginPage').style.display = 'flex';
+            document.getElementById('registerPage').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('errorPage').style.display = 'none';
+            document.getElementById('loginUsernameInput').value = '';
+            document.getElementById('loginPasswordInput').value = '';
+            document.getElementById('loginAccountStatus').className = 'status-msg';
+            document.getElementById('loginAccountStatus').textContent = '';
+        }
 
-        function showRegisterPage() { showPage('registerPage'); }
+        function showRegisterPage() {
+            document.getElementById('accountLoginPage').style.display = 'none';
+            document.getElementById('registerPage').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('errorPage').style.display = 'none';
+            document.getElementById('registerUsernameInput').value = '';
+            document.getElementById('registerPasswordInput').value = '';
+            document.getElementById('registerStatus').className = 'status-msg';
+            document.getElementById('registerStatus').textContent = '';
+        }
 
         // ==========================================================
         //  صفحه انتخاب سن
@@ -3794,7 +3647,11 @@
                 loadProfile();
 
                 setTimeout(() => {
-                    goHome();
+                    document.getElementById('accountLoginPage').style.display = 'none';
+                    document.getElementById('registerPage').style.display = 'none';
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    showPage('homePage');
                 }, 1200);
             } else {
                 status.className = 'status-msg error';
@@ -3850,7 +3707,11 @@
             loadProfile();
 
             setTimeout(() => {
-                goHome();
+                document.getElementById('accountLoginPage').style.display = 'none';
+                document.getElementById('registerPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                showPage('homePage');
             }, 1500);
         }
 
@@ -4085,81 +3946,38 @@
         }
 
         // ==========================================================
-        //  ۱. مدیریت ورود و خروج
-        // ==========================================================
-        let currentUsername = '';
-
-        function handleLogin() {
-            const input = document.getElementById('usernameInput');
-            const error = document.getElementById('loginError');
-            const username = input.value.trim();
-
-            if (username === '') { error.style.display = 'block'; return; }
-
-            if (isUserBanned(username)) {
-                localStorage.setItem('username', username);
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('bannedPage').style.display = 'flex';
-                updateBanTimer();
-                return;
-            }
-
-            if (!isUsernameTaken(username)) { addUsername(username); }
-
-            error.style.display = 'none';
-            currentUsername = username;
-            localStorage.setItem('username', username);
-
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('loader').style.display = 'flex';
-
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('displayUsername').textContent = username;
-                loadProfile();
-                showPage('homePage');
-                updateAdminStats();
-                if (getAdmins().includes(username)) {
-                    updateAdminPanelUI();
-                }
-                updateButtonsVisibility();
-            }, 1500);
-        }
-
-        // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
-            setupStartButton();
-
-            document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
-            document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
+            // دکمه‌ها
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
+            document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
+            document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
 
-            // Enter key for password inputs
-            document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') createPassword();
-            });
+            // Enter key
             document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') loginWithAccount();
             });
             document.getElementById('registerPasswordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') registerAccount();
             });
+            document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') createPassword();
+            });
 
+            // بررسی ورود قبلی
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 if (isUserBanned(saved)) {
-                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('accountLoginPage').style.display = 'none';
+                    document.getElementById('registerPage').style.display = 'none';
                     document.getElementById('bannedPage').style.display = 'flex';
                     updateBanTimer();
                     return;
                 }
-                currentUsername = saved;
-                if (!isUsernameTaken(saved)) { addUsername(saved); }
-                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('accountLoginPage').style.display = 'none';
+                document.getElementById('registerPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'flex';
                 setTimeout(() => {
                     document.getElementById('loader').style.display = 'none';
@@ -4172,7 +3990,20 @@
                         updateAdminPanelUI();
                     }
                     updateButtonsVisibility();
-                }, 1500);
+                    // نمایش دکمه‌های هدر
+                    document.querySelectorAll('.main-header .header-left button').forEach(btn => {
+                        if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
+                    });
+                    document.querySelector('.main-header .profile-btn').style.display = 'flex';
+                    document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .store-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .age-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                }, 1200);
+            } else {
+                // نمایش صفحه ورود
+                showAccountLoginPage();
             }
         });
 
@@ -4854,10 +4685,10 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - با سیستم کامل ورود، ثبت نام و خروج از اکانت');
+        console.log('❄️ برفی - ورود با نام کاربری و رمز عبور');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('🔑 دکمه‌های "اکانت" و "ساخت رمز عبور" و "خروج از اکانت" اضافه شدند.');
-        console.log('📝 صفحه ثبت نام و ورود با نام کاربری و رمز عبور کامل شد.');
+        console.log('🔑 صفحه ورود با نام کاربری و رمز عبور به عنوان صفحه اصلی');
+        console.log('📝 ثبت نام و خروج از اکانت کامل شد.');
     </script>
 
 </body>
