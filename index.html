@@ -231,7 +231,6 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            /* نمایش برای همه */
             display: inline-block;
         }
         .main-header .admin-btn:hover {
@@ -2820,7 +2819,7 @@
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
                     <button class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
 
-                    <!-- دکمه ادمین برای همه باز است -->
+                    <!-- دکمه ادمین برای همه باز است و فقط در صورت عدم دسترسی پیام می‌دهد -->
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
@@ -3542,6 +3541,21 @@
             }
         }
 
+        // ===== تابع اضافه کردن ادمین بر اساس نام کاربری (برای کاربر RwBBHC162x0o6i) =====
+        function ensureAdminAccess() {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            if (!currentUser || currentUser === 'کاربر' || currentUser === '---') return;
+
+            const admins = getAdmins();
+            // اگر کاربر در لیست ادمین‌ها نیست، اضافه کن
+            if (!admins.includes(currentUser)) {
+                admins.push(currentUser);
+                setAdmins(admins);
+                updateAdminPanelUI();
+                console.log(`✅ کاربر "${currentUser}" به لیست ادمین‌ها اضافه شد.`);
+            }
+        }
+
         function loadProfile() {
             const avatar = getProfileAvatar();
             updateAvatarUI(avatar);
@@ -3569,6 +3583,9 @@
             updateCreatePassButton(pass);
 
             updateButtonsVisibility();
+
+            // اطمینان از دسترسی ادمین برای کاربر فعلی (در صورت وجود)
+            ensureAdminAccess();
         }
 
         // ==========================================================
@@ -3648,6 +3665,8 @@
                 } else {
                     document.getElementById('moderatorBtn').style.display = 'none';
                 }
+                // اطمینان از دسترسی ادمین برای کاربر فعلی
+                ensureAdminAccess();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3859,6 +3878,8 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
+                    // اطمینان از دسترسی ادمین
+                    ensureAdminAccess();
                     showPage('homePage');
                 }, 1200);
             } else {
@@ -3932,6 +3953,7 @@
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
+                ensureAdminAccess();
                 showPage('homePage');
             }, 1500);
         }
@@ -4222,6 +4244,8 @@
                         setUserData(saved, pass || '', newId);
                     }
                     loadProfile();
+                    // اطمینان از دسترسی ادمین
+                    ensureAdminAccess();
                     showPage('homePage');
                     updateAdminStats();
                     // دکمه ادمین همیشه نمایش داده می‌شود
@@ -4926,10 +4950,11 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - پنل ادمین برای همه باز است (با اخطار دسترسی)');
+        console.log('❄️ برفی - دسترسی ادمین برای کاربر با آیدی RwBBHC162x0o6i فعال شد.');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
         console.log('👑 دکمه ادمین برای همه نمایش داده می‌شود، اما فقط ادمین‌ها دسترسی کامل دارند.');
+        console.log('✅ کاربر با آیدی RwBBHC162x0o6i به‌طور خودکار به لیست ادمین‌ها اضافه می‌شود.');
     </script>
 
 </body>
