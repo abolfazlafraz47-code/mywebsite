@@ -181,44 +181,6 @@
             box-shadow: 0 6px 24px rgba(255, 107, 107, 0.5);
         }
 
-        .main-header .account-btn {
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-            color: #1a1a3a;
-            border: none;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            box-shadow: 0 2px 12px rgba(161, 140, 209, 0.3);
-            display: none;
-        }
-        .main-header .account-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 24px rgba(161, 140, 209, 0.5);
-        }
-
-        .main-header .create-pass-btn {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: white;
-            border: none;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            display: none;
-        }
-        .main-header .create-pass-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
-        }
-
         .main-header .store-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -378,6 +340,25 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
+        .main-header .create-pass-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
+            display: none;
+        }
+        .main-header .create-pass-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
+        }
+
         /* ===== صفحات با افکت شیشه‌ای ===== */
         #loader,
         #errorPage,
@@ -405,7 +386,7 @@
             transition: all 0.4s ease;
         }
 
-        /* ===== صفحه ورود با نام کاربری و رمز عبور (صفحه اصلی ورود) ===== */
+        /* ===== صفحه ورود با نام کاربری و رمز عبور ===== */
         .account-login-box {
             padding: 40px 28px;
             width: 100%;
@@ -3609,7 +3590,7 @@
         }
 
         // ==========================================================
-        //  ورود با اکانت
+        //  ورود با اکانت (اصلاح شده برای ورود صحیح)
         // ==========================================================
         function loginWithAccount() {
             const usernameInput = document.getElementById('loginUsernameInput');
@@ -3619,38 +3600,60 @@
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
+            // بررسی خالی نبودن
             if (!username || !password) {
                 status.className = 'status-msg error';
                 status.textContent = '⚠️ لطفاً نام کاربری و رمز عبور را وارد کنید.';
                 return;
             }
 
+            // بررسی وجود کاربر
             if (!isUsernameTaken(username)) {
                 status.className = 'status-msg error';
                 status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.';
                 return;
             }
 
+            // دریافت رمز عبور کاربر
             const correctPass = getUserPasswordByUsername(username);
-            if (!correctPass) {
+
+            // بررسی وجود رمز عبور برای کاربر
+            if (!correctPass || correctPass === '') {
                 status.className = 'status-msg error';
                 status.textContent = '❌ این کاربر رمز عبور ندارد. ابتدا رمز بسازید.';
                 return;
             }
 
+            // بررسی صحت رمز عبور
             if (password === correctPass) {
                 status.className = 'status-msg success';
                 status.textContent = '✅ ورود موفق! در حال انتقال...';
 
+                // ذخیره نام کاربری در localStorage
                 localStorage.setItem('username', username);
                 document.getElementById('displayUsername').textContent = username;
                 loadProfile();
 
                 setTimeout(() => {
+                    // مخفی کردن صفحات ورود و ثبت نام
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
                     document.getElementById('loader').style.display = 'none';
+                    // نمایش محتوای اصلی
                     document.getElementById('mainContent').style.display = 'block';
+                    // نمایش دکمه‌های هدر
+                    document.querySelectorAll('.main-header .header-left button').forEach(btn => {
+                        if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
+                    });
+                    document.querySelector('.main-header .profile-btn').style.display = 'flex';
+                    document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .store-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .age-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                    // نمایش دکمه خروج
+                    document.getElementById('logoutBtn').style.display = 'inline-block';
+                    // رفتن به صفحه اصلی
                     showPage('homePage');
                 }, 1200);
             } else {
@@ -3660,7 +3663,7 @@
         }
 
         // ==========================================================
-        //  ثبت نام
+        //  ثبت نام (اصلاح شده)
         // ==========================================================
         function registerAccount() {
             const usernameInput = document.getElementById('registerUsernameInput');
@@ -3711,6 +3714,17 @@
                 document.getElementById('registerPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
+                // نمایش دکمه‌های هدر
+                document.querySelectorAll('.main-header .header-left button').forEach(btn => {
+                    if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
+                });
+                document.querySelector('.main-header .profile-btn').style.display = 'flex';
+                document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .store-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .age-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
+                document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                document.getElementById('logoutBtn').style.display = 'inline-block';
                 showPage('homePage');
             }, 1500);
         }
@@ -4000,6 +4014,7 @@
                     document.querySelector('.main-header .age-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                    document.getElementById('logoutBtn').style.display = 'inline-block';
                 }, 1200);
             } else {
                 // نمایش صفحه ورود
@@ -4689,6 +4704,7 @@
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🔑 صفحه ورود با نام کاربری و رمز عبور به عنوان صفحه اصلی');
         console.log('📝 ثبت نام و خروج از اکانت کامل شد.');
+        console.log('✅ ورود با نام کاربری و رمز عبور صحیح به اکانت هدایت می‌شود.');
     </script>
 
 </body>
