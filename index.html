@@ -2811,6 +2811,7 @@
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
                     <button class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
 
+                    <!-- دکمه ادمین فقط در صورت عضویت در لیست ادمین‌ها نمایش داده می‌شود -->
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
@@ -3629,6 +3630,20 @@
                 document.querySelector('.main-header .age-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                // دکمه ادمین بر اساس لیست ادمین‌ها نمایش داده می‌شود
+                const username = document.getElementById('displayUsername').textContent.trim();
+                const admins = getAdmins();
+                if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
+                    document.getElementById('adminBtn').style.display = 'inline-block';
+                } else {
+                    document.getElementById('adminBtn').style.display = 'none';
+                }
+                // دکمه ادمینیتور فقط برای آراد
+                if (username === "آراد") {
+                    document.getElementById('moderatorBtn').style.display = 'inline-block';
+                } else {
+                    document.getElementById('moderatorBtn').style.display = 'none';
+                }
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3936,20 +3951,15 @@
 
             logoutBtn.style.display = 'inline-block';
 
-            if (username === "ابوالفضل") {
+            // دکمه ادمین: اگر کاربر در لیست ادمین‌ها باشد یا نام خاص داشته باشد
+            const admins = getAdmins();
+            if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
                 adminBtn.style.display = 'inline-block';
+            }
+
+            // دکمه ادمینیتور فقط برای آراد
+            if (username === "آراد") {
                 moderatorBtn.style.display = 'inline-block';
-            } else if (username === "محمد رضا") {
-                adminBtn.style.display = 'inline-block';
-                moderatorBtn.style.display = 'inline-block';
-            } else if (username === "آراد") {
-                moderatorBtn.style.display = 'inline-block';
-            } else {
-                // بررسی اینکه آیا کاربر در لیست ادمین‌ها هست
-                const admins = getAdmins();
-                if (admins.includes(username)) {
-                    adminBtn.style.display = 'inline-block';
-                }
             }
         }
 
@@ -4208,8 +4218,13 @@
                     loadProfile();
                     showPage('homePage');
                     updateAdminStats();
-                    if (getAdmins().includes(saved)) {
-                        updateAdminPanelUI();
+                    // به‌روزرسانی دکمه‌های ادمین
+                    const admins = getAdmins();
+                    if (admins.includes(saved) || saved === "ابوالفضل" || saved === "محمد رضا") {
+                        document.getElementById('adminBtn').style.display = 'inline-block';
+                    }
+                    if (saved === "آراد") {
+                        document.getElementById('moderatorBtn').style.display = 'inline-block';
                     }
                     updateButtonsVisibility();
                     // نمایش دکمه‌های هدر
