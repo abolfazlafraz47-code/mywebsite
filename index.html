@@ -231,7 +231,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            display: none;
+            /* نمایش برای همه */
+            display: inline-block;
         }
         .main-header .admin-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -2495,6 +2496,10 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .main-header .admin-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
             .main-header .profile-btn {
                 font-size: 10px;
                 padding: 3px 10px 3px 6px;
@@ -2651,6 +2656,10 @@
             .main-header .rank-btn,
             .main-header .create-pass-btn,
             .main-header .logout-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .admin-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -2811,7 +2820,7 @@
                     <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
                     <button class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
 
-                    <!-- دکمه ادمین فقط در صورت عضویت در لیست ادمین‌ها نمایش داده می‌شود -->
+                    <!-- دکمه ادمین برای همه باز است -->
                     <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
                     <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
 
@@ -2942,7 +2951,7 @@
                     <div class="add-admin-section">
                         <h4>👑 اضافه کردن ادمین با آیدی</h4>
                         <div class="add-row">
-                            <input type="text" id="addAdminIdInput" placeholder="آیدی اکانت را وارد کنید..." value="RwBBHC162x0o6i" />
+                            <input type="text" id="addAdminIdInput" placeholder="آیدی اکانت را وارد کنید..." />
                             <button class="add-admin-btn" onclick="addAdminById()">➕ اضافه کن</button>
                         </div>
                         <div class="add-msg" id="addAdminMsg"></div>
@@ -3630,15 +3639,10 @@
                 document.querySelector('.main-header .age-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
-                // دکمه ادمین بر اساس لیست ادمین‌ها نمایش داده می‌شود
-                const username = document.getElementById('displayUsername').textContent.trim();
-                const admins = getAdmins();
-                if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
-                    document.getElementById('adminBtn').style.display = 'inline-block';
-                } else {
-                    document.getElementById('adminBtn').style.display = 'none';
-                }
+                // دکمه ادمین همیشه نمایش داده می‌شود
+                document.getElementById('adminBtn').style.display = 'inline-block';
                 // دکمه ادمینیتور فقط برای آراد
+                const username = document.getElementById('displayUsername').textContent.trim();
                 if (username === "آراد") {
                     document.getElementById('moderatorBtn').style.display = 'inline-block';
                 } else {
@@ -3941,8 +3945,15 @@
             const moderatorBtn = document.getElementById('moderatorBtn');
             const logoutBtn = document.getElementById('logoutBtn');
 
-            adminBtn.style.display = 'none';
-            moderatorBtn.style.display = 'none';
+            // دکمه ادمین همیشه نمایش داده می‌شود
+            adminBtn.style.display = 'inline-block';
+
+            // دکمه ادمینیتور فقط برای آراد
+            if (username === "آراد") {
+                moderatorBtn.style.display = 'inline-block';
+            } else {
+                moderatorBtn.style.display = 'none';
+            }
 
             if (!username || username === 'کاربر' || username === '---') {
                 logoutBtn.style.display = 'none';
@@ -3950,17 +3961,6 @@
             }
 
             logoutBtn.style.display = 'inline-block';
-
-            // دکمه ادمین: اگر کاربر در لیست ادمین‌ها باشد یا نام خاص داشته باشد
-            const admins = getAdmins();
-            if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
-                adminBtn.style.display = 'inline-block';
-            }
-
-            // دکمه ادمینیتور فقط برای آراد
-            if (username === "آراد") {
-                moderatorBtn.style.display = 'inline-block';
-            }
         }
 
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
@@ -4104,9 +4104,13 @@
         // ==========================================================
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) { alert('لطفاً وارد شوید!'); return; }
+            if (!username) {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return;
+            }
             const admins = getAdmins();
             if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
+                // دسترسی کامل
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderBanList();
@@ -4118,7 +4122,9 @@
                 document.getElementById('addAdminMsg').className = 'add-msg';
                 document.getElementById('addAdminMsg').textContent = '';
                 showPage('adminPanel');
-            } else { alert('⛔ شما دسترسی به پنل ادمین ندارید!'); }
+            } else {
+                alert('⚠️ شما دسترسی به پنل ادمین ندارید! این پنل فقط برای ادمین‌هاست.');
+            }
         }
 
         function openModeratorPanel() {
@@ -4218,11 +4224,8 @@
                     loadProfile();
                     showPage('homePage');
                     updateAdminStats();
-                    // به‌روزرسانی دکمه‌های ادمین
-                    const admins = getAdmins();
-                    if (admins.includes(saved) || saved === "ابوالفضل" || saved === "محمد رضا") {
-                        document.getElementById('adminBtn').style.display = 'inline-block';
-                    }
+                    // دکمه ادمین همیشه نمایش داده می‌شود
+                    document.getElementById('adminBtn').style.display = 'inline-block';
                     if (saved === "آراد") {
                         document.getElementById('moderatorBtn').style.display = 'inline-block';
                     }
@@ -4923,11 +4926,10 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - با اضافه کردن ادمین با آیدی');
+        console.log('❄️ برفی - پنل ادمین برای همه باز است (با اخطار دسترسی)');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
-        console.log('👑 در پنل ادمین با وارد کردن آیدی می‌توانید ادمین اضافه کنید.');
-        console.log('✅ کاربر با آیدی RwBBHC162x0o6i به لیست ادمین‌ها اضافه شد.');
+        console.log('👑 دکمه ادمین برای همه نمایش داده می‌شود، اما فقط ادمین‌ها دسترسی کامل دارند.');
     </script>
 
 </body>
