@@ -1906,14 +1906,6 @@
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
         }
-        .profile-box .profile-info .info-item .value.id-value {
-            color: #a78bfa;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            letter-spacing: 1px;
-            direction: ltr;
-            text-align: left;
-        }
         .profile-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -2546,9 +2538,6 @@
                 font-size: 14px;
                 padding: 10px 14px;
             }
-            .profile-box .profile-info .info-item .value.id-value {
-                font-size: 12px;
-            }
         }
         @media(max-width:380px) {
             .main-header .site-title {
@@ -2636,9 +2625,6 @@
                 font-size: 12px;
                 padding: 6px 10px;
                 min-width: 60px;
-            }
-            .profile-box .profile-info .info-item .value.id-value {
-                font-size: 10px;
             }
         }
     </style>
@@ -2947,10 +2933,6 @@
                         <div class="info-item">
                             <span class="label">👤 نام کاربری</span>
                             <span class="value" id="profileUsername">---</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">🆔 آیدی اکانت</span>
-                            <span class="value id-value" id="profileAccountId">---</span>
                         </div>
                         <div class="info-item">
                             <span class="label">🎂 سن</span>
@@ -3288,19 +3270,7 @@
         }
 
         // ==========================================================
-        //  تولید آیدی تصادفی
-        // ==========================================================
-        function generateRandomId() {
-            const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            let result = 'Rw';
-            for (let i = 0; i < 12; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        // ==========================================================
-        //  مدیریت پروفایل و سن و رمز عبور و آیدی
+        //  مدیریت پروفایل و سن و رمز عبور
         // ==========================================================
         function getProfileAvatar() {
             try { return localStorage.getItem('profileAvatar') || ''; } catch { return ''; }
@@ -3371,7 +3341,7 @@
             }
         }
 
-        // ===== سیستم اکانت‌ها (ذخیره رمز و آیدی برای هر کاربر) =====
+        // ===== سیستم اکانت‌ها (ذخیره رمز برای هر کاربر) =====
         function getUsersData() {
             try { const data = localStorage.getItem('usersData'); return data ? JSON.parse(data) : {}; } catch { return {}; }
         }
@@ -3382,17 +3352,12 @@
 
         function getUserPasswordByUsername(username) {
             const users = getUsersData();
-            return users[username] ? users[username].password : '';
+            return users[username] || '';
         }
 
-        function getUserAccountId(username) {
+        function setUserPasswordForUsername(username, password) {
             const users = getUsersData();
-            return users[username] ? users[username].id : null;
-        }
-
-        function setUserData(username, password, accountId) {
-            const users = getUsersData();
-            users[username] = { password: password, id: accountId };
+            users[username] = password;
             setUsersData(users);
         }
 
@@ -3430,10 +3395,6 @@
             updateAvatarUI(avatar);
             const username = document.getElementById('displayUsername').textContent.trim();
             document.getElementById('profileUsername').textContent = username || '---';
-
-            // نمایش آیدی
-            const accountId = getUserAccountId(username);
-            document.getElementById('profileAccountId').textContent = accountId || '---';
 
             // نمایش یا مخفی کردن دکمه خروج
             const logoutBtn = document.getElementById('logoutBtn');
@@ -3616,15 +3577,7 @@
             }
 
             const username = document.getElementById('displayUsername').textContent.trim();
-            // فقط رمز عبور رو به‌روز می‌کنیم (آیدی قبلاً ذخیره شده)
-            const existingId = getUserAccountId(username);
-            if (existingId) {
-                setUserData(username, password, existingId);
-            } else {
-                // اگر آیدی وجود نداشت (احتمالاً کاربر قدیمی) یک آیدی جدید بساز
-                const newId = generateRandomId();
-                setUserData(username, password, newId);
-            }
+            setUserPasswordForUsername(username, password);
             loadProfile();
             status.className = 'status-msg success';
             status.textContent = '✅ رمز عبور با موفقیت ذخیره شد!';
@@ -3637,7 +3590,7 @@
         }
 
         // ==========================================================
-        //  ورود با اکانت
+        //  ورود با اکانت (اصلاح شده برای ورود صحیح)
         // ==========================================================
         function loginWithAccount() {
             const usernameInput = document.getElementById('loginUsernameInput');
@@ -3647,37 +3600,46 @@
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
+            // بررسی خالی نبودن
             if (!username || !password) {
                 status.className = 'status-msg error';
                 status.textContent = '⚠️ لطفاً نام کاربری و رمز عبور را وارد کنید.';
                 return;
             }
 
+            // بررسی وجود کاربر
             if (!isUsernameTaken(username)) {
                 status.className = 'status-msg error';
                 status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.';
                 return;
             }
 
+            // دریافت رمز عبور کاربر
             const correctPass = getUserPasswordByUsername(username);
+
+            // بررسی وجود رمز عبور برای کاربر
             if (!correctPass || correctPass === '') {
                 status.className = 'status-msg error';
                 status.textContent = '❌ این کاربر رمز عبور ندارد. ابتدا رمز بسازید.';
                 return;
             }
 
+            // بررسی صحت رمز عبور
             if (password === correctPass) {
                 status.className = 'status-msg success';
                 status.textContent = '✅ ورود موفق! در حال انتقال...';
 
+                // ذخیره نام کاربری در localStorage
                 localStorage.setItem('username', username);
                 document.getElementById('displayUsername').textContent = username;
                 loadProfile();
 
                 setTimeout(() => {
+                    // مخفی کردن صفحات ورود و ثبت نام
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
                     document.getElementById('loader').style.display = 'none';
+                    // نمایش محتوای اصلی
                     document.getElementById('mainContent').style.display = 'block';
                     // نمایش دکمه‌های هدر
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
@@ -3689,7 +3651,9 @@
                     document.querySelector('.main-header .age-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                    // نمایش دکمه خروج
                     document.getElementById('logoutBtn').style.display = 'inline-block';
+                    // رفتن به صفحه اصلی
                     showPage('homePage');
                 }, 1200);
             } else {
@@ -3699,7 +3663,7 @@
         }
 
         // ==========================================================
-        //  ثبت نام
+        //  ثبت نام (اصلاح شده)
         // ==========================================================
         function registerAccount() {
             const usernameInput = document.getElementById('registerUsernameInput');
@@ -3733,12 +3697,9 @@
                 return;
             }
 
-            // تولید آیدی تصادفی
-            const newId = generateRandomId();
-
             // ثبت نام کاربر
             addUsername(username);
-            setUserData(username, password, newId);
+            setUserPasswordForUsername(username, password);
 
             status.className = 'status-msg success';
             status.textContent = '✅ ثبت نام موفق! در حال انتقال...';
@@ -3753,6 +3714,7 @@
                 document.getElementById('registerPage').style.display = 'none';
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
+                // نمایش دکمه‌های هدر
                 document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                     if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                 });
@@ -4035,14 +3997,6 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    // چک کردن آیدی برای کاربران قدیمی
-                    const existingId = getUserAccountId(saved);
-                    if (!existingId) {
-                        // اگر کاربر قدیمی آیدی نداره، براش بساز
-                        const newId = generateRandomId();
-                        const pass = getUserPasswordByUsername(saved);
-                        setUserData(saved, pass || '', newId);
-                    }
                     loadProfile();
                     showPage('homePage');
                     updateAdminStats();
@@ -4746,9 +4700,11 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - با آیدی اکانت تصادفی');
+        console.log('❄️ برفی - ورود با نام کاربری و رمز عبور');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
+        console.log('🔑 صفحه ورود با نام کاربری و رمز عبور به عنوان صفحه اصلی');
+        console.log('📝 ثبت نام و خروج از اکانت کامل شد.');
+        console.log('✅ ورود با نام کاربری و رمز عبور صحیح به اکانت هدایت می‌شود.');
     </script>
 
 </body>
