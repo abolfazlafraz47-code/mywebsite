@@ -1417,6 +1417,83 @@
             transform: scale(1.05);
             box-shadow: 0 2px 12px rgba(255, 107, 138, 0.2);
         }
+
+        /* ===== بخش جدید: اضافه کردن ادمین با آیدی ===== */
+        .admin-panel-box .add-admin-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: right;
+        }
+        .admin-panel-box .add-admin-section h4 {
+            color: #4facfe;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .admin-panel-box .add-admin-section .add-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        .admin-panel-box .add-admin-section .add-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        .admin-panel-box .add-admin-section .add-row input:focus {
+            border-color: rgba(79, 172, 254, 0.3);
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.05);
+        }
+        .admin-panel-box .add-admin-section .add-row input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+            font-family: 'Vazir', 'Tahoma', sans-serif;
+            letter-spacing: 0;
+        }
+        .admin-panel-box .add-admin-section .add-row .add-admin-btn {
+            background: rgba(79, 172, 254, 0.15);
+            color: #4facfe;
+            border: 1px solid rgba(79, 172, 254, 0.15);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        .admin-panel-box .add-admin-section .add-row .add-admin-btn:hover {
+            background: rgba(79, 172, 254, 0.25);
+            transform: scale(1.05);
+        }
+        .admin-panel-box .add-admin-section .add-msg {
+            font-size: 13px;
+            margin-top: 8px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            display: none;
+        }
+        .admin-panel-box .add-admin-section .add-msg.success {
+            display: block;
+            color: #2ecc71;
+        }
+        .admin-panel-box .add-admin-section .add-msg.error {
+            display: block;
+            color: #ff6b6b;
+        }
+
         .admin-panel-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -2549,6 +2626,15 @@
             .profile-box .profile-info .info-item .value.id-value {
                 font-size: 12px;
             }
+            .admin-panel-box .add-admin-section .add-row input {
+                font-size: 12px;
+                padding: 6px 10px;
+                min-width: 60px;
+            }
+            .admin-panel-box .add-admin-section .add-row .add-admin-btn {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
         }
         @media(max-width:380px) {
             .main-header .site-title {
@@ -2850,6 +2936,17 @@
                             <span id="adminNamesDisplay" style="font-weight:600;color:#fff;display:flex;flex-wrap:wrap;gap:4px;"></span>
                         </li>
                     </ul>
+
+                    <!-- ===== بخش جدید: اضافه کردن ادمین با آیدی ===== -->
+                    <div class="add-admin-section">
+                        <h4>👑 اضافه کردن ادمین با آیدی</h4>
+                        <div class="add-row">
+                            <input type="text" id="addAdminIdInput" placeholder="آیدی اکانت را وارد کنید..." value="RwBBHC162x0o6i" />
+                            <button class="add-admin-btn" onclick="addAdminById()">➕ اضافه کن</button>
+                        </div>
+                        <div class="add-msg" id="addAdminMsg"></div>
+                    </div>
+
                     <div class="ban-section">
                         <h4>🚫 مدیریت بن</h4>
                         <div class="ban-search">
@@ -3390,6 +3487,16 @@
             return users[username] ? users[username].id : null;
         }
 
+        function getUsernameByAccountId(accountId) {
+            const users = getUsersData();
+            for (const [username, data] of Object.entries(users)) {
+                if (data.id === accountId) {
+                    return username;
+                }
+            }
+            return null;
+        }
+
         function setUserData(username, password, accountId) {
             const users = getUsersData();
             users[username] = { password: password, id: accountId };
@@ -3455,6 +3562,46 @@
         }
 
         // ==========================================================
+        //  اضافه کردن ادمین با آیدی (تابع جدید)
+        // ==========================================================
+        function addAdminById() {
+            const input = document.getElementById('addAdminIdInput');
+            const accountId = input.value.trim();
+            const msg = document.getElementById('addAdminMsg');
+
+            if (!accountId) {
+                msg.className = 'add-msg error';
+                msg.textContent = '⚠️ لطفاً آیدی را وارد کنید.';
+                return;
+            }
+
+            // پیدا کردن نام کاربری با این آیدی
+            const username = getUsernameByAccountId(accountId);
+
+            if (!username) {
+                msg.className = 'add-msg error';
+                msg.textContent = '❌ کاربری با این آیدی پیدا نشد.';
+                return;
+            }
+
+            // بررسی اینکه آیا کاربر در لیست ادمین‌ها هست
+            const admins = getAdmins();
+            if (admins.includes(username)) {
+                msg.className = 'add-msg error';
+                msg.textContent = `⚠️ کاربر "${username}" قبلاً ادمین است.`;
+                return;
+            }
+
+            // اضافه کردن به لیست ادمین‌ها
+            admins.push(username);
+            setAdmins(admins);
+            updateAdminPanelUI();
+            msg.className = 'add-msg success';
+            msg.textContent = `✅ کاربر "${username}" با آیدی ${accountId} به لیست ادمین‌ها اضافه شد.`;
+            input.value = '';
+        }
+
+        // ==========================================================
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
@@ -3492,6 +3639,9 @@
                 document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
                 document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
                 document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
+                // پاک کردن پیام قبلی
+                document.getElementById('addAdminMsg').className = 'add-msg';
+                document.getElementById('addAdminMsg').textContent = '';
             }
             if (pageId === 'moderatorPanel') {
                 updateModeratorStats();
@@ -3794,6 +3944,12 @@
                 moderatorBtn.style.display = 'inline-block';
             } else if (username === "آراد") {
                 moderatorBtn.style.display = 'inline-block';
+            } else {
+                // بررسی اینکه آیا کاربر در لیست ادمین‌ها هست
+                const admins = getAdmins();
+                if (admins.includes(username)) {
+                    adminBtn.style.display = 'inline-block';
+                }
             }
         }
 
@@ -3939,7 +4095,8 @@
         function openAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
-            if (username === "ابوالفضل" || username === "محمد رضا") {
+            const admins = getAdmins();
+            if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderBanList();
@@ -3948,6 +4105,8 @@
                 document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
                 document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
                 document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
+                document.getElementById('addAdminMsg').className = 'add-msg';
+                document.getElementById('addAdminMsg').textContent = '';
                 showPage('adminPanel');
             } else { alert('⛔ شما دسترسی به پنل ادمین ندارید!'); }
         }
@@ -4016,6 +4175,9 @@
             });
             document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') createPassword();
+            });
+            document.getElementById('addAdminIdInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addAdminById();
             });
 
             // بررسی ورود قبلی
@@ -4746,9 +4908,11 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - با آیدی اکانت تصادفی');
+        console.log('❄️ برفی - با اضافه کردن ادمین با آیدی');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
+        console.log('👑 در پنل ادمین با وارد کردن آیدی می‌توانید ادمین اضافه کنید.');
+        console.log('✅ کاربر با آیدی RwBBHC162x0o6i به لیست ادمین‌ها اضافه شد.');
     </script>
 
 </body>
