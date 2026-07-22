@@ -161,6 +161,25 @@
             border-color: rgba(100, 200, 255, 0.3);
         }
 
+        /* ===== نمایش سکه در هدر ===== */
+        .coins-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 215, 0, 0.12);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+        }
+        .coins-display .coin-icon {
+            font-size: 16px;
+        }
+
         /* ===== دکمه خروج از اکانت ===== */
         .main-header .logout-btn {
             background: linear-gradient(135deg, #ff6b6b, #ee5a24);
@@ -1991,6 +2010,14 @@
             direction: ltr;
             text-align: left;
         }
+
+        /* نمایش سکه در پروفایل */
+        .profile-box .profile-info .info-item .value.coins-value {
+            color: #ffd700;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
         .profile-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -2511,6 +2538,13 @@
                 font-size: 8px;
                 padding: 0px 4px;
             }
+            .coins-display {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+            .coins-display .coin-icon {
+                font-size: 14px;
+            }
             .account-login-box,
             .register-box {
                 padding: 30px 20px;
@@ -2674,6 +2708,13 @@
                 font-size: 7px;
                 padding: 0px 3px;
             }
+            .coins-display {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            .coins-display .coin-icon {
+                font-size: 12px;
+            }
             .account-login-box h1,
             .register-box h1 {
                 font-size: 26px;
@@ -2810,6 +2851,12 @@
                     <div class="user-name">
                         👤 <span id="displayUsername">کاربر</span>
                     </div>
+
+                    <!-- ===== نمایش سکه در هدر ===== -->
+                    <span class="coins-display" id="coinsDisplay">
+                        <span class="coin-icon">🪙</span>
+                        <span id="coinsAmount">0</span>
+                    </span>
 
                     <!-- ===== دکمه خروج از اکانت ===== -->
                     <button class="logout-btn" id="logoutBtn" onclick="logoutAccount()">🚪 خروج از اکانت</button>
@@ -3070,6 +3117,11 @@
                             <span class="label">✅ وضعیت</span>
                             <span class="value" id="profileStatus">فعال</span>
                         </div>
+                        <!-- نمایش سکه در پروفایل -->
+                        <div class="info-item">
+                            <span class="label">🪙 سکه</span>
+                            <span class="value coins-value" id="profileCoins">0</span>
+                        </div>
                     </div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -3155,6 +3207,35 @@
                 container.appendChild(el);
             }
         })();
+
+        // ==========================================================
+        //  سیستم سکه‌ها
+        // ==========================================================
+        function getCoins() {
+            try {
+                const val = localStorage.getItem('coins');
+                return val ? parseInt(val, 10) : 0;
+            } catch { return 0; }
+        }
+
+        function setCoins(val) {
+            localStorage.setItem('coins', String(val));
+            updateCoinsDisplay();
+        }
+
+        function addCoins(amount) {
+            const current = getCoins();
+            const newVal = current + amount;
+            setCoins(newVal);
+        }
+
+        function updateCoinsDisplay() {
+            const amount = getCoins();
+            const display = document.getElementById('coinsAmount');
+            const profileCoins = document.getElementById('profileCoins');
+            if (display) display.textContent = amount;
+            if (profileCoins) profileCoins.textContent = amount;
+        }
 
         // ==========================================================
         //  تشخیص ویندوز 10/11 و کامپیوتر
@@ -3538,6 +3619,8 @@
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
+                // به‌روزرسانی سکه (مقدار ثابت می‌ماند)
+                updateCoinsDisplay();
             }
         }
 
@@ -3581,6 +3664,9 @@
             const pass = getUserPasswordByUsername(username);
             updatePasswordUI(pass);
             updateCreatePassButton(pass);
+
+            // به‌روزرسانی سکه
+            updateCoinsDisplay();
 
             updateButtonsVisibility();
 
@@ -3667,6 +3753,8 @@
                 }
                 // اطمینان از دسترسی ادمین برای کاربر فعلی
                 ensureAdminAccess();
+                // به‌روزرسانی سکه
+                updateCoinsDisplay();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3680,17 +3768,21 @@
                 // پاک کردن پیام قبلی
                 document.getElementById('addAdminMsg').className = 'add-msg';
                 document.getElementById('addAdminMsg').textContent = '';
+                updateCoinsDisplay();
             }
             if (pageId === 'moderatorPanel') {
                 updateModeratorStats();
                 renderModeratorSupportMessages();
+                updateCoinsDisplay();
             }
-            if (pageId === 'countrySelectPage') { renderCountries(); }
+            if (pageId === 'countrySelectPage') { renderCountries();
+                updateCoinsDisplay(); }
             if (pageId === 'giftPage') {
                 const result = document.getElementById('giftResult');
                 result.className = 'gift-result';
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
+                updateCoinsDisplay();
             }
             if (pageId === 'ageSelectionPage') {
                 renderAgeGrid();
@@ -3701,6 +3793,7 @@
                         if (parseInt(btn.dataset.age) === currentAge) btn.classList.add('selected');
                     });
                 }
+                updateCoinsDisplay();
             }
             if (pageId === 'createPassPage') {
                 const currentUser = document.getElementById('displayUsername').textContent.trim();
@@ -3715,7 +3808,10 @@
                 document.getElementById('newPasswordInput').value = '';
                 document.getElementById('createPassStatus').className = 'status-msg';
                 document.getElementById('createPassStatus').textContent = '';
+                updateCoinsDisplay();
             }
+            // به‌روزرسانی سکه در هر صفحه
+            updateCoinsDisplay();
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -3734,6 +3830,7 @@
             document.getElementById('loginPasswordInput').value = '';
             document.getElementById('loginAccountStatus').className = 'status-msg';
             document.getElementById('loginAccountStatus').textContent = '';
+            updateCoinsDisplay();
         }
 
         function showRegisterPage() {
@@ -3746,6 +3843,7 @@
             document.getElementById('registerPasswordInput').value = '';
             document.getElementById('registerStatus').className = 'status-msg';
             document.getElementById('registerStatus').textContent = '';
+            updateCoinsDisplay();
         }
 
         // ==========================================================
@@ -3880,11 +3978,13 @@
                     document.getElementById('logoutBtn').style.display = 'inline-block';
                     // اطمینان از دسترسی ادمین
                     ensureAdminAccess();
+                    // به‌روزرسانی سکه
+                    updateCoinsDisplay();
                     showPage('homePage');
                 }, 1200);
             } else {
                 status.className = 'status-msg error';
-                status.textContent = '❌ اشتباه است';
+                status.textContent = '❌ رمز عبور اشتباه است';
             }
         }
 
@@ -3954,6 +4054,7 @@
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
                 ensureAdminAccess();
+                updateCoinsDisplay();
                 showPage('homePage');
             }, 1500);
         }
@@ -4192,6 +4293,7 @@
             }
             resetFootballGameState();
             showPage('homePage');
+            updateCoinsDisplay();
         }
 
         // ==========================================================
@@ -4265,11 +4367,15 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
+                    // به‌روزرسانی سکه
+                    updateCoinsDisplay();
                 }, 1200);
             } else {
                 // نمایش صفحه ورود
                 showAccountLoginPage();
             }
+            // به‌روزرسانی سکه در شروع
+            updateCoinsDisplay();
         });
 
         // ==========================================================
@@ -4484,10 +4590,18 @@
                 gameId = null;
                 updateAdminStats();
             }
-            if (result === 'X') { playWinSound();
-                statusMsg.textContent = '🎉 شما برنده شدید!'; } else if (result === 'O') { playLoseSound();
-                statusMsg.textContent = '🤖 ربات برنده شد!'; } else if (result === 'draw') { statusMsg.textContent =
-                    '🤝 مساوی!'; }
+            // ===== افزودن سکه در صورت برد بازیکن =====
+            if (result === 'X') {
+                playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید! +۱۰ سکه';
+                addCoins(10);  // اضافه کردن ۱۰ سکه
+                updateCoinsDisplay();
+            } else if (result === 'O') {
+                playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!';
+            } else if (result === 'draw') {
+                statusMsg.textContent = '🤝 مساوی!';
+            }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
@@ -4955,6 +5069,7 @@
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
         console.log('👑 دکمه ادمین برای همه نمایش داده می‌شود، اما فقط ادمین‌ها دسترسی کامل دارند.');
         console.log('✅ کاربر با آیدی RwBBHC162x0o6i به‌طور خودکار به لیست ادمین‌ها اضافه می‌شود.');
+        console.log('🪙 سیستم سکه‌ها فعال است و در بازی دوز برد ۱۰ سکه اضافه می‌شود.');
     </script>
 
 </body>
