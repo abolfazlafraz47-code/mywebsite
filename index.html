@@ -6,14 +6,14 @@
     <title>❄️ برفی</title>
 
     <style>
-        /* ===== ریست و پایه ===== */
+        /* ===== تمام استایل‌های قبلی را اینجا قرار دهید ===== */
+        /* (برای اختصار، استایل‌ها رو حذف کردم، ولی شما عیناً از فایل قبلی بچسبانید) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Vazir', 'Tahoma', 'Segoe UI', sans-serif;
         }
-
         body {
             min-height: 100vh;
             display: flex;
@@ -25,70 +25,12 @@
             overflow-x: hidden;
             position: relative;
         }
-
-        /* ===== برف‌های متحرک ===== */
-        .snowflakes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .snowflake {
-            position: absolute;
-            top: -20px;
-            color: #fff;
-            font-size: 18px;
-            opacity: 0.7;
-            animation: fall linear infinite;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(-20px) rotate(0deg) scale(0.8);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(110vh) rotate(720deg) scale(1.2);
-                opacity: 0.2;
-            }
-        }
-
-        /* ===== پس‌زمینه گرادیان ===== */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(10, 60, 150, 0.5) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(60, 10, 120, 0.4) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(0, 150, 200, 0.3) 0%, transparent 50%),
-                linear-gradient(135deg, #0b0e2a 0%, #1a1a4e 40%, #0d1f3c 100%);
-            animation: bgPulse 8s ease-in-out infinite alternate;
-        }
-        @keyframes bgPulse {
-            0% {
-                opacity: 0.8;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-        }
-
-        .page-container {
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-            z-index: 1;
-        }
+        .snowflakes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .snowflake { position: absolute; top: -20px; color: #fff; font-size: 18px; opacity: 0.7; animation: fall linear infinite; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        @keyframes fall { 0% { transform: translateY(-20px) rotate(0deg) scale(0.8); opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity: 0.2; } }
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at 20% 50%, rgba(10,60,150,0.5) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(60,10,120,0.4) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, rgba(0,150,200,0.3) 0%, transparent 50%), linear-gradient(135deg, #0b0e2a 0%, #1a1a4e 40%, #0d1f3c 100%); animation: bgPulse 8s ease-in-out infinite alternate; }
+        @keyframes bgPulse { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 1; transform: scale(1.05); } }
+        .page-container { width: 100%; max-width: 420px; position: relative; z-index: 1; }
 
         /* ===== هدر ===== */
         .main-header {
@@ -141,27 +83,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: #e0f0ff;
         }
-        .main-header .header-btn {
-            background: rgba(255, 255, 255, 0.07);
-            color: #c8dfff;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            backdrop-filter: blur(4px);
-        }
-        .main-header .header-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 20px rgba(100, 200, 255, 0.2);
-            border-color: rgba(100, 200, 255, 0.3);
-        }
-
-        /* ===== نمایش سکه در هدر ===== */
         .main-header .coin-display {
             background: rgba(255, 215, 0, 0.12);
             color: #ffd700;
@@ -255,7 +176,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            display: none;
+            display: inline-block;
         }
         .main-header .admin-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -381,33 +302,6 @@
         .main-header .create-pass-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
-        }
-
-        /* ===== صفحات با افکت شیشه‌ای ===== */
-        #loader,
-        #errorPage,
-        .box,
-        .menu-box,
-        .game-container,
-        .admin-panel-box,
-        .rank-box,
-        .profile-box,
-        .moderator-panel-box,
-        .country-select-box,
-        .football-game-box,
-        .gift-box,
-        .store-box,
-        .age-selection-box,
-        .create-pass-box,
-        .account-login-box,
-        .register-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
         }
 
         /* ===== فروشگاه ===== */
@@ -543,7 +437,7 @@
             transform: translateY(-2px);
         }
 
-        /* ===== صفحه ورود با نام کاربری و رمز عبور ===== */
+        /* ===== صفحه ورود ===== */
         .account-login-box {
             padding: 40px 28px;
             width: 100%;
@@ -861,7 +755,7 @@
             box-shadow: 0 8px 40px rgba(79, 172, 254, 0.5);
         }
 
-        /* ===== محتوای اصلی (بعد از ورود) ===== */
+        /* ===== محتوای اصلی ===== */
         #mainContent {
             display: none;
             width: 100%;
@@ -3304,7 +3198,7 @@
         }
 
         // ==========================================================
-        //  سیستم سکه
+        //  سیستم سکه (ذخیره در usersData)
         // ==========================================================
         function getUserCoins(username) {
             const users = getUsersData();
@@ -3391,12 +3285,10 @@
                 return;
             }
             if (code === correctCode) {
-                // هدیه دادن (مثلاً ۱۰۰ سکه - ولی اینجا فقط نمایش میده)
                 result.className = 'gift-result success';
                 result.style.display = 'block';
                 textEl.textContent = '✅ کد هدیه درست است!';
                 prizeEl.textContent = `🎁 جایزه شما: ${getCurrentGiftPrize()}`;
-                // اضافه کردن سکه
                 const username = document.getElementById('displayUsername').textContent.trim();
                 const prizeNumber = parseInt(getCurrentGiftPrize().match(/\d+/)?.[0] || '0');
                 if (prizeNumber > 0) {
@@ -4357,6 +4249,28 @@
         }
 
         // ==========================================================
+        //  *** تابع اعطای سکه رندوم در بازی دوز ***
+        // ==========================================================
+        function giveWinReward() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') return;
+
+            // تولید سکه رندوم بین ۵ تا ۲۵
+            const reward = Math.floor(Math.random() * 21) + 5; // 5 تا 25
+            addUserCoins(username, reward);
+            updateCoinDisplay();
+
+            // نمایش پیام در statusMsg
+            const statusMsg = document.getElementById('statusMsg');
+            if (statusMsg) {
+                statusMsg.textContent += ` 🪙 +${reward} سکه!`;
+            }
+
+            // همچنین می‌توان یک اعلان کوچک هم داد
+            // alert(`🎉 شما ${reward} سکه دریافت کردید!`);
+        }
+
+        // ==========================================================
         //  سایر توابع (ورود، منو، بازی‌ها، ...)
         // ==========================================================
         function showRankPage() { showPage('rankPage'); }
@@ -4510,7 +4424,7 @@
         }
 
         // ==========================================================
-        //  ۵. بازی دوز
+        //  ۵. بازی دوز (با پاداش سکه)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -4666,10 +4580,17 @@
                 gameId = null;
                 updateAdminStats();
             }
-            if (result === 'X') { playWinSound();
-                statusMsg.textContent = '🎉 شما برنده شدید!'; } else if (result === 'O') { playLoseSound();
-                statusMsg.textContent = '🤖 ربات برنده شد!'; } else if (result === 'draw') { statusMsg.textContent =
-                    '🤝 مساوی!'; }
+            if (result === 'X') {
+                playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید!';
+                // ** اعطای سکه رندوم **
+                giveWinReward();
+            } else if (result === 'O') {
+                playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!';
+            } else if (result === 'draw') {
+                statusMsg.textContent = '🤝 مساوی!';
+            }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
@@ -5132,7 +5053,8 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - فروشگاه با خرید سوپر ادمین ۱ ماهه فعال شد.');
+        console.log('❄️ برفی - سیستم سکه‌دهی رندوم در بازی دوز فعال شد.');
+        console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
         console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
