@@ -162,22 +162,27 @@
         }
 
         /* ===== نمایش سکه در هدر ===== */
-        .coins-display {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+        .main-header .coin-display {
             background: rgba(255, 215, 0, 0.12);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 700;
             color: #ffd700;
             border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
             white-space: nowrap;
             backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .coins-display .coin-icon {
+        .main-header .coin-display .coin-icon {
             font-size: 16px;
+        }
+        .main-header .coin-display .coin-count {
+            font-size: 15px;
+            min-width: 20px;
+            text-align: center;
         }
 
         /* ===== دکمه خروج از اکانت ===== */
@@ -250,7 +255,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
-            display: inline-block;
+            display: none;
         }
         .main-header .admin-btn:hover {
             transform: translateY(-2px) scale(1.05);
@@ -403,6 +408,139 @@
             border-radius: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
+        }
+
+        /* ===== فروشگاه ===== */
+        .store-box {
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        .store-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .store-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .store-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .store-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .store-item .item-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+        .store-item .item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .store-item .item-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .store-item .item-price {
+            font-size: 15px;
+            color: #ffd700;
+            font-weight: 700;
+        }
+        .store-item .item-action {
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+        }
+        .store-item .item-action:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .store-item .item-action:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        .store-item .item-action.done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            cursor: default;
+        }
+        .store-item .item-action.done:hover {
+            transform: none !important;
+        }
+        .store-status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+        .store-status .active {
+            color: #2ecc71;
+        }
+        .store-status .expired {
+            color: #ff6b6b;
+        }
+        .store-box .back-home-btn {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .store-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         /* ===== صفحه ورود با نام کاربری و رمز عبور ===== */
@@ -613,299 +751,6 @@
         .register-box .switch-link:hover {
             color: #00f2fe;
             transform: scale(1.05);
-        }
-
-        /* ===== صفحه فروشگاه ===== */
-        .store-box {
-            padding: 40px 28px;
-            width: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
-        }
-        .store-box .store-message {
-            font-size: 24px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 12px;
-        }
-        .store-box .store-sub {
-            font-size: 18px;
-            color: rgba(255, 215, 0, 0.8);
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .store-box .back-home-btn {
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 28px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .store-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ===== صفحه انتخاب سن ===== */
-        .age-selection-box {
-            padding: 28px 20px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-        }
-        .age-selection-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .age-selection-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .age-selection-box h2 {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a8e063, #56ab2f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-        .age-selection-box p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-        .age-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            margin: 12px 0 16px 0;
-        }
-        .age-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 10px 0;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: none;
-        }
-        .age-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.05);
-        }
-        .age-btn.selected {
-            border-color: #ffd700;
-            background: rgba(255, 215, 0, 0.15);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-            color: #ffd700;
-        }
-        .age-selection-box .action-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .age-selection-box .action-row button {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 18px;
-            border-radius: 14px;
-            font-size: 15px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-        .age-selection-box .action-row .confirm-age-btn {
-            background: linear-gradient(135deg, #ffd700, #f093fb);
-            color: #1a1a3a;
-        }
-        .age-selection-box .action-row .confirm-age-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
-        }
-        .age-selection-box .selected-age-display {
-            margin-top: 12px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .age-selection-box .selected-age-display span {
-            color: #ffd700;
-            font-weight: 700;
-        }
-        .age-selection-box .back-home-btn {
-            margin-top: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .age-selection-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        /* ===== صفحه ساخت رمز عبور ===== */
-        .create-pass-box {
-            padding: 40px 28px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-        }
-        .create-pass-box .back-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: none;
-        }
-        .create-pass-box .back-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .create-pass-box h2 {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-        }
-        .create-pass-box p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .create-pass-box .input-group {
-            width: 100%;
-            margin-bottom: 16px;
-            text-align: right;
-        }
-        .create-pass-box .input-group label {
-            display: block;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-        .create-pass-box .input-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.04);
-            color: #fff;
-            font-weight: 500;
-        }
-        .create-pass-box .input-group input:focus {
-            border-color: rgba(245, 87, 108, 0.3);
-            box-shadow: 0 0 30px rgba(245, 87, 108, 0.05);
-            background: rgba(255, 255, 255, 0.06);
-        }
-        .create-pass-box .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-        .create-pass-box .action-btn {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.25);
-            width: 100%;
-        }
-        .create-pass-box .action-btn:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.4);
-        }
-        .create-pass-box .status-msg {
-            margin-top: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            display: none;
-        }
-        .create-pass-box .status-msg.success {
-            display: block;
-            color: #2ecc71;
-        }
-        .create-pass-box .status-msg.error {
-            display: block;
-            color: #ff6b6b;
-        }
-        .create-pass-box .back-home-btn {
-            margin-top: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.6);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .create-pass-box .back-home-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
         }
 
         /* ===== صفحه لودینگ ===== */
@@ -1437,7 +1282,6 @@
             box-shadow: 0 2px 12px rgba(255, 107, 138, 0.2);
         }
 
-        /* ===== بخش جدید: اضافه کردن ادمین با آیدی ===== */
         .admin-panel-box .add-admin-section {
             margin-top: 16px;
             padding-top: 16px;
@@ -2010,14 +1854,10 @@
             direction: ltr;
             text-align: left;
         }
-
-        /* نمایش سکه در پروفایل */
         .profile-box .profile-info .info-item .value.coins-value {
             color: #ffd700;
-            font-weight: 800;
-            font-size: 18px;
+            font-weight: 700;
         }
-
         .profile-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -2496,6 +2336,256 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== صفحه انتخاب سن ===== */
+        .age-selection-box {
+            padding: 28px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .age-selection-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .age-selection-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .age-selection-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .age-selection-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .age-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin: 12px 0 16px 0;
+        }
+        .age-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px 0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+        }
+        .age-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.05);
+        }
+        .age-btn.selected {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+        .age-selection-box .action-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .age-selection-box .action-row button {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        .age-selection-box .action-row .confirm-age-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+        }
+        .age-selection-box .action-row .confirm-age-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+        .age-selection-box .selected-age-display {
+            margin-top: 12px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .age-selection-box .selected-age-display span {
+            color: #ffd700;
+            font-weight: 700;
+        }
+        .age-selection-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .age-selection-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== صفحه ساخت رمز عبور ===== */
+        .create-pass-box {
+            padding: 40px 28px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .create-pass-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .create-pass-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .create-pass-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .create-pass-box p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .create-pass-box .input-group {
+            width: 100%;
+            margin-bottom: 16px;
+            text-align: right;
+        }
+        .create-pass-box .input-group label {
+            display: block;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .create-pass-box .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-weight: 500;
+        }
+        .create-pass-box .input-group input:focus {
+            border-color: rgba(245, 87, 108, 0.3);
+            box-shadow: 0 0 30px rgba(245, 87, 108, 0.05);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .create-pass-box .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .create-pass-box .action-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.25);
+            width: 100%;
+        }
+        .create-pass-box .action-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 32px rgba(245, 87, 108, 0.4);
+        }
+        .create-pass-box .status-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+        .create-pass-box .status-msg.success {
+            display: block;
+            color: #2ecc71;
+        }
+        .create-pass-box .status-msg.error {
+            display: block;
+            color: #ff6b6b;
+        }
+        .create-pass-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .create-pass-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
         /* ===== واکنش‌گرایی ===== */
         @media(max-width:480px) {
             .page-container {
@@ -2538,12 +2628,12 @@
                 font-size: 8px;
                 padding: 0px 4px;
             }
-            .coins-display {
-                font-size: 12px;
+            .main-header .coin-display {
+                font-size: 11px;
                 padding: 3px 10px;
             }
-            .coins-display .coin-icon {
-                font-size: 14px;
+            .main-header .coin-display .coin-count {
+                font-size: 13px;
             }
             .account-login-box,
             .register-box {
@@ -2664,14 +2754,15 @@
             .profile-box .profile-info .info-item .value.id-value {
                 font-size: 12px;
             }
-            .admin-panel-box .add-admin-section .add-row input {
-                font-size: 12px;
-                padding: 6px 10px;
-                min-width: 60px;
+            .store-item .item-title {
+                font-size: 15px;
             }
-            .admin-panel-box .add-admin-section .add-row .add-admin-btn {
-                font-size: 11px;
-                padding: 6px 12px;
+            .store-item .item-price {
+                font-size: 13px;
+            }
+            .store-item .item-action {
+                font-size: 12px;
+                padding: 6px 16px;
             }
         }
         @media(max-width:380px) {
@@ -2708,12 +2799,12 @@
                 font-size: 7px;
                 padding: 0px 3px;
             }
-            .coins-display {
+            .main-header .coin-display {
                 font-size: 10px;
                 padding: 2px 8px;
             }
-            .coins-display .coin-icon {
-                font-size: 12px;
+            .main-header .coin-display .coin-count {
+                font-size: 11px;
             }
             .account-login-box h1,
             .register-box h1 {
@@ -2775,6 +2866,16 @@
             .profile-box .profile-info .info-item .value.id-value {
                 font-size: 10px;
             }
+            .store-item .item-title {
+                font-size: 13px;
+            }
+            .store-item .item-price {
+                font-size: 12px;
+            }
+            .store-item .item-action {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
         }
     </style>
 </head>
@@ -2801,7 +2902,7 @@
                     <label for="loginPasswordInput">رمز عبور</label>
                     <input type="text" id="loginPasswordInput" placeholder="رمز عبور خود را وارد کنید..." />
                 </div>
-                <button class="action-btn" id="loginAccountBtn">🚪 ورود</button>
+                <button type="button" class="action-btn" id="loginAccountBtn">🚪 ورود</button>
                 <div class="status-msg" id="loginAccountStatus"></div>
                 <a class="switch-link" onclick="showRegisterPage()">📝 ثبت نام</a>
             </div>
@@ -2820,157 +2921,125 @@
                     <label for="registerPasswordInput">رمز عبور</label>
                     <input type="text" id="registerPasswordInput" placeholder="رمز عبور جدید..." />
                 </div>
-                <button class="action-btn" id="registerBtn">✅ ثبت نام</button>
+                <button type="button" class="action-btn" id="registerBtn">✅ ثبت نام</button>
                 <div class="status-msg" id="registerStatus"></div>
                 <a class="switch-link" onclick="showAccountLoginPage()">🔑 ورود</a>
             </div>
         </div>
 
         <!-- ======== صفحه لودینگ ======== -->
-        <div id="loader">
+        <div id="loader" style="display:none;">
             <div class="spinner"></div>
             <div class="loading-text">در حال اتصال<span class="dots"></span></div>
             <div class="sub-text">لطفاً منتظر بمانید...</div>
         </div>
 
         <!-- ======== صفحه خطا ======== -->
-        <div id="errorPage">
+        <div id="errorPage" style="display:none;">
             <div class="error-icon">📡</div>
             <div class="error-title">اتصال خود را چک کنید</div>
             <div class="error-desc">امکان برقراری ارتباط با سرور وجود ندارد.</div>
-            <button class="retry-btn" onclick="retryConnection()">🔄 تلاش مجدد</button>
+            <button type="button" class="retry-btn" onclick="retryConnection()">🔄 تلاش مجدد</button>
         </div>
 
         <!-- ======== محتوای اصلی (بعد از ورود) ======== -->
-        <div id="mainContent">
+        <div id="mainContent" style="display:none;">
 
             <!-- ===== هدر ===== -->
             <div class="main-header">
                 <div class="site-title">❄️ <span>برفی</span></div>
                 <div class="header-left">
-                    <div class="user-name">
-                        👤 <span id="displayUsername">کاربر</span>
-                    </div>
-
-                    <!-- ===== نمایش سکه در هدر ===== -->
-                    <span class="coins-display" id="coinsDisplay">
+                    <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
+                    <div class="coin-display">
                         <span class="coin-icon">🪙</span>
-                        <span id="coinsAmount">0</span>
-                    </span>
-
-                    <!-- ===== دکمه خروج از اکانت ===== -->
-                    <button class="logout-btn" id="logoutBtn" onclick="logoutAccount()">🚪 خروج از اکانت</button>
-
-                    <button class="store-btn" onclick="showStorePage()">🏪 فروشگاه</button>
-                    <button class="age-btn" onclick="showAgeSelectionPage()">🎂 انتخاب سن</button>
-                    <button class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
-                    <button class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
-
-                    <!-- دکمه ادمین برای همه باز است و فقط در صورت عدم دسترسی پیام می‌دهد -->
-                    <button class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ ادمین</button>
-                    <button class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
-
-                    <button class="profile-btn" onclick="showProfilePage()">
+                        <span class="coin-count" id="coinCount">0</span>
+                    </div>
+                    <button type="button" class="logout-btn" id="logoutBtn" onclick="logoutAccount()">🚪 خروج از اکانت</button>
+                    <button type="button" class="store-btn" onclick="showStorePage()">🏪 فروشگاه</button>
+                    <button type="button" class="age-btn" onclick="showAgeSelectionPage()">🎂 انتخاب سن</button>
+                    <button type="button" class="gift-btn" onclick="showGiftPage()">🎁 کد هدیه</button>
+                    <button type="button" class="rank-btn" onclick="showRankPage()">🏅 رنک</button>
+                    <button type="button" class="admin-btn" id="adminBtn" onclick="openAdminPanel()">⚙️ سوپر ادمین</button>
+                    <button type="button" class="moderator-btn" id="moderatorBtn" onclick="openModeratorPanel()">👑 پنل ادمینیتور</button>
+                    <button type="button" class="profile-btn" onclick="showProfilePage()">
                         <span class="avatar" id="headerAvatar" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+');"></span>
-                        پروفایل
-                        <span class="age-badge" id="profileAgeBadge"></span>
+                        پروفایل <span class="age-badge" id="profileAgeBadge"></span>
                     </button>
-
-                    <button class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
+                    <button type="button" class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
                 </div>
             </div>
 
             <!-- صفحه اصلی -->
             <div id="homePage">
-                <div id="deviceInfo">
-                    <span class="device-icon" id="deviceIcon">📱</span>
-                    <span id="deviceName">گوشی</span>
-                </div>
+                <div id="deviceInfo"><span class="device-icon" id="deviceIcon">📱</span><span id="deviceName">گوشی</span></div>
                 <div class="box">
                     <h2>👋 خوش آمدید!</h2>
                     <p>از حضور شما خوشحالیم.</p>
                     <div class="start-btn-wrapper">
-                        <button class="start-btn" id="startBtn">🚀 شروع</button>
+                        <button type="button" class="start-btn" id="startBtn">🚀 شروع</button>
                         <div class="key-hint" id="keyHint">⌨️ برای شروع کلید <strong>E</strong> را بزنید</div>
                     </div>
                 </div>
             </div>
 
             <!-- ===== منوی بازی ===== -->
-            <div id="menuPage">
+            <div id="menuPage" style="display:none;">
                 <div class="menu-box">
                     <h2>🎮 بازی‌ها</h2>
-                    <button onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
+                    <button type="button" onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
                     <br>
-                    <button onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
+                    <button type="button" onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
                     <br><br>
-                    <button class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- صفحه بازی دوز -->
-            <div id="gamePage">
+            <div id="gamePage" style="display:none;">
                 <div class="game-container">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h3>🎯 بازی دوز</h3>
-                    <div class="timer-container">
-                        <div class="timer" id="timerDisplay">⏱ 20</div>
-                    </div>
+                    <div class="timer-container"><div class="timer" id="timerDisplay">⏱ 20</div></div>
                     <div class="game-status" id="statusMsg">نوبت شما (X) - شروع کنید!</div>
                     <div class="board" id="board"></div>
-                    <button class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
+                    <button type="button" class="reset-btn" onclick="resetGame()">🔄 بازی جدید</button>
                 </div>
             </div>
 
             <!-- ===== انتخاب کشور ===== -->
-            <div id="countrySelectPage">
+            <div id="countrySelectPage" style="display:none;">
                 <div class="country-select-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🌍 انتخاب کشور</h2>
                     <p>کشور خود را برای بازی انتخاب کنید</p>
                     <div class="country-grid" id="countryGrid"></div>
-                    <button class="start-game-btn" id="startFootballBtn" onclick="startFootballGame()" disabled>⚽ شروع بازی</button>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="start-game-btn" id="startFootballBtn" onclick="startFootballGame()" disabled>⚽ شروع بازی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== بازی فوتبال ===== -->
-            <div id="footballGamePage">
+            <div id="footballGamePage" style="display:none;">
                 <div class="football-game-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <div class="game-header">
                         <h3>⚽ فوتبال کشوری</h3>
                         <div class="turn-text" id="turnText">🎯 Your Turn</div>
                     </div>
                     <div class="scoreboard">
-                        <div class="team-info" id="playerTeam">
-                            <span class="flag" id="playerFlag">🇮🇷</span>
-                            <span class="name" id="playerName">IRAN</span>
-                            <span class="label">My Team</span>
-                        </div>
-                        <div class="score-center">
-                            <span class="score" id="scoreDisplay">0 - 0</span>
-                            <span class="goals-label">Goals to Win: 3</span>
-                        </div>
-                        <div class="team-info" id="robotTeam">
-                            <span class="flag" id="robotFlag">🇯🇵</span>
-                            <span class="name" id="robotName">JAPAN</span>
-                            <span class="label">Opponent</span>
-                        </div>
+                        <div class="team-info" id="playerTeam"><span class="flag" id="playerFlag">🇮🇷</span><span class="name" id="playerName">IRAN</span><span class="label">My Team</span></div>
+                        <div class="score-center"><span class="score" id="scoreDisplay">0 - 0</span><span class="goals-label">Goals to Win: 3</span></div>
+                        <div class="team-info" id="robotTeam"><span class="flag" id="robotFlag">🇯🇵</span><span class="name" id="robotName">JAPAN</span><span class="label">Opponent</span></div>
                     </div>
                     <div class="pitch-container">
                         <div class="pitch" id="pitch">
-                            <div class="pitch-center-circle"></div>
-                            <div class="pitch-center-line"></div>
-                            <div class="goal goal-left"></div>
-                            <div class="goal goal-right"></div>
-                            <div class="ball" id="ball">
-                                <span class="country-flag" id="ballFlag">⚽</span>
-                            </div>
+                            <div class="pitch-center-circle"></div><div class="pitch-center-line"></div>
+                            <div class="goal goal-left"></div><div class="goal goal-right"></div>
+                            <div class="ball" id="ball"><span class="country-flag" id="ballFlag">⚽</span></div>
                             <div class="goal-message" id="goalMessage">
                                 <div id="goalText">🎉 گل!</div>
                                 <div class="sub" id="goalSub">تبریک!</div>
-                                <button class="reset-game-btn" onclick="resetFootballGame()">🔄 بازی جدید</button>
+                                <button type="button" class="reset-game-btn" onclick="resetFootballGame()">🔄 بازی جدید</button>
                             </div>
                         </div>
                     </div>
@@ -2978,11 +3047,11 @@
                 </div>
             </div>
 
-            <!-- ===== پنل ادمینی ===== -->
-            <div id="adminPanel">
+            <!-- ===== پنل سوپر ادمین ===== -->
+            <div id="adminPanel" style="display:none;">
                 <div class="admin-panel-box">
-                    <h2>🔐 پنل مدیریت (سوپر ادمین)</h2>
-                    <p style="color:rgba(255,255,255,0.5);font-weight:500;">دسترسی کامل به تمام قابلیت‌ها</p>
+                    <h2>🔐 پنل سوپر ادمین</h2>
+                    <p style="color:rgba(255,255,255,0.5);font-weight:500;">مدیریت کامل سایت</p>
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="gameCount">0</span></li>
@@ -2992,22 +3061,19 @@
                             <span id="adminNamesDisplay" style="font-weight:600;color:#fff;display:flex;flex-wrap:wrap;gap:4px;"></span>
                         </li>
                     </ul>
-
-                    <!-- ===== بخش جدید: اضافه کردن ادمین با آیدی ===== -->
                     <div class="add-admin-section">
                         <h4>👑 اضافه کردن ادمین با آیدی</h4>
                         <div class="add-row">
                             <input type="text" id="addAdminIdInput" placeholder="آیدی اکانت را وارد کنید..." />
-                            <button class="add-admin-btn" onclick="addAdminById()">➕ اضافه کن</button>
+                            <button type="button" class="add-admin-btn" onclick="addAdminById()">➕ اضافه کن</button>
                         </div>
                         <div class="add-msg" id="addAdminMsg"></div>
                     </div>
-
                     <div class="ban-section">
                         <h4>🚫 مدیریت بن</h4>
                         <div class="ban-search">
                             <input type="text" id="banSearchInput" placeholder="جستجوی نام کاربری..." />
-                            <button class="search-btn" onclick="searchUsers()">🔍 جستجو</button>
+                            <button type="button" class="search-btn" onclick="searchUsers()">🔍 جستجو</button>
                         </div>
                         <div class="ban-list" id="banList"></div>
                     </div>
@@ -3018,78 +3084,52 @@
                         </div>
                         <div class="gift-row">
                             <input type="text" id="giftPrizeInput" placeholder="جایزه" value="۱۰۰ سکه طلا" />
-                            <button class="save-gift-btn" onclick="saveGiftSettings()">💾 ذخیره</button>
+                            <button type="button" class="save-gift-btn" onclick="saveGiftSettings()">💾 ذخیره</button>
                         </div>
                         <div class="gift-info">
                             کد فعلی: <span id="currentGiftCodeDisplay">1234</span> | جایزه: <span id="currentGiftPrizeDisplay">۱۰۰ سکه طلا</span>
-                            <br>
-                            <span style="color:#ff6b6b;">⚠️ کد 877 همیشه خطا است</span>
+                            <br><span style="color:#ff6b6b;">⚠️ کد 877 همیشه خطا است</span>
                         </div>
                     </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== پنل ادمینیتور ===== -->
-            <div id="moderatorPanel">
+            <div id="moderatorPanel" style="display:none;">
                 <div class="moderator-panel-box">
                     <h2>👑 پنل ادمینیتور</h2>
                     <p style="color:rgba(255,255,255,0.4);font-size:13px;">دسترسی مدیریتی سطح متوسط</p>
                     <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number" id="moderatorUserCount">0</div>
-                            <div class="stat-label">کاربران آنلاین</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="moderatorGameCount">0</div>
-                            <div class="stat-label">بازی‌های فعال</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="moderatorTotalUsers">0</div>
-                            <div class="stat-label">کل کاربران</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="moderatorBannedCount">0</div>
-                            <div class="stat-label">کاربران بن شده</div>
-                        </div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorUserCount">0</div><div class="stat-label">کاربران آنلاین</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorGameCount">0</div><div class="stat-label">بازی‌های فعال</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorTotalUsers">0</div><div class="stat-label">کل کاربران</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorBannedCount">0</div><div class="stat-label">کاربران بن شده</div></div>
                     </div>
                     <div class="support-messages">
                         <h4>📩 پیام‌های پشتیبانی (فقط خواندن)</h4>
                         <div class="msg-list" id="moderatorSupportMessages"></div>
                     </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== صفحه رنک ها ===== -->
-            <div id="rankPage">
+            <div id="rankPage" style="display:none;">
                 <div class="rank-box">
-                    <button class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd','_blank')">ورود به پیوی سازنده روبیکا</button>
+                    <button type="button" class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd','_blank')">ورود به پیوی سازنده روبیکا</button>
                     <h2>🏅 رنک‌های سایت</h2>
-                    <div class="rank-group">
-                        <span class="rank-title" style="color:#ff6b8a;">سازنده</span>
-                        <span class="rank-name">ابوالفضل</span>
-                        <span class="rank-name">محمد رضا</span>
-                    </div>
-                    <div class="rank-group">
-                        <span class="rank-title" style="color:#2ecc71;">هد ادمین</span>
-                    </div>
-                    <div class="rank-group">
-                        <span class="rank-title" style="color:#f39c12;">سوپر ادمین</span>
-                    </div>
-                    <div class="rank-group">
-                        <span class="rank-title" style="color:#f1c40f;">ادمینیتور</span>
-                        <span class="rank-name" style="color:#f1c40f;">آراد</span>
-                    </div>
-                    <div class="rank-group">
-                        <span class="rank-title" style="color:#a78bfa;">مود</span>
-                    </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <div class="rank-group"><span class="rank-title" style="color:#ff6b8a;">سازنده</span><span class="rank-name">ابوالفضل</span><span class="rank-name">محمد رضا</span></div>
+                    <div class="rank-group"><span class="rank-title" style="color:#2ecc71;">هد ادمین</span></div>
+                    <div class="rank-group"><span class="rank-title" style="color:#f39c12;">سوپر ادمین</span></div>
+                    <div class="rank-group"><span class="rank-title" style="color:#f1c40f;">ادمینیتور</span><span class="rank-name" style="color:#f1c40f;">آراد</span></div>
+                    <div class="rank-group"><span class="rank-title" style="color:#a78bfa;">مود</span></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== صفحه پروفایل ===== -->
-            <div id="profilePage">
+            <div id="profilePage" style="display:none;">
                 <div class="profile-box">
                     <h2>👤 پروفایل</h2>
                     <div class="avatar-upload">
@@ -3097,93 +3137,84 @@
                         <input type="file" id="avatarInput" accept="image/*" />
                     </div>
                     <div class="profile-info">
-                        <div class="info-item">
-                            <span class="label">👤 نام کاربری</span>
-                            <span class="value" id="profileUsername">---</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">🆔 آیدی اکانت</span>
-                            <span class="value id-value" id="profileAccountId">---</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">🎂 سن</span>
-                            <span class="value age-value" id="profileAge">ثبت نشده</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">🔒 رمز عبور</span>
-                            <span class="value pass-value" id="profilePassword">ثبت نشده</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">✅ وضعیت</span>
-                            <span class="value" id="profileStatus">فعال</span>
-                        </div>
-                        <!-- نمایش سکه در پروفایل -->
-                        <div class="info-item">
-                            <span class="label">🪙 سکه</span>
-                            <span class="value coins-value" id="profileCoins">0</span>
-                        </div>
+                        <div class="info-item"><span class="label">👤 نام کاربری</span><span class="value" id="profileUsername">---</span></div>
+                        <div class="info-item"><span class="label">🆔 آیدی اکانت</span><span class="value id-value" id="profileAccountId">---</span></div>
+                        <div class="info-item"><span class="label">🎂 سن</span><span class="value age-value" id="profileAge">ثبت نشده</span></div>
+                        <div class="info-item"><span class="label">🔒 رمز عبور</span><span class="value pass-value" id="profilePassword">ثبت نشده</span></div>
+                        <div class="info-item"><span class="label">🪙 سکه</span><span class="value coins-value" id="profileCoins">0</span></div>
+                        <div class="info-item"><span class="label">✅ وضعیت</span><span class="value" id="profileStatus">فعال</span></div>
                     </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
-            <!-- ===== صفحه انتخاب سن ===== -->
-            <div id="ageSelectionPage">
+            <!-- ===== صفحه فروشگاه (فقط یک آیتم) ===== -->
+            <div id="storePage" style="display:none;">
+                <div class="store-box">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🏪 فروشگاه</h2>
+
+                    <div class="store-item">
+                        <div class="item-info">
+                            <span class="item-title">👑 سوپر ادمین ۱ ماهه</span>
+                            <span class="item-desc">دسترسی کامل به پنل مدیریت</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                            <span class="item-price">💰 ۲۰۰ سکه</span>
+                            <button type="button" class="item-action" id="buySuperAdminBtn" onclick="buySuperAdmin()">🛒 خرید</button>
+                        </div>
+                    </div>
+
+                    <div class="store-status" id="superAdminStatus"></div>
+
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ===== صفحه تغییر سن ===== -->
+            <div id="ageSelectionPage" style="display:none;">
                 <div class="age-selection-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🎂 انتخاب سن</h2>
                     <p>سن خود را انتخاب کنید</p>
                     <div class="age-grid" id="ageGrid"></div>
-                    <div class="selected-age-display">
-                        سن انتخاب شده: <span id="selectedAgeDisplay">هیچ</span>
-                    </div>
-                    <div class="action-row">
-                        <button class="confirm-age-btn" id="confirmAgeBtn">✅ تایید سن</button>
-                    </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <div class="selected-age-display">سن انتخاب شده: <span id="selectedAgeDisplay">هیچ</span></div>
+                    <div class="action-row"><button type="button" class="confirm-age-btn" id="confirmAgeBtn">✅ تایید سن</button></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== صفحه ساخت رمز عبور ===== -->
-            <div id="createPassPage">
+            <div id="createPassPage" style="display:none;">
                 <div class="create-pass-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🔒 ساخت رمز عبور</h2>
                     <p id="createPassDesc">یک رمز عبور برای اکانت خود بسازید</p>
                     <div class="input-group">
                         <label for="newPasswordInput">رمز عبور جدید</label>
                         <input type="text" id="newPasswordInput" placeholder="رمز عبور را وارد کنید..." />
                     </div>
-                    <button class="action-btn" id="createPassActionBtn">🔐 ساخت</button>
+                    <button type="button" class="action-btn" id="createPassActionBtn">🔐 ساخت</button>
                     <div class="status-msg" id="createPassStatus"></div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
             <!-- ===== صفحه کد هدیه ===== -->
-            <div id="giftPage">
+            <div id="giftPage" style="display:none;">
                 <div class="gift-box">
-                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🎁 کد هدیه</h2>
                     <p>کد هدیه خود را وارد کنید</p>
                     <div class="gift-input-area">
                         <input type="text" id="giftCodeInputUser" placeholder="کد هدیه را وارد کنید..." maxlength="20" />
-                        <button class="gift-submit-btn" onclick="checkGiftCode()">📤 ثبت</button>
+                        <button type="button" class="gift-submit-btn" onclick="checkGiftCode()">📤 ثبت</button>
                     </div>
                     <div class="gift-result" id="giftResult">
                         <div id="giftResultText"></div>
                         <div class="gift-prize" id="giftResultPrize"></div>
                     </div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
-            <!-- ===== صفحه فروشگاه ===== -->
-            <div id="storePage">
-                <div class="store-box">
-                    <div class="store-message">بیاین پیوی بگین چی اضافه کنم</div>
-                    <div class="store-sub">@A87hskgd</div>
-                    <button class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
@@ -3207,35 +3238,6 @@
                 container.appendChild(el);
             }
         })();
-
-        // ==========================================================
-        //  سیستم سکه‌ها
-        // ==========================================================
-        function getCoins() {
-            try {
-                const val = localStorage.getItem('coins');
-                return val ? parseInt(val, 10) : 0;
-            } catch { return 0; }
-        }
-
-        function setCoins(val) {
-            localStorage.setItem('coins', String(val));
-            updateCoinsDisplay();
-        }
-
-        function addCoins(amount) {
-            const current = getCoins();
-            const newVal = current + amount;
-            setCoins(newVal);
-        }
-
-        function updateCoinsDisplay() {
-            const amount = getCoins();
-            const display = document.getElementById('coinsAmount');
-            const profileCoins = document.getElementById('profileCoins');
-            if (display) display.textContent = amount;
-            if (profileCoins) profileCoins.textContent = amount;
-        }
 
         // ==========================================================
         //  تشخیص ویندوز 10/11 و کامپیوتر
@@ -3302,6 +3304,43 @@
         }
 
         // ==========================================================
+        //  سیستم سکه
+        // ==========================================================
+        function getUserCoins(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].coins || 0 : 0;
+        }
+
+        function setUserCoins(username, amount) {
+            const users = getUsersData();
+            if (users[username]) {
+                users[username].coins = Math.max(0, amount);
+                setUsersData(users);
+                updateCoinDisplay();
+            }
+        }
+
+        function addUserCoins(username, amount) {
+            const current = getUserCoins(username);
+            setUserCoins(username, current + amount);
+        }
+
+        function removeUserCoins(username, amount) {
+            const current = getUserCoins(username);
+            if (current < amount) return false;
+            setUserCoins(username, current - amount);
+            return true;
+        }
+
+        function updateCoinDisplay() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const coins = getUserCoins(username);
+            document.getElementById('coinCount').textContent = coins;
+            const profileCoins = document.getElementById('profileCoins');
+            if (profileCoins) profileCoins.textContent = coins;
+        }
+
+        // ==========================================================
         //  سیستم کد هدیه
         // ==========================================================
         function getGiftSettings() {
@@ -3352,10 +3391,19 @@
                 return;
             }
             if (code === correctCode) {
+                // هدیه دادن (مثلاً ۱۰۰ سکه - ولی اینجا فقط نمایش میده)
                 result.className = 'gift-result success';
                 result.style.display = 'block';
                 textEl.textContent = '✅ کد هدیه درست است!';
                 prizeEl.textContent = `🎁 جایزه شما: ${getCurrentGiftPrize()}`;
+                // اضافه کردن سکه
+                const username = document.getElementById('displayUsername').textContent.trim();
+                const prizeNumber = parseInt(getCurrentGiftPrize().match(/\d+/)?.[0] || '0');
+                if (prizeNumber > 0) {
+                    addUserCoins(username, prizeNumber);
+                    alert(`🪙 ${prizeNumber} سکه به حساب شما اضافه شد!`);
+                    updateCoinDisplay();
+                }
             } else {
                 result.className = 'gift-result error';
                 result.style.display = 'block';
@@ -3458,7 +3506,7 @@
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
             const currentUser = document.getElementById('displayUsername').textContent.trim();
-            const isSuperAdmin = currentUser === "ابوالفضل";
+            const isSuperAdmin = currentUser === "ابوالفضل" || isTemporarySuperAdmin(currentUser);
             let html = '';
             admins.forEach(admin => {
                 let color = '#fff';
@@ -3466,7 +3514,7 @@
                 if (admin === "ابوالفضل") color = '#ff6b6b';
                 html += `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;color:${color};">`;
                 html += admin;
-                if (isSuperAdmin && admin !== "ابوالفضل") {
+                if (isSuperAdmin && admin !== "ابوالفضل" && admin !== "محمد رضا") {
                     html += ` <button class="remove-admin-btn" onclick="removeAdmin('${admin}')">❌</button>`;
                 }
                 html += `</span>`;
@@ -3484,6 +3532,57 @@
                 result += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             return result;
+        }
+
+        // ==========================================================
+        //  سیستم سوپر ادمین موقت (خرید ۱ ماهه)
+        // ==========================================================
+        function isTemporarySuperAdmin(username) {
+            const users = getUsersData();
+            const userData = users[username];
+            if (!userData) return false;
+            const expiry = userData.superAdminExpiry;
+            if (!expiry) return false;
+            return expiry > Date.now();
+        }
+
+        function getSuperAdminRemainingDays(username) {
+            const users = getUsersData();
+            const userData = users[username];
+            if (!userData || !userData.superAdminExpiry) return null;
+            const remaining = userData.superAdminExpiry - Date.now();
+            if (remaining <= 0) return null;
+            const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            return `${days} روز و ${hours} ساعت`;
+        }
+
+        // ==========================================================
+        //  خرید سوپر ادمین
+        // ==========================================================
+        function buySuperAdmin() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) { alert('لطفاً وارد شوید.'); return; }
+
+            const coins = getUserCoins(username);
+            if (coins < 200) {
+                alert('❌ سکه کافی نیست! شما به ۲۰۰ سکه نیاز دارید.');
+                return;
+            }
+
+            if (confirm('آیا مطمئن هستید که ۲۰۰ سکه برای خرید ۱ ماه سوپر ادمین خرج کنید؟')) {
+                if (removeUserCoins(username, 200)) {
+                    const users = getUsersData();
+                    const newExpiry = Date.now() + 30 * 24 * 60 * 60 * 1000; // 1 ماه
+                    users[username].superAdminExpiry = newExpiry;
+                    setUsersData(users);
+                    alert('✅ تبریک! دسترسی سوپر ادمین به مدت ۱ ماه برای شما فعال شد.');
+                    updateStoreUI();
+                    updateCoinDisplay();
+                } else {
+                    alert('❌ خطا در کاهش سکه.');
+                }
+            }
         }
 
         // ==========================================================
@@ -3558,7 +3657,7 @@
             }
         }
 
-        // ===== سیستم اکانت‌ها (ذخیره رمز و آیدی برای هر کاربر) =====
+        // ===== سیستم اکانت‌ها (ذخیره رمز و آیدی و سکه برای هر کاربر) =====
         function getUsersData() {
             try { const data = localStorage.getItem('usersData'); return data ? JSON.parse(data) : {}; } catch { return {}; }
         }
@@ -3587,10 +3686,19 @@
             return null;
         }
 
-        function setUserData(username, password, accountId) {
+        function setUserData(username, password, accountId, coins = 0, superAdminExpiry = null) {
             const users = getUsersData();
-            users[username] = { password: password, id: accountId };
+            users[username] = { password, id: accountId, coins, superAdminExpiry };
             setUsersData(users);
+        }
+
+        // ==========================================================
+        //  تابع تعیین مجوز ادمینیتور
+        // ==========================================================
+        function isModerator(username) {
+            if (username === "آراد") return true;
+            const accountId = getUserAccountId(username);
+            return accountId === "RwuSYbgUUdA1Ta";
         }
 
         // ===== خروج از اکانت =====
@@ -3600,13 +3708,11 @@
                 document.getElementById('displayUsername').textContent = 'کاربر';
                 document.getElementById('logoutBtn').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'none';
-                // نمایش صفحه ورود
                 showAccountLoginPage();
                 document.getElementById('loginUsernameInput').value = '';
                 document.getElementById('loginPasswordInput').value = '';
                 document.getElementById('loginAccountStatus').className = 'status-msg';
                 document.getElementById('loginAccountStatus').textContent = '';
-                // مخفی کردن دکمه‌های هدر
                 document.querySelectorAll('.main-header .header-left button:not(.logout-btn)').forEach(btn => {
                     if (btn.id !== 'logoutBtn') btn.style.display = 'none';
                 });
@@ -3619,64 +3725,10 @@
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
-                // به‌روزرسانی سکه (مقدار ثابت می‌ماند)
-                updateCoinsDisplay();
             }
         }
 
-        // ===== تابع اضافه کردن ادمین بر اساس نام کاربری (برای کاربر RwBBHC162x0o6i) =====
-        function ensureAdminAccess() {
-            const currentUser = document.getElementById('displayUsername').textContent.trim();
-            if (!currentUser || currentUser === 'کاربر' || currentUser === '---') return;
-
-            const admins = getAdmins();
-            // اگر کاربر در لیست ادمین‌ها نیست، اضافه کن
-            if (!admins.includes(currentUser)) {
-                admins.push(currentUser);
-                setAdmins(admins);
-                updateAdminPanelUI();
-                console.log(`✅ کاربر "${currentUser}" به لیست ادمین‌ها اضافه شد.`);
-            }
-        }
-
-        function loadProfile() {
-            const avatar = getProfileAvatar();
-            updateAvatarUI(avatar);
-            const username = document.getElementById('displayUsername').textContent.trim();
-            document.getElementById('profileUsername').textContent = username || '---';
-
-            // نمایش آیدی
-            const accountId = getUserAccountId(username);
-            document.getElementById('profileAccountId').textContent = accountId || '---';
-
-            // نمایش یا مخفی کردن دکمه خروج
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (username && username !== 'کاربر' && username !== '---') {
-                logoutBtn.style.display = 'inline-block';
-            } else {
-                logoutBtn.style.display = 'none';
-            }
-
-            const age = getUserAge();
-            updateAgeUI(age);
-
-            // رمز عبور کاربر فعلی
-            const pass = getUserPasswordByUsername(username);
-            updatePasswordUI(pass);
-            updateCreatePassButton(pass);
-
-            // به‌روزرسانی سکه
-            updateCoinsDisplay();
-
-            updateButtonsVisibility();
-
-            // اطمینان از دسترسی ادمین برای کاربر فعلی (در صورت وجود)
-            ensureAdminAccess();
-        }
-
-        // ==========================================================
-        //  اضافه کردن ادمین با آیدی (تابع جدید)
-        // ==========================================================
+        // ===== تابع اضافه کردن ادمین بر اساس آیدی =====
         function addAdminById() {
             const input = document.getElementById('addAdminIdInput');
             const accountId = input.value.trim();
@@ -3688,16 +3740,13 @@
                 return;
             }
 
-            // پیدا کردن نام کاربری با این آیدی
             const username = getUsernameByAccountId(accountId);
-
             if (!username) {
                 msg.className = 'add-msg error';
                 msg.textContent = '❌ کاربری با این آیدی پیدا نشد.';
                 return;
             }
 
-            // بررسی اینکه آیا کاربر در لیست ادمین‌ها هست
             const admins = getAdmins();
             if (admins.includes(username)) {
                 msg.className = 'add-msg error';
@@ -3705,7 +3754,6 @@
                 return;
             }
 
-            // اضافه کردن به لیست ادمین‌ها
             admins.push(username);
             setAdmins(admins);
             updateAdminPanelUI();
@@ -3732,7 +3780,6 @@
                 detectDevice();
                 setupStartButton();
                 loadProfile();
-                // نمایش دکمه‌های هدر
                 document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                     if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                 });
@@ -3742,19 +3789,16 @@
                 document.querySelector('.main-header .age-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
-                // دکمه ادمین همیشه نمایش داده می‌شود
                 document.getElementById('adminBtn').style.display = 'inline-block';
-                // دکمه ادمینیتور فقط برای آراد
                 const username = document.getElementById('displayUsername').textContent.trim();
-                if (username === "آراد") {
+                if (isModerator(username)) {
                     document.getElementById('moderatorBtn').style.display = 'inline-block';
                 } else {
                     document.getElementById('moderatorBtn').style.display = 'none';
                 }
-                // اطمینان از دسترسی ادمین برای کاربر فعلی
                 ensureAdminAccess();
-                // به‌روزرسانی سکه
-                updateCoinsDisplay();
+                updateCoinDisplay();
+                updateStoreUI();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3765,24 +3809,19 @@
                 document.getElementById('giftPrizeInput').value = settings.prize || '۱۰۰ سکه طلا';
                 document.getElementById('currentGiftCodeDisplay').textContent = settings.code || '1234';
                 document.getElementById('currentGiftPrizeDisplay').textContent = settings.prize || '۱۰۰ سکه طلا';
-                // پاک کردن پیام قبلی
                 document.getElementById('addAdminMsg').className = 'add-msg';
                 document.getElementById('addAdminMsg').textContent = '';
-                updateCoinsDisplay();
             }
             if (pageId === 'moderatorPanel') {
                 updateModeratorStats();
                 renderModeratorSupportMessages();
-                updateCoinsDisplay();
             }
-            if (pageId === 'countrySelectPage') { renderCountries();
-                updateCoinsDisplay(); }
+            if (pageId === 'countrySelectPage') { renderCountries(); }
             if (pageId === 'giftPage') {
                 const result = document.getElementById('giftResult');
                 result.className = 'gift-result';
                 result.style.display = 'none';
                 document.getElementById('giftCodeInputUser').value = '';
-                updateCoinsDisplay();
             }
             if (pageId === 'ageSelectionPage') {
                 renderAgeGrid();
@@ -3793,7 +3832,6 @@
                         if (parseInt(btn.dataset.age) === currentAge) btn.classList.add('selected');
                     });
                 }
-                updateCoinsDisplay();
             }
             if (pageId === 'createPassPage') {
                 const currentUser = document.getElementById('displayUsername').textContent.trim();
@@ -3808,10 +3846,10 @@
                 document.getElementById('newPasswordInput').value = '';
                 document.getElementById('createPassStatus').className = 'status-msg';
                 document.getElementById('createPassStatus').textContent = '';
-                updateCoinsDisplay();
             }
-            // به‌روزرسانی سکه در هر صفحه
-            updateCoinsDisplay();
+            if (pageId === 'storePage') {
+                updateStoreUI();
+            }
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -3830,7 +3868,6 @@
             document.getElementById('loginPasswordInput').value = '';
             document.getElementById('loginAccountStatus').className = 'status-msg';
             document.getElementById('loginAccountStatus').textContent = '';
-            updateCoinsDisplay();
         }
 
         function showRegisterPage() {
@@ -3843,7 +3880,6 @@
             document.getElementById('registerPasswordInput').value = '';
             document.getElementById('registerStatus').className = 'status-msg';
             document.getElementById('registerStatus').textContent = '';
-            updateCoinsDisplay();
         }
 
         // ==========================================================
@@ -3894,7 +3930,6 @@
                 status.textContent = '⚠️ لطفاً یک رمز عبور وارد کنید.';
                 return;
             }
-
             if (password.length < 4) {
                 status.className = 'status-msg error';
                 status.textContent = '⚠️ رمز عبور باید حداقل ۴ کاراکتر باشد.';
@@ -3902,24 +3937,20 @@
             }
 
             const username = document.getElementById('displayUsername').textContent.trim();
-            // فقط رمز عبور رو به‌روز می‌کنیم (آیدی قبلاً ذخیره شده)
             const existingId = getUserAccountId(username);
+            const existingCoins = getUserCoins(username);
+            const existingExpiry = getUsersData()[username]?.superAdminExpiry || null;
             if (existingId) {
-                setUserData(username, password, existingId);
+                setUserData(username, password, existingId, existingCoins, existingExpiry);
             } else {
-                // اگر آیدی وجود نداشت (احتمالاً کاربر قدیمی) یک آیدی جدید بساز
                 const newId = generateRandomId();
-                setUserData(username, password, newId);
+                setUserData(username, password, newId, 0, null);
             }
             loadProfile();
             status.className = 'status-msg success';
             status.textContent = '✅ رمز عبور با موفقیت ذخیره شد!';
-
             updateCreatePassButton(password);
-
-            setTimeout(() => {
-                goHome();
-            }, 1500);
+            setTimeout(() => { goHome(); }, 1500);
         }
 
         // ==========================================================
@@ -3938,7 +3969,6 @@
                 status.textContent = '⚠️ لطفاً نام کاربری و رمز عبور را وارد کنید.';
                 return;
             }
-
             if (!isUsernameTaken(username)) {
                 status.className = 'status-msg error';
                 status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.';
@@ -3955,17 +3985,14 @@
             if (password === correctPass) {
                 status.className = 'status-msg success';
                 status.textContent = '✅ ورود موفق! در حال انتقال...';
-
                 localStorage.setItem('username', username);
                 document.getElementById('displayUsername').textContent = username;
                 loadProfile();
-
                 setTimeout(() => {
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
-                    // نمایش دکمه‌های هدر
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                         if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                     });
@@ -3976,15 +4003,12 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
-                    // اطمینان از دسترسی ادمین
                     ensureAdminAccess();
-                    // به‌روزرسانی سکه
-                    updateCoinsDisplay();
                     showPage('homePage');
                 }, 1200);
             } else {
                 status.className = 'status-msg error';
-                status.textContent = '❌ رمز عبور اشتباه است';
+                status.textContent = '❌ اشتباه است';
             }
         }
 
@@ -4004,36 +4028,28 @@
                 status.textContent = '⚠️ لطفاً تمام فیلدها را پر کنید.';
                 return;
             }
-
             if (username.length < 3) {
                 status.className = 'status-msg error';
                 status.textContent = '⚠️ نام کاربری باید حداقل ۳ کاراکتر باشد.';
                 return;
             }
-
             if (password.length < 4) {
                 status.className = 'status-msg error';
                 status.textContent = '⚠️ رمز عبور باید حداقل ۴ کاراکتر باشد.';
                 return;
             }
-
             if (isUsernameTaken(username)) {
                 status.className = 'status-msg error';
                 status.textContent = '❌ این نام کاربری قبلاً ثبت شده است.';
                 return;
             }
 
-            // تولید آیدی تصادفی
             const newId = generateRandomId();
-
-            // ثبت نام کاربر
             addUsername(username);
-            setUserData(username, password, newId);
+            setUserData(username, password, newId, 100, null); // ۱۰۰ سکه اولیه برای تست
 
             status.className = 'status-msg success';
             status.textContent = '✅ ثبت نام موفق! در حال انتقال...';
-
-            // ورود خودکار
             localStorage.setItem('username', username);
             document.getElementById('displayUsername').textContent = username;
             loadProfile();
@@ -4054,7 +4070,6 @@
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
                 ensureAdminAccess();
-                updateCoinsDisplay();
                 showPage('homePage');
             }, 1500);
         }
@@ -4062,17 +4077,54 @@
         // ==========================================================
         //  توابع مدیریتی دیگر
         // ==========================================================
+        function ensureAdminAccess() {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            if (!currentUser || currentUser === 'کاربر' || currentUser === '---') return;
+            const admins = getAdmins();
+            if (!admins.includes(currentUser) && currentUser !== "ابوالفضل" && currentUser !== "محمد رضا") {
+                // فقط ادمین‌های اصلی را اضافه نکن، بلکه اگر کاربر خاصی است اضافه کن (برای سازگاری)
+                // ولی اینجا کاری نمی‌کنیم چون ادمین‌ها دستی اضافه می‌شوند.
+            }
+            updateAdminPanelUI();
+        }
+
+        function loadProfile() {
+            const avatar = getProfileAvatar();
+            updateAvatarUI(avatar);
+            const username = document.getElementById('displayUsername').textContent.trim();
+            document.getElementById('profileUsername').textContent = username || '---';
+            const accountId = getUserAccountId(username);
+            document.getElementById('profileAccountId').textContent = accountId || '---';
+            const coins = getUserCoins(username);
+            document.getElementById('profileCoins').textContent = coins;
+
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (username && username !== 'کاربر' && username !== '---') {
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                logoutBtn.style.display = 'none';
+            }
+
+            const age = getUserAge();
+            updateAgeUI(age);
+            const pass = getUserPasswordByUsername(username);
+            updatePasswordUI(pass);
+            updateCreatePassButton(pass);
+            updateButtonsVisibility();
+            ensureAdminAccess();
+            updateCoinDisplay();
+            updateStoreUI();
+        }
+
         function updateButtonsVisibility() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const adminBtn = document.getElementById('adminBtn');
             const moderatorBtn = document.getElementById('moderatorBtn');
             const logoutBtn = document.getElementById('logoutBtn');
 
-            // دکمه ادمین همیشه نمایش داده می‌شود
             adminBtn.style.display = 'inline-block';
 
-            // دکمه ادمینیتور فقط برای آراد
-            if (username === "آراد") {
+            if (isModerator(username)) {
                 moderatorBtn.style.display = 'inline-block';
             } else {
                 moderatorBtn.style.display = 'none';
@@ -4082,7 +4134,6 @@
                 logoutBtn.style.display = 'none';
                 return;
             }
-
             logoutBtn.style.display = 'inline-block';
         }
 
@@ -4098,6 +4149,9 @@
             reader.readAsDataURL(file);
         });
 
+        // ==========================================================
+        //  پنل ادمینیتور - آمار و پیام‌ها
+        // ==========================================================
         function updateModeratorStats() {
             const users = getOnlineUsers();
             const games = getActiveGames();
@@ -4175,11 +4229,11 @@
             filteredUsers.forEach(username => {
                 const isBanned = !!banned[username];
                 const isCurrentUser = username === currentUser;
-                const isSuperAdmin = username === "ابوالفضل";
+                const isSuperAdmin = username === "ابوالفضل" || username === "محمد رضا";
                 let canBan = true;
                 if (isCurrentUser) canBan = false;
                 if (isSuperAdmin) canBan = false;
-                if (currentUser !== "ابوالفضل") canBan = false;
+                if (currentUser !== "ابوالفضل" && !isTemporarySuperAdmin(currentUser)) canBan = false;
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
                 html += `
                     <div class="ban-item">
@@ -4205,7 +4259,7 @@
             if (!username) return;
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (username === currentUser) { alert('⛔ نمی‌توانید خودتان را بن کنید!'); return; }
-            if (username === "ابوالفضل") { alert('⛔ نمی‌توانید سوپر ادمین را بن کنید!'); return; }
+            if (username === "ابوالفضل" || username === "محمد رضا") { alert('⛔ نمی‌توانید سوپر ادمین را بن کنید!'); return; }
             if (confirm(`آیا کاربر "${username}" را به مدت 24 ساعت بن کنید؟`)) {
                 banUser(username);
                 renderBanList();
@@ -4231,9 +4285,11 @@
                 alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
                 return;
             }
-            const admins = getAdmins();
-            if (admins.includes(username) || username === "ابوالفضل" || username === "محمد رضا") {
-                // دسترسی کامل
+
+            const isPermanentAdmin = username === "ابوالفضل" || username === "محمد رضا";
+            const isTemporary = isTemporarySuperAdmin(username);
+
+            if (isPermanentAdmin || isTemporary) {
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderBanList();
@@ -4246,18 +4302,58 @@
                 document.getElementById('addAdminMsg').textContent = '';
                 showPage('adminPanel');
             } else {
-                alert('⚠️ شما دسترسی به پنل ادمین ندارید! این پنل فقط برای ادمین‌هاست.');
+                alert('⛔ شما دسترسی به پنل سوپر ادمین ندارید! (برای دسترسی، از فروشگاه خرید کنید)');
             }
         }
 
         function openModeratorPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید!'); return; }
-            if (username === "آراد") {
+            if (isModerator(username)) {
                 updateModeratorStats();
                 renderModeratorSupportMessages();
                 showPage('moderatorPanel');
-            } else { alert('⛔ فقط آراد دسترسی به پنل ادمینیتور را دارد!'); }
+            } else {
+                alert('⛔ شما دسترسی به پنل ادمینیتور ندارید.');
+            }
+        }
+
+        // ==========================================================
+        //  بروزرسانی فروشگاه
+        // ==========================================================
+        function updateStoreUI() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const btn = document.getElementById('buySuperAdminBtn');
+            const statusDiv = document.getElementById('superAdminStatus');
+
+            if (!username || username === 'کاربر') {
+                btn.disabled = true;
+                btn.textContent = '🚫 وارد شوید';
+                statusDiv.textContent = '';
+                return;
+            }
+
+            const isActive = isTemporarySuperAdmin(username);
+            const remaining = getSuperAdminRemainingDays(username);
+
+            if (isActive && remaining) {
+                btn.disabled = true;
+                btn.textContent = '✅ فعال';
+                btn.className = 'item-action done';
+                statusDiv.innerHTML = `✅ دسترسی سوپر ادمین فعال است (${remaining} باقی مانده)`;
+                statusDiv.className = 'store-status active';
+            } else {
+                btn.disabled = false;
+                btn.textContent = '🛒 خرید';
+                btn.className = 'item-action';
+                if (getUserCoins(username) < 200) {
+                    statusDiv.innerHTML = '💰 سکه کافی نیست (۲۰۰ سکه نیاز است)';
+                    statusDiv.className = 'store-status expired';
+                } else {
+                    statusDiv.innerHTML = '💰 برای خرید کلیک کنید';
+                    statusDiv.className = 'store-status';
+                }
+            }
         }
 
         // ==========================================================
@@ -4265,22 +4361,16 @@
         // ==========================================================
         function showRankPage() { showPage('rankPage'); }
 
-        function showProfilePage() {
-            loadProfile();
-            showPage('profilePage');
-        }
+        function showProfilePage() { loadProfile();
+            showPage('profilePage'); }
 
         function goToMenu() { showPage('menuPage'); }
 
-        function goToGame() {
-            showPage('gamePage');
-            startGame();
-        }
+        function goToGame() { showPage('gamePage');
+            startGame(); }
 
-        function goToCountrySelect() {
-            showPage('countrySelectPage');
-            renderCountries();
-        }
+        function goToCountrySelect() { showPage('countrySelectPage');
+            renderCountries(); }
 
         function goHome() {
             clearTimer();
@@ -4293,20 +4383,17 @@
             }
             resetFootballGameState();
             showPage('homePage');
-            updateCoinsDisplay();
         }
 
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
-            // دکمه‌ها
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
             document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
             document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
 
-            // Enter key
             document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') loginWithAccount();
             });
@@ -4320,7 +4407,6 @@
                 if (e.key === 'Enter') addAdminById();
             });
 
-            // بررسی ورود قبلی
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
                 if (isUserBanned(saved)) {
@@ -4337,26 +4423,21 @@
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('displayUsername').textContent = saved;
-                    // چک کردن آیدی برای کاربران قدیمی
                     const existingId = getUserAccountId(saved);
                     if (!existingId) {
-                        // اگر کاربر قدیمی آیدی نداره، براش بساز
                         const newId = generateRandomId();
                         const pass = getUserPasswordByUsername(saved);
-                        setUserData(saved, pass || '', newId);
+                        setUserData(saved, pass || '', newId, 0, null);
                     }
                     loadProfile();
-                    // اطمینان از دسترسی ادمین
                     ensureAdminAccess();
                     showPage('homePage');
                     updateAdminStats();
-                    // دکمه ادمین همیشه نمایش داده می‌شود
                     document.getElementById('adminBtn').style.display = 'inline-block';
-                    if (saved === "آراد") {
+                    if (isModerator(saved)) {
                         document.getElementById('moderatorBtn').style.display = 'inline-block';
                     }
                     updateButtonsVisibility();
-                    // نمایش دکمه‌های هدر
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                         if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                     });
@@ -4367,15 +4448,10 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
-                    // به‌روزرسانی سکه
-                    updateCoinsDisplay();
                 }, 1200);
             } else {
-                // نمایش صفحه ورود
                 showAccountLoginPage();
             }
-            // به‌روزرسانی سکه در شروع
-            updateCoinsDisplay();
         });
 
         // ==========================================================
@@ -4590,18 +4666,10 @@
                 gameId = null;
                 updateAdminStats();
             }
-            // ===== افزودن سکه در صورت برد بازیکن =====
-            if (result === 'X') {
-                playWinSound();
-                statusMsg.textContent = '🎉 شما برنده شدید! +۱۰ سکه';
-                addCoins(10);  // اضافه کردن ۱۰ سکه
-                updateCoinsDisplay();
-            } else if (result === 'O') {
-                playLoseSound();
-                statusMsg.textContent = '🤖 ربات برنده شد!';
-            } else if (result === 'draw') {
-                statusMsg.textContent = '🤝 مساوی!';
-            }
+            if (result === 'X') { playWinSound();
+                statusMsg.textContent = '🎉 شما برنده شدید!'; } else if (result === 'O') { playLoseSound();
+                statusMsg.textContent = '🤖 ربات برنده شد!'; } else if (result === 'draw') { statusMsg.textContent =
+                    '🤝 مساوی!'; }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
         }
 
@@ -5064,12 +5132,11 @@
         // ==========================================================
         //  نهایی
         // ==========================================================
-        console.log('❄️ برفی - دسترسی ادمین برای کاربر با آیدی RwBBHC162x0o6i فعال شد.');
+        console.log('❄️ برفی - فروشگاه با خرید سوپر ادمین ۱ ماهه فعال شد.');
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('🆔 هر کاربر یک آیدی تصادفی منحصر به فرد دارد.');
-        console.log('👑 دکمه ادمین برای همه نمایش داده می‌شود، اما فقط ادمین‌ها دسترسی کامل دارند.');
-        console.log('✅ کاربر با آیدی RwBBHC162x0o6i به‌طور خودکار به لیست ادمین‌ها اضافه می‌شود.');
-        console.log('🪙 سیستم سکه‌ها فعال است و در بازی دوز برد ۱۰ سکه اضافه می‌شود.');
+        console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
+        console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
     </script>
 
 </body>
