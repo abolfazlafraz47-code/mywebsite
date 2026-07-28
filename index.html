@@ -3056,7 +3056,7 @@
         }
 
         // ==========================================================
-        //  تابع بررسی کد هدیه (بروزرسانی‌شده)
+        //  تابع بررسی کد هدیه (با محدودیت زمانی تا ساعت ۱۲:۳۰)
         // ==========================================================
         function checkGiftCode() {
             const input = document.getElementById('giftCodeInputUser');
@@ -3066,6 +3066,7 @@
             const prizeEl = document.getElementById('giftResultPrize');
             const username = document.getElementById('displayUsername').textContent.trim();
 
+            // ۱. کاربر باید وارد شده باشد
             if (!username || username === 'کاربر' || username === '---') {
                 result.className = 'gift-result error';
                 result.style.display = 'block';
@@ -3074,6 +3075,7 @@
                 return;
             }
 
+            // ۲. کد 877 همیشه خطا
             if (code === '877') {
                 result.className = 'gift-result error';
                 result.style.display = 'block';
@@ -3082,8 +3084,24 @@
                 return;
             }
 
-            // کد ویژه "برفی" – یکبار مصرف
+            // ۳. کد ویژه "برفی" – یکبار مصرف با جایزه ۳۰ سکه و محدودیت زمانی
             if (code === 'برفی') {
+                // بررسی محدودیت زمانی (تا ساعت ۱۲:۳۰)
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const currentTime = hours * 60 + minutes; // تبدیل به دقیقه از نیمه‌شب
+                const expiryTime = 12 * 60 + 30; // ۱۲:۳۰ = 750 دقیقه از نیمه‌شب
+
+                if (currentTime > expiryTime) {
+                    result.className = 'gift-result error';
+                    result.style.display = 'block';
+                    textEl.textContent = '⏰ کد هدیه منقضی شده است!';
+                    prizeEl.textContent = '🕐 این کد فقط تا ساعت ۱۲:۳۰ قابل استفاده است.';
+                    return;
+                }
+
+                // بررسی اینکه کاربر قبلاً این کد رو استفاده کرده یا نه
                 if (hasUsedGiftCode(username, 'برفی')) {
                     result.className = 'gift-result error';
                     result.style.display = 'block';
@@ -3091,8 +3109,11 @@
                     prizeEl.textContent = '';
                     return;
                 } else {
+                    // اضافه کردن ۳۰ سکه به حساب کاربر
                     addUserCoins(username, 30);
+                    // ثبت کد به عنوان استفاده‌شده برای این کاربر
                     addUsedGiftCode(username, 'برفی');
+                    // به‌روزرسانی نمایش سکه
                     updateCoinDisplay();
                     result.className = 'gift-result success';
                     result.style.display = 'block';
@@ -3102,7 +3123,7 @@
                 }
             }
 
-            // کد عمومی (تنظیم‌شده توسط ادمین)
+            // ۴. کد عمومی (تنظیم‌شده توسط ادمین) - مثل "1234" (بدون محدودیت زمانی)
             const correctCode = getCurrentGiftCode();
             if (code === correctCode) {
                 const prize = getCurrentGiftPrize();
@@ -3118,6 +3139,7 @@
                 return;
             }
 
+            // ۵. کد ناشناخته
             result.className = 'gift-result error';
             result.style.display = 'block';
             textEl.textContent = '❌ کد هدیه اشتباه است!';
@@ -3805,7 +3827,6 @@
         function ensureAdminAccess() {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (!currentUser || currentUser === 'کاربر' || currentUser === '---') return;
-            // فقط برای نمایش در UI، کاری نمی‌کنیم
             updateAdminPanelUI();
         }
 
@@ -4758,125 +4779,4 @@
                         goalText.textContent = '🏆 شما برنده شدید!';
                         goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
                         goalMsg.style.display = 'block';
-                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان شدید!';
-                    }, 800);
-                } else if (footballState.robotScore >= 3) {
-                    setTimeout(() => {
-                        goalText.textContent = '😔 ربات برنده شد!';
-                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
-                        goalMsg.style.display = 'block';
-                        document.getElementById('footballStatus').textContent = '😔 ربات قهرمان شد!';
-                    }, 800);
-                }
-                disableBallDrag();
-            }
-        }
-
-        function resetFootballGame() {
-            document.getElementById('goalMessage').style.display = 'none';
-            footballState.isGameOver = false;
-            footballState.isGoal = false;
-            footballState.ballX = 50;
-            footballState.ballY = 50;
-            footballState.hasStarted = false;
-            footballState.playerScore = 0;
-            footballState.robotScore = 0;
-            updateScoreDisplay();
-            const ball = document.getElementById('ball');
-            ball.style.left = '50%';
-            ball.style.top = '50%';
-            document.getElementById('footballStatus').textContent = '🔄 بازی جدید! کشور خود را انتخاب کنید';
-            document.getElementById('turnText').textContent = '⏳ انتخاب کشور';
-            document.getElementById('playerTeam').classList.remove('active');
-            document.getElementById('robotTeam').classList.remove('active');
-            disableBallDrag();
-            showPage('countrySelectPage');
-            renderCountries();
-        }
-
-        function resetFootballGameState() {
-            footballState.isGameOver = false;
-            footballState.isGoal = false;
-            footballState.isDragging = false;
-            footballState.hasStarted = false;
-            document.getElementById('goalMessage').style.display = 'none';
-            disableBallDrag();
-        }
-
-        // ==========================================================
-        //  بارگذاری اولیه
-        // ==========================================================
-        window.addEventListener('load', function() {
-            document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
-            document.getElementById('registerBtn').addEventListener('click', registerAccount);
-            document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
-            document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
-
-            document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') loginWithAccount();
-            });
-            document.getElementById('registerPasswordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') registerAccount();
-            });
-            document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') createPassword();
-            });
-            document.getElementById('addAdminIdInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') addAdminById();
-            });
-
-            const saved = localStorage.getItem('username');
-            if (saved && saved.trim() !== '') {
-                if (isUserBanned(saved)) {
-                    document.getElementById('accountLoginPage').style.display = 'none';
-                    document.getElementById('registerPage').style.display = 'none';
-                    // می‌توانید صفحه بن را اضافه کنید
-                    return;
-                }
-                document.getElementById('accountLoginPage').style.display = 'none';
-                document.getElementById('registerPage').style.display = 'none';
-                document.getElementById('loader').style.display = 'flex';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('displayUsername').textContent = saved;
-                    const existingId = getUserAccountId(saved);
-                    if (!existingId) {
-                        const newId = generateRandomId();
-                        const pass = getUserPasswordByUsername(saved);
-                        setUserData(saved, pass || '', newId, 0, null);
-                    }
-                    loadProfile();
-                    ensureAdminAccess();
-                    showPage('homePage');
-                    updateAdminStats();
-                    document.getElementById('adminBtn').style.display = 'inline-block';
-                    if (isModerator(saved)) {
-                        document.getElementById('moderatorBtn').style.display = 'inline-block';
-                    }
-                    updateButtonsVisibility();
-                    document.querySelectorAll('.main-header .header-left button').forEach(btn => {
-                        if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
-                    });
-                    document.querySelector('.main-header .profile-btn').style.display = 'flex';
-                    document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
-                    document.querySelector('.main-header .store-btn').style.display = 'inline-block';
-                    document.querySelector('.main-header .age-btn').style.display = 'inline-block';
-                    document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
-                    document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
-                    document.getElementById('logoutBtn').style.display = 'inline-block';
-                }, 1200);
-            } else {
-                showAccountLoginPage();
-            }
-        });
-
-        console.log('❄️ برفی - کد هدیه "برفی" یکبار مصرف با ۳۰ سکه فعال شد.');
-        console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
-        console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
-        console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
-        console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
-    </script>
-
-</body>
-</html>
+                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان
