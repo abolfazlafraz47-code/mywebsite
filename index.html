@@ -2689,11 +2689,11 @@
                 </div>
             </div>
 
-            <!-- ===== اخطار برای کاربر خاص (آیدی: RwuSYbgUUdA1Ta) ===== -->
+            <!-- ===== اخطار برای کاربر خاص ===== -->
             <div class="warning-banner" id="warningBanner">
                 <span class="warning-icon">⚠️</span>
-                <div class="warning-title">شما یک اخطار دریافت کردید</div>
-                <div class="warning-text">
+                <div class="warning-title" id="warningTitle">شما یک اخطار دریافت کردید</div>
+                <div class="warning-text" id="warningText">
                     به دلیل فحاشی و بی‌ادبی در چت عمومی، یک اخطار رسمی برای شما ثبت شده است.<br>
                     لطفاً از تکرار این رفتار خودداری کنید.
                 </div>
@@ -3526,16 +3526,29 @@
         }
 
         // ==========================================================
-        //  تابع نمایش اخطار برای کاربر خاص
+        //  تابع نمایش اخطار برای کاربر خاص (بروزرسانی شده)
         // ==========================================================
         function showWarningForUser() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const accountId = getUserAccountId(username);
 
-            if (accountId === "RwuSYbgUUdA1Ta") {
+            // اخطار برای کاربر با آیدی Rwvw83JJ5RD11E (تقلب در بازی)
+            if (accountId === "Rwvw83JJ5RD11E") {
+                const banner = document.getElementById('warningBanner');
+                const hasSeenWarning = localStorage.getItem('warningSeen_Rwvw83JJ5RD11E');
+                if (!hasSeenWarning) {
+                    document.getElementById('warningTitle').textContent = 'شما یک اخطار دریافت کردید';
+                    document.getElementById('warningText').innerHTML = 'به دلیل تقلب در بازی، یک اخطار رسمی برای شما ثبت شده است.<br>لطفاً از تکرار این رفتار خودداری کنید.';
+                    banner.classList.add('show');
+                }
+            }
+            // اخطار برای کاربر با آیدی RwuSYbgUUdA1Ta (فحاشی)
+            else if (accountId === "RwuSYbgUUdA1Ta") {
                 const banner = document.getElementById('warningBanner');
                 const hasSeenWarning = localStorage.getItem('warningSeen_RwuSYbgUUdA1Ta');
                 if (!hasSeenWarning) {
+                    document.getElementById('warningTitle').textContent = 'شما یک اخطار دریافت کردید';
+                    document.getElementById('warningText').innerHTML = 'به دلیل فحاشی و بی‌ادبی در چت عمومی، یک اخطار رسمی برای شما ثبت شده است.<br>لطفاً از تکرار این رفتار خودداری کنید.';
                     banner.classList.add('show');
                 }
             }
@@ -3544,7 +3557,15 @@
         function dismissWarning() {
             const banner = document.getElementById('warningBanner');
             banner.classList.remove('show');
-            localStorage.setItem('warningSeen_RwuSYbgUUdA1Ta', 'true');
+
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const accountId = getUserAccountId(username);
+
+            if (accountId === "Rwvw83JJ5RD11E") {
+                localStorage.setItem('warningSeen_Rwvw83JJ5RD11E', 'true');
+            } else if (accountId === "RwuSYbgUUdA1Ta") {
+                localStorage.setItem('warningSeen_RwuSYbgUUdA1Ta', 'true');
+            }
         }
 
         // ===== خروج از اکانت =====
@@ -5001,6 +5022,7 @@
         console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
         console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
         console.log('⚠️ کاربر با آیدی RwuSYbgUUdA1Ta یک اخطار دریافت میکند.');
+        console.log('⚠️ کاربر با آیدی Rwvw83JJ5RD11E به دلیل تقلب در بازی اخطار دریافت میکند.');
     </script>
 
 </body>
