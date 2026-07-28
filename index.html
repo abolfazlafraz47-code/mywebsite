@@ -642,6 +642,12 @@
             display: none;
             width: 100%;
         }
+        .gift-box .gift-result.success {
+            display: block;
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
         .gift-box .gift-result.error {
             display: block;
             background: rgba(255, 107, 107, 0.1);
@@ -3099,7 +3105,7 @@
         }
 
         // ==========================================================
-        //  تابع بررسی کد هدیه (با محدودیت زمانی تا ساعت ۱۲:۳۰)
+        //  تابع بررسی کد هدیه (با محدودیت زمانی)
         // ==========================================================
         function checkGiftCode() {
             const input = document.getElementById('giftCodeInputUser');
@@ -3127,9 +3133,43 @@
                 return;
             }
 
-            // ۳. کد ویژه "برفی" – یکبار مصرف با جایزه ۳۰ سکه و محدودیت زمانی
+            // ۳. کد ویژه "80" - جایزه ۸۰ سکه (محدودیت تا ساعت ۲۰:۵۰ و یکبار مصرف)
+            if (code === '80') {
+                // بررسی محدودیت زمانی (تا ساعت ۲۰:۵۰)
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const currentTime = hours * 60 + minutes;
+                const expiryTime = 20 * 60 + 50; // ۲۰:۵۰ = 1250 دقیقه از نیمه‌شب
+
+                if (currentTime > expiryTime) {
+                    result.className = 'gift-result error';
+                    result.style.display = 'block';
+                    textEl.textContent = '⏰ کد هدیه منقضی شده است!';
+                    prizeEl.textContent = '🕐 این کد فقط تا ساعت ۲۰:۵۰ قابل استفاده است.';
+                    return;
+                }
+
+                if (hasUsedGiftCode(username, '80')) {
+                    result.className = 'gift-result error';
+                    result.style.display = 'block';
+                    textEl.textContent = '⚠️ کد هدیه را قبلاً استفاده کردید!';
+                    prizeEl.textContent = '';
+                    return;
+                } else {
+                    addUserCoins(username, 80);
+                    addUsedGiftCode(username, '80');
+                    updateCoinDisplay();
+                    result.className = 'gift-result success';
+                    result.style.display = 'block';
+                    textEl.textContent = '🎉 کد هدیه با موفقیت اعمال شد!';
+                    prizeEl.textContent = '🪙 +۸۰ سکه به حساب شما اضافه شد.';
+                    return;
+                }
+            }
+
+            // ۴. کد ویژه "برفی" – یکبار مصرف با جایزه ۳۰ سکه (محدودیت تا ساعت ۱۲:۳۰)
             if (code === 'برفی') {
-                // بررسی محدودیت زمانی (تا ساعت ۱۲:۳۰)
                 const now = new Date();
                 const hours = now.getHours();
                 const minutes = now.getMinutes();
@@ -3154,7 +3194,7 @@
                     addUserCoins(username, 30);
                     addUsedGiftCode(username, 'برفی');
                     updateCoinDisplay();
-                    result.className = 'gift-result error';
+                    result.className = 'gift-result success';
                     result.style.display = 'block';
                     textEl.textContent = '🎉 کد هدیه با موفقیت اعمال شد!';
                     prizeEl.textContent = '🪙 +۳۰ سکه به حساب شما اضافه شد.';
@@ -3162,7 +3202,7 @@
                 }
             }
 
-            // ۴. کد عمومی (تنظیم‌شده توسط ادمین)
+            // ۵. کد عمومی (تنظیم‌شده توسط ادمین)
             const correctCode = getCurrentGiftCode();
             if (code === correctCode) {
                 const prize = getCurrentGiftPrize();
@@ -3171,13 +3211,14 @@
                     addUserCoins(username, prizeNumber);
                     updateCoinDisplay();
                 }
-                result.className = 'gift-result error';
+                result.className = 'gift-result success';
                 result.style.display = 'block';
                 textEl.textContent = '✅ کد هدیه درست است!';
                 prizeEl.textContent = `🎁 جایزه شما: ${prize}`;
                 return;
             }
 
+            // ۶. کد ناشناخته
             result.className = 'gift-result error';
             result.style.display = 'block';
             textEl.textContent = '❌ کد هدیه اشتباه است!';
@@ -3491,10 +3532,8 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             const accountId = getUserAccountId(username);
 
-            // اگر کاربر با آیدی RwuSYbgUUdA1Ta وارد شده باشه
             if (accountId === "RwuSYbgUUdA1Ta") {
                 const banner = document.getElementById('warningBanner');
-                // بررسی اینکه کاربر قبلاً اخطار رو ندیده باشه (ذخیره در localStorage)
                 const hasSeenWarning = localStorage.getItem('warningSeen_RwuSYbgUUdA1Ta');
                 if (!hasSeenWarning) {
                     banner.classList.add('show');
@@ -3505,7 +3544,6 @@
         function dismissWarning() {
             const banner = document.getElementById('warningBanner');
             banner.classList.remove('show');
-            // ذخیره میکنیم که کاربر اخطار رو دیده
             localStorage.setItem('warningSeen_RwuSYbgUUdA1Ta', 'true');
         }
 
@@ -3533,7 +3571,6 @@
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
-                // مخفی کردن اخطار هنگام خروج
                 document.getElementById('warningBanner').classList.remove('show');
             }
         }
@@ -3590,7 +3627,6 @@
                 detectDevice();
                 setupStartButton();
                 loadProfile();
-                // نمایش اخطار برای کاربر خاص
                 showWarningForUser();
                 document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                     if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
@@ -4958,10 +4994,10 @@
             }
         });
 
-        console.log('❄️ برفی - کد هدیه "برفی" یکبار مصرف با ۳۰ سکه فعال شد.');
-        console.log('⏰ کد هدیه "برفی" فقط تا ساعت ۱۲:۳۰ قابل استفاده است.');
+        console.log('❄️ برفی');
+        console.log('🎁 کد هدیه "80" تا ساعت ۲۰:۵۰ قابل استفاده است - جایزه ۸۰ سکه');
+        console.log('🎁 کد هدیه "برفی" تا ساعت ۱۲:۳۰ قابل استفاده است - جایزه ۳۰ سکه');
         console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
-        console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
         console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
         console.log('⚠️ کاربر با آیدی RwuSYbgUUdA1Ta یک اخطار دریافت میکند.');
