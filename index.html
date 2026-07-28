@@ -3542,6 +3542,16 @@
                     banner.classList.add('show');
                 }
             }
+            // اخطار برای کاربر با نام کاربری "مسیحا" (تقلب در بازی)
+            else if (username === "مسیحا") {
+                const banner = document.getElementById('warningBanner');
+                const hasSeenWarning = localStorage.getItem('warningSeen_مسیحا');
+                if (!hasSeenWarning) {
+                    document.getElementById('warningTitle').textContent = 'شما یک اخطار دریافت کردید';
+                    document.getElementById('warningText').innerHTML = 'به دلیل تقلب در بازی، یک اخطار رسمی برای شما ثبت شده است.<br>لطفاً از تکرار این رفتار خودداری کنید.';
+                    banner.classList.add('show');
+                }
+            }
             // اخطار برای کاربر با آیدی RwuSYbgUUdA1Ta (فحاشی)
             else if (accountId === "RwuSYbgUUdA1Ta") {
                 const banner = document.getElementById('warningBanner');
@@ -3563,6 +3573,8 @@
 
             if (accountId === "Rwvw83JJ5RD11E") {
                 localStorage.setItem('warningSeen_Rwvw83JJ5RD11E', 'true');
+            } else if (username === "مسیحا") {
+                localStorage.setItem('warningSeen_مسیحا', 'true');
             } else if (accountId === "RwuSYbgUUdA1Ta") {
                 localStorage.setItem('warningSeen_RwuSYbgUUdA1Ta', 'true');
             }
@@ -5023,6 +5035,7 @@
         console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
         console.log('⚠️ کاربر با آیدی RwuSYbgUUdA1Ta یک اخطار دریافت میکند.');
         console.log('⚠️ کاربر با آیدی Rwvw83JJ5RD11E به دلیل تقلب در بازی اخطار دریافت میکند.');
+        console.log('⚠️ کاربر "مسیحا" به دلیل تقلب در بازی اخطار دریافت میکند.');
     </script>
 
 </body>
