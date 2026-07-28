@@ -4779,4 +4779,125 @@
                         goalText.textContent = '🏆 شما برنده شدید!';
                         goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
                         goalMsg.style.display = 'block';
-                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان
+                        document.getElementById('footballStatus').textContent = '🏆 شما قهرمان شدید!';
+                    }, 800);
+                } else if (footballState.robotScore >= 3) {
+                    setTimeout(() => {
+                        goalText.textContent = '😔 ربات برنده شد!';
+                        goalSub.textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
+                        goalMsg.style.display = 'block';
+                        document.getElementById('footballStatus').textContent = '😔 ربات قهرمان شد!';
+                    }, 800);
+                }
+                disableBallDrag();
+            }
+        }
+
+        function resetFootballGame() {
+            document.getElementById('goalMessage').style.display = 'none';
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.ballX = 50;
+            footballState.ballY = 50;
+            footballState.hasStarted = false;
+            footballState.playerScore = 0;
+            footballState.robotScore = 0;
+            updateScoreDisplay();
+            const ball = document.getElementById('ball');
+            ball.style.left = '50%';
+            ball.style.top = '50%';
+            document.getElementById('footballStatus').textContent = '🔄 بازی جدید! کشور خود را انتخاب کنید';
+            document.getElementById('turnText').textContent = '⏳ انتخاب کشور';
+            document.getElementById('playerTeam').classList.remove('active');
+            document.getElementById('robotTeam').classList.remove('active');
+            disableBallDrag();
+            showPage('countrySelectPage');
+            renderCountries();
+        }
+
+        function resetFootballGameState() {
+            footballState.isGameOver = false;
+            footballState.isGoal = false;
+            footballState.isDragging = false;
+            footballState.hasStarted = false;
+            document.getElementById('goalMessage').style.display = 'none';
+            disableBallDrag();
+        }
+
+        // ==========================================================
+        //  بارگذاری اولیه
+        // ==========================================================
+        window.addEventListener('load', function() {
+            document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
+            document.getElementById('registerBtn').addEventListener('click', registerAccount);
+            document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
+            document.getElementById('confirmAgeBtn').addEventListener('click', confirmAge);
+
+            document.getElementById('loginPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginWithAccount();
+            });
+            document.getElementById('registerPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') registerAccount();
+            });
+            document.getElementById('newPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') createPassword();
+            });
+            document.getElementById('addAdminIdInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addAdminById();
+            });
+
+            const saved = localStorage.getItem('username');
+            if (saved && saved.trim() !== '') {
+                if (isUserBanned(saved)) {
+                    document.getElementById('accountLoginPage').style.display = 'none';
+                    document.getElementById('registerPage').style.display = 'none';
+                    return;
+                }
+                document.getElementById('accountLoginPage').style.display = 'none';
+                document.getElementById('registerPage').style.display = 'none';
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('displayUsername').textContent = saved;
+                    const existingId = getUserAccountId(saved);
+                    if (!existingId) {
+                        const newId = generateRandomId();
+                        const pass = getUserPasswordByUsername(saved);
+                        setUserData(saved, pass || '', newId, 0, null);
+                    }
+                    loadProfile();
+                    ensureAdminAccess();
+                    showPage('homePage');
+                    updateAdminStats();
+                    document.getElementById('adminBtn').style.display = 'inline-block';
+                    if (isModerator(saved)) {
+                        document.getElementById('moderatorBtn').style.display = 'inline-block';
+                    }
+                    updateButtonsVisibility();
+                    document.querySelectorAll('.main-header .header-left button').forEach(btn => {
+                        if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
+                    });
+                    document.querySelector('.main-header .profile-btn').style.display = 'flex';
+                    document.querySelector('.main-header .create-pass-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .store-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .age-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
+                    document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
+                    document.getElementById('logoutBtn').style.display = 'inline-block';
+                }, 1200);
+            } else {
+                showAccountLoginPage();
+            }
+        });
+
+        console.log('❄️ برفی - کد هدیه "برفی" یکبار مصرف با ۳۰ سکه فعال شد.');
+        console.log('⏰ کد هدیه "برفی" فقط تا ساعت ۱۲:۳۰ قابل استفاده است.');
+        console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
+        console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
+        console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
+        console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
+    </script>
+
+</body>
+</html>
