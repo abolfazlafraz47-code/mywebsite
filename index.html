@@ -134,25 +134,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: #e0f0ff;
         }
-        .main-header .header-btn {
-            background: rgba(255, 255, 255, 0.07);
-            color: #c8dfff;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            backdrop-filter: blur(4px);
-        }
-        .main-header .header-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 20px rgba(100, 200, 255, 0.2);
-            border-color: rgba(100, 200, 255, 0.3);
-        }
 
         .main-header .coin-display {
             background: rgba(255, 215, 0, 0.12);
@@ -366,6 +347,63 @@
         .main-header .create-pass-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
+        }
+
+        /* ===== اخطار برای کاربر خاص ===== */
+        .warning-banner {
+            display: none;
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid rgba(255, 107, 107, 0.4);
+            border-radius: 16px;
+            padding: 20px 18px;
+            margin-bottom: 16px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            animation: shakeWarning 0.5s ease;
+        }
+        .warning-banner.show {
+            display: block;
+        }
+        .warning-banner .warning-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .warning-banner .warning-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 6px;
+        }
+        .warning-banner .warning-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        .warning-banner .warning-dismiss {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 8px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: none;
+        }
+        .warning-banner .warning-dismiss:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+        @keyframes shakeWarning {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-4px); }
+            100% { transform: translateX(0); }
         }
 
         /* ===== صفحات با افکت شیشه‌ای ===== */
@@ -603,12 +641,6 @@
             font-weight: 700;
             display: none;
             width: 100%;
-        }
-        .gift-box .gift-result.success {
-            display: block;
-            background: rgba(46, 204, 113, 0.1);
-            border: 2px solid rgba(46, 204, 113, 0.3);
-            color: #2ecc71;
         }
         .gift-box .gift-result.error {
             display: block;
@@ -2651,6 +2683,17 @@
                 </div>
             </div>
 
+            <!-- ===== اخطار برای کاربر خاص (آیدی: RwuSYbgUUdA1Ta) ===== -->
+            <div class="warning-banner" id="warningBanner">
+                <span class="warning-icon">⚠️</span>
+                <div class="warning-title">شما یک اخطار دریافت کردید</div>
+                <div class="warning-text">
+                    به دلیل فحاشی و بی‌ادبی در چت عمومی، یک اخطار رسمی برای شما ثبت شده است.<br>
+                    لطفاً از تکرار این رفتار خودداری کنید.
+                </div>
+                <button class="warning-dismiss" onclick="dismissWarning()">✅ فهمیدم</button>
+            </div>
+
             <!-- صفحه اصلی -->
             <div id="homePage">
                 <div id="deviceInfo"><span class="device-icon" id="deviceIcon">📱</span><span id="deviceName">گوشی</span></div>
@@ -3090,8 +3133,8 @@
                 const now = new Date();
                 const hours = now.getHours();
                 const minutes = now.getMinutes();
-                const currentTime = hours * 60 + minutes; // تبدیل به دقیقه از نیمه‌شب
-                const expiryTime = 12 * 60 + 30; // ۱۲:۳۰ = 750 دقیقه از نیمه‌شب
+                const currentTime = hours * 60 + minutes;
+                const expiryTime = 12 * 60 + 30;
 
                 if (currentTime > expiryTime) {
                     result.className = 'gift-result error';
@@ -3101,7 +3144,6 @@
                     return;
                 }
 
-                // بررسی اینکه کاربر قبلاً این کد رو استفاده کرده یا نه
                 if (hasUsedGiftCode(username, 'برفی')) {
                     result.className = 'gift-result error';
                     result.style.display = 'block';
@@ -3109,13 +3151,10 @@
                     prizeEl.textContent = '';
                     return;
                 } else {
-                    // اضافه کردن ۳۰ سکه به حساب کاربر
                     addUserCoins(username, 30);
-                    // ثبت کد به عنوان استفاده‌شده برای این کاربر
                     addUsedGiftCode(username, 'برفی');
-                    // به‌روزرسانی نمایش سکه
                     updateCoinDisplay();
-                    result.className = 'gift-result success';
+                    result.className = 'gift-result error';
                     result.style.display = 'block';
                     textEl.textContent = '🎉 کد هدیه با موفقیت اعمال شد!';
                     prizeEl.textContent = '🪙 +۳۰ سکه به حساب شما اضافه شد.';
@@ -3123,7 +3162,7 @@
                 }
             }
 
-            // ۴. کد عمومی (تنظیم‌شده توسط ادمین) - مثل "1234" (بدون محدودیت زمانی)
+            // ۴. کد عمومی (تنظیم‌شده توسط ادمین)
             const correctCode = getCurrentGiftCode();
             if (code === correctCode) {
                 const prize = getCurrentGiftPrize();
@@ -3132,14 +3171,13 @@
                     addUserCoins(username, prizeNumber);
                     updateCoinDisplay();
                 }
-                result.className = 'gift-result success';
+                result.className = 'gift-result error';
                 result.style.display = 'block';
                 textEl.textContent = '✅ کد هدیه درست است!';
                 prizeEl.textContent = `🎁 جایزه شما: ${prize}`;
                 return;
             }
 
-            // ۵. کد ناشناخته
             result.className = 'gift-result error';
             result.style.display = 'block';
             textEl.textContent = '❌ کد هدیه اشتباه است!';
@@ -3338,7 +3376,7 @@
             if (confirm('آیا مطمئن هستید که ۲۰۰ سکه برای خرید ۱ ماه سوپر ادمین خرج کنید؟')) {
                 if (removeUserCoins(username, 200)) {
                     const users = getUsersData();
-                    const newExpiry = Date.now() + 30 * 24 * 60 * 60 * 1000; // 1 ماه
+                    const newExpiry = Date.now() + 30 * 24 * 60 * 60 * 1000;
                     users[username].superAdminExpiry = newExpiry;
                     setUsersData(users);
                     alert('✅ تبریک! دسترسی سوپر ادمین به مدت ۱ ماه برای شما فعال شد.');
@@ -3446,6 +3484,31 @@
             return accountId === "RwuSYbgUUdA1Ta";
         }
 
+        // ==========================================================
+        //  تابع نمایش اخطار برای کاربر خاص
+        // ==========================================================
+        function showWarningForUser() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const accountId = getUserAccountId(username);
+
+            // اگر کاربر با آیدی RwuSYbgUUdA1Ta وارد شده باشه
+            if (accountId === "RwuSYbgUUdA1Ta") {
+                const banner = document.getElementById('warningBanner');
+                // بررسی اینکه کاربر قبلاً اخطار رو ندیده باشه (ذخیره در localStorage)
+                const hasSeenWarning = localStorage.getItem('warningSeen_RwuSYbgUUdA1Ta');
+                if (!hasSeenWarning) {
+                    banner.classList.add('show');
+                }
+            }
+        }
+
+        function dismissWarning() {
+            const banner = document.getElementById('warningBanner');
+            banner.classList.remove('show');
+            // ذخیره میکنیم که کاربر اخطار رو دیده
+            localStorage.setItem('warningSeen_RwuSYbgUUdA1Ta', 'true');
+        }
+
         // ===== خروج از اکانت =====
         function logoutAccount() {
             if (confirm('آیا از خروج از اکانت خود مطمئن هستید؟')) {
@@ -3470,6 +3533,8 @@
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
+                // مخفی کردن اخطار هنگام خروج
+                document.getElementById('warningBanner').classList.remove('show');
             }
         }
 
@@ -3525,6 +3590,8 @@
                 detectDevice();
                 setupStartButton();
                 loadProfile();
+                // نمایش اخطار برای کاربر خاص
+                showWarningForUser();
                 document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                     if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                 });
@@ -3793,7 +3860,7 @@
 
             const newId = generateRandomId();
             addUsername(username);
-            setUserData(username, password, newId, 100, null); // ۱۰۰ سکه اولیه
+            setUserData(username, password, newId, 100, null);
 
             status.className = 'status-msg success';
             status.textContent = '✅ ثبت نام موفق! در حال انتقال...';
@@ -4105,7 +4172,7 @@
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username || username === 'کاربر') return;
 
-            const reward = Math.floor(Math.random() * 21) + 5; // 5 تا 25
+            const reward = Math.floor(Math.random() * 21) + 5;
             addUserCoins(username, reward);
             updateCoinDisplay();
 
@@ -4452,7 +4519,7 @@
         }
 
         // ==========================================================
-        //  بازی فوتبال کشوری (بدون تغییر در سکه)
+        //  بازی فوتبال کشوری
         // ==========================================================
         const countries = [
             { name: 'ایران', flag: '🇮🇷' },
@@ -4897,6 +4964,7 @@
         console.log('🪟 دکمه شروع در ویندوز 10/11 فقط با کلید E فعال است.');
         console.log('👑 کاربران میتوانند با ۲۰۰ سکه، ۱ ماه سوپر ادمین بخرند.');
         console.log('✅ کاربر با آیدی RwuSYbgUUdA1Ta به پنل ادمینیتور دسترسی دارد.');
+        console.log('⚠️ کاربر با آیدی RwuSYbgUUdA1Ta یک اخطار دریافت میکند.');
     </script>
 
 </body>
