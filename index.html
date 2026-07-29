@@ -769,6 +769,12 @@
             font-weight: 700;
             color: #ffd700;
         }
+        .shooting-game-box .shooting-header .shooting-health {
+            margin-top: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
 
         .weapon-select {
             display: flex;
@@ -3421,6 +3427,9 @@
                     <button type="button" onclick="goToGame()">🚪 ورود به بازی دوز آفلاین</button>
                     <br>
                     <button type="button" onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
+                    <br>
+                    <!-- دکمه تفنگی درست زیر فوتبال کشوری -->
+                    <button type="button" onclick="goToShootingGame()" style="background:linear-gradient(135deg,#ff6b6b,#ffd700);color:#1a1a3a;">🔫 ورود به بازی تفنگی</button>
                     <br><br>
                     <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -3451,7 +3460,7 @@
                 </div>
             </div>
 
-            <!-- بازی تیراندازی -->
+            <!-- بازی تیراندازی (با سلامتی و شلیک ربات‌ها) -->
             <div id="shootingGamePage" style="display:none;">
                 <div class="shooting-game-box">
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
@@ -3460,7 +3469,9 @@
                         <div class="shooting-stats">
                             <span>🎯 کشته‌ها: <span id="shootingKills">0</span>/9</span>
                             <span>💀 باقی‌مانده: <span id="shootingRemaining">9</span></span>
+                            <span>❤️ جان شما: <span id="shootingHealth">5</span></span>
                         </div>
+                        <div class="shooting-health" id="healthBar">🩸 سلامتی: ████████</div>
                     </div>
 
                     <div class="weapon-select" id="weaponSelect">
@@ -5261,7 +5272,7 @@
         }
 
         // ==========================================================
-        //  بازی تیراندازی با تفنگ
+        //  بازی تیراندازی با تفنگ (با سلامتی و شلیک ربات‌ها)
         // ==========================================================
         let shootingState = {
             selectedWeapon: null,
@@ -5269,11 +5280,14 @@
             kills: 0,
             isGameActive: false,
             totalRobots: 9,
+            userHealth: 5,
+            maxHealth: 5,
             weapons: {
                 pistol: { name: 'تپانچه', damage: 1, emoji: '🔫', color: '#4facfe' },
                 shotgun: { name: 'ساچمه‌ای', damage: 2, emoji: '💥', color: '#ff6b6b' },
                 sniper: { name: 'تک‌تیر', damage: 3, emoji: '🎯', color: '#ffd700' }
-            }
+            },
+            robotShootTimer: null
         };
 
         function goToShootingGame() {
@@ -5286,20 +5300,25 @@
             shootingState.robots = [];
             shootingState.kills = 0;
             shootingState.isGameActive = false;
+            shootingState.userHealth = shootingState.maxHealth;
             document.getElementById('shootingKills').textContent = '0';
             document.getElementById('shootingRemaining').textContent = '9';
+            document.getElementById('shootingHealth').textContent = shootingState.userHealth;
+            updateHealthBar();
             document.getElementById('shootingStatus').textContent = '🔫 یک تفنگ انتخاب کنید و شروع کنید!';
             document.getElementById('shootingStartBtn').disabled = true;
             document.getElementById('shootingStartBtn').textContent = '🚀 شروع بازی';
+            if (shootingState.robotShootTimer) {
+                clearInterval(shootingState.robotShootTimer);
+                shootingState.robotShootTimer = null;
+            }
 
-            // Reset weapon buttons
             document.querySelectorAll('.weapon-btn').forEach(btn => {
                 btn.classList.remove('selected');
                 btn.disabled = false;
             });
             shootingState.selectedWeapon = null;
 
-            // Create 9 robots
             for (let i = 0; i < 9; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'arena-cell';
@@ -5316,6 +5335,15 @@
                 grid.appendChild(cell);
                 shootingState.robots.push({ alive: true, element: robot });
             }
+        }
+
+        function updateHealthBar() {
+            const bar = document.getElementById('healthBar');
+            const filled = '█'.repeat(shootingState.userHealth);
+            const empty = '░'.repeat(shootingState.maxHealth - shootingState.userHealth);
+            bar.textContent = `🩸 سلامتی: ${filled}${empty}`;
+            if (shootingState.userHealth <= 1) bar.style.color = '#ff6b6b';
+            else bar.style.color = '#ffd700';
         }
 
         function selectWeapon(weapon) {
@@ -5339,7 +5367,7 @@
             }
             if (shootingState.isGameActive) return;
 
-            // Reset robots
+            // Reset
             shootingState.robots.forEach((r, i) => {
                 r.alive = true;
                 r.element.textContent = '🤖';
@@ -5349,13 +5377,23 @@
                 cell.style.background = 'rgba(255,255,255,0.02)';
             });
             shootingState.kills = 0;
+            shootingState.userHealth = shootingState.maxHealth;
             shootingState.isGameActive = true;
             document.getElementById('shootingKills').textContent = '0';
             document.getElementById('shootingRemaining').textContent = '9';
+            document.getElementById('shootingHealth').textContent = shootingState.userHealth;
+            updateHealthBar();
             document.getElementById('shootingStatus').textContent = '🎯 هدف‌ها را بزنید!';
             document.getElementById('shootingStartBtn').disabled = true;
             document.getElementById('shootingStartBtn').textContent = '⏳ در حال بازی...';
             document.querySelectorAll('.weapon-btn').forEach(btn => btn.disabled = true);
+
+            // شروع تایمر شلیک ربات‌ها (هر ۲ ثانیه یک ربات شلیک می‌کند)
+            if (shootingState.robotShootTimer) clearInterval(shootingState.robotShootTimer);
+            shootingState.robotShootTimer = setInterval(() => {
+                if (!shootingState.isGameActive) return;
+                robotShoot();
+            }, 2000);
         }
 
         function shootRobot(index) {
@@ -5373,7 +5411,7 @@
             robot.element.className = 'robot dead';
             robot.element.dataset.alive = 'false';
 
-            // اثر شلیک
+            // افکت شلیک
             const cell = robot.element.parentElement;
             const effect = document.createElement('div');
             effect.className = 'shooting-effect';
@@ -5384,7 +5422,6 @@
             cell.appendChild(effect);
             setTimeout(() => effect.remove(), 400);
 
-            // افکت گلوله
             const trail = document.createElement('div');
             trail.className = 'bullet-trail';
             trail.style.left = Math.random() * 80 + 10 + '%';
@@ -5397,21 +5434,18 @@
             const remaining = 9 - shootingState.kills;
             document.getElementById('shootingRemaining').textContent = remaining;
 
-            // لرزش
-            robot.element.style.animation = 'robotHit 0.3s ease';
-            setTimeout(() => {
-                robot.element.style.animation = '';
-            }, 300);
-
             if (shootingState.kills === 9) {
                 // برنده شد!
                 shootingState.isGameActive = false;
+                if (shootingState.robotShootTimer) {
+                    clearInterval(shootingState.robotShootTimer);
+                    shootingState.robotShootTimer = null;
+                }
                 document.getElementById('shootingStatus').innerHTML = '🎉 <span class="win">همه ربات‌ها را کشتید! +۵۰ سکه</span>';
                 document.getElementById('shootingStartBtn').disabled = false;
                 document.getElementById('shootingStartBtn').textContent = '🔄 بازی جدید';
                 document.querySelectorAll('.weapon-btn').forEach(btn => btn.disabled = false);
 
-                // جایزه
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (username && username !== 'کاربر') {
                     addUserCoins(username, 50);
@@ -5423,12 +5457,60 @@
             }
         }
 
+        // ربات‌ها به سمت کاربر شلیک می‌کنند
+        function robotShoot() {
+            if (!shootingState.isGameActive) return;
+            const aliveRobots = shootingState.robots.filter(r => r.alive);
+            if (aliveRobots.length === 0) return;
+
+            // ۵۰٪ احتمال شلیک
+            if (Math.random() < 0.5) return;
+
+            const randomRobot = aliveRobots[Math.floor(Math.random() * aliveRobots.length)];
+            const cell = randomRobot.element.parentElement;
+
+            // افکت شلیک ربات
+            const effect = document.createElement('div');
+            effect.className = 'shooting-effect';
+            effect.textContent = '🔫';
+            effect.style.left = '50%';
+            effect.style.top = '50%';
+            effect.style.transform = 'translate(-50%, -50%)';
+            effect.style.color = '#ff6b6b';
+            cell.appendChild(effect);
+            setTimeout(() => effect.remove(), 400);
+
+            // کاهش سلامتی کاربر
+            shootingState.userHealth = Math.max(0, shootingState.userHealth - 1);
+            document.getElementById('shootingHealth').textContent = shootingState.userHealth;
+            updateHealthBar();
+
+            if (shootingState.userHealth <= 0) {
+                // کاربر کشته شد
+                shootingState.isGameActive = false;
+                if (shootingState.robotShootTimer) {
+                    clearInterval(shootingState.robotShootTimer);
+                    shootingState.robotShootTimer = null;
+                }
+                document.getElementById('shootingStatus').innerHTML = '💀 <span class="lose">شما کشته شدید! ربات‌ها برنده شدند.</span>';
+                document.getElementById('shootingStartBtn').disabled = false;
+                document.getElementById('shootingStartBtn').textContent = '🔄 بازی جدید';
+                document.querySelectorAll('.weapon-btn').forEach(btn => btn.disabled = false);
+                alert('💀 شما توسط ربات‌ها کشته شدید!');
+            } else {
+                document.getElementById('shootingStatus').textContent = `💥 ربات به شما شلیک کرد! (${shootingState.userHealth} جان باقی)`;
+                setTimeout(() => {
+                    if (shootingState.isGameActive) {
+                        document.getElementById('shootingStatus').textContent = `🎯 ${shootingState.kills} تا کشته شدی! (${9 - shootingState.kills} تا باقی)`;
+                    }
+                }, 1000);
+            }
+        }
+
         // ==========================================================
         //  بازی دوز با ربات هوشمندتر (Minimax ساده)
         // ==========================================================
-        // ربات با هوش بیشتر - از minimax با عمق 2 استفاده میکنه
         function getSmartRobotMove(board) {
-            // بررسی برد ربات
             for (let i = 0; i < 9; i++) {
                 if (board[i] === '') {
                     board[i] = 'O';
@@ -5439,7 +5521,6 @@
                     board[i] = '';
                 }
             }
-            // جلوگیری از برد بازیکن
             for (let i = 0; i < 9; i++) {
                 if (board[i] === '') {
                     board[i] = 'X';
@@ -5450,14 +5531,12 @@
                     board[i] = '';
                 }
             }
-            // اولویت‌های مرکزی و گوشه‌ها
             const corners = [0, 2, 6, 8];
             const shuffledCorners = corners.sort(() => Math.random() - 0.5);
             for (let c of shuffledCorners) {
                 if (board[c] === '') return c;
             }
             if (board[4] === '') return 4;
-            // حرکت تصادفی
             const empty = board.reduce((acc, v, idx) => v === '' ? [...acc, idx] : acc, []);
             if (empty.length > 0) {
                 return empty[Math.floor(Math.random() * empty.length)];
@@ -5465,11 +5544,9 @@
             return -1;
         }
 
-        // بازنویسی تابع robotMove برای استفاده از هوش بیشتر
         const originalRobotMove = robotMove;
         robotMove = function() {
             if (gameOver) { isRobotTurn = false; return; }
-
             const move = getSmartRobotMove(board);
             if (move !== -1) {
                 applyRobotMove(move);
@@ -5481,7 +5558,7 @@
         // ==========================================================
         //  بازی فوتبال (بدون تغییر)
         // ==========================================================
-        // کد بازی فوتبال همانند قبل باقی می‌ماند - به دلیل حجم بالا حذف شده اما عملکرد کامل دارد
+        // (کد فوتبال به دلیل حجم بالا در اینجا حذف شده اما عملکرد کامل دارد)
 
         // ==========================================================
         //  سایر توابع
@@ -5513,6 +5590,10 @@
                 updateAdminStats();
             }
             resetFootballGameState();
+            if (shootingState.robotShootTimer) {
+                clearInterval(shootingState.robotShootTimer);
+                shootingState.robotShootTimer = null;
+            }
             showPage('homePage');
         }
 
@@ -5757,7 +5838,6 @@
 
         function robotMove() {
             if (gameOver) { isRobotTurn = false; return; }
-
             const move = getSmartRobotMove(board);
             if (move !== -1) {
                 applyRobotMove(move);
@@ -6264,6 +6344,7 @@
         console.log('👑 با ۴ جام یا اکانت ویژه، رنک هد ادمین و پنل اختصاصی فعال میشود.');
         console.log('⭐ اکانت ویژه با قیمت ۵,۰۰۰ سکه: روزی ۲۰ سکه، نام طلایی، قاب پروفایل و ...');
         console.log('🔫 بازی تیراندازی با تفنگ اضافه شد! با کشتن ۹ ربات، ۵۰ سکه جایزه بگیرید.');
+        console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
         console.log('🤖 ربات بازی دوز هوشمندتر شد!');
     </script>
 
