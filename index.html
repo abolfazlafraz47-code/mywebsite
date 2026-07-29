@@ -134,7 +134,7 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: #e0f0ff;
         }
-        /* نمایش جام در هدر */
+
         .main-header .trophy-display {
             display: inline-flex;
             align-items: center;
@@ -365,7 +365,60 @@
             box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
         }
 
-        /* ===== اخطار برای کاربر خاص ===== */
+        .main-header .head-admin-btn {
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.3);
+            display: none;
+        }
+        .main-header .head-admin-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.5);
+        }
+
+        /* ===== صفحه بن (فقط پیام بن) ===== */
+        #bannedPage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        #bannedPage .ban-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        #bannedPage .ban-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+        #bannedPage .ban-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+        #bannedPage .ban-timer {
+            margin-top: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* ===== اخطار ===== */
         .warning-banner {
             display: none;
             background: rgba(255, 107, 107, 0.15);
@@ -423,23 +476,10 @@
         }
 
         /* ===== صفحات با افکت شیشه‌ای ===== */
-        #loader,
-        #errorPage,
-        .box,
-        .menu-box,
-        .game-container,
-        .admin-panel-box,
-        .rank-box,
-        .profile-box,
-        .moderator-panel-box,
-        .country-select-box,
-        .football-game-box,
-        .gift-box,
-        .store-box,
-        .age-selection-box,
-        .create-pass-box,
-        .account-login-box,
-        .register-box,
+        #loader, #errorPage, .box, .menu-box, .game-container,
+        .admin-panel-box, .rank-box, .profile-box, .moderator-panel-box,
+        .country-select-box, .football-game-box, .gift-box, .store-box,
+        .age-selection-box, .create-pass-box, .account-login-box, .register-box,
         .head-admin-panel-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
@@ -548,21 +588,15 @@
             color: #2ecc71;
             cursor: default;
         }
-        .store-item .item-action.done:hover {
-            transform: none !important;
-        }
+        .store-item .item-action.done:hover { transform: none !important; }
         .store-status {
             margin-top: 10px;
             font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
             text-align: center;
         }
-        .store-status .active {
-            color: #2ecc71;
-        }
-        .store-status .expired {
-            color: #ff6b6b;
-        }
+        .store-status .active { color: #2ecc71; }
+        .store-status .expired { color: #ff6b6b; }
         .store-box .back-home-btn {
             margin-top: 20px;
             background: rgba(255, 255, 255, 0.06);
@@ -872,14 +906,8 @@
             font-weight: 600;
             display: none;
         }
-        .account-login-box .status-msg.error {
-            display: block;
-            color: #ff6b6b;
-        }
-        .account-login-box .status-msg.success {
-            display: block;
-            color: #2ecc71;
-        }
+        .account-login-box .status-msg.error { display: block; color: #ff6b6b; }
+        .account-login-box .status-msg.success { display: block; color: #2ecc71; }
         .account-login-box .switch-link {
             color: #4facfe;
             font-size: 14px;
@@ -977,14 +1005,8 @@
             font-weight: 600;
             display: none;
         }
-        .register-box .status-msg.error {
-            display: block;
-            color: #ff6b6b;
-        }
-        .register-box .status-msg.success {
-            display: block;
-            color: #2ecc71;
-        }
+        .register-box .status-msg.error { display: block; color: #ff6b6b; }
+        .register-box .status-msg.success { display: block; color: #2ecc71; }
         .register-box .switch-link {
             color: #4facfe;
             font-size: 14px;
@@ -1024,12 +1046,8 @@
             box-shadow: 0 0 40px rgba(79, 172, 254, 0.15);
         }
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         #loader .loading-text {
             font-size: 22px;
@@ -1045,21 +1063,11 @@
             animation: dots 1.5s infinite steps(1);
         }
         @keyframes dots {
-            0% {
-                content: '';
-            }
-            25% {
-                content: '.';
-            }
-            50% {
-                content: '..';
-            }
-            75% {
-                content: '...';
-            }
-            100% {
-                content: '';
-            }
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
         }
         #loader .sub-text {
             color: rgba(255, 255, 255, 0.4);
@@ -1115,20 +1123,9 @@
         }
 
         /* ===== صفحات داخلی ===== */
-        #homePage,
-        #menuPage,
-        #gamePage,
-        #adminPanel,
-        #rankPage,
-        #profilePage,
-        #moderatorPanel,
-        #countrySelectPage,
-        #footballGamePage,
-        #giftPage,
-        #storePage,
-        #ageSelectionPage,
-        #createPassPage,
-        #headAdminPanel {
+        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage,
+        #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage,
+        #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1138,14 +1135,8 @@
             position: relative;
         }
         @keyframes fadeSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         #deviceInfo {
@@ -1167,9 +1158,7 @@
             user-select: none;
             white-space: nowrap;
         }
-        #deviceInfo .device-icon {
-            font-size: 14px;
-        }
+        #deviceInfo .device-icon { font-size: 14px; }
 
         .box {
             padding: 32px 28px;
@@ -1203,9 +1192,7 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
-        .start-btn-wrapper .key-hint.show {
-            display: block;
-        }
+        .start-btn-wrapper .key-hint.show { display: block; }
         .start-btn-wrapper .start-btn {
             width: 100%;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
@@ -1366,12 +1353,8 @@
             box-shadow: 0 0 30px rgba(255, 107, 138, 0.1);
         }
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.08);
-            }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
         }
 
         .game-status {
@@ -1422,9 +1405,7 @@
             transform: scale(1.02);
             box-shadow: 0 0 30px rgba(79, 172, 254, 0.05);
         }
-        .cell:hover:not(.taken)::before {
-            opacity: 1;
-        }
+        .cell:hover:not(.taken)::before { opacity: 1; }
         .cell.taken {
             cursor: default;
             border-color: rgba(255, 255, 255, 0.02);
@@ -1596,14 +1577,8 @@
             color: rgba(255, 255, 255, 0.6);
             display: none;
         }
-        .admin-panel-box .add-admin-section .add-msg.success {
-            display: block;
-            color: #2ecc71;
-        }
-        .admin-panel-box .add-admin-section .add-msg.error {
-            display: block;
-            color: #ff6b6b;
-        }
+        .admin-panel-box .add-admin-section .add-msg.success { display: block; color: #2ecc71; }
+        .admin-panel-box .add-admin-section .add-msg.error { display: block; color: #ff6b6b; }
 
         .admin-panel-box .back-home-btn {
             margin-top: 20px;
@@ -2274,9 +2249,7 @@
             cursor: grab;
             overflow: hidden;
         }
-        .pitch:active {
-            cursor: grabbing;
-        }
+        .pitch:active { cursor: grabbing; }
         .pitch-center-circle {
             position: absolute;
             top: 50%;
@@ -2307,16 +2280,8 @@
             border-radius: 3px;
             opacity: 0.5;
         }
-        .goal-left {
-            left: -2px;
-            border-right: none;
-            border-radius: 4px 0 0 4px;
-        }
-        .goal-right {
-            right: -2px;
-            border-left: none;
-            border-radius: 0 4px 4px 0;
-        }
+        .goal-left { left: -2px; border-right: none; border-radius: 4px 0 0 4px; }
+        .goal-right { right: -2px; border-left: none; border-radius: 0 4px 4px 0; }
 
         .ball {
             position: absolute;
@@ -2339,9 +2304,7 @@
             touch-action: none;
             cursor: grab;
         }
-        .ball:active {
-            cursor: grabbing;
-        }
+        .ball:active { cursor: grabbing; }
 
         .goal-message {
             position: absolute;
@@ -2617,14 +2580,8 @@
             font-weight: 600;
             display: none;
         }
-        .create-pass-box .status-msg.success {
-            display: block;
-            color: #2ecc71;
-        }
-        .create-pass-box .status-msg.error {
-            display: block;
-            color: #ff6b6b;
-        }
+        .create-pass-box .status-msg.success { display: block; color: #2ecc71; }
+        .create-pass-box .status-msg.error { display: block; color: #ff6b6b; }
         .create-pass-box .back-home-btn {
             margin-top: 16px;
             background: rgba(255, 255, 255, 0.06);
@@ -2647,309 +2604,90 @@
 
         /* ===== واکنش‌گرایی ===== */
         @media(max-width:480px) {
-            .page-container {
-                max-width: 100%;
-            }
-            .main-header {
-                padding: 10px 14px;
-                border-radius: 16px;
-            }
-            .main-header .site-title {
-                font-size: 18px;
-            }
-            .main-header .user-name {
-                font-size: 12px;
-                padding: 3px 10px;
-            }
-            .main-header .header-btn,
-            .main-header .store-btn,
-            .main-header .age-btn,
-            .main-header .gift-btn,
-            .main-header .rank-btn,
-            .main-header .create-pass-btn,
-            .main-header .logout-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .admin-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .profile-btn {
-                font-size: 10px;
-                padding: 3px 10px 3px 6px;
-            }
-            .main-header .profile-btn .avatar {
-                width: 22px;
-                height: 22px;
-            }
-            .main-header .profile-btn .age-badge {
-                font-size: 8px;
-                padding: 0px 4px;
-            }
-            .main-header .coin-display {
-                font-size: 11px;
-                padding: 3px 10px;
-            }
-            .main-header .coin-display .coin-count {
-                font-size: 13px;
-            }
-            .main-header .trophy-display {
-                font-size: 11px;
-                padding: 2px 8px;
-            }
-            .main-header .trophy-display .trophy-count {
-                font-size: 12px;
-            }
-            .account-login-box,
-            .register-box {
-                padding: 30px 20px;
-                min-height: 350px;
-            }
-            .account-login-box h1,
-            .register-box h1 {
-                font-size: 32px;
-            }
-            .box {
-                padding: 24px 18px;
-            }
-            .menu-box {
-                padding: 28px 18px;
-            }
-            .menu-box button {
-                width: 100%;
-                font-size: 17px;
-            }
-            .game-container {
-                padding: 18px 14px 22px;
-            }
-            .board {
-                gap: 8px;
-                max-width: 240px;
-            }
-            .cell {
-                font-size: 38px;
-                border-radius: 12px;
-            }
-            .timer {
-                font-size: 22px;
-                padding: 3px 16px;
-                min-width: 70px;
-            }
-            .profile-box .avatar-upload .avatar-preview {
-                width: 90px;
-                height: 90px;
-            }
-            .admin-panel-box,
-            .rank-box,
-            .profile-box,
-            .moderator-panel-box,
-            .country-select-box,
-            .football-game-box,
-            .gift-box,
-            .store-box,
-            .age-selection-box,
-            .create-pass-box,
-            .head-admin-panel-box {
-                padding: 20px 14px;
-            }
-            .age-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 6px;
-            }
-            .age-btn {
-                font-size: 14px;
-                padding: 8px 0;
-            }
-            .country-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .country-btn {
-                font-size: 14px;
-                padding: 10px 4px;
-            }
-            .country-btn .flag {
-                font-size: 26px;
-            }
-            .pitch {
-                height: 260px;
-                max-width: 260px;
-            }
-            .ball {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            .scoreboard .team-info .flag {
-                font-size: 22px;
-            }
-            .scoreboard .score-center .score {
-                font-size: 22px;
-            }
-            .football-game-box .game-header h3 {
-                font-size: 17px;
-            }
-            .goal-message {
-                font-size: 18px;
-                padding: 12px 16px;
-                min-width: 120px;
-            }
-            #deviceInfo {
-                font-size: 10px;
-                padding: 2px 10px;
-                top: 8px;
-                left: 8px;
-            }
-            #deviceInfo .device-icon {
-                font-size: 12px;
-            }
-            .start-btn-wrapper .key-hint {
-                font-size: 11px;
-            }
-            .age-selection-box .action-row button {
-                font-size: 13px;
-                padding: 8px 14px;
-                min-width: 80px;
-            }
-            .create-pass-box .input-group input,
-            .account-login-box .input-group input,
-            .register-box .input-group input {
-                font-size: 14px;
-                padding: 10px 14px;
-            }
-            .profile-box .profile-info .info-item .value.id-value {
-                font-size: 12px;
-            }
-            .store-item .item-title {
-                font-size: 15px;
-            }
-            .store-item .item-price {
-                font-size: 13px;
-            }
-            .store-item .item-action {
-                font-size: 12px;
-                padding: 6px 16px;
-            }
+            .page-container { max-width: 100%; }
+            .main-header { padding: 10px 14px; border-radius: 16px; }
+            .main-header .site-title { font-size: 18px; }
+            .main-header .user-name { font-size: 12px; padding: 3px 10px; }
+            .main-header .header-btn, .main-header .store-btn, .main-header .age-btn,
+            .main-header .gift-btn, .main-header .rank-btn, .main-header .create-pass-btn,
+            .main-header .logout-btn { font-size: 10px; padding: 3px 10px; }
+            .main-header .admin-btn { font-size: 10px; padding: 3px 10px; }
+            .main-header .profile-btn { font-size: 10px; padding: 3px 10px 3px 6px; }
+            .main-header .profile-btn .avatar { width: 22px; height: 22px; }
+            .main-header .profile-btn .age-badge { font-size: 8px; padding: 0px 4px; }
+            .main-header .coin-display { font-size: 11px; padding: 3px 10px; }
+            .main-header .coin-display .coin-count { font-size: 13px; }
+            .main-header .trophy-display { font-size: 11px; padding: 2px 8px; }
+            .main-header .trophy-display .trophy-count { font-size: 12px; }
+            .main-header .head-admin-btn { font-size: 10px; padding: 3px 10px; }
+            .account-login-box, .register-box { padding: 30px 20px; min-height: 350px; }
+            .account-login-box h1, .register-box h1 { font-size: 32px; }
+            .box { padding: 24px 18px; }
+            .menu-box { padding: 28px 18px; }
+            .menu-box button { width: 100%; font-size: 17px; }
+            .game-container { padding: 18px 14px 22px; }
+            .board { gap: 8px; max-width: 240px; }
+            .cell { font-size: 38px; border-radius: 12px; }
+            .timer { font-size: 22px; padding: 3px 16px; min-width: 70px; }
+            .profile-box .avatar-upload .avatar-preview { width: 90px; height: 90px; }
+            .admin-panel-box, .rank-box, .profile-box, .moderator-panel-box,
+            .country-select-box, .football-game-box, .gift-box, .store-box,
+            .age-selection-box, .create-pass-box, .head-admin-panel-box { padding: 20px 14px; }
+            .age-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+            .age-btn { font-size: 14px; padding: 8px 0; }
+            .country-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .country-btn { font-size: 14px; padding: 10px 4px; }
+            .country-btn .flag { font-size: 26px; }
+            .pitch { height: 260px; max-width: 260px; }
+            .ball { width: 30px; height: 30px; font-size: 14px; }
+            .scoreboard .team-info .flag { font-size: 22px; }
+            .scoreboard .score-center .score { font-size: 22px; }
+            .football-game-box .game-header h3 { font-size: 17px; }
+            .goal-message { font-size: 18px; padding: 12px 16px; min-width: 120px; }
+            #deviceInfo { font-size: 10px; padding: 2px 10px; top: 8px; left: 8px; }
+            #deviceInfo .device-icon { font-size: 12px; }
+            .start-btn-wrapper .key-hint { font-size: 11px; }
+            .age-selection-box .action-row button { font-size: 13px; padding: 8px 14px; min-width: 80px; }
+            .create-pass-box .input-group input, .account-login-box .input-group input,
+            .register-box .input-group input { font-size: 14px; padding: 10px 14px; }
+            .profile-box .profile-info .info-item .value.id-value { font-size: 12px; }
+            .store-item .item-title { font-size: 15px; }
+            .store-item .item-price { font-size: 13px; }
+            .store-item .item-action { font-size: 12px; padding: 6px 16px; }
         }
         @media(max-width:380px) {
-            .main-header .site-title {
-                font-size: 15px;
-            }
-            .main-header .user-name {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            .main-header .header-btn,
-            .main-header .store-btn,
-            .main-header .age-btn,
-            .main-header .gift-btn,
-            .main-header .rank-btn,
-            .main-header .create-pass-btn,
-            .main-header .logout-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .admin-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .profile-btn {
-                font-size: 9px;
-                padding: 2px 8px 2px 4px;
-            }
-            .main-header .profile-btn .avatar {
-                width: 18px;
-                height: 18px;
-            }
-            .main-header .profile-btn .age-badge {
-                font-size: 7px;
-                padding: 0px 3px;
-            }
-            .main-header .coin-display {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            .main-header .coin-display .coin-count {
-                font-size: 11px;
-            }
-            .main-header .trophy-display {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-            .main-header .trophy-display .trophy-count {
-                font-size: 10px;
-            }
-            .account-login-box h1,
-            .register-box h1 {
-                font-size: 26px;
-            }
-            .board {
-                gap: 6px;
-                max-width: 200px;
-            }
-            .cell {
-                font-size: 30px;
-                border-radius: 10px;
-            }
-            .timer {
-                font-size: 18px;
-                padding: 2px 12px;
-                min-width: 60px;
-            }
-            .pitch {
-                height: 200px;
-                max-width: 200px;
-            }
-            .ball {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-            .scoreboard .team-info .flag {
-                font-size: 18px;
-            }
-            .scoreboard .score-center .score {
-                font-size: 18px;
-            }
-            #deviceInfo {
-                font-size: 9px;
-                padding: 2px 8px;
-                top: 6px;
-                left: 6px;
-            }
-            #deviceInfo .device-icon {
-                font-size: 10px;
-            }
-            .start-btn-wrapper .key-hint {
-                font-size: 10px;
-            }
-            .age-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 5px;
-            }
-            .age-btn {
-                font-size: 12px;
-                padding: 6px 0;
-            }
-            .age-selection-box .action-row button {
-                font-size: 12px;
-                padding: 6px 10px;
-                min-width: 60px;
-            }
-            .profile-box .profile-info .info-item .value.id-value {
-                font-size: 10px;
-            }
-            .store-item .item-title {
-                font-size: 13px;
-            }
-            .store-item .item-price {
-                font-size: 12px;
-            }
-            .store-item .item-action {
-                font-size: 11px;
-                padding: 4px 12px;
-            }
+            .main-header .site-title { font-size: 15px; }
+            .main-header .user-name { font-size: 10px; padding: 2px 8px; }
+            .main-header .header-btn, .main-header .store-btn, .main-header .age-btn,
+            .main-header .gift-btn, .main-header .rank-btn, .main-header .create-pass-btn,
+            .main-header .logout-btn { font-size: 9px; padding: 2px 8px; }
+            .main-header .admin-btn { font-size: 9px; padding: 2px 8px; }
+            .main-header .profile-btn { font-size: 9px; padding: 2px 8px 2px 4px; }
+            .main-header .profile-btn .avatar { width: 18px; height: 18px; }
+            .main-header .profile-btn .age-badge { font-size: 7px; padding: 0px 3px; }
+            .main-header .coin-display { font-size: 10px; padding: 2px 8px; }
+            .main-header .coin-display .coin-count { font-size: 11px; }
+            .main-header .trophy-display { font-size: 10px; padding: 2px 6px; }
+            .main-header .trophy-display .trophy-count { font-size: 10px; }
+            .main-header .head-admin-btn { font-size: 9px; padding: 2px 8px; }
+            .account-login-box h1, .register-box h1 { font-size: 26px; }
+            .board { gap: 6px; max-width: 200px; }
+            .cell { font-size: 30px; border-radius: 10px; }
+            .timer { font-size: 18px; padding: 2px 12px; min-width: 60px; }
+            .pitch { height: 200px; max-width: 200px; }
+            .ball { width: 24px; height: 24px; font-size: 10px; }
+            .scoreboard .team-info .flag { font-size: 18px; }
+            .scoreboard .score-center .score { font-size: 18px; }
+            #deviceInfo { font-size: 9px; padding: 2px 8px; top: 6px; left: 6px; }
+            #deviceInfo .device-icon { font-size: 10px; }
+            .start-btn-wrapper .key-hint { font-size: 10px; }
+            .age-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+            .age-btn { font-size: 12px; padding: 6px 0; }
+            .age-selection-box .action-row button { font-size: 12px; padding: 6px 10px; min-width: 60px; }
+            .profile-box .profile-info .info-item .value.id-value { font-size: 10px; }
+            .store-item .item-title { font-size: 13px; }
+            .store-item .item-price { font-size: 12px; }
+            .store-item .item-action { font-size: 11px; padding: 4px 12px; }
         }
     </style>
 </head>
@@ -3001,6 +2739,16 @@
             </div>
         </div>
 
+        <!-- ======== صفحه بن ======== -->
+        <div id="bannedPage">
+            <div class="account-login-box" style="min-height:300px;">
+                <div class="ban-icon">🚫</div>
+                <div class="ban-title">شما بن ۴۸ ساعته خوردید</div>
+                <div class="ban-text">به دلیل تخلف در بازی، دسترسی شما به مدت ۴۸ ساعت مسدود شده است.<br>لطفاً صبر کنید تا زمان بن تمام شود.</div>
+                <div class="ban-timer" id="banTimer">--:--:--</div>
+            </div>
+        </div>
+
         <!-- ======== صفحه لودینگ ======== -->
         <div id="loader" style="display:none;">
             <div class="spinner"></div>
@@ -3025,13 +2773,11 @@
                 <div class="header-left">
                     <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
 
-                    <!-- جام‌ها -->
                     <div class="trophy-display" id="trophyDisplay" style="display:none;">
                         <span class="trophy-icon">🏆</span>
                         <span class="trophy-count" id="trophyCount">0</span>
                     </div>
 
-                    <!-- سکه -->
                     <div class="coin-display">
                         <span class="coin-icon">🪙</span>
                         <span class="coin-count" id="coinCount">0</span>
@@ -3049,12 +2795,11 @@
                         پروفایل <span class="age-badge" id="profileAgeBadge"></span>
                     </button>
                     <button type="button" class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
-                    <!-- دکمه هد ادمین (فقط برای کسانی که جام ۴ دارند) -->
-                    <button type="button" class="head-admin-btn" id="headAdminBtn" onclick="openHeadAdminPanel()" style="display:none;background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#1a1a3a;border:none;padding:4px 14px;border-radius:30px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 12px rgba(255,215,0,0.3);">👑 هد ادمین</button>
+                    <button type="button" class="head-admin-btn" id="headAdminBtn" onclick="openHeadAdminPanel()">👑 هد ادمین</button>
                 </div>
             </div>
 
-            <!-- ===== اخطار برای کاربر خاص ===== -->
+            <!-- ===== اخطار ===== -->
             <div class="warning-banner" id="warningBanner">
                 <span class="warning-icon">⚠️</span>
                 <div class="warning-title" id="warningTitle">شما یک اخطار دریافت کردید</div>
@@ -3177,25 +2922,6 @@
                 </div>
             </div>
 
-            <!-- پنل ادمینیتور -->
-            <div id="moderatorPanel" style="display:none;">
-                <div class="moderator-panel-box">
-                    <h2>👑 پنل ادمینیتور</h2>
-                    <p style="color:rgba(255,255,255,0.4);font-size:13px;">دسترسی مدیریتی سطح متوسط</p>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-number" id="moderatorUserCount">0</div><div class="stat-label">کاربران آنلاین</div></div>
-                        <div class="stat-card"><div class="stat-number" id="moderatorGameCount">0</div><div class="stat-label">بازی‌های فعال</div></div>
-                        <div class="stat-card"><div class="stat-number" id="moderatorTotalUsers">0</div><div class="stat-label">کل کاربران</div></div>
-                        <div class="stat-card"><div class="stat-number" id="moderatorBannedCount">0</div><div class="stat-label">کاربران بن شده</div></div>
-                    </div>
-                    <div class="support-messages">
-                        <h4>📩 پیام‌های پشتیبانی (فقط خواندن)</h4>
-                        <div class="msg-list" id="moderatorSupportMessages"></div>
-                    </div>
-                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
-                </div>
-            </div>
-
             <!-- پنل هد ادمین -->
             <div id="headAdminPanel" style="display:none;">
                 <div class="head-admin-panel-box">
@@ -3215,6 +2941,25 @@
                         <li>🔹 <strong>تغییر رنگ نام سایر کاربران</strong> - میتوانید رنگ نام کاربران را تغییر دهید</li>
                         <li>🔹 <strong>ارسال پیام سراسری</strong> - پیام به تمام کاربران آنلاین</li>
                         <li>🔹 <strong>مشاهده لاگ فعالیت‌ها</strong> - تاریخچه فعالیت‌های کاربران</li>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- پنل ادمینیتور -->
+            <div id="moderatorPanel" style="display:none;">
+                <div class="moderator-panel-box">
+                    <h2>👑 پنل ادمینیتور</h2>
+                    <p style="color:rgba(255,255,255,0.4);font-size:13px;">دسترسی مدیریتی سطح متوسط</p>
+                    <div class="stats-grid">
+                        <div class="stat-card"><div class="stat-number" id="moderatorUserCount">0</div><div class="stat-label">کاربران آنلاین</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorGameCount">0</div><div class="stat-label">بازی‌های فعال</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorTotalUsers">0</div><div class="stat-label">کل کاربران</div></div>
+                        <div class="stat-card"><div class="stat-number" id="moderatorBannedCount">0</div><div class="stat-label">کاربران بن شده</div></div>
+                    </div>
+                    <div class="support-messages">
+                        <h4>📩 پیام‌های پشتیبانی (فقط خواندن)</h4>
+                        <div class="msg-list" id="moderatorSupportMessages"></div>
                     </div>
                     <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -3262,7 +3007,6 @@
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🏪 فروشگاه</h2>
 
-                    <!-- سوپر ادمین -->
                     <div class="store-item">
                         <div class="item-info">
                             <span class="item-title">👑 سوپر ادمین ۱ ماهه</span>
@@ -3274,7 +3018,6 @@
                         </div>
                     </div>
 
-                    <!-- اکانت ویژه -->
                     <div class="store-item" style="border:2px solid rgba(255,215,0,0.3);background:rgba(255,215,0,0.05);">
                         <div class="item-info">
                             <span class="item-title" style="color:#ffd700;">⭐ اکانت ویژه 🌟</span>
@@ -3424,7 +3167,7 @@
         }
 
         // ==========================================================
-        //  سیستم سکه (ذخیره در usersData)
+        //  سیستم سکه
         // ==========================================================
         function getUsersData() {
             try { const data = localStorage.getItem('usersData'); return data ? JSON.parse(data) : {}; } catch { return {}; }
@@ -3469,7 +3212,7 @@
         }
 
         // ==========================================================
-        //  سیستم جام‌ها (برد پشت سر هم در دوز)
+        //  سیستم جام‌ها
         // ==========================================================
         function getTrophies(username) {
             const users = getUsersData();
@@ -3483,11 +3226,6 @@
                 setUsersData(users);
                 updateTrophyDisplay();
             }
-        }
-
-        function addTrophy(username) {
-            const current = getTrophies(username);
-            setTrophies(username, current + 1);
         }
 
         function getCurrentWinStreak(username) {
@@ -3507,34 +3245,6 @@
             setWinStreak(username, 0);
         }
 
-        function updateTrophyDisplay() {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const trophies = getTrophies(username);
-            const trophyDisplay = document.getElementById('trophyDisplay');
-            const trophyCount = document.getElementById('trophyCount');
-            const profileTrophies = document.getElementById('profileTrophies');
-            if (trophyDisplay) {
-                if (trophies > 0) {
-                    trophyDisplay.style.display = 'inline-flex';
-                    trophyCount.textContent = trophies;
-                } else {
-                    trophyDisplay.style.display = 'none';
-                }
-            }
-            if (profileTrophies) profileTrophies.textContent = trophies;
-
-            // نمایش دکمه هد ادمین اگر جام ۴ داشته باشد
-            const headBtn = document.getElementById('headAdminBtn');
-            if (trophies >= 4) {
-                headBtn.style.display = 'inline-block';
-                // رنک هد ادمین
-                const rankName = document.getElementById('headAdminRankName');
-                if (rankName) rankName.textContent = username;
-            } else {
-                headBtn.style.display = 'none';
-            }
-        }
-
         // ==========================================================
         //  سیستم اکانت ویژه
         // ==========================================================
@@ -3549,22 +3259,139 @@
                 users[username].specialAccount = active;
                 setUsersData(users);
                 updateSpecialUI(username);
+                updateTrophyDisplay();
             }
         }
 
+        // ==========================================================
+        //  تشخیص هد ادمین (جام ۴ یا اکانت ویژه)
+        // ==========================================================
+        function isHeadAdmin(username) {
+            return getTrophies(username) >= 4 || isSpecialAccount(username);
+        }
+
+        // ==========================================================
+        //  به‌روزرسانی نمایش جام و دکمه هد ادمین
+        // ==========================================================
+        function updateTrophyDisplay() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const trophies = getTrophies(username);
+            const trophyDisplay = document.getElementById('trophyDisplay');
+            const trophyCount = document.getElementById('trophyCount');
+            const profileTrophies = document.getElementById('profileTrophies');
+            const headBtn = document.getElementById('headAdminBtn');
+
+            if (trophyDisplay) {
+                if (trophies > 0) {
+                    trophyDisplay.style.display = 'inline-flex';
+                    trophyCount.textContent = trophies;
+                } else {
+                    trophyDisplay.style.display = 'none';
+                }
+            }
+            if (profileTrophies) profileTrophies.textContent = trophies;
+
+            if (isHeadAdmin(username)) {
+                headBtn.style.display = 'inline-block';
+                const rankName = document.getElementById('headAdminRankName');
+                if (rankName) rankName.textContent = username;
+            } else {
+                headBtn.style.display = 'none';
+            }
+        }
+
+        // ==========================================================
+        //  سیستم بن ۴۸ ساعته
+        // ==========================================================
+        const BAN_DURATION = 48 * 60 * 60 * 1000; // 48 ساعت
+
+        function banUser(username) {
+            const banned = getBannedUsers();
+            banned[username] = Date.now();
+            setBannedUsers(banned);
+            return true;
+        }
+
+        function isUserBanned(username) {
+            const banned = getBannedUsers();
+            if (banned[username]) {
+                const elapsed = Date.now() - banned[username];
+                if (elapsed < BAN_DURATION) {
+                    return true;
+                } else {
+                    delete banned[username];
+                    setBannedUsers(banned);
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function getBanRemainingTime(username) {
+            const banned = getBannedUsers();
+            if (banned[username]) {
+                const elapsed = Date.now() - banned[username];
+                const remaining = BAN_DURATION - elapsed;
+                if (remaining > 0) {
+                    const hours = Math.floor(remaining / (60 * 60 * 1000));
+                    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                    const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+                    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+                }
+                return '00:00:00';
+            }
+            return null;
+        }
+
+        function updateBanTimer() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) return;
+            const remaining = getBanRemainingTime(username);
+            const timerEl = document.getElementById('banTimer');
+            if (remaining) {
+                timerEl.textContent = remaining;
+                setTimeout(updateBanTimer, 1000);
+            } else {
+                timerEl.textContent = '✅ زمان بن تمام شد!';
+                // اگر کاربر در صفحه بن است و زمان تمام شده، رفرش کن
+                if (document.getElementById('bannedPage').style.display === 'flex') {
+                    location.reload();
+                }
+            }
+        }
+
+        // ==========================================================
+        //  بن کردن کاربر "kia" به صورت ۴۸ ساعته (در ابتدا)
+        // ==========================================================
+        (function banKiaUser() {
+            // پیدا کردن کاربر با نام kia
+            const users = getUsersData();
+            for (const username of Object.keys(users)) {
+                if (username.toLowerCase() === 'kia') {
+                    // اگر قبلاً بن نشده، بن کن
+                    if (!isUserBanned(username)) {
+                        banUser(username);
+                        console.log(`✅ کاربر "${username}" به مدت ۴۸ ساعت بن شد.`);
+                    }
+                    break;
+                }
+            }
+        })();
+
+        // ==========================================================
+        //  عملکرد ویژه اکانت ویژه (رنگ طلایی و ...)
+        // ==========================================================
         function updateSpecialUI(username) {
             const isSpecial = isSpecialAccount(username);
             const nameEl = document.getElementById('displayUsername');
             if (isSpecial) {
                 nameEl.style.color = '#ffd700';
                 nameEl.style.textShadow = '0 0 20px rgba(255,215,0,0.3)';
-                // قاب پروفایل
                 const avatarPreview = document.getElementById('avatarPreview');
                 if (avatarPreview) {
                     avatarPreview.style.border = '3px solid #ffd700';
                     avatarPreview.style.boxShadow = '0 0 40px rgba(255,215,0,0.2)';
                 }
-                // هدر آواتار
                 const headerAvatar = document.getElementById('headerAvatar');
                 if (headerAvatar) {
                     headerAvatar.style.border = '2px solid #ffd700';
@@ -3584,6 +3411,9 @@
             }
         }
 
+        // ==========================================================
+        //  خرید اکانت ویژه
+        // ==========================================================
         function buySpecialAccount() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) {
@@ -3609,6 +3439,7 @@
                     updateStoreUI();
                     updateCoinDisplay();
                     updateSpecialUI(username);
+                    updateTrophyDisplay();
                 } else {
                     alert('❌ خطا در کاهش سکه.');
                 }
@@ -3616,7 +3447,7 @@
         }
 
         // ==========================================================
-        //  سیستم کدهای هدیه استفاده‌شده (یکبار مصرف)
+        //  سیستم کدهای هدیه
         // ==========================================================
         const USED_GIFT_CODES_KEY = 'usedGiftCodes';
 
@@ -3671,7 +3502,7 @@
                 return;
             }
 
-            // کد 80 - ۸۰ سکه (تا ساعت ۲۰:۵۰)
+            // کد 80
             if (code === '80') {
                 const now = new Date();
                 const hours = now.getHours();
@@ -3779,37 +3610,8 @@
 
         function setBannedUsers(banned) { localStorage.setItem('bannedUsers', JSON.stringify(banned)); }
 
-        function isUserBanned(username) {
-            const banned = getBannedUsers();
-            if (banned[username]) {
-                if (Date.now() - banned[username] < 24 * 60 * 60 * 1000) { return true; } else { delete banned[username];
-                    setBannedUsers(banned); return false; }
-            }
-            return false;
-        }
-
-        function banUser(username) { const banned = getBannedUsers();
-            banned[username] = Date.now();
-            setBannedUsers(banned); return true; }
-
         function unbanUser(username) { const banned = getBannedUsers(); delete banned[username];
             setBannedUsers(banned); return true; }
-
-        function getBanRemainingTime(username) {
-            const banned = getBannedUsers();
-            if (banned[username]) {
-                const elapsed = Date.now() - banned[username];
-                const remaining = 24 * 60 * 60 * 1000 - elapsed;
-                if (remaining > 0) {
-                    const hours = Math.floor(remaining / (60 * 60 * 1000));
-                    const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-                    const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
-                    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-                }
-                return '00:00:00';
-            }
-            return null;
-        }
 
         // ==========================================================
         //  تنظیم اولیه لیست مدیران
@@ -3836,8 +3638,8 @@
 
         function removeAdmin(adminToRemove) {
             const currentUser = document.getElementById('displayUsername').textContent.trim();
-            if (currentUser !== "ابوالفضل" && !isTemporarySuperAdmin(currentUser) && getTrophies(currentUser) < 4) {
-                alert('⛔ فقط سوپر ادمین یا هد ادمین (جام ۴) می‌تواند ادمین‌ها را حذف کند!');
+            if (currentUser !== "ابوالفضل" && !isTemporarySuperAdmin(currentUser) && !isHeadAdmin(currentUser)) {
+                alert('⛔ فقط سوپر ادمین (دائم/موقت) یا هد ادمین می‌تواند ادمین‌ها را حذف کند!');
                 return;
             }
             if (adminToRemove === "ابوالفضل") { alert('⛔ نمی‌توانید خودتان را حذف کنید!'); return; }
@@ -3853,8 +3655,7 @@
             const adminListEl = document.getElementById('adminNamesDisplay');
             if (!adminListEl) return;
             const currentUser = document.getElementById('displayUsername').textContent.trim();
-            const isSuperAdmin = currentUser === "ابوالفضل" || isTemporarySuperAdmin(currentUser) || getTrophies(currentUser) >=
-                4;
+            const isSuperAdmin = currentUser === "ابوالفضل" || isTemporarySuperAdmin(currentUser) || isHeadAdmin(currentUser);
             let html = '';
             admins.forEach(admin => {
                 let color = '#fff';
@@ -3884,7 +3685,7 @@
         }
 
         // ==========================================================
-        //  سیستم سوپر ادمین موقت (خرید ۱ ماهه)
+        //  سیستم سوپر ادمین موقت
         // ==========================================================
         function isTemporarySuperAdmin(username) {
             const users = getUsersData();
@@ -3935,7 +3736,7 @@
         }
 
         // ==========================================================
-        //  مدیریت پروفایل و سن و رمز عبور و آیدی
+        //  مدیریت پروفایل
         // ==========================================================
         function getProfileAvatar() {
             try { return localStorage.getItem('profileAvatar') || ''; } catch { return ''; }
@@ -4032,20 +3833,15 @@
         }
 
         // ==========================================================
-        //  تابع نمایش اخطار برای کاربر خاص
+        //  تابع نمایش اخطار
         // ==========================================================
         function showWarningForUser() {
             const username = document.getElementById('displayUsername').textContent.trim();
             const accountId = getUserAccountId(username);
 
-            // تنظیم سکه کاربران خاص به 900
+            // کاربرانی که سکه ۹۰۰ میگیرند (مثلاً Rwvw83JJ5RD11E)
             if (accountId === "Rwvw83JJ5RD11E") {
                 setUserCoins(username, 900);
-            }
-            // کاربر دوم که نامش مشخص نیست - از آیدی استفاده میکنیم
-            // (در صورت نیاز آیدی دوم را اضافه کنید)
-
-            if (accountId === "Rwvw83JJ5RD11E") {
                 const banner = document.getElementById('warningBanner');
                 const hasSeenWarning = localStorage.getItem('warningSeen_Rwvw83JJ5RD11E');
                 if (!hasSeenWarning) {
@@ -4085,6 +3881,7 @@
                 document.getElementById('displayUsername').textContent = 'کاربر';
                 document.getElementById('logoutBtn').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('bannedPage').style.display = 'none';
                 showAccountLoginPage();
                 document.getElementById('loginUsernameInput').value = '';
                 document.getElementById('loginPasswordInput').value = '';
@@ -4102,12 +3899,12 @@
                 document.getElementById('adminBtn').style.display = 'none';
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
-                document.getElementById('warningBanner').classList.remove('show');
                 document.getElementById('headAdminBtn').style.display = 'none';
+                document.getElementById('warningBanner').classList.remove('show');
             }
         }
 
-        // ===== تابع اضافه کردن ادمین بر اساس آیدی =====
+        // ===== تابع اضافه کردن ادمین =====
         function addAdminById() {
             const input = document.getElementById('addAdminIdInput');
             const accountId = input.value.trim();
@@ -4246,6 +4043,7 @@
             document.getElementById('mainContent').style.display = 'none';
             document.getElementById('loader').style.display = 'none';
             document.getElementById('errorPage').style.display = 'none';
+            document.getElementById('bannedPage').style.display = 'none';
             document.getElementById('loginUsernameInput').value = '';
             document.getElementById('loginPasswordInput').value = '';
             document.getElementById('loginAccountStatus').className = 'status-msg';
@@ -4258,6 +4056,7 @@
             document.getElementById('mainContent').style.display = 'none';
             document.getElementById('loader').style.display = 'none';
             document.getElementById('errorPage').style.display = 'none';
+            document.getElementById('bannedPage').style.display = 'none';
             document.getElementById('registerUsernameInput').value = '';
             document.getElementById('registerPasswordInput').value = '';
             document.getElementById('registerStatus').className = 'status-msg';
@@ -4340,7 +4139,7 @@
         }
 
         // ==========================================================
-        //  ورود با اکانت
+        //  ورود با اکانت (با پشتیبانی از بن)
         // ==========================================================
         function loginWithAccount() {
             const usernameInput = document.getElementById('loginUsernameInput');
@@ -4358,6 +4157,12 @@
             if (!isUsernameTaken(username)) {
                 status.className = 'status-msg error';
                 status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.';
+                return;
+            }
+
+            if (isUserBanned(username)) {
+                status.className = 'status-msg error';
+                status.textContent = '🚫 شما بن ۴۸ ساعته هستید!';
                 return;
             }
 
@@ -4379,6 +4184,7 @@
                     document.getElementById('registerPage').style.display = 'none';
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('bannedPage').style.display = 'none';
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
                         if (btn.id !== 'logoutBtn') btn.style.display = 'inline-block';
                     });
@@ -4535,7 +4341,7 @@
         });
 
         // ==========================================================
-        //  پنل ادمینیتور - آمار و پیام‌ها
+        //  پنل ادمینیتور
         // ==========================================================
         function updateModeratorStats() {
             const users = getOnlineUsers();
@@ -4585,7 +4391,7 @@
         function setSupportMessages(messages) { localStorage.setItem('supportMessages', JSON.stringify(messages)); }
 
         // ==========================================================
-        //  پنل بن (برای سوپر ادمین)
+        //  پنل بن (برای سوپر ادمین با پشتیبانی از بن ۴۸ ساعته)
         // ==========================================================
         function searchUsers() { renderBanList(); }
 
@@ -4615,24 +4421,24 @@
                 const isBanned = !!banned[username];
                 const isCurrentUser = username === currentUser;
                 const isSuperAdmin = username === "ابوالفضل" || username === "محمد رضا";
-                const isHeadAdmin = getTrophies(username) >= 4;
+                const isHeadAdminUser = isHeadAdmin(username);
                 let canBan = true;
                 if (isCurrentUser) canBan = false;
                 if (isSuperAdmin) canBan = false;
-                if (isHeadAdmin) canBan = false;
-                if (currentUser !== "ابوالفضل" && !isTemporarySuperAdmin(currentUser) && getTrophies(currentUser) < 4) canBan =
+                if (isHeadAdminUser) canBan = false;
+                if (currentUser !== "ابوالفضل" && !isTemporarySuperAdmin(currentUser) && !isHeadAdmin(currentUser)) canBan =
                     false;
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
                 html += `
                     <div class="ban-item">
                         <div class="ban-user">
-                            <span class="ban-flag">${isBanned?'🚫': isHeadAdmin ? '👑' : '👤'}</span>
-                            <span class="ban-name">${username} ${isHeadAdmin ? '🌟' : ''}</span>
+                            <span class="ban-flag">${isBanned?'🚫': isHeadAdminUser ? '👑' : '👤'}</span>
+                            <span class="ban-name">${username} ${isHeadAdminUser ? '🌟' : ''}</span>
                             ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
                         </div>
                         ${canBan ? `
                             <button class="ban-btn ${isBanned?'unban':''}" onclick="${isBanned?`unbanUserAction('${username}')`:`banUserAction('${username}')`}">
-                                ${isBanned?'✅ آنبَن':'🚫 بن ۲۴ساعته'}
+                                ${isBanned?'✅ آنبَن':'🚫 بن ۴۸ساعته'}
                             </button>
                         ` : `
                             <span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>
@@ -4648,11 +4454,11 @@
             const currentUser = document.getElementById('displayUsername').textContent.trim();
             if (username === currentUser) { alert('⛔ نمی‌توانید خودتان را بن کنید!'); return; }
             if (username === "ابوالفضل" || username === "محمد رضا") { alert('⛔ نمی‌توانید سوپر ادمین را بن کنید!'); return; }
-            if (getTrophies(username) >= 4) { alert('⛔ نمی‌توانید هد ادمین را بن کنید!'); return; }
-            if (confirm(`آیا کاربر "${username}" را به مدت 24 ساعت بن کنید؟`)) {
+            if (isHeadAdmin(username)) { alert('⛔ نمی‌توانید هد ادمین را بن کنید!'); return; }
+            if (confirm(`آیا کاربر "${username}" را به مدت 48 ساعت بن کنید؟`)) {
                 banUser(username);
                 renderBanList();
-                alert(`✅ کاربر "${username}" بن شد.`);
+                alert(`✅ کاربر "${username}" به مدت ۴۸ ساعت بن شد.`);
             }
         }
 
@@ -4681,12 +4487,11 @@
 
         function openHeadAdminPanel() {
             const username = document.getElementById('displayUsername').textContent.trim();
-            const trophies = getTrophies(username);
-            if (trophies >= 4) {
+            if (isHeadAdmin(username)) {
                 updateHeadAdminStats();
                 showPage('headAdminPanel');
             } else {
-                alert('⛔ شما دسترسی به پنل هد ادمین ندارید! برای دسترسی باید ۴ جام داشته باشید.');
+                alert('⛔ شما دسترسی به پنل هد ادمین ندارید! (برای دسترسی، اکانت ویژه بخرید یا ۴ جام بگیرید)');
             }
         }
 
@@ -4702,9 +4507,8 @@
 
             const isPermanentAdmin = username === "ابوالفضل" || username === "محمد رضا";
             const isTemporary = isTemporarySuperAdmin(username);
-            const isHeadAdmin = getTrophies(username) >= 4;
 
-            if (isPermanentAdmin || isTemporary || isHeadAdmin) {
+            if (isPermanentAdmin || isTemporary || isHeadAdmin(username)) {
                 updateAdminStats();
                 updateAdminPanelUI();
                 renderBanList();
@@ -4744,7 +4548,6 @@
                 return;
             }
 
-            // سوپر ادمین
             const isActive = isTemporarySuperAdmin(username);
             const remaining = getSuperAdminRemainingDays(username);
             const saBtn = document.getElementById('buySuperAdminBtn');
@@ -4758,7 +4561,6 @@
                 saBtn.className = 'item-action';
             }
 
-            // اکانت ویژه
             const specialBtn = document.getElementById('buySpecialAccountBtn');
             if (isSpecialAccount(username)) {
                 specialBtn.disabled = true;
@@ -4770,7 +4572,6 @@
                 specialBtn.className = 'item-action';
             }
 
-            // وضعیت کلی
             let statusHtml = '';
             if (isActive && remaining) {
                 statusHtml += `✅ سوپر ادمین فعال (${remaining} باقی مانده)`;
@@ -4787,7 +4588,7 @@
         }
 
         // ==========================================================
-        //  *** تابع اعطای سکه رندوم در بازی دوز با سیستم جام‌ها ***
+        //  پاداش سکه و سیستم جام‌ها
         // ==========================================================
         function giveWinReward() {
             const username = document.getElementById('displayUsername').textContent.trim();
@@ -4797,11 +4598,9 @@
             addUserCoins(username, reward);
             updateCoinDisplay();
 
-            // ===== سیستم جام‌ها (برد پشت سر هم) =====
             let streak = getCurrentWinStreak(username) + 1;
             setWinStreak(username, streak);
 
-            // بررسی جام‌ها
             let trophies = getTrophies(username);
             let newTrophy = false;
 
@@ -4821,9 +4620,7 @@
                 trophies = 4;
                 newTrophy = true;
                 alert('🏆🏆🏆🏆 شما چهارمین جام خود را با ۱۰۰ برد پشت سر هم دریافت کردید! 🎉 شما هد ادمین شدید!');
-                // فعال کردن دکمه هد ادمین
                 document.getElementById('headAdminBtn').style.display = 'inline-block';
-                // به‌روزرسانی رنک
                 const rankName = document.getElementById('headAdminRankName');
                 if (rankName) rankName.textContent = username;
             }
@@ -4839,9 +4636,6 @@
             }
         }
 
-        // ==========================================================
-        //  ریست استریک در صورت باخت (در endGame)
-        // ==========================================================
         function resetStreakOnLose() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (username && username !== 'کاربر' && username !== '---') {
@@ -4860,7 +4654,6 @@
         function goToMenu() { showPage('menuPage'); }
 
         function goToGame() {
-            // ریست استریک در شروع بازی جدید (اختیاری)
             showPage('gamePage');
             startGame();
         }
@@ -4938,7 +4731,7 @@
         }
 
         // ==========================================================
-        //  بازی دوز (با پاداش سکه و سیستم جام‌ها)
+        //  بازی دوز (با پاداش و جام)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -5101,11 +4894,9 @@
             } else if (result === 'O') {
                 playLoseSound();
                 statusMsg.textContent = '🤖 ربات برنده شد!';
-                // ریست استریک در صورت باخت
                 resetStreakOnLose();
             } else if (result === 'draw') {
                 statusMsg.textContent = '🤝 مساوی!';
-                // مساوی هم استریک رو ریست میکنیم
                 resetStreakOnLose();
             }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
@@ -5568,7 +5359,7 @@
         }
 
         // ==========================================================
-        //  بارگذاری اولیه
+        //  بارگذاری اولیه (با پشتیبانی از صفحه بن)
         // ==========================================================
         window.addEventListener('load', function() {
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
@@ -5594,6 +5385,10 @@
                 if (isUserBanned(saved)) {
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('bannedPage').style.display = 'flex';
+                    document.getElementById('displayUsername').textContent = saved;
+                    updateBanTimer();
                     return;
                 }
                 document.getElementById('accountLoginPage').style.display = 'none';
@@ -5602,6 +5397,7 @@
                 setTimeout(() => {
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('bannedPage').style.display = 'none';
                     document.getElementById('displayUsername').textContent = saved;
                     const existingId = getUserAccountId(saved);
                     if (!existingId) {
@@ -5635,11 +5431,12 @@
         });
 
         console.log('❄️ برفی');
+        console.log('🚫 کاربر "kia" به مدت ۴۸ ساعت بن شد.');
         console.log('🎁 کد هدیه "80" تا ساعت ۲۰:۵۰ قابل استفاده است - جایزه ۸۰ سکه');
         console.log('🎁 کد هدیه "برفی" تا ساعت ۱۲:۳۰ قابل استفاده است - جایزه ۳۰ سکه');
         console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
         console.log('🏆 سیستم جام‌ها: ۱۰→۲۵→۶۰→۱۰۰ برد پشت سر هم');
-        console.log('👑 با ۴ جام، رنک هد ادمین و پنل اختصاصی فعال میشود.');
+        console.log('👑 با ۴ جام یا اکانت ویژه، رنک هد ادمین و پنل اختصاصی فعال میشود.');
         console.log('⭐ اکانت ویژه با قیمت ۵,۰۰۰ سکه: روزی ۲۰ سکه، نام طلایی، قاب پروفایل و ...');
         console.log('✅ کاربر با آیدی Rwvw83JJ5RD11E سکه ۹۰۰ شد و اخطار گرفت.');
     </script>
