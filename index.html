@@ -383,7 +383,6 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.5);
         }
 
-        /* دکمه کاربران برتر */
         .main-header .top-users-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: white;
@@ -3015,7 +3014,7 @@
             margin-bottom: 16px;
         }
         .top-users-box .tu-header .tu-title {
-            font-size: 22px;
+            font-size: 26px;
             font-weight: 800;
             color: #ffd700;
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
@@ -3803,7 +3802,6 @@
                         <span class="rank-name" style="padding-right:40px;">مسیحا</span>
                         <span class="rank-name" style="padding-right:40px;">آراد</span>
                     </div>
-                    <!-- حذف شد: هد ادمین سبز -->
                     <div class="rank-group"><span class="rank-title" style="color:#f39c12;">سوپر ادمین</span></div>
                     <div class="rank-group"><span class="rank-title" style="color:#f1c40f;">ادمینیتور</span><span class="rank-name" style="color:#f1c40f;">آراد</span></div>
                     <div class="rank-group"><span class="rank-title" style="color:#a78bfa;">مود</span></div>
@@ -3913,9 +3911,14 @@
             <div id="topUsersPage" style="display:none;">
                 <div class="top-users-box">
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <!-- بخش اول: اراد تریاکی -->
                     <div class="tu-header">
                         <div class="tu-title">اراد تریاکی</div>
                         <div class="tu-sub">kiaELX</div>
+                    </div>
+                    <!-- بخش دوم: لیست کاربران برتر با استایل مشابه -->
+                    <div class="tu-header" style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.2);padding-top:16px;">
+                        <div class="tu-title" style="font-size:22px;">لیست کاربران برتر</div>
                     </div>
                     <div class="tu-list" id="topUsersList"></div>
                     <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -6486,6 +6489,7 @@
             const container = document.getElementById('topUsersList');
             if (!container) return;
             const allUsers = getRegisteredUsernames();
+            // شرط: کاربرانی که ۴ جام یا بیشتر دارند
             const topUsers = allUsers.filter(u => getTrophies(u) >= 4);
             const currentUser = document.getElementById('displayUsername').textContent.trim();
 
@@ -6648,7 +6652,7 @@
         console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
         console.log('🤖 ربات بازی دوز هوشمندتر شد!');
         console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta سکه‌هایش ۱۰۰۰۰ شد و پیام سپر آن بن برایش فعال شد.');
-        console.log('🏆 صفحه کاربران برتر اضافه شد.');
+        console.log('🏆 صفحه کاربران برتر با دو بخش (اراد تریاکی و لیست کاربران برتر) به‌روز شد.');
     </script>
 
 </body>
