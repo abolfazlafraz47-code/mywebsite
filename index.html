@@ -383,6 +383,26 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.5);
         }
 
+        /* دکمه کاربران برتر */
+        .main-header .top-users-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(79, 172, 254, 0.3);
+            display: none;
+        }
+        .main-header .top-users-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(79, 172, 254, 0.5);
+        }
+
         /* ===== صفحه بن ===== */
         #bannedPage {
             display: none;
@@ -494,7 +514,8 @@
         .account-login-box,
         .register-box,
         .head-admin-panel-box,
-        .shooting-game-box {
+        .shooting-game-box,
+        .top-users-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -1421,7 +1442,8 @@
         #ageSelectionPage,
         #createPassPage,
         #headAdminPanel,
-        #shootingGamePage {
+        #shootingGamePage,
+        #topUsersPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -2957,6 +2979,160 @@
             transform: translateY(-2px);
         }
 
+        /* ===== کاربران برتر ===== */
+        .top-users-box {
+            padding: 28px 20px;
+            width: 100%;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .top-users-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .top-users-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .top-users-box .tu-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .top-users-box .tu-header .tu-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        .top-users-box .tu-header .tu-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+        .top-users-box .tu-list {
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .top-users-box .tu-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .top-users-box .tu-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .top-users-box .tu-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+        .top-users-box .tu-item {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border: 1px solid rgba(255, 215, 0, 0.08);
+        }
+        .top-users-box .tu-item .tu-username {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+        .top-users-box .tu-item .tu-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .top-users-box .tu-item .tu-row input[type="number"] {
+            flex: 1;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            width: 80px;
+            text-align: center;
+        }
+        .top-users-box .tu-item .tu-row input[type="number"]:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+        .top-users-box .tu-item .tu-row input[type="number"]::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .top-users-box .tu-item .tu-row .tu-send-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+        }
+        .top-users-box .tu-item .tu-row .tu-send-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .top-users-box .tu-item .tu-row .tu-send-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .top-users-box .tu-empty {
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 15px;
+        }
+        .top-users-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .top-users-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
         /* ===== واکنش‌گرایی ===== */
         @media(max-width:480px) {
             .page-container {
@@ -2979,7 +3155,8 @@
             .main-header .gift-btn,
             .main-header .rank-btn,
             .main-header .create-pass-btn,
-            .main-header .logout-btn {
+            .main-header .logout-btn,
+            .main-header .top-users-btn {
                 font-size: 10px;
                 padding: 3px 10px;
             }
@@ -3067,7 +3244,8 @@
             .age-selection-box,
             .create-pass-box,
             .head-admin-panel-box,
-            .shooting-game-box {
+            .shooting-game-box,
+            .top-users-box {
                 padding: 20px 14px;
             }
             .age-grid {
@@ -3155,6 +3333,15 @@
                 font-size: 12px;
                 padding: 6px 12px;
             }
+            .top-users-box .tu-item .tu-row input[type="number"] {
+                font-size: 12px;
+                padding: 4px 8px;
+                width: 60px;
+            }
+            .top-users-box .tu-item .tu-row .tu-send-btn {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
         }
         @media(max-width:380px) {
             .main-header .site-title {
@@ -3170,7 +3357,8 @@
             .main-header .gift-btn,
             .main-header .rank-btn,
             .main-header .create-pass-btn,
-            .main-header .logout-btn {
+            .main-header .logout-btn,
+            .main-header .top-users-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -3285,6 +3473,15 @@
                 font-size: 10px;
                 padding: 4px 10px;
             }
+            .top-users-box .tu-item .tu-row input[type="number"] {
+                font-size: 10px;
+                padding: 3px 6px;
+                width: 50px;
+            }
+            .top-users-box .tu-item .tu-row .tu-send-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
         }
     </style>
 </head>
@@ -3393,6 +3590,8 @@
                     </button>
                     <button type="button" class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
                     <button type="button" class="head-admin-btn" id="headAdminBtn" onclick="openHeadAdminPanel()">👑 هد ادمین</button>
+                    <!-- دکمه کاربران برتر -->
+                    <button type="button" class="top-users-btn" id="topUsersBtn" onclick="showTopUsers()">🏆 کاربران برتر</button>
                 </div>
             </div>
 
@@ -3428,7 +3627,6 @@
                     <br>
                     <button type="button" onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
                     <br>
-                    <!-- دکمه تفنگی درست زیر فوتبال کشوری -->
                     <button type="button" onclick="goToShootingGame()" style="background:linear-gradient(135deg,#ff6b6b,#ffd700);color:#1a1a3a;">🔫 ورود به بازی تفنگی</button>
                     <br><br>
                     <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
@@ -3460,7 +3658,7 @@
                 </div>
             </div>
 
-            <!-- بازی تیراندازی (با سلامتی و شلیک ربات‌ها) -->
+            <!-- بازی تیراندازی -->
             <div id="shootingGamePage" style="display:none;">
                 <div class="shooting-game-box">
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
@@ -3473,17 +3671,14 @@
                         </div>
                         <div class="shooting-health" id="healthBar">🩸 سلامتی: ████████</div>
                     </div>
-
                     <div class="weapon-select" id="weaponSelect">
                         <button class="weapon-btn" data-weapon="pistol" onclick="selectWeapon('pistol')">🔫 تپانچه</button>
                         <button class="weapon-btn" data-weapon="shotgun" onclick="selectWeapon('shotgun')">💥 تفنگ ساچمه‌ای</button>
                         <button class="weapon-btn" data-weapon="sniper" onclick="selectWeapon('sniper')">🎯 تفنگ تک‌تیر</button>
                     </div>
-
                     <div class="shooting-arena" id="shootingArena">
                         <div class="arena-grid" id="arenaGrid"></div>
                     </div>
-
                     <div class="shooting-status" id="shootingStatus">🔫 یک تفنگ انتخاب کنید و شروع کنید!</div>
                     <button class="shooting-start-btn" id="shootingStartBtn" onclick="startShootingGame()" disabled>🚀 شروع بازی</button>
                 </div>
@@ -3601,8 +3796,14 @@
                     <button type="button" class="rubika-btn" onclick="window.open('https://rubika.ir/@A87hskgd','_blank')">ورود به پیوی سازنده روبیکا</button>
                     <h2>🏅 رنک‌های سایت</h2>
                     <div class="rank-group"><span class="rank-title" style="color:#ff6b8a;">سازنده</span><span class="rank-name">ابوالفضل</span><span class="rank-name">محمد رضا</span></div>
-                    <div class="rank-group"><span class="rank-title" style="color:#ffd700;">هد ادمین</span><span class="rank-name" id="headAdminRankName">---</span></div>
-                    <div class="rank-group"><span class="rank-title" style="color:#2ecc71;">هد ادمین</span></div>
+                    <div class="rank-group"><span class="rank-title" style="color:#ffd700;">هد ادمین</span>
+                        <span class="rank-name" id="headAdminRankName">---</span>
+                        <span class="rank-name">انیمال برفی ✅</span>
+                        <span class="rank-name" style="padding-right:40px;">کیا</span>
+                        <span class="rank-name" style="padding-right:40px;">مسیحا</span>
+                        <span class="rank-name" style="padding-right:40px;">آراد</span>
+                    </div>
+                    <!-- حذف شد: هد ادمین سبز -->
                     <div class="rank-group"><span class="rank-title" style="color:#f39c12;">سوپر ادمین</span></div>
                     <div class="rank-group"><span class="rank-title" style="color:#f1c40f;">ادمینیتور</span><span class="rank-name" style="color:#f1c40f;">آراد</span></div>
                     <div class="rank-group"><span class="rank-title" style="color:#a78bfa;">مود</span></div>
@@ -3636,7 +3837,6 @@
                 <div class="store-box">
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2>🏪 فروشگاه</h2>
-
                     <div class="store-item">
                         <div class="item-info">
                             <span class="item-title">👑 سوپر ادمین ۱ ماهه</span>
@@ -3647,7 +3847,6 @@
                             <button type="button" class="item-action" id="buySuperAdminBtn" onclick="buySuperAdmin()">🛒 خرید</button>
                         </div>
                     </div>
-
                     <div class="store-item" style="border:2px solid rgba(255,215,0,0.3);background:rgba(255,215,0,0.05);">
                         <div class="item-info">
                             <span class="item-title" style="color:#ffd700;">⭐ اکانت ویژه 🌟</span>
@@ -3658,7 +3857,6 @@
                             <button type="button" class="item-action" id="buySpecialAccountBtn" onclick="buySpecialAccount()" style="background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#1a1a3a;">🌟 خرید</button>
                         </div>
                     </div>
-
                     <div class="store-status" id="storeStatus"></div>
                     <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -3707,6 +3905,19 @@
                     </div>
                     <button type="button" class="action-btn" id="createPassActionBtn">🔐 ساخت</button>
                     <div class="status-msg" id="createPassStatus"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- کاربران برتر -->
+            <div id="topUsersPage" style="display:none;">
+                <div class="top-users-box">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <div class="tu-header">
+                        <div class="tu-title">اراد تریاکی</div>
+                        <div class="tu-sub">kiaELX</div>
+                    </div>
+                    <div class="tu-list" id="topUsersList"></div>
                     <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -4523,6 +4734,7 @@
                 document.getElementById('moderatorBtn').style.display = 'none';
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
                 document.getElementById('headAdminBtn').style.display = 'none';
+                document.getElementById('topUsersBtn').style.display = 'none';
                 document.getElementById('warningBanner').classList.remove('show');
             }
         }
@@ -4567,7 +4779,7 @@
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
-                'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage'
+                'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage', 'topUsersPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -4590,6 +4802,7 @@
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('adminBtn').style.display = 'inline-block';
+                document.getElementById('topUsersBtn').style.display = 'inline-block';
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (isModerator(username)) {
                     document.getElementById('moderatorBtn').style.display = 'inline-block';
@@ -4654,6 +4867,9 @@
             }
             if (pageId === 'shootingGamePage') {
                 initShootingGame();
+            }
+            if (pageId === 'topUsersPage') {
+                renderTopUsers();
             }
         }
 
@@ -4823,6 +5039,7 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
+                    document.getElementById('topUsersBtn').style.display = 'inline-block';
                     ensureAdminAccess();
                     showPage('homePage');
                 }, 1200);
@@ -4889,6 +5106,7 @@
                 document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
+                document.getElementById('topUsersBtn').style.display = 'inline-block';
                 ensureAdminAccess();
                 showPage('homePage');
             }, 1500);
@@ -4940,8 +5158,10 @@
             const adminBtn = document.getElementById('adminBtn');
             const moderatorBtn = document.getElementById('moderatorBtn');
             const logoutBtn = document.getElementById('logoutBtn');
+            const topBtn = document.getElementById('topUsersBtn');
 
             adminBtn.style.display = 'inline-block';
+            topBtn.style.display = 'inline-block';
 
             if (isModerator(username)) {
                 moderatorBtn.style.display = 'inline-block';
@@ -5388,7 +5608,6 @@
             document.getElementById('shootingStartBtn').textContent = '⏳ در حال بازی...';
             document.querySelectorAll('.weapon-btn').forEach(btn => btn.disabled = true);
 
-            // شروع تایمر شلیک ربات‌ها (هر ۲ ثانیه یک ربات شلیک می‌کند)
             if (shootingState.robotShootTimer) clearInterval(shootingState.robotShootTimer);
             shootingState.robotShootTimer = setInterval(() => {
                 if (!shootingState.isGameActive) return;
@@ -5411,7 +5630,6 @@
             robot.element.className = 'robot dead';
             robot.element.dataset.alive = 'false';
 
-            // افکت شلیک
             const cell = robot.element.parentElement;
             const effect = document.createElement('div');
             effect.className = 'shooting-effect';
@@ -5435,7 +5653,6 @@
             document.getElementById('shootingRemaining').textContent = remaining;
 
             if (shootingState.kills === 9) {
-                // برنده شد!
                 shootingState.isGameActive = false;
                 if (shootingState.robotShootTimer) {
                     clearInterval(shootingState.robotShootTimer);
@@ -5457,19 +5674,16 @@
             }
         }
 
-        // ربات‌ها به سمت کاربر شلیک می‌کنند
         function robotShoot() {
             if (!shootingState.isGameActive) return;
             const aliveRobots = shootingState.robots.filter(r => r.alive);
             if (aliveRobots.length === 0) return;
 
-            // ۵۰٪ احتمال شلیک
             if (Math.random() < 0.5) return;
 
             const randomRobot = aliveRobots[Math.floor(Math.random() * aliveRobots.length)];
             const cell = randomRobot.element.parentElement;
 
-            // افکت شلیک ربات
             const effect = document.createElement('div');
             effect.className = 'shooting-effect';
             effect.textContent = '🔫';
@@ -5480,13 +5694,11 @@
             cell.appendChild(effect);
             setTimeout(() => effect.remove(), 400);
 
-            // کاهش سلامتی کاربر
             shootingState.userHealth = Math.max(0, shootingState.userHealth - 1);
             document.getElementById('shootingHealth').textContent = shootingState.userHealth;
             updateHealthBar();
 
             if (shootingState.userHealth <= 0) {
-                // کاربر کشته شد
                 shootingState.isGameActive = false;
                 if (shootingState.robotShootTimer) {
                     clearInterval(shootingState.robotShootTimer);
@@ -6264,18 +6476,87 @@
         }
 
         // ==========================================================
+        //  صفحه کاربران برتر
+        // ==========================================================
+        function showTopUsers() {
+            showPage('topUsersPage');
+        }
+
+        function renderTopUsers() {
+            const container = document.getElementById('topUsersList');
+            if (!container) return;
+            const allUsers = getRegisteredUsernames();
+            const topUsers = allUsers.filter(u => getTrophies(u) >= 4);
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+
+            if (topUsers.length === 0) {
+                container.innerHTML = `<div class="tu-empty">هیچ کاربری ۴ جام یا بیشتر ندارد</div>`;
+                return;
+            }
+
+            let html = '';
+            topUsers.forEach(username => {
+                const trophies = getTrophies(username);
+                const isSelf = username === currentUser;
+                html += `
+                    <div class="tu-item">
+                        <div class="tu-username">👤 ${username} <span style="font-size:14px;color:#ffd700;">🏆 ${trophies}</span></div>
+                        <div class="tu-row">
+                            <input type="number" min="1" placeholder="تعداد" value="100" id="coinInput_${username}" />
+                            <button class="tu-send-btn" onclick="sendCoinsTo('${username}')" ${isSelf ? 'disabled' : ''}>💰 دادن سکه</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function sendCoinsTo(targetUsername) {
+            const currentUser = document.getElementById('displayUsername').textContent.trim();
+            if (!currentUser || currentUser === 'کاربر') {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return;
+            }
+            if (currentUser === targetUsername) {
+                alert('⚠️ نمی‌توانید به خودتان سکه بدهید.');
+                return;
+            }
+
+            const input = document.getElementById(`coinInput_${targetUsername}`);
+            if (!input) return;
+            const amount = parseInt(input.value.trim());
+            if (isNaN(amount) || amount <= 0) {
+                alert('⚠️ لطفاً یک عدد معتبر وارد کنید.');
+                return;
+            }
+
+            const myCoins = getUserCoins(currentUser);
+            if (myCoins < amount) {
+                alert(`❌ شما فقط ${myCoins} سکه دارید.`);
+                return;
+            }
+
+            if (confirm(`آیا ${amount} سکه به کاربر "${targetUsername}" میدهید؟`)) {
+                if (removeUserCoins(currentUser, amount)) {
+                    addUserCoins(targetUsername, amount);
+                    updateCoinDisplay();
+                    alert(`✅ ${amount} سکه با موفقیت به ${targetUsername} داده شد.`);
+                    renderTopUsers(); // refresh
+                } else {
+                    alert('❌ خطا در انتقال سکه.');
+                }
+            }
+        }
+
+        // ==========================================================
         //  اعمال ویژه برای کاربر RwuSYbgUUdA1Ta
         // ==========================================================
         (function applySpecialToUser() {
             const targetAccountId = 'RwuSYbgUUdA1Ta';
             const username = getUsernameByAccountId(targetAccountId);
             if (username) {
-                // سکه‌ها را ۱۰۰۰۰ کنید
                 setUserCoins(username, 10000);
                 console.log(`✅ سکه‌های کاربر "${username}" به ۱۰۰۰۰ تنظیم شد.`);
-
-                // یک پیام اخطار مخصوص برای این کاربر (در صورت لاگین) قبلاً در تابع showWarningForUser تعریف شده
-                // اما برای اینکه پیام حتی اگر لاگین نکرده هم دیده بشه، یک فلگ در localStorage میذاریم
                 localStorage.setItem('specialMessageShown_RwuSYbgUUdA1Ta', 'true');
             } else {
                 console.log(`⚠️ کاربر با آیدی ${targetAccountId} پیدا نشد.`);
@@ -6334,6 +6615,7 @@
                     showPage('homePage');
                     updateAdminStats();
                     document.getElementById('adminBtn').style.display = 'inline-block';
+                    document.getElementById('topUsersBtn').style.display = 'inline-block';
                     if (isModerator(saved)) {
                         document.getElementById('moderatorBtn').style.display = 'inline-block';
                     }
@@ -6365,7 +6647,8 @@
         console.log('🔫 بازی تیراندازی با تفنگ اضافه شد! با کشتن ۹ ربات، ۵۰ سکه جایزه بگیرید.');
         console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
         console.log('🤖 ربات بازی دوز هوشمندتر شد!');
-        console.log(`👤 کاربر با آیدی RwuSYbgUUdA1Ta سکه‌هایش ۱۰۰۰۰ شد و پیام سپر آن بن برایش فعال شد.`);
+        console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta سکه‌هایش ۱۰۰۰۰ شد و پیام سپر آن بن برایش فعال شد.');
+        console.log('🏆 صفحه کاربران برتر اضافه شد.');
     </script>
 
 </body>
