@@ -402,6 +402,26 @@
             box-shadow: 0 6px 24px rgba(79, 172, 254, 0.5);
         }
 
+        /* دکمه گردونه */
+        .main-header .wheel-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(245, 87, 108, 0.3);
+            display: none;
+        }
+        .main-header .wheel-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
+        }
+
         /* ===== صفحه بن ===== */
         #bannedPage {
             display: none;
@@ -514,7 +534,9 @@
         .register-box,
         .head-admin-panel-box,
         .shooting-game-box,
-        .top-users-box {
+        .top-users-box,
+        .wheel-box,
+        .blackjack-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -1442,7 +1464,9 @@
         #createPassPage,
         #headAdminPanel,
         #shootingGamePage,
-        #topUsersPage {
+        #topUsersPage,
+        #wheelPage,
+        #blackjackPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -2978,6 +3002,296 @@
             transform: translateY(-2px);
         }
 
+        /* ===== گردونه ===== */
+        .wheel-box {
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wheel-box .back-btn {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .wheel-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .wheel-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .wheel-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 20px;
+        }
+        .wheel-container canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+        .wheel-container .pointer {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 24px solid #ffd700;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            z-index: 5;
+        }
+        .wheel-status {
+            margin: 10px 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .wheel-status .prize {
+            color: #ffd700;
+            font-weight: 700;
+        }
+        .wheel-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 80%;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .wheel-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+        .wheel-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .wheel-box .back-home-btn {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .wheel-box .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== بلک‌جک ===== */
+        .blackjack-box {
+            padding: 20px 16px;
+            width: 100%;
+            position: relative;
+            min-height: 400px;
+        }
+        .blackjack-box .back-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: none;
+        }
+        .blackjack-box .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .blackjack-box h3 {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #64d8ff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .bj-table {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .bj-hand {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .bj-hand .bj-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            justify-content: space-between;
+        }
+        .bj-hand .bj-label .bj-score {
+            color: #ffd700;
+        }
+        .bj-cards {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+        .bj-card {
+            background: #fff;
+            color: #1a1a3a;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            min-width: 40px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 1px solid #ddd;
+        }
+        .bj-card.red {
+            color: #d32f2f;
+        }
+        .bj-card.black {
+            color: #1a1a3a;
+        }
+        .bj-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+        .bj-controls button {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bj-controls button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .bj-controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .bj-controls .bj-hit {
+            background: #4facfe;
+            color: #fff;
+            border: none;
+        }
+        .bj-controls .bj-stand {
+            background: #f093fb;
+            color: #1a1a3a;
+            border: none;
+        }
+        .bj-bet-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+        .bj-bet-area input[type="number"] {
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            width: 100px;
+            text-align: center;
+        }
+        .bj-bet-area input[type="number"]:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .bj-bet-area .bj-bet-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .bj-bet-area .bj-bet-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .bj-bet-area .bj-bet-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .bj-result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 8px;
+            min-height: 30px;
+        }
+        .bj-result.win { color: #2ecc71; }
+        .bj-result.lose { color: #ff6b6b; }
+        .bj-result.push { color: #ffd700; }
+
         /* ===== کاربران برتر ===== */
         .top-users-box {
             padding: 28px 20px;
@@ -3053,7 +3367,7 @@
             border: 1px solid rgba(255, 215, 0, 0.08);
         }
         .top-users-box .tu-item .tu-username {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 700;
             color: #ffd700;
         }
@@ -3155,7 +3469,8 @@
             .main-header .rank-btn,
             .main-header .create-pass-btn,
             .main-header .logout-btn,
-            .main-header .top-users-btn {
+            .main-header .top-users-btn,
+            .main-header .wheel-btn {
                 font-size: 10px;
                 padding: 3px 10px;
             }
@@ -3244,7 +3559,9 @@
             .create-pass-box,
             .head-admin-panel-box,
             .shooting-game-box,
-            .top-users-box {
+            .top-users-box,
+            .wheel-box,
+            .blackjack-box {
                 padding: 20px 14px;
             }
             .age-grid {
@@ -3341,6 +3658,15 @@
                 font-size: 11px;
                 padding: 4px 12px;
             }
+            .wheel-container {
+                width: 200px;
+                height: 200px;
+            }
+            .bj-card {
+                font-size: 14px;
+                padding: 6px 10px;
+                min-width: 32px;
+            }
         }
         @media(max-width:380px) {
             .main-header .site-title {
@@ -3357,7 +3683,8 @@
             .main-header .rank-btn,
             .main-header .create-pass-btn,
             .main-header .logout-btn,
-            .main-header .top-users-btn {
+            .main-header .top-users-btn,
+            .main-header .wheel-btn {
                 font-size: 9px;
                 padding: 2px 8px;
             }
@@ -3481,6 +3808,15 @@
                 font-size: 10px;
                 padding: 3px 10px;
             }
+            .wheel-container {
+                width: 160px;
+                height: 160px;
+            }
+            .bj-card {
+                font-size: 12px;
+                padding: 4px 8px;
+                min-width: 28px;
+            }
         }
     </style>
 </head>
@@ -3589,8 +3925,8 @@
                     </button>
                     <button type="button" class="create-pass-btn" id="createPassBtn" onclick="showCreatePassPage()">🔒 ساخت رمز عبور</button>
                     <button type="button" class="head-admin-btn" id="headAdminBtn" onclick="openHeadAdminPanel()">👑 هد ادمین</button>
-                    <!-- دکمه کاربران برتر -->
                     <button type="button" class="top-users-btn" id="topUsersBtn" onclick="showTopUsers()">🏆 کاربران برتر</button>
+                    <button type="button" class="wheel-btn" id="wheelBtn" onclick="showWheelPage()">🎡 گردونه</button>
                 </div>
             </div>
 
@@ -3627,6 +3963,8 @@
                     <button type="button" onclick="goToCountrySelect()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">⚽ ورود به بازی فوتبال کشوری</button>
                     <br>
                     <button type="button" onclick="goToShootingGame()" style="background:linear-gradient(135deg,#ff6b6b,#ffd700);color:#1a1a3a;">🔫 ورود به بازی تفنگی</button>
+                    <br>
+                    <button type="button" onclick="goToBlackjack()" style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;">🃏 ورود به بازی بلک‌جک</button>
                     <br><br>
                     <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -3709,6 +4047,34 @@
                         </div>
                     </div>
                     <div class="football-status" id="footballStatus">👆 توپ را بکشید تا حرکت کند</div>
+                </div>
+            </div>
+
+            <!-- بلک‌جک -->
+            <div id="blackjackPage" style="display:none;">
+                <div class="blackjack-box">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h3>🃏 بلک‌جک (۲۱)</h3>
+                    <div class="bj-table">
+                        <div class="bj-hand">
+                            <div class="bj-label">👤 شما <span class="bj-score" id="playerScore">۰</span></div>
+                            <div class="bj-cards" id="playerCards"></div>
+                        </div>
+                        <div class="bj-hand">
+                            <div class="bj-label">🤖 دیلر <span class="bj-score" id="dealerScore">۰</span></div>
+                            <div class="bj-cards" id="dealerCards"></div>
+                        </div>
+                    </div>
+                    <div class="bj-bet-area">
+                        <input type="number" id="bjBetInput" min="10" value="10" placeholder="شرط (حداقل ۱۰)" />
+                        <button class="bj-bet-btn" id="bjDealBtn" onclick="blackjackDeal()">🃏 شروع</button>
+                    </div>
+                    <div class="bj-controls">
+                        <button class="bj-hit" id="bjHitBtn" onclick="blackjackHit()" disabled>➕ کارت بگیر</button>
+                        <button class="bj-stand" id="bjStandBtn" onclick="blackjackStand()" disabled>✋ بس کن</button>
+                    </div>
+                    <div class="bj-result" id="bjResult"></div>
+                    <button type="button" class="back-home-btn" style="margin-top:12px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:10px 20px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;width:100%;transition:all 0.3s ease;" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
@@ -3911,16 +4277,29 @@
             <div id="topUsersPage" style="display:none;">
                 <div class="top-users-box">
                     <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <!-- بخش اول: اراد تریاکی -->
                     <div class="tu-header">
                         <div class="tu-title">اراد تریاکی</div>
                         <div class="tu-sub">kiaELX</div>
                     </div>
-                    <!-- بخش دوم: لیست کاربران برتر با استایل مشابه -->
                     <div class="tu-header" style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.2);padding-top:16px;">
-                        <div class="tu-title" style="font-size:22px;">لیست کاربران برتر</div>
+                        <div class="tu-title" style="font-size:26px;color:#ffd700;">لیست کاربران برتر</div>
                     </div>
                     <div class="tu-list" id="topUsersList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- گردونه -->
+            <div id="wheelPage" style="display:none;">
+                <div class="wheel-box">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🎡 گردونه شانس</h2>
+                    <div class="wheel-container">
+                        <canvas id="wheelCanvas" width="300" height="300"></canvas>
+                        <div class="pointer"></div>
+                    </div>
+                    <div class="wheel-status" id="wheelStatus">🎯 روی دکمه بزنید تا بچرخد</div>
+                    <button class="wheel-btn" id="wheelSpinBtn" onclick="spinWheel()">🌀 چرخش</button>
                     <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
@@ -4738,6 +5117,7 @@
                 document.querySelector('.main-header .logout-btn').style.display = 'none';
                 document.getElementById('headAdminBtn').style.display = 'none';
                 document.getElementById('topUsersBtn').style.display = 'none';
+                document.getElementById('wheelBtn').style.display = 'none';
                 document.getElementById('warningBanner').classList.remove('show');
             }
         }
@@ -4782,7 +5162,8 @@
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
-                'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage', 'topUsersPage'
+                'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage', 'topUsersPage',
+                'wheelPage', 'blackjackPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -4806,6 +5187,7 @@
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('adminBtn').style.display = 'inline-block';
                 document.getElementById('topUsersBtn').style.display = 'inline-block';
+                document.getElementById('wheelBtn').style.display = 'inline-block';
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (isModerator(username)) {
                     document.getElementById('moderatorBtn').style.display = 'inline-block';
@@ -4817,6 +5199,8 @@
                 updateTrophyDisplay();
                 updateStoreUI();
                 updateSpecialUI(username);
+                // بررسی محدودیت گردونه
+                checkWheelAvailability();
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -4874,6 +5258,13 @@
             if (pageId === 'topUsersPage') {
                 renderTopUsers();
             }
+            if (pageId === 'wheelPage') {
+                drawWheel();
+                checkWheelAvailability();
+            }
+            if (pageId === 'blackjackPage') {
+                resetBlackjackUI();
+            }
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -4883,6 +5274,12 @@
         function showCreatePassPage() { showPage('createPassPage'); }
 
         function showGiftPage() { showPage('giftPage'); }
+
+        function showTopUsers() { showPage('topUsersPage'); }
+
+        function showWheelPage() { showPage('wheelPage'); }
+
+        function goToBlackjack() { showPage('blackjackPage'); }
 
         function showAccountLoginPage() {
             document.getElementById('accountLoginPage').style.display = 'flex';
@@ -5043,6 +5440,7 @@
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
                     document.getElementById('topUsersBtn').style.display = 'inline-block';
+                    document.getElementById('wheelBtn').style.display = 'inline-block';
                     ensureAdminAccess();
                     showPage('homePage');
                 }, 1200);
@@ -5110,6 +5508,7 @@
                 document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
                 document.getElementById('topUsersBtn').style.display = 'inline-block';
+                document.getElementById('wheelBtn').style.display = 'inline-block';
                 ensureAdminAccess();
                 showPage('homePage');
             }, 1500);
@@ -5162,9 +5561,11 @@
             const moderatorBtn = document.getElementById('moderatorBtn');
             const logoutBtn = document.getElementById('logoutBtn');
             const topBtn = document.getElementById('topUsersBtn');
+            const wheelBtn = document.getElementById('wheelBtn');
 
             adminBtn.style.display = 'inline-block';
             topBtn.style.display = 'inline-block';
+            wheelBtn.style.display = 'inline-block';
 
             if (isModerator(username)) {
                 moderatorBtn.style.display = 'inline-block';
@@ -5774,6 +6175,414 @@
         //  بازی فوتبال (بدون تغییر)
         // ==========================================================
         // (کد فوتبال به دلیل حجم بالا در اینجا حذف شده اما عملکرد کامل دارد)
+
+        // ==========================================================
+        //  گردونه شانس
+        // ==========================================================
+        const wheelPrizes = [
+            { label: '۱۵۰ سکه', value: 150, weight: 80, color: '#4facfe' },
+            { label: '۵۰۰ سکه', value: 500, weight: 40, color: '#f093fb' },
+            { label: '۲۰۰ سکه', value: 200, weight: 50, color: '#ffd700' },
+            { label: '۱۰۰۰ سکه', value: 1000, weight: 10, color: '#ff6b6b' },
+            { label: '۳۰۰۰ سکه', value: 3000, weight: 2, color: '#2ecc71' }
+        ];
+
+        let wheelSpinning = false;
+        let lastWheelSpinDate = localStorage.getItem('lastWheelSpinDate') || '';
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 2 - 10;
+
+            const totalWeight = wheelPrizes.reduce((sum, p) => sum + p.weight, 0);
+            let startAngle = -Math.PI / 2; // شروع از بالا
+
+            ctx.clearRect(0, 0, width, height);
+
+            wheelPrizes.forEach((prize) => {
+                const sliceAngle = (prize.weight / totalWeight) * 2 * Math.PI;
+                const endAngle = startAngle + sliceAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+
+                ctx.fillStyle = prize.color;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // متن
+                const midAngle = startAngle + sliceAngle / 2;
+                const textRadius = radius * 0.65;
+                const textX = centerX + Math.cos(midAngle) * textRadius;
+                const textY = centerY + Math.sin(midAngle) * textRadius;
+                ctx.save();
+                ctx.translate(textX, textY);
+                ctx.rotate(midAngle + Math.PI / 2);
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Vazir, Tahoma, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(prize.label, 0, 0);
+                ctx.restore();
+
+                startAngle = endAngle;
+            });
+
+            // نقطه مرکزی
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fill();
+            ctx.strokeStyle = '#ffd700';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        function checkWheelAvailability() {
+            const today = new Date().toDateString();
+            const btn = document.getElementById('wheelSpinBtn');
+            const status = document.getElementById('wheelStatus');
+
+            if (lastWheelSpinDate === today) {
+                btn.disabled = true;
+                status.textContent = '⏳ امروز قبلاً گردونه را زدید! فردا دوباره امتحان کنید.';
+            } else {
+                btn.disabled = false;
+                status.textContent = '🎯 روی دکمه بزنید تا بچرخد';
+            }
+        }
+
+        function spinWheel() {
+            if (wheelSpinning) return;
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return;
+            }
+
+            const today = new Date().toDateString();
+            if (lastWheelSpinDate === today) {
+                alert('⏳ امروز قبلاً گردونه را زدید! فردا دوباره امتحان کنید.');
+                return;
+            }
+
+            wheelSpinning = true;
+            const btn = document.getElementById('wheelSpinBtn');
+            btn.disabled = true;
+            const status = document.getElementById('wheelStatus');
+            status.textContent = '🌀 در حال چرخش...';
+
+            const canvas = document.getElementById('wheelCanvas');
+            const totalWeight = wheelPrizes.reduce((sum, p) => sum + p.weight, 0);
+
+            // انتخاب جایزه بر اساس وزن
+            let rand = Math.random() * totalWeight;
+            let selectedPrize = null;
+            for (const prize of wheelPrizes) {
+                rand -= prize.weight;
+                if (rand <= 0) {
+                    selectedPrize = prize;
+                    break;
+                }
+            }
+            if (!selectedPrize) selectedPrize = wheelPrizes[0];
+
+            // محاسبه زاویه توقف (میانگین زاویه بخش مربوطه)
+            let startAngle = -Math.PI / 2;
+            let prizeStartAngle = 0;
+            for (const prize of wheelPrizes) {
+                const sliceAngle = (prize.weight / totalWeight) * 2 * Math.PI;
+                if (prize === selectedPrize) {
+                    prizeStartAngle = startAngle + sliceAngle / 2;
+                    break;
+                }
+                startAngle += sliceAngle;
+            }
+
+            // چرخش تصادفی چند دور + زاویه دقیق
+            const extraSpins = 5 + Math.floor(Math.random() * 5); // 5 تا 10 دور
+            const targetAngle = prizeStartAngle + extraSpins * 2 * Math.PI;
+            const currentRotation = parseFloat(canvas.style.transform?.replace('rotate(', '').replace('deg)', '')) || 0;
+            const newRotation = currentRotation + (targetAngle * 180 / Math.PI);
+
+            canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+            canvas.style.transform = `rotate(${newRotation}deg)`;
+
+            setTimeout(() => {
+                // اعطای جایزه
+                addUserCoins(username, selectedPrize.value);
+                updateCoinDisplay();
+                lastWheelSpinDate = today;
+                localStorage.setItem('lastWheelSpinDate', today);
+                status.innerHTML = `🎉 تبریک! شما <span class="prize">${selectedPrize.value} سکه</span> برنده شدید!`;
+                btn.disabled = true;
+                wheelSpinning = false;
+                document.getElementById('wheelSpinBtn').disabled = true;
+            }, 4200);
+        }
+
+        // ==========================================================
+        //  بلک‌جک (۲۱)
+        // ==========================================================
+        let bjState = {
+            deck: [],
+            playerHand: [],
+            dealerHand: [],
+            bet: 0,
+            gameOver: false,
+            isDealerTurn: false
+        };
+
+        function createDeck() {
+            const suits = ['♠', '♥', '♦', '♣'];
+            const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            const deck = [];
+            for (const suit of suits) {
+                for (const val of values) {
+                    deck.push({ suit, value: val });
+                }
+            }
+            return shuffle(deck);
+        }
+
+        function shuffle(deck) {
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+            return deck;
+        }
+
+        function getCardValue(card) {
+            if (card.value === 'A') return 11;
+            if (['J', 'Q', 'K'].includes(card.value)) return 10;
+            return parseInt(card.value);
+        }
+
+        function getHandValue(hand) {
+            let value = 0;
+            let aces = 0;
+            for (const card of hand) {
+                if (card.value === 'A') aces++;
+                value += getCardValue(card);
+            }
+            while (value > 21 && aces > 0) {
+                value -= 10;
+                aces--;
+            }
+            return value;
+        }
+
+        function renderCard(card) {
+            const isRed = card.suit === '♥' || card.suit === '♦';
+            const label = card.value + card.suit;
+            return `<span class="bj-card ${isRed ? 'red' : 'black'}">${label}</span>`;
+        }
+
+        function updateBlackjackUI() {
+            const playerCards = document.getElementById('playerCards');
+            const dealerCards = document.getElementById('dealerCards');
+            const playerScore = document.getElementById('playerScore');
+            const dealerScore = document.getElementById('dealerScore');
+            const result = document.getElementById('bjResult');
+
+            playerCards.innerHTML = bjState.playerHand.map(c => renderCard(c)).join('');
+            playerScore.textContent = getHandValue(bjState.playerHand);
+
+            if (bjState.isDealerTurn || bjState.gameOver) {
+                dealerCards.innerHTML = bjState.dealerHand.map(c => renderCard(c)).join('');
+                dealerScore.textContent = getHandValue(bjState.dealerHand);
+            } else {
+                // فقط کارت اول دیلر را نشان بده
+                const firstCard = bjState.dealerHand[0];
+                dealerCards.innerHTML = renderCard(firstCard) + `<span class="bj-card" style="background:#333;color:#fff;">??</span>`;
+                dealerScore.textContent = getCardValue(firstCard);
+            }
+
+            // دکمه‌ها
+            document.getElementById('bjHitBtn').disabled = bjState.gameOver || bjState.isDealerTurn;
+            document.getElementById('bjStandBtn').disabled = bjState.gameOver || bjState.isDealerTurn;
+            document.getElementById('bjDealBtn').disabled = !bjState.gameOver;
+
+            if (bjState.gameOver) {
+                result.style.display = 'block';
+            } else {
+                result.style.display = 'none';
+            }
+        }
+
+        function resetBlackjackUI() {
+            bjState.gameOver = true;
+            bjState.isDealerTurn = false;
+            bjState.playerHand = [];
+            bjState.dealerHand = [];
+            document.getElementById('playerCards').innerHTML = '';
+            document.getElementById('dealerCards').innerHTML = '';
+            document.getElementById('playerScore').textContent = '۰';
+            document.getElementById('dealerScore').textContent = '۰';
+            document.getElementById('bjResult').style.display = 'none';
+            document.getElementById('bjResult').className = 'bj-result';
+            document.getElementById('bjHitBtn').disabled = true;
+            document.getElementById('bjStandBtn').disabled = true;
+            document.getElementById('bjDealBtn').disabled = false;
+        }
+
+        function blackjackDeal() {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return;
+            }
+
+            const betInput = document.getElementById('bjBetInput');
+            const bet = parseInt(betInput.value.trim());
+            if (isNaN(bet) || bet < 10) {
+                alert('⚠️ شرط باید حداقل ۱۰ سکه باشد.');
+                return;
+            }
+
+            const coins = getUserCoins(username);
+            if (coins < bet) {
+                alert(`❌ شما فقط ${coins} سکه دارید.`);
+                return;
+            }
+
+            // شروع بازی
+            bjState.bet = bet;
+            bjState.deck = createDeck();
+            bjState.playerHand = [bjState.deck.pop(), bjState.deck.pop()];
+            bjState.dealerHand = [bjState.deck.pop(), bjState.deck.pop()];
+            bjState.gameOver = false;
+            bjState.isDealerTurn = false;
+            document.getElementById('bjResult').className = 'bj-result';
+            document.getElementById('bjResult').style.display = 'none';
+
+            // بررسی بلک‌جک طبیعی
+            const playerValue = getHandValue(bjState.playerHand);
+            const dealerValue = getHandValue(bjState.dealerHand);
+
+            if (playerValue === 21) {
+                // بلک‌جک بازیکن
+                bjState.gameOver = true;
+                if (dealerValue === 21) {
+                    // مساوی
+                    document.getElementById('bjResult').textContent = '🤝 هر دو بلک‌جک! مساوی.';
+                    document.getElementById('bjResult').className = 'bj-result push';
+                } else {
+                    addUserCoins(username, Math.floor(bet * 1.5));
+                    updateCoinDisplay();
+                    document.getElementById('bjResult').textContent = '🎉 بلک‌جک! شما برنده شدید! (+' + Math.floor(bet * 1.5) + ' سکه)';
+                    document.getElementById('bjResult').className = 'bj-result win';
+                }
+                updateBlackjackUI();
+                document.getElementById('bjDealBtn').disabled = false;
+                document.getElementById('bjHitBtn').disabled = true;
+                document.getElementById('bjStandBtn').disabled = true;
+                return;
+            }
+
+            if (dealerValue === 21) {
+                bjState.gameOver = true;
+                removeUserCoins(username, bet);
+                updateCoinDisplay();
+                document.getElementById('bjResult').textContent = '😔 دیلر بلک‌جک کرد! شما باختید. (-' + bet + ' سکه)';
+                document.getElementById('bjResult').className = 'bj-result lose';
+                updateBlackjackUI();
+                document.getElementById('bjDealBtn').disabled = false;
+                document.getElementById('bjHitBtn').disabled = true;
+                document.getElementById('bjStandBtn').disabled = true;
+                return;
+            }
+
+            document.getElementById('bjDealBtn').disabled = true;
+            document.getElementById('bjHitBtn').disabled = false;
+            document.getElementById('bjStandBtn').disabled = false;
+            updateBlackjackUI();
+        }
+
+        function blackjackHit() {
+            if (bjState.gameOver || bjState.isDealerTurn) return;
+
+            const card = bjState.deck.pop();
+            bjState.playerHand.push(card);
+            const value = getHandValue(bjState.playerHand);
+
+            if (value > 21) {
+                // باخت
+                bjState.gameOver = true;
+                const username = document.getElementById('displayUsername').textContent.trim();
+                removeUserCoins(username, bjState.bet);
+                updateCoinDisplay();
+                document.getElementById('bjResult').textContent = '💔 شما بیش از ۲۱ شدید! باختید. (-' + bjState.bet + ' سکه)';
+                document.getElementById('bjResult').className = 'bj-result lose';
+                updateBlackjackUI();
+                document.getElementById('bjHitBtn').disabled = true;
+                document.getElementById('bjStandBtn').disabled = true;
+                document.getElementById('bjDealBtn').disabled = false;
+                return;
+            }
+
+            updateBlackjackUI();
+        }
+
+        function blackjackStand() {
+            if (bjState.gameOver || bjState.isDealerTurn) return;
+
+            bjState.isDealerTurn = true;
+            document.getElementById('bjHitBtn').disabled = true;
+            document.getElementById('bjStandBtn').disabled = true;
+            updateBlackjackUI();
+
+            // نوبت دیلر
+            setTimeout(() => {
+                let dealerValue = getHandValue(bjState.dealerHand);
+                while (dealerValue < 17) {
+                    const card = bjState.deck.pop();
+                    bjState.dealerHand.push(card);
+                    dealerValue = getHandValue(bjState.dealerHand);
+                }
+
+                const playerValue = getHandValue(bjState.playerHand);
+                const username = document.getElementById('displayUsername').textContent.trim();
+
+                if (dealerValue > 21) {
+                    // دیلر باخت
+                    addUserCoins(username, bjState.bet * 2);
+                    updateCoinDisplay();
+                    document.getElementById('bjResult').textContent = '🎉 دیلر بیش از ۲۱ شد! شما برنده شدید! (+' + bjState.bet + ' سکه)';
+                    document.getElementById('bjResult').className = 'bj-result win';
+                } else if (dealerValue > playerValue) {
+                    removeUserCoins(username, bjState.bet);
+                    updateCoinDisplay();
+                    document.getElementById('bjResult').textContent = '😔 دیلر برنده شد! باختید. (-' + bjState.bet + ' سکه)';
+                    document.getElementById('bjResult').className = 'bj-result lose';
+                } else if (dealerValue < playerValue) {
+                    addUserCoins(username, bjState.bet * 2);
+                    updateCoinDisplay();
+                    document.getElementById('bjResult').textContent = '🎉 شما برنده شدید! (+' + bjState.bet + ' سکه)';
+                    document.getElementById('bjResult').className = 'bj-result win';
+                } else {
+                    document.getElementById('bjResult').textContent = '🤝 مساوی! شرط شما برگردانده شد.';
+                    document.getElementById('bjResult').className = 'bj-result push';
+                }
+
+                bjState.gameOver = true;
+                bjState.isDealerTurn = false;
+                updateBlackjackUI();
+                document.getElementById('bjDealBtn').disabled = false;
+                document.getElementById('bjHitBtn').disabled = true;
+                document.getElementById('bjStandBtn').disabled = true;
+            }, 800);
+        }
 
         // ==========================================================
         //  سایر توابع
@@ -6489,7 +7298,6 @@
             const container = document.getElementById('topUsersList');
             if (!container) return;
             const allUsers = getRegisteredUsernames();
-            // شرط: کاربرانی که ۴ جام یا بیشتر دارند
             const topUsers = allUsers.filter(u => getTrophies(u) >= 4);
             const currentUser = document.getElementById('displayUsername').textContent.trim();
 
@@ -6545,7 +7353,7 @@
                     addUserCoins(targetUsername, amount);
                     updateCoinDisplay();
                     alert(`✅ ${amount} سکه با موفقیت به ${targetUsername} داده شد.`);
-                    renderTopUsers(); // refresh
+                    renderTopUsers();
                 } else {
                     alert('❌ خطا در انتقال سکه.');
                 }
@@ -6620,6 +7428,7 @@
                     updateAdminStats();
                     document.getElementById('adminBtn').style.display = 'inline-block';
                     document.getElementById('topUsersBtn').style.display = 'inline-block';
+                    document.getElementById('wheelBtn').style.display = 'inline-block';
                     if (isModerator(saved)) {
                         document.getElementById('moderatorBtn').style.display = 'inline-block';
                     }
@@ -6652,7 +7461,8 @@
         console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
         console.log('🤖 ربات بازی دوز هوشمندتر شد!');
         console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta سکه‌هایش ۱۰۰۰۰ شد و پیام سپر آن بن برایش فعال شد.');
-        console.log('🏆 صفحه کاربران برتر با دو بخش (اراد تریاکی و لیست کاربران برتر) به‌روز شد.');
+        console.log('🎡 گردونه شانس با جوایز روزانه اضافه شد.');
+        console.log('🃏 بازی بلک‌جک (۲۱) با شرط‌بندی سکه اضافه شد.');
     </script>
 
 </body>
