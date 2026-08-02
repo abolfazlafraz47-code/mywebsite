@@ -25,6 +25,7 @@
             position: relative;
         }
 
+        /* ===== برف‌های متحرک ===== */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -49,6 +50,7 @@
             100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity: 0.2; }
         }
 
+        /* ===== پس‌زمینه گرادیان ===== */
         .bg-glow {
             position: fixed;
             top: 0;
@@ -398,7 +400,6 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(245, 87, 108, 0.5);
         }
-        /* دکمه ماموریت‌ها */
         .main-header .missions-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -774,7 +775,6 @@
         .profile-box .profile-info .info-item .value.pass-value { color: #f093fb; font-family: 'Courier New', monospace; letter-spacing: 2px; }
         .profile-box .profile-info .info-item .value.id-value { color: #a78bfa; font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 1px; direction: ltr; text-align: left; }
         .profile-box .profile-info .info-item .value.coins-value { color: #ffd700; font-weight: 700; }
-        /* بخش آمار */
         .profile-stats { margin-top: 16px; padding: 14px; background: rgba(255,255,255,0.04); border-radius: 16px; border: 1px solid rgba(255,255,255,0.06); }
         .profile-stats h4 { color: #4facfe; font-size: 16px; margin-bottom: 10px; text-align: center; }
         .profile-stats .stat-row { display: flex; justify-content: space-between; padding: 4px 0; color: rgba(255,255,255,0.7); font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
@@ -1492,7 +1492,6 @@
                         <div class="info-item"><span class="label">🏆 جام‌ها</span><span class="value" id="profileTrophies">0</span></div>
                         <div class="info-item"><span class="label">✅ وضعیت</span><span class="value" id="profileStatus">فعال</span></div>
                     </div>
-                    <!-- بخش آمار -->
                     <div class="profile-stats">
                         <h4>📊 آمار شخصی</h4>
                         <div class="stat-row"><span class="stat-label">🎮 کل بازی‌ها</span><span class="stat-value" id="statTotalGames">0</span></div>
@@ -1649,6 +1648,52 @@
         })();
 
         // ==========================================================
+        //  بن دائمی و حذف کاربران خاص
+        // ==========================================================
+        function getPermanentBans() {
+            try { return JSON.parse(localStorage.getItem('permanentBans') || '[]'); } catch { return []; }
+        }
+
+        function setPermanentBans(list) {
+            localStorage.setItem('permanentBans', JSON.stringify(list));
+        }
+
+        // اصلاح تابع isUserBanned برای پشتیبانی از بن دائمی
+        const originalIsUserBanned = isUserBanned;
+        isUserBanned = function(username) {
+            const permanent = getPermanentBans();
+            if (permanent.includes(username)) return true;
+            return originalIsUserBanned(username);
+        };
+
+        // اجرای عملیات حذف
+        function executePermanentBan() {
+            const targetIds = ['Rw7RZL9cTdrIon', 'kiahh25', 'Rwvw83JJ5RD11E'];
+
+            // حذف از لیست کاربران
+            let usernames = getRegisteredUsernames();
+            let updated = usernames.filter(u => !targetIds.includes(u));
+            if (usernames.length !== updated.length) setRegisteredUsernames(updated);
+
+            // حذف از داده‌ها
+            let usersData = getUsersData();
+            targetIds.forEach(id => { if (usersData[id]) delete usersData[id]; });
+            setUsersData(usersData);
+
+            // اضافه به بن دائمی
+            let perm = getPermanentBans();
+            targetIds.forEach(id => { if (!perm.includes(id)) perm.push(id); });
+            setPermanentBans(perm);
+
+            // پاک کردن از بن ۴۸ ساعته
+            let banned48 = getBannedUsers();
+            targetIds.forEach(id => { delete banned48[id]; });
+            setBannedUsers(banned48);
+
+            console.log('✅ ۳ کاربر بن دائمی و حذف شدند.');
+        }
+
+        // ==========================================================
         //  تشخیص ویندوز 10/11 و کامپیوتر
         // ==========================================================
         function isWindowsDesktop() {
@@ -1682,13 +1727,21 @@
 
         function detectDevice() {
             const ua = navigator.userAgent;
-            let device = 'کامپیوتر', icon = '💻';
+            let device = 'کامپیوتر',
+                icon = '💻';
             const width = window.innerWidth;
             if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
-                if (width < 768) { device = 'گوشی'; icon = '📱'; } else if (width < 1024) { device = 'تبلت'; icon = '📟'; } else { device = 'تبلت'; icon = '📟'; }
+                if (width < 768) { device = 'گوشی';
+                    icon = '📱'; } else if (width < 1024) { device = 'تبلت';
+                    icon = '📟'; } else { device = 'تبلت';
+                    icon = '📟'; }
             } else {
-                if (width < 768) { device = 'گوشی'; icon = '📱'; } else if (width < 1024) { device = 'تبلت'; icon = '📟'; } else {
-                    if (isWindowsDesktop()) { device = 'ویندوز'; icon = '🪟'; } else { device = 'کامپیوتر'; icon = '💻'; }
+                if (width < 768) { device = 'گوشی';
+                    icon = '📱'; } else if (width < 1024) { device = 'تبلت';
+                    icon = '📟'; } else {
+                    if (isWindowsDesktop()) { device = 'ویندوز';
+                        icon = '🪟'; } else { device = 'کامپیوتر';
+                        icon = '💻'; }
                 }
             }
             document.getElementById('deviceIcon').textContent = icon;
@@ -1804,7 +1857,8 @@
             const profileTrophies = document.getElementById('profileTrophies');
             const headBtn = document.getElementById('headAdminBtn');
             if (trophyDisplay) {
-                if (trophies > 0) { trophyDisplay.style.display = 'inline-flex'; trophyCount.textContent = trophies; } else { trophyDisplay.style.display = 'none'; }
+                if (trophies > 0) { trophyDisplay.style.display = 'inline-flex';
+                    trophyCount.textContent = trophies; } else { trophyDisplay.style.display = 'none'; }
             }
             if (profileTrophies) profileTrophies.textContent = trophies;
             if (isHeadAdmin(username)) {
@@ -1817,7 +1871,7 @@
         }
 
         // ==========================================================
-        //  سیستم بن
+        //  سیستم بن ۴۸ ساعته
         // ==========================================================
         const BAN_DURATION = 48 * 60 * 60 * 1000;
 
@@ -2454,7 +2508,6 @@
                 addStatGame(username, 'win', gnState.bet * 2);
                 document.getElementById('gnGuessBtn').disabled = true;
                 document.getElementById('gnNewBtn').disabled = false;
-                // آپدیت ماموریت حدس عدد
                 updateMissionProgress(username, 'play_guess');
                 return;
             }
@@ -3119,7 +3172,6 @@
                 updateTrophyDisplay(); }
             const statusMsg = document.getElementById('statusMsg');
             if (statusMsg) { statusMsg.textContent += ` 🪙 +${reward} سکه! (${streak} برد پشت سر هم)`; }
-            // آپدیت ماموریت دوز
             updateMissionProgress(username, 'play_tictactoe');
         }
 
@@ -4363,7 +4415,6 @@
                     updateCoinDisplay();
                     alert(`✅ ${amount} سکه با موفقیت به ${targetUsername} داده شد.`);
                     renderTopUsers();
-                    // ثبت تاریخچه برای هر دو
                     addStatGame(currentUser, 'draw', -amount);
                     addStatGame(targetUsername, 'draw', amount);
                 } else { alert('❌ خطا در انتقال سکه.'); }
@@ -4457,22 +4508,17 @@
         }
 
         // ==========================================================
-        //  اعمال ویژه برای کاربر RwuSYbgUUdA1Ta
+        //  اعمال ویژه برای کاربر RwuSYbgUUdA1Ta (که الان حذف شد)
         // ==========================================================
-        (function applySpecialToUser() {
-            const targetAccountId = 'RwuSYbgUUdA1Ta';
-            const username = getUsernameByAccountId(targetAccountId);
-            if (username) {
-                setUserCoins(username, 10000);
-                console.log(`✅ سکه‌های کاربر "${username}" به ۱۰۰۰۰ تنظیم شد.`);
-                localStorage.setItem('specialMessageShown_RwuSYbgUUdA1Ta', 'true');
-            } else { console.log(`⚠️ کاربر با آیدی ${targetAccountId} پیدا نشد.`); }
-        })();
+        // قبلاً انجام شد، نیازی نیست.
 
         // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
+            // ابتدا بن دائمی را اعمال کن
+            executePermanentBan();
+
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
             document.getElementById('createPassActionBtn').addEventListener('click', createPassword);
@@ -4484,6 +4530,18 @@
 
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
+                // اگر کاربر بن دائمی شده، اجازه ورود نده
+                if (getPermanentBans().includes(saved)) {
+                    document.getElementById('accountLoginPage').style.display = 'none';
+                    document.getElementById('registerPage').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('bannedPage').style.display = 'flex';
+                    document.getElementById('displayUsername').textContent = saved;
+                    document.querySelector('#bannedPage .ban-title').textContent = '⛔ شما بن دائمی شدید!';
+                    document.querySelector('#bannedPage .ban-text').textContent = 'اکانت شما به دلیل تخلف برای همیشه مسدود شده است.';
+                    document.querySelector('#bannedPage .ban-timer').textContent = '🔒 دائمی';
+                    return;
+                }
                 if (isUserBanned(saved)) {
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
@@ -4534,7 +4592,7 @@
         });
 
         console.log('❄️ برفی');
-        console.log('🚫 کاربر "kia" به مدت ۴۸ ساعت بن شد.');
+        console.log('🚫 کاربران Rw7RZL9cTdrIon، kiahh25، Rwvw83JJ5RD11E برای همیشه بن و حذف شدند.');
         console.log('🎁 کد هدیه "80" تا ساعت ۲۰:۵۰ قابل استفاده است - جایزه ۸۰ سکه');
         console.log('🎁 کد هدیه "برفی" تا ساعت ۱۲:۳۰ قابل استفاده است - جایزه ۳۰ سکه');
         console.log('🪙 هر برد در بازی دوز بین ۵ تا ۲۵ سکه جایزه دارد.');
@@ -4544,12 +4602,12 @@
         console.log('🔫 بازی تیراندازی با تفنگ اضافه شد! با کشتن ۹ ربات، ۵۰ سکه جایزه بگیرید.');
         console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
         console.log('🤖 ربات بازی دوز هوشمندتر شد!');
-        console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta سکه‌هایش ۱۰۰۰۰ شد و پیام سپر آن بن برایش فعال شد.');
         console.log('🎡 گردونه شانس با جوایز روزانه اضافه شد.');
         console.log('🃏 بازی بلک‌جک (۲۱) با شرط‌بندی سکه اضافه شد.');
         console.log('🔢 مسابقه حدس عدد با شرط‌بندی اضافه شد.');
         console.log('📊 آمار و تاریخچه شخصی به پروفایل اضافه شد.');
         console.log('🎯 ماموریت‌های روزانه با ۶ تسک و جایزه سکه اضافه شد.');
+        console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
     </script>
 
 </body>
