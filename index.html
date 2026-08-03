@@ -419,6 +419,32 @@
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
 
+        /* ===== دکمه پخش آهنگ ===== */
+        .music-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(79, 172, 254, 0.3);
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.5);
+        }
+        .music-status {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+
         /* ===== صفحه بن ===== */
         #bannedPage {
             display: none;
@@ -1015,6 +1041,8 @@
             .main-header .trophy-display { font-size: 11px; padding: 2px 8px; }
             .main-header .trophy-display .trophy-count { font-size: 12px; }
             .main-header .head-admin-btn { font-size: 10px; padding: 3px 10px; }
+            .music-btn { width: 28px; height: 28px; font-size: 14px; }
+            .music-status { font-size: 9px; }
             .account-login-box, .register-box { padding: 30px 20px; min-height: 350px; }
             .account-login-box h1, .register-box h1 { font-size: 32px; }
             .box { padding: 24px 18px; }
@@ -1075,6 +1103,8 @@
             .main-header .trophy-display { font-size: 10px; padding: 2px 6px; }
             .main-header .trophy-display .trophy-count { font-size: 10px; }
             .main-header .head-admin-btn { font-size: 9px; padding: 2px 8px; }
+            .music-btn { width: 24px; height: 24px; font-size: 12px; }
+            .music-status { font-size: 8px; }
             .account-login-box h1, .register-box h1 { font-size: 26px; }
             .board { gap: 6px; max-width: 200px; }
             .cell { font-size: 30px; border-radius: 10px; }
@@ -1178,6 +1208,12 @@
             <div class="main-header">
                 <div class="site-title">❄️ <span>برفی</span></div>
                 <div class="header-left">
+                    <!-- ===== دکمه پخش آهنگ ===== -->
+                    <div class="audio-control" style="display:flex;align-items:center;gap:6px;">
+                        <button id="playMusicBtn" onclick="toggleMusic()" class="music-btn">▶️</button>
+                        <span id="musicStatus" class="music-status">🎵 Wet Hands</span>
+                    </div>
+                    
                     <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
                     <div class="trophy-display" id="trophyDisplay" style="display:none;">
                         <span class="trophy-icon">🏆</span>
@@ -1646,6 +1682,61 @@
                 container.appendChild(el);
             }
         })();
+
+        // ==========================================================
+        //  پخش‌کننده آهنگ (حلقه بی‌نهایت)
+        // ==========================================================
+        let musicPlayer = null;
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            const btn = document.getElementById('playMusicBtn');
+            const status = document.getElementById('musicStatus');
+            
+            if (!musicPlayer) {
+                // ساخت پلیر جدید
+                musicPlayer = new Audio();
+                // آهنگ Wet Hands از ماینکرفت
+                musicPlayer.src = 'https://www.myinstants.com/media/sounds/minecraft-wet-hands.mp3';
+                musicPlayer.volume = 0.5;
+                
+                // وقتی آهنگ تموم شد، دوباره پخش کن (حلقه بی‌نهایت)
+                musicPlayer.addEventListener('ended', function() {
+                    if (isMusicPlaying) {
+                        this.currentTime = 0;
+                        this.play().catch(() => {});
+                    }
+                });
+                
+                // وقتی خطا داد
+                musicPlayer.onerror = function() {
+                    alert('⚠️ پخش آهنگ امکان‌پذیر نیست. لطفاً بعداً امتحان کنید.');
+                    btn.textContent = '▶️';
+                    status.style.display = 'none';
+                    isMusicPlaying = false;
+                };
+            }
+            
+            if (isMusicPlaying) {
+                // توقف
+                musicPlayer.pause();
+                btn.textContent = '▶️';
+                status.style.display = 'none';
+                isMusicPlaying = false;
+            } else {
+                // پخش
+                musicPlayer.play().then(() => {
+                    btn.textContent = '⏹️';
+                    status.style.display = 'inline';
+                    isMusicPlaying = true;
+                }).catch(() => {
+                    alert('⚠️ پخش آهنگ با مشکل مواجه شد. روی دکمه کلیک کنید تا دوباره تلاش کند.');
+                    btn.textContent = '▶️';
+                    status.style.display = 'none';
+                    isMusicPlaying = false;
+                });
+            }
+        }
 
         // ==========================================================
         //  بن دائمی و حذف کاربران خاص
@@ -2487,7 +2578,7 @@
             document.getElementById('gnBetInput').disabled = true;
             removeUserCoins(username, bet);
             updateCoinDisplay();
-            addStatGame(username, 'lose', -bet); // موقتا ثبت باخت، بعدا اصلاح میشه
+            addStatGame(username, 'lose', -bet);
         }
 
         function guessNumberGuess() {
@@ -4508,11 +4599,6 @@
         }
 
         // ==========================================================
-        //  اعمال ویژه برای کاربر RwuSYbgUUdA1Ta (که الان حذف شد)
-        // ==========================================================
-        // قبلاً انجام شد، نیازی نیست.
-
-        // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
@@ -4608,6 +4694,7 @@
         console.log('📊 آمار و تاریخچه شخصی به پروفایل اضافه شد.');
         console.log('🎯 ماموریت‌های روزانه با ۶ تسک و جایزه سکه اضافه شد.');
         console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
+        console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت اضافه شد!');
     </script>
 
 </body>
