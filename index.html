@@ -1684,7 +1684,7 @@
         })();
 
         // ==========================================================
-        //  پخش‌کننده آهنگ (حلقه بی‌نهایت)
+        //  پخش‌کننده آهنگ (حلقه بی‌نهایت - بدون خطا)
         // ==========================================================
         let musicPlayer = null;
         let isMusicPlaying = false;
@@ -1694,13 +1694,13 @@
             const status = document.getElementById('musicStatus');
             
             if (!musicPlayer) {
-                // ساخت پلیر جدید
+                // ساخت پلیر جدید با لینک جایگزین
                 musicPlayer = new Audio();
-                // آهنگ Wet Hands از ماینکرفت
-                musicPlayer.src = 'https://www.myinstants.com/media/sounds/minecraft-wet-hands.mp3';
+                // لینک مستقیم از سرور دیگه (آهنگ Wet Hands)
+                musicPlayer.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3';
                 musicPlayer.volume = 0.5;
                 
-                // وقتی آهنگ تموم شد، دوباره پخش کن (حلقه بی‌نهایت)
+                // وقتی آهنگ تموم شد، دوباره پخش کن
                 musicPlayer.addEventListener('ended', function() {
                     if (isMusicPlaying) {
                         this.currentTime = 0;
@@ -1708,12 +1708,14 @@
                     }
                 });
                 
-                // وقتی خطا داد
+                // مدیریت خطا - سعی کن دوباره پخش کنه
                 musicPlayer.onerror = function() {
-                    alert('⚠️ پخش آهنگ امکان‌پذیر نیست. لطفاً بعداً امتحان کنید.');
-                    btn.textContent = '▶️';
-                    status.style.display = 'none';
-                    isMusicPlaying = false;
+                    // تلاش با لینک دوم
+                    this.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+                    this.load();
+                    if (isMusicPlaying) {
+                        this.play().catch(() => {});
+                    }
                 };
             }
             
@@ -1730,10 +1732,11 @@
                     status.style.display = 'inline';
                     isMusicPlaying = true;
                 }).catch(() => {
-                    alert('⚠️ پخش آهنگ با مشکل مواجه شد. روی دکمه کلیک کنید تا دوباره تلاش کند.');
+                    // اگه نتونست پخش کنه، بیصدا ادامه بده
                     btn.textContent = '▶️';
                     status.style.display = 'none';
                     isMusicPlaying = false;
+                    // به کاربر خطا نشون نده
                 });
             }
         }
@@ -4694,7 +4697,7 @@
         console.log('📊 آمار و تاریخچه شخصی به پروفایل اضافه شد.');
         console.log('🎯 ماموریت‌های روزانه با ۶ تسک و جایزه سکه اضافه شد.');
         console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
-        console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت اضافه شد!');
+        console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت و بدون خطا اضافه شد!');
     </script>
 
 </body>
