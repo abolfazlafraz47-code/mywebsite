@@ -2863,221 +2863,89 @@
             }
         }
 
-        // رندر لیست کلن‌ها
-        function renderClansUI() {
-            const container = document.getElementById('clansContent');
-            if (!container) return;
+        // ==========================================================
+        //  اضافه کردن کاربر به کلن با آیدی
+        // ==========================================================
+        function addUserToClanByAccountId(accountId, clanName) {
+            console.log('🏰 در حال اضافه کردن کاربر به کلن...');
+            
+            // پیدا کردن نام کاربری
+            const username = getUsernameByAccountId(accountId);
+            if (!username) {
+                console.log(`❌ کاربری با آیدی ${accountId} پیدا نشد.`);
+                alert(`❌ کاربری با آیدی ${accountId} پیدا نشد.`);
+                return false;
+            }
 
+            console.log(`✅ نام کاربری پیدا شد: ${username}`);
+
+            // بررسی کلن
             const clans = getClans();
-            const clanNames = Object.keys(clans);
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const userClan = getUserClan(username);
-
-            let html = '';
-
-            // کلن کاربر
-            if (userClan) {
-                const clan = clans[userClan];
-                if (clan) {
-                    html += `
-                        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
-                            <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
-                            <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">
-                                👁️ مشاهده
-                            </button>
-                        </div>
-                    `;
-                }
+            if (!clans[clanName]) {
+                console.log(`❌ کلن "${clanName}" وجود ندارد!`);
+                alert(`❌ کلن "${clanName}" وجود ندارد!`);
+                return false;
             }
 
-            // فرم ساخت کلن
-            if (!userClan) {
-                html += `
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
-                        <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
-                        <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
-                        <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">
-                            🚀 ساخت (۵۰۰ سکه)
-                        </button>
-                    </div>
-                `;
+            // بررسی عضویت
+            let members = getClanMembers(clanName);
+            if (members.includes(username)) {
+                console.log(`⚠️ کاربر "${username}" قبلاً عضو کلن "${clanName}" است.`);
+                alert(`⚠️ کاربر "${username}" قبلاً عضو کلن "${clanName}" است.`);
+                return false;
             }
 
-            // لیست کلن‌ها
-            if (clanNames.length === 0) {
-                html += `
-                    <div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);">
-                        <div style="font-size:48px;margin-bottom:12px;">🏰</div>
-                        <div style="font-size:16px;">هیچ کلنی ساخته نشده است!</div>
-                        <div style="font-size:13px;margin-top:6px;">اولین کلن را شما بسازید (۵۰۰ سکه)</div>
-                    </div>
-                `;
-            } else {
-                const sortedClans = clanNames.sort((a, b) => {
-                    return (clans[b].totalMembers || 0) - (clans[a].totalMembers || 0);
-                });
+            // اضافه کردن
+            members.push(username);
+            setClanMembers(clanName, members);
+            clans[clanName].totalMembers = members.length;
+            setClans(clans);
+            saveUserClan(username, clanName);
 
-                sortedClans.forEach(name => {
-                    const clan = clans[name];
-                    const isMember = getUserClan(username) === name;
-                    html += `
-                        <div onclick="showClanPage('${name}')" style="
-                            background: rgba(255,255,255,0.04);
-                            border-radius: 16px;
-                            padding: 16px;
-                            margin-bottom: 10px;
-                            border: 1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        ">
-                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-                                <div style="display:flex;align-items:center;gap:10px;">
-                                    <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
-                                    <div>
-                                        <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
-                                        <div style="font-size:12px;color:rgba(255,255,255,0.4);">
-                                            <span>👑 ${clan.owner}</span>
-                                            <span style="margin:0 6px;">•</span>
-                                            <span>👥 ${clan.totalMembers || 0} عضو</span>
-                                            <span style="margin:0 6px;">•</span>
-                                            <span>🪙 ${clan.clanCoins || 0}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="display:flex;gap:6px;align-items:center;">
-                                    <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
-                                        ${isMember ? '✅ عضو' : '🔹'}
-                                    </span>
-                                    ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
+            console.log(`✅ کاربر "${username}" (آیدی: ${accountId}) به کلن "${clanName}" اضافه شد.`);
+            console.log(`👥 تعداد اعضای کلن: ${members.length}`);
+            console.log(`📋 لیست اعضا: ${members.join(', ')}`);
 
-            container.innerHTML = html;
-        }
-
-        // ساخت کلن از UI
-        function createClanFromUI() {
-            const nameInput = document.getElementById('clanNameInput');
-            const emojiInput = document.getElementById('clanEmojiInput');
-            const name = nameInput.value.trim();
-            const emoji = emojiInput.value.trim() || '🏰';
-
-            if (!name) {
-                alert('⚠️ لطفاً نام کلن را وارد کنید.');
-                return;
-            }
-
-            if (name.length < 3) {
-                alert('⚠️ نام کلن باید حداقل ۳ کاراکتر باشد.');
-                return;
-            }
-
-            createClan(name, name.substring(0, 3).toUpperCase(), emoji);
-            nameInput.value = '';
-        }
-
-        // نمایش صفحه کلن
-        function showClanPage(clanName) {
-            const clans = getClans();
-            const clan = clans[clanName];
-            if (!clan) {
-                alert('❌ این کلن وجود ندارد!');
-                return;
-            }
-
-            const members = getClanMembers(clanName);
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const isMember = members.includes(username);
-            const isOwner = clan.owner === username;
-
-            const container = document.getElementById('clanContent');
-            if (!container) return;
-
-            let html = `
-                <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
-                <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
-                <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
-                    <span>👑 ${clan.owner}</span>
-                    <span style="margin:0 8px;">•</span>
-                    <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
-                </div>
-
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
-                    </div>
-                </div>
-
-                <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
-                    <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
-                    ${members.map(m => `
-                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
-                            <span>${m} ${m === clan.owner ? '👑' : ''}</span>
-                            ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-
-            if (!isMember) {
-                html += `
-                    <button onclick="joinClan('${clanName}')" style="width:100%;margin:6px 0;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:10px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;">
-                        🔗 پیوستن به کلن
-                    </button>
-                `;
-            } else {
-                html += `
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
-                        <div style="flex:1;min-width:120px;">
-                            <input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" />
-                        </div>
-                        <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">
-                            💰 کمک سکه
-                        </button>
-                    </div>
-                    ${!isOwner ? `
-                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
-                            🚪 خروج از کلن
-                        </button>
-                    ` : `
-                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
-                            🗑️ حذف کلن
-                        </button>
-                    `}
-                `;
-            }
-
-            container.innerHTML = html;
-
-            // نمایش صفحه
-            document.getElementById('clansPage').style.display = 'none';
-            document.getElementById('clanPage').style.display = 'flex';
-        }
-
-        // نمایش صفحه کلن‌ها
-        function showClansPage() {
-            document.getElementById('clanPage').style.display = 'none';
-            document.getElementById('clansPage').style.display = 'flex';
+            // بروزرسانی UI
             renderClansUI();
-
-            // مخفی کردن صفحات دیگر
-            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage').forEach(el => {
-                if (el) el.style.display = 'none';
-            });
+            
+            alert(`✅ کاربر "${username}" با موفقیت به کلن "${clanName}" اضافه شد!`);
+            return true;
         }
+
+        // ==========================================================
+        //  اجرای مستقیم اضافه کردن کاربر RwuSYbgUUdA1Ta به کلن سیگما ها
+        // ==========================================================
+        function addTargetUserToClan() {
+            const accountId = 'RwuSYbgUUdA1Ta';
+            const clanName = 'سیگما ها';
+            
+            console.log('🚀 شروع عملیات اضافه کردن کاربر به کلن...');
+            console.log(`📌 آیدی: ${accountId}`);
+            console.log(`📌 کلن مقصد: ${clanName}`);
+            
+            const result = addUserToClanByAccountId(accountId, clanName);
+            
+            if (result) {
+                console.log('✅ عملیات با موفقیت انجام شد!');
+                // رفرش صفحه کلن‌ها
+                setTimeout(() => {
+                    showClansPage();
+                }, 500);
+            } else {
+                console.log('❌ عملیات ناموفق بود.');
+            }
+        }
+
+        // اجرا بعد از لود کامل صفحه
+        window.addEventListener('load', function() {
+            // ... کدهای قبلی ...
+            
+            // اضافه کردن کاربر هدف به کلن سیگما ها
+            setTimeout(function() {
+                addTargetUserToClan();
+            }, 2000);
+        });
 
         // ==========================================================
         //  توابع نمایش صفحات
@@ -5042,6 +4910,219 @@
         }
 
         // ==========================================================
+        //  نمایش کلن‌ها
+        // ==========================================================
+        function showClansPage() {
+            document.getElementById('clanPage').style.display = 'none';
+            document.getElementById('clansPage').style.display = 'flex';
+            renderClansUI();
+
+            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        // رندر لیست کلن‌ها
+        function renderClansUI() {
+            const container = document.getElementById('clansContent');
+            if (!container) return;
+
+            const clans = getClans();
+            const clanNames = Object.keys(clans);
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const userClan = getUserClan(username);
+
+            let html = '';
+
+            if (userClan) {
+                const clan = clans[userClan];
+                if (clan) {
+                    html += `
+                        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                            <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
+                            <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">
+                                👁️ مشاهده
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+
+            if (!userClan) {
+                html += `
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
+                        <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
+                        <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
+                        <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">
+                            🚀 ساخت (۵۰۰ سکه)
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (clanNames.length === 0) {
+                html += `
+                    <div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);">
+                        <div style="font-size:48px;margin-bottom:12px;">🏰</div>
+                        <div style="font-size:16px;">هیچ کلنی ساخته نشده است!</div>
+                        <div style="font-size:13px;margin-top:6px;">اولین کلن را شما بسازید (۵۰۰ سکه)</div>
+                    </div>
+                `;
+            } else {
+                const sortedClans = clanNames.sort((a, b) => {
+                    return (clans[b].totalMembers || 0) - (clans[a].totalMembers || 0);
+                });
+
+                sortedClans.forEach(name => {
+                    const clan = clans[name];
+                    const isMember = getUserClan(username) === name;
+                    html += `
+                        <div onclick="showClanPage('${name}')" style="
+                            background: rgba(255,255,255,0.04);
+                            border-radius: 16px;
+                            padding: 16px;
+                            margin-bottom: 10px;
+                            border: 1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        ">
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
+                                    <div>
+                                        <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
+                                        <div style="font-size:12px;color:rgba(255,255,255,0.4);">
+                                            <span>👑 ${clan.owner}</span>
+                                            <span style="margin:0 6px;">•</span>
+                                            <span>👥 ${clan.totalMembers || 0} عضو</span>
+                                            <span style="margin:0 6px;">•</span>
+                                            <span>🪙 ${clan.clanCoins || 0}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;">
+                                    <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
+                                        ${isMember ? '✅ عضو' : '🔹'}
+                                    </span>
+                                    ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ساخت کلن از UI
+        function createClanFromUI() {
+            const nameInput = document.getElementById('clanNameInput');
+            const emojiInput = document.getElementById('clanEmojiInput');
+            const name = nameInput.value.trim();
+            const emoji = emojiInput.value.trim() || '🏰';
+
+            if (!name) {
+                alert('⚠️ لطفاً نام کلن را وارد کنید.');
+                return;
+            }
+
+            if (name.length < 3) {
+                alert('⚠️ نام کلن باید حداقل ۳ کاراکتر باشد.');
+                return;
+            }
+
+            createClan(name, name.substring(0, 3).toUpperCase(), emoji);
+            nameInput.value = '';
+        }
+
+        // نمایش صفحه کلن
+        function showClanPage(clanName) {
+            const clans = getClans();
+            const clan = clans[clanName];
+            if (!clan) {
+                alert('❌ این کلن وجود ندارد!');
+                return;
+            }
+
+            const members = getClanMembers(clanName);
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const isMember = members.includes(username);
+            const isOwner = clan.owner === username;
+
+            const container = document.getElementById('clanContent');
+            if (!container) return;
+
+            let html = `
+                <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
+                <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
+                <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
+                    <span>👑 ${clan.owner}</span>
+                    <span style="margin:0 8px;">•</span>
+                    <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
+                    </div>
+                </div>
+
+                <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
+                    <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
+                    ${members.map(m => `
+                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
+                            <span>${m} ${m === clan.owner ? '👑' : ''}</span>
+                            ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            if (!isMember) {
+                html += `
+                    <button onclick="joinClan('${clanName}')" style="width:100%;margin:6px 0;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:10px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;">
+                        🔗 پیوستن به کلن
+                    </button>
+                `;
+            } else {
+                html += `
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
+                        <div style="flex:1;min-width:120px;">
+                            <input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" />
+                        </div>
+                        <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">
+                            💰 کمک سکه
+                        </button>
+                    </div>
+                    ${!isOwner ? `
+                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
+                            🚪 خروج از کلن
+                        </button>
+                    ` : `
+                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
+                            🗑️ حذف کلن
+                        </button>
+                    `}
+                `;
+            }
+
+            container.innerHTML = html;
+
+            document.getElementById('clansPage').style.display = 'none';
+            document.getElementById('clanPage').style.display = 'flex';
+        }
+
+        // ==========================================================
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
@@ -5143,6 +5224,11 @@
                     document.querySelector('.main-header .gift-btn').style.display = 'inline-block';
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
+                    
+                    // اضافه کردن کاربر هدف به کلن سیگما ها
+                    setTimeout(function() {
+                        addTargetUserToClan();
+                    }, 3000);
                 }, 1200);
             } else {
                 showAccountLoginPage();
@@ -5168,6 +5254,7 @@
         console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
         console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت و بدون خطا اضافه شد!');
         console.log('🏰 سیستم کلن با قابلیت ساخت، پیوستن، کمک سکه و مدیریت اعضا اضافه شد!');
+        console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta به کلن "سیگما ها" اضافه شد!');
     </script>
 
 </body>
