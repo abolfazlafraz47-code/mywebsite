@@ -418,6 +418,24 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
+        .main-header .clan-btn {
+            background: linear-gradient(135deg, #ffd700, #f093fb);
+            color: #1a1a3a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.2);
+            display: none;
+        }
+        .main-header .clan-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
+        }
 
         /* ===== دکمه پخش آهنگ ===== */
         .music-btn {
@@ -505,7 +523,7 @@
         #loader, #errorPage, .box, .menu-box, .game-container, .admin-panel-box, .rank-box, .profile-box,
         .moderator-panel-box, .country-select-box, .football-game-box, .gift-box, .store-box, .age-selection-box,
         .create-pass-box, .account-login-box, .register-box, .head-admin-panel-box, .shooting-game-box,
-        .top-users-box, .wheel-box, .blackjack-box, .missions-box, .guess-number-box {
+        .top-users-box, .wheel-box, .blackjack-box, .missions-box, .guess-number-box, .clans-box, .clan-page-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -514,6 +532,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
+        .clans-box, .clan-page-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
 
         /* ===== فروشگاه ===== */
         .store-box { padding: 30px 20px; width: 100%; text-align: center; position: relative; min-height: 300px; display: flex; flex-direction: column; }
@@ -643,7 +662,8 @@
 
         #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage,
         #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel,
-        #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage {
+        #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage,
+        #clansPage, #clanPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1029,7 +1049,8 @@
             .main-header .user-name { font-size: 12px; padding: 3px 10px; }
             .main-header .header-btn, .main-header .store-btn, .main-header .age-btn, .main-header .gift-btn,
             .main-header .rank-btn, .main-header .create-pass-btn, .main-header .logout-btn,
-            .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn {
+            .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn,
+            .main-header .clan-btn {
                 font-size: 10px; padding: 3px 10px;
             }
             .main-header .admin-btn { font-size: 10px; padding: 3px 10px; }
@@ -1056,7 +1077,7 @@
             .admin-panel-box, .rank-box, .profile-box, .moderator-panel-box, .country-select-box,
             .football-game-box, .gift-box, .store-box, .age-selection-box, .create-pass-box,
             .head-admin-panel-box, .shooting-game-box, .top-users-box, .wheel-box, .blackjack-box,
-            .missions-box, .guess-number-box { padding: 20px 14px; }
+            .missions-box, .guess-number-box, .clans-box, .clan-page-box { padding: 20px 14px; }
             .age-grid { grid-template-columns: repeat(5,1fr); gap: 6px; }
             .age-btn { font-size: 14px; padding: 8px 0; }
             .country-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
@@ -1091,7 +1112,8 @@
             .main-header .user-name { font-size: 10px; padding: 2px 8px; }
             .main-header .header-btn, .main-header .store-btn, .main-header .age-btn, .main-header .gift-btn,
             .main-header .rank-btn, .main-header .create-pass-btn, .main-header .logout-btn,
-            .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn {
+            .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn,
+            .main-header .clan-btn {
                 font-size: 9px; padding: 2px 8px;
             }
             .main-header .admin-btn { font-size: 9px; padding: 2px 8px; }
@@ -1239,6 +1261,7 @@
                     <button type="button" class="top-users-btn" id="topUsersBtn" onclick="showTopUsers()">🏆 کاربران برتر</button>
                     <button type="button" class="wheel-btn" id="wheelBtn" onclick="showWheelPage()">🎡 گردونه</button>
                     <button type="button" class="missions-btn" id="missionsBtn" onclick="showMissionsPage()">🎯 ماموریت‌ها</button>
+                    <button type="button" class="clan-btn" id="clanBtn" onclick="showClansPage()">🏰 کلن‌ها</button>
                 </div>
             </div>
 
@@ -1279,6 +1302,8 @@
                     <button type="button" onclick="goToBlackjack()" style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;">🃏 ورود به بازی بلک‌جک</button>
                     <br>
                     <button type="button" onclick="goToGuessNumber()" style="background:linear-gradient(135deg,#a8e063,#56ab2f);color:#fff;">🔢 مسابقه حدس عدد</button>
+                    <br>
+                    <button type="button" onclick="showClansPage()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">🏰 ورود به کلن‌ها</button>
                     <br><br>
                     <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1662,6 +1687,23 @@
                 </div>
             </div>
 
+            <!-- صفحه کلن‌ها -->
+            <div id="clansPage" style="display:none;">
+                <div class="clans-box">
+                    <button class="back-btn" onclick="goHome()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <h2 style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#ffd700,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;">🏰 کلن‌ها</h2>
+                    <div id="clansContent"></div>
+                </div>
+            </div>
+
+            <!-- صفحه کلن -->
+            <div id="clanPage" style="display:none;">
+                <div class="clan-page-box">
+                    <button class="back-btn" onclick="showClansPage()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <div id="clanContent"></div>
+                </div>
+            </div>
+
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
@@ -1694,13 +1736,10 @@
             const status = document.getElementById('musicStatus');
             
             if (!musicPlayer) {
-                // ساخت پلیر جدید با لینک جایگزین
                 musicPlayer = new Audio();
-                // لینک مستقیم از سرور دیگه (آهنگ Wet Hands)
                 musicPlayer.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3';
                 musicPlayer.volume = 0.5;
                 
-                // وقتی آهنگ تموم شد، دوباره پخش کن
                 musicPlayer.addEventListener('ended', function() {
                     if (isMusicPlaying) {
                         this.currentTime = 0;
@@ -1708,9 +1747,7 @@
                     }
                 });
                 
-                // مدیریت خطا - سعی کن دوباره پخش کنه
                 musicPlayer.onerror = function() {
-                    // تلاش با لینک دوم
                     this.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
                     this.load();
                     if (isMusicPlaying) {
@@ -1720,23 +1757,19 @@
             }
             
             if (isMusicPlaying) {
-                // توقف
                 musicPlayer.pause();
                 btn.textContent = '▶️';
                 status.style.display = 'none';
                 isMusicPlaying = false;
             } else {
-                // پخش
                 musicPlayer.play().then(() => {
                     btn.textContent = '⏹️';
                     status.style.display = 'inline';
                     isMusicPlaying = true;
                 }).catch(() => {
-                    // اگه نتونست پخش کنه، بیصدا ادامه بده
                     btn.textContent = '▶️';
                     status.style.display = 'none';
                     isMusicPlaying = false;
-                    // به کاربر خطا نشون نده
                 });
             }
         }
@@ -1750,41 +1783,6 @@
 
         function setPermanentBans(list) {
             localStorage.setItem('permanentBans', JSON.stringify(list));
-        }
-
-        // اصلاح تابع isUserBanned برای پشتیبانی از بن دائمی
-        const originalIsUserBanned = isUserBanned;
-        isUserBanned = function(username) {
-            const permanent = getPermanentBans();
-            if (permanent.includes(username)) return true;
-            return originalIsUserBanned(username);
-        };
-
-        // اجرای عملیات حذف
-        function executePermanentBan() {
-            const targetIds = ['Rw7RZL9cTdrIon', 'kiahh25', 'Rwvw83JJ5RD11E'];
-
-            // حذف از لیست کاربران
-            let usernames = getRegisteredUsernames();
-            let updated = usernames.filter(u => !targetIds.includes(u));
-            if (usernames.length !== updated.length) setRegisteredUsernames(updated);
-
-            // حذف از داده‌ها
-            let usersData = getUsersData();
-            targetIds.forEach(id => { if (usersData[id]) delete usersData[id]; });
-            setUsersData(usersData);
-
-            // اضافه به بن دائمی
-            let perm = getPermanentBans();
-            targetIds.forEach(id => { if (!perm.includes(id)) perm.push(id); });
-            setPermanentBans(perm);
-
-            // پاک کردن از بن ۴۸ ساعته
-            let banned48 = getBannedUsers();
-            targetIds.forEach(id => { delete banned48[id]; });
-            setBannedUsers(banned48);
-
-            console.log('✅ ۳ کاربر بن دائمی و حذف شدند.');
         }
 
         // ==========================================================
@@ -1977,6 +1975,8 @@
         }
 
         function isUserBanned(username) {
+            const permanent = getPermanentBans();
+            if (permanent.includes(username)) return true;
             const banned = getBannedUsers();
             if (banned[username]) {
                 const elapsed = Date.now() - banned[username];
@@ -2015,22 +2015,6 @@
                 if (document.getElementById('bannedPage').style.display === 'flex') { location.reload(); }
             }
         }
-
-        // ==========================================================
-        //  بن کردن کاربر "kia"
-        // ==========================================================
-        (function banKiaUser() {
-            const users = getUsersData();
-            for (const username of Object.keys(users)) {
-                if (username.toLowerCase() === 'kia') {
-                    if (!isUserBanned(username)) {
-                        banUser(username);
-                        console.log(`✅ کاربر "${username}" به مدت ۴۸ ساعت بن شد.`);
-                    }
-                    break;
-                }
-            }
-        })();
 
         // ==========================================================
         //  عملکرد ویژه اکانت ویژه
@@ -2391,7 +2375,9 @@
         function getUsernameByAccountId(accountId) {
             const users = getUsersData();
             for (const [username, data] of Object.entries(users)) {
-                if (data.id === accountId) { return username; }
+                if (data.id === accountId) {
+                    return username;
+                }
             }
             return null;
         }
@@ -2641,13 +2627,467 @@
         }
 
         // ==========================================================
+        //  سیستم کلن (نسخه شبه‌آنلاین با localStorage)
+        // ==========================================================
+        const CLANS_KEY = 'clansData';
+        const CLAN_MEMBERS_KEY = 'clanMembers';
+
+        // دریافت لیست کلن‌ها
+        function getClans() {
+            try {
+                const data = localStorage.getItem(CLANS_KEY);
+                return data ? JSON.parse(data) : {};
+            } catch { return {}; }
+        }
+
+        // ذخیره کلن‌ها
+        function setClans(clans) {
+            localStorage.setItem(CLANS_KEY, JSON.stringify(clans));
+        }
+
+        // دریافت اعضای کلن
+        function getClanMembers(clanName) {
+            try {
+                const data = localStorage.getItem(CLAN_MEMBERS_KEY + '_' + clanName);
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        // ذخیره اعضای کلن
+        function setClanMembers(clanName, members) {
+            localStorage.setItem(CLAN_MEMBERS_KEY + '_' + clanName, JSON.stringify(members));
+        }
+
+        // دریافت کلن کاربر
+        function getUserClan(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].clan || null : null;
+        }
+
+        // ذخیره کلن کاربر
+        function saveUserClan(username, clanName) {
+            const users = getUsersData();
+            if (users[username]) {
+                users[username].clan = clanName;
+                setUsersData(users);
+            }
+        }
+
+        // حذف کلن از کاربر
+        function removeUserClan(username) {
+            const users = getUsersData();
+            if (users[username]) {
+                delete users[username].clan;
+                setUsersData(users);
+            }
+        }
+
+        // ساخت کلن جدید
+        function createClan(clanName, clanTag, clanEmoji = '🏰') {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return false;
+            }
+
+            if (getUserClan(username)) {
+                alert('⚠️ شما قبلاً عضو یک کلن هستید!');
+                return false;
+            }
+
+            const clans = getClans();
+            if (clans[clanName]) {
+                alert('⚠️ این نام کلن قبلاً ثبت شده است!');
+                return false;
+            }
+
+            const cost = 500;
+            const coins = getUserCoins(username);
+            if (coins < cost) {
+                alert(`❌ برای ساخت کلن به ${cost} سکه نیاز دارید!`);
+                return false;
+            }
+
+            if (!removeUserCoins(username, cost)) {
+                alert('❌ خطا در کسر سکه.');
+                return false;
+            }
+
+            clans[clanName] = {
+                name: clanName,
+                tag: clanTag || clanName.substring(0, 3).toUpperCase(),
+                emoji: clanEmoji || '🏰',
+                owner: username,
+                created: Date.now(),
+                level: 1,
+                totalTrophies: 0,
+                totalMembers: 1,
+                clanCoins: 0
+            };
+            setClans(clans);
+
+            setClanMembers(clanName, [username]);
+            saveUserClan(username, clanName);
+
+            updateCoinDisplay();
+            alert(`✅ کلن "${clanName}" با موفقیت ساخته شد!`);
+            renderClansUI();
+            return true;
+        }
+
+        // پیوستن به کلن
+        function joinClan(clanName) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') {
+                alert('⚠️ لطفاً ابتدا وارد اکانت خود شوید.');
+                return;
+            }
+
+            if (getUserClan(username)) {
+                alert('⚠️ شما قبلاً عضو یک کلن هستید!');
+                return;
+            }
+
+            const clans = getClans();
+            if (!clans[clanName]) {
+                alert('❌ این کلن وجود ندارد!');
+                return;
+            }
+
+            const members = getClanMembers(clanName);
+            if (members.includes(username)) {
+                alert('⚠️ شما قبلاً عضو این کلن هستید!');
+                return;
+            }
+
+            members.push(username);
+            setClanMembers(clanName, members);
+            clans[clanName].totalMembers = members.length;
+            setClans(clans);
+            saveUserClan(username, clanName);
+
+            alert(`✅ شما به کلن "${clanName}" پیوستید!`);
+            renderClansUI();
+            showClanPage(clanName);
+        }
+
+        // ترک کلن
+        function leaveClan(clanName) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) return;
+
+            const clans = getClans();
+            if (!clans[clanName]) {
+                alert('❌ این کلن وجود ندارد!');
+                return;
+            }
+
+            if (clans[clanName].owner === username) {
+                if (confirm(`شما مالک کلن "${clanName}" هستید. با ترک، کلن حذف میشود. ادامه دهید؟`)) {
+                    delete clans[clanName];
+                    setClans(clans);
+                    localStorage.removeItem(CLAN_MEMBERS_KEY + '_' + clanName);
+                    const users = getUsersData();
+                    for (const [user, data] of Object.entries(users)) {
+                        if (data.clan === clanName) {
+                            delete users[user].clan;
+                        }
+                    }
+                    setUsersData(users);
+                    alert(`✅ کلن "${clanName}" حذف شد.`);
+                    renderClansUI();
+                    showClansPage();
+                    return;
+                }
+                return;
+            }
+
+            let members = getClanMembers(clanName);
+            members = members.filter(m => m !== username);
+            setClanMembers(clanName, members);
+            clans[clanName].totalMembers = members.length;
+            setClans(clans);
+            removeUserClan(username);
+
+            alert(`✅ شما از کلن "${clanName}" خارج شدید.`);
+            renderClansUI();
+            showClansPage();
+        }
+
+        // اخراج از کلن
+        function kickFromClan(clanName, username) {
+            if (!confirm(`آیا کاربر "${username}" را از کلن اخراج میکنید؟`)) return;
+
+            let members = getClanMembers(clanName);
+            members = members.filter(m => m !== username);
+            setClanMembers(clanName, members);
+
+            const clans = getClans();
+            clans[clanName].totalMembers = members.length;
+            setClans(clans);
+
+            removeUserClan(username);
+
+            alert(`✅ کاربر "${username}" از کلن اخراج شد.`);
+            showClanPage(clanName);
+        }
+
+        // ارسال سکه به کلن
+        function donateToClan(clanName, amount) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username) return;
+
+            if (getUserClan(username) !== clanName) {
+                alert('⚠️ شما عضو این کلن نیستید!');
+                return;
+            }
+
+            const coins = getUserCoins(username);
+            if (coins < amount) {
+                alert(`❌ شما فقط ${coins} سکه دارید.`);
+                return;
+            }
+
+            if (amount < 10) {
+                alert('⚠️ حداقل کمک ۱۰ سکه است.');
+                return;
+            }
+
+            if (removeUserCoins(username, amount)) {
+                const clans = getClans();
+                clans[clanName].clanCoins = (clans[clanName].clanCoins || 0) + amount;
+                setClans(clans);
+                updateCoinDisplay();
+                alert(`✅ شما ${amount} سکه به کلن کمک کردید!`);
+                showClanPage(clanName);
+            }
+        }
+
+        // رندر لیست کلن‌ها
+        function renderClansUI() {
+            const container = document.getElementById('clansContent');
+            if (!container) return;
+
+            const clans = getClans();
+            const clanNames = Object.keys(clans);
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const userClan = getUserClan(username);
+
+            let html = '';
+
+            // کلن کاربر
+            if (userClan) {
+                const clan = clans[userClan];
+                if (clan) {
+                    html += `
+                        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                            <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
+                            <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">
+                                👁️ مشاهده
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+
+            // فرم ساخت کلن
+            if (!userClan) {
+                html += `
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
+                        <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
+                        <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
+                        <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">
+                            🚀 ساخت (۵۰۰ سکه)
+                        </button>
+                    </div>
+                `;
+            }
+
+            // لیست کلن‌ها
+            if (clanNames.length === 0) {
+                html += `
+                    <div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);">
+                        <div style="font-size:48px;margin-bottom:12px;">🏰</div>
+                        <div style="font-size:16px;">هیچ کلنی ساخته نشده است!</div>
+                        <div style="font-size:13px;margin-top:6px;">اولین کلن را شما بسازید (۵۰۰ سکه)</div>
+                    </div>
+                `;
+            } else {
+                const sortedClans = clanNames.sort((a, b) => {
+                    return (clans[b].totalMembers || 0) - (clans[a].totalMembers || 0);
+                });
+
+                sortedClans.forEach(name => {
+                    const clan = clans[name];
+                    const isMember = getUserClan(username) === name;
+                    html += `
+                        <div onclick="showClanPage('${name}')" style="
+                            background: rgba(255,255,255,0.04);
+                            border-radius: 16px;
+                            padding: 16px;
+                            margin-bottom: 10px;
+                            border: 1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        ">
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
+                                    <div>
+                                        <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
+                                        <div style="font-size:12px;color:rgba(255,255,255,0.4);">
+                                            <span>👑 ${clan.owner}</span>
+                                            <span style="margin:0 6px;">•</span>
+                                            <span>👥 ${clan.totalMembers || 0} عضو</span>
+                                            <span style="margin:0 6px;">•</span>
+                                            <span>🪙 ${clan.clanCoins || 0}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;">
+                                    <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
+                                        ${isMember ? '✅ عضو' : '🔹'}
+                                    </span>
+                                    ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ساخت کلن از UI
+        function createClanFromUI() {
+            const nameInput = document.getElementById('clanNameInput');
+            const emojiInput = document.getElementById('clanEmojiInput');
+            const name = nameInput.value.trim();
+            const emoji = emojiInput.value.trim() || '🏰';
+
+            if (!name) {
+                alert('⚠️ لطفاً نام کلن را وارد کنید.');
+                return;
+            }
+
+            if (name.length < 3) {
+                alert('⚠️ نام کلن باید حداقل ۳ کاراکتر باشد.');
+                return;
+            }
+
+            createClan(name, name.substring(0, 3).toUpperCase(), emoji);
+            nameInput.value = '';
+        }
+
+        // نمایش صفحه کلن
+        function showClanPage(clanName) {
+            const clans = getClans();
+            const clan = clans[clanName];
+            if (!clan) {
+                alert('❌ این کلن وجود ندارد!');
+                return;
+            }
+
+            const members = getClanMembers(clanName);
+            const username = document.getElementById('displayUsername').textContent.trim();
+            const isMember = members.includes(username);
+            const isOwner = clan.owner === username;
+
+            const container = document.getElementById('clanContent');
+            if (!container) return;
+
+            let html = `
+                <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
+                <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
+                <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
+                    <span>👑 ${clan.owner}</span>
+                    <span style="margin:0 8px;">•</span>
+                    <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
+                    </div>
+                </div>
+
+                <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
+                    <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
+                    ${members.map(m => `
+                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
+                            <span>${m} ${m === clan.owner ? '👑' : ''}</span>
+                            ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            if (!isMember) {
+                html += `
+                    <button onclick="joinClan('${clanName}')" style="width:100%;margin:6px 0;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:10px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;">
+                        🔗 پیوستن به کلن
+                    </button>
+                `;
+            } else {
+                html += `
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
+                        <div style="flex:1;min-width:120px;">
+                            <input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" />
+                        </div>
+                        <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">
+                            💰 کمک سکه
+                        </button>
+                    </div>
+                    ${!isOwner ? `
+                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
+                            🚪 خروج از کلن
+                        </button>
+                    ` : `
+                        <button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">
+                            🗑️ حذف کلن
+                        </button>
+                    `}
+                `;
+            }
+
+            container.innerHTML = html;
+
+            // نمایش صفحه
+            document.getElementById('clansPage').style.display = 'none';
+            document.getElementById('clanPage').style.display = 'flex';
+        }
+
+        // نمایش صفحه کلن‌ها
+        function showClansPage() {
+            document.getElementById('clanPage').style.display = 'none';
+            document.getElementById('clansPage').style.display = 'flex';
+            renderClansUI();
+
+            // مخفی کردن صفحات دیگر
+            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        // ==========================================================
         //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
                 'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage',
-                'topUsersPage', 'wheelPage', 'blackjackPage', 'missionsPage', 'guessNumberPage'
+                'topUsersPage', 'wheelPage', 'blackjackPage', 'missionsPage', 'guessNumberPage',
+                'clansPage', 'clanPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2673,6 +3113,7 @@
                 document.getElementById('topUsersBtn').style.display = 'inline-block';
                 document.getElementById('wheelBtn').style.display = 'inline-block';
                 document.getElementById('missionsBtn').style.display = 'inline-block';
+                document.getElementById('clanBtn').style.display = 'inline-block';
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (isModerator(username)) { document.getElementById('moderatorBtn').style.display = 'inline-block'; } else { document.getElementById('moderatorBtn').style.display = 'none'; }
                 ensureAdminAccess();
@@ -2736,6 +3177,7 @@
                 renderMissionsUI(username);
             }
             if (pageId === 'guessNumberPage') { guessNumberReset(); }
+            if (pageId === 'clansPage') { renderClansUI(); }
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -2859,7 +3301,7 @@
             if (!isUsernameTaken(username)) { status.className = 'status-msg error';
                 status.textContent = '❌ کاربری با این نام کاربری وجود ندارد.'; return; }
             if (isUserBanned(username)) { status.className = 'status-msg error';
-                status.textContent = '🚫 شما بن ۴۸ ساعته هستید!'; return; }
+                status.textContent = '🚫 شما بن شدید!'; return; }
             const correctPass = getUserPasswordByUsername(username);
             if (!correctPass || correctPass === '') { status.className = 'status-msg error';
                 status.textContent = '❌ این کاربر رمز عبور ندارد. ابتدا رمز بسازید.'; return; }
@@ -2888,6 +3330,7 @@
                     document.getElementById('topUsersBtn').style.display = 'inline-block';
                     document.getElementById('wheelBtn').style.display = 'inline-block';
                     document.getElementById('missionsBtn').style.display = 'inline-block';
+                    document.getElementById('clanBtn').style.display = 'inline-block';
                     ensureAdminAccess();
                     showPage('homePage');
                 }, 1200);
@@ -2937,6 +3380,7 @@
                 document.getElementById('topUsersBtn').style.display = 'inline-block';
                 document.getElementById('wheelBtn').style.display = 'inline-block';
                 document.getElementById('missionsBtn').style.display = 'inline-block';
+                document.getElementById('clanBtn').style.display = 'inline-block';
                 ensureAdminAccess();
                 showPage('homePage');
             }, 1500);
@@ -2986,10 +3430,12 @@
             const topBtn = document.getElementById('topUsersBtn');
             const wheelBtn = document.getElementById('wheelBtn');
             const missionsBtn = document.getElementById('missionsBtn');
+            const clanBtn = document.getElementById('clanBtn');
             adminBtn.style.display = 'inline-block';
             topBtn.style.display = 'inline-block';
             wheelBtn.style.display = 'inline-block';
             missionsBtn.style.display = 'inline-block';
+            clanBtn.style.display = 'inline-block';
             if (isModerator(username)) { moderatorBtn.style.display = 'inline-block'; } else { moderatorBtn.style.display = 'none'; }
             if (!username || username === 'کاربر' || username === '---') { logoutBtn.style.display = 'none'; return; }
             logoutBtn.style.display = 'inline-block';
@@ -3479,13 +3925,6 @@
             if (empty.length > 0) { return empty[Math.floor(Math.random() * empty.length)]; }
             return -1;
         }
-
-        const originalRobotMove = robotMove;
-        robotMove = function() {
-            if (gameOver) { isRobotTurn = false; return; }
-            const move = getSmartRobotMove(board);
-            if (move !== -1) { applyRobotMove(move); } else { isRobotTurn = false; }
-        };
 
         // ==========================================================
         //  بازی فوتبال (کد کامل - خلاصه)
@@ -4577,6 +5016,7 @@
                 document.getElementById('topUsersBtn').style.display = 'none';
                 document.getElementById('wheelBtn').style.display = 'none';
                 document.getElementById('missionsBtn').style.display = 'none';
+                document.getElementById('clanBtn').style.display = 'none';
                 document.getElementById('warningBanner').classList.remove('show');
             }
         }
@@ -4605,8 +5045,37 @@
         //  بارگذاری اولیه
         // ==========================================================
         window.addEventListener('load', function() {
-            // ابتدا بن دائمی را اعمال کن
-            executePermanentBan();
+            // اجرای عملیات حذف و بن دائمی
+            (function executePermanentBan() {
+                const targetIds = ['Rw7RZL9cTdrIon', 'kiahh25', 'Rwvw83JJ5RD11E'];
+                let usernames = getRegisteredUsernames();
+                let updated = usernames.filter(u => !targetIds.includes(u));
+                if (usernames.length !== updated.length) setRegisteredUsernames(updated);
+                let usersData = getUsersData();
+                targetIds.forEach(id => { if (usersData[id]) delete usersData[id]; });
+                setUsersData(usersData);
+                let perm = getPermanentBans();
+                targetIds.forEach(id => { if (!perm.includes(id)) perm.push(id); });
+                setPermanentBans(perm);
+                let banned48 = getBannedUsers();
+                targetIds.forEach(id => { delete banned48[id]; });
+                setBannedUsers(banned48);
+                console.log('✅ ۳ کاربر بن دائمی و حذف شدند.');
+            })();
+
+            // بن کردن کاربر "kia"
+            (function banKiaUser() {
+                const users = getUsersData();
+                for (const username of Object.keys(users)) {
+                    if (username.toLowerCase() === 'kia') {
+                        if (!isUserBanned(username)) {
+                            banUser(username);
+                            console.log(`✅ کاربر "${username}" به مدت ۴۸ ساعت بن شد.`);
+                        }
+                        break;
+                    }
+                }
+            })();
 
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
@@ -4619,7 +5088,6 @@
 
             const saved = localStorage.getItem('username');
             if (saved && saved.trim() !== '') {
-                // اگر کاربر بن دائمی شده، اجازه ورود نده
                 if (getPermanentBans().includes(saved)) {
                     document.getElementById('accountLoginPage').style.display = 'none';
                     document.getElementById('registerPage').style.display = 'none';
@@ -4662,6 +5130,7 @@
                     document.getElementById('topUsersBtn').style.display = 'inline-block';
                     document.getElementById('wheelBtn').style.display = 'inline-block';
                     document.getElementById('missionsBtn').style.display = 'inline-block';
+                    document.getElementById('clanBtn').style.display = 'inline-block';
                     if (isModerator(saved)) { document.getElementById('moderatorBtn').style.display = 'inline-block'; }
                     updateButtonsVisibility();
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
@@ -4698,6 +5167,7 @@
         console.log('🎯 ماموریت‌های روزانه با ۶ تسک و جایزه سکه اضافه شد.');
         console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
         console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت و بدون خطا اضافه شد!');
+        console.log('🏰 سیستم کلن با قابلیت ساخت، پیوستن، کمک سکه و مدیریت اعضا اضافه شد!');
     </script>
 
 </body>
