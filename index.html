@@ -436,6 +436,60 @@
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 24px rgba(255, 215, 0, 0.3);
         }
+        .main-header .achievements-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(79, 172, 254, 0.3);
+            display: none;
+        }
+        .main-header .achievements-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(79, 172, 254, 0.5);
+        }
+        .main-header .events-btn {
+            background: linear-gradient(135deg, #ff6b6b, #f093fb);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 107, 107, 0.3);
+            display: none;
+        }
+        .main-header .events-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(255, 107, 107, 0.5);
+        }
+        .main-header .craft-btn {
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(86, 171, 47, 0.3);
+            display: none;
+        }
+        .main-header .craft-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 24px rgba(86, 171, 47, 0.5);
+        }
 
         /* ===== دکمه پخش آهنگ ===== */
         .music-btn {
@@ -523,7 +577,8 @@
         #loader, #errorPage, .box, .menu-box, .game-container, .admin-panel-box, .rank-box, .profile-box,
         .moderator-panel-box, .country-select-box, .football-game-box, .gift-box, .store-box, .age-selection-box,
         .create-pass-box, .account-login-box, .register-box, .head-admin-panel-box, .shooting-game-box,
-        .top-users-box, .wheel-box, .blackjack-box, .missions-box, .guess-number-box, .clans-box, .clan-page-box {
+        .top-users-box, .wheel-box, .blackjack-box, .missions-box, .guess-number-box, .clans-box, .clan-page-box,
+        .achievements-box, .events-box, .craft-box, .newgames-box {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -532,7 +587,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
-        .clans-box, .clan-page-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .clans-box, .clan-page-box, .achievements-box, .events-box, .craft-box, .newgames-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
 
         /* ===== فروشگاه ===== */
         .store-box { padding: 30px 20px; width: 100%; text-align: center; position: relative; min-height: 300px; display: flex; flex-direction: column; }
@@ -663,7 +718,7 @@
         #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage,
         #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel,
         #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage,
-        #clansPage, #clanPage {
+        #clansPage, #clanPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1041,6 +1096,68 @@
         .guess-number-box .gn-new-btn { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); padding: 10px 20px; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; margin-top: 8px; }
         .guess-number-box .gn-new-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: translateY(-2px); }
 
+        /* ===== دستاوردها ===== */
+        .achievements-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .achievements-box .back-btn { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); padding: 5px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; z-index: 2; box-shadow: none; }
+        .achievements-box .back-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: scale(1.05); }
+        .achievements-box h2 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+        .achievement-item { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .achievement-item .ach-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
+        .achievement-item .ach-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .achievement-item .ach-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .achievement-item .ach-status { font-size: 20px; }
+        .achievement-item .ach-progress { font-size: 12px; color: #4facfe; }
+        .achievement-item.locked { opacity: 0.5; border-color: rgba(255,255,255,0.03); }
+        .achievement-item.unlocked { border-color: rgba(255,215,0,0.3); background: rgba(255,215,0,0.05); }
+
+        /* ===== رویدادها ===== */
+        .events-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .events-box .back-btn { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); padding: 5px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; z-index: 2; box-shadow: none; }
+        .events-box .back-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: scale(1.05); }
+        .events-box h2 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+        .event-item { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06); }
+        .event-item .event-title { font-size: 16px; font-weight: 700; color: #ffd700; }
+        .event-item .event-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+        .event-item .event-time { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+        .event-item .event-reward { font-size: 13px; color: #2ecc71; font-weight: 600; }
+        .event-item .event-btn { background: linear-gradient(135deg, #ffd700, #f093fb); color: #1a1a3a; border: none; padding: 4px 16px; border-radius: 30px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .event-item .event-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
+        .event-item .event-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+        .event-item .event-btn.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
+        .event-item.active { border-color: rgba(255,215,0,0.2); }
+
+        /* ===== صنایع دستی ===== */
+        .craft-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .craft-box .back-btn { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); padding: 5px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; z-index: 2; box-shadow: none; }
+        .craft-box .back-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: scale(1.05); }
+        .craft-box h2 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #a8e063, #56ab2f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+        .craft-item { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .craft-item .craft-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
+        .craft-item .craft-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .craft-item .craft-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .craft-item .craft-cost { font-size: 12px; color: #ffd700; }
+        .craft-item .craft-btn { background: linear-gradient(135deg, #a8e063, #56ab2f); color: #fff; border: none; padding: 4px 16px; border-radius: 30px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .craft-item .craft-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(86,171,47,0.3); }
+        .craft-item .craft-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+        .craft-item .craft-btn.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
+        .craft-inventory { margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 12px; }
+        .craft-inventory h4 { color: #4facfe; font-size: 14px; margin-bottom: 6px; }
+        .craft-inventory .inv-item { display: inline-block; padding: 4px 12px; margin: 3px; background: rgba(255,255,255,0.04); border-radius: 20px; font-size: 12px; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.04); }
+
+        /* ===== بازی‌های جدید ===== */
+        .newgames-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .newgames-box .back-btn { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); padding: 5px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; z-index: 2; box-shadow: none; }
+        .newgames-box .back-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: scale(1.05); }
+        .newgames-box h2 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #64d8ff, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+        .newgame-item { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; cursor: pointer; transition: all 0.3s ease; }
+        .newgame-item:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
+        .newgame-item .ng-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
+        .newgame-item .ng-name { font-size: 16px; font-weight: 700; color: #fff; }
+        .newgame-item .ng-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .newgame-item .ng-emoji { font-size: 28px; }
+        .newgame-item .ng-btn { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #fff; border: none; padding: 4px 16px; border-radius: 30px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .newgame-item .ng-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(79,172,254,0.3); }
+
         /* ===== واکنش‌گرایی ===== */
         @media(max-width:480px) {
             .page-container { max-width: 100%; }
@@ -1050,7 +1167,7 @@
             .main-header .header-btn, .main-header .store-btn, .main-header .age-btn, .main-header .gift-btn,
             .main-header .rank-btn, .main-header .create-pass-btn, .main-header .logout-btn,
             .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn,
-            .main-header .clan-btn {
+            .main-header .clan-btn, .main-header .achievements-btn, .main-header .events-btn, .main-header .craft-btn {
                 font-size: 10px; padding: 3px 10px;
             }
             .main-header .admin-btn { font-size: 10px; padding: 3px 10px; }
@@ -1077,7 +1194,8 @@
             .admin-panel-box, .rank-box, .profile-box, .moderator-panel-box, .country-select-box,
             .football-game-box, .gift-box, .store-box, .age-selection-box, .create-pass-box,
             .head-admin-panel-box, .shooting-game-box, .top-users-box, .wheel-box, .blackjack-box,
-            .missions-box, .guess-number-box, .clans-box, .clan-page-box { padding: 20px 14px; }
+            .missions-box, .guess-number-box, .clans-box, .clan-page-box, .achievements-box,
+            .events-box, .craft-box, .newgames-box { padding: 20px 14px; }
             .age-grid { grid-template-columns: repeat(5,1fr); gap: 6px; }
             .age-btn { font-size: 14px; padding: 8px 0; }
             .country-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
@@ -1113,7 +1231,7 @@
             .main-header .header-btn, .main-header .store-btn, .main-header .age-btn, .main-header .gift-btn,
             .main-header .rank-btn, .main-header .create-pass-btn, .main-header .logout-btn,
             .main-header .top-users-btn, .main-header .wheel-btn, .main-header .missions-btn,
-            .main-header .clan-btn {
+            .main-header .clan-btn, .main-header .achievements-btn, .main-header .events-btn, .main-header .craft-btn {
                 font-size: 9px; padding: 2px 8px;
             }
             .main-header .admin-btn { font-size: 9px; padding: 2px 8px; }
@@ -1152,6 +1270,10 @@
             .wheel-container { width: 160px; height: 160px; }
             .bj-card { font-size: 12px; padding: 4px 8px; min-width: 28px; }
             .guess-number-box .gn-input-area input[type="number"] { width: 70px; font-size: 14px; }
+            .achievement-item .ach-name { font-size: 13px; }
+            .event-item .event-title { font-size: 14px; }
+            .craft-item .craft-name { font-size: 13px; }
+            .newgame-item .ng-name { font-size: 14px; }
         }
     </style>
 </head>
@@ -1262,6 +1384,9 @@
                     <button type="button" class="wheel-btn" id="wheelBtn" onclick="showWheelPage()">🎡 گردونه</button>
                     <button type="button" class="missions-btn" id="missionsBtn" onclick="showMissionsPage()">🎯 ماموریت‌ها</button>
                     <button type="button" class="clan-btn" id="clanBtn" onclick="showClansPage()">🏰 کلن‌ها</button>
+                    <button type="button" class="achievements-btn" id="achievementsBtn" onclick="showAchievementsPage()">🏅 دستاوردها</button>
+                    <button type="button" class="events-btn" id="eventsBtn" onclick="showEventsPage()">🎪 رویدادها</button>
+                    <button type="button" class="craft-btn" id="craftBtn" onclick="showCraftPage()">🔨 صنایع دستی</button>
                 </div>
             </div>
 
@@ -1304,6 +1429,14 @@
                     <button type="button" onclick="goToGuessNumber()" style="background:linear-gradient(135deg,#a8e063,#56ab2f);color:#fff;">🔢 مسابقه حدس عدد</button>
                     <br>
                     <button type="button" onclick="showClansPage()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;">🏰 ورود به کلن‌ها</button>
+                    <br>
+                    <button type="button" onclick="showAchievementsPage()" style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;">🏅 دستاوردها</button>
+                    <br>
+                    <button type="button" onclick="showEventsPage()" style="background:linear-gradient(135deg,#ff6b6b,#f093fb);color:#fff;">🎪 رویدادها</button>
+                    <br>
+                    <button type="button" onclick="showCraftPage()" style="background:linear-gradient(135deg,#a8e063,#56ab2f);color:#fff;">🔨 صنایع دستی</button>
+                    <br>
+                    <button type="button" onclick="showNewGamesPage()" style="background:linear-gradient(135deg,#64d8ff,#f093fb);color:#1a1a3a;">🎮 بازی‌های جدید</button>
                     <br><br>
                     <button type="button" class="back-btn-menu" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
                 </div>
@@ -1447,7 +1580,7 @@
                     <ul>
                         <li><span>📊 تعداد کاربران آنلاین</span> <span id="userCount">0</span></li>
                         <li><span>🕹️ بازی‌های فعال</span> <span id="gameCount">0</span></li>
-                        <li><span>⚙️ تنظیمات</span> <span>نسخه ۱.۰</span></li>
+                        <li><span>⚙️ تنظیمات</span> <span>نسخه ۲.۰</span></li>
                         <li id="adminList" style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;border-bottom:1px solid rgba(255,255,255,0.04);padding:10px 0;">
                             <span style="font-weight:500;color:rgba(255,255,255,0.5);">👤 مدیران</span>
                             <span id="adminNamesDisplay" style="font-weight:600;color:#fff;display:flex;flex-wrap:wrap;gap:4px;"></span>
@@ -1551,6 +1684,7 @@
                         <div class="info-item"><span class="label">🔒 رمز عبور</span><span class="value pass-value" id="profilePassword">ثبت نشده</span></div>
                         <div class="info-item"><span class="label">🪙 سکه</span><span class="value coins-value" id="profileCoins">0</span></div>
                         <div class="info-item"><span class="label">🏆 جام‌ها</span><span class="value" id="profileTrophies">0</span></div>
+                        <div class="info-item"><span class="label">📊 سطح</span><span class="value" id="profileLevel">۱</span></div>
                         <div class="info-item"><span class="label">✅ وضعیت</span><span class="value" id="profileStatus">فعال</span></div>
                     </div>
                     <div class="profile-stats">
@@ -1560,6 +1694,7 @@
                         <div class="stat-row"><span class="stat-label">💔 باخت</span><span class="stat-value" id="statLosses">0</span></div>
                         <div class="stat-row"><span class="stat-label">🪙 سکه‌های کسب‌شده</span><span class="stat-value" id="statEarned">0</span></div>
                         <div class="stat-row"><span class="stat-label">💸 سکه‌های خرج‌شده</span><span class="stat-value" id="statSpent">0</span></div>
+                        <div class="stat-row"><span class="stat-label">🏅 دستاوردها</span><span class="stat-value" id="statAchievements">0</span></div>
                     </div>
                     <div class="profile-history" id="profileHistory">
                         <div style="font-size:13px;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:4px;">📜 تاریخچه فعالیت</div>
@@ -1701,6 +1836,50 @@
                 <div class="clan-page-box">
                     <button class="back-btn" onclick="showClansPage()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
                     <div id="clanContent"></div>
+                </div>
+            </div>
+
+            <!-- دستاوردها -->
+            <div id="achievementsPage" style="display:none;">
+                <div class="achievements-box">
+                    <button class="back-btn" onclick="goHome()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <h2>🏅 دستاوردها</h2>
+                    <div id="achievementsList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()" style="width:100%;margin-top:16px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:10px 20px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- رویدادها -->
+            <div id="eventsPage" style="display:none;">
+                <div class="events-box">
+                    <button class="back-btn" onclick="goHome()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <h2>🎪 رویدادهای زنده</h2>
+                    <div id="eventsList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()" style="width:100%;margin-top:16px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:10px 20px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- صنایع دستی -->
+            <div id="craftPage" style="display:none;">
+                <div class="craft-box">
+                    <button class="back-btn" onclick="goHome()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <h2>🔨 صنایع دستی</h2>
+                    <div id="craftList"></div>
+                    <div class="craft-inventory" id="craftInventory">
+                        <h4>📦 انبار شما</h4>
+                        <div id="inventoryItems"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()" style="width:100%;margin-top:16px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:10px 20px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- بازی‌های جدید -->
+            <div id="newGamesPage" style="display:none;">
+                <div class="newgames-box">
+                    <button class="back-btn" onclick="goHome()" style="position:absolute;top:14px;right:16px;">↩ بازگشت</button>
+                    <h2>🎮 بازی‌های جدید</h2>
+                    <div id="newGamesList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()" style="width:100%;margin-top:16px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:10px 20px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">🔙 بازگشت به صفحه اصلی</button>
                 </div>
             </div>
 
@@ -1960,6 +2139,390 @@
             } else {
                 headBtn.style.display = 'none';
             }
+        }
+
+        // ==========================================================
+        //  سیستم سطح‌بندی
+        // ==========================================================
+        function getUserLevel(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].level || 1 : 1;
+        }
+
+        function getUserLevelProgress(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].levelProgress || 0 : 0;
+        }
+
+        function setUserLevel(username, level, progress) {
+            const users = getUsersData();
+            if (users[username]) {
+                users[username].level = level || 1;
+                users[username].levelProgress = progress || 0;
+                setUsersData(users);
+                updateLevelUI(username);
+            }
+        }
+
+        function addLevelXP(username, amount) {
+            const currentLevel = getUserLevel(username);
+            let progress = getUserLevelProgress(username) + amount;
+            const neededXP = currentLevel * 50;
+            let leveledUp = false;
+            while (progress >= neededXP) {
+                progress -= neededXP;
+                const newLevel = currentLevel + 1;
+                setUserLevel(username, newLevel, progress);
+                leveledUp = true;
+                alert(`🎉 تبریک! شما به سطح ${newLevel} رسیدید!`);
+                checkLevelAchievements(username, newLevel);
+                return true;
+            }
+            if (!leveledUp) {
+                setUserLevel(username, currentLevel, progress);
+            }
+            updateLevelUI(username);
+            return leveledUp;
+        }
+
+        function updateLevelUI(username) {
+            const level = getUserLevel(username);
+            const progress = getUserLevelProgress(username);
+            const neededXP = level * 50;
+            const profileLevel = document.getElementById('profileLevel');
+            if (profileLevel) profileLevel.textContent = level;
+        }
+
+        // ==========================================================
+        //  سیستم دستاوردها
+        // ==========================================================
+        const ACHIEVEMENTS = [
+            { id: 'first_win', name: 'اولین برد', desc: 'اولین بازی خود را ببرید', icon: '🎯', check: (s) => s.wins >= 1 },
+            { id: 'win_10', name: '۱۰ برد', desc: '۱۰ بازی را ببرید', icon: '🏅', check: (s) => s.wins >= 10 },
+            { id: 'win_50', name: '۵۰ برد', desc: '۵۰ بازی را ببرید', icon: '🥇', check: (s) => s.wins >= 50 },
+            { id: 'win_100', name: '۱۰۰ برد', desc: '۱۰۰ بازی را ببرید', icon: '👑', check: (s) => s.wins >= 100 },
+            { id: 'level_5', name: 'سطح ۵', desc: 'به سطح ۵ برسید', icon: '⭐', check: (s, u) => getUserLevel(u) >= 5 },
+            { id: 'level_10', name: 'سطح ۱۰', desc: 'به سطح ۱۰ برسید', icon: '🌟', check: (s, u) => getUserLevel(u) >= 10 },
+            { id: 'level_25', name: 'سطح ۲۵', desc: 'به سطح ۲۵ برسید', icon: '💎', check: (s, u) => getUserLevel(u) >= 25 },
+            { id: 'coins_100', name: '۱۰۰ سکه', desc: '۱۰۰ سکه جمع کنید', icon: '🪙', check: (s) => s.earnedCoins >= 100 },
+            { id: 'coins_1000', name: '۱۰۰۰ سکه', desc: '۱۰۰۰ سکه جمع کنید', icon: '💰', check: (s) => s.earnedCoins >= 1000 },
+            { id: 'trophy_1', name: 'اولین جام', desc: 'یک جام دریافت کنید', icon: '🏆', check: (s, u) => getTrophies(u) >= 1 },
+            { id: 'trophy_4', name: 'هد ادمین', desc: '۴ جام دریافت کنید', icon: '👑', check: (s, u) => getTrophies(u) >= 4 },
+            { id: 'clan_join', name: 'عضو کلن', desc: 'به یک کلن بپیوندید', icon: '🏰', check: (s, u) => getUserClan(u) !== null },
+            { id: 'shooting_win', name: 'تیرانداز', desc: 'بازی تیراندازی را ببرید', icon: '🔫', check: (s) => s.shootingWins || 0 >= 1 },
+            { id: 'football_win', name: 'فوتبالیست', desc: 'بازی فوتبال را ببرید', icon: '⚽', check: (s) => s.footballWins || 0 >= 1 },
+            { id: 'blackjack_win', name: 'برنده بلک‌جک', desc: 'یک بازی بلک‌جک را ببرید', icon: '🃏', check: (s) => s.blackjackWins || 0 >= 1 },
+            { id: 'guess_win', name: 'حدس‌زن', desc: 'مسابقه حدس عدد را ببرید', icon: '🔢', check: (s) => s.guessWins || 0 >= 1 },
+            { id: 'wheel_spin', name: 'چرخونده', desc: 'یک بار گردونه را بچرخانید', icon: '🎡', check: (s) => s.wheelSpins || 0 >= 1 },
+        ];
+
+        function getUserAchievements(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].achievements || [] : [];
+        }
+
+        function setUserAchievements(username, achievements) {
+            const users = getUsersData();
+            if (users[username]) {
+                users[username].achievements = achievements;
+                setUsersData(users);
+                updateAchievementsUI(username);
+            }
+        }
+
+        function checkAchievements(username) {
+            const stats = getUserStats(username);
+            const unlocked = getUserAchievements(username);
+            let newUnlocked = [];
+            let anyNew = false;
+            ACHIEVEMENTS.forEach(ach => {
+                if (!unlocked.includes(ach.id)) {
+                    if (ach.check(stats, username)) {
+                        unlocked.push(ach.id);
+                        newUnlocked.push(ach);
+                        anyNew = true;
+                        alert(`🏅 دستاورد جدید: ${ach.icon} ${ach.name}!`);
+                        addUserCoins(username, 20);
+                        updateCoinDisplay();
+                    }
+                }
+            });
+            if (anyNew) {
+                setUserAchievements(username, unlocked);
+                updateAchievementsUI(username);
+                addLevelXP(username, 10);
+            }
+            return anyNew;
+        }
+
+        function updateAchievementsUI(username) {
+            const container = document.getElementById('achievementsList');
+            if (!container) return;
+            const unlocked = getUserAchievements(username);
+            let html = '';
+            ACHIEVEMENTS.forEach(ach => {
+                const isUnlocked = unlocked.includes(ach.id);
+                html += `
+                    <div class="achievement-item ${isUnlocked ? 'unlocked' : 'locked'}">
+                        <div class="ach-info">
+                            <span class="ach-name">${ach.icon} ${ach.name}</span>
+                            <span class="ach-desc">${ach.desc}</span>
+                        </div>
+                        <span class="ach-status">${isUnlocked ? '✅' : '🔒'}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            const statAchievements = document.getElementById('statAchievements');
+            if (statAchievements) statAchievements.textContent = unlocked.length;
+        }
+
+        function checkLevelAchievements(username, level) {
+            const stats = getUserStats(username);
+            const unlocked = getUserAchievements(username);
+            let anyNew = false;
+            ACHIEVEMENTS.forEach(ach => {
+                if (!unlocked.includes(ach.id) && ach.id.startsWith('level_')) {
+                    if (ach.check(stats, username)) {
+                        unlocked.push(ach.id);
+                        anyNew = true;
+                        alert(`🏅 دستاورد جدید: ${ach.icon} ${ach.name}!`);
+                        addUserCoins(username, 30);
+                        updateCoinDisplay();
+                    }
+                }
+            });
+            if (anyNew) {
+                setUserAchievements(username, unlocked);
+                updateAchievementsUI(username);
+            }
+        }
+
+        // ==========================================================
+        //  سیستم رویدادهای زنده
+        // ==========================================================
+        function getEvents() {
+            try {
+                const data = localStorage.getItem('eventsData');
+                if (data) return JSON.parse(data);
+            } catch {}
+            return [
+                { id: 'event1', name: '🎪 جمعه‌بازی', desc: 'هر بازی ۲ برابر سکه جایزه دارد!', time: 'جمعه ۲۰-۲۲', reward: '۲x سکه', active: true, claimed: false },
+                { id: 'event2', name: '🎯 مسابقه تیراندازی', desc: 'در بازی تیراندازی شرکت کنید و جایزه بگیرید', time: 'شنبه ۱۸-۲۰', reward: '۵۰ سکه', active: false, claimed: false },
+                { id: 'event3', name: '⚽ جام فوتبال', desc: 'مسابقات فوتبال با جوایز ویژه', time: 'یکشنبه ۱۶-۲۰', reward: '۱۰۰ سکه', active: false, claimed: false },
+                { id: 'event4', name: '🃏 شب بلک‌جک', desc: 'هر برد بلک‌جک جایزه اضافی دارد', time: 'دوشنبه ۲۰-۲۳', reward: '۳۰ سکه', active: false, claimed: false },
+                { id: 'event5', name: '🎡 چرخش رایگان', desc: 'یک چرخش رایگان گردونه', time: 'چهارشنبه ۱۲-۱۴', reward: 'چرخش رایگان', active: false, claimed: false },
+            ];
+        }
+
+        function setEvents(events) {
+            localStorage.setItem('eventsData', JSON.stringify(events));
+        }
+
+        function renderEventsUI() {
+            const container = document.getElementById('eventsList');
+            if (!container) return;
+            const events = getEvents();
+            const username = document.getElementById('displayUsername').textContent.trim();
+            let html = '';
+            events.forEach(ev => {
+                html += `
+                    <div class="event-item ${ev.active ? 'active' : ''}">
+                        <div class="event-title">${ev.name}</div>
+                        <div class="event-desc">${ev.desc}</div>
+                        <div class="event-time">🕐 ${ev.time}</div>
+                        <div class="event-reward">🎁 جایزه: ${ev.reward}</div>
+                        <button class="event-btn ${ev.claimed ? 'done' : ''}" onclick="joinEvent('${ev.id}')" ${!ev.active || ev.claimed ? 'disabled' : ''}>
+                            ${ev.claimed ? '✅ دریافت شد' : '🎯 شرکت'}
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function joinEvent(eventId) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') { alert('⚠️ لطفاً وارد شوید.'); return; }
+            const events = getEvents();
+            const ev = events.find(e => e.id === eventId);
+            if (!ev || !ev.active || ev.claimed) return;
+            ev.claimed = true;
+            setEvents(events);
+            // جایزه رویداد
+            if (ev.reward.includes('سکه')) {
+                const amount = parseInt(ev.reward) || 50;
+                addUserCoins(username, amount);
+                updateCoinDisplay();
+                alert(`🎉 شما در رویداد ${ev.name} شرکت کردید و ${amount} سکه دریافت کردید!`);
+            } else if (ev.reward === 'چرخش رایگان') {
+                alert('🎉 شما یک چرخش رایگان گردونه دریافت کردید!');
+                // اجازه چرخش رایگان
+                localStorage.setItem('freeSpin', 'true');
+            }
+            renderEventsUI();
+            addLevelXP(username, 5);
+        }
+
+        // ==========================================================
+        //  سیستم صنایع دستی
+        // ==========================================================
+        const CRAFT_RECIPES = [
+            { id: 'craft1', name: '🎨 قاب طلایی', desc: 'قاب پروفایل طلایی', cost: 100, emoji: '🖼️' },
+            { id: 'craft2', name: '✨ ستاره درخشان', desc: 'افکت ستاره برای پروفایل', cost: 150, emoji: '⭐' },
+            { id: 'craft3', name: '🌈 رنگین‌کمان', desc: 'رنگ نام رنگین‌کمانی', cost: 200, emoji: '🌈' },
+            { id: 'craft4', name: '👑 تاج سلطنتی', desc: 'تاج برای آواتار', cost: 300, emoji: '👑' },
+            { id: 'craft5', name: '💎 الماس نادر', desc: 'الماس برای پروفایل', cost: 500, emoji: '💎' },
+        ];
+
+        function getUserCrafts(username) {
+            const users = getUsersData();
+            return users[username] ? users[username].crafts || [] : [];
+        }
+
+        function setUserCrafts(username, crafts) {
+            const users = getUsersData();
+            if (users[username]) {
+                users[username].crafts = crafts;
+                setUsersData(users);
+                renderCraftUI(username);
+            }
+        }
+
+        function craftItem(username, recipeId) {
+            const recipe = CRAFT_RECIPES.find(r => r.id === recipeId);
+            if (!recipe) return false;
+            const coins = getUserCoins(username);
+            if (coins < recipe.cost) {
+                alert(`❌ شما به ${recipe.cost} سکه نیاز دارید.`);
+                return false;
+            }
+            const crafts = getUserCrafts(username);
+            if (crafts.includes(recipeId)) {
+                alert('⚠️ شما قبلاً این آیتم را ساخته‌اید!');
+                return false;
+            }
+            if (removeUserCoins(username, recipe.cost)) {
+                crafts.push(recipeId);
+                setUserCrafts(username, crafts);
+                alert(`✅ شما "${recipe.name}" را با موفقیت ساختید!`);
+                addLevelXP(username, 15);
+                renderCraftUI(username);
+                return true;
+            }
+            return false;
+        }
+
+        function renderCraftUI(username) {
+            const container = document.getElementById('craftList');
+            const inventory = document.getElementById('inventoryItems');
+            if (!container) return;
+            const crafts = getUserCrafts(username);
+            let html = '';
+            CRAFT_RECIPES.forEach(recipe => {
+                const has = crafts.includes(recipe.id);
+                html += `
+                    <div class="craft-item">
+                        <div class="craft-info">
+                            <span class="craft-name">${recipe.emoji} ${recipe.name}</span>
+                            <span class="craft-desc">${recipe.desc}</span>
+                            <span class="craft-cost">💰 ${recipe.cost} سکه</span>
+                        </div>
+                        <button class="craft-btn ${has ? 'done' : ''}" onclick="craftItem('${username}','${recipe.id}')" ${has ? 'disabled' : ''}>
+                            ${has ? '✅ ساخته شده' : '🔨 ساخت'}
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            // انبار
+            if (inventory) {
+                if (crafts.length === 0) {
+                    inventory.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:13px;">هنوز چیزی نساخته‌اید</span>';
+                } else {
+                    let invHtml = '';
+                    crafts.forEach(id => {
+                        const recipe = CRAFT_RECIPES.find(r => r.id === id);
+                        if (recipe) invHtml += `<span class="inv-item">${recipe.emoji} ${recipe.name}</span>`;
+                    });
+                    inventory.innerHTML = invHtml;
+                }
+            }
+        }
+
+        // ==========================================================
+        //  بازی‌های جدید
+        // ==========================================================
+        const NEW_GAMES = [
+            { id: 'game_memory', name: '🧠 بازی حافظه', desc: 'کارت‌ها را جفت کنید', emoji: '🧠' },
+            { id: 'game_math', name: '➗ مسابقه ریاضی', desc: 'معادلات ریاضی را حل کنید', emoji: '➗' },
+            { id: 'game_snake', name: '🐍 مار', desc: 'بازی کلاسیک مار', emoji: '🐍' },
+            { id: 'game_typing', name: '⌨️ سرعت تایپ', desc: 'کلمات را سریع تایپ کنید', emoji: '⌨️' },
+        ];
+
+        function renderNewGamesUI() {
+            const container = document.getElementById('newGamesList');
+            if (!container) return;
+            let html = '';
+            NEW_GAMES.forEach(game => {
+                html += `
+                    <div class="newgame-item" onclick="playNewGame('${game.id}')">
+                        <div class="ng-info">
+                            <span class="ng-name">${game.emoji} ${game.name}</span>
+                            <span class="ng-desc">${game.desc}</span>
+                        </div>
+                        <span class="ng-emoji">${game.emoji}</span>
+                        <button class="ng-btn">🎮 بازی</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function playNewGame(gameId) {
+            const username = document.getElementById('displayUsername').textContent.trim();
+            if (!username || username === 'کاربر') { alert('⚠️ لطفاً وارد شوید.'); return; }
+            const game = NEW_GAMES.find(g => g.id === gameId);
+            if (!game) return;
+            
+            let result = confirm(`🎮 می‌خواهید بازی "${game.name}" را شروع کنید؟\n💰 هزینه: ۱۰ سکه`);
+            if (!result) return;
+            
+            if (!removeUserCoins(username, 10)) {
+                alert('❌ سکه کافی نیست!');
+                return;
+            }
+            updateCoinDisplay();
+            
+            // شبیه‌سازی بازی
+            const win = Math.random() > 0.4;
+            if (win) {
+                const reward = Math.floor(Math.random() * 30) + 10;
+                addUserCoins(username, reward);
+                updateCoinDisplay();
+                addLevelXP(username, 5);
+                alert(`🎉 شما در بازی "${game.name}" برنده شدید! 🪙 +${reward} سکه`);
+                // ثبت آمار
+                const stats = getUserStats(username);
+                if (gameId === 'game_memory') stats.memoryWins = (stats.memoryWins || 0) + 1;
+                else if (gameId === 'game_math') stats.mathWins = (stats.mathWins || 0) + 1;
+                else if (gameId === 'game_snake') stats.snakeWins = (stats.snakeWins || 0) + 1;
+                else if (gameId === 'game_typing') stats.typingWins = (stats.typingWins || 0) + 1;
+                stats.totalGames = (stats.totalGames || 0) + 1;
+                stats.wins = (stats.wins || 0) + 1;
+                stats.earnedCoins = (stats.earnedCoins || 0) + reward;
+                setUserStats(username, stats);
+                checkAchievements(username);
+            } else {
+                addLevelXP(username, 2);
+                alert(`😔 شما در بازی "${game.name}" باختید!`);
+                const stats = getUserStats(username);
+                stats.totalGames = (stats.totalGames || 0) + 1;
+                stats.losses = (stats.losses || 0) + 1;
+                stats.spentCoins = (stats.spentCoins || 0) + 10;
+                setUserStats(username, stats);
+            }
+            updateProfileStatsUI(username);
         }
 
         // ==========================================================
@@ -2382,9 +2945,9 @@
             return null;
         }
 
-        function setUserData(username, password, accountId, coins = 0, superAdminExpiry = null, trophies = 0, specialAccount = false, winStreak = 0) {
+        function setUserData(username, password, accountId, coins = 0, superAdminExpiry = null, trophies = 0, specialAccount = false, winStreak = 0, level = 1, levelProgress = 0, achievements = []) {
             const users = getUsersData();
-            users[username] = { password, id: accountId, coins, superAdminExpiry, trophies, specialAccount, winStreak };
+            users[username] = { password, id: accountId, coins, superAdminExpiry, trophies, specialAccount, winStreak, level, levelProgress, achievements };
             setUsersData(users);
         }
 
@@ -2396,7 +2959,7 @@
             if (users[username] && users[username].stats) {
                 return users[username].stats;
             }
-            return { totalGames: 0, wins: 0, losses: 0, earnedCoins: 0, spentCoins: 0, history: [] };
+            return { totalGames: 0, wins: 0, losses: 0, earnedCoins: 0, spentCoins: 0, history: [], shootingWins: 0, footballWins: 0, blackjackWins: 0, guessWins: 0, wheelSpins: 0 };
         }
 
         function setUserStats(username, stats) {
@@ -2406,10 +2969,18 @@
             setUsersData(users);
         }
 
-        function addStatGame(username, result, coinChange = 0) {
+        function addStatGame(username, result, coinChange = 0, gameType = null) {
             const stats = getUserStats(username);
             stats.totalGames = (stats.totalGames || 0) + 1;
-            if (result === 'win') { stats.wins = (stats.wins || 0) + 1; } else if (result === 'lose') { stats.losses = (stats.losses || 0) + 1; }
+            if (result === 'win') {
+                stats.wins = (stats.wins || 0) + 1;
+                if (gameType === 'shooting') stats.shootingWins = (stats.shootingWins || 0) + 1;
+                else if (gameType === 'football') stats.footballWins = (stats.footballWins || 0) + 1;
+                else if (gameType === 'blackjack') stats.blackjackWins = (stats.blackjackWins || 0) + 1;
+                else if (gameType === 'guess') stats.guessWins = (stats.guessWins || 0) + 1;
+            } else if (result === 'lose') {
+                stats.losses = (stats.losses || 0) + 1;
+            }
             if (coinChange > 0) { stats.earnedCoins = (stats.earnedCoins || 0) + coinChange; } else if (coinChange < 0) { stats.spentCoins = (stats.spentCoins || 0) + Math.abs(coinChange); }
             if (!stats.history) { stats.history = []; }
             const time = new Date().toLocaleString('fa-IR');
@@ -2417,6 +2988,18 @@
             if (stats.history.length > 20) { stats.history.pop(); }
             setUserStats(username, stats);
             updateProfileStatsUI(username);
+            
+            // افزودن XP به سطح
+            if (result === 'win') {
+                addLevelXP(username, 10);
+            } else if (result === 'lose') {
+                addLevelXP(username, 3);
+            } else {
+                addLevelXP(username, 5);
+            }
+            
+            // بررسی دستاوردها
+            checkAchievements(username);
         }
 
         function updateProfileStatsUI(username) {
@@ -2434,6 +3017,8 @@
             } else {
                 historyList.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);font-size:13px;padding:8px;">هیچ فعالیتی ثبت نشده</div>';
             }
+            updateLevelUI(username);
+            updateAchievementsUI(username);
         }
 
         // ==========================================================
@@ -2500,6 +3085,7 @@
             addUserCoins(username, task.reward);
             updateCoinDisplay();
             renderMissionsUI(username);
+            addLevelXP(username, 5);
             return true;
         }
 
@@ -2585,7 +3171,7 @@
                 feedback.className = 'gn-feedback win';
                 addUserCoins(username, gnState.bet * 2);
                 updateCoinDisplay();
-                addStatGame(username, 'win', gnState.bet * 2);
+                addStatGame(username, 'win', gnState.bet * 2, 'guess');
                 document.getElementById('gnGuessBtn').disabled = true;
                 document.getElementById('gnNewBtn').disabled = false;
                 updateMissionProgress(username, 'play_guess');
@@ -2632,7 +3218,6 @@
         const CLANS_KEY = 'clansData';
         const CLAN_MEMBERS_KEY = 'clanMembers';
 
-        // دریافت لیست کلن‌ها
         function getClans() {
             try {
                 const data = localStorage.getItem(CLANS_KEY);
@@ -2640,12 +3225,10 @@
             } catch { return {}; }
         }
 
-        // ذخیره کلن‌ها
         function setClans(clans) {
             localStorage.setItem(CLANS_KEY, JSON.stringify(clans));
         }
 
-        // دریافت اعضای کلن
         function getClanMembers(clanName) {
             try {
                 const data = localStorage.getItem(CLAN_MEMBERS_KEY + '_' + clanName);
@@ -2653,18 +3236,15 @@
             } catch { return []; }
         }
 
-        // ذخیره اعضای کلن
         function setClanMembers(clanName, members) {
             localStorage.setItem(CLAN_MEMBERS_KEY + '_' + clanName, JSON.stringify(members));
         }
 
-        // دریافت کلن کاربر
         function getUserClan(username) {
             const users = getUsersData();
             return users[username] ? users[username].clan || null : null;
         }
 
-        // ذخیره کلن کاربر
         function saveUserClan(username, clanName) {
             const users = getUsersData();
             if (users[username]) {
@@ -2673,7 +3253,6 @@
             }
         }
 
-        // حذف کلن از کاربر
         function removeUserClan(username) {
             const users = getUsersData();
             if (users[username]) {
@@ -2682,7 +3261,6 @@
             }
         }
 
-        // ساخت کلن جدید
         function createClan(clanName, clanTag, clanEmoji = '🏰') {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username || username === 'کاربر') {
@@ -2732,10 +3310,11 @@
             updateCoinDisplay();
             alert(`✅ کلن "${clanName}" با موفقیت ساخته شد!`);
             renderClansUI();
+            addLevelXP(username, 20);
+            checkAchievements(username);
             return true;
         }
 
-        // پیوستن به کلن
         function joinClan(clanName) {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username || username === 'کاربر') {
@@ -2769,9 +3348,10 @@
             alert(`✅ شما به کلن "${clanName}" پیوستید!`);
             renderClansUI();
             showClanPage(clanName);
+            addLevelXP(username, 10);
+            checkAchievements(username);
         }
 
-        // ترک کلن
         function leaveClan(clanName) {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) return;
@@ -2814,7 +3394,6 @@
             showClansPage();
         }
 
-        // اخراج از کلن
         function kickFromClan(clanName, username) {
             if (!confirm(`آیا کاربر "${username}" را از کلن اخراج میکنید؟`)) return;
 
@@ -2832,7 +3411,6 @@
             showClanPage(clanName);
         }
 
-        // ارسال سکه به کلن
         function donateToClan(clanName, amount) {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) return;
@@ -2859,93 +3437,10 @@
                 setClans(clans);
                 updateCoinDisplay();
                 alert(`✅ شما ${amount} سکه به کلن کمک کردید!`);
+                addLevelXP(username, 5);
                 showClanPage(clanName);
             }
         }
-
-        // ==========================================================
-        //  اضافه کردن کاربر به کلن با آیدی
-        // ==========================================================
-        function addUserToClanByAccountId(accountId, clanName) {
-            console.log('🏰 در حال اضافه کردن کاربر به کلن...');
-            
-            // پیدا کردن نام کاربری
-            const username = getUsernameByAccountId(accountId);
-            if (!username) {
-                console.log(`❌ کاربری با آیدی ${accountId} پیدا نشد.`);
-                alert(`❌ کاربری با آیدی ${accountId} پیدا نشد.`);
-                return false;
-            }
-
-            console.log(`✅ نام کاربری پیدا شد: ${username}`);
-
-            // بررسی کلن
-            const clans = getClans();
-            if (!clans[clanName]) {
-                console.log(`❌ کلن "${clanName}" وجود ندارد!`);
-                alert(`❌ کلن "${clanName}" وجود ندارد!`);
-                return false;
-            }
-
-            // بررسی عضویت
-            let members = getClanMembers(clanName);
-            if (members.includes(username)) {
-                console.log(`⚠️ کاربر "${username}" قبلاً عضو کلن "${clanName}" است.`);
-                alert(`⚠️ کاربر "${username}" قبلاً عضو کلن "${clanName}" است.`);
-                return false;
-            }
-
-            // اضافه کردن
-            members.push(username);
-            setClanMembers(clanName, members);
-            clans[clanName].totalMembers = members.length;
-            setClans(clans);
-            saveUserClan(username, clanName);
-
-            console.log(`✅ کاربر "${username}" (آیدی: ${accountId}) به کلن "${clanName}" اضافه شد.`);
-            console.log(`👥 تعداد اعضای کلن: ${members.length}`);
-            console.log(`📋 لیست اعضا: ${members.join(', ')}`);
-
-            // بروزرسانی UI
-            renderClansUI();
-            
-            alert(`✅ کاربر "${username}" با موفقیت به کلن "${clanName}" اضافه شد!`);
-            return true;
-        }
-
-        // ==========================================================
-        //  اجرای مستقیم اضافه کردن کاربر RwuSYbgUUdA1Ta به کلن سیگما ها
-        // ==========================================================
-        function addTargetUserToClan() {
-            const accountId = 'RwuSYbgUUdA1Ta';
-            const clanName = 'سیگما ها';
-            
-            console.log('🚀 شروع عملیات اضافه کردن کاربر به کلن...');
-            console.log(`📌 آیدی: ${accountId}`);
-            console.log(`📌 کلن مقصد: ${clanName}`);
-            
-            const result = addUserToClanByAccountId(accountId, clanName);
-            
-            if (result) {
-                console.log('✅ عملیات با موفقیت انجام شد!');
-                // رفرش صفحه کلن‌ها
-                setTimeout(() => {
-                    showClansPage();
-                }, 500);
-            } else {
-                console.log('❌ عملیات ناموفق بود.');
-            }
-        }
-
-        // اجرا بعد از لود کامل صفحه
-        window.addEventListener('load', function() {
-            // ... کدهای قبلی ...
-            
-            // اضافه کردن کاربر هدف به کلن سیگما ها
-            setTimeout(function() {
-                addTargetUserToClan();
-            }, 2000);
-        });
 
         // ==========================================================
         //  توابع نمایش صفحات
@@ -2955,7 +3450,7 @@
                 'moderatorPanel', 'countrySelectPage', 'footballGamePage', 'giftPage', 'storePage',
                 'ageSelectionPage', 'createPassPage', 'headAdminPanel', 'shootingGamePage',
                 'topUsersPage', 'wheelPage', 'blackjackPage', 'missionsPage', 'guessNumberPage',
-                'clansPage', 'clanPage'
+                'clansPage', 'clanPage', 'achievementsPage', 'eventsPage', 'craftPage', 'newGamesPage'
             ];
             pages.forEach(id => {
                 const el = document.getElementById(id);
@@ -2982,6 +3477,9 @@
                 document.getElementById('wheelBtn').style.display = 'inline-block';
                 document.getElementById('missionsBtn').style.display = 'inline-block';
                 document.getElementById('clanBtn').style.display = 'inline-block';
+                document.getElementById('achievementsBtn').style.display = 'inline-block';
+                document.getElementById('eventsBtn').style.display = 'inline-block';
+                document.getElementById('craftBtn').style.display = 'inline-block';
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (isModerator(username)) { document.getElementById('moderatorBtn').style.display = 'inline-block'; } else { document.getElementById('moderatorBtn').style.display = 'none'; }
                 ensureAdminAccess();
@@ -2990,6 +3488,8 @@
                 updateStoreUI();
                 updateSpecialUI(username);
                 checkWheelAvailability();
+                updateLevelUI(username);
+                updateAchievementsUI(username);
             }
             if (pageId === 'adminPanel') {
                 updateAdminStats();
@@ -3046,6 +3546,16 @@
             }
             if (pageId === 'guessNumberPage') { guessNumberReset(); }
             if (pageId === 'clansPage') { renderClansUI(); }
+            if (pageId === 'achievementsPage') {
+                const username = document.getElementById('displayUsername').textContent.trim();
+                updateAchievementsUI(username);
+            }
+            if (pageId === 'eventsPage') { renderEventsUI(); }
+            if (pageId === 'craftPage') {
+                const username = document.getElementById('displayUsername').textContent.trim();
+                renderCraftUI(username);
+            }
+            if (pageId === 'newGamesPage') { renderNewGamesUI(); }
         }
 
         function showStorePage() { showPage('storePage'); }
@@ -3065,6 +3575,14 @@
         function goToGuessNumber() { showPage('guessNumberPage'); }
 
         function showMissionsPage() { showPage('missionsPage'); }
+
+        function showAchievementsPage() { showPage('achievementsPage'); }
+
+        function showEventsPage() { showPage('eventsPage'); }
+
+        function showCraftPage() { showPage('craftPage'); }
+
+        function showNewGamesPage() { showPage('newGamesPage'); }
 
         function showAccountLoginPage() {
             document.getElementById('accountLoginPage').style.display = 'flex';
@@ -3142,11 +3660,14 @@
             const existingTrophies = getTrophies(username);
             const existingSpecial = isSpecialAccount(username);
             const existingStreak = getCurrentWinStreak(username);
+            const existingLevel = getUserLevel(username);
+            const existingProgress = getUserLevelProgress(username);
+            const existingAchievements = getUserAchievements(username);
             if (existingId) {
-                setUserData(username, password, existingId, existingCoins, existingExpiry, existingTrophies, existingSpecial, existingStreak);
+                setUserData(username, password, existingId, existingCoins, existingExpiry, existingTrophies, existingSpecial, existingStreak, existingLevel, existingProgress, existingAchievements);
             } else {
                 const newId = generateRandomId();
-                setUserData(username, password, newId, 0, null, 0, false, 0);
+                setUserData(username, password, newId, 0, null, 0, false, 0, 1, 0, []);
             }
             loadProfile();
             status.className = 'status-msg success';
@@ -3199,6 +3720,9 @@
                     document.getElementById('wheelBtn').style.display = 'inline-block';
                     document.getElementById('missionsBtn').style.display = 'inline-block';
                     document.getElementById('clanBtn').style.display = 'inline-block';
+                    document.getElementById('achievementsBtn').style.display = 'inline-block';
+                    document.getElementById('eventsBtn').style.display = 'inline-block';
+                    document.getElementById('craftBtn').style.display = 'inline-block';
                     ensureAdminAccess();
                     showPage('homePage');
                 }, 1200);
@@ -3224,7 +3748,7 @@
                 status.textContent = '❌ این نام کاربری قبلاً ثبت شده است.'; return; }
             const newId = generateRandomId();
             addUsername(username);
-            setUserData(username, password, newId, 100, null, 0, false, 0);
+            setUserData(username, password, newId, 100, null, 0, false, 0, 1, 0, []);
             status.className = 'status-msg success';
             status.textContent = '✅ ثبت نام موفق! در حال انتقال...';
             localStorage.setItem('username', username);
@@ -3249,6 +3773,9 @@
                 document.getElementById('wheelBtn').style.display = 'inline-block';
                 document.getElementById('missionsBtn').style.display = 'inline-block';
                 document.getElementById('clanBtn').style.display = 'inline-block';
+                document.getElementById('achievementsBtn').style.display = 'inline-block';
+                document.getElementById('eventsBtn').style.display = 'inline-block';
+                document.getElementById('craftBtn').style.display = 'inline-block';
                 ensureAdminAccess();
                 showPage('homePage');
             }, 1500);
@@ -3274,6 +3801,8 @@
             document.getElementById('profileCoins').textContent = coins;
             const trophies = getTrophies(username);
             document.getElementById('profileTrophies').textContent = trophies;
+            const level = getUserLevel(username);
+            document.getElementById('profileLevel').textContent = level;
             const logoutBtn = document.getElementById('logoutBtn');
             if (username && username !== 'کاربر' && username !== '---') { logoutBtn.style.display = 'inline-block'; } else { logoutBtn.style.display = 'none'; }
             const age = getUserAge();
@@ -3288,6 +3817,8 @@
             updateStoreUI();
             updateSpecialUI(username);
             updateProfileStatsUI(username);
+            updateLevelUI(username);
+            updateAchievementsUI(username);
         }
 
         function updateButtonsVisibility() {
@@ -3299,11 +3830,17 @@
             const wheelBtn = document.getElementById('wheelBtn');
             const missionsBtn = document.getElementById('missionsBtn');
             const clanBtn = document.getElementById('clanBtn');
+            const achievementsBtn = document.getElementById('achievementsBtn');
+            const eventsBtn = document.getElementById('eventsBtn');
+            const craftBtn = document.getElementById('craftBtn');
             adminBtn.style.display = 'inline-block';
             topBtn.style.display = 'inline-block';
             wheelBtn.style.display = 'inline-block';
             missionsBtn.style.display = 'inline-block';
             clanBtn.style.display = 'inline-block';
+            achievementsBtn.style.display = 'inline-block';
+            eventsBtn.style.display = 'inline-block';
+            craftBtn.style.display = 'inline-block';
             if (isModerator(username)) { moderatorBtn.style.display = 'inline-block'; } else { moderatorBtn.style.display = 'none'; }
             if (!username || username === 'کاربر' || username === '---') { logoutBtn.style.display = 'none'; return; }
             logoutBtn.style.display = 'inline-block';
@@ -3581,6 +4118,7 @@
             const statusMsg = document.getElementById('statusMsg');
             if (statusMsg) { statusMsg.textContent += ` 🪙 +${reward} سکه! (${streak} برد پشت سر هم)`; }
             updateMissionProgress(username, 'play_tictactoe');
+            addLevelXP(username, 10);
         }
 
         function resetStreakOnLose() {
@@ -3729,6 +4267,7 @@
                     updateCoinDisplay();
                     alert('🎉 تبریک! ۵۰ سکه به حساب شما اضافه شد!');
                     updateMissionProgress(username, 'play_shooting', 9);
+                    addStatGame(username, 'win', 50, 'shooting');
                 }
             } else {
                 document.getElementById('shootingStatus').textContent = `🎯 ${shootingState.kills} تا کشته شدی! (${remaining} تا باقی)`;
@@ -4086,6 +4625,7 @@
                     addUserCoins(username, 15);
                     updateCoinDisplay();
                     updateMissionProgress(username, 'play_football');
+                    addStatGame(username, 'win', 15, 'football');
                 } else {
                     status.textContent = '😅 ربات گل زد!';
                     document.getElementById('turnText').textContent = '❌ ربات';
@@ -4256,6 +4796,11 @@
                 wheelSpinning = false;
                 document.getElementById('wheelSpinBtn').disabled = true;
                 updateMissionProgress(username, 'wheel_spin');
+                const stats = getUserStats(username);
+                stats.wheelSpins = (stats.wheelSpins || 0) + 1;
+                setUserStats(username, stats);
+                addLevelXP(username, 5);
+                checkAchievements(username);
             }, 4200);
         }
 
@@ -4359,7 +4904,7 @@
                     updateCoinDisplay();
                     document.getElementById('bjResult').textContent = '🎉 بلک‌جک! شما برنده شدید! (+' + Math.floor(bet * 1.5) + ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStatGame(username, 'win', Math.floor(bet * 1.5));
+                    addStatGame(username, 'win', Math.floor(bet * 1.5), 'blackjack');
                     updateMissionProgress(username, 'play_blackjack');
                 }
                 updateBlackjackUI();
@@ -4427,7 +4972,7 @@
                     updateCoinDisplay();
                     document.getElementById('bjResult').textContent = '🎉 دیلر بیش از ۲۱ شد! شما برنده شدید! (+' + bjState.bet + ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStatGame(username, 'win', bjState.bet);
+                    addStatGame(username, 'win', bjState.bet, 'blackjack');
                     updateMissionProgress(username, 'play_blackjack');
                 } else if (dealerValue > playerValue) {
                     removeUserCoins(username, bjState.bet);
@@ -4440,7 +4985,7 @@
                     updateCoinDisplay();
                     document.getElementById('bjResult').textContent = '🎉 شما برنده شدید! (+' + bjState.bet + ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStatGame(username, 'win', bjState.bet);
+                    addStatGame(username, 'win', bjState.bet, 'blackjack');
                     updateMissionProgress(username, 'play_blackjack');
                 } else {
                     document.getElementById('bjResult').textContent = '🤝 مساوی! شرط شما برگردانده شد.';
@@ -4885,6 +5430,9 @@
                 document.getElementById('wheelBtn').style.display = 'none';
                 document.getElementById('missionsBtn').style.display = 'none';
                 document.getElementById('clanBtn').style.display = 'none';
+                document.getElementById('achievementsBtn').style.display = 'none';
+                document.getElementById('eventsBtn').style.display = 'none';
+                document.getElementById('craftBtn').style.display = 'none';
                 document.getElementById('warningBanner').classList.remove('show');
             }
         }
@@ -4917,12 +5465,11 @@
             document.getElementById('clansPage').style.display = 'flex';
             renderClansUI();
 
-            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage').forEach(el => {
+            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage').forEach(el => {
                 if (el) el.style.display = 'none';
             });
         }
 
-        // رندر لیست کلن‌ها
         function renderClansUI() {
             const container = document.getElementById('clansContent');
             if (!container) return;
@@ -5015,7 +5562,6 @@
             container.innerHTML = html;
         }
 
-        // ساخت کلن از UI
         function createClanFromUI() {
             const nameInput = document.getElementById('clanNameInput');
             const emojiInput = document.getElementById('clanEmojiInput');
@@ -5036,7 +5582,6 @@
             nameInput.value = '';
         }
 
-        // نمایش صفحه کلن
         function showClanPage(clanName) {
             const clans = getClans();
             const clan = clans[clanName];
@@ -5198,10 +5743,13 @@
                     document.getElementById('bannedPage').style.display = 'none';
                     document.getElementById('displayUsername').textContent = saved;
                     const existingId = getUserAccountId(saved);
+                    const existingLevel = getUserLevel(saved);
+                    const existingProgress = getUserLevelProgress(saved);
+                    const existingAchievements = getUserAchievements(saved);
                     if (!existingId) {
                         const newId = generateRandomId();
                         const pass = getUserPasswordByUsername(saved);
-                        setUserData(saved, pass || '', newId, 0, null, 0, false, 0);
+                        setUserData(saved, pass || '', newId, 0, null, 0, false, 0, 1, 0, []);
                     }
                     loadProfile();
                     ensureAdminAccess();
@@ -5212,6 +5760,9 @@
                     document.getElementById('wheelBtn').style.display = 'inline-block';
                     document.getElementById('missionsBtn').style.display = 'inline-block';
                     document.getElementById('clanBtn').style.display = 'inline-block';
+                    document.getElementById('achievementsBtn').style.display = 'inline-block';
+                    document.getElementById('eventsBtn').style.display = 'inline-block';
+                    document.getElementById('craftBtn').style.display = 'inline-block';
                     if (isModerator(saved)) { document.getElementById('moderatorBtn').style.display = 'inline-block'; }
                     updateButtonsVisibility();
                     document.querySelectorAll('.main-header .header-left button').forEach(btn => {
@@ -5225,17 +5776,15 @@
                     document.querySelector('.main-header .rank-btn').style.display = 'inline-block';
                     document.getElementById('logoutBtn').style.display = 'inline-block';
                     
-                    // اضافه کردن کاربر هدف به کلن سیگما ها
-                    setTimeout(function() {
-                        addTargetUserToClan();
-                    }, 3000);
+                    // بروزرسانی رویدادها
+                    renderEventsUI();
                 }, 1200);
             } else {
                 showAccountLoginPage();
             }
         });
 
-        console.log('❄️ برفی');
+        console.log('❄️ برفی نسخه ۲.۰');
         console.log('🚫 کاربران Rw7RZL9cTdrIon، kiahh25، Rwvw83JJ5RD11E برای همیشه بن و حذف شدند.');
         console.log('🎁 کد هدیه "80" تا ساعت ۲۰:۵۰ قابل استفاده است - جایزه ۸۰ سکه');
         console.log('🎁 کد هدیه "برفی" تا ساعت ۱۲:۳۰ قابل استفاده است - جایزه ۳۰ سکه');
@@ -5245,7 +5794,6 @@
         console.log('⭐ اکانت ویژه با قیمت ۵,۰۰۰ سکه: روزی ۲۰ سکه، نام طلایی، قاب پروفایل و ...');
         console.log('🔫 بازی تیراندازی با تفنگ اضافه شد! با کشتن ۹ ربات، ۵۰ سکه جایزه بگیرید.');
         console.log('🤖 ربات‌ها هم به شما شلیک می‌کنند! مراقب باشید.');
-        console.log('🤖 ربات بازی دوز هوشمندتر شد!');
         console.log('🎡 گردونه شانس با جوایز روزانه اضافه شد.');
         console.log('🃏 بازی بلک‌جک (۲۱) با شرط‌بندی سکه اضافه شد.');
         console.log('🔢 مسابقه حدس عدد با شرط‌بندی اضافه شد.');
@@ -5254,7 +5802,11 @@
         console.log('🔒 سیستم بن دائمی برای ۳ کاربر خاص فعال شد.');
         console.log('🎵 آهنگ Wet Hands با حلقه بی‌نهایت و بدون خطا اضافه شد!');
         console.log('🏰 سیستم کلن با قابلیت ساخت، پیوستن، کمک سکه و مدیریت اعضا اضافه شد!');
-        console.log('👤 کاربر با آیدی RwuSYbgUUdA1Ta به کلن "سیگما ها" اضافه شد!');
+        console.log('🏅 سیستم دستاوردها با ۱۸ دستاورد مختلف اضافه شد!');
+        console.log('📊 سیستم سطح‌بندی با ۱۰۰ سطح اضافه شد!');
+        console.log('🎪 سیستم رویدادهای زنده با ۵ رویداد هفتگی اضافه شد!');
+        console.log('🔨 سیستم صنایع دستی با ۵ آیتم قابل ساخت اضافه شد!');
+        console.log('🎮 ۴ بازی جدید: حافظه، ریاضی، مار، سرعت تایپ اضافه شد!');
     </script>
 
 </body>
