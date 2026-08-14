@@ -64,7 +64,6 @@
             position: relative;
             z-index: 1;
         }
-        /* هدر */
         .main-header {
             display: flex;
             flex-wrap: wrap;
@@ -196,7 +195,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* صفحات */
         .page {
             display: none;
             flex-direction: column;
@@ -351,9 +349,9 @@
             cursor: pointer;
             transition: 0.3s;
             display: block;
+            text-align: center;
         }
         .menu-box button:hover { transform: scale(1.03); }
-        /* بازی دوز */
         .game-container h3 {
             text-align: center;
             font-size: 22px;
@@ -414,7 +412,6 @@
             transition: 0.3s;
         }
         .reset-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
-        /* فروشگاه */
         .store-item {
             display: flex;
             justify-content: space-between;
@@ -440,7 +437,6 @@
             color: #1a1a3a;
         }
         .store-item .item-action:disabled { opacity: 0.5; cursor: not-allowed; }
-        /* گردونه */
         .wheel-container {
             position: relative;
             width: 260px;
@@ -479,7 +475,6 @@
             width: 80%;
         }
         .wheel-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        /* بلک‌جک */
         .bj-hand {
             background: rgba(0,0,0,0.3);
             border-radius: 16px;
@@ -536,7 +531,6 @@
         .bj-result.win { color: #2ecc71; }
         .bj-result.lose { color: #ff6b6b; }
         .bj-result.push { color: #ffd700; }
-        /* حدس عدد */
         .gn-input-area {
             display: flex;
             gap: 10px;
@@ -597,7 +591,6 @@
             width: 100%;
             margin-top: 8px;
         }
-        /* تیراندازی */
         .shooting-arena {
             position: relative;
             width: 100%;
@@ -678,7 +671,6 @@
             color: #1a1a3a;
         }
         .shooting-start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        /* فوتبال */
         .scoreboard {
             display: flex;
             justify-content: space-between;
@@ -769,7 +761,6 @@
             border-color: #ffd700;
             background: rgba(255,215,0,0.1);
         }
-        /* کلن، دستاورد، رویداد، صنایع، جام جهانی، داشبورد */
         .clan-item, .mission-item, .achievement-item, .event-item, .craft-item, .newgame-item, .worldcup-item {
             background: rgba(255,255,255,0.04);
             border-radius: 14px;
@@ -1005,7 +996,7 @@
     <div class="snowflakes" id="snowflakes"></div>
     <div class="page-container">
 
-        <!-- ===== ورود ===== -->
+        <!-- ورود -->
         <div id="loginPage" class="page active">
             <div class="account-login-box">
                 <h1>❄️ برفی</h1>
@@ -1025,7 +1016,7 @@
             </div>
         </div>
 
-        <!-- ===== ثبت نام ===== -->
+        <!-- ثبت نام -->
         <div id="registerPage" class="page">
             <div class="register-box">
                 <h1>❄️ برفی</h1>
@@ -1048,7 +1039,7 @@
             </div>
         </div>
 
-        <!-- ===== فراموشی رمز ===== -->
+        <!-- فراموشی رمز -->
         <div id="forgotPage" class="page">
             <div class="forgot-password-box">
                 <h1>🔑 فراموشی رمز</h1>
@@ -1063,23 +1054,23 @@
             </div>
         </div>
 
-        <!-- ===== بن ===== -->
+        <!-- بن -->
         <div id="bannedPage">
             <div class="account-login-box" style="min-height:300px;">
-                <div class="ban-icon" style="font-size:64px;">🚫</div>
+                <div style="font-size:64px;">🚫</div>
                 <div style="font-size:28px;font-weight:800;color:#ff6b6b;">شما بن ۴۸ ساعته خوردید</div>
                 <div style="color:rgba(255,255,255,0.7);font-size:16px;line-height:1.8;max-width:300px;">به دلیل تخلف در بازی، دسترسی شما به مدت ۴۸ ساعت مسدود شده است.</div>
                 <div id="banTimer" style="margin-top:16px;font-size:20px;font-weight:700;color:#ffd700;font-family:monospace;">--:--:--</div>
             </div>
         </div>
 
-        <!-- ===== لودینگ ===== -->
+        <!-- لودینگ -->
         <div id="loader">
             <div class="spinner"></div>
             <div style="font-size:22px;font-weight:700;color:#fff;">در حال اتصال...</div>
         </div>
 
-        <!-- ===== خطا ===== -->
+        <!-- خطا -->
         <div id="errorPage">
             <div style="font-size:64px;">📡</div>
             <div style="font-size:22px;font-weight:700;color:#ff6b8a;">اتصال خود را چک کنید</div>
@@ -1087,7 +1078,7 @@
             <button class="retry-btn" onclick="retryConnection()" style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:14px 40px;border-radius:16px;font-size:18px;font-weight:700;cursor:pointer;">🔄 تلاش مجدد</button>
         </div>
 
-        <!-- ===== محتوای اصلی ===== -->
+        <!-- محتوای اصلی -->
         <div id="mainContent" style="display:none;">
 
             <!-- هدر -->
@@ -1126,7 +1117,7 @@
 
             <!-- اخطار -->
             <div class="warning-banner" id="warningBanner">
-                <span style="font-size:32px;">⚠️</span>
+                <div style="font-size:32px;">⚠️</div>
                 <div id="warningTitle" style="font-size:18px;font-weight:800;color:#ff6b6b;">اخطار</div>
                 <div id="warningText" style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;margin:8px 0 14px;">متن اخطار</div>
                 <button class="warning-dismiss" onclick="dismissWarning()" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.2);padding:8px 28px;border-radius:30px;font-size:14px;font-weight:700;cursor:pointer;">✅ فهمیدم</button>
@@ -1291,16 +1282,25 @@
                 </div>
             </div>
 
-            <!-- ===== سایر صفحات (فروشگاه، سن، هدیه، رنک، پروفایل، تغییر رمز، ادمین، کلن، دستاورد، رویداد، صنایع، بازی‌های جدید، جام جهانی، داشبورد) ===== -->
-            <!-- برای جلوگیری از طولانی شدن، فقط ساختار رو می‌ذارم و JS همه رو مدیریت میکنه -->
+            <!-- ===== صفحات دیگر ===== -->
 
             <!-- فروشگاه -->
             <div id="storePage" class="page">
                 <div class="store-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
                     <h2 style="text-align:center;font-size:26px;font-weight:800;background:linear-gradient(135deg,#ffd700,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🏪 فروشگاه</h2>
-                    <div class="store-item"><div><span class="item-title">👑 سوپر ادمین ۱ ماهه</span><div style="font-size:13px;color:rgba(255,255,255,0.5);">دسترسی کامل به پنل</div></div><div style="display:flex;align-items:center;gap:12px;"><span class="item-price">💰 ۲۰۰ سکه</span><button class="item-action" id="buySuperAdminBtn" onclick="buySuperAdmin()">🛒 خرید</button></div></div>
-                    <div class="store-item" style="border:2px solid rgba(255,215,0,0.3);background:rgba(255,215,0,0.05);"><div><span class="item-title" style="color:#ffd700;">⭐ اکانت ویژه 🌟</span><div style="font-size:13px;color:rgba(255,255,255,0.5);">روزی ۲۰ سکه • نام طلایی • هد ادمین</div></div><div style="display:flex;align-items:center;gap:12px;"><span class="item-price" style="color:#ff6b6b;font-size:18px;">💰 ۵۰۰۰ سکه</span><button class="item-action" id="buySpecialAccountBtn" onclick="buySpecialAccount()" style="background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#1a1a3a;">🌟 خرید</button></div></div>
+                    <div class="store-item">
+                        <div><span class="item-title">👑 سوپر ادمین ۱ ماهه</span>
+                            <div style="font-size:13px;color:rgba(255,255,255,0.5);">دسترسی کامل به پنل</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:12px;"><span class="item-price">💰 ۲۰۰ سکه</span><button class="item-action" id="buySuperAdminBtn" onclick="buySuperAdmin()">🛒 خرید</button></div>
+                    </div>
+                    <div class="store-item" style="border:2px solid rgba(255,215,0,0.3);background:rgba(255,215,0,0.05);">
+                        <div><span class="item-title" style="color:#ffd700;">⭐ اکانت ویژه 🌟</span>
+                            <div style="font-size:13px;color:rgba(255,255,255,0.5);">روزی ۲۰ سکه • نام طلایی • هد ادمین</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:12px;"><span class="item-price" style="color:#ff6b6b;font-size:18px;">💰 ۵۰۰۰ سکه</span><button class="item-action" id="buySpecialAccountBtn" onclick="buySpecialAccount()" style="background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#1a1a3a;">🌟 خرید</button></div>
+                    </div>
                     <div class="store-status" id="storeStatus" style="text-align:center;font-size:14px;color:rgba(255,255,255,0.6);margin-top:10px;"></div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت</button>
                 </div>
@@ -1405,7 +1405,6 @@
                 </div>
             </div>
 
-            <!-- ===== صفحات مدیریتی ===== -->
             <!-- سوپر ادمین -->
             <div id="adminPanel" class="page">
                 <div class="admin-panel-box">
@@ -1480,13 +1479,17 @@
                 </div>
             </div>
 
-            <!-- ===== صفحات بقیه ===== -->
             <!-- کاربران برتر -->
             <div id="topUsersPage" class="page">
                 <div class="top-users-box">
                     <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
-                    <div style="text-align:center;"><div style="font-size:26px;font-weight:800;color:#ffd700;">اراد تریاکی</div><div style="font-size:14px;color:rgba(255,255,255,0.5);">kiaELX</div></div>
-                    <div style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.2);padding-top:16px;text-align:center;"><div style="font-size:26px;font-weight:800;color:#ffd700;">لیست کاربران برتر</div></div>
+                    <div style="text-align:center;">
+                        <div style="font-size:26px;font-weight:800;color:#ffd700;">اراد تریاکی</div>
+                        <div style="font-size:14px;color:rgba(255,255,255,0.5);">kiaELX</div>
+                    </div>
+                    <div style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.2);padding-top:16px;text-align:center;">
+                        <div style="font-size:26px;font-weight:800;color:#ffd700;">لیست کاربران برتر</div>
+                    </div>
                     <div id="topUsersList" style="max-height:400px;overflow-y:auto;margin-top:8px;"></div>
                     <button class="back-home-btn" onclick="goHome()">🔙 بازگشت</button>
                 </div>
@@ -1629,12 +1632,12 @@
             for (let i = 0; i < 45; i++) {
                 const el = document.createElement('div');
                 el.className = 'snowflake';
-                el.textContent = ['❄','❅','❆','✦'][Math.floor(Math.random()*4)];
-                el.style.left = Math.random()*100+'%';
-                el.style.fontSize = (12+Math.random()*18)+'px';
-                el.style.animationDuration = (12+Math.random()*18)+'s';
-                el.style.animationDelay = (Math.random()*20)+'s';
-                el.style.opacity = 0.3+Math.random()*0.5;
+                el.textContent = ['❄', '❅', '❆', '✦'][Math.floor(Math.random() * 4)];
+                el.style.left = Math.random() * 100 + '%';
+                el.style.fontSize = (12 + Math.random() * 18) + 'px';
+                el.style.animationDuration = (12 + Math.random() * 18) + 's';
+                el.style.animationDelay = (Math.random() * 20) + 's';
+                el.style.opacity = 0.3 + Math.random() * 0.5;
                 c.appendChild(el);
             }
         })();
@@ -1642,7 +1645,8 @@
         // ==========================================================
         //  آهنگ
         // ==========================================================
-        let musicPlayer = null, isMusicPlaying = false;
+        let musicPlayer = null,
+            isMusicPlaying = false;
 
         function toggleMusic() {
             const btn = document.getElementById('playMusicBtn');
@@ -1675,9 +1679,13 @@
 
         function toggleTheme() {
             const body = document.body;
-            if (theme === 'dark') { body.classList.remove('dark'); body.classList.add('light'); theme = 'light'; }
-            else if (theme === 'light') { body.classList.remove('light'); body.classList.add('rainbow'); theme = 'rainbow'; }
-            else { body.classList.remove('rainbow'); body.classList.add('dark'); theme = 'dark'; }
+            if (theme === 'dark') { body.classList.remove('dark');
+                body.classList.add('light');
+                theme = 'light'; } else if (theme === 'light') { body.classList.remove('light');
+                body.classList.add('rainbow');
+                theme = 'rainbow'; } else { body.classList.remove('rainbow');
+                body.classList.add('dark');
+                theme = 'dark'; }
             localStorage.setItem('theme', theme);
         }
         (function() { document.body.classList.add(theme); })();
@@ -1744,7 +1752,9 @@
         function getUserStats(username) {
             const u = getUsers();
             return u[username] && u[username].stats ? u[username].stats : { totalGames: 0, wins: 0, losses: 0, earnedCoins: 0,
-                spentCoins: 0, history: [] };
+                spentCoins: 0, history: [], shootingWins: 0, footballWins: 0, blackjackWins: 0, guessWins: 0,
+                wheelSpins: 0
+            };
         }
 
         function setUserStats(username, stats) {
@@ -1754,11 +1764,16 @@
             setUsers(u);
         }
 
-        function addStat(username, result, coinChange = 0) {
+        function addStat(username, result, coinChange = 0, gameType = null) {
             const stats = getUserStats(username);
             stats.totalGames = (stats.totalGames || 0) + 1;
-            if (result === 'win') stats.wins = (stats.wins || 0) + 1;
-            else if (result === 'lose') stats.losses = (stats.losses || 0) + 1;
+            if (result === 'win') {
+                stats.wins = (stats.wins || 0) + 1;
+                if (gameType === 'shooting') stats.shootingWins = (stats.shootingWins || 0) + 1;
+                else if (gameType === 'football') stats.footballWins = (stats.footballWins || 0) + 1;
+                else if (gameType === 'blackjack') stats.blackjackWins = (stats.blackjackWins || 0) + 1;
+                else if (gameType === 'guess') stats.guessWins = (stats.guessWins || 0) + 1;
+            } else if (result === 'lose') stats.losses = (stats.losses || 0) + 1;
             if (coinChange > 0) stats.earnedCoins = (stats.earnedCoins || 0) + coinChange;
             else if (coinChange < 0) stats.spentCoins = (stats.spentCoins || 0) + Math.abs(coinChange);
             if (!stats.history) stats.history = [];
@@ -1766,6 +1781,8 @@
             if (stats.history.length > 20) stats.history.pop();
             setUserStats(username, stats);
             updateProfileUI();
+            addWorldcupScore(username, result === 'win' ? 5 : 1);
+            addLog(`${username} ${result === 'win' ? 'برد' : result === 'lose' ? 'باخت' : 'مساوی'} در ${gameType || 'بازی'}`);
         }
 
         function getUserPassword(username) {
@@ -1793,7 +1810,8 @@
             return r;
         }
 
-        function setUserData(username, password, id, coins = 0, trophies = 0, level = 1, special = false, superAdminExpiry = null) {
+        function setUserData(username, password, id, coins = 0, trophies = 0, level = 1, special = false, superAdminExpiry =
+            null) {
             const u = getUsers();
             u[username] = { password, id, coins, trophies, level, special, superAdminExpiry };
             setUsers(u);
@@ -2055,8 +2073,6 @@
             renderTopUsers();
             renderModeratorSupportMessages();
             updateSpecialUI(username);
-            const level = getUserLevel(username);
-            document.getElementById('profileLevel').textContent = level;
         }
 
         function updateSpecialUI(username) {
@@ -2154,7 +2170,8 @@
         function openAdmin() {
             const username = document.getElementById('displayUsername').textContent.trim();
             if (!username) { alert('لطفاً وارد شوید.'); return; }
-            if (username === 'ابوالفضل' || username === 'محمد رضا' || isTemporarySuperAdmin(username) || isHeadAdmin(username)) {
+            if (username === 'ابوالفضل' || username === 'محمد رضا' || isTemporarySuperAdmin(username) || isHeadAdmin(
+                username)) {
                 showPage('adminPanel');
                 updateAdminPanelUI();
                 renderBanList();
@@ -2235,7 +2252,8 @@
                 const isSelf = username === current;
                 const isSuper = username === 'ابوالفضل' || username === 'محمد رضا';
                 const isHead = isHeadAdmin(username);
-                let canBan = !isSelf && !isSuper && !isHead && (current === 'ابوالفضل' || isTemporarySuperAdmin(current) || isHeadAdmin(current));
+                let canBan = !isSelf && !isSuper && !isHead && (current === 'ابوالفضل' || isTemporarySuperAdmin(
+                    current) || isHeadAdmin(current));
                 const rem = isBanned ? getBanRemaining(username) : null;
                 html += `
                     <div class="ban-item">
@@ -2304,7 +2322,8 @@
         function updateAvatarUI(data) {
             const preview = document.getElementById('avatarPreview');
             const header = document.getElementById('headerAvatar');
-            const def = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
+            const def =
+                "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2NjYyIvPjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1zaXplPSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiPvCfkI08L3RleHQ+PC9zdmc+')";
             if (preview) preview.style.backgroundImage = data ? `url('${data}')` : def;
             if (header) header.style.backgroundImage = data ? `url('${data}')` : def;
         }
@@ -2539,13 +2558,15 @@
                 setUserCoins(username, 900);
                 if (!localStorage.getItem('warningSeen_Rwvw83JJ5RD11E')) {
                     document.getElementById('warningTitle').textContent = 'شما یک اخطار دریافت کردید';
-                    document.getElementById('warningText').innerHTML = 'به دلیل تقلب در بازی، یک اخطار رسمی برای شما ثبت شده است.<br>لطفاً از تکرار این رفتار خودداری کنید.';
+                    document.getElementById('warningText').innerHTML =
+                        'به دلیل تقلب در بازی، یک اخطار رسمی برای شما ثبت شده است.<br>لطفاً از تکرار این رفتار خودداری کنید.';
                     document.getElementById('warningBanner').classList.add('show');
                 }
             } else if (id === 'RwuSYbgUUdA1Ta') {
                 if (!localStorage.getItem('warningSeen_RwuSYbgUUdA1Ta')) {
                     document.getElementById('warningTitle').textContent = 'سپر یک بار مصرف آن بن برای شما فعال شد';
-                    document.getElementById('warningText').innerHTML = '✅ شما از یک بن ۴۸ ساعته نجات یافتید!<br>این پیغام فقط یک بار نمایش داده می‌شود.';
+                    document.getElementById('warningText').innerHTML =
+                        '✅ شما از یک بن ۴۸ ساعته نجات یافتید!<br>این پیغام فقط یک بار نمایش داده می‌شود.';
                     document.getElementById('warningBanner').classList.add('show');
                 }
             }
@@ -2603,7 +2624,8 @@
             document.getElementById('registerPage').classList.remove('active');
             document.getElementById('forgotPage').classList.remove('active');
             document.getElementById('bannedPage').style.display = 'none';
-            document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn').forEach(el => el.style.display = 'inline-block');
+            document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn')
+                .forEach(el => el.style.display = 'inline-block');
             document.getElementById('logoutBtn').style.display = 'inline-block';
             if (isModerator(username)) document.getElementById('moderatorBtn').style.display = 'inline-block';
             else document.getElementById('moderatorBtn').style.display = 'none';
@@ -2615,6 +2637,7 @@
             renderCountries();
             initShootingGame();
             renderAgeGrid();
+            startGame();
         }
 
         function register() {
@@ -2663,7 +2686,8 @@
             document.getElementById('registerPage').classList.remove('active');
             document.getElementById('forgotPage').classList.remove('active');
             document.getElementById('bannedPage').style.display = 'none';
-            document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn').forEach(el => el.style.display = 'inline-block');
+            document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn')
+                .forEach(el => el.style.display = 'inline-block');
             document.getElementById('logoutBtn').style.display = 'inline-block');
             loadProfile();
             updateUI();
@@ -2672,6 +2696,7 @@
             renderCountries();
             initShootingGame();
             renderAgeGrid();
+            startGame();
         }
 
         function forgotPassword() {
@@ -2713,7 +2738,8 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById('loginPage').classList.add('active');
                 document.getElementById('bannedPage').style.display = 'none';
-                document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn')
+                    .forEach(el => el.style.display = 'none');
                 document.getElementById('logoutBtn').style.display = 'none';
                 document.getElementById('warningBanner').classList.remove('show');
                 addLog(`${username} خارج شد`);
@@ -2829,7 +2855,7 @@
                 document.getElementById('statusMsg').textContent = '🎉 شما برنده شدید!';
                 const reward = Math.floor(Math.random() * 21) + 5;
                 addUserCoins(username, reward);
-                addStat(username, 'win', reward);
+                addStat(username, 'win', reward, 'tictactoe');
                 addLog(`${username} در دوز برد و ${reward} سکه گرفت`);
             } else if (result === 'O') {
                 document.getElementById('statusMsg').textContent = '🤖 ربات برنده شد!';
@@ -2840,6 +2866,7 @@
             }
             document.querySelectorAll('.cell:not(.taken)').forEach(c => c.classList.add('taken'));
             updateUI();
+            updateMissionProgress(username, 'play_tictactoe');
         }
 
         function handleHumanMove(index) {
@@ -3061,14 +3088,16 @@
                     if (isPlayer) {
                         const username = document.getElementById('displayUsername').textContent.trim();
                         addUserCoins(username, 15);
-                        addStat(username, 'win', 15);
-                        addLog(`${username} در فوتبال گل زد و ۱۵ سکه گرفت`);
+                        addStat(username, 'win', 15, 'football');
                         updateUI();
+                        updateMissionProgress(username, 'play_football');
                     }
                     if (footballState.playerScore >= 3 || footballState.robotScore >= 3) {
                         setTimeout(() => {
-                            document.getElementById('goalText').textContent = footballState.playerScore >= 3 ? '🏆 شما برنده شدید!' : '😔 ربات برنده شد!';
-                            document.getElementById('goalSub').textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
+                            document.getElementById('goalText').textContent = footballState.playerScore >= 3 ?
+                                '🏆 شما برنده شدید!' : '😔 ربات برنده شد!';
+                            document.getElementById('goalSub').textContent =
+                                `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
                             goalMsg.style.display = 'block';
                             disableFootballDrag();
                         }, 800);
@@ -3164,13 +3193,16 @@
                     if (isPlayer) {
                         const username = document.getElementById('displayUsername').textContent.trim();
                         addUserCoins(username, 15);
-                        addStat(username, 'win', 15);
+                        addStat(username, 'win', 15, 'football');
                         updateUI();
+                        updateMissionProgress(username, 'play_football');
                     }
                     if (footballState.playerScore >= 3 || footballState.robotScore >= 3) {
                         setTimeout(() => {
-                            document.getElementById('goalText').textContent = footballState.playerScore >= 3 ? '🏆 شما برنده شدید!' : '😔 ربات برنده شد!';
-                            document.getElementById('goalSub').textContent = `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
+                            document.getElementById('goalText').textContent = footballState.playerScore >= 3 ?
+                                '🏆 شما برنده شدید!' : '😔 ربات برنده شد!';
+                            document.getElementById('goalSub').textContent =
+                                `نتیجه نهایی ${footballState.playerScore} - ${footballState.robotScore}`;
                             goalMsg.style.display = 'block';
                             disableFootballDrag();
                         }, 800);
@@ -3307,8 +3339,9 @@
                 document.querySelectorAll('.weapon-btn').forEach(b => b.disabled = false);
                 const username = document.getElementById('displayUsername').textContent.trim();
                 addUserCoins(username, 50);
-                addStat(username, 'win', 50);
+                addStat(username, 'win', 50, 'shooting');
                 updateUI();
+                updateMissionProgress(username, 'play_shooting', 3);
                 addLog(`${username} تیراندازی را برد و ۵۰ سکه گرفت`);
             }
         }
@@ -3387,7 +3420,8 @@
                 document.getElementById('dealerScore').textContent = handValue(bjState.dealerHand);
             } else {
                 const first = bjState.dealerHand[0];
-                document.getElementById('dealerCards').innerHTML = renderCard(first) + `<span class="bj-card" style="background:#333;color:#fff;">??</span>`;
+                document.getElementById('dealerCards').innerHTML = renderCard(first) +
+                    `<span class="bj-card" style="background:#333;color:#fff;">??</span>`;
                 document.getElementById('dealerScore').textContent = cardValue(first);
             }
             document.getElementById('bjHitBtn').disabled = bjState.gameOver || bjState.isDealerTurn;
@@ -3419,10 +3453,12 @@
                     document.getElementById('bjResult').className = 'bj-result push';
                 } else {
                     addUserCoins(username, Math.floor(bet * 1.5));
-                    document.getElementById('bjResult').textContent = '🎉 بلک‌جک! شما برنده شدید! (+' + Math.floor(bet * 1.5) + ' سکه)';
+                    document.getElementById('bjResult').textContent = '🎉 بلک‌جک! شما برنده شدید! (+' + Math.floor(bet * 1.5) +
+                        ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStat(username, 'win', Math.floor(bet * 1.5));
+                    addStat(username, 'win', Math.floor(bet * 1.5), 'blackjack');
                     updateUI();
+                    updateMissionProgress(username, 'play_blackjack');
                     addLog(`${username} در بلک‌جک برنده شد`);
                 }
                 updateBJUI();
@@ -3484,10 +3520,12 @@
                 const username = document.getElementById('displayUsername').textContent.trim();
                 if (dv > 21) {
                     addUserCoins(username, bjState.bet * 2);
-                    document.getElementById('bjResult').textContent = '🎉 دیلر بیش از ۲۱ شد! شما برنده شدید! (+' + bjState.bet + ' سکه)';
+                    document.getElementById('bjResult').textContent = '🎉 دیلر بیش از ۲۱ شد! شما برنده شدید! (+' + bjState
+                        .bet + ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStat(username, 'win', bjState.bet);
+                    addStat(username, 'win', bjState.bet, 'blackjack');
                     updateUI();
+                    updateMissionProgress(username, 'play_blackjack');
                     addLog(`${username} در بلک‌جک برنده شد`);
                 } else if (dv > pv) {
                     removeUserCoins(username, bjState.bet);
@@ -3498,8 +3536,9 @@
                     addUserCoins(username, bjState.bet * 2);
                     document.getElementById('bjResult').textContent = '🎉 شما برنده شدید! (+' + bjState.bet + ' سکه)';
                     document.getElementById('bjResult').className = 'bj-result win';
-                    addStat(username, 'win', bjState.bet);
+                    addStat(username, 'win', bjState.bet, 'blackjack');
                     updateUI();
+                    updateMissionProgress(username, 'play_blackjack');
                     addLog(`${username} در بلک‌جک برنده شد`);
                 } else {
                     document.getElementById('bjResult').textContent = '🤝 مساوی! شرط برگردانده شد.';
@@ -3556,10 +3595,11 @@
                 fb.textContent = `🎉 درست حدس زدید! عدد ${gnState.secret} بود. شما برنده شدید! (+${gnState.bet*2} سکه)`;
                 fb.className = 'gn-feedback win';
                 addUserCoins(username, gnState.bet * 2);
-                addStat(username, 'win', gnState.bet * 2);
+                addStat(username, 'win', gnState.bet * 2, 'guess');
                 updateUI();
                 document.getElementById('gnGuessBtn').disabled = true;
                 document.getElementById('gnNewBtn').disabled = false;
+                updateMissionProgress(username, 'play_guess');
                 addLog(`${username} در حدس عدد برنده شد`);
                 return;
             }
@@ -3703,16 +3743,21 @@
                 btn.disabled = true;
                 wheelSpinning = false;
                 updateUI();
+                updateMissionProgress(username, 'wheel_spin');
+                const stats = getUserStats(username);
+                stats.wheelSpins = (stats.wheelSpins || 0) + 1;
+                setUserStats(username, stats);
                 addLog(`${username} گردونه چرخاند و ${selected.value} سکه برد`);
             }, 4200);
         }
 
         // ==========================================================
-        //  ماموریت‌ها (ساده)
+        //  ماموریت‌ها
         // ==========================================================
         function getMissions(username) {
             const u = getUsers();
-            return u[username] && u[username].missions ? u[username].missions : { tasks: [
+            return u[username] && u[username].missions ? u[username].missions : { date: new Date().toDateString(),
+                tasks: [
                     { id: 'play_tictactoe', name: 'بازی دوز', desc: '۱ بازی انجام دهید', target: 1, progress: 0,
                         reward: 20, claimed: false },
                     { id: 'play_football', name: 'بازی فوتبال', desc: '۱ گل بزنید', target: 1, progress: 0,
@@ -3728,10 +3773,68 @@
                 ] };
         }
 
+        function setMissions(username, data) {
+            const u = getUsers();
+            if (!u[username]) u[username] = {};
+            u[username].missions = data;
+            setUsers(u);
+        }
+
+        function resetMissions() {
+            return { date: new Date().toDateString(), tasks: [
+                    { id: 'play_tictactoe', name: 'بازی دوز', desc: '۱ بازی انجام دهید', target: 1, progress: 0,
+                        reward: 20, claimed: false },
+                    { id: 'play_football', name: 'بازی فوتبال', desc: '۱ گل بزنید', target: 1, progress: 0,
+                        reward: 25, claimed: false },
+                    { id: 'play_shooting', name: 'تیراندازی', desc: '۳ ربات بکشید', target: 3, progress: 0,
+                        reward: 30, claimed: false },
+                    { id: 'play_blackjack', name: 'بلک‌جک', desc: '۱ بازی انجام دهید', target: 1, progress: 0,
+                        reward: 20, claimed: false },
+                    { id: 'play_guess', name: 'حدس عدد', desc: '۱ بازی انجام دهید', target: 1, progress: 0,
+                        reward: 15, claimed: false },
+                    { id: 'wheel_spin', name: 'گردونه', desc: '۱ بار بچرخانید', target: 1, progress: 0, reward: 10,
+                        claimed: false }
+                ] };
+        }
+
+        function checkMissionsReset(username) {
+            const data = getMissions(username);
+            const today = new Date().toDateString();
+            if (data.date !== today) {
+                const newData = resetMissions();
+                setMissions(username, newData);
+                return newData;
+            }
+            return data;
+        }
+
+        function updateMissionProgress(username, taskId, amount = 1) {
+            const data = checkMissionsReset(username);
+            const task = data.tasks.find(t => t.id === taskId);
+            if (task && !task.claimed) {
+                task.progress = Math.min(task.target, task.progress + amount);
+                setMissions(username, data);
+                renderMissionsUI(username);
+            }
+        }
+
+        function claimMissionReward(username, taskId) {
+            const data = checkMissionsReset(username);
+            const task = data.tasks.find(t => t.id === taskId);
+            if (!task || task.claimed || task.progress < task.target) return false;
+            task.claimed = true;
+            setMissions(username, data);
+            addUserCoins(username, task.reward);
+            updateUI();
+            renderMissionsUI(username);
+            addLog(`${username} ماموریت ${task.name} را کامل کرد`);
+            return true;
+        }
+
         function renderMissionsUI(username) {
             const container = document.getElementById('missionsList');
             if (!container) return;
-            const data = getMissions(username);
+            const data = checkMissionsReset(username);
             let html = '';
             data.tasks.forEach(task => {
                 const done = task.progress >= task.target;
@@ -3741,30 +3844,15 @@
                         <div><span class="mission-title" style="font-size:16px;font-weight:700;color:#fff;">${task.name}</span>
                         <div style="font-size:13px;color:rgba(255,255,255,0.5);">${task.desc}</div>
                         <div style="font-size:13px;color:#4facfe;font-weight:600;">پیشرفت: ${task.progress}/${task.target} | 🪙 ${task.reward} سکه</div></div>
-                        <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMission('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''} style="background:${claimed ? 'rgba(46,204,113,0.15)' : 'linear-gradient(135deg,#ffd700,#f093fb)'};color:${claimed ? '#2ecc71' : '#1a1a3a'};border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}</button>
+                        <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMissionReward('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''} style="background:${claimed ? 'rgba(46,204,113,0.15)' : 'linear-gradient(135deg,#ffd700,#f093fb)'};color:${claimed ? '#2ecc71' : '#1a1a3a'};border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}</button>
                     </div>
                 `;
             });
             container.innerHTML = html;
         }
 
-        function claimMission(username, taskId) {
-            const data = getMissions(username);
-            const task = data.tasks.find(t => t.id === taskId);
-            if (!task || task.claimed || task.progress < task.target) return;
-            task.claimed = true;
-            const u = getUsers();
-            if (!u[username]) u[username] = {};
-            u[username].missions = data;
-            setUsers(u);
-            addUserCoins(username, task.reward);
-            updateUI();
-            renderMissionsUI(username);
-            addLog(`${username} ماموریت ${task.name} را کامل کرد`);
-        }
-
         // ==========================================================
-        //  کلن (ساده)
+        //  کلن
         // ==========================================================
         function getClans() {
             try { return JSON.parse(localStorage.getItem('clansData') || '{}'); } catch { return {}; }
@@ -3793,7 +3881,8 @@
             let html = '';
             if (userClan && clans[userClan]) {
                 const c = clans[userClan];
-                html += `<div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;"><span style="color:#ffd700;">🌟 کلن شما: <strong>${c.emoji||'🏰'} ${userClan}</strong></span><button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">👁️</button></div>`;
+                html +=
+                    `<div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;"><span style="color:#ffd700;">🌟 کلن شما: <strong>${c.emoji||'🏰'} ${userClan}</strong></span><button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">👁️</button></div>`;
             }
             if (!userClan) {
                 html += `
@@ -3805,7 +3894,8 @@
                 `;
             }
             if (names.length === 0) {
-                html += `<div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);font-size:16px;">هیچ کلنی ساخته نشده است</div>`;
+                html +=
+                    `<div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);font-size:16px;">هیچ کلنی ساخته نشده است</div>`;
             } else {
                 names.forEach(name => {
                     const c = clans[name];
@@ -3844,6 +3934,7 @@
             renderClansUI();
             alert(`✅ کلن "${name}" ساخته شد!`);
             addLog(`${username} کلن ${name} را ساخت`);
+            checkAchievements(username);
         }
 
         function showClanPage(name) {
@@ -3866,7 +3957,8 @@
                 </div>
             `;
             if (!isMember) {
-                html += `<button onclick="joinClan('${name}')" style="width:100%;padding:10px;border-radius:14px;font-size:16px;font-weight:700;border:none;cursor:pointer;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;">🔗 پیوستن به کلن</button>`;
+                html +=
+                    `<button onclick="joinClan('${name}')" style="width:100%;padding:10px;border-radius:14px;font-size:16px;font-weight:700;border:none;cursor:pointer;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;">🔗 پیوستن به کلن</button>`;
             } else {
                 html += `
                     <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
@@ -3898,6 +3990,7 @@
             renderClansUI();
             alert(`✅ شما به کلن "${name}" پیوستید!`);
             addLog(`${username} به کلن ${name} پیوست`);
+            checkAchievements(username);
             showClanPage(name);
         }
 
@@ -4172,7 +4265,8 @@
             });
             container.innerHTML = html;
             if (inv) {
-                if (!crafts.length) inv.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:13px;">هنوز چیزی نساخته‌اید</span>';
+                if (!crafts.length) inv.innerHTML =
+                    '<span style="color:rgba(255,255,255,0.3);font-size:13px;">هنوز چیزی نساخته‌اید</span>';
                 else {
                     let txt = '';
                     crafts.forEach(id => {
@@ -4252,7 +4346,7 @@
                         { id: 'wc1', name: '🌍 جام هفتگی', desc: 'بیشترین برد در هفته', prize: '۵۰۰ سکه',
                             active: true, participants: [] },
                         { id: 'wc2', name: '🏆 جام ماهانه', desc: 'بیشترین سکه در ماه', prize: '۲۰۰۰ سکه',
-                        active: false, participants: [] }
+                            active: false, participants: [] }
                     ], rankings: {} };
             } catch { return { events: [], rankings: {} }; }
         }
@@ -4281,11 +4375,13 @@
             if (rankC) {
                 const rankings = data.rankings || {};
                 const sorted = Object.entries(rankings).sort((a, b) => b[1] - a[1]);
-                if (!sorted.length) rankC.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:13px;">هیچ امتیازی ثبت نشده</span>';
+                if (!sorted.length) rankC.innerHTML =
+                    '<span style="color:rgba(255,255,255,0.3);font-size:13px;">هیچ امتیازی ثبت نشده</span>';
                 else {
                     let rhtml = '';
                     sorted.forEach(([user, score], idx) => {
-                        rhtml += `<div class="rank-row" style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#ffd700;font-weight:700;">#${idx+1}</span><span>${user}</span><span style="color:#4facfe;">${score} امتیاز</span></div>`;
+                        rhtml +=
+                            `<div class="rank-row" style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#ffd700;font-weight:700;">#${idx+1}</span><span>${user}</span><span style="color:#4facfe;">${score} امتیاز</span></div>`;
                     });
                     rankC.innerHTML = rhtml;
                 }
@@ -4321,7 +4417,8 @@
             const all = getUsernames();
             const top = all.filter(u => getTrophies(u) >= 4);
             if (!top.length) {
-                container.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">هیچ کاربری ۴ جام یا بیشتر ندارد</div>';
+                container.innerHTML =
+                    '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">هیچ کاربری ۴ جام یا بیشتر ندارد</div>';
                 return;
             }
             let html = '';
@@ -4400,7 +4497,8 @@
                     document.getElementById('registerPage').classList.remove('active');
                     document.getElementById('forgotPage').classList.remove('active');
                     document.getElementById('bannedPage').style.display = 'none';
-                    document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn').forEach(el => el.style.display = 'inline-block');
+                    document.querySelectorAll('.header-btn, .profile-btn, .logout-btn, #createPassBtn, #headAdminBtn, #adminBtn, #moderatorBtn')
+                        .forEach(el => el.style.display = 'inline-block');
                     document.getElementById('logoutBtn').style.display = 'inline-block';
                     if (isModerator(saved)) document.getElementById('moderatorBtn').style.display = 'inline-block';
                     else document.getElementById('moderatorBtn').style.display = 'none';
@@ -4411,6 +4509,7 @@
                     renderCountries();
                     initShootingGame();
                     renderAgeGrid();
+                    startGame();
                     addLog(`${saved} وارد شد`);
                 } else {
                     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
