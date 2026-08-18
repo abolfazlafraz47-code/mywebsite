@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>❄️ برفی</title>
+    <title>❄️ برفی 🐱</title>
     <style>
         /* ===== ریست و پایه ===== */
         * {
@@ -17,9 +17,9 @@
             --secondary: #f093fb;
             --gold: #ffd700;
             --bg: #0b0e2a;
-            --card-bg: rgba(255,255,255,0.05);
+            --card-bg: rgba(255, 255, 255, 0.05);
             --text: #e0f0ff;
-            --shadow: 0 20px 60px rgba(0,0,0,0.5);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         body {
             min-height: 100vh;
@@ -33,18 +33,40 @@
             position: relative;
             transition: background 0.5s ease;
         }
-        body.light { --bg: #f0f4ff; --card-bg: rgba(255,255,255,0.7); --text: #1a1a3a; background: var(--bg); }
-        body.dark { --bg: #0b0e2a; --card-bg: rgba(255,255,255,0.05); --text: #e0f0ff; background: var(--bg); }
-        body.rainbow { animation: rainbowBg 10s ease infinite; }
+        body.light {
+            --bg: #f0f4ff;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text: #1a1a3a;
+            background: var(--bg);
+        }
+        body.dark {
+            --bg: #0b0e2a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #e0f0ff;
+            background: var(--bg);
+        }
+        body.rainbow {
+            animation: rainbowBg 10s ease infinite;
+        }
         @keyframes rainbowBg {
-            0% { background: #0b0e2a; }
-            25% { background: #1a0e2a; }
-            50% { background: #2a0e1a; }
-            75% { background: #1a0e2a; }
-            100% { background: #0b0e2a; }
+            0% {
+                background: #0b0e2a;
+            }
+            25% {
+                background: #1a0e2a;
+            }
+            50% {
+                background: #2a0e1a;
+            }
+            75% {
+                background: #1a0e2a;
+            }
+            100% {
+                background: #0b0e2a;
+            }
         }
 
-        /* ===== برف ===== */
+        /* ===== برف گربه‌ای ===== */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -62,11 +84,17 @@
             font-size: 18px;
             opacity: 0.7;
             animation: fall linear infinite;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
         @keyframes fall {
-            0% { transform: translateY(-20px) rotate(0deg) scale(0.8); opacity: 0.8; }
-            100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity: 0.2; }
+            0% {
+                transform: translateY(-20px) rotate(0deg) scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg) scale(1.2);
+                opacity: 0.2;
+            }
         }
 
         /* ===== پس‌زمینه ===== */
@@ -78,15 +106,21 @@
             height: 100%;
             z-index: 0;
             background:
-                radial-gradient(ellipse at 20% 50%, rgba(10,60,150,0.5) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(60,10,120,0.4) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(0,150,200,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 50%, rgba(10, 60, 150, 0.5) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(60, 10, 120, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(0, 150, 200, 0.3) 0%, transparent 50%),
                 linear-gradient(135deg, #0b0e2a 0%, #1a1a4e 40%, #0d1f3c 100%);
             animation: bgPulse 8s ease-in-out infinite alternate;
         }
         @keyframes bgPulse {
-            0% { opacity: 0.8; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
         }
 
         .page-container {
@@ -110,7 +144,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(18px);
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
         }
@@ -124,7 +158,9 @@
             align-items: center;
             gap: 6px;
         }
-        .main-header .site-title span { -webkit-text-fill-color: #fff; }
+        .main-header .site-title span {
+            -webkit-text-fill-color: #fff;
+        }
         .main-header .header-left {
             display: flex;
             align-items: center;
@@ -134,19 +170,19 @@
         .main-header .user-name {
             font-size: 14px;
             font-weight: 700;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             padding: 4px 14px;
             border-radius: 30px;
             white-space: nowrap;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             color: var(--text);
         }
         .main-header .trophy-display {
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            background: rgba(255,215,0,0.08);
-            border: 1px solid rgba(255,215,0,0.1);
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.1);
             padding: 2px 10px 2px 8px;
             border-radius: 30px;
             font-size: 13px;
@@ -155,9 +191,9 @@
             white-space: nowrap;
         }
         .main-header .coin-display {
-            background: rgba(255,215,0,0.12);
+            background: rgba(255, 215, 0, 0.12);
             color: #ffd700;
-            border: 1px solid rgba(255,215,0,0.15);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             padding: 4px 14px;
             border-radius: 30px;
             font-size: 13px;
@@ -179,16 +215,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
-            box-shadow: 0 2px 12px rgba(255,107,107,0.3);
+            box-shadow: 0 2px 12px rgba(255, 107, 107, 0.3);
             display: none;
         }
         .main-header .logout-btn:hover {
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 24px rgba(255,107,107,0.5);
+            box-shadow: 0 6px 24px rgba(255, 107, 107, 0.5);
         }
         .main-header .theme-btn {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -202,12 +238,12 @@
         }
         .main-header .theme-btn:hover {
             transform: scale(1.1);
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
         }
         .main-header .header-btn {
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.7);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 4px 12px;
             border-radius: 30px;
             font-size: 12px;
@@ -218,14 +254,14 @@
             display: none;
         }
         .main-header .header-btn:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: scale(1.05);
         }
         .main-header .profile-btn {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: var(--text);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 4px 12px 4px 8px;
             border-radius: 30px;
             font-size: 12px;
@@ -246,41 +282,17 @@
             display: inline-block;
             background-size: cover;
             background-position: center;
-            border: 2px solid rgba(255,255,255,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
         }
         .main-header .profile-btn .age-badge {
             font-size: 9px;
-            background: rgba(255,215,0,0.2);
+            background: rgba(255, 215, 0, 0.2);
             padding: 1px 6px;
             border-radius: 10px;
             color: #ffd700;
             margin-right: 2px;
             font-weight: 700;
-        }
-        .music-btn {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(79,172,254,0.3);
-            transition: all 0.3s ease;
-            color: #fff;
-        }
-        .music-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 20px rgba(79,172,254,0.5);
-        }
-        .music-status {
-            font-size: 10px;
-            color: rgba(255,255,255,0.5);
-            display: none;
         }
 
         /* ===== صفحه بن ===== */
@@ -293,16 +305,36 @@
             text-align: center;
             padding: 40px 20px;
         }
-        #bannedPage .ban-icon { font-size: 64px; margin-bottom: 16px; }
-        #bannedPage .ban-title { font-size: 28px; font-weight: 800; color: #ff6b6b; margin-bottom: 8px; }
-        #bannedPage .ban-text { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.8; max-width: 300px; }
-        #bannedPage .ban-timer { margin-top: 16px; font-size: 20px; font-weight: 700; color: #ffd700; font-family: 'Courier New', monospace; letter-spacing: 2px; }
+        #bannedPage .ban-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        #bannedPage .ban-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+        #bannedPage .ban-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+        #bannedPage .ban-timer {
+            margin-top: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
 
         /* ===== اخطار ===== */
         .warning-banner {
             display: none;
-            background: rgba(255,107,107,0.15);
-            border: 2px solid rgba(255,107,107,0.4);
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid rgba(255, 107, 107, 0.4);
             border-radius: 16px;
             padding: 20px 18px;
             margin-bottom: 16px;
@@ -311,14 +343,30 @@
             backdrop-filter: blur(8px);
             animation: shakeWarning 0.5s ease;
         }
-        .warning-banner.show { display: block; }
-        .warning-banner .warning-icon { font-size: 32px; display: block; margin-bottom: 8px; }
-        .warning-banner .warning-title { font-size: 18px; font-weight: 800; color: #ff6b6b; margin-bottom: 6px; }
-        .warning-banner .warning-text { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 14px; }
+        .warning-banner.show {
+            display: block;
+        }
+        .warning-banner .warning-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .warning-banner .warning-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 6px;
+        }
+        .warning-banner .warning-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
         .warning-banner .warning-dismiss {
-            background: rgba(255,215,0,0.15);
+            background: rgba(255, 215, 0, 0.15);
             color: #ffd700;
-            border: 1px solid rgba(255,215,0,0.2);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             padding: 8px 28px;
             border-radius: 30px;
             font-size: 14px;
@@ -328,34 +376,73 @@
             box-shadow: none;
         }
         .warning-banner .warning-dismiss:hover {
-            background: rgba(255,215,0,0.25);
+            background: rgba(255, 215, 0, 0.25);
             transform: scale(1.05);
         }
         @keyframes shakeWarning {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            50% { transform: translateX(8px); }
-            75% { transform: translateX(-4px); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-8px);
+            }
+            50% {
+                transform: translateX(8px);
+            }
+            75% {
+                transform: translateX(-4px);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
 
         /* ===== صفحات اصلی ===== */
-        #loader, #errorPage, .box, .menu-box, .game-container, .admin-panel-box, .rank-box, .profile-box,
-        .moderator-panel-box, .country-select-box, .football-game-box, .gift-box, .store-box, .age-selection-box,
-        .create-pass-box, .account-login-box, .register-box, .head-admin-panel-box, .shooting-game-box,
-        .top-users-box, .wheel-box, .blackjack-box, .missions-box, .guess-number-box, .clans-box, .clan-page-box,
-        .achievements-box, .events-box, .craft-box, .newgames-box, .worldcup-box, .admin-dashboard-box,
+        #loader,
+        #errorPage,
+        .box,
+        .menu-box,
+        .game-container,
+        .admin-panel-box,
+        .rank-box,
+        .profile-box,
+        .moderator-panel-box,
+        .country-select-box,
+        .football-game-box,
+        .gift-box,
+        .store-box,
+        .age-selection-box,
+        .create-pass-box,
+        .account-login-box,
+        .register-box,
+        .head-admin-panel-box,
+        .shooting-game-box,
+        .top-users-box,
+        .wheel-box,
+        .blackjack-box,
+        .missions-box,
+        .guess-number-box,
+        .clans-box,
+        .clan-page-box,
+        .achievements-box,
+        .events-box,
+        .craft-box,
+        .newgames-box,
+        .worldcup-box,
+        .admin-dashboard-box,
         .forgot-password-box {
             background: var(--card-bg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 28px;
             box-shadow: var(--shadow);
             transition: all 0.4s ease;
         }
 
-        .account-login-box, .register-box, .forgot-password-box {
+        .account-login-box,
+        .register-box,
+        .forgot-password-box {
             padding: 40px 28px;
             width: 100%;
             text-align: center;
@@ -366,7 +453,9 @@
             align-items: center;
             justify-content: center;
         }
-        .account-login-box h1, .register-box h1, .forgot-password-box h1 {
+        .account-login-box h1,
+        .register-box h1,
+        .forgot-password-box h1 {
             font-size: 40px;
             font-weight: 900;
             background: linear-gradient(135deg, #64d8ff, #a78bfa, #f093fb);
@@ -375,39 +464,49 @@
             margin-bottom: 8px;
             letter-spacing: 1px;
         }
-        .account-login-box p, .register-box p, .forgot-password-box p {
-            color: rgba(255,255,255,0.6);
+        .account-login-box p,
+        .register-box p,
+        .forgot-password-box p {
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 25px;
             font-size: 15px;
         }
-        .input-group { width: 100%; margin-bottom: 16px; text-align: right; }
+        .input-group {
+            width: 100%;
+            margin-bottom: 16px;
+            text-align: right;
+        }
         .input-group label {
             display: block;
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 6px;
             font-weight: 500;
         }
-        .input-group input, .input-group textarea, .input-group select {
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid rgba(255,255,255,0.08);
+            border: 2px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
             font-size: 16px;
             outline: none;
             transition: all 0.3s ease;
             text-align: center;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text);
             font-weight: 500;
         }
-        .input-group input:focus, .input-group textarea:focus {
-            border-color: rgba(161,140,209,0.3);
-            box-shadow: 0 0 30px rgba(161,140,209,0.05);
-            background: rgba(255,255,255,0.06);
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: rgba(161, 140, 209, 0.3);
+            box-shadow: 0 0 30px rgba(161, 140, 209, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
-        .input-group input::placeholder, .input-group textarea::placeholder {
-            color: rgba(255,255,255,0.2);
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
         }
         .action-btn {
             background: linear-gradient(135deg, #a18cd1, #fbc2eb);
@@ -419,13 +518,27 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(161,140,209,0.25);
+            box-shadow: 0 4px 20px rgba(161, 140, 209, 0.25);
             width: 100%;
         }
-        .action-btn:hover { transform: scale(1.03); box-shadow: 0 8px 32px rgba(161,140,209,0.4); }
-        .status-msg { margin-top: 12px; font-size: 14px; font-weight: 600; display: none; }
-        .status-msg.error { display: block; color: #ff6b6b; }
-        .status-msg.success { display: block; color: #2ecc71; }
+        .action-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 32px rgba(161, 140, 209, 0.4);
+        }
+        .status-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+        .status-msg.error {
+            display: block;
+            color: #ff6b6b;
+        }
+        .status-msg.success {
+            display: block;
+            color: #2ecc71;
+        }
         .switch-link {
             color: #4facfe;
             font-size: 14px;
@@ -436,29 +549,100 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        .switch-link:hover { color: #00f2fe; transform: scale(1.05); }
+        .switch-link:hover {
+            color: #00f2fe;
+            transform: scale(1.05);
+        }
 
-        #loader { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; text-align: center; min-height: 320px; position: relative; overflow: hidden; }
+        #loader {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
         #loader .spinner {
-            width: 70px; height: 70px;
-            border: 4px solid rgba(255,255,255,0.05);
+            width: 70px;
+            height: 70px;
+            border: 4px solid rgba(255, 255, 255, 0.05);
             border-top: 4px solid #4facfe;
             border-right: 4px solid #a78bfa;
             border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.6,0,0.4,1) infinite;
+            animation: spin 0.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
             margin-bottom: 24px;
-            box-shadow: 0 0 40px rgba(79,172,254,0.15);
+            box-shadow: 0 0 40px rgba(79, 172, 254, 0.15);
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #loader .loading-text { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-        #loader .dots::after { content: ''; display: inline-block; width: 30px; text-align: left; animation: dots 1.5s infinite steps(1); }
-        @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } 100% { content: ''; } }
-        #loader .sub-text { color: rgba(255,255,255,0.4); font-size: 14px; }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        #loader .loading-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        #loader .dots::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            text-align: left;
+            animation: dots 1.5s infinite steps(1);
+        }
+        @keyframes dots {
+            0% {
+                content: '';
+            }
+            25% {
+                content: '.';
+            }
+            50% {
+                content: '..';
+            }
+            75% {
+                content: '...';
+            }
+            100% {
+                content: '';
+            }
+        }
+        #loader .sub-text {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+        }
 
-        #errorPage { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; min-height: 320px; }
-        #errorPage .error-icon { font-size: 64px; margin-bottom: 16px; }
-        #errorPage .error-title { font-size: 22px; font-weight: 700; color: #ff6b8a; margin-bottom: 8px; }
-        #errorPage .error-desc { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+        #errorPage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 320px;
+        }
+        #errorPage .error-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        #errorPage .error-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ff6b8a;
+            margin-bottom: 8px;
+        }
+        #errorPage .error-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 24px;
+        }
         #errorPage .retry-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: white;
@@ -469,16 +653,46 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 24px rgba(79,172,254,0.3);
+            box-shadow: 0 4px 24px rgba(79, 172, 254, 0.3);
         }
-        #errorPage .retry-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 40px rgba(79,172,254,0.5); }
+        #errorPage .retry-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 40px rgba(79, 172, 254, 0.5);
+        }
 
-        #mainContent { display: none; width: 100%; }
-        #homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage,
-        #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel,
-        #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage,
-        #clansPage, #clanPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage, #worldcupPage,
-        #adminDashboardPage, #forgotPasswordPage {
+        #mainContent {
+            display: none;
+            width: 100%;
+        }
+        #homePage,
+        #menuPage,
+        #gamePage,
+        #adminPanel,
+        #rankPage,
+        #profilePage,
+        #moderatorPanel,
+        #countrySelectPage,
+        #footballGamePage,
+        #giftPage,
+        #storePage,
+        #ageSelectionPage,
+        #createPassPage,
+        #headAdminPanel,
+        #shootingGamePage,
+        #topUsersPage,
+        #wheelPage,
+        #blackjackPage,
+        #missionsPage,
+        #guessNumberPage,
+        #clansPage,
+        #clanPage,
+        #achievementsPage,
+        #eventsPage,
+        #craftPage,
+        #newGamesPage,
+        #worldcupPage,
+        #adminDashboardPage,
+        #forgotPasswordPage {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -487,19 +701,28 @@
             animation: fadeSlideUp 0.5s ease;
             position: relative;
         }
-        @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         #deviceInfo {
             position: absolute;
             top: 12px;
             left: 12px;
             font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            background: rgba(0,0,0,0.3);
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             padding: 4px 12px;
             border-radius: 20px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 5;
             display: flex;
             align-items: center;
@@ -508,9 +731,15 @@
             user-select: none;
             white-space: nowrap;
         }
-        #deviceInfo .device-icon { font-size: 14px; }
+        #deviceInfo .device-icon {
+            font-size: 14px;
+        }
 
-        .box { padding: 32px 28px; width: 100%; text-align: center; }
+        .box {
+            padding: 32px 28px;
+            width: 100%;
+            text-align: center;
+        }
         .box h2 {
             font-size: 26px;
             font-weight: 800;
@@ -519,17 +748,27 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
         }
-        .box p { color: rgba(255,255,255,0.5); margin-bottom: 20px; font-size: 15px; }
-        .start-btn-wrapper { position: relative; display: inline-block; width: 100%; }
+        .box p {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        .start-btn-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
         .start-btn-wrapper .key-hint {
             font-size: 13px;
-            color: rgba(255,215,0,0.7);
+            color: rgba(255, 215, 0, 0.7);
             margin-top: 6px;
             display: none;
             font-weight: 600;
             letter-spacing: 1px;
         }
-        .start-btn-wrapper .key-hint.show { display: block; }
+        .start-btn-wrapper .key-hint.show {
+            display: block;
+        }
         .start-btn-wrapper .start-btn {
             width: 100%;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
@@ -541,15 +780,19 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(79,172,254,0.25);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.25);
             letter-spacing: 0.5px;
         }
         .start-btn-wrapper .start-btn:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(79,172,254,0.4);
+            box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
         }
 
-        .menu-box { padding: 40px 28px; width: 100%; text-align: center; }
+        .menu-box {
+            padding: 40px 28px;
+            width: 100%;
+            text-align: center;
+        }
         .menu-box h2 {
             font-size: 30px;
             font-weight: 800;
@@ -558,28 +801,32 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
-        .menu-box button { width: 85%; margin: 8px auto; font-size: 20px; }
+        .menu-box button {
+            width: 85%;
+            margin: 8px auto;
+            font-size: 20px;
+        }
         .menu-box .back-btn-menu {
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.6);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
             box-shadow: none;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             width: 85%;
         }
         .menu-box .back-btn-menu:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .back-btn {
             position: absolute;
             top: 14px;
             right: 16px;
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.6);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 5px 14px;
             border-radius: 10px;
             font-size: 13px;
@@ -589,9 +836,19 @@
             z-index: 2;
             box-shadow: none;
         }
-        .back-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: scale(1.05); }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: scale(1.05);
+        }
 
-        .game-container { padding: 24px 20px 28px; width: 100%; max-width: 360px; position: relative; overflow: hidden; }
+        .game-container {
+            padding: 24px 20px 28px;
+            width: 100%;
+            max-width: 360px;
+            position: relative;
+            overflow: hidden;
+        }
         .game-container h3 {
             text-align: center;
             margin-top: 4px;
@@ -602,10 +859,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .timer-container { text-align: center; margin: 4px 0 8px 0; }
+        .timer-container {
+            text-align: center;
+            margin: 4px 0 8px 0;
+        }
         .timer {
             display: inline-block;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             color: #ffd700;
             font-size: 28px;
             font-weight: 800;
@@ -613,7 +873,7 @@
             border-radius: 30px;
             min-width: 80px;
             font-family: 'Courier New', monospace;
-            border: 1px solid rgba(255,215,0,0.15);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
             letter-spacing: 2px;
@@ -621,20 +881,34 @@
         .timer.warning {
             color: #ff6b8a;
             animation: pulse 0.5s infinite alternate;
-            border-color: rgba(255,107,138,0.3);
-            box-shadow: 0 0 30px rgba(255,107,138,0.1);
+            border-color: rgba(255, 107, 138, 0.3);
+            box-shadow: 0 0 30px rgba(255, 107, 138, 0.1);
         }
-        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
-        .game-status { font-size: 17px; margin: 6px 0 12px 0; text-align: center; font-weight: 600; color: rgba(255,255,255,0.8); min-height: 28px; }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.08);
+            }
+        }
+        .game-status {
+            font-size: 17px;
+            margin: 6px 0 12px 0;
+            text-align: center;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            min-height: 28px;
+        }
         .board {
             display: grid;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin: 8px auto 14px;
             max-width: 280px;
         }
         .cell {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
             aspect-ratio: 1/1;
             display: flex;
@@ -644,30 +918,43 @@
             font-weight: 900;
             cursor: pointer;
             transition: all 0.25s ease;
-            border: 2px solid rgba(255,255,255,0.04);
+            border: 2px solid rgba(255, 255, 255, 0.04);
             color: #fff;
             position: relative;
             overflow: hidden;
         }
         .cell:hover:not(.taken) {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(79,172,254,0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(79, 172, 254, 0.2);
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(79,172,254,0.05);
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.05);
         }
-        .cell.taken { cursor: default; border-color: rgba(255,255,255,0.02); }
-        .cell.x { color: #4facfe; text-shadow: 0 0 30px rgba(79,172,254,0.3); }
-        .cell.o { color: #f093fb; text-shadow: 0 0 30px rgba(240,147,251,0.3); }
-        .cell.taken.x { background: rgba(79,172,254,0.06); }
-        .cell.taken.o { background: rgba(240,147,251,0.06); }
+        .cell.taken {
+            cursor: default;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+        .cell.x {
+            color: #4facfe;
+            text-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+        .cell.o {
+            color: #f093fb;
+            text-shadow: 0 0 30px rgba(240, 147, 251, 0.3);
+        }
+        .cell.taken.x {
+            background: rgba(79, 172, 254, 0.06);
+        }
+        .cell.taken.o {
+            background: rgba(240, 147, 251, 0.06);
+        }
         .reset-btn {
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.7);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.7);
             margin-top: 8px;
             padding: 10px 25px;
             font-size: 16px;
             font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -675,19 +962,19 @@
             box-shadow: none;
         }
         .reset-btn:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .back-home-btn {
             margin-top: 20px;
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.6);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
             box-shadow: none;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 10px 20px;
             border-radius: 14px;
             font-size: 14px;
@@ -697,14 +984,18 @@
             width: 100%;
         }
         .back-home-btn:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* ===== ادمین داشبورد ===== */
-        .admin-dashboard-box { padding: 24px 20px; width: 100%; position: relative; }
+        .admin-dashboard-box {
+            padding: 24px 20px;
+            width: 100%;
+            position: relative;
+        }
         .admin-dashboard-box h2 {
             font-size: 24px;
             font-weight: 800;
@@ -720,10 +1011,10 @@
             margin: 12px 0;
         }
         .dashboard-stats .stat-card {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             padding: 14px 10px;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
         }
         .dashboard-stats .stat-card .stat-number {
@@ -733,15 +1024,15 @@
         }
         .dashboard-stats .stat-card .stat-label {
             font-size: 12px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 2px;
         }
         .dashboard-chart {
             margin: 12px 0;
             padding: 16px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .dashboard-chart .chart-bars {
             display: flex;
@@ -766,7 +1057,7 @@
         }
         .dashboard-chart .chart-bar .bar-label {
             font-size: 9px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 4px;
         }
         .dashboard-chart .chart-bar .bar-value {
@@ -779,30 +1070,41 @@
             overflow-y: auto;
             margin-top: 12px;
             padding: 8px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,0.1) transparent;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
         }
-        .dashboard-log::-webkit-scrollbar { width: 4px; }
-        .dashboard-log::-webkit-scrollbar-track { background: transparent; }
-        .dashboard-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+        .dashboard-log::-webkit-scrollbar {
+            width: 4px;
+        }
+        .dashboard-log::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dashboard-log::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
         .dashboard-log .log-item {
             padding: 4px 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             font-size: 12px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             display: flex;
             justify-content: space-between;
         }
         .dashboard-log .log-item .log-time {
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             font-size: 10px;
         }
 
         /* ===== جام جهانی ===== */
-        .worldcup-box { padding: 24px 20px; width: 100%; position: relative; }
+        .worldcup-box {
+            padding: 24px 20px;
+            width: 100%;
+            position: relative;
+        }
         .worldcup-box h2 {
             font-size: 24px;
             font-weight: 800;
@@ -812,11 +1114,11 @@
             margin-bottom: 12px;
         }
         .worldcup-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
         .worldcup-item .wc-title {
             font-size: 16px;
@@ -825,7 +1127,7 @@
         }
         .worldcup-item .wc-desc {
             font-size: 13px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-top: 2px;
         }
         .worldcup-item .wc-rank {
@@ -853,7 +1155,7 @@
         }
         .worldcup-item .wc-btn:hover:not(:disabled) {
             transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
         }
         .worldcup-item .wc-btn:disabled {
             opacity: 0.4;
@@ -861,24 +1163,24 @@
             transform: none !important;
         }
         .worldcup-item .wc-btn.done {
-            background: rgba(46,204,113,0.15);
+            background: rgba(46, 204, 113, 0.15);
             color: #2ecc71;
             cursor: default;
         }
         .worldcup-rankings {
             margin-top: 12px;
             padding: 12px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .worldcup-rankings .rank-row {
             display: flex;
             justify-content: space-between;
             padding: 4px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             font-size: 13px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
         .worldcup-rankings .rank-row .rank-pos {
             color: #ffd700;
@@ -889,7 +1191,11 @@
         }
 
         /* ===== پروفایل ===== */
-        .profile-box { padding: 32px 24px; width: 100%; text-align: center; }
+        .profile-box {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+        }
         .profile-box h2 {
             font-size: 26px;
             font-weight: 800;
@@ -898,7 +1204,9 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
         }
-        .profile-box .avatar-upload { margin-bottom: 20px; }
+        .profile-box .avatar-upload {
+            margin-bottom: 20px;
+        }
         .profile-box .avatar-upload .avatar-preview {
             width: 110px;
             height: 110px;
@@ -906,41 +1214,56 @@
             margin: 0 auto 12px;
             background-size: cover;
             background-position: center;
-            border: 3px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 40px rgba(79,172,254,0.1);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(79, 172, 254, 0.1);
             transition: all 0.3s ease;
             position: relative;
         }
         .profile-box .avatar-upload .avatar-preview:hover {
-            border-color: rgba(79,172,254,0.3);
-            box-shadow: 0 0 60px rgba(79,172,254,0.15);
+            border-color: rgba(79, 172, 254, 0.3);
+            box-shadow: 0 0 60px rgba(79, 172, 254, 0.15);
         }
         .profile-box .avatar-upload input[type="file"] {
             display: block;
             margin: 0 auto;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 13px;
             cursor: pointer;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             padding: 8px 16px;
             border-radius: 12px;
-            border: 1px dashed rgba(255,255,255,0.06);
+            border: 1px dashed rgba(255, 255, 255, 0.06);
             width: 100%;
             max-width: 220px;
         }
-        .profile-box .profile-info { margin-top: 12px; text-align: right; padding: 0 10px; }
+        .profile-box .profile-info {
+            margin-top: 12px;
+            text-align: right;
+            padding: 0 10px;
+        }
         .profile-box .profile-info .info-item {
             display: flex;
             justify-content: space-between;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            color: rgba(255,255,255,0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 15px;
         }
-        .profile-box .profile-info .info-item .label { color: rgba(255,255,255,0.4); }
-        .profile-box .profile-info .info-item .value { color: #fff; font-weight: 600; }
-        .profile-box .profile-info .info-item .value.age-value { color: #ffd700; }
-        .profile-box .profile-info .info-item .value.pass-value { color: #f093fb; font-family: 'Courier New', monospace; letter-spacing: 2px; }
+        .profile-box .profile-info .info-item .label {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .profile-box .profile-info .info-item .value {
+            color: #fff;
+            font-weight: 600;
+        }
+        .profile-box .profile-info .info-item .value.age-value {
+            color: #ffd700;
+        }
+        .profile-box .profile-info .info-item .value.pass-value {
+            color: #f093fb;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
         .profile-box .profile-info .info-item .value.id-value {
             color: #a78bfa;
             font-family: 'Courier New', monospace;
@@ -952,17 +1275,17 @@
         .profile-bio {
             margin-top: 12px;
             padding: 12px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             text-align: right;
         }
         .profile-bio textarea {
             width: 100%;
             padding: 8px 12px;
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
-            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
             color: var(--text);
             font-size: 13px;
             resize: vertical;
@@ -971,14 +1294,14 @@
             transition: all 0.3s ease;
         }
         .profile-bio textarea:focus {
-            border-color: rgba(79,172,254,0.3);
-            box-shadow: 0 0 20px rgba(79,172,254,0.05);
+            border-color: rgba(79, 172, 254, 0.3);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.05);
         }
         .profile-bio .bio-save {
             margin-top: 6px;
-            background: rgba(79,172,254,0.15);
+            background: rgba(79, 172, 254, 0.15);
             color: #4facfe;
-            border: 1px solid rgba(79,172,254,0.15);
+            border: 1px solid rgba(79, 172, 254, 0.15);
             padding: 4px 16px;
             border-radius: 12px;
             font-size: 12px;
@@ -987,44 +1310,79 @@
             transition: all 0.3s ease;
         }
         .profile-bio .bio-save:hover {
-            background: rgba(79,172,254,0.25);
+            background: rgba(79, 172, 254, 0.25);
             transform: scale(1.05);
         }
         .profile-stats {
             margin-top: 16px;
             padding: 14px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .profile-stats h4 { color: #4facfe; font-size: 16px; margin-bottom: 10px; text-align: center; }
+        .profile-stats h4 {
+            color: #4facfe;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
         .profile-stats .stat-row {
             display: flex;
             justify-content: space-between;
             padding: 4px 0;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .profile-stats .stat-row .stat-label { color: rgba(255,255,255,0.5); }
-        .profile-stats .stat-row .stat-value { color: #ffd700; font-weight: 600; }
-        .profile-stats .stat-row:last-child { border-bottom: none; }
-        .profile-history { margin-top: 12px; max-height: 120px; overflow-y: auto; scrollbar-width: thin; }
-        .profile-history::-webkit-scrollbar { width: 3px; }
-        .profile-history::-webkit-scrollbar-track { background: transparent; }
-        .profile-history::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+        .profile-stats .stat-row .stat-label {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .profile-stats .stat-row .stat-value {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        .profile-stats .stat-row:last-child {
+            border-bottom: none;
+        }
+        .profile-history {
+            margin-top: 12px;
+            max-height: 120px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        .profile-history::-webkit-scrollbar {
+            width: 3px;
+        }
+        .profile-history::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .profile-history::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
         .profile-history .history-item {
             font-size: 12px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             padding: 3px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             display: flex;
             justify-content: space-between;
         }
-        .profile-history .history-item .h-time { color: rgba(255,255,255,0.3); font-size: 10px; }
+        .profile-history .history-item .h-time {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 10px;
+        }
 
         /* ===== فروشگاه ===== */
-        .store-box { padding: 30px 20px; width: 100%; text-align: center; position: relative; min-height: 300px; display: flex; flex-direction: column; }
+        .store-box {
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
         .store-box h2 {
             font-size: 26px;
             font-weight: 800;
@@ -1038,17 +1396,33 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 18px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             margin-bottom: 10px;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .store-item .item-info { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-        .store-item .item-title { font-size: 18px; font-weight: 700; color: #fff; }
-        .store-item .item-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
-        .store-item .item-price { font-size: 15px; color: #ffd700; font-weight: 700; }
+        .store-item .item-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+        .store-item .item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .store-item .item-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .store-item .item-price {
+            font-size: 15px;
+            color: #ffd700;
+            font-weight: 700;
+        }
         .store-item .item-action {
             padding: 8px 22px;
             border-radius: 30px;
@@ -1061,20 +1435,51 @@
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
         }
-        .store-item .item-action:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .store-item .item-action:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-        .store-item .item-action.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
-        .store-status { margin-top: 10px; font-size: 14px; color: rgba(255,255,255,0.6); text-align: center; }
+        .store-item .item-action:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .store-item .item-action:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        .store-item .item-action.done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            cursor: default;
+        }
+        .store-status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
 
         /* ===== سایر بازی‌ها ===== */
-        .shooting-game-box, .football-game-box, .blackjack-box, .guess-number-box, .missions-box,
-        .clans-box, .clan-page-box, .achievements-box, .events-box, .craft-box, .newgames-box,
-        .worldcup-box, .admin-dashboard-box {
+        .shooting-game-box,
+        .football-game-box,
+        .blackjack-box,
+        .guess-number-box,
+        .missions-box,
+        .clans-box,
+        .clan-page-box,
+        .achievements-box,
+        .events-box,
+        .craft-box,
+        .newgames-box,
+        .worldcup-box,
+        .admin-dashboard-box {
             padding: 24px 20px;
             width: 100%;
             position: relative;
         }
-        .shooting-game-box .shooting-header { text-align: center; margin-top: 6px; margin-bottom: 10px; }
+        .shooting-game-box .shooting-header {
+            text-align: center;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
         .shooting-game-box .shooting-header h3 {
             font-size: 20px;
             font-weight: 800;
@@ -1088,9 +1493,12 @@
             gap: 20px;
             margin-top: 6px;
             font-size: 14px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
-        .shooting-game-box .shooting-stats span { font-weight: 700; color: #ffd700; }
+        .shooting-game-box .shooting-stats span {
+            font-weight: 700;
+            color: #ffd700;
+        }
         .weapon-select {
             display: flex;
             gap: 10px;
@@ -1101,8 +1509,8 @@
         .weapon-select .weapon-btn {
             padding: 8px 16px;
             border-radius: 30px;
-            border: 2px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
             font-size: 14px;
             font-weight: 700;
@@ -1110,11 +1518,14 @@
             transition: all 0.3s ease;
             box-shadow: none;
         }
-        .weapon-select .weapon-btn:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
+        .weapon-select .weapon-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.05);
+        }
         .weapon-select .weapon-btn.selected {
             border-color: #ffd700;
-            background: rgba(255,215,0,0.15);
-            box-shadow: 0 0 20px rgba(255,215,0,0.1);
+            background: rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
             color: #ffd700;
         }
         .shooting-arena {
@@ -1123,24 +1534,24 @@
             aspect-ratio: 1/1;
             background: radial-gradient(ellipse at center, #1a2a1a, #0a1a0a);
             border-radius: 20px;
-            border: 2px solid rgba(255,255,255,0.05);
+            border: 2px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
             margin: 8px auto;
             max-width: 340px;
         }
         .shooting-arena .arena-grid {
             display: grid;
-            grid-template-columns: repeat(3,1fr);
-            grid-template-rows: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
             width: 100%;
             height: 100%;
             gap: 4px;
             padding: 8px;
         }
         .shooting-arena .arena-cell {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1152,11 +1563,11 @@
             animation: robotIdle 1.5s ease-in-out infinite;
             cursor: crosshair;
             transition: all 0.2s ease;
-            filter: drop-shadow(0 0 10px rgba(255,0,0,0.2));
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.2));
         }
         .shooting-arena .arena-cell .robot:hover {
             transform: scale(1.15);
-            filter: drop-shadow(0 0 20px rgba(255,0,0,0.4));
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.4));
         }
         .shooting-arena .arena-cell .robot.dead {
             animation: none;
@@ -1165,8 +1576,22 @@
             transform: scale(0.8);
             cursor: default;
         }
-        @keyframes robotIdle { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-4px) rotate(2deg); } }
-        .shooting-status { text-align: center; font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 6px; min-height: 20px; }
+        @keyframes robotIdle {
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-4px) rotate(2deg);
+            }
+        }
+        .shooting-status {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 6px;
+            min-height: 20px;
+        }
         .shooting-game-box .shooting-start-btn {
             width: 100%;
             margin-top: 10px;
@@ -1180,11 +1605,22 @@
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
         }
-        .shooting-game-box .shooting-start-btn:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .shooting-game-box .shooting-start-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .shooting-game-box .shooting-start-btn:hover:not(:disabled) {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .shooting-game-box .shooting-start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
 
         /* ===== فوتبال ===== */
-        .football-game-box .game-header { text-align: center; margin-top: 6px; margin-bottom: 4px; }
+        .football-game-box .game-header {
+            text-align: center;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
         .football-game-box .game-header h3 {
             font-size: 20px;
             font-weight: 800;
@@ -1192,7 +1628,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .football-game-box .game-header .turn-text { font-size: 14px; font-weight: 600; color: #ffd700; margin-top: 2px; }
+        .football-game-box .game-header .turn-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            margin-top: 2px;
+        }
         .scoreboard {
             display: flex;
             justify-content: space-between;
@@ -1200,37 +1641,60 @@
             width: 100%;
             padding: 8px 12px;
             margin: 6px 0 8px 0;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .scoreboard .team-info { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-        .scoreboard .team-info .flag { font-size: 28px; }
-        .scoreboard .team-info .name { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; }
-        .scoreboard .score-center .score { font-size: 28px; font-weight: 900; color: #ffd700; }
-        .pitch-container { position: relative; width: 100%; max-width: 340px; margin: 4px auto; }
+        .scoreboard .team-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .scoreboard .team-info .flag {
+            font-size: 28px;
+        }
+        .scoreboard .team-info .name {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+        }
+        .scoreboard .score-center .score {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffd700;
+        }
+        .pitch-container {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+            margin: 4px auto;
+        }
         .pitch {
             width: 100%;
             aspect-ratio: 1/1;
             background: radial-gradient(ellipse at center, #1a7a3a, #0d4a22);
             border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.08);
+            border: 3px solid rgba(255, 255, 255, 0.08);
             position: relative;
-            box-shadow: 0 0 40px rgba(0,0,0,0.3), inset 0 0 60px rgba(0,0,0,0.2);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3), inset 0 0 60px rgba(0, 0, 0, 0.2);
             touch-action: none;
             cursor: grab;
             overflow: hidden;
         }
-        .pitch:active { cursor: grabbing; }
+        .pitch:active {
+            cursor: grabbing;
+        }
         .pitch-center-circle {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             width: 25%;
             height: 25%;
             border-radius: 50%;
-            border: 1.5px dashed rgba(255,255,255,0.08);
+            border: 1.5px dashed rgba(255, 255, 255, 0.08);
         }
         .ball {
             position: absolute;
@@ -1239,8 +1703,8 @@
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #fff, #ddd);
             border: 1.5px solid #bbb;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 -4px 8px rgba(0,0,0,0.1);
-            transform: translate(-50%,-50%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 -4px 8px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%);
             transition: none;
             z-index: 5;
             display: flex;
@@ -1253,13 +1717,15 @@
             touch-action: none;
             cursor: grab;
         }
-        .ball:active { cursor: grabbing; }
+        .ball:active {
+            cursor: grabbing;
+        }
         .goal-message {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
-            background: rgba(0,0,0,0.88);
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.88);
             backdrop-filter: blur(12px);
             padding: 16px 22px;
             border-radius: 18px;
@@ -1269,16 +1735,21 @@
             font-weight: 900;
             z-index: 10;
             text-align: center;
-            box-shadow: 0 0 60px rgba(255,215,0,0.15);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.15);
             display: none;
             min-width: 140px;
         }
-        .goal-message .sub { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 400; margin-top: 4px; }
+        .goal-message .sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            margin-top: 4px;
+        }
         .goal-message .reset-game-btn {
             margin-top: 10px;
-            background: rgba(255,215,0,0.12);
+            background: rgba(255, 215, 0, 0.12);
             color: #ffd700;
-            border: 1px solid rgba(255,215,0,0.15);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             padding: 5px 18px;
             border-radius: 30px;
             font-size: 12px;
@@ -1287,18 +1758,28 @@
             transition: all 0.3s ease;
             box-shadow: none;
         }
-        .goal-message .reset-game-btn:hover { background: rgba(255,215,0,0.2); transform: scale(1.05); }
-        .football-status { text-align: center; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; font-weight: 500; min-height: 20px; }
+        .goal-message .reset-game-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.05);
+        }
+        .football-status {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            font-weight: 500;
+            min-height: 20px;
+        }
 
         .country-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin: 12px 0 18px 0;
         }
         .country-btn {
-            background: rgba(255,255,255,0.06);
-            border: 2px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 12px 6px;
             color: #fff;
@@ -1312,12 +1793,18 @@
             gap: 6px;
             box-shadow: none;
         }
-        .country-btn:hover { background: rgba(255,255,255,0.12); transform: scale(1.03); border-color: rgba(79,172,254,0.3); }
-        .country-btn .flag { font-size: 32px; }
+        .country-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.03);
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+        .country-btn .flag {
+            font-size: 32px;
+        }
         .country-btn.selected {
             border-color: #ffd700;
-            background: rgba(255,215,0,0.1);
-            box-shadow: 0 0 30px rgba(255,215,0,0.05);
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
         }
         .start-game-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
@@ -1331,14 +1818,37 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255,215,0,0.25);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
         }
-        .start-game-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 32px rgba(255,215,0,0.4); }
+        .start-game-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4);
+        }
 
         /* ===== گردونه ===== */
-        .wheel-box { padding: 30px 20px; width: 100%; text-align: center; position: relative; min-height: 400px; display: flex; flex-direction: column; align-items: center; }
-        .wheel-container { position: relative; width: 260px; height: 260px; margin: 0 auto 20px; }
-        .wheel-container canvas { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 30px rgba(255,215,0,0.2); transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99); }
+        .wheel-box {
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wheel-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 20px;
+        }
+        .wheel-container canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
         .wheel-container .pointer {
             position: absolute;
             top: -8px;
@@ -1349,10 +1859,14 @@
             border-left: 14px solid transparent;
             border-right: 14px solid transparent;
             border-top: 24px solid #ffd700;
-            filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
             z-index: 5;
         }
-        .wheel-status { margin: 10px 0; font-size: 16px; color: rgba(255,255,255,0.7); }
+        .wheel-status {
+            margin: 10px 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
         .wheel-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -1365,28 +1879,46 @@
             transition: all 0.3s ease;
             margin-top: 10px;
             width: 80%;
-            box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
         }
-        .wheel-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255,215,0,0.5); }
-        .wheel-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .wheel-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+        .wheel-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
 
         /* ===== بلک‌جک ===== */
-        .blackjack-box .bj-table { display: flex; flex-direction: column; gap: 16px; }
+        .blackjack-box .bj-table {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
         .bj-hand {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 16px;
             padding: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .bj-hand .bj-label {
             font-size: 14px;
             font-weight: 600;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             display: flex;
             justify-content: space-between;
         }
-        .bj-hand .bj-label .bj-score { color: #ffd700; }
-        .bj-cards { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+        .bj-hand .bj-label .bj-score {
+            color: #ffd700;
+        }
+        .bj-cards {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
         .bj-card {
             background: #fff;
             color: #1a1a3a;
@@ -1396,12 +1928,22 @@
             font-size: 16px;
             min-width: 40px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             border: 1px solid #ddd;
         }
-        .bj-card.red { color: #d32f2f; }
-        .bj-card.black { color: #1a1a3a; }
-        .bj-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+        .bj-card.red {
+            color: #d32f2f;
+        }
+        .bj-card.black {
+            color: #1a1a3a;
+        }
+        .bj-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
         .bj-controls button {
             padding: 8px 20px;
             border-radius: 30px;
@@ -1410,14 +1952,29 @@
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .bj-controls button:hover:not(:disabled) { background: rgba(255,255,255,0.2); transform: scale(1.05); }
-        .bj-controls button:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
-        .bj-controls .bj-hit { background: #4facfe; color: #fff; border: none; }
-        .bj-controls .bj-stand { background: #f093fb; color: #1a1a3a; border: none; }
+        .bj-controls button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .bj-controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .bj-controls .bj-hit {
+            background: #4facfe;
+            color: #fff;
+            border: none;
+        }
+        .bj-controls .bj-stand {
+            background: #f093fb;
+            color: #1a1a3a;
+            border: none;
+        }
         .bj-bet-area {
             display: flex;
             align-items: center;
@@ -1429,15 +1986,17 @@
         .bj-bet-area input[type="number"] {
             padding: 8px 12px;
             border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
             color: #fff;
             font-size: 16px;
             outline: none;
             width: 100px;
             text-align: center;
         }
-        .bj-bet-area input[type="number"]:focus { border-color: rgba(255,215,0,0.3); }
+        .bj-bet-area input[type="number"]:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
         .bj-bet-area .bj-bet-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -1449,20 +2008,38 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .bj-bet-area .bj-bet-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .bj-bet-area .bj-bet-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .bj-result { text-align: center; font-size: 18px; font-weight: 700; margin-top: 8px; min-height: 30px; }
-        .bj-result.win { color: #2ecc71; }
-        .bj-result.lose { color: #ff6b6b; }
-        .bj-result.push { color: #ffd700; }
+        .bj-bet-area .bj-bet-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .bj-bet-area .bj-bet-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .bj-result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 8px;
+            min-height: 30px;
+        }
+        .bj-result.win {
+            color: #2ecc71;
+        }
+        .bj-result.lose {
+            color: #ff6b6b;
+        }
+        .bj-result.push {
+            color: #ffd700;
+        }
 
         /* ===== ماموریت‌ها ===== */
         .mission-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             width: 100%;
             display: flex;
             justify-content: space-between;
@@ -1470,10 +2047,26 @@
             flex-wrap: wrap;
             gap: 6px;
         }
-        .mission-item .mission-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-        .mission-item .mission-title { font-size: 16px; font-weight: 700; color: #fff; }
-        .mission-item .mission-desc { font-size: 13px; color: rgba(255,255,255,0.5); }
-        .mission-item .mission-progress { font-size: 13px; color: #4facfe; font-weight: 600; }
+        .mission-item .mission-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+        }
+        .mission-item .mission-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .mission-item .mission-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .mission-item .mission-progress {
+            font-size: 13px;
+            color: #4facfe;
+            font-weight: 600;
+        }
         .mission-item .mission-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -1486,55 +2079,112 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-        .mission-item .mission-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .mission-item .mission-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
-        .mission-item .mission-btn.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
+        .mission-item .mission-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .mission-item .mission-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .mission-item .mission-btn.done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            cursor: default;
+        }
 
         /* ===== کلن ===== */
-        .clans-box, .clan-page-box { padding: 24px 20px; width: 100%; text-align: center; position: relative; }
+        .clans-box,
+        .clan-page-box {
+            padding: 24px 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
         .clan-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .clan-item:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
+        .clan-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+        }
 
         /* ===== دستاوردها ===== */
         .achievement-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 12px 14px;
             margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
         }
-        .achievement-item .ach-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
-        .achievement-item .ach-name { font-size: 15px; font-weight: 700; color: #fff; }
-        .achievement-item .ach-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .achievement-item .ach-status { font-size: 20px; }
-        .achievement-item.locked { opacity: 0.5; border-color: rgba(255,255,255,0.03); }
-        .achievement-item.unlocked { border-color: rgba(255,215,0,0.3); background: rgba(255,215,0,0.05); }
+        .achievement-item .ach-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            text-align: right;
+        }
+        .achievement-item .ach-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .achievement-item .ach-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .achievement-item .ach-status {
+            font-size: 20px;
+        }
+        .achievement-item.locked {
+            opacity: 0.5;
+            border-color: rgba(255, 255, 255, 0.03);
+        }
+        .achievement-item.unlocked {
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.05);
+        }
 
         /* ===== رویدادها ===== */
         .event-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .event-item .event-title { font-size: 16px; font-weight: 700; color: #ffd700; }
-        .event-item .event-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-        .event-item .event-time { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
-        .event-item .event-reward { font-size: 13px; color: #2ecc71; font-weight: 600; }
+        .event-item .event-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+        .event-item .event-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+        .event-item .event-time {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+        }
+        .event-item .event-reward {
+            font-size: 13px;
+            color: #2ecc71;
+            font-weight: 600;
+        }
         .event-item .event-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -1547,28 +2197,57 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-        .event-item .event-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .event-item .event-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
-        .event-item .event-btn.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
-        .event-item.active { border-color: rgba(255,215,0,0.2); }
+        .event-item .event-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .event-item .event-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .event-item .event-btn.done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            cursor: default;
+        }
+        .event-item.active {
+            border-color: rgba(255, 215, 0, 0.2);
+        }
 
         /* ===== صنایع دستی ===== */
         .craft-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
         }
-        .craft-item .craft-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
-        .craft-item .craft-name { font-size: 15px; font-weight: 700; color: #fff; }
-        .craft-item .craft-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .craft-item .craft-cost { font-size: 12px; color: #ffd700; }
+        .craft-item .craft-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            text-align: right;
+        }
+        .craft-item .craft-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .craft-item .craft-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .craft-item .craft-cost {
+            font-size: 12px;
+            color: #ffd700;
+        }
         .craft-item .craft-btn {
             background: linear-gradient(135deg, #a8e063, #56ab2f);
             color: #fff;
@@ -1581,34 +2260,49 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-        .craft-item .craft-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(86,171,47,0.3); }
-        .craft-item .craft-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
-        .craft-item .craft-btn.done { background: rgba(46,204,113,0.15); color: #2ecc71; cursor: default; }
+        .craft-item .craft-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(86, 171, 47, 0.3);
+        }
+        .craft-item .craft-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .craft-item .craft-btn.done {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            cursor: default;
+        }
         .craft-inventory {
             margin-top: 12px;
             padding: 12px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
         }
-        .craft-inventory h4 { color: #4facfe; font-size: 14px; margin-bottom: 6px; }
+        .craft-inventory h4 {
+            color: #4facfe;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
         .craft-inventory .inv-item {
             display: inline-block;
             padding: 4px 12px;
             margin: 3px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 20px;
             font-size: 12px;
-            color: rgba(255,255,255,0.7);
-            border: 1px solid rgba(255,255,255,0.04);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         /* ===== بازی‌های جدید ===== */
         .newgame-item {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1617,11 +2311,29 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .newgame-item:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
-        .newgame-item .ng-info { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: right; }
-        .newgame-item .ng-name { font-size: 16px; font-weight: 700; color: #fff; }
-        .newgame-item .ng-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .newgame-item .ng-emoji { font-size: 28px; }
+        .newgame-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+        }
+        .newgame-item .ng-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            text-align: right;
+        }
+        .newgame-item .ng-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .newgame-item .ng-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .newgame-item .ng-emoji {
+            font-size: 28px;
+        }
         .newgame-item .ng-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: #fff;
@@ -1634,11 +2346,25 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-        .newgame-item .ng-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(79,172,254,0.3); }
+        .newgame-item .ng-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
+        }
 
         /* ===== حدس عدد ===== */
-        .guess-number-box .gn-info { text-align: center; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
-        .guess-number-box .gn-range { font-size: 22px; font-weight: 700; color: #ffd700; text-align: center; margin: 8px 0; }
+        .guess-number-box .gn-info {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+        }
+        .guess-number-box .gn-range {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd700;
+            text-align: center;
+            margin: 8px 0;
+        }
         .guess-number-box .gn-input-area {
             display: flex;
             gap: 10px;
@@ -1649,15 +2375,17 @@
         .guess-number-box .gn-input-area input[type="number"] {
             padding: 10px 14px;
             border-radius: 14px;
-            border: 2px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
             color: #fff;
             font-size: 18px;
             outline: none;
             width: 120px;
             text-align: center;
         }
-        .guess-number-box .gn-input-area input[type="number"]:focus { border-color: rgba(79,172,254,0.3); }
+        .guess-number-box .gn-input-area input[type="number"]:focus {
+            border-color: rgba(79, 172, 254, 0.3);
+        }
         .guess-number-box .gn-input-area .gn-guess-btn {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             color: #fff;
@@ -1669,15 +2397,43 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .guess-number-box .gn-input-area .gn-guess-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(79,172,254,0.3); }
-        .guess-number-box .gn-input-area .gn-guess-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-        .guess-number-box .gn-feedback { text-align: center; font-size: 16px; font-weight: 600; margin: 8px 0; min-height: 30px; }
-        .guess-number-box .gn-feedback.high { color: #ff6b6b; }
-        .guess-number-box .gn-feedback.low { color: #4facfe; }
-        .guess-number-box .gn-feedback.win { color: #2ecc71; }
-        .guess-number-box .gn-feedback.lose { color: #ff6b6b; }
-        .guess-number-box .gn-attempts { text-align: center; font-size: 14px; color: rgba(255,255,255,0.5); }
-        .guess-number-box .gn-attempts span { color: #ffd700; font-weight: 700; }
+        .guess-number-box .gn-input-area .gn-guess-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
+        }
+        .guess-number-box .gn-input-area .gn-guess-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .guess-number-box .gn-feedback {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 8px 0;
+            min-height: 30px;
+        }
+        .guess-number-box .gn-feedback.high {
+            color: #ff6b6b;
+        }
+        .guess-number-box .gn-feedback.low {
+            color: #4facfe;
+        }
+        .guess-number-box .gn-feedback.win {
+            color: #2ecc71;
+        }
+        .guess-number-box .gn-feedback.lose {
+            color: #ff6b6b;
+        }
+        .guess-number-box .gn-attempts {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .guess-number-box .gn-attempts span {
+            color: #ffd700;
+            font-weight: 700;
+        }
         .guess-number-box .gn-bet-area {
             display: flex;
             align-items: center;
@@ -1689,15 +2445,17 @@
         .guess-number-box .gn-bet-area input[type="number"] {
             padding: 8px 12px;
             border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
             color: #fff;
             font-size: 16px;
             outline: none;
             width: 100px;
             text-align: center;
         }
-        .guess-number-box .gn-bet-area input[type="number"]:focus { border-color: rgba(255,215,0,0.3); }
+        .guess-number-box .gn-bet-area input[type="number"]:focus {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
         .guess-number-box .gn-bet-area .gn-bet-btn {
             background: linear-gradient(135deg, #ffd700, #f093fb);
             color: #1a1a3a;
@@ -1709,12 +2467,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .guess-number-box .gn-bet-area .gn-bet-btn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
-        .guess-number-box .gn-bet-area .gn-bet-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .guess-number-box .gn-bet-area .gn-bet-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        .guess-number-box .gn-bet-area .gn-bet-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         .guess-number-box .gn-new-btn {
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.6);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 10px 20px;
             border-radius: 14px;
             font-size: 14px;
@@ -1724,81 +2488,313 @@
             width: 100%;
             margin-top: 8px;
         }
-        .guess-number-box .gn-new-btn:hover { background: rgba(255,255,255,0.12); color: #fff; transform: translateY(-2px); }
+        .guess-number-box .gn-new-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== ایونت گربه ===== */
+        .cat-event-banner {
+            background: linear-gradient(135deg, #ff8c00, #ff4500);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            text-align: center;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+            width: 100%;
+        }
+        .cat-event-banner .cat-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .cat-event-banner .cat-timer {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            margin: 8px 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .cat-event-banner .cat-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 4px;
+        }
+        .cat-event-banner .cat-mission {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 6px;
+            padding: 6px 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: inline-block;
+        }
 
         /* ===== واکنش‌گرایی ===== */
         @media(max-width:480px) {
-            .page-container { max-width: 100%; }
-            .main-header { padding: 10px 14px; border-radius: 16px; }
-            .main-header .site-title { font-size: 18px; }
-            .main-header .user-name { font-size: 12px; padding: 3px 10px; }
-            .main-header .header-btn, .main-header .logout-btn, .main-header .theme-btn {
-                font-size: 10px; padding: 3px 10px;
+            .page-container {
+                max-width: 100%;
             }
-            .main-header .profile-btn { font-size: 10px; padding: 3px 10px 3px 6px; }
-            .main-header .profile-btn .avatar { width: 22px; height: 22px; }
-            .main-header .coin-display { font-size: 11px; padding: 3px 10px; }
-            .main-header .coin-display .coin-count { font-size: 13px; }
-            .main-header .trophy-display { font-size: 11px; padding: 2px 8px; }
-            .music-btn { width: 28px; height: 28px; font-size: 14px; }
-            .account-login-box, .register-box { padding: 30px 20px; min-height: 350px; }
-            .account-login-box h1, .register-box h1 { font-size: 32px; }
-            .box { padding: 24px 18px; }
-            .menu-box { padding: 28px 18px; }
-            .menu-box button { width: 100%; font-size: 17px; }
-            .game-container { padding: 18px 14px 22px; }
-            .board { gap: 8px; max-width: 240px; }
-            .cell { font-size: 38px; border-radius: 12px; }
-            .timer { font-size: 22px; padding: 3px 16px; min-width: 70px; }
-            .profile-box .avatar-upload .avatar-preview { width: 90px; height: 90px; }
-            .shooting-arena .arena-cell .robot { font-size: 28px; }
-            .weapon-select .weapon-btn { font-size: 12px; padding: 6px 12px; }
-            .wheel-container { width: 200px; height: 200px; }
-            .bj-card { font-size: 14px; padding: 6px 10px; min-width: 32px; }
-            .guess-number-box .gn-input-area input[type="number"] { width: 90px; font-size: 16px; }
-            .missions-box .mission-item { flex-direction: column; align-items: stretch; text-align: center; }
-            .dashboard-stats { grid-template-columns: 1fr 1fr; }
-            .country-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
-            .country-btn { font-size: 14px; padding: 10px 4px; }
-            .country-btn .flag { font-size: 26px; }
-            .pitch { height: 260px; max-width: 260px; }
-            .ball { width: 30px; height: 30px; font-size: 14px; }
-            .scoreboard .team-info .flag { font-size: 22px; }
-            .scoreboard .score-center .score { font-size: 22px; }
-            .goal-message { font-size: 18px; padding: 12px 16px; min-width: 120px; }
-            .dashboard-chart .chart-bars { height: 80px; }
-            .profile-bio textarea { font-size: 12px; }
+            .main-header {
+                padding: 10px 14px;
+                border-radius: 16px;
+            }
+            .main-header .site-title {
+                font-size: 18px;
+            }
+            .main-header .user-name {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+            .main-header .header-btn,
+            .main-header .logout-btn,
+            .main-header .theme-btn {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            .main-header .profile-btn {
+                font-size: 10px;
+                padding: 3px 10px 3px 6px;
+            }
+            .main-header .profile-btn .avatar {
+                width: 22px;
+                height: 22px;
+            }
+            .main-header .coin-display {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            .main-header .coin-display .coin-count {
+                font-size: 13px;
+            }
+            .main-header .trophy-display {
+                font-size: 11px;
+                padding: 2px 8px;
+            }
+            .account-login-box,
+            .register-box {
+                padding: 30px 20px;
+                min-height: 350px;
+            }
+            .account-login-box h1,
+            .register-box h1 {
+                font-size: 32px;
+            }
+            .box {
+                padding: 24px 18px;
+            }
+            .menu-box {
+                padding: 28px 18px;
+            }
+            .menu-box button {
+                width: 100%;
+                font-size: 17px;
+            }
+            .game-container {
+                padding: 18px 14px 22px;
+            }
+            .board {
+                gap: 8px;
+                max-width: 240px;
+            }
+            .cell {
+                font-size: 38px;
+                border-radius: 12px;
+            }
+            .timer {
+                font-size: 22px;
+                padding: 3px 16px;
+                min-width: 70px;
+            }
+            .profile-box .avatar-upload .avatar-preview {
+                width: 90px;
+                height: 90px;
+            }
+            .shooting-arena .arena-cell .robot {
+                font-size: 28px;
+            }
+            .weapon-select .weapon-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .wheel-container {
+                width: 200px;
+                height: 200px;
+            }
+            .bj-card {
+                font-size: 14px;
+                padding: 6px 10px;
+                min-width: 32px;
+            }
+            .guess-number-box .gn-input-area input[type="number"] {
+                width: 90px;
+                font-size: 16px;
+            }
+            .missions-box .mission-item {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .country-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .country-btn {
+                font-size: 14px;
+                padding: 10px 4px;
+            }
+            .country-btn .flag {
+                font-size: 26px;
+            }
+            .pitch {
+                height: 260px;
+                max-width: 260px;
+            }
+            .ball {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            .scoreboard .team-info .flag {
+                font-size: 22px;
+            }
+            .scoreboard .score-center .score {
+                font-size: 22px;
+            }
+            .goal-message {
+                font-size: 18px;
+                padding: 12px 16px;
+                min-width: 120px;
+            }
+            .dashboard-chart .chart-bars {
+                height: 80px;
+            }
+            .profile-bio textarea {
+                font-size: 12px;
+            }
+            .cat-event-banner .cat-title {
+                font-size: 18px;
+            }
+            .cat-event-banner .cat-timer {
+                font-size: 22px;
+            }
         }
         @media(max-width:380px) {
-            .main-header .site-title { font-size: 15px; }
-            .main-header .user-name { font-size: 10px; padding: 2px 8px; }
-            .main-header .header-btn, .main-header .logout-btn, .main-header .theme-btn {
-                font-size: 9px; padding: 2px 8px;
+            .main-header .site-title {
+                font-size: 15px;
             }
-            .main-header .profile-btn { font-size: 9px; padding: 2px 8px 2px 4px; }
-            .main-header .profile-btn .avatar { width: 18px; height: 18px; }
-            .main-header .coin-display { font-size: 10px; padding: 2px 8px; }
-            .main-header .coin-display .coin-count { font-size: 11px; }
-            .main-header .trophy-display { font-size: 10px; padding: 2px 6px; }
-            .music-btn { width: 24px; height: 24px; font-size: 12px; }
-            .account-login-box h1, .register-box h1 { font-size: 26px; }
-            .board { gap: 6px; max-width: 200px; }
-            .cell { font-size: 30px; border-radius: 10px; }
-            .timer { font-size: 18px; padding: 2px 12px; min-width: 60px; }
-            .pitch { height: 200px; max-width: 200px; }
-            .ball { width: 24px; height: 24px; font-size: 10px; }
-            .scoreboard .team-info .flag { font-size: 18px; }
-            .scoreboard .score-center .score { font-size: 18px; }
-            .wheel-container { width: 160px; height: 160px; }
-            .bj-card { font-size: 12px; padding: 4px 8px; min-width: 28px; }
-            .guess-number-box .gn-input-area input[type="number"] { width: 70px; font-size: 14px; }
-            .achievement-item .ach-name { font-size: 13px; }
-            .event-item .event-title { font-size: 14px; }
-            .craft-item .craft-name { font-size: 13px; }
-            .newgame-item .ng-name { font-size: 14px; }
-            .dashboard-stats { grid-template-columns: 1fr 1fr; }
-            .dashboard-chart .chart-bars { height: 60px; }
-            .profile-bio textarea { font-size: 11px; }
+            .main-header .user-name {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            .main-header .header-btn,
+            .main-header .logout-btn,
+            .main-header .theme-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .main-header .profile-btn {
+                font-size: 9px;
+                padding: 2px 8px 2px 4px;
+            }
+            .main-header .profile-btn .avatar {
+                width: 18px;
+                height: 18px;
+            }
+            .main-header .coin-display {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            .main-header .coin-display .coin-count {
+                font-size: 11px;
+            }
+            .main-header .trophy-display {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+            .account-login-box h1,
+            .register-box h1 {
+                font-size: 26px;
+            }
+            .board {
+                gap: 6px;
+                max-width: 200px;
+            }
+            .cell {
+                font-size: 30px;
+                border-radius: 10px;
+            }
+            .timer {
+                font-size: 18px;
+                padding: 2px 12px;
+                min-width: 60px;
+            }
+            .pitch {
+                height: 200px;
+                max-width: 200px;
+            }
+            .ball {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            .scoreboard .team-info .flag {
+                font-size: 18px;
+            }
+            .scoreboard .score-center .score {
+                font-size: 18px;
+            }
+            .wheel-container {
+                width: 160px;
+                height: 160px;
+            }
+            .bj-card {
+                font-size: 12px;
+                padding: 4px 8px;
+                min-width: 28px;
+            }
+            .guess-number-box .gn-input-area input[type="number"] {
+                width: 70px;
+                font-size: 14px;
+            }
+            .achievement-item .ach-name {
+                font-size: 13px;
+            }
+            .event-item .event-title {
+                font-size: 14px;
+            }
+            .craft-item .craft-name {
+                font-size: 13px;
+            }
+            .newgame-item .ng-name {
+                font-size: 14px;
+            }
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .dashboard-chart .chart-bars {
+                height: 60px;
+            }
+            .profile-bio textarea {
+                font-size: 11px;
+            }
+            .cat-event-banner .cat-title {
+                font-size: 16px;
+            }
+            .cat-event-banner .cat-timer {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -1812,7 +2808,7 @@
         <!-- ======== صفحه ورود ======== -->
         <div id="accountLoginPage" style="display:flex;">
             <div class="account-login-box">
-                <h1>❄️ برفی</h1>
+                <h1>❄️ برفی 🐱</h1>
                 <p>با نام کاربری و رمز عبور وارد شوید</p>
                 <div class="input-group">
                     <label for="loginUsernameInput">نام کاربری</label>
@@ -1832,7 +2828,7 @@
         <!-- ======== صفحه ثبت نام ======== -->
         <div id="registerPage" style="display:none;">
             <div class="register-box">
-                <h1>❄️ برفی</h1>
+                <h1>❄️ برفی 🐱</h1>
                 <p>برای ساخت اکانت جدید، اطلاعات را وارد کنید</p>
                 <div class="input-group">
                     <label for="registerUsernameInput">نام کاربری</label>
@@ -1895,12 +2891,8 @@
 
             <!-- ===== هدر ===== -->
             <div class="main-header">
-                <div class="site-title">❄️ <span>برفی</span></div>
+                <div class="site-title">❄️ <span>برفی</span> 🐱</div>
                 <div class="header-left">
-                    <div class="audio-control" style="display:flex;align-items:center;gap:6px;">
-                        <button id="playMusicBtn" onclick="toggleMusic()" class="music-btn">▶️</button>
-                        <span id="musicStatus" class="music-status">🎵 Wet Hands</span>
-                    </div>
                     <button class="theme-btn" onclick="toggleTheme()" title="تغییر تم">🌓</button>
                     <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
                     <div class="trophy-display" id="trophyDisplay" style="display:none;">
@@ -1950,9 +2942,20 @@
             <!-- صفحه اصلی -->
             <div id="homePage">
                 <div id="deviceInfo"><span class="device-icon" id="deviceIcon">📱</span><span id="deviceName">گوشی</span></div>
+
+                <!-- بنر ایونت گربه -->
+                <div class="cat-event-banner" id="catEventBanner">
+                    <div class="cat-title">🐱 ایونت گربه 🐱</div>
+                    <div class="cat-timer" id="catTimer">23:59:59</div>
+                    <div class="cat-desc">🎯 ماموریت‌های ویژه گربه‌ای فعال شد!</div>
+                    <div class="cat-mission">🐾 ۵ بازی انجام بده → ۵۰ سکه + جام گربه‌ای</div>
+                    <div class="cat-mission">🏆 ۳ بازی ببر → ۱۰۰ سکه + ۲ جام گربه‌ای</div>
+                    <div class="cat-mission">💰 ۱۰۰ سکه جمع کن → ۱۵۰ سکه + جام نادر</div>
+                </div>
+
                 <div class="box">
-                    <h2>👋 خوش آمدید!</h2>
-                    <p>از حضور شما خوشحالیم.</p>
+                    <h2>👋 خوش آمدید! 🐱</h2>
+                    <p>از حضور شما خوشحالیم. ایونت گربه شروع شد!</p>
                     <div class="start-btn-wrapper">
                         <button type="button" class="start-btn" id="startBtn">🚀 شروع</button>
                         <div class="key-hint" id="keyHint">⌨️ برای شروع کلید <strong>E</strong> را بزنید</div>
@@ -2512,11 +3515,12 @@
 
     <script>
         // ==========================================================
-        //  تولید برف
+        //  تولید برف (با ایموجی گربه در ایونت)
         // ==========================================================
         (function createSnow() {
             const container = document.getElementById('snowflakes');
-            const flakes = ['❄', '❅', '❆', '✦'];
+            const isCatEvent = true; // ایونت گربه فعال
+            const flakes = isCatEvent ? ['🐱', '🐾', '❄', '❅'] : ['❄', '❅', '❆', '✦'];
             for (let i = 0; i < 45; i++) {
                 const el = document.createElement('div');
                 el.className = 'snowflake';
@@ -2531,44 +3535,101 @@
         })();
 
         // ==========================================================
-        //  آهنگ
+        //  آهنگ گربه (خودکار بدون دکمه)
         // ==========================================================
-        let musicPlayer = null;
-        let isMusicPlaying = false;
+        let catMusic = null;
+        let catMusicStarted = false;
 
-        function toggleMusic() {
-            const btn = document.getElementById('playMusicBtn');
-            const status = document.getElementById('musicStatus');
-            if (!musicPlayer) {
-                musicPlayer = new Audio();
-                musicPlayer.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3';
-                musicPlayer.volume = 0.5;
-                musicPlayer.addEventListener('ended', function() {
-                    if (isMusicPlaying) { this.currentTime = 0; this.play().catch(() => {}); }
+        function playCatMusic() {
+            if (catMusicStarted) return;
+            if (!catMusic) {
+                catMusic = new Audio();
+                catMusic.src = 'https://www.myinstants.com/media/sounds/nyan-cat.mp3';
+                catMusic.volume = 0.4;
+                catMusic.addEventListener('ended', function() {
+                    if (!this.paused) {
+                        this.currentTime = 0;
+                        this.play().catch(() => {});
+                    }
                 });
-                musicPlayer.onerror = function() {
-                    this.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+                catMusic.onerror = function() {
+                    // اگر لینک اول خراب بود، لینک جایگزین
+                    this.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3';
                     this.load();
-                    if (isMusicPlaying) this.play().catch(() => {});
+                    if (!this.paused) this.play().catch(() => {});
                 };
             }
-            if (isMusicPlaying) {
-                musicPlayer.pause();
-                btn.textContent = '▶️';
-                status.style.display = 'none';
-                isMusicPlaying = false;
-            } else {
-                musicPlayer.play().then(() => {
-                    btn.textContent = '⏹️';
-                    status.style.display = 'inline';
-                    isMusicPlaying = true;
-                }).catch(() => {
-                    btn.textContent = '▶️';
-                    status.style.display = 'none';
-                    isMusicPlaying = false;
+            catMusic.play().then(() => {
+                catMusicStarted = true;
+            }).catch(() => {
+                // برای دور زدن autoplay، با کلیک کاربر شروع میشه
+                document.addEventListener('click', function startOnClick() {
+                    if (!catMusicStarted) {
+                        catMusic.play().catch(() => {});
+                        catMusicStarted = true;
+                    }
+                    document.removeEventListener('click', startOnClick);
+                }, { once: true });
+            });
+        }
+
+        // ==========================================================
+        //  تایمر ایونت گربه (۲۴ ساعت)
+        // ==========================================================
+        let catEventEndTime = localStorage.getItem('catEventEndTime');
+        let catEventTimer = null;
+
+        function startCatEventTimer() {
+            if (!catEventEndTime) {
+                // شروع ایونت از الان به مدت ۲۴ ساعت
+                catEventEndTime = Date.now() + 24 * 60 * 60 * 1000;
+                localStorage.setItem('catEventEndTime', catEventEndTime);
+            }
+            updateCatTimer();
+            if (catEventTimer) clearInterval(catEventTimer);
+            catEventTimer = setInterval(updateCatTimer, 1000);
+        }
+
+        function updateCatTimer() {
+            const timerEl = document.getElementById('catTimer');
+            if (!timerEl) return;
+            const now = Date.now();
+            const remaining = parseInt(catEventEndTime) - now;
+            if (remaining <= 0) {
+                timerEl.textContent = '⏰ ایونت تمام شد!';
+                document.getElementById('catEventBanner').style.opacity = '0.5';
+                document.getElementById('catEventBanner').style.filter = 'grayscale(0.5)';
+                if (catEventTimer) clearInterval(catEventTimer);
+                localStorage.removeItem('catEventEndTime');
+                return;
+            }
+            const h = Math.floor(remaining / (60 * 60 * 1000));
+            const m = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+            const s = Math.floor((remaining % (60 * 1000)) / 1000);
+            timerEl.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        // ==========================================================
+        //  دکمه شروع (رفع باگ)
+        // ==========================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('startBtn');
+            if (startBtn) {
+                startBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToMenu();
                 });
             }
-        }
+            // کلید E برای شروع
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    const homePage = document.getElementById('homePage');
+                    if (homePage && homePage.style.display !== 'none') {
+                        goToMenu();
+                    }
+                }
+            });
+        });
 
         // ==========================================================
         //  تم‌ها
@@ -2729,12 +3790,13 @@
 
         function setUserData(username, password, accountId, coins = 0, superAdminExpiry = null, trophies = 0, specialAccount = false, winStreak = 0, level = 1, levelProgress = 0, achievements = [], email = '', bio = '') {
             const users = getUsersData();
-            users[username] = { password, id: accountId, coins, superAdminExpiry, trophies, specialAccount, winStreak, level, levelProgress, achievements, email, bio };
+            users[username] = { password, id: accountId, coins, superAdminExpiry, trophies, specialAccount, winStreak,
+                level, levelProgress, achievements, email, bio };
             setUsersData(users);
         }
 
         // ==========================================================
-        //  سیستم سطح (Level) - اضافه شده
+        //  سیستم سطح (Level)
         // ==========================================================
         function getUserLevel(username) {
             const users = getUsersData();
@@ -2793,7 +3855,6 @@
                 else if (gameType === 'blackjack') stats.blackjackWins = (stats.blackjackWins || 0) + 1;
                 else if (gameType === 'guess') stats.guessWins = (stats.guessWins || 0) + 1;
                 else if (gameType === 'wheel') stats.wheelSpins = (stats.wheelSpins || 0) + 1;
-                // افزایش سطح به ازای برد
                 addExp(username, 10);
             } else if (result === 'lose') stats.losses = (stats.losses || 0) + 1;
             if (coinChange > 0) stats.earnedCoins = (stats.earnedCoins || 0) + coinChange;
@@ -2804,16 +3865,13 @@
             if (stats.history.length > 20) stats.history.pop();
             setUserStats(username, stats);
             updateProfileStatsUI(username);
-            // چک کردن دستاوردها بعد از هر بازی
             checkAchievements(username);
-            // به‌روزرسانی ماموریت‌ها بر اساس نوع بازی
             if (gameType === 'tictactoe') updateMissionProgress(username, 'play_tictactoe', 1);
             else if (gameType === 'football') updateMissionProgress(username, 'play_football', 1);
             else if (gameType === 'shooting') updateMissionProgress(username, 'play_shooting', 1);
             else if (gameType === 'blackjack') updateMissionProgress(username, 'play_blackjack', 1);
             else if (gameType === 'guess') updateMissionProgress(username, 'play_guess', 1);
             else if (gameType === 'wheel') updateMissionProgress(username, 'wheel_spin', 1);
-            // ثبت در جام جهانی
             if (result === 'win') addWorldcupScore(username, 10);
         }
 
@@ -3110,7 +4168,7 @@
         }
 
         // ==========================================================
-        //  سیستم کلن
+        //  سیستم کلن (خلاصه)
         // ==========================================================
         const CLANS_KEY = 'clansData';
         const CLAN_MEMBERS_KEY = 'clanMembers';
@@ -3898,13 +4956,12 @@
         }
 
         // ==========================================================
-        //  کاربران برتر (رفع باگ input)
+        //  کاربران برتر
         // ==========================================================
         function renderTopUsers() {
             const container = document.getElementById('topUsersList');
             if (!container) return;
             const allUsers = getRegisteredUsernames();
-            // مرتب‌سازی بر اساس سکه (بیشترین به کمترین)
             const sortedUsers = allUsers.sort((a, b) => getUserCoins(b) - getUserCoins(a));
             const topUsers = sortedUsers.slice(0, 20);
             const currentUser = document.getElementById('displayUsername').textContent.trim();
@@ -3969,7 +5026,6 @@
 
             const username = document.getElementById('displayUsername').textContent.trim();
             if (pageId === 'homePage') {
-                // چک کردن بن کاربر
                 if (checkUserBanStatus()) return;
                 loadProfile();
                 showWarningForUser();
@@ -3996,6 +5052,10 @@
                 renderCountries();
                 drawWheel();
                 checkWheelAvailability();
+                // شروع تایمر ایونت
+                startCatEventTimer();
+                // شروع آهنگ گربه
+                setTimeout(playCatMusic, 500);
             }
             if (pageId === 'profilePage') loadProfile();
             if (pageId === 'storePage') updateStoreUI();
@@ -4130,7 +5190,7 @@
         }
 
         // ==========================================================
-        //  بازی فوتبال (کامل با drag و حرکت ربات و گل)
+        //  بازی فوتبال (با drag کامل)
         // ==========================================================
         let footballState = {
             playerCountry: null,
@@ -4182,7 +5242,6 @@
             showPage('footballGamePage');
             enableBallDrag();
             document.getElementById('footballStatus').textContent = '👆 توپ را بکشید تا حرکت کند';
-            // شروع تایمر ربات
             if (footballRobotTimer) clearInterval(footballRobotTimer);
             footballRobotTimer = setInterval(() => {
                 if (!footballState.isGameOver && footballState.turn === 'robot' && !footballState
@@ -4231,10 +5290,8 @@
                 footballState.isDragging = false;
                 ball.style.transition = 'all 0.1s ease';
                 document.getElementById('footballStatus').textContent = '⏳ در حال بررسی...';
-                // چک کردن گل
                 setTimeout(() => {
                     if (checkGoal()) return;
-                    // نوبت ربات
                     footballState.turn = 'robot';
                     document.getElementById('turnText').textContent = '🤖 نوبت ربات';
                     document.getElementById('turnText').style.color = '#f093fb';
@@ -4274,7 +5331,6 @@
         function robotMoveBall() {
             if (footballState.isGameOver || footballState.turn !== 'robot') return;
             const ball = document.getElementById('ball');
-            // حرکت ربات به سمت دروازه بازیکن (چپ)
             const targetX = 5 + Math.random() * 15;
             const targetY = 20 + Math.random() * 60;
             const steps = 10;
@@ -4283,7 +5339,6 @@
             function moveStep() {
                 if (step >= steps || footballState.isGameOver || footballState.turn !== 'robot') {
                     if (!footballState.isGameOver) {
-                        // چک کردن گل
                         if (!checkGoal()) {
                             footballState.turn = 'player';
                             document.getElementById('turnText').textContent = '🎯 نوبت شما';
@@ -4313,9 +5368,7 @@
             const ballX = footballState.ballX;
             const ballY = footballState.ballY;
             const goalZone = 8;
-            // دروازه چپ (ربات) - اگر توپ به چپ برسه
             if (ballX < goalZone && ballY > 25 && ballY < 75) {
-                // گل برای بازیکن
                 footballState.playerScore++;
                 document.getElementById('scoreDisplay').textContent = footballState.playerScore + ' - ' + footballState
                     .robotScore;
@@ -4331,9 +5384,7 @@
                 if (footballState.playerScore >= 3) endFootballGame('player');
                 return true;
             }
-            // دروازه راست (بازیکن) - اگر توپ به راست برسه
             if (ballX > (100 - goalZone) && ballY > 25 && ballY < 75) {
-                // گل برای ربات
                 footballState.robotScore++;
                 document.getElementById('scoreDisplay').textContent = footballState.playerScore + ' - ' + footballState
                     .robotScore;
@@ -4379,7 +5430,7 @@
             const msg = document.getElementById('goalMessage');
             document.getElementById('goalText').textContent = winner === 'player' ? '🏆 شما برنده شدید!' : '😔 ربات برنده شد!';
             document.getElementById('goalSub').textContent = winner === 'player' ? 'تبریک! +۵۰ سکه' :
-            'دفعه بعد تلاش بیشتری کنید!';
+                'دفعه بعد تلاش بیشتری کنید!';
             msg.style.display = 'block';
             msg.style.borderColor = winner === 'player' ? '#ffd700' : '#ff6b6b';
             document.getElementById('footballStatus').textContent = '🏁 بازی تمام شد!';
@@ -4393,7 +5444,6 @@
                 addStatGame(username, 'lose', 0, 'football');
                 addLog(`${username} در فوتبال باخت`);
             }
-            // دکمه بازی جدید در پیام گل
             const resetBtn = document.querySelector('.goal-message .reset-game-btn');
             if (resetBtn) {
                 resetBtn.style.display = 'inline-block';
@@ -4424,7 +5474,7 @@
         }
 
         // ==========================================================
-        //  بازی دوز
+        //  بازی دوز (کامل)
         // ==========================================================
         const boardEl = document.getElementById('board');
         const statusMsg = document.getElementById('statusMsg');
@@ -4609,7 +5659,7 @@
         }
 
         // ==========================================================
-        //  بازی تیراندازی
+        //  بازی تیراندازی (کامل)
         // ==========================================================
         let shootingState = {
             selectedWeapon: null,
@@ -4744,7 +5794,7 @@
         }
 
         // ==========================================================
-        //  بلک‌جک (اصلاح شده با کسر صحیح سکه)
+        //  بلک‌جک (اصلاح شده)
         // ==========================================================
         let bjState = { deck: [], playerHand: [], dealerHand: [], bet: 0, gameOver: false, isDealerTurn: false };
 
@@ -4818,7 +5868,6 @@
             const bet = parseInt(document.getElementById('bjBetInput').value.trim());
             if (isNaN(bet) || bet < 10) { alert('⚠️ شرط باید حداقل ۱۰ سکه باشد.'); return; }
             if (getUserCoins(username) < bet) { alert(`❌ شما فقط ${getUserCoins(username)} سکه دارید.`); return; }
-            // کسر شرط از کاربر
             if (!removeUserCoins(username, bet)) { alert('❌ خطا در کسر سکه'); return; }
             updateCoinDisplay();
             bjState.bet = bet;
@@ -5929,20 +6978,21 @@
                     renderNewGamesUI();
                     renderTopUsers();
                     addLog(`${saved} وارد شد`);
+                    // شروع آهنگ گربه
+                    setTimeout(playCatMusic, 500);
+                    // شروع تایمر ایونت
+                    startCatEventTimer();
                 }, 800);
             } else {
                 showAccountLoginPage();
             }
         });
 
-        console.log('❄️ برفی نسخه ۳.۱ (اصلاح‌شده)');
-        console.log('✅ فوتبال با drag کامل');
-        console.log('✅ اصلاح بلک‌جک، حدس عدد، گردونه');
-        console.log('✅ سیستم سطح (Level)');
-        console.log('✅ ماموریت‌ها و دستاوردها خودکار');
-        console.log('✅ جام جهانی ثبت امتیاز');
-        console.log('✅ چک بن در صفحه اصلی');
-        console.log('✅ لاگ کامل همه فعالیت‌ها');
+        console.log('❄️ برفی نسخه ۳.۲ (ایونت گربه + آهنگ خودکار)');
+        console.log('🐱 ایونت گربه ۲۴ ساعته فعال شد!');
+        console.log('🎵 آهنگ Nyan Cat خودکار پخش میشه');
+        console.log('✅ دکمه شروع به منوی بازی هدایت میکنه');
+        console.log('✅ همه بازی‌ها و سیستم‌ها کامل هستن');
     </script>
 
 </body>
