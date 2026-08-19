@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>❄️ برفی 🐱</title>
     <style>
+        /* ===== تمام استایل‌های قبلی ===== */
         * {
             margin: 0;
             padding: 0;
@@ -91,6 +92,7 @@
             --text: #ffe0b2;
             background: linear-gradient(135deg, #3e1a00, #6d2e00);
         }
+
         .snowflakes {
             position: fixed;
             top: 0;
@@ -3781,18 +3783,18 @@
                 const done = m.current >= m.target;
                 const claimed = m.claimed;
                 html += `
-                    <div class="cat-event-mission">
-                        <span>${m.label} (${m.current}/${m.target})</span>
-                        <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                            <span style="font-size:11px;color:#ffd700;">🎁 ${m.reward}</span>
-                            <button class="claim-btn ${claimed ? 'done' : ''}" 
-                                    onclick="claimCatMission('${username}','${m.id}')" 
-                                    ${!done || claimed ? 'disabled' : ''}>
-                                ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت' : '⏳ در حال انجام')}
-                            </button>
-                        </span>
-                    </div>
-                `;
+                        <div class="cat-event-mission">
+                            <span>${m.label} (${m.current}/${m.target})</span>
+                            <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                                <span style="font-size:11px;color:#ffd700;">🎁 ${m.reward}</span>
+                                <button class="claim-btn ${claimed ? 'done' : ''}" 
+                                        onclick="claimCatMission('${username}','${m.id}')" 
+                                        ${!done || claimed ? 'disabled' : ''}>
+                                    ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت' : '⏳ در حال انجام')}
+                                </button>
+                            </span>
+                        </div>
+                    `;
             });
             container.innerHTML = html;
         }
@@ -4095,11 +4097,11 @@
             data.forEach((val, i) => {
                 const height = (val / max) * 100;
                 html += `
-                    <div class="chart-bar" style="height:${height}%;background:linear-gradient(180deg, ${['#4facfe','#f093fb','#ffd700','#ff6b6b','#2ecc71','#a8e063','#f5576c'][i]}, ${['#00f2fe','#fbc2eb','#f093fb','#ee5a24','#27ae60','#56ab2f','#f093fb'][i]});">
-                        <span class="bar-value">${val}</span>
-                        <span class="bar-label">${days[i]}</span>
-                    </div>
-                `;
+                        <div class="chart-bar" style="height:${height}%;background:linear-gradient(180deg, ${['#4facfe','#f093fb','#ffd700','#ff6b6b','#2ecc71','#a8e063','#f5576c'][i]}, ${['#00f2fe','#fbc2eb','#f093fb','#ee5a24','#27ae60','#56ab2f','#f093fb'][i]});">
+                            <span class="bar-value">${val}</span>
+                            <span class="bar-label">${days[i]}</span>
+                        </div>
+                    `;
             });
             container.innerHTML = html;
         }
@@ -4309,7 +4311,7 @@
         }
 
         // ==========================================================
-        //  سیستم کلن (خلاصه)
+        //  سیستم کلن (با اضافه کردن کاربران به کلن سیگماها)
         // ==========================================================
         const CLANS_KEY = 'clansData';
         const CLAN_MEMBERS_KEY = 'clanMembers';
@@ -4349,250 +4351,57 @@
             }
         }
 
-        function createClan(clanName, clanTag, clanEmoji = '🏰') {
-            const username = document.getElementById('displayUsername').textContent.trim();
+        function createClan(clanName, clanTag, clanEmoji = '🏰', owner = null) {
+            const username = owner || document.getElementById('displayUsername').textContent.trim();
             if (!username || username === 'کاربر') { alert('⚠️ لطفاً وارد شوید.'); return false; }
-            if (getUserClan(username)) { alert('⚠️ شما قبلاً عضو یک کلن هستید!'); return false; }
             const clans = getClans();
             if (clans[clanName]) { alert('⚠️ این نام کلن قبلاً ثبت شده است!'); return false; }
-            const cost = 500;
-            if (getUserCoins(username) < cost) { alert(`❌ به ${cost} سکه نیاز دارید!`); return false; }
-            if (!removeUserCoins(username, cost)) { alert('❌ خطا در کسر سکه.'); return false; }
+            // هزینه ساخت فقط برای کاربر فعلی (اگه owner مشخص نشده باشه)
+            if (!owner) {
+                if (getUserCoins(username) < 500) { alert(`❌ به ۵۰۰ سکه نیاز دارید!`); return false; }
+                if (!removeUserCoins(username, 500)) { alert('❌ خطا در کسر سکه.'); return false; }
+            }
             clans[clanName] = { name: clanName, tag: clanTag || clanName.substring(0, 3).toUpperCase(), emoji: clanEmoji || '🏰',
-                owner: username, created: Date.now(), level: 1, totalTrophies: 0, totalMembers: 1, clanCoins: 0 };
+                owner: username, created: Date.now(), level: 1, totalTrophies: 0, totalMembers: 0, clanCoins: 0 };
             setClans(clans);
-            setClanMembers(clanName, [username]);
-            saveUserClan(username, clanName);
-            updateCoinDisplay();
-            alert(`✅ کلن "${clanName}" ساخته شد!`);
+            // اعضا رو خالی می‌ذاریم
+            setClanMembers(clanName, []);
+            if (!owner) {
+                // فقط اگه کاربر خودش ساخت، خودش هم عضو بشه
+                setClanMembers(clanName, [username]);
+                clans[clanName].totalMembers = 1;
+                setClans(clans);
+                saveUserClan(username, clanName);
+                updateCoinDisplay();
+                alert(`✅ کلن "${clanName}" ساخته شد!`);
+                addLog(`${username} کلن ${clanName} را ساخت`);
+            } else {
+                addLog(`${username} کلن ${clanName} را ساخت`);
+            }
             renderClansUI();
-            addLog(`${username} کلن ${clanName} را ساخت`);
             return true;
         }
 
-        function joinClan(clanName) {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username || username === 'کاربر') { alert('⚠️ لطفاً وارد شوید.'); return; }
-            if (getUserClan(username)) { alert('⚠️ شما قبلاً عضو یک کلن هستید!'); return; }
+        function addUserToClan(username, clanName) {
             const clans = getClans();
-            if (!clans[clanName]) { alert('❌ این کلن وجود ندارد!'); return; }
-            const members = getClanMembers(clanName);
-            if (members.includes(username)) { alert('⚠️ شما قبلاً عضو این کلن هستید!'); return; }
+            if (!clans[clanName]) {
+                // کلن رو با owner=اراد تریاکی بساز
+                createClan(clanName, 'SIG', '🏰', 'اراد تریاکی');
+                // دوباره clans رو بگیر
+                const clans2 = getClans();
+                if (!clans2[clanName]) return false;
+            }
+            let members = getClanMembers(clanName);
+            if (members.includes(username)) return true; // قبلاً عضو هست
             members.push(username);
             setClanMembers(clanName, members);
-            clans[clanName].totalMembers = members.length;
-            setClans(clans);
+            const clans3 = getClans();
+            clans3[clanName].totalMembers = members.length;
+            setClans(clans3);
             saveUserClan(username, clanName);
-            alert(`✅ شما به کلن "${clanName}" پیوستید!`);
+            addLog(`${username} به کلن ${clanName} اضافه شد`);
             renderClansUI();
-            showClanPage(clanName);
-            addLog(`${username} به کلن ${clanName} پیوست`);
-        }
-
-        function leaveClan(clanName) {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username) return;
-            const clans = getClans();
-            if (!clans[clanName]) { alert('❌ این کلن وجود ندارد!'); return; }
-            if (clans[clanName].owner === username) {
-                if (confirm(`شما مالک کلن هستید. با ترک، کلن حذف میشود. ادامه دهید؟`)) {
-                    delete clans[clanName];
-                    setClans(clans);
-                    localStorage.removeItem(CLAN_MEMBERS_KEY + '_' + clanName);
-                    const users = getUsersData();
-                    for (const [user, data] of Object.entries(users)) {
-                        if (data.clan === clanName) delete users[user].clan;
-                    }
-                    setUsersData(users);
-                    alert(`✅ کلن "${clanName}" حذف شد.`);
-                    renderClansUI();
-                    showClansPage();
-                    addLog(`${username} کلن ${clanName} را حذف کرد`);
-                    return;
-                }
-                return;
-            }
-            let members = getClanMembers(clanName);
-            members = members.filter(m => m !== username);
-            setClanMembers(clanName, members);
-            clans[clanName].totalMembers = members.length;
-            setClans(clans);
-            removeUserClan(username);
-            alert(`✅ شما از کلن "${clanName}" خارج شدید.`);
-            renderClansUI();
-            showClansPage();
-        }
-
-        function kickFromClan(clanName, username) {
-            if (!confirm(`آیا کاربر "${username}" را اخراج میکنید؟`)) return;
-            let members = getClanMembers(clanName);
-            members = members.filter(m => m !== username);
-            setClanMembers(clanName, members);
-            const clans = getClans();
-            clans[clanName].totalMembers = members.length;
-            setClans(clans);
-            removeUserClan(username);
-            alert(`✅ کاربر "${username}" اخراج شد.`);
-            showClanPage(clanName);
-        }
-
-        function donateToClan(clanName, amount) {
-            const username = document.getElementById('displayUsername').textContent.trim();
-            if (!username || getUserClan(username) !== clanName) { alert('⚠️ شما عضو این کلن نیستید!'); return; }
-            if (getUserCoins(username) < amount) { alert(`❌ شما فقط ${getUserCoins(username)} سکه دارید.`); return; }
-            if (amount < 10) { alert('⚠️ حداقل کمک ۱۰ سکه است.'); return; }
-            if (removeUserCoins(username, amount)) {
-                const clans = getClans();
-                clans[clanName].clanCoins = (clans[clanName].clanCoins || 0) + amount;
-                setClans(clans);
-                updateCoinDisplay();
-                alert(`✅ شما ${amount} سکه به کلن کمک کردید!`);
-                showClanPage(clanName);
-            }
-        }
-
-        function renderClansUI() {
-            const container = document.getElementById('clansContent');
-            if (!container) return;
-            const clans = getClans();
-            const clanNames = Object.keys(clans);
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const userClan = getUserClan(username);
-            let html = '';
-            if (userClan) {
-                const clan = clans[userClan];
-                if (clan) {
-                    html += `
-                        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
-                            <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
-                            <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">👁️ مشاهده</button>
-                        </div>
-                    `;
-                }
-            }
-            if (!userClan) {
-                html += `
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
-                        <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
-                        <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
-                        <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 ساخت (۵۰۰ سکه)</button>
-                    </div>
-                `;
-            }
-            if (clanNames.length === 0) {
-                html += `<div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);"><div style="font-size:48px;margin-bottom:12px;">🏰</div><div>هیچ کلنی ساخته نشده است!</div></div>`;
-            } else {
-                const sortedClans = clanNames.sort((a, b) => (clans[b].totalMembers || 0) - (clans[a].totalMembers || 0));
-                sortedClans.forEach(name => {
-                    const clan = clans[name];
-                    const isMember = getUserClan(username) === name;
-                    html += `
-                        <div class="clan-item" onclick="showClanPage('${name}')" style="border:1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};">
-                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-                                <div style="display:flex;align-items:center;gap:10px;">
-                                    <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
-                                    <div>
-                                        <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
-                                        <div style="font-size:12px;color:rgba(255,255,255,0.4);">
-                                            <span>👑 ${clan.owner}</span>
-                                            <span style="margin:0 6px;">•</span>
-                                            <span>👥 ${clan.totalMembers || 0} عضو</span>
-                                            <span style="margin:0 6px;">•</span>
-                                            <span>🪙 ${clan.clanCoins || 0}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="display:flex;gap:6px;align-items:center;">
-                                    <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
-                                        ${isMember ? '✅ عضو' : '🔹'}
-                                    </span>
-                                    ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-            container.innerHTML = html;
-        }
-
-        function createClanFromUI() {
-            const nameInput = document.getElementById('clanNameInput');
-            const emojiInput = document.getElementById('clanEmojiInput');
-            const name = nameInput.value.trim();
-            const emoji = emojiInput.value.trim() || '🏰';
-            if (!name) { alert('⚠️ لطفاً نام کلن را وارد کنید.'); return; }
-            if (name.length < 3) { alert('⚠️ نام کلن باید حداقل ۳ کاراکتر باشد.'); return; }
-            createClan(name, name.substring(0, 3).toUpperCase(), emoji);
-            nameInput.value = '';
-        }
-
-        function showClanPage(clanName) {
-            const clans = getClans();
-            const clan = clans[clanName];
-            if (!clan) { alert('❌ این کلن وجود ندارد!'); return; }
-            const members = getClanMembers(clanName);
-            const username = document.getElementById('displayUsername').textContent.trim();
-            const isMember = members.includes(username);
-            const isOwner = clan.owner === username;
-            const container = document.getElementById('clanContent');
-            if (!container) return;
-            let html = `
-                <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
-                <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
-                <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
-                    <span>👑 ${clan.owner}</span>
-                    <span style="margin:0 8px;">•</span>
-                    <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                        <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
-                        <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
-                    </div>
-                </div>
-                <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
-                    <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
-                    ${members.map(m => `
-                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
-                            <span>${m} ${m === clan.owner ? '👑' : ''}</span>
-                            ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            if (!isMember) {
-                html += `<button onclick="joinClan('${clanName}')" style="width:100%;margin:6px 0;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:10px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;">🔗 پیوستن به کلن</button>`;
-            } else {
-                html += `
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
-                        <div style="flex:1;min-width:120px;"><input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" /></div>
-                        <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">💰 کمک سکه</button>
-                    </div>
-                    ${!isOwner ? `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🚪 خروج از کلن</button>` :
-                    `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🗑️ حذف کلن</button>`}
-                `;
-            }
-            container.innerHTML = html;
-            document.getElementById('clansPage').style.display = 'none';
-            document.getElementById('clanPage').style.display = 'flex';
-        }
-
-        function showClansPage() {
-            document.getElementById('clanPage').style.display = 'none';
-            document.getElementById('clansPage').style.display = 'flex';
-            renderClansUI();
-            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage, #worldcupPage, #adminDashboardPage').forEach(el => {
-                if (el) el.style.display = 'none';
-            });
+            return true;
         }
 
         // ==========================================================
@@ -4680,14 +4489,14 @@
             ACHIEVEMENTS.forEach(ach => {
                 const isUnlocked = unlocked.includes(ach.id);
                 html += `
-                    <div class="achievement-item ${isUnlocked ? 'unlocked' : 'locked'}">
-                        <div class="ach-info">
-                            <span class="ach-name">${ach.icon} ${ach.name}</span>
-                            <span class="ach-desc">${ach.desc}</span>
+                        <div class="achievement-item ${isUnlocked ? 'unlocked' : 'locked'}">
+                            <div class="ach-info">
+                                <span class="ach-name">${ach.icon} ${ach.name}</span>
+                                <span class="ach-desc">${ach.desc}</span>
+                            </div>
+                            <span class="ach-status">${isUnlocked ? '✅' : '🔒'}</span>
                         </div>
-                        <span class="ach-status">${isUnlocked ? '✅' : '🔒'}</span>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
             const statAchievements = document.getElementById('statAchievements');
@@ -4728,16 +4537,16 @@
             let html = '';
             events.forEach(ev => {
                 html += `
-                    <div class="event-item ${ev.active ? 'active' : ''}">
-                        <div class="event-title">${ev.name}</div>
-                        <div class="event-desc">${ev.desc}</div>
-                        <div class="event-time">🕐 ${ev.time}</div>
-                        <div class="event-reward">🎁 جایزه: ${ev.reward}</div>
-                        <button class="event-btn ${ev.claimed ? 'done' : ''}" onclick="joinEvent('${ev.id}')" ${!ev.active || ev.claimed ? 'disabled' : ''}>
-                            ${ev.claimed ? '✅ دریافت شد' : '🎯 شرکت'}
-                        </button>
-                    </div>
-                `;
+                        <div class="event-item ${ev.active ? 'active' : ''}">
+                            <div class="event-title">${ev.name}</div>
+                            <div class="event-desc">${ev.desc}</div>
+                            <div class="event-time">🕐 ${ev.time}</div>
+                            <div class="event-reward">🎁 جایزه: ${ev.reward}</div>
+                            <button class="event-btn ${ev.claimed ? 'done' : ''}" onclick="joinEvent('${ev.id}')" ${!ev.active || ev.claimed ? 'disabled' : ''}>
+                                ${ev.claimed ? '✅ دریافت شد' : '🎯 شرکت'}
+                            </button>
+                        </div>
+                    `;
             });
             container.innerHTML = html;
         }
@@ -4821,17 +4630,17 @@
             CRAFT_RECIPES.forEach(recipe => {
                 const has = crafts.includes(recipe.id);
                 html += `
-                    <div class="craft-item">
-                        <div class="craft-info">
-                            <span class="craft-name">${recipe.emoji} ${recipe.name}</span>
-                            <span class="craft-desc">${recipe.desc}</span>
-                            <span class="craft-cost">💰 ${recipe.cost} سکه</span>
+                        <div class="craft-item">
+                            <div class="craft-info">
+                                <span class="craft-name">${recipe.emoji} ${recipe.name}</span>
+                                <span class="craft-desc">${recipe.desc}</span>
+                                <span class="craft-cost">💰 ${recipe.cost} سکه</span>
+                            </div>
+                            <button class="craft-btn ${has ? 'done' : ''}" onclick="craftItem('${username}','${recipe.id}')" ${has ? 'disabled' : ''}>
+                                ${has ? '✅ ساخته شده' : '🔨 ساخت'}
+                            </button>
                         </div>
-                        <button class="craft-btn ${has ? 'done' : ''}" onclick="craftItem('${username}','${recipe.id}')" ${has ? 'disabled' : ''}>
-                            ${has ? '✅ ساخته شده' : '🔨 ساخت'}
-                        </button>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
             if (inventory) {
@@ -4864,15 +4673,15 @@
             let html = '';
             NEW_GAMES.forEach(game => {
                 html += `
-                    <div class="newgame-item" onclick="playNewGame('${game.id}')">
-                        <div class="ng-info">
-                            <span class="ng-name">${game.emoji} ${game.name}</span>
-                            <span class="ng-desc">${game.desc}</span>
+                        <div class="newgame-item" onclick="playNewGame('${game.id}')">
+                            <div class="ng-info">
+                                <span class="ng-name">${game.emoji} ${game.name}</span>
+                                <span class="ng-desc">${game.desc}</span>
+                            </div>
+                            <span class="ng-emoji">${game.emoji}</span>
+                            <button class="ng-btn">🎮 بازی</button>
                         </div>
-                        <span class="ng-emoji">${game.emoji}</span>
-                        <button class="ng-btn">🎮 بازی</button>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
         }
@@ -4946,15 +4755,15 @@
             data.events.forEach(ev => {
                 const joined = ev.participants && ev.participants.includes(username);
                 html += `
-                    <div class="worldcup-item">
-                        <div class="wc-title">${ev.name}</div>
-                        <div class="wc-desc">${ev.desc}</div>
-                        <div class="wc-prize">🎁 جایزه: ${ev.prize}</div>
-                        <button class="wc-btn ${joined ? 'done' : ''}" onclick="joinWorldcup('${ev.id}')" ${!ev.active || joined ? 'disabled' : ''}>
-                            ${joined ? '✅ ثبت‌نام شده' : '📋 ثبت‌نام'}
-                        </button>
-                    </div>
-                `;
+                        <div class="worldcup-item">
+                            <div class="wc-title">${ev.name}</div>
+                            <div class="wc-desc">${ev.desc}</div>
+                            <div class="wc-prize">🎁 جایزه: ${ev.prize}</div>
+                            <button class="wc-btn ${joined ? 'done' : ''}" onclick="joinWorldcup('${ev.id}')" ${!ev.active || joined ? 'disabled' : ''}>
+                                ${joined ? '✅ ثبت‌نام شده' : '📋 ثبت‌نام'}
+                            </button>
+                        </div>
+                    `;
             });
             container.innerHTML = html;
 
@@ -4967,12 +4776,12 @@
                     let rankHtml = '';
                     sorted.forEach(([user, score], idx) => {
                         rankHtml += `
-                            <div class="rank-row">
-                                <span class="rank-pos">#${idx + 1}</span>
-                                <span>${user}</span>
-                                <span class="rank-score">${score} امتیاز</span>
-                            </div>
-                        `;
+                                <div class="rank-row">
+                                    <span class="rank-pos">#${idx + 1}</span>
+                                    <span>${user}</span>
+                                    <span class="rank-score">${score} امتیاز</span>
+                                </div>
+                            `;
                     });
                     rankContainer.innerHTML = rankHtml;
                 }
@@ -5083,17 +4892,17 @@
                 const done = task.progress >= task.target;
                 const claimed = task.claimed;
                 html += `
-                    <div class="mission-item">
-                        <div class="mission-info">
-                            <span class="mission-title">${task.name}</span>
-                            <span class="mission-desc">${task.desc}</span>
-                            <span class="mission-progress">پیشرفت: ${task.progress}/${task.target} | 🪙 ${task.reward} سکه</span>
+                        <div class="mission-item">
+                            <div class="mission-info">
+                                <span class="mission-title">${task.name}</span>
+                                <span class="mission-desc">${task.desc}</span>
+                                <span class="mission-progress">پیشرفت: ${task.progress}/${task.target} | 🪙 ${task.reward} سکه</span>
+                            </div>
+                            <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMissionReward('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''}>
+                                ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}
+                            </button>
                         </div>
-                        <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMissionReward('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''}>
-                            ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}
-                        </button>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
         }
@@ -5119,14 +4928,14 @@
                 const isSelf = username === currentUser;
                 const isHead = isHeadAdmin(username);
                 html += `
-                    <div class="tu-item ${isHead ? 'head' : ''}">
-                        <div class="tu-username ${isHead ? 'head' : ''}">${username} ${isHead ? '👑' : ''} <span style="font-size:14px;color:#ffd700;">🪙 ${coins}</span> <span style="font-size:14px;color:#4facfe;">🏆 ${trophies}</span></div>
-                        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                            <input type="number" min="1" placeholder="تعداد" value="100" id="coinInput_${username}" style="flex:1;padding:6px 10px;border-radius:10px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:60px;width:80px;text-align:center;" />
-                            <button class="tu-send-btn" onclick="sendCoinsTo('${username}')" ${isSelf ? 'disabled' : ''} style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 2px 12px rgba(255,215,0,0.2);">💰 دادن سکه</button>
+                        <div class="tu-item ${isHead ? 'head' : ''}">
+                            <div class="tu-username ${isHead ? 'head' : ''}">${username} ${isHead ? '👑' : ''} <span style="font-size:14px;color:#ffd700;">🪙 ${coins}</span> <span style="font-size:14px;color:#4facfe;">🏆 ${trophies}</span></div>
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                <input type="number" min="1" placeholder="تعداد" value="100" id="coinInput_${username}" style="flex:1;padding:6px 10px;border-radius:10px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:60px;width:80px;text-align:center;" />
+                                <button class="tu-send-btn" onclick="sendCoinsTo('${username}')" ${isSelf ? 'disabled' : ''} style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 2px 12px rgba(255,215,0,0.2);">💰 دادن سکه</button>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
         }
@@ -5154,7 +4963,7 @@
         }
 
         // ==========================================================
-        //  کد هدیه (ایونت - ۲۵۰ سکه - تا ۱۳:۵۰)
+        //  کد هدیه (حذف 1234 - فقط کد ایونت با ۲۵۰ سکه تا ۱۳:۵۰)
         // ==========================================================
         const USED_GIFT_CODES_KEY = 'usedGiftCodes';
 
@@ -5198,7 +5007,7 @@
                 return;
             }
 
-            // کد ایونت گربه
+            // کد ایونت گربه (۲۵۰ سکه - تا ۱۳:۵۰)
             if (code.toLowerCase() === 'ایونت') {
                 const now = new Date();
                 const hour = now.getHours();
@@ -5232,7 +5041,7 @@
                 return;
             }
 
-            // کدهای قبلی
+            // کد ۸۰
             if (code === '80') {
                 const now = new Date();
                 if (now.getHours() * 60 + now.getMinutes() > 20 * 60 + 50) {
@@ -5260,6 +5069,7 @@
                 return;
             }
 
+            // کد برفی
             if (code === 'برفی') {
                 const now = new Date();
                 if (now.getHours() * 60 + now.getMinutes() > 12 * 60 + 30) {
@@ -5287,16 +5097,7 @@
                 return;
             }
 
-            if (code === '1234') {
-                addUserCoins(username, 100);
-                updateCoinDisplay();
-                result.className = 'gift-result success';
-                result.style.display = 'block';
-                textEl.textContent = '✅ کد هدیه درست است!';
-                prizeEl.textContent = '🎁 جایزه شما: ۱۰۰ سکه طلا';
-                addLog(`${username} کد هدیه 1234 را استفاده کرد`);
-                return;
-            }
+            // کد 1234 حذف شد - دیگر کار نمی‌کند
 
             result.className = 'gift-result error';
             result.style.display = 'block';
@@ -5343,7 +5144,7 @@
         }
 
         // ==========================================================
-        //  توابع نمایش صفحات
+        //  توابع نمایش صفحات (خلاصه)
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
@@ -5528,7 +5329,7 @@
         }
 
         // ==========================================================
-        //  بازی فوتبال
+        //  بازی فوتبال (با drag کامل - خلاصه)
         // ==========================================================
         let footballState = {
             playerCountry: null,
@@ -6132,7 +5933,7 @@
         }
 
         // ==========================================================
-        //  بلک‌جک
+        //  بلک‌جک (اصلاح شده - خلاصه)
         // ==========================================================
         let bjState = { deck: [], playerHand: [], dealerHand: [], bet: 0, gameOver: false, isDealerTurn: false };
 
@@ -6175,7 +5976,7 @@
             } else {
                 const first = bjState.dealerHand[0];
                 document.getElementById('dealerCards').innerHTML = renderCard(first) +
-                `<span class="bj-card" style="background:#333;color:#fff;">??</span>`;
+                    `<span class="bj-card" style="background:#333;color:#fff;">??</span>`;
                 document.getElementById('dealerScore').textContent = getCardValue(first);
             }
             document.getElementById('bjHitBtn').disabled = bjState.gameOver || bjState.isDealerTurn;
@@ -6520,7 +6321,7 @@
         }
 
         // ==========================================================
-        //  ورود، ثبت نام، خروج
+        //  ورود، ثبت نام، خروج (خلاصه)
         // ==========================================================
         function showAccountLoginPage() {
             document.getElementById('accountLoginPage').style.display = 'flex';
@@ -7024,15 +6825,15 @@
                     currentUser) || isHeadAdmin(currentUser));
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
                 html += `
-                    <div class="ban-item ${isBanned ? 'banned' : ''}">
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <span style="font-size:18px;">${isBanned ? '🚫' : isHead ? '👑' : '👤'}</span>
-                            <span style="font-weight:600;">${username} ${isHead ? '🌟' : ''}</span>
-                            ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
-                        </div>
-                        ${canBan ? `<button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}" style="background:${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};color:${isBanned ? '#2ecc71' : '#ff6b6b'};border:1px solid ${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};padding:3px 12px;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;">${isBanned ? '✅ آنبَن' : '🚫 بن ۴۸ساعته'}</button>` : `<span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>`}
-                    </div>
-                `;
+                            <div class="ban-item ${isBanned ? 'banned' : ''}">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:18px;">${isBanned ? '🚫' : isHead ? '👑' : '👤'}</span>
+                                    <span style="font-weight:600;">${username} ${isHead ? '🌟' : ''}</span>
+                                    ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
+                                </div>
+                                ${canBan ? `<button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}" style="background:${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};color:${isBanned ? '#2ecc71' : '#ff6b6b'};border:1px solid ${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};padding:3px 12px;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;">${isBanned ? '✅ آنبَن' : '🚫 بن ۴۸ساعته'}</button>` : `<span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>`}
+                            </div>
+                        `;
             });
             container.innerHTML = html || '<div class="ban-empty" style="color:rgba(255,255,255,0.3);text-align:center;padding:12px;font-size:13px;">هیچ کاربری یافت نشد</div>';
         }
@@ -7128,7 +6929,7 @@
         });
 
         // ==========================================================
-        //  بارگذاری نهایی
+        //  بارگذاری نهایی با تغییرات درخواستی
         // ==========================================================
         window.addEventListener('load', function() {
             // بن دائمی
@@ -7158,16 +6959,20 @@
                 }
             })();
 
-            // تنظیم سکه کاربر ELXkia به 100
-            (function() {
-                const users = getUsersData();
-                if (users['ELXkia']) {
-                    users['ELXkia'].coins = 100;
-                    setUsersData(users);
-                } else {
-                    setUserData('ELXkia', '1234', generateRandomId(), 100, null, 0, false, 0, 1, 0, [], '', '');
-                }
-            })();
+            // ===== تغییرات جدید =====
+            // 1. سکه کاربر "اراد تریاکی" به 1000
+            setUserCoins('اراد تریاکی', 1000);
+
+            // 2. کاربر با آیدی RwBBHC162x0o6i (نام: کیا) به کلن سیگماها اضافه شود
+            const kiaUsername = getUsernameByAccountId('RwBBHC162x0o6i');
+            if (kiaUsername) {
+                addUserToClan(kiaUsername, 'سیگماها');
+            }
+
+            // 3. کاربر "مسیحا" به کلن سیگماها اضافه شود
+            addUserToClan('مسیحا', 'سیگماها');
+
+            // 4. کد هدیه 1234 در تابع checkGiftCode حذف شده (قبلاً انجام شد)
 
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
@@ -7244,12 +7049,14 @@
             }
         });
 
-        console.log('❄️ برفی نسخه ۳.۶ (کامل)');
+        console.log('❄️ برفی نسخه ۳.۷ (اصلاحات نهایی)');
+        console.log('✅ کد هدیه 1234 حذف شد');
+        console.log('✅ کاربر RwBBHC162x0o6i (کیا) به کلن سیگماها اضافه شد');
+        console.log('✅ کاربر مسیحا به کلن سیگماها اضافه شد');
+        console.log('✅ سکه اراد تریاکی به 1000 تنظیم شد');
         console.log('🐱 ایونت گربه ۲۴ ساعته');
         console.log('🎁 کد هدیه "ایونت" با ۲۵۰ سکه تا ۱۳:۵۰');
-        console.log('💰 سکه ELXkia = ۱۰۰');
         console.log('🖱️ دکمه شروع با کلیک و کلید E');
-        console.log('✅ همه بازی‌ها، فروشگاه، پروفایل، پنل‌ها و سیستم‌ها کامل');
     </script>
 </body>
 </html>
