@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>❄️ برفی 🐱</title>
+    <title>❄️ برفی</title>
     <style>
         * {
             margin: 0;
@@ -31,21 +31,6 @@
             overflow-x: hidden;
             position: relative;
             transition: background 0.5s ease;
-        }
-        body.cat-event {
-            --bg: #ff8c00;
-            --card-bg: rgba(255, 140, 0, 0.15);
-            --text: #fff3e0;
-            background: linear-gradient(135deg, #ff8c00, #ff4500, #ff8c00);
-            animation: catBgPulse 3s ease-in-out infinite alternate;
-        }
-        @keyframes catBgPulse {
-            0% {
-                background: linear-gradient(135deg, #ff8c00, #ff4500);
-            }
-            100% {
-                background: linear-gradient(135deg, #ff6600, #ff8c00);
-            }
         }
         body.light {
             --bg: #f0f4ff;
@@ -78,18 +63,6 @@
             100% {
                 background: #0b0e2a;
             }
-        }
-        body.cat-event.light {
-            --bg: #ffcc80;
-            --card-bg: rgba(255, 255, 255, 0.5);
-            --text: #4a2800;
-            background: linear-gradient(135deg, #ffcc80, #ff9800);
-        }
-        body.cat-event.dark {
-            --bg: #3e1a00;
-            --card-bg: rgba(255, 140, 0, 0.2);
-            --text: #ffe0b2;
-            background: linear-gradient(135deg, #3e1a00, #6d2e00);
         }
 
         .snowflakes {
@@ -311,15 +284,14 @@
             margin-right: 2px;
             font-weight: 700;
         }
-
-        /* ===== دکمه کارتون‌ها (جدید) ===== */
+        /* دکمه کارتون‌ها در هدر */
         .header-btn.cartoons-btn {
             background: linear-gradient(135deg, #ff6b6b, #f093fb);
             color: #fff;
             border: none;
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -844,157 +816,6 @@
             box-shadow: 0 8px 32px rgba(255, 107, 107, 0.4);
         }
 
-        /* ===== صفحه کارتون‌ها ===== */
-        .cartoons-page {
-            padding: 30px 20px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .cartoons-page .sponge-btn {
-            background: linear-gradient(135deg, #ffd700, #ff6b00);
-            color: #1a1a3a;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 30px;
-            font-size: 24px;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 30px rgba(255, 215, 0, 0.3);
-            margin-bottom: 6px;
-            width: 100%;
-            max-width: 300px;
-            letter-spacing: 2px;
-        }
-        .cartoons-page .sponge-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 40px rgba(255, 215, 0, 0.5);
-        }
-        .cartoons-page .sponge-img {
-            width: 200px;
-            height: 200px;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmQ3MDAiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjU1IiBjeT0iNTUiIHI9IjUiIGZpbGw9IiMwMDAiLz48Y2lyY2xlIGN4PSIxNDUiIGN5PSI1NSIgcj0iNSIgZmlsbD0iIzAwMCIvPjxwYXRoIGQ9Ik01MCAxMjAgQzgwIDE0MCAxMjAgMTQwIDE1MCAxMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+PHJlY3QgeD0iNzAiIHk9IjE1MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iNzAiIHk9IjE2MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZmZmIi8+PC9zdmc+');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 20px;
-            margin-top: 4px;
-            border: 3px solid #ffd700;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
-        }
-        .cartoons-page .episodes-container {
-            width: 100%;
-            margin-top: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-        }
-        .cartoons-page .episodes-container.show {
-            display: flex;
-        }
-        .cartoons-page .episodes-container::-webkit-scrollbar {
-            width: 4px;
-        }
-        .cartoons-page .episodes-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .cartoons-page .episodes-container::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-        }
-        .cartoons-page .episode-item {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 12px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        .cartoons-page .episode-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 215, 0, 0.2);
-        }
-        .cartoons-page .episode-item .ep-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #fff;
-            flex: 1;
-            text-align: right;
-        }
-        .cartoons-page .episode-item .ep-watch-btn {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: #fff;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .cartoons-page .episode-item .ep-watch-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
-        }
-        .cartoons-page .episode-item .ep-watch-btn.watching {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            cursor: default;
-            transform: none !important;
-        }
-        .cartoons-page .episode-player {
-            width: 100%;
-            margin-top: 12px;
-            border-radius: 16px;
-            overflow: hidden;
-            display: none;
-            border: 2px solid rgba(255, 215, 0, 0.15);
-        }
-        .cartoons-page .episode-player iframe {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border: none;
-        }
-        .cartoons-page .episode-player.show {
-            display: block;
-        }
-        .cartoons-page .close-player-btn {
-            margin-top: 8px;
-            background: rgba(255, 107, 107, 0.15);
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 107, 107, 0.15);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: none;
-        }
-        .cartoons-page .close-player-btn:hover {
-            background: rgba(255, 107, 107, 0.25);
-            transform: scale(1.05);
-        }
-        .cartoons-page .close-player-btn.show {
-            display: inline-block;
-        }
-
-        /* ===== بقیه استایل‌ها (بازی‌ها، فروشگاه، پروفایل و ...) ===== */
         .menu-box {
             padding: 40px 28px;
             width: 100%;
@@ -1197,362 +1018,157 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .cat-event-banner {
-            background: linear-gradient(135deg, #ff8c00, #ff4500);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            text-align: center;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+        /* ===== صفحه کارتون‌ها ===== */
+        .cartoons-page {
+            padding: 30px 20px;
             width: 100%;
-        }
-        .cat-event-banner .cat-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .cat-event-banner .cat-timer {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ffd700;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-            margin: 8px 0;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-        .cat-event-banner .cat-desc {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 4px;
-        }
-        .cat-event-missions {
+            text-align: center;
+            position: relative;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-top: 10px;
+            align-items: center;
         }
-        .cat-event-mission {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.9);
-            padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.2);
+        .cartoons-page .sponge-btn {
+            background: linear-gradient(135deg, #ffd700, #ff6b00);
+            color: #1a1a3a;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(255, 215, 0, 0.3);
+            margin-bottom: 6px;
+            width: 100%;
+            max-width: 300px;
+            letter-spacing: 2px;
+        }
+        .cartoons-page .sponge-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(255, 215, 0, 0.5);
+        }
+        .cartoons-page .sponge-img {
+            width: 200px;
+            height: 200px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmQ3MDAiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjYwIiByPSIxNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjU1IiBjeT0iNTUiIHI9IjUiIGZpbGw9IiMwMDAiLz48Y2lyY2xlIGN4PSIxNDUiIGN5PSI1NSIgcj0iNSIgZmlsbD0iIzAwMCIvPjxwYXRoIGQ9Ik01MCAxMjAgQzgwIDE0MCAxMjAgMTQwIDE1MCAxMjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+PHJlY3QgeD0iNzAiIHk9IjE1MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iNzAiIHk9IjE2MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 20px;
+            margin-top: 4px;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+        }
+        .cartoons-page .episodes-container {
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+        .cartoons-page .episodes-container.show {
+            display: flex;
+        }
+        .cartoons-page .episodes-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .cartoons-page .episodes-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .cartoons-page .episodes-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 10px;
+        }
+        .cartoons-page .episode-item {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 8px;
+            transition: all 0.3s ease;
         }
-        .cat-event-mission .claim-btn {
-            background: linear-gradient(135deg, #ffd700, #f093fb);
-            color: #1a1a3a;
+        .cartoons-page .episode-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+        .cartoons-page .episode-item .ep-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            flex: 1;
+            text-align: right;
+        }
+        .cartoons-page .episode-item .ep-watch-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
             border: none;
-            padding: 2px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             white-space: nowrap;
         }
-        .cat-event-mission .claim-btn:hover:not(:disabled) {
+        .cartoons-page .episode-item .ep-watch-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
         }
-        .cat-event-mission .claim-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .cat-event-mission .claim-btn.done {
+        .cartoons-page .episode-item .ep-watch-btn.watching {
             background: rgba(46, 204, 113, 0.15);
             color: #2ecc71;
             cursor: default;
+            transform: none !important;
+        }
+        .cartoons-page .episode-player {
+            width: 100%;
+            margin-top: 12px;
+            border-radius: 16px;
+            overflow: hidden;
+            display: none;
+            border: 2px solid rgba(255, 215, 0, 0.15);
+        }
+        .cartoons-page .episode-player iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+        .cartoons-page .episode-player.show {
+            display: block;
+        }
+        .cartoons-page .close-player-btn {
+            margin-top: 8px;
+            background: rgba(255, 107, 107, 0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.15);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+        }
+        .cartoons-page .close-player-btn:hover {
+            background: rgba(255, 107, 107, 0.25);
+            transform: scale(1.05);
+        }
+        .cartoons-page .close-player-btn.show {
+            display: inline-block;
         }
 
-        /* ===== واکنش‌گرایی ===== */
-        @media(max-width:480px) {
-            .page-container {
-                max-width: 100%;
-            }
-            .main-header {
-                padding: 10px 14px;
-                border-radius: 16px;
-            }
-            .main-header .site-title {
-                font-size: 18px;
-            }
-            .main-header .user-name {
-                font-size: 12px;
-                padding: 3px 10px;
-            }
-            .main-header .header-btn,
-            .main-header .logout-btn,
-            .main-header .theme-btn {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            .main-header .profile-btn {
-                font-size: 10px;
-                padding: 3px 10px 3px 6px;
-            }
-            .main-header .profile-btn .avatar {
-                width: 22px;
-                height: 22px;
-            }
-            .main-header .coin-display {
-                font-size: 11px;
-                padding: 3px 10px;
-            }
-            .main-header .coin-display .coin-count {
-                font-size: 13px;
-            }
-            .main-header .trophy-display {
-                font-size: 11px;
-                padding: 2px 8px;
-            }
-            .account-login-box,
-            .register-box {
-                padding: 30px 20px;
-                min-height: 350px;
-            }
-            .account-login-box h1,
-            .register-box h1 {
-                font-size: 32px;
-            }
-            .box {
-                padding: 24px 18px;
-            }
-            .menu-box {
-                padding: 28px 18px;
-            }
-            .menu-box button {
-                width: 100%;
-                font-size: 17px;
-            }
-            .game-container {
-                padding: 18px 14px 22px;
-            }
-            .board {
-                gap: 8px;
-                max-width: 240px;
-            }
-            .cell {
-                font-size: 38px;
-                border-radius: 12px;
-            }
-            .timer {
-                font-size: 22px;
-                padding: 3px 16px;
-                min-width: 70px;
-            }
-            .profile-box .avatar-upload .avatar-preview {
-                width: 90px;
-                height: 90px;
-            }
-            .shooting-arena .arena-cell .robot {
-                font-size: 28px;
-            }
-            .weapon-select .weapon-btn {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-            .wheel-container {
-                width: 200px;
-                height: 200px;
-            }
-            .bj-card {
-                font-size: 14px;
-                padding: 6px 10px;
-                min-width: 32px;
-            }
-            .guess-number-box .gn-input-area input[type="number"] {
-                width: 90px;
-                font-size: 16px;
-            }
-            .missions-box .mission-item {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            .dashboard-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            .country-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .country-btn {
-                font-size: 14px;
-                padding: 10px 4px;
-            }
-            .country-btn .flag {
-                font-size: 26px;
-            }
-            .pitch {
-                height: 260px;
-                max-width: 260px;
-            }
-            .ball {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            .scoreboard .team-info .flag {
-                font-size: 22px;
-            }
-            .scoreboard .score-center .score {
-                font-size: 22px;
-            }
-            .goal-message {
-                font-size: 18px;
-                padding: 12px 16px;
-                min-width: 120px;
-            }
-            .dashboard-chart .chart-bars {
-                height: 80px;
-            }
-            .profile-bio textarea {
-                font-size: 12px;
-            }
-            .cat-event-banner .cat-title {
-                font-size: 18px;
-            }
-            .cat-event-banner .cat-timer {
-                font-size: 22px;
-            }
-            .cat-event-mission {
-                font-size: 12px;
-            }
-            .cartoons-page .sponge-btn {
-                font-size: 20px;
-                padding: 14px 30px;
-            }
-            .cartoons-page .sponge-img {
-                width: 150px;
-                height: 150px;
-            }
-        }
-        @media(max-width:380px) {
-            .main-header .site-title {
-                font-size: 15px;
-            }
-            .main-header .user-name {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            .main-header .header-btn,
-            .main-header .logout-btn,
-            .main-header .theme-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .main-header .profile-btn {
-                font-size: 9px;
-                padding: 2px 8px 2px 4px;
-            }
-            .main-header .profile-btn .avatar {
-                width: 18px;
-                height: 18px;
-            }
-            .main-header .coin-display {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            .main-header .coin-display .coin-count {
-                font-size: 11px;
-            }
-            .main-header .trophy-display {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-            .account-login-box h1,
-            .register-box h1 {
-                font-size: 26px;
-            }
-            .board {
-                gap: 6px;
-                max-width: 200px;
-            }
-            .cell {
-                font-size: 30px;
-                border-radius: 10px;
-            }
-            .timer {
-                font-size: 18px;
-                padding: 2px 12px;
-                min-width: 60px;
-            }
-            .pitch {
-                height: 200px;
-                max-width: 200px;
-            }
-            .ball {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-            .scoreboard .team-info .flag {
-                font-size: 18px;
-            }
-            .scoreboard .score-center .score {
-                font-size: 18px;
-            }
-            .wheel-container {
-                width: 160px;
-                height: 160px;
-            }
-            .bj-card {
-                font-size: 12px;
-                padding: 4px 8px;
-                min-width: 28px;
-            }
-            .guess-number-box .gn-input-area input[type="number"] {
-                width: 70px;
-                font-size: 14px;
-            }
-            .achievement-item .ach-name {
-                font-size: 13px;
-            }
-            .event-item .event-title {
-                font-size: 14px;
-            }
-            .craft-item .craft-name {
-                font-size: 13px;
-            }
-            .newgame-item .ng-name {
-                font-size: 14px;
-            }
-            .dashboard-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            .dashboard-chart .chart-bars {
-                height: 60px;
-            }
-            .profile-bio textarea {
-                font-size: 11px;
-            }
-            .cat-event-banner .cat-title {
-                font-size: 16px;
-            }
-            .cat-event-banner .cat-timer {
-                font-size: 18px;
-            }
-            .cartoons-page .sponge-btn {
-                font-size: 17px;
-                padding: 12px 20px;
-            }
-            .cartoons-page .sponge-img {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        /* ===== استایل‌های بخش‌های دیگر (خلاصه) ===== */
+        /* ===== بقیه استایل‌ها (ادمین، فروشگاه، پروفایل و ...) ===== */
         .admin-dashboard-box {
             padding: 24px 20px;
             width: 100%;
@@ -2016,7 +1632,7 @@
             text-align: center;
         }
 
-        /* ===== خلاصه بازی‌ها ===== */
+        /* ===== بازی‌ها ===== */
         .shooting-game-box,
         .football-game-box,
         .blackjack-box,
@@ -3135,7 +2751,6 @@
             color: #ffd700;
         }
 
-        /* ===== Responsive ===== */
         @media(max-width:480px) {
             .page-container {
                 max-width: 100%;
@@ -3280,15 +2895,6 @@
             .profile-bio textarea {
                 font-size: 12px;
             }
-            .cat-event-banner .cat-title {
-                font-size: 18px;
-            }
-            .cat-event-banner .cat-timer {
-                font-size: 22px;
-            }
-            .cat-event-mission {
-                font-size: 12px;
-            }
             .cartoons-page .sponge-btn {
                 font-size: 20px;
                 padding: 14px 30px;
@@ -3397,12 +3003,6 @@
             .profile-bio textarea {
                 font-size: 11px;
             }
-            .cat-event-banner .cat-title {
-                font-size: 16px;
-            }
-            .cat-event-banner .cat-timer {
-                font-size: 18px;
-            }
             .cartoons-page .sponge-btn {
                 font-size: 17px;
                 padding: 12px 20px;
@@ -3424,7 +3024,7 @@
         <!-- ======== صفحه ورود ======== -->
         <div id="accountLoginPage" style="display:flex;">
             <div class="account-login-box">
-                <h1>❄️ برفی 🐱</h1>
+                <h1>❄️ برفی</h1>
                 <p>با نام کاربری و رمز عبور وارد شوید</p>
                 <div class="input-group">
                     <label for="loginUsernameInput">نام کاربری</label>
@@ -3444,7 +3044,7 @@
         <!-- ======== صفحه ثبت نام ======== -->
         <div id="registerPage" style="display:none;">
             <div class="register-box">
-                <h1>❄️ برفی 🐱</h1>
+                <h1>❄️ برفی</h1>
                 <p>برای ساخت اکانت جدید، اطلاعات را وارد کنید</p>
                 <div class="input-group">
                     <label for="registerUsernameInput">نام کاربری</label>
@@ -3507,7 +3107,7 @@
 
             <!-- ===== هدر ===== -->
             <div class="main-header">
-                <div class="site-title">❄️ <span>برفی</span> 🐱</div>
+                <div class="site-title">❄️ <span>برفی</span></div>
                 <div class="header-left">
                     <button class="theme-btn" onclick="toggleTheme()" title="تغییر تم">🌓</button>
                     <div class="user-name">👤 <span id="displayUsername">کاربر</span></div>
@@ -3561,17 +3161,9 @@
             <div id="homePage">
                 <div id="deviceInfo"><span class="device-icon" id="deviceIcon">📱</span><span id="deviceName">گوشی</span></div>
 
-                <!-- بنر ایونت گربه -->
-                <div class="cat-event-banner" id="catEventBanner">
-                    <div class="cat-title">🐱 ایونت گربه 🐱</div>
-                    <div class="cat-timer" id="catTimer">23:59:59</div>
-                    <div class="cat-desc">🎯 ماموریت‌های ویژه گربه‌ای فعال شد!</div>
-                    <div class="cat-event-missions" id="catMissionsContainer"></div>
-                </div>
-
                 <div class="box">
-                    <h2>👋 خوش آمدید! 🐱</h2>
-                    <p>از حضور شما خوشحالیم. ایونت گربه شروع شد!</p>
+                    <h2>👋 خوش آمدید!</h2>
+                    <p>از حضور شما خوشحالیم.</p>
                     <div class="start-btn-wrapper">
                         <button type="button" class="start-btn" id="startBtn">🚀 شروع</button>
                         <div class="key-hint" id="keyHint">⌨️ برای شروع کلید <strong>E</strong> را بزنید</div>
@@ -3882,6 +3474,243 @@
                 </div>
             </div>
 
+            <!-- پنل سوپر ادمین -->
+            <div id="adminPanel" style="display:none;">
+                <div class="admin-panel-box" style="padding:32px 24px;width:100%;text-align:center;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <h2 style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#f093fb,#f5576c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🔐 پنل سوپر ادمین</h2>
+                    <p style="color:rgba(255,255,255,0.5);font-weight:500;">مدیریت کامل سایت</p>
+                    <ul>
+                        <li><span>📊 کاربران آنلاین</span><span id="userCount">0</span></li>
+                        <li><span>🕹️ بازی‌های فعال</span><span id="gameCount">0</span></li>
+                        <li><span>👤 مدیران</span><span id="adminNamesDisplay" class="admin-names"></span></li>
+                    </ul>
+                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);text-align:right;">
+                        <h4 style="color:#4facfe;font-size:16px;margin-bottom:10px;text-align:center;">👑 اضافه کردن ادمین با آیدی</h4>
+                        <div style="display:flex;gap:8px;width:100%;flex-wrap:wrap;">
+                            <input type="text" id="addAdminIdInput" placeholder="آیدی اکانت را وارد کنید..." style="flex:1;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:80px;text-align:center;font-family:'Courier New',monospace;letter-spacing:1px;" />
+                            <button type="button" onclick="addAdminById()" style="background:rgba(79,172,254,0.15);color:#4facfe;border:1px solid rgba(79,172,254,0.15);padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;white-space:nowrap;">➕ اضافه کن</button>
+                        </div>
+                        <div id="addAdminMsg" style="font-size:13px;margin-top:8px;text-align:center;color:rgba(255,255,255,0.6);display:none;"></div>
+                    </div>
+                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);text-align:right;">
+                        <h4 style="color:#ff6b6b;font-size:16px;margin-bottom:10px;text-align:center;">🚫 مدیریت بن</h4>
+                        <div style="display:flex;gap:8px;width:100%;margin:8px 0;flex-wrap:wrap;">
+                            <input type="text" id="banSearchInput" placeholder="جستجوی نام کاربری..." style="flex:1;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:80px;" />
+                            <button type="button" onclick="searchUsers()" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.06);padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;white-space:nowrap;">🔍 جستجو</button>
+                        </div>
+                        <div id="banList" style="width:100%;max-height:200px;overflow-y:auto;text-align:right;margin-top:6px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- پنل هد ادمین -->
+            <div id="headAdminPanel" style="display:none;">
+                <div class="head-admin-panel-box" style="padding:32px 24px;width:100%;text-align:center;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <h2 style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#ffd700,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">👑 پنل هد ادمین</h2>
+                    <p style="color:rgba(255,215,0,0.6);font-weight:600;">🌟 شما یک هد ادمین هستید!</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,215,0,0.08);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#ffd700;" id="haUsers">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کاربران آنلاین</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,215,0,0.08);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#ffd700;" id="haGames">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">بازی‌های فعال</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,215,0,0.08);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#ffd700;" id="haTotalUsers">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کل کاربران</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,215,0,0.08);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#ffd700;" id="haBanned">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کاربران بن شده</div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;margin-top:12px;padding:12px 16px;background:rgba(255,215,0,0.04);border-radius:16px;border:1px solid rgba(255,215,0,0.06);">
+                        <h4 style="color:#ffd700;font-size:15px;margin-bottom:8px;text-align:center;">✨ امکانات ویژه هد ادمین</h4>
+                        <div style="color:rgba(255,255,255,0.7);font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);">🔹 <strong>رنگ نام طلایی</strong></div>
+                        <div style="color:rgba(255,255,255,0.7);font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);">🔹 <strong>قاب پروفایل اختصاصی</strong></div>
+                        <div style="color:rgba(255,255,255,0.7);font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);">🔹 <strong>دسترسی به آمار پیشرفته</strong></div>
+                        <div style="color:rgba(255,255,255,0.7);font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);">🔹 <strong>تغییر رنگ نام کاربران</strong></div>
+                        <div style="color:rgba(255,255,255,0.7);font-size:13px;padding:4px 0;">🔹 <strong>ارسال پیام سراسری</strong></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- پنل ادمینیتور -->
+            <div id="moderatorPanel" style="display:none;">
+                <div class="moderator-panel-box" style="padding:32px 24px;width:100%;text-align:center;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <h2 style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#f1c40f,#f39c12);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">👑 پنل ادمینیتور</h2>
+                    <p style="color:rgba(255,255,255,0.4);font-size:13px;">دسترسی مدیریتی سطح متوسط</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#f1c40f;" id="moderatorUserCount">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کاربران آنلاین</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#f1c40f;" id="moderatorGameCount">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">بازی‌های فعال</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#f1c40f;" id="moderatorTotalUsers">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کل کاربران</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);padding:14px 10px;border-radius:16px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+                            <div style="font-size:28px;font-weight:800;color:#f1c40f;" id="moderatorBannedCount">0</div>
+                            <div style="font-size:12px;color:rgba(255,255,255,0.4);">کاربران بن شده</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);text-align:right;">
+                        <h4 style="color:#ffd700;font-size:16px;margin-bottom:10px;text-align:center;">📩 پیام‌های پشتیبانی</h4>
+                        <div id="moderatorSupportMessages" style="max-height:180px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- کاربران برتر -->
+            <div id="topUsersPage" style="display:none;">
+                <div class="top-users-box" style="padding:28px 20px;width:100%;position:relative;min-height:400px;display:flex;flex-direction:column;align-items:center;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <div style="text-align:center;margin-bottom:16px;">
+                        <div style="font-size:26px;font-weight:800;color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.2);">اراد تریاکی</div>
+                        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:2px;">kiaELX</div>
+                    </div>
+                    <div style="margin-top:20px;border-top:1px solid rgba(255,215,0,0.2);padding-top:16px;text-align:center;">
+                        <div style="font-size:26px;font-weight:800;color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.2);">لیست کاربران برتر</div>
+                    </div>
+                    <div id="topUsersList" style="width:100%;max-height:400px;overflow-y:auto;margin-top:8px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- گردونه -->
+            <div id="wheelPage" style="display:none;">
+                <div class="wheel-box">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#ffd700,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px;">🎡 گردونه شانس</h2>
+                    <div class="wheel-container">
+                        <canvas id="wheelCanvas" width="300" height="300"></canvas>
+                        <div class="pointer"></div>
+                    </div>
+                    <div class="wheel-status" id="wheelStatus">🎯 روی دکمه بزنید تا بچرخد</div>
+                    <button class="wheel-btn" id="wheelSpinBtn" onclick="spinWheel()">🌀 چرخش</button>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- ماموریت‌ها -->
+            <div id="missionsPage" style="display:none;">
+                <div class="missions-box" style="padding:28px 20px;width:100%;position:relative;min-height:400px;display:flex;flex-direction:column;align-items:center;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button type="button" class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#ffd700,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px;">🎯 ماموریت‌های روزانه</h2>
+                    <div id="missionsList" style="width:100%;"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- کلن‌ها -->
+            <div id="clansPage" style="display:none;">
+                <div class="clans-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#ffd700,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;">🏰 کلن‌ها</h2>
+                    <div id="clansContent"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- کلن صفحه -->
+            <div id="clanPage" style="display:none;">
+                <div class="clan-page-box">
+                    <button class="back-btn" onclick="showClansPage()">↩ بازگشت</button>
+                    <div id="clanContent"></div>
+                    <button type="button" class="back-home-btn" onclick="showClansPage()">🔙 بازگشت به لیست کلن‌ها</button>
+                </div>
+            </div>
+
+            <!-- دستاوردها -->
+            <div id="achievementsPage" style="display:none;">
+                <div class="achievements-box" style="padding:24px 20px;width:100%;text-align:center;position:relative;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🏅 دستاوردها</h2>
+                    <div id="achievementsList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- رویدادها -->
+            <div id="eventsPage" style="display:none;">
+                <div class="events-box" style="padding:24px 20px;width:100%;text-align:center;position:relative;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#ff6b6b,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🎪 رویدادهای زنده</h2>
+                    <div id="eventsList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- صنایع دستی -->
+            <div id="craftPage" style="display:none;">
+                <div class="craft-box" style="padding:24px 20px;width:100%;text-align:center;position:relative;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#a8e063,#56ab2f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🔨 صنایع دستی</h2>
+                    <div id="craftList"></div>
+                    <div class="craft-inventory" id="craftInventory">
+                        <h4 style="color:#4facfe;font-size:14px;margin-bottom:6px;">📦 انبار شما</h4>
+                        <div id="inventoryItems"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- بازی‌های جدید -->
+            <div id="newGamesPage" style="display:none;">
+                <div class="newgames-box" style="padding:24px 20px;width:100%;text-align:center;position:relative;background:var(--card-bg);backdrop-filter:blur(24px);border-radius:28px;border:1px solid rgba(255,255,255,0.08);">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2 style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#64d8ff,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🎮 بازی‌های جدید</h2>
+                    <div id="newGamesList"></div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- جام جهانی -->
+            <div id="worldcupPage" style="display:none;">
+                <div class="worldcup-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>🌍 جام جهانی</h2>
+                    <div id="worldcupList"></div>
+                    <div class="worldcup-rankings" id="worldcupRankings">
+                        <h4 style="color:#ffd700;font-size:14px;margin-bottom:6px;">🏆 جدول رده‌بندی</h4>
+                        <div id="worldcupRankList"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
+            <!-- داشبورد مدیریت -->
+            <div id="adminDashboardPage" style="display:none;">
+                <div class="admin-dashboard-box">
+                    <button class="back-btn" onclick="goHome()">↩ بازگشت</button>
+                    <h2>📊 داشبورد مدیریت</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-card"><div class="stat-number" id="dashUsers">0</div><div class="stat-label">کاربران آنلاین</div></div>
+                        <div class="stat-card"><div class="stat-number" id="dashGames">0</div><div class="stat-label">بازی‌های فعال</div></div>
+                        <div class="stat-card"><div class="stat-number" id="dashTotal">0</div><div class="stat-label">کل کاربران</div></div>
+                        <div class="stat-card"><div class="stat-number" id="dashBanned">0</div><div class="stat-label">بن شده‌ها</div></div>
+                    </div>
+                    <div class="dashboard-chart">
+                        <h4 style="color:#4facfe;font-size:14px;text-align:center;margin-bottom:6px;">📈 فعالیت روزانه</h4>
+                        <div class="chart-bars" id="chartBars"></div>
+                    </div>
+                    <div class="dashboard-log" id="dashboardLog">
+                        <h4 style="color:rgba(255,255,255,0.4);font-size:12px;text-align:center;margin-bottom:6px;">📋 لاگ فعالیت‌ها</h4>
+                        <div id="logList"></div>
+                    </div>
+                    <button type="button" class="back-home-btn" onclick="goHome()">🔙 بازگشت به صفحه اصلی</button>
+                </div>
+            </div>
+
             <!-- ===== صفحه کارتون‌ها ===== -->
             <div id="cartoonsPage" style="display:none;">
                 <div class="cartoons-page">
@@ -3899,20 +3728,17 @@
                 </div>
             </div>
 
-            <!-- ===== بقیه صفحات (پنل‌ها، کلن‌ها و ...) ===== -->
-            <!-- به دلیل طولانی شدن کد، بخش‌های قبلی مثل پنل ادمین، کلن‌ها و ... در اینجا حذف شده‌اند، اما در نسخه کامل موجودند -->
-
         </div><!-- /mainContent -->
     </div><!-- /page-container -->
 
     <script>
         // ==========================================================
-        //  برف/گربه
+        //  برف
         // ==========================================================
-        function createSnowflakes(isCatEvent) {
+        function createSnowflakes() {
             const container = document.getElementById('snowflakes');
             container.innerHTML = '';
-            const flakes = isCatEvent ? ['🐱', '🐾', '🐱', '🐾', '🐈'] : ['❄', '❅', '❆', '✦'];
+            const flakes = ['❄', '❅', '❆', '✦'];
             for (let i = 0; i < 45; i++) {
                 const el = document.createElement('div');
                 el.className = 'snowflake';
@@ -3927,152 +3753,33 @@
         }
 
         // ==========================================================
-        //  آهنگ گربه
+        //  تم‌ها
         // ==========================================================
-        let catMusic = null;
-        let catMusicStarted = false;
+        let currentTheme = localStorage.getItem('theme') || 'dark';
 
-        function playCatMusic() {
-            if (catMusicStarted) return;
-            if (!catMusic) {
-                catMusic = new Audio();
-                catMusic.src = 'https://www.myinstants.com/media/sounds/nyan-cat.mp3';
-                catMusic.volume = 0.4;
-                catMusic.loop = true;
-                catMusic.onerror = function() {
-                    this.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3';
-                    this.load();
-                    if (!this.paused) this.play().catch(() => {});
-                };
-            }
-            catMusic.muted = true;
-            catMusic.play().then(() => {
-                catMusicStarted = true;
-                document.addEventListener('click', function unmute() {
-                    if (catMusic) {
-                        catMusic.muted = false;
-                        catMusic.volume = 0.4;
-                    }
-                    document.removeEventListener('click', unmute);
-                }, { once: true });
-            }).catch(() => {
-                document.addEventListener('click', function startManually() {
-                    if (!catMusicStarted && catMusic) {
-                        catMusic.muted = false;
-                        catMusic.play().then(() => { catMusicStarted = true; }).catch(() => {});
-                    }
-                    document.removeEventListener('click', startManually);
-                }, { once: true });
-            });
-        }
-
-        function stopCatMusic() {
-            if (catMusic) {
-                catMusic.pause();
-                catMusic.currentTime = 0;
-                catMusicStarted = false;
-            }
-        }
-
-        // ==========================================================
-        //  سیستم ایونت گربه (خلاصه)
-        // ==========================================================
-        const CAT_EVENT_KEY = 'catEventProgress';
-
-        function getCatEventProgress(username) {
-            const data = JSON.parse(localStorage.getItem(CAT_EVENT_KEY) || '{}');
-            if (!data[username]) {
-                data[username] = { gamesPlayed: 0, gamesWon: 0, coinsEarned: 0, claimed: { mission1: false, mission2: false,
-                        mission3: false } };
-                localStorage.setItem(CAT_EVENT_KEY, JSON.stringify(data));
-            }
-            return data[username];
-        }
-
-        function saveCatEventProgress(username, progress) {
-            const data = JSON.parse(localStorage.getItem(CAT_EVENT_KEY) || '{}');
-            data[username] = progress;
-            localStorage.setItem(CAT_EVENT_KEY, JSON.stringify(data));
-        }
-
-        function updateCatEventGames(username, won = false) {
-            const progress = getCatEventProgress(username);
-            progress.gamesPlayed++;
-            if (won) progress.gamesWon++;
-            const stats = getUserStats(username);
-            progress.coinsEarned = stats.earnedCoins || 0;
-            saveCatEventProgress(username, progress);
-            renderCatMissions(username);
-        }
-
-        function claimCatMission(username, missionId) {
-            const progress = getCatEventProgress(username);
-            if (progress.claimed[missionId]) return;
-            let rewardCoins = 0,
-                trophyCount = 0,
-                trophyType = '';
-            if (missionId === 'mission1' && progress.gamesPlayed >= 5) {
-                rewardCoins = 50;
-                trophyCount = 1;
-                trophyType = 'جام گربه‌ای';
-                progress.claimed.mission1 = true;
-            } else if (missionId === 'mission2' && progress.gamesWon >= 3) {
-                rewardCoins = 100;
-                trophyCount = 2;
-                trophyType = 'جام گربه‌ای';
-                progress.claimed.mission2 = true;
-            } else if (missionId === 'mission3' && progress.coinsEarned >= 100) {
-                rewardCoins = 150;
-                trophyCount = 1;
-                trophyType = 'جام نادر';
-                progress.claimed.mission3 = true;
+        function toggleTheme() {
+            const body = document.body;
+            if (currentTheme === 'dark') {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                currentTheme = 'light';
+            } else if (currentTheme === 'light') {
+                body.classList.remove('light');
+                body.classList.add('rainbow');
+                currentTheme = 'rainbow';
             } else {
-                alert('⚠️ هنوز ماموریت کامل نشده!');
-                return;
+                body.classList.remove('rainbow');
+                body.classList.add('dark');
+                currentTheme = 'dark';
             }
-            addUserCoins(username, rewardCoins);
-            updateCoinDisplay();
-            const currentTrophies = getTrophies(username);
-            setTrophies(username, currentTrophies + trophyCount);
-            saveCatEventProgress(username, progress);
-            alert(`🎉 تبریک! ${rewardCoins} سکه و ${trophyCount} عدد ${trophyType} دریافت کردید!`);
-            addLog(`${username} ماموریت ${missionId} ایونت گربه را کامل کرد`);
-            renderCatMissions(username);
-            updateTrophyDisplay();
+            localStorage.setItem('theme', currentTheme);
         }
-
-        function renderCatMissions(username) {
-            const container = document.getElementById('catMissionsContainer');
-            if (!container) return;
-            const progress = getCatEventProgress(username);
-            const missions = [
-                { id: 'mission1', label: '🐾 ۵ بازی انجام بده', target: 5, current: progress.gamesPlayed,
-                    reward: '۵۰ سکه + 🏅 جام گربه‌ای', claimed: progress.claimed.mission1 },
-                { id: 'mission2', label: '🏆 ۳ بازی ببر', target: 3, current: progress.gamesWon,
-                    reward: '۱۰۰ سکه + 🏅۲ جام گربه‌ای', claimed: progress.claimed.mission2 },
-                { id: 'mission3', label: '💰 ۱۰۰ سکه جمع کن', target: 100, current: progress.coinsEarned,
-                    reward: '۱۵۰ سکه + 🏆 جام نادر', claimed: progress.claimed.mission3 }
-            ];
-            let html = '';
-            missions.forEach(m => {
-                const done = m.current >= m.target;
-                const claimed = m.claimed;
-                html += `
-                            <div class="cat-event-mission">
-                                <span>${m.label} (${m.current}/${m.target})</span>
-                                <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                                    <span style="font-size:11px;color:#ffd700;">🎁 ${m.reward}</span>
-                                    <button class="claim-btn ${claimed ? 'done' : ''}" 
-                                            onclick="claimCatMission('${username}','${m.id}')" 
-                                            ${!done || claimed ? 'disabled' : ''}>
-                                        ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت' : '⏳ در حال انجام')}
-                                    </button>
-                                </span>
-                            </div>
-                        `;
-            });
-            container.innerHTML = html;
-        }
+        (function applyTheme() {
+            const body = document.body;
+            if (currentTheme === 'light') body.classList.add('light');
+            else if (currentTheme === 'rainbow') body.classList.add('rainbow');
+            else body.classList.add('dark');
+        })();
 
         // ==========================================================
         //  سیستم سکه، کاربران، جام‌ها
@@ -4101,11 +3808,6 @@
 
         function addUserCoins(username, amount) {
             setUserCoins(username, getUserCoins(username) + amount);
-            const stats = getUserStats(username);
-            const progress = getCatEventProgress(username);
-            progress.coinsEarned = stats.earnedCoins || 0;
-            saveCatEventProgress(username, progress);
-            renderCatMissions(username);
         }
 
         function removeUserCoins(username, amount) {
@@ -4215,7 +3917,7 @@
         }
 
         // ==========================================================
-        //  سیستم سطح و آمار (خلاصه)
+        //  سیستم سطح و آمار
         // ==========================================================
         function getUserLevel(username) {
             const users = getUsersData();
@@ -4289,7 +3991,6 @@
             else if (gameType === 'blackjack') updateMissionProgress(username, 'play_blackjack', 1);
             else if (gameType === 'guess') updateMissionProgress(username, 'play_guess', 1);
             else if (gameType === 'wheel') updateMissionProgress(username, 'wheel_spin', 1);
-            updateCatEventGames(username, isWin);
             if (isWin) addWorldcupScore(username, 10);
         }
 
@@ -4311,7 +4012,7 @@
         }
 
         // ==========================================================
-        //  سیستم لاگ و داشبورد (خلاصه)
+        //  سیستم لاگ و داشبورد
         // ==========================================================
         function getLogs() {
             try { return JSON.parse(localStorage.getItem('adminLogs') || '[]'); } catch { return []; }
@@ -4372,11 +4073,11 @@
             data.forEach((val, i) => {
                 const height = (val / max) * 100;
                 html += `
-                            <div class="chart-bar" style="height:${height}%;background:linear-gradient(180deg, ${['#4facfe','#f093fb','#ffd700','#ff6b6b','#2ecc71','#a8e063','#f5576c'][i]}, ${['#00f2fe','#fbc2eb','#f093fb','#ee5a24','#27ae60','#56ab2f','#f093fb'][i]});">
-                                <span class="bar-value">${val}</span>
-                                <span class="bar-label">${days[i]}</span>
-                            </div>
-                        `;
+                                <div class="chart-bar" style="height:${height}%;background:linear-gradient(180deg, ${['#4facfe','#f093fb','#ffd700','#ff6b6b','#2ecc71','#a8e063','#f5576c'][i]}, ${['#00f2fe','#fbc2eb','#f093fb','#ee5a24','#27ae60','#56ab2f','#f093fb'][i]});">
+                                    <span class="bar-value">${val}</span>
+                                    <span class="bar-label">${days[i]}</span>
+                                </div>
+                            `;
             });
             container.innerHTML = html;
         }
@@ -4508,7 +4209,7 @@
         }
 
         // ==========================================================
-        //  سیستم فروشگاه (خلاصه)
+        //  سیستم فروشگاه
         // ==========================================================
         function buySuperAdmin() {
             const username = document.getElementById('displayUsername').textContent.trim();
@@ -4586,7 +4287,7 @@
         }
 
         // ==========================================================
-        //  سیستم کلن (خلاصه)
+        //  سیستم کلن
         // ==========================================================
         const CLANS_KEY = 'clansData';
         const CLAN_MEMBERS_KEY = 'clanMembers';
@@ -4686,21 +4387,21 @@
                 const clan = clans[userClan];
                 if (clan) {
                     html += `
-                                <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
-                                    <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
-                                    <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">👁️ مشاهده</button>
-                                </div>
-                            `;
+                                    <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:12px;margin:8px 0 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                                        <span style="font-size:14px;color:#ffd700;">🌟 کلن شما: <strong>${clan.emoji} ${userClan}</strong></span>
+                                        <button onclick="showClanPage('${userClan}')" style="background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.15);padding:4px 16px;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;">👁️ مشاهده</button>
+                                    </div>
+                                `;
                 }
             }
             if (!userClan) {
                 html += `
-                            <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
-                                <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
-                                <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
-                                <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 ساخت (۵۰۰ سکه)</button>
-                            </div>
-                        `;
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
+                                    <input type="text" id="clanNameInput" placeholder="نام کلن..." style="flex:1;min-width:100px;padding:8px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:14px;" />
+                                    <input type="text" id="clanEmojiInput" placeholder="ایموجی" value="🏰" style="width:60px;padding:8px 4px;border-radius:12px;border:2px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#fff;text-align:center;font-size:18px;" />
+                                    <button onclick="createClanFromUI()" style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px 20px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">🚀 ساخت (۵۰۰ سکه)</button>
+                                </div>
+                            `;
             }
             if (clanNames.length === 0) {
                 html += `<div style="text-align:center;padding:30px 0;color:rgba(255,255,255,0.4);"><div style="font-size:48px;margin-bottom:12px;">🏰</div><div>هیچ کلنی ساخته نشده است!</div></div>`;
@@ -4710,30 +4411,30 @@
                     const clan = clans[name];
                     const isMember = getUserClan(username) === name;
                     html += `
-                                <div class="clan-item" onclick="showClanPage('${name}')" style="border:1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-                                        <div style="display:flex;align-items:center;gap:10px;">
-                                            <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
-                                            <div>
-                                                <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
-                                                <div style="font-size:12px;color:rgba(255,255,255,0.4);">
-                                                    <span>👑 ${clan.owner}</span>
-                                                    <span style="margin:0 6px;">•</span>
-                                                    <span>👥 ${clan.totalMembers || 0} عضو</span>
-                                                    <span style="margin:0 6px;">•</span>
-                                                    <span>🪙 ${clan.clanCoins || 0}</span>
+                                    <div class="clan-item" onclick="showClanPage('${name}')" style="border:1px solid ${isMember ? 'rgba(255,215,0,0.3)' : 'rgba(255,255,255,0.06)'};">
+                                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                                            <div style="display:flex;align-items:center;gap:10px;">
+                                                <span style="font-size:32px;">${clan.emoji || '🏰'}</span>
+                                                <div>
+                                                    <div style="font-size:18px;font-weight:700;color:#fff;">${name}</div>
+                                                    <div style="font-size:12px;color:rgba(255,255,255,0.4);">
+                                                        <span>👑 ${clan.owner}</span>
+                                                        <span style="margin:0 6px;">•</span>
+                                                        <span>👥 ${clan.totalMembers || 0} عضو</span>
+                                                        <span style="margin:0 6px;">•</span>
+                                                        <span>🪙 ${clan.clanCoins || 0}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div style="display:flex;gap:6px;align-items:center;">
-                                            <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
-                                                ${isMember ? '✅ عضو' : '🔹'}
-                                            </span>
-                                            ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
+                                            <div style="display:flex;gap:6px;align-items:center;">
+                                                <span style="font-size:12px;padding:2px 10px;border-radius:12px;background:${isMember ? 'rgba(46,204,113,0.15)' : 'rgba(255,215,0,0.1)'};color:${isMember ? '#2ecc71' : '#ffd700'};">
+                                                    ${isMember ? '✅ عضو' : '🔹'}
+                                                </span>
+                                                ${clan.owner === username ? '<span style="font-size:12px;color:#ffd700;">👑 مالک</span>' : ''}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
                 });
             }
             container.innerHTML = html;
@@ -4761,48 +4462,48 @@
             const container = document.getElementById('clanContent');
             if (!container) return;
             let html = `
-                        <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
-                        <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
-                        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
-                            <span>👑 ${clan.owner}</span>
-                            <span style="margin:0 8px;">•</span>
-                            <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
-                            <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                                <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
-                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
+                            <div style="font-size:48px;margin-bottom:8px;">${clan.emoji || '🏰'}</div>
+                            <h2 style="font-size:24px;font-weight:800;color:#ffd700;">${clanName}</h2>
+                            <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:12px;">
+                                <span>👑 ${clan.owner}</span>
+                                <span style="margin:0 8px;">•</span>
+                                <span>📅 ${new Date(clan.created).toLocaleDateString('fa-IR')}</span>
                             </div>
-                            <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                                <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
-                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
+                            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;">
+                                <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                                    <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.totalMembers || 0}</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);">اعضا</div>
+                                </div>
+                                <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                                    <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.clanCoins || 0}</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);">سکه کلن</div>
+                                </div>
+                                <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
+                                    <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
+                                </div>
                             </div>
-                            <div style="background:rgba(255,255,255,0.04);padding:10px;border-radius:12px;">
-                                <div style="font-size:22px;font-weight:800;color:#ffd700;">${clan.level || 1}</div>
-                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">سطح</div>
+                            <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
+                                <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
+                                ${members.map(m => `
+                                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
+                                            <span>${m} ${m === clan.owner ? '👑' : ''}</span>
+                                            ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
+                                        </div>
+                                    `).join('')}
                             </div>
-                        </div>
-                        <div style="text-align:right;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px;margin:8px 0;">
-                            <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px;">👥 اعضا (${members.length})</div>
-                            ${members.map(m => `
-                                    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:rgba(255,255,255,0.7);">
-                                        <span>${m} ${m === clan.owner ? '👑' : ''}</span>
-                                        ${isOwner && m !== clan.owner ? `<button onclick="kickFromClan('${clanName}','${m}')" style="background:rgba(255,107,107,0.15);color:#ff6b6b;border:none;padding:2px 10px;border-radius:8px;font-size:11px;cursor:pointer;">❌</button>` : ''}
-                                    </div>
-                                `).join('')}
-                        </div>
-                    `;
+                        `;
             if (!isMember) {
                 html += `<button onclick="joinClan('${clanName}')" style="width:100%;margin:6px 0;background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;border:none;padding:10px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;">🔗 پیوستن به کلن</button>`;
             } else {
                 html += `
-                            <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
-                                <div style="flex:1;min-width:120px;"><input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" /></div>
-                                <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">💰 کمک سکه</button>
-                            </div>
-                            ${!isOwner ? `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🚪 خروج از کلن</button>` :
-                            `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🗑️ حذف کلن</button>`}
-                        `;
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0;">
+                                    <div style="flex:1;min-width:120px;"><input type="number" id="donateAmount" min="10" value="50" placeholder="مقدار" style="width:100%;padding:8px;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;text-align:center;" /></div>
+                                    <button onclick="donateToClan('${clanName}', parseInt(document.getElementById('donateAmount').value))" style="flex:1;min-width:80px;background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:8px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;">💰 کمک سکه</button>
+                                </div>
+                                ${!isOwner ? `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.15);color:#ff6b6b;border:1px solid rgba(255,107,107,0.15);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🚪 خروج از کلن</button>` :
+                                `<button onclick="leaveClan('${clanName}')" style="width:100%;margin:4px 0;background:rgba(255,107,107,0.2);color:#ff6b6b;border:1px solid rgba(255,107,107,0.2);padding:8px;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;">🗑️ حذف کلن</button>`}
+                            `;
             }
             container.innerHTML = html;
             document.getElementById('clansPage').style.display = 'none';
@@ -4984,14 +4685,14 @@
             ACHIEVEMENTS.forEach(ach => {
                 const isUnlocked = unlocked.includes(ach.id);
                 html += `
-                            <div class="achievement-item ${isUnlocked ? 'unlocked' : 'locked'}">
-                                <div class="ach-info">
-                                    <span class="ach-name">${ach.icon} ${ach.name}</span>
-                                    <span class="ach-desc">${ach.desc}</span>
+                                <div class="achievement-item ${isUnlocked ? 'unlocked' : 'locked'}">
+                                    <div class="ach-info">
+                                        <span class="ach-name">${ach.icon} ${ach.name}</span>
+                                        <span class="ach-desc">${ach.desc}</span>
+                                    </div>
+                                    <span class="ach-status">${isUnlocked ? '✅' : '🔒'}</span>
                                 </div>
-                                <span class="ach-status">${isUnlocked ? '✅' : '🔒'}</span>
-                            </div>
-                        `;
+                            `;
             });
             container.innerHTML = html;
             const statAchievements = document.getElementById('statAchievements');
@@ -5032,16 +4733,16 @@
             let html = '';
             events.forEach(ev => {
                 html += `
-                            <div class="event-item ${ev.active ? 'active' : ''}">
-                                <div class="event-title">${ev.name}</div>
-                                <div class="event-desc">${ev.desc}</div>
-                                <div class="event-time">🕐 ${ev.time}</div>
-                                <div class="event-reward">🎁 جایزه: ${ev.reward}</div>
-                                <button class="event-btn ${ev.claimed ? 'done' : ''}" onclick="joinEvent('${ev.id}')" ${!ev.active || ev.claimed ? 'disabled' : ''}>
-                                    ${ev.claimed ? '✅ دریافت شد' : '🎯 شرکت'}
-                                </button>
-                            </div>
-                        `;
+                                <div class="event-item ${ev.active ? 'active' : ''}">
+                                    <div class="event-title">${ev.name}</div>
+                                    <div class="event-desc">${ev.desc}</div>
+                                    <div class="event-time">🕐 ${ev.time}</div>
+                                    <div class="event-reward">🎁 جایزه: ${ev.reward}</div>
+                                    <button class="event-btn ${ev.claimed ? 'done' : ''}" onclick="joinEvent('${ev.id}')" ${!ev.active || ev.claimed ? 'disabled' : ''}>
+                                        ${ev.claimed ? '✅ دریافت شد' : '🎯 شرکت'}
+                                    </button>
+                                </div>
+                            `;
             });
             container.innerHTML = html;
         }
@@ -5125,17 +4826,17 @@
             CRAFT_RECIPES.forEach(recipe => {
                 const has = crafts.includes(recipe.id);
                 html += `
-                            <div class="craft-item">
-                                <div class="craft-info">
-                                    <span class="craft-name">${recipe.emoji} ${recipe.name}</span>
-                                    <span class="craft-desc">${recipe.desc}</span>
-                                    <span class="craft-cost">💰 ${recipe.cost} سکه</span>
+                                <div class="craft-item">
+                                    <div class="craft-info">
+                                        <span class="craft-name">${recipe.emoji} ${recipe.name}</span>
+                                        <span class="craft-desc">${recipe.desc}</span>
+                                        <span class="craft-cost">💰 ${recipe.cost} سکه</span>
+                                    </div>
+                                    <button class="craft-btn ${has ? 'done' : ''}" onclick="craftItem('${username}','${recipe.id}')" ${has ? 'disabled' : ''}>
+                                        ${has ? '✅ ساخته شده' : '🔨 ساخت'}
+                                    </button>
                                 </div>
-                                <button class="craft-btn ${has ? 'done' : ''}" onclick="craftItem('${username}','${recipe.id}')" ${has ? 'disabled' : ''}>
-                                    ${has ? '✅ ساخته شده' : '🔨 ساخت'}
-                                </button>
-                            </div>
-                        `;
+                            `;
             });
             container.innerHTML = html;
             if (inventory) {
@@ -5168,15 +4869,15 @@
             let html = '';
             NEW_GAMES.forEach(game => {
                 html += `
-                            <div class="newgame-item" onclick="playNewGame('${game.id}')">
-                                <div class="ng-info">
-                                    <span class="ng-name">${game.emoji} ${game.name}</span>
-                                    <span class="ng-desc">${game.desc}</span>
+                                <div class="newgame-item" onclick="playNewGame('${game.id}')">
+                                    <div class="ng-info">
+                                        <span class="ng-name">${game.emoji} ${game.name}</span>
+                                        <span class="ng-desc">${game.desc}</span>
+                                    </div>
+                                    <span class="ng-emoji">${game.emoji}</span>
+                                    <button class="ng-btn">🎮 بازی</button>
                                 </div>
-                                <span class="ng-emoji">${game.emoji}</span>
-                                <button class="ng-btn">🎮 بازی</button>
-                            </div>
-                        `;
+                            `;
             });
             container.innerHTML = html;
         }
@@ -5204,7 +4905,6 @@
                 checkAchievements(username);
                 addLog(`${username} در بازی ${game.name} برنده شد`);
                 addExp(username, 5);
-                updateCatEventGames(username, true);
             } else {
                 alert(`😔 شما در بازی "${game.name}" باختید!`);
                 const stats = getUserStats(username);
@@ -5212,7 +4912,6 @@
                 stats.losses = (stats.losses || 0) + 1;
                 stats.spentCoins = (stats.spentCoins || 0) + 10;
                 setUserStats(username, stats);
-                updateCatEventGames(username, false);
             }
             updateProfileStatsUI(username);
         }
@@ -5250,15 +4949,15 @@
             data.events.forEach(ev => {
                 const joined = ev.participants && ev.participants.includes(username);
                 html += `
-                            <div class="worldcup-item">
-                                <div class="wc-title">${ev.name}</div>
-                                <div class="wc-desc">${ev.desc}</div>
-                                <div class="wc-prize">🎁 جایزه: ${ev.prize}</div>
-                                <button class="wc-btn ${joined ? 'done' : ''}" onclick="joinWorldcup('${ev.id}')" ${!ev.active || joined ? 'disabled' : ''}>
-                                    ${joined ? '✅ ثبت‌نام شده' : '📋 ثبت‌نام'}
-                                </button>
-                            </div>
-                        `;
+                                <div class="worldcup-item">
+                                    <div class="wc-title">${ev.name}</div>
+                                    <div class="wc-desc">${ev.desc}</div>
+                                    <div class="wc-prize">🎁 جایزه: ${ev.prize}</div>
+                                    <button class="wc-btn ${joined ? 'done' : ''}" onclick="joinWorldcup('${ev.id}')" ${!ev.active || joined ? 'disabled' : ''}>
+                                        ${joined ? '✅ ثبت‌نام شده' : '📋 ثبت‌نام'}
+                                    </button>
+                                </div>
+                            `;
             });
             container.innerHTML = html;
 
@@ -5271,12 +4970,12 @@
                     let rankHtml = '';
                     sorted.forEach(([user, score], idx) => {
                         rankHtml += `
-                                    <div class="rank-row">
-                                        <span class="rank-pos">#${idx + 1}</span>
-                                        <span>${user}</span>
-                                        <span class="rank-score">${score} امتیاز</span>
-                                    </div>
-                                `;
+                                        <div class="rank-row">
+                                            <span class="rank-pos">#${idx + 1}</span>
+                                            <span>${user}</span>
+                                            <span class="rank-score">${score} امتیاز</span>
+                                        </div>
+                                    `;
                     });
                     rankContainer.innerHTML = rankHtml;
                 }
@@ -5387,17 +5086,17 @@
                 const done = task.progress >= task.target;
                 const claimed = task.claimed;
                 html += `
-                            <div class="mission-item">
-                                <div class="mission-info">
-                                    <span class="mission-title">${task.name}</span>
-                                    <span class="mission-desc">${task.desc}</span>
-                                    <span class="mission-progress">پیشرفت: ${task.progress}/${task.target} | 🪙 ${task.reward} سکه</span>
+                                <div class="mission-item">
+                                    <div class="mission-info">
+                                        <span class="mission-title">${task.name}</span>
+                                        <span class="mission-desc">${task.desc}</span>
+                                        <span class="mission-progress">پیشرفت: ${task.progress}/${task.target} | 🪙 ${task.reward} سکه</span>
+                                    </div>
+                                    <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMissionReward('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''}>
+                                        ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}
+                                    </button>
                                 </div>
-                                <button class="mission-btn ${claimed ? 'done' : ''}" onclick="claimMissionReward('${username}','${task.id}')" ${!done || claimed ? 'disabled' : ''}>
-                                    ${claimed ? '✅ دریافت شد' : (done ? '🎁 دریافت جایزه' : '⏳ در حال انجام')}
-                                </button>
-                            </div>
-                        `;
+                            `;
             });
             container.innerHTML = html;
         }
@@ -5423,14 +5122,14 @@
                 const isSelf = username === currentUser;
                 const isHead = isHeadAdmin(username);
                 html += `
-                            <div class="tu-item ${isHead ? 'head' : ''}">
-                                <div class="tu-username ${isHead ? 'head' : ''}">${username} ${isHead ? '👑' : ''} <span style="font-size:14px;color:#ffd700;">🪙 ${coins}</span> <span style="font-size:14px;color:#4facfe;">🏆 ${trophies}</span></div>
-                                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                                    <input type="number" min="1" placeholder="تعداد" value="100" id="coinInput_${username}" style="flex:1;padding:6px 10px;border-radius:10px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:60px;width:80px;text-align:center;" />
-                                    <button class="tu-send-btn" onclick="sendCoinsTo('${username}')" ${isSelf ? 'disabled' : ''} style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 2px 12px rgba(255,215,0,0.2);">💰 دادن سکه</button>
+                                <div class="tu-item ${isHead ? 'head' : ''}">
+                                    <div class="tu-username ${isHead ? 'head' : ''}">${username} ${isHead ? '👑' : ''} <span style="font-size:14px;color:#ffd700;">🪙 ${coins}</span> <span style="font-size:14px;color:#4facfe;">🏆 ${trophies}</span></div>
+                                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                        <input type="number" min="1" placeholder="تعداد" value="100" id="coinInput_${username}" style="flex:1;padding:6px 10px;border-radius:10px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;outline:none;min-width:60px;width:80px;text-align:center;" />
+                                        <button class="tu-send-btn" onclick="sendCoinsTo('${username}')" ${isSelf ? 'disabled' : ''} style="background:linear-gradient(135deg,#ffd700,#f093fb);color:#1a1a3a;border:none;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 2px 12px rgba(255,215,0,0.2);">💰 دادن سکه</button>
+                                    </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
             });
             container.innerHTML = html;
         }
@@ -5458,7 +5157,7 @@
         }
 
         // ==========================================================
-        //  کد هدیه (حذف 1234 - فقط کد ایونت با ۲۵۰ سکه تا ۱۳:۵۰)
+        //  کد هدیه (حذف 1234)
         // ==========================================================
         const USED_GIFT_CODES_KEY = 'usedGiftCodes';
 
@@ -5499,40 +5198,6 @@
                 result.style.display = 'block';
                 textEl.textContent = '⚠️ لطفاً ابتدا وارد اکانت خود شوید.';
                 prizeEl.textContent = '';
-                return;
-            }
-
-            // کد ایونت گربه (۲۵۰ سکه - تا ۱۳:۵۰)
-            if (code.toLowerCase() === 'ایونت') {
-                const now = new Date();
-                const hour = now.getHours();
-                const minute = now.getMinutes();
-
-                if (hour > 13 || (hour === 13 && minute > 50)) {
-                    result.className = 'gift-result error';
-                    result.style.display = 'block';
-                    textEl.textContent = '⏰ کد هدیه منقضی شده است!';
-                    prizeEl.textContent = '🕐 این کد فقط تا ساعت ۱۳:۵۰ قابل استفاده است.';
-                    return;
-                }
-
-                if (hasUsedGiftCode(username, 'ایونت')) {
-                    result.className = 'gift-result error';
-                    result.style.display = 'block';
-                    textEl.textContent = '⚠️ کد هدیه را قبلاً استفاده کردید!';
-                    prizeEl.textContent = '';
-                    return;
-                }
-
-                addUserCoins(username, 250);
-                addUsedGiftCode(username, 'ایونت');
-                updateCoinDisplay();
-
-                result.className = 'gift-result success';
-                result.style.display = 'block';
-                textEl.textContent = '🎉 کد هدیه ایونت گربه با موفقیت اعمال شد!';
-                prizeEl.textContent = '🪙 +۲۵۰ سکه به حساب شما اضافه شد.';
-                addLog(`${username} کد هدیه ایونت را استفاده کرد`);
                 return;
             }
 
@@ -5601,44 +5266,6 @@
         }
 
         // ==========================================================
-        //  تایمر ایونت گربه (۲۴ ساعت)
-        // ==========================================================
-        let catEventEndTime = localStorage.getItem('catEventEndTime');
-        let catEventTimer = null;
-
-        function startCatEventTimer() {
-            if (!catEventEndTime) {
-                catEventEndTime = Date.now() + 24 * 60 * 60 * 1000;
-                localStorage.setItem('catEventEndTime', catEventEndTime);
-            }
-            updateCatTimer();
-            if (catEventTimer) clearInterval(catEventTimer);
-            catEventTimer = setInterval(updateCatTimer, 1000);
-        }
-
-        function updateCatTimer() {
-            const timerEl = document.getElementById('catTimer');
-            if (!timerEl) return;
-            const now = Date.now();
-            const remaining = parseInt(catEventEndTime) - now;
-            if (remaining <= 0) {
-                timerEl.textContent = '⏰ ایونت تمام شد!';
-                document.getElementById('catEventBanner').style.opacity = '0.5';
-                document.getElementById('catEventBanner').style.filter = 'grayscale(0.5)';
-                if (catEventTimer) clearInterval(catEventTimer);
-                localStorage.removeItem('catEventEndTime');
-                document.body.classList.remove('cat-event');
-                createSnowflakes(false);
-                stopCatMusic();
-                return;
-            }
-            const h = Math.floor(remaining / (60 * 60 * 1000));
-            const m = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
-            const s = Math.floor((remaining % (60 * 1000)) / 1000);
-            timerEl.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-
-        // ==========================================================
         //  ===== صفحه کارتون‌ها (باب اسفنجی) =====
         // ==========================================================
         const EPISODES = [
@@ -5655,31 +5282,27 @@
         ];
 
         let episodesVisible = false;
-        let currentPlayer = null;
 
         function toggleSpongeEpisodes() {
             const container = document.getElementById('episodesContainer');
             if (episodesVisible) {
                 container.classList.remove('show');
                 episodesVisible = false;
-                // بستن پلیر اگر باز است
                 closePlayer();
                 return;
             }
-            // ساخت لیست قسمت‌ها
             let html = '';
             EPISODES.forEach((ep, index) => {
                 html += `
-                            <div class="episode-item">
-                                <span class="ep-title">${ep.title}</span>
-                                <button class="ep-watch-btn" onclick="watchEpisode(${index})">▶️ تماشا</button>
-                            </div>
-                        `;
+                                <div class="episode-item">
+                                    <span class="ep-title">${ep.title}</span>
+                                    <button class="ep-watch-btn" onclick="watchEpisode(${index})">▶️ تماشا</button>
+                                </div>
+                            `;
             });
             container.innerHTML = html;
             container.classList.add('show');
             episodesVisible = true;
-            // اسکرول به لیست
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -5694,7 +5317,6 @@
             player.classList.add('show');
             closeBtn.classList.add('show');
 
-            // غیرفعال کردن دکمه تماشا برای این قسمت
             document.querySelectorAll('.ep-watch-btn').forEach((btn, i) => {
                 if (i === index) {
                     btn.textContent = '▶️ در حال پخش';
@@ -5707,7 +5329,6 @@
                 }
             });
 
-            // اسکرول به پلیر
             player.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
@@ -5720,7 +5341,6 @@
             player.classList.remove('show');
             closeBtn.classList.remove('show');
 
-            // فعال کردن دکمه‌های تماشا
             document.querySelectorAll('.ep-watch-btn').forEach(btn => {
                 btn.textContent = '▶️ تماشا';
                 btn.disabled = false;
@@ -5729,12 +5349,9 @@
         }
 
         function showCartoonsPage() {
-            // مخفی کردن بقیه صفحات
-            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage, #clansPage, #clanPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage, #worldcupPage, #adminDashboardPage').forEach(el => {
-                if (el) el.style.display = 'none';
-            });
+            document.querySelectorAll('#homePage, #menuPage, #gamePage, #adminPanel, #rankPage, #profilePage, #moderatorPanel, #countrySelectPage, #footballGamePage, #giftPage, #storePage, #ageSelectionPage, #createPassPage, #headAdminPanel, #shootingGamePage, #topUsersPage, #wheelPage, #blackjackPage, #missionsPage, #guessNumberPage, #clansPage, #clanPage, #achievementsPage, #eventsPage, #craftPage, #newGamesPage, #worldcupPage, #adminDashboardPage')
+                .forEach(el => { if (el) el.style.display = 'none'; });
             document.getElementById('cartoonsPage').style.display = 'flex';
-            // ریست کردن نمایش قسمت‌ها
             const container = document.getElementById('episodesContainer');
             container.classList.remove('show');
             episodesVisible = false;
@@ -5742,7 +5359,7 @@
         }
 
         // ==========================================================
-        //  توابع نمایش صفحات (بقیه)
+        //  توابع نمایش صفحات
         // ==========================================================
         function showPage(pageId) {
             const pages = ['homePage', 'menuPage', 'gamePage', 'adminPanel', 'rankPage', 'profilePage',
@@ -5784,16 +5401,6 @@
                 renderCountries();
                 drawWheel();
                 checkWheelAvailability();
-                const isCatEventActive = true;
-                if (isCatEventActive) {
-                    document.body.classList.add('cat-event');
-                    createSnowflakes(true);
-                    setTimeout(playCatMusic, 500);
-                    startCatEventTimer();
-                    renderCatMissions(username);
-                } else {
-                    createSnowflakes(false);
-                }
             }
             if (pageId === 'profilePage') loadProfile();
             if (pageId === 'storePage') updateStoreUI();
@@ -5932,7 +5539,7 @@
         }
 
         // ==========================================================
-        //  بازی فوتبال (با drag کامل - خلاصه)
+        //  بازی فوتبال
         // ==========================================================
         let footballState = {
             playerCountry: null,
@@ -6536,7 +6143,7 @@
         }
 
         // ==========================================================
-        //  بلک‌جک (اصلاح شده - خلاصه)
+        //  بلک‌جک
         // ==========================================================
         let bjState = { deck: [], playerHand: [], dealerHand: [], bet: 0, gameOver: false, isDealerTurn: false };
 
@@ -6924,7 +6531,7 @@
         }
 
         // ==========================================================
-        //  ورود، ثبت نام، خروج (خلاصه)
+        //  ورود، ثبت نام، خروج
         // ==========================================================
         function showAccountLoginPage() {
             document.getElementById('accountLoginPage').style.display = 'flex';
@@ -7428,15 +7035,15 @@
                     currentUser) || isHeadAdmin(currentUser));
                 const remaining = isBanned ? getBanRemainingTime(username) : null;
                 html += `
-                                <div class="ban-item ${isBanned ? 'banned' : ''}">
-                                    <div style="display:flex;align-items:center;gap:8px;">
-                                        <span style="font-size:18px;">${isBanned ? '🚫' : isHead ? '👑' : '👤'}</span>
-                                        <span style="font-weight:600;">${username} ${isHead ? '🌟' : ''}</span>
-                                        ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
+                                    <div class="ban-item ${isBanned ? 'banned' : ''}">
+                                        <div style="display:flex;align-items:center;gap:8px;">
+                                            <span style="font-size:18px;">${isBanned ? '🚫' : isHead ? '👑' : '👤'}</span>
+                                            <span style="font-weight:600;">${username} ${isHead ? '🌟' : ''}</span>
+                                            ${isBanned ? `<span style="font-size:11px;color:#ff6b6b;margin-right:8px;">(${remaining})</span>` : ''}
+                                        </div>
+                                        ${canBan ? `<button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}" style="background:${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};color:${isBanned ? '#2ecc71' : '#ff6b6b'};border:1px solid ${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};padding:3px 12px;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;">${isBanned ? '✅ آنبَن' : '🚫 بن ۴۸ساعته'}</button>` : `<span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>`}
                                     </div>
-                                    ${canBan ? `<button class="ban-btn ${isBanned ? 'unban' : ''}" onclick="${isBanned ? `unbanUserAction('${username}')` : `banUserAction('${username}')`}" style="background:${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};color:${isBanned ? '#2ecc71' : '#ff6b6b'};border:1px solid ${isBanned ? 'rgba(46,204,113,0.15)' : 'rgba(255,107,107,0.15)'};padding:3px 12px;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:none;">${isBanned ? '✅ آنبَن' : '🚫 بن ۴۸ساعته'}</button>` : `<span style="font-size:11px;color:rgba(255,255,255,0.3);">غیرقابل بن</span>`}
-                                </div>
-                            `;
+                                `;
             });
             container.innerHTML = html || '<div class="ban-empty" style="color:rgba(255,255,255,0.3);text-align:center;padding:12px;font-size:13px;">هیچ کاربری یافت نشد</div>';
         }
@@ -7537,7 +7144,7 @@
         });
 
         // ==========================================================
-        //  بارگذاری نهایی با تغییرات درخواستی
+        //  بارگذاری نهایی
         // ==========================================================
         window.addEventListener('load', function() {
             // بن دائمی
@@ -7580,13 +7187,13 @@
             // 3. کاربر "مسیحا" به کلن سیگماها اضافه شود
             addUserToClan('مسیحا', 'سیگماها');
 
-            // 4. کد هدیه 1234 در تابع checkGiftCode حذف شده (قبلاً انجام شد)
+            // 4. کد هدیه 1234 در تابع checkGiftCode حذف شده
 
             document.getElementById('loginAccountBtn').addEventListener('click', loginWithAccount);
             document.getElementById('registerBtn').addEventListener('click', registerAccount);
             document.getElementById('forgotPasswordBtn').addEventListener('click', forgotPassword);
 
-            // دکمه شروع با رویداد click و keydown در DOMContentLoaded اضافه شده، اما برای اطمینان دوباره:
+            // دکمه شروع
             const startBtn = document.getElementById('startBtn');
             if (startBtn) {
                 startBtn.addEventListener('click', function(e) {
@@ -7650,32 +7257,23 @@
                     renderCraftUI(saved);
                     renderNewGamesUI();
                     renderTopUsers();
+                    createSnowflakes();
                     addLog(`${saved} وارد شد`);
-                    const isCatEventActive = true;
-                    if (isCatEventActive) {
-                        document.body.classList.add('cat-event');
-                        createSnowflakes(true);
-                        setTimeout(playCatMusic, 500);
-                        startCatEventTimer();
-                        renderCatMissions(saved);
-                    } else {
-                        createSnowflakes(false);
-                    }
                 }, 800);
             } else {
                 showAccountLoginPage();
             }
         });
 
-        console.log('❄️ برفی نسخه ۳.۹ (با کارتون‌ها و باب‌اسفنجی)');
+        console.log('❄️ برفی نسخه ۴.۰ (بدون ایونت گربه)');
         console.log('✅ دکمه شروع با کلیک و کلید E کار می‌کند');
         console.log('✅ دکمه کارتون‌ها در صفحه اصلی و هدر اضافه شد');
-        console.log('✅ صفحه کارتون‌ها با دکمه باب‌اسفنجی و عکس');
-        console.log('✅ لیست کامل قسمت‌های جدید و قدیم باب‌اسفنجی');
+        console.log('✅ صفحه کارتون‌ها با باب‌اسفنجی و لیست کامل قسمت‌ها');
         console.log('✅ قابلیت تماشا با پلیر داخلی');
-        console.log('🐱 ایونت گربه ۲۴ ساعته');
-        console.log('🎁 کد هدیه "ایونت" با ۲۵۰ سکه تا ۱۳:۵۰');
-        console.log('🖱️ دکمه شروع همیشه کار می‌کند!');
+        console.log('✅ کد هدیه 1234 حذف شد');
+        console.log('✅ کاربر RwBBHC162x0o6i (کیا) به کلن سیگماها اضافه شد');
+        console.log('✅ کاربر مسیحا به کلن سیگماها اضافه شد');
+        console.log('✅ سکه اراد تریاکی به 1000 تنظیم شد');
     </script>
 </body>
 </html>
