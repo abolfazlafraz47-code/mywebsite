@@ -2,724 +2,588 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>⚡ NEXORA 3D</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⚡ NEXORA | 10 بازی</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Tahoma,Arial,sans-serif;
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+ font-family:Tahoma,Arial,sans-serif
 }
 
 body{
-    background:#03040a;
-    color:white;
-    overflow-x:hidden;
+ background:#03040a;
+ color:#fff;
+ min-height:100vh;
+ overflow-x:hidden
 }
 
-canvas{
-    display:block;
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-3;
+ background:
+ radial-gradient(circle at 15% 20%,#0066ff35,transparent 28%),
+ radial-gradient(circle at 85% 20%,#a000ff30,transparent 30%),
+ radial-gradient(circle at 50% 90%,#00ffd522,transparent 30%)
 }
 
-#gameCanvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:-2;
+.grid{
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ background-image:
+ linear-gradient(#fff1 1px,transparent 1px),
+ linear-gradient(90deg,#fff1 1px,transparent 1px);
+ background-size:45px 45px;
+ opacity:.15
 }
-
-.bg{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-    background:
-      radial-gradient(circle at 20% 20%,#0066ff22,transparent 30%),
-      radial-gradient(circle at 80% 30%,#a000ff20,transparent 30%);
-}
-
-/* HEADER */
 
 header{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-    height:75px;
-    z-index:20;
-    padding:0 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#03040acc;
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #ffffff10;
+ position:sticky;
+ top:0;
+ z-index:50;
+ height:72px;
+ padding:0 6%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ background:#03040add;
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid #fff1
 }
 
 .logo{
-    color:#00eaff;
-    font-size:25px;
-    font-weight:bold;
-    text-shadow:0 0 25px #00eaff;
+ color:#00eaff;
+ font-size:25px;
+ font-weight:bold;
+ text-shadow:0 0 25px #00eaff
 }
 
 nav{
-    display:flex;
-    gap:25px;
+ display:flex;
+ gap:25px
 }
 
 nav a{
-    color:#aaa;
-    text-decoration:none;
-    cursor:pointer;
-    transition:.3s;
+ color:#aaa;
+ text-decoration:none;
+ cursor:pointer
 }
 
 nav a:hover{
-    color:#00eaff;
+ color:#00eaff
 }
 
-.header-btn{
-    border:0;
-    padding:11px 18px;
-    border-radius:12px;
-    color:white;
-    cursor:pointer;
-    background:linear-gradient(135deg,#006aff,#9900ff);
-    box-shadow:0 0 25px #7300ff55;
+.headerBtn,.btn{
+ border:0;
+ border-radius:14px;
+ padding:13px 22px;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ background:linear-gradient(135deg,#006aff,#9700ff);
+ box-shadow:0 0 25px #6200ff44;
+ transition:.25s
 }
 
-/* HERO */
+.btn:hover,.headerBtn:hover{
+ transform:translateY(-4px) scale(1.03);
+ box-shadow:0 0 40px #7000ff66
+}
 
 .hero{
-    min-height:100vh;
-    padding:130px 20px 70px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+ min-height:650px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:90px 20px
 }
 
-.hero-content{
-    max-width:850px;
+.heroContent{
+ max-width:850px
 }
 
 .badge{
-    display:inline-block;
-    padding:10px 18px;
-    border-radius:50px;
-    color:#00eaff;
-    border:1px solid #00eaff44;
-    background:#00eaff0b;
-    margin-bottom:25px;
-    box-shadow:0 0 30px #00eaff12;
+ display:inline-block;
+ padding:9px 18px;
+ border-radius:50px;
+ color:#00eaff;
+ border:1px solid #00eaff44;
+ background:#00eaff0c;
+ margin-bottom:25px
 }
 
 h1{
-    font-size:clamp(45px,8vw,90px);
-    line-height:1.1;
-    margin-bottom:25px;
-    background:linear-gradient(90deg,#fff,#00eaff,#a000ff,#fff);
-    background-size:300%;
-    -webkit-background-clip:text;
-    color:transparent;
-    animation:gradient 5s linear infinite;
+ font-size:clamp(45px,8vw,90px);
+ line-height:1.1;
+ margin-bottom:25px;
+ background:linear-gradient(90deg,#fff,#00eaff,#9d00ff,#fff);
+ background-size:300%;
+ -webkit-background-clip:text;
+ color:transparent;
+ animation:gradient 5s linear infinite
 }
 
 .hero p{
-    color:#aaa;
-    line-height:2;
-    font-size:17px;
-    margin-bottom:35px;
+ color:#999;
+ line-height:2;
+ font-size:17px;
+ margin-bottom:35px
 }
-
-.buttons{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-}
-
-.btn{
-    position:relative;
-    overflow:hidden;
-    padding:16px 30px;
-    border-radius:16px;
-    border:0;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.btn:active{
-    transform:scale(.93);
-}
-
-.primary{
-    background:linear-gradient(135deg,#006aff,#9900ff);
-    box-shadow:0 0 35px #006aff55;
-}
-
-.primary:hover{
-    transform:translateY(-5px) scale(1.03);
-    box-shadow:0 0 50px #8700ff66;
-}
-
-.secondary{
-    background:#ffffff0a;
-    border:1px solid #ffffff18;
-}
-
-.secondary:hover{
-    transform:translateY(-5px);
-    border-color:#00eaff77;
-}
-
-/* GAME SECTION */
 
 .games{
-    position:relative;
-    padding:100px 6%;
-    background:linear-gradient(#03040a00,#03040af2 15%,#03040aff);
+ padding:90px 6%;
+ background:linear-gradient(#03040a00,#03040aff 15%)
 }
 
 .title{
-    text-align:center;
-    margin-bottom:45px;
+ text-align:center;
+ margin-bottom:45px
 }
 
 .title h2{
-    font-size:38px;
-    margin-bottom:12px;
+ font-size:38px;
+ margin-bottom:12px
 }
 
 .title p{
-    color:#777;
+ color:#777
 }
 
-.game-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
+.gameGrid{
+ max-width:1200px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:18px
 }
 
-.game-card{
-    position:relative;
-    min-height:300px;
-    padding:28px;
-    border-radius:27px;
-    overflow:hidden;
-    cursor:pointer;
-    background:
-      linear-gradient(145deg,#ffffff0e,#ffffff04);
-    border:1px solid #ffffff12;
-    transition:.35s;
+.game{
+ position:relative;
+ min-height:245px;
+ padding:24px;
+ border-radius:23px;
+ overflow:hidden;
+ background:#ffffff08;
+ border:1px solid #ffffff12;
+ cursor:pointer;
+ transition:.35s
 }
 
-.game-card:hover{
-    transform:translateY(-12px) perspective(700px) rotateX(3deg);
-    border-color:#00eaff66;
-    box-shadow:0 25px 70px #006aff22;
+.game:hover{
+ transform:translateY(-10px) scale(1.02);
+ border-color:#00eaff66;
+ box-shadow:0 20px 60px #006aff22
 }
 
-.game-icon{
-    font-size:65px;
-    margin-bottom:20px;
-    filter:drop-shadow(0 0 20px #00eaff55);
+.gameIcon{
+ font-size:55px;
+ margin-bottom:15px
 }
 
-.game-card h3{
-    font-size:24px;
-    margin-bottom:12px;
+.game h3{
+ font-size:19px;
+ margin-bottom:10px
 }
 
-.game-card p{
-    color:#888;
-    line-height:1.8;
+.game p{
+ color:#888;
+ line-height:1.7;
+ font-size:13px
 }
 
 .play{
-    position:absolute;
-    bottom:25px;
-    right:25px;
-    left:25px;
-    padding:13px;
-    border:0;
-    border-radius:13px;
-    color:white;
-    cursor:pointer;
-    background:linear-gradient(90deg,#006aff,#9b00ff);
+ position:absolute;
+ bottom:18px;
+ right:18px;
+ left:18px;
+ padding:11px;
+ border:0;
+ border-radius:11px;
+ color:white;
+ cursor:pointer;
+ background:linear-gradient(90deg,#006aff,#9700ff)
 }
 
-/* STATS */
-
 .stats{
-    max-width:1100px;
-    margin:60px auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+ max-width:1000px;
+ margin:40px auto;
+ padding:0 20px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px
 }
 
 .stat{
-    padding:28px;
-    text-align:center;
-    border-radius:20px;
-    background:#ffffff07;
-    border:1px solid #ffffff0c;
+ text-align:center;
+ padding:25px;
+ border-radius:20px;
+ background:#ffffff07;
+ border:1px solid #ffffff0d
 }
 
 .stat strong{
-    display:block;
-    color:#00eaff;
-    font-size:30px;
-    margin-bottom:10px;
-    text-shadow:0 0 20px #00eaff;
+ display:block;
+ font-size:30px;
+ color:#00eaff;
+ margin-bottom:8px
 }
 
 .stat span{
-    color:#777;
+ color:#777
 }
 
-/* MODAL */
-
 .modal{
-    position:fixed;
-    inset:0;
-    z-index:100;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:#000000cc;
-    backdrop-filter:blur(14px);
+ position:fixed;
+ inset:0;
+ z-index:100;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+ background:#000000cc;
+ backdrop-filter:blur(12px)
 }
 
 .modal.show{
-    display:flex;
+ display:flex
 }
 
-.modal-box{
-    position:relative;
-    width:min(850px,100%);
-    max-height:90vh;
-    overflow:auto;
-    padding:30px;
-    border-radius:28px;
-    background:#080914f5;
-    border:1px solid #00eaff33;
-    box-shadow:0 0 100px #006aff22;
-    animation:popup .3s;
+.box{
+ width:min(1000px,100%);
+ max-height:94vh;
+ overflow:auto;
+ position:relative;
+ padding:25px;
+ border-radius:25px;
+ background:#080a13f7;
+ border:1px solid #00eaff33;
+ box-shadow:0 0 100px #006aff22
 }
 
 .close{
-    position:absolute;
-    top:15px;
-    left:15px;
-    width:40px;
-    height:40px;
-    border:0;
-    border-radius:50%;
-    color:white;
-    background:#ffffff0d;
-    cursor:pointer;
-    font-size:22px;
+ position:absolute;
+ top:12px;
+ left:12px;
+ width:40px;
+ height:40px;
+ border:0;
+ border-radius:50%;
+ background:#ffffff0d;
+ color:#fff;
+ font-size:22px;
+ cursor:pointer;
+ z-index:5
 }
 
-.modal-title{
-    text-align:center;
-    color:#00eaff;
-    font-size:28px;
-    margin-bottom:25px;
+.gameTitle{
+ text-align:center;
+ color:#00eaff;
+ font-size:27px;
+ margin-bottom:18px
 }
 
-/* 3D GAME */
-
-#threeGame{
-    position:relative;
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    border-radius:22px;
-    background:#02030a;
-    border:1px solid #00eaff33;
+#gameArea{
+ position:relative;
+ width:100%;
+ height:520px;
+ border-radius:20px;
+ overflow:hidden;
+ background:#02030a;
+ border:1px solid #ffffff12
 }
 
-#threeCanvas{
-    width:100%;
-    height:100%;
+#gameCanvas{
+ width:100%;
+ height:100%;
+ display:block
 }
 
 .hud{
-    position:absolute;
-    top:15px;
-    right:15px;
-    left:15px;
-    display:flex;
-    justify-content:space-between;
-    pointer-events:none;
+ position:absolute;
+ top:12px;
+ right:12px;
+ left:12px;
+ display:flex;
+ justify-content:space-between;
+ pointer-events:none;
+ z-index:4
 }
 
-.hud-box{
-    padding:10px 15px;
-    border-radius:12px;
-    background:#00000099;
-    border:1px solid #ffffff18;
-    backdrop-filter:blur(10px);
+.hud span{
+ padding:9px 14px;
+ border-radius:12px;
+ background:#0009;
+ border:1px solid #fff2;
+ backdrop-filter:blur(10px)
 }
 
 .controls{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-top:15px;
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ margin-top:12px;
+ flex-wrap:wrap
 }
 
 .control{
-    width:65px;
-    height:55px;
-    border:0;
-    border-radius:15px;
-    color:white;
-    font-size:22px;
-    background:#ffffff0d;
-    border:1px solid #ffffff15;
-    cursor:pointer;
+ min-width:65px;
+ height:50px;
+ border:0;
+ border-radius:13px;
+ background:#ffffff0d;
+ color:#fff;
+ border:1px solid #ffffff12;
+ font-size:20px;
+ cursor:pointer
 }
 
 .control:active{
-    transform:scale(.9);
-    background:#00eaff22;
+ transform:scale(.9);
+ background:#00eaff22
 }
 
-/* CHALLENGES */
-
-.challenge{
-    padding:18px;
-    margin-bottom:12px;
-    border-radius:17px;
-    background:#ffffff07;
-    border:1px solid #ffffff0d;
+.help{
+ text-align:center;
+ color:#777;
+ margin-top:10px;
+ font-size:13px
 }
-
-.challenge b{
-    display:block;
-    margin-bottom:8px;
-}
-
-.challenge span{
-    color:#888;
-    font-size:13px;
-}
-
-.progress{
-    height:7px;
-    margin-top:13px;
-    border-radius:10px;
-    background:#ffffff0c;
-    overflow:hidden;
-}
-
-.progress div{
-    height:100%;
-    background:linear-gradient(90deg,#00eaff,#9b00ff);
-}
-
-/* TOAST */
 
 .toast{
-    position:fixed;
-    z-index:300;
-    bottom:25px;
-    right:50%;
-    transform:translate(50%,120px);
-    padding:15px 22px;
-    border-radius:15px;
-    background:#10111cf5;
-    border:1px solid #00eaff44;
-    box-shadow:0 0 30px #00eaff22;
-    transition:.4s;
+ position:fixed;
+ bottom:25px;
+ right:50%;
+ transform:translate(50%,120px);
+ padding:14px 20px;
+ border-radius:14px;
+ background:#10121cf7;
+ border:1px solid #00eaff44;
+ z-index:300;
+ transition:.4s
 }
 
 .toast.show{
-    transform:translate(50%,0);
+ transform:translate(50%,0)
 }
 
 footer{
-    text-align:center;
-    padding:40px;
-    color:#555;
-    background:#03040a;
+ padding:40px;
+ text-align:center;
+ color:#555;
+ border-top:1px solid #ffffff0c
 }
-
-/* ANIMATION */
 
 @keyframes gradient{
-    0%{background-position:0}
-    100%{background-position:300%}
+ 0%{background-position:0}
+ 100%{background-position:300%}
 }
 
-@keyframes popup{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
+@media(max-width:1000px){
+ .gameGrid{
+  grid-template-columns:repeat(2,1fr)
+ }
 }
 
-/* MOBILE */
-
-@media(max-width:850px){
-
-    nav{
-        display:none;
-    }
-
-    .game-grid{
-        grid-template-columns:1fr;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    header{
-        padding:0 18px;
-    }
-
-    #threeGame{
-        height:430px;
-    }
+@media(max-width:650px){
+ nav{
+  display:none
+ }
+ .gameGrid{
+  grid-template-columns:1fr
+ }
+ .stats{
+  grid-template-columns:1fr
+ }
+ #gameArea{
+  height:430px
+ }
+ header{
+  padding:0 18px
+ }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="gameCanvas"></canvas>
-<div class="bg"></div>
-
+<div class="grid"></div>
 
 <header>
+ <div class="logo">⚡ NEXORA</div>
 
-    <div class="logo">⚡ NEXORA</div>
+ <nav>
+  <a onclick="scrollGames()">🎮 بازی‌ها</a>
+  <a onclick="showChallenges()">🔥 چالش‌ها</a>
+  <a onclick="showRank()">👑 رتبه‌بندی</a>
+ </nav>
 
-    <nav>
-        <a onclick="scrollToGames()">🎮 بازی‌ها</a>
-        <a onclick="openChallenges()">🔥 چالش‌ها</a>
-        <a onclick="openRanking()">👑 رتبه‌بندی</a>
-    </nav>
-
-    <button class="header-btn" onclick="openLogin()">
-        ورود 🚀
-    </button>
-
+ <button class="headerBtn" onclick="login()">
+ ورود 🚀
+ </button>
 </header>
 
 
 <section class="hero">
 
-    <div class="hero-content">
+ <div class="heroContent">
 
-        <div class="badge">
-            🔥 NEXORA 3D WORLD
-        </div>
+  <div class="badge">
+   🔥 NEXORA GAME WORLD
+  </div>
 
-        <h1>
-            دنیای جدید بازی
-        </h1>
+  <h1>
+   دنیای ۱۰ بازی متفاوت
+  </h1>
 
-        <p>
-            وارد دنیایی از بازی‌های هیجان‌انگیز شو،
-            رکورد بزن، XP بگیر و در جدول بهترین‌ها قرار بگیر.
-        </p>
+  <p>
+   هر بازی سبک، محیط، کنترل و هدف مخصوص خودش را دارد.
+   یکی را انتخاب کن و رکورد بزن!
+  </p>
 
-        <div class="buttons">
+  <button class="btn" onclick="scrollGames()">
+   🎮 مشاهده بازی‌ها
+  </button>
 
-            <button class="btn primary" onclick="scrollToGames()">
-                🎮 بازی‌ها
-            </button>
-
-            <button class="btn secondary" onclick="openChallenges()">
-                ⚡ چالش‌های امروز
-            </button>
-
-        </div>
-
-    </div>
+ </div>
 
 </section>
 
 
 <section class="games" id="games">
 
-    <div class="title">
-
-        <h2>🎮 بازی‌های NEXORA</h2>
-
-        <p>
-            یک بازی را انتخاب کن و وارد دنیای سه‌بعدی شو
-        </p>
-
-    </div>
+ <div class="title">
+  <h2>🎮 بازی‌ها</h2>
+  <p>هر کارت یک بازی متفاوت است</p>
+ </div>
 
 
-    <div class="game-grid">
+ <div class="gameGrid">
 
 
-        <div class="game-card" onclick="open3DGame('racer')">
-
-            <div class="game-icon">🏎️</div>
-
-            <h3>NEON RACER</h3>
-
-            <p>
-                در جاده نئونی حرکت کن و سکه‌ها را جمع کن.
-            </p>
-
-            <button class="play">
-                ▶ بازی کن
-            </button>
-
-        </div>
+  <div class="game" onclick="startGame(1)">
+   <div class="gameIcon">🏎️</div>
+   <h3>NEON RACER</h3>
+   <p>مسابقه بده و از موانع فرار کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
 
-        <div class="game-card" onclick="open3DGame('cube')">
-
-            <div class="game-icon">🧊</div>
-
-            <h3>3D CUBE</h3>
-
-            <p>
-                مکعب سه‌بعدی را کنترل کن و امتیاز بگیر.
-            </p>
-
-            <button class="play">
-                ▶ بازی کن
-            </button>
-
-        </div>
+  <div class="game" onclick="startGame(2)">
+   <div class="gameIcon">🚀</div>
+   <h3>SPACE ATTACK</h3>
+   <p>سفینه را کنترل کن و شهاب‌سنگ‌ها را نابود کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
 
-        <div class="game-card" onclick="open3DGame('runner')">
-
-            <div class="game-icon">🏃</div>
-
-            <h3>NEON RUN</h3>
-
-            <p>
-                از موانع عبور کن و تا جای ممکن زنده بمان.
-            </p>
-
-            <button class="play">
-                ▶ بازی کن
-            </button>
-
-        </div>
+  <div class="game" onclick="startGame(3)">
+   <div class="gameIcon">🏃</div>
+   <h3>NEON PARKOUR</h3>
+   <p>از روی سکوها بپر و سقوط نکن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
 
-        <div class="game-card" onclick="openChallenges()">
-
-            <div class="game-icon">🔥</div>
-
-            <h3>CHALLENGE</h3>
-
-            <p>
-                مأموریت‌های روزانه را کامل کن.
-            </p>
-
-            <button class="play">
-                ▶ مشاهده
-            </button>
-
-        </div>
+  <div class="game" onclick="startGame(4)">
+   <div class="gameIcon">🏀</div>
+   <h3>BASKET PRO</h3>
+   <p>توپ را نشانه بگیر و امتیاز بگیر.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
 
-        <div class="game-card" onclick="showToast('🎁 جایزه روزانه آماده است!')">
-
-            <div class="game-icon">🎁</div>
-
-            <h3>DAILY REWARD</h3>
-
-            <p>
-                جایزه روزانه خودت را دریافت کن.
-            </p>
-
-            <button class="play">
-                ▶ دریافت
-            </button>
-
-        </div>
+  <div class="game" onclick="startGame(5)">
+   <div class="gameIcon">🏹</div>
+   <h3>TARGET MASTER</h3>
+   <p>اهداف متحرک را هدف بگیر.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
 
-        <div class="game-card" onclick="openRanking()">
+  <div class="game" onclick="startGame(6)">
+   <div class="gameIcon">🏂</div>
+   <h3>SNOW RUSH</h3>
+   <p>در مسیر برفی حرکت کن و پرچم‌ها را رد کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
-            <div class="game-icon">👑</div>
 
-            <h3>LEADERBOARD</h3>
+  <div class="game" onclick="startGame(7)">
+   <div class="gameIcon">🧊</div>
+   <h3>CUBE PUZZLE</h3>
+   <p>مکعب را بچرخان و رنگ‌ها را مرتب کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
-            <p>
-                ببین چه کسی در صدر جدول قرار دارد.
-            </p>
 
-            <button class="play">
-                ▶ رتبه‌بندی
-            </button>
+  <div class="game" onclick="startGame(8)">
+   <div class="gameIcon">🏝️</div>
+   <h3>TREASURE ISLAND</h3>
+   <p>در جزیره بگرد و گنج را پیدا کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
 
-        </div>
 
-    </div>
+  <div class="game" onclick="startGame(9)">
+   <div class="gameIcon">🧟</div>
+   <h3>ZOMBIE ESCAPE</h3>
+   <p>از موجودات دوری کن و انرژی جمع کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
+
+
+  <div class="game" onclick="startGame(10)">
+   <div class="gameIcon">🏰</div>
+   <h3>CASTLE DEFENSE</h3>
+   <p>از قلعه خودت در برابر دشمنان دفاع کن.</p>
+   <button class="play">▶ بازی</button>
+  </div>
+
+ </div>
 
 </section>
 
 
 <div class="stats">
 
-    <div class="stat">
-        <strong id="online">12,847</strong>
-        <span>بازیکن آنلاین</span>
-    </div>
+ <div class="stat">
+  <strong id="online">12,847</strong>
+  <span>بازیکن آنلاین</span>
+ </div>
 
-    <div class="stat">
-        <strong>1,284,932</strong>
-        <span>کاربر</span>
-    </div>
+ <div class="stat">
+  <strong>10</strong>
+  <span>بازی</span>
+ </div>
 
-    <div class="stat">
-        <strong id="xp">0</strong>
-        <span>XP من</span>
-    </div>
+ <div class="stat">
+  <strong id="xp">0</strong>
+  <span>XP من</span>
+ </div>
 
 </div>
 
 
 <footer>
-    ⚡ NEXORA 3D © 2026
+ ⚡ NEXORA © 2026
 </footer>
 
 
-<!-- MODAL -->
-
 <div class="modal" id="modal">
 
-    <div class="modal-box">
+ <div class="box">
 
-        <button class="close" onclick="closeModal()">×</button>
+  <button class="close" onclick="closeGame()">×</button>
 
-        <div id="modalContent"></div>
+  <div id="modalContent"></div>
 
-    </div>
+ </div>
 
 </div>
 
@@ -727,789 +591,1814 @@ footer{
 <div class="toast" id="toast"></div>
 
 
-<!-- THREE.JS -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 
 <script>
 
-/* =========================
-   GLOBAL
-========================= */
-
-const modal =
-document.getElementById("modal");
-
-const modalContent =
-document.getElementById("modalContent");
-
-let XP = 0;
-
-let currentGame = null;
-
-let gameAnimation;
-
-
-/* =========================
-   MODAL
-========================= */
-
-function openModal(html){
-
-    modalContent.innerHTML = html;
-
-    modal.classList.add("show");
-
-}
-
-function closeModal(){
-
-    modal.classList.remove("show");
-
-    if(gameAnimation){
-
-        cancelAnimationFrame(gameAnimation);
-
-        gameAnimation = null;
-
-    }
-
-    currentGame = null;
-
-}
-
-modal.addEventListener("click",e=>{
-
-    if(e.target === modal){
-
-        closeModal();
-
-    }
-
-});
-
-
-/* =========================
-   SCROLL
-========================= */
-
-function scrollToGames(){
-
-    document
-    .getElementById("games")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function openLogin(){
-
-    openModal(`
-
-        <div class="modal-title">
-            🚀 ورود به NEXORA
-        </div>
-
-        <input
-        id="username"
-        class="input"
-        placeholder="نام کاربری"
-        style="
-        width:100%;
-        padding:15px;
-        margin-bottom:12px;
-        border-radius:12px;
-        background:#ffffff08;
-        border:1px solid #ffffff15;
-        color:white;
-        outline:none;
-        "
-        >
-
-        <input
-        id="password"
-        type="password"
-        class="input"
-        placeholder="رمز عبور"
-        style="
-        width:100%;
-        padding:15px;
-        margin-bottom:12px;
-        border-radius:12px;
-        background:#ffffff08;
-        border:1px solid #ffffff15;
-        color:white;
-        outline:none;
-        "
-        >
-
-        <button
-        class="btn primary"
-        style="width:100%"
-        onclick="login()">
-        ورود 🚀
-        </button>
-
-    `);
-
-}
-
-
-function login(){
-
-    let name =
-    document.getElementById("username").value;
-
-    if(!name){
-
-        showToast("⚠️ نام کاربری را وارد کن");
-
-        return;
-
-    }
-
-    closeModal();
-
-    showToast("🔥 خوش آمدی "+name+"!");
-
-}
-
-
-/* =========================
-   CHALLENGES
-========================= */
-
-function openChallenges(){
-
-    openModal(`
-
-        <div class="modal-title">
-            🔥 چالش‌های امروز
-        </div>
-
-        <div class="challenge">
-
-            <b>🎯 جمع کردن 10 سکه</b>
-
-            <span>
-                جایزه: +250 XP
-            </span>
-
-            <div class="progress">
-                <div style="width:70%"></div>
-            </div>
-
-        </div>
-
-        <div class="challenge">
-
-            <b>🏎️ بازی Neon Racer</b>
-
-            <span>
-                یک بار بازی را کامل کن
-            </span>
-
-            <div class="progress">
-                <div style="width:35%"></div>
-            </div>
-
-        </div>
-
-        <div class="challenge">
-
-            <b>👑 رکورد جدید</b>
-
-            <span>
-                رکورد خودت را بشکن
-            </span>
-
-            <div class="progress">
-                <div style="width:15%"></div>
-            </div>
-
-        </div>
-
-        <button
-        class="btn primary"
-        style="width:100%"
-        onclick="open3DGame('racer')">
-
-        🎮 شروع چالش
-
-        </button>
-
-    `);
-
-}
-
-
-/* =========================
-   RANKING
-========================= */
-
-function openRanking(){
-
-    openModal(`
-
-        <div class="modal-title">
-            👑 رتبه‌بندی جهانی
-        </div>
-
-        <div class="challenge">
-            🥇 ShadowX — 98,420 XP
-        </div>
-
-        <div class="challenge">
-            🥈 DarkWolf — 91,780 XP
-        </div>
-
-        <div class="challenge">
-            🥉 Lightning — 87,350 XP
-        </div>
-
-        <div class="challenge">
-            ⭐ Player — ${XP} XP
-        </div>
-
-    `);
-
-}
-
-
-/* =========================
-   3D GAME
-========================= */
-
-function open3DGame(type){
-
-    currentGame = type;
-
-    openModal(`
-
-        <div class="modal-title">
-            ${type==="racer"?"🏎️ NEON RACER":
-              type==="cube"?"🧊 3D CUBE":
-              "🏃 NEON RUN"}
-        </div>
-
-        <div id="threeGame">
-
-            <div class="hud">
-
-                <div class="hud-box">
-                    ⭐ امتیاز:
-                    <span id="gameScore">0</span>
-                </div>
-
-                <div class="hud-box">
-                    💎 سکه:
-                    <span id="gameCoins">0</span>
-                </div>
-
-            </div>
-
-            <canvas id="threeCanvas"></canvas>
-
-        </div>
-
-        <div class="controls">
-
-            <button class="control"
-            onclick="moveLeft()">⬅️</button>
-
-            <button class="control"
-            onclick="moveForward()">⬆️</button>
-
-            <button class="control"
-            onclick="moveBackward()">⬇️</button>
-
-            <button class="control"
-            onclick="moveRight()">➡️</button>
-
-        </div>
-
-    `);
-
-    setTimeout(()=>{
-
-        startThreeGame(type);
-
-    },100);
-
-}
-
-
-/* =========================
-   THREE GAME
-========================= */
+/* ==========================
+   VARIABLES
+========================== */
+
+const modal=document.getElementById("modal");
+const content=document.getElementById("modalContent");
+
+let animation=null;
+let gameRunning=false;
 
 let scene;
 let camera;
 let renderer;
+
 let player;
-let coins=[];
-let obstacles=[];
+
+let objects=[];
+
 let score=0;
-let coinCount=0;
+let coins=0;
+let xp=0;
+
+let gameType=0;
+
 let keys={};
 
-function startThreeGame(type){
 
-    const canvas =
-    document.getElementById("threeCanvas");
+/* ==========================
+   BASIC
+========================== */
 
-    scene =
-    new THREE.Scene();
+function scrollGames(){
 
-    scene.background =
-    new THREE.Color(0x02030a);
-
-    camera =
-    new THREE.PerspectiveCamera(
-        65,
-        canvas.clientWidth/canvas.clientHeight,
-        .1,
-        1000
-    );
-
-    renderer =
-    new THREE.WebGLRenderer({
-        canvas:canvas,
-        antialias:true
-    });
-
-    renderer.setSize(
-        canvas.clientWidth,
-        canvas.clientHeight
-    );
-
-    renderer.setPixelRatio(
-        Math.min(window.devicePixelRatio,2)
-    );
-
-
-    /* نور */
-
-    const ambient =
-    new THREE.AmbientLight(
-        0xffffff,
-        .7
-    );
-
-    scene.add(ambient);
-
-
-    const light =
-    new THREE.PointLight(
-        0x00eaff,
-        4,
-        100
-    );
-
-    light.position.set(
-        0,10,5
-    );
-
-    scene.add(light);
-
-
-    /* زمین */
-
-    const groundGeometry =
-    new THREE.PlaneGeometry(
-        80,80
-    );
-
-    const groundMaterial =
-    new THREE.MeshStandardMaterial({
-        color:0x080b15,
-        roughness:.7
-    });
-
-    const ground =
-    new THREE.Mesh(
-        groundGeometry,
-        groundMaterial
-    );
-
-    ground.rotation.x =
-    -Math.PI/2;
-
-    scene.add(ground);
-
-
-    /* خطوط نئون */
-
-    for(let i=-40;i<=40;i+=4){
-
-        const geo =
-        new THREE.BoxGeometry(
-            .04,.03,80
-        );
-
-        const mat =
-        new THREE.MeshBasicMaterial({
-            color:0x0066ff
-        });
-
-        const line =
-        new THREE.Mesh(geo,mat);
-
-        line.position.set(
-            i,.03,0
-        );
-
-        scene.add(line);
-
-    }
-
-
-    /* بازیکن */
-
-    const playerGeo =
-    new THREE.BoxGeometry(
-        1.5,.8,2
-    );
-
-    const playerMat =
-    new THREE.MeshStandardMaterial({
-        color:0x00eaff,
-        emissive:0x003344,
-        metalness:.7,
-        roughness:.25
-    });
-
-    player =
-    new THREE.Mesh(
-        playerGeo,
-        playerMat
-    );
-
-    player.position.set(
-        0,.5,5
-    );
-
-    scene.add(player);
-
-
-    /* سکه‌ها */
-
-    coins=[];
-
-    for(let i=0;i<18;i++){
-
-        const geo =
-        new THREE.TorusGeometry(
-            .35,.12,12,24
-        );
-
-        const mat =
-        new THREE.MeshStandardMaterial({
-            color:0xffd000,
-            emissive:0x996600,
-            metalness:.8
-        });
-
-        const coin =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-        coin.position.set(
-            (Math.random()*10)-5,
-            .8,
-            -(Math.random()*45)
-        );
-
-        coin.rotation.x =
-        Math.PI/2;
-
-        scene.add(coin);
-
-        coins.push(coin);
-
-    }
-
-
-    /* موانع */
-
-    obstacles=[];
-
-    for(let i=0;i<10;i++){
-
-        const geo =
-        new THREE.BoxGeometry(
-            1.5,1.5,1.5
-        );
-
-        const mat =
-        new THREE.MeshStandardMaterial({
-            color:0x9b00ff,
-            emissive:0x220033
-        });
-
-        const obstacle =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-        obstacle.position.set(
-            (Math.random()*10)-5,
-            .75,
-            -(Math.random()*50)
-        );
-
-        scene.add(obstacle);
-
-        obstacles.push(obstacle);
-
-    }
-
-
-    camera.position.set(
-        0,5,10
-    );
-
-    camera.lookAt(
-        player.position
-    );
-
-
-    score=0;
-    coinCount=0;
-
-    animate3D();
+ document.getElementById("games")
+ .scrollIntoView({behavior:"smooth"});
 
 }
 
 
-/* =========================
-   ANIMATION
-========================= */
+function showToast(text){
 
-function animate3D(){
+ const t=document.getElementById("toast");
 
-    if(!currentGame) return;
+ t.textContent=text;
 
-    gameAnimation =
-    requestAnimationFrame(
-        animate3D
+ t.classList.add("show");
+
+ setTimeout(()=>{
+  t.classList.remove("show");
+ },2500);
+
+}
+
+
+function closeGame(){
+
+ gameRunning=false;
+
+ if(animation){
+  cancelAnimationFrame(animation);
+  animation=null;
+ }
+
+ modal.classList.remove("show");
+
+}
+
+
+function addXP(n){
+
+ xp+=n;
+
+ document.getElementById("xp").textContent=
+ xp.toLocaleString();
+
+}
+
+
+/* ==========================
+   START GAME
+========================== */
+
+function startGame(type){
+
+ gameType=type;
+
+ const names=[
+  "",
+  "🏎️ NEON RACER",
+  "🚀 SPACE ATTACK",
+  "🏃 NEON PARKOUR",
+  "🏀 BASKET PRO",
+  "🏹 TARGET MASTER",
+  "🏂 SNOW RUSH",
+  "🧊 CUBE PUZZLE",
+  "🏝️ TREASURE ISLAND",
+  "🧟 ZOMBIE ESCAPE",
+  "🏰 CASTLE DEFENSE"
+ ];
+
+ content.innerHTML=`
+
+ <div class="gameTitle">
+ ${names[type]}
+ </div>
+
+ <div id="gameArea">
+
+  <div class="hud">
+   <span>⭐ امتیاز: <b id="score">0</b></span>
+   <span>💎 XP: <b id="gameXP">0</b></span>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+
+ </div>
+
+ <div id="controls" class="controls"></div>
+
+ <div class="help" id="help"></div>
+ `;
+
+ modal.classList.add("show");
+
+ setTimeout(()=>{
+
+  createGame(type);
+
+ },80);
+
+}
+
+
+/* ==========================
+   THREE SETUP
+========================== */
+
+function setup3D(){
+
+ const canvas=document.getElementById("gameCanvas");
+
+ const area=document.getElementById("gameArea");
+
+ scene=new THREE.Scene();
+
+ renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true
+ });
+
+ renderer.setSize(
+  area.clientWidth,
+  area.clientHeight
+ );
+
+ renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio,2)
+ );
+
+ camera=new THREE.PerspectiveCamera(
+  65,
+  area.clientWidth/area.clientHeight,
+  .1,
+  1000
+ );
+
+ scene.add(
+  new THREE.AmbientLight(
+   0xffffff,
+   .8
+  )
+ );
+
+ const light=new THREE.PointLight(
+  0x00eaff,
+  5,
+  100
+ );
+
+ light.position.set(0,10,8);
+
+ scene.add(light);
+
+ objects=[];
+
+}
+
+
+/* ==========================
+   CREATE GAME
+========================== */
+
+function createGame(type){
+
+ score=0;
+ coins=0;
+ gameRunning=true;
+
+ updateScore();
+
+ if(type===1) racer();
+ if(type===2) space();
+ if(type===3) parkour();
+ if(type===4) basket();
+ if(type===5) target();
+ if(type===6) snow();
+ if(type===7) cubePuzzle();
+ if(type===8) island();
+ if(type===9) zombie();
+ if(type===10) defense();
+
+}
+
+
+/* ==========================
+   1 RACER
+========================== */
+
+function racer(){
+
+ setup3D();
+
+ const ground=new THREE.Mesh(
+  new THREE.PlaneGeometry(30,100),
+  new THREE.MeshStandardMaterial({
+   color:0x080b15
+  })
+ );
+
+ ground.rotation.x=-Math.PI/2;
+
+ scene.add(ground);
+
+
+ player=new THREE.Mesh(
+  new THREE.BoxGeometry(1.5,.6,2.5),
+  new THREE.MeshStandardMaterial({
+   color:0x00eaff,
+   emissive:0x003344
+  })
+ );
+
+ player.position.y=.5;
+ player.position.z=7;
+
+ scene.add(player);
+
+
+ for(let i=0;i<15;i++){
+
+  const o=new THREE.Mesh(
+   new THREE.BoxGeometry(1.5,1.5,1.5),
+   new THREE.MeshStandardMaterial({
+    color:0x9900ff,
+    emissive:0x220033
+   })
+  );
+
+  o.position.set(
+   Math.random()*12-6,
+   .75,
+   -i*6
+  );
+
+  scene.add(o);
+  objects.push(o);
+
+ }
+
+ camera.position.set(0,5,12);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">⬅️</button>
+ <button class="control" onclick="press('up')">⬆️</button>
+ <button class="control" onclick="press('right')">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "با دکمه‌ها یا کلیدهای جهت حرکت کن.";
+
+ animateRacer();
+
+}
+
+
+function animateRacer(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateRacer
+ );
+
+ if(keys.left)
+  player.position.x-=.13;
+
+ if(keys.right)
+  player.position.x+=.13;
+
+ player.position.x=
+ Math.max(-6,Math.min(6,player.position.x));
+
+ objects.forEach(o=>{
+
+  o.position.z+=.12;
+
+  if(o.position.z>12){
+
+   o.position.z=-70;
+
+   o.position.x=Math.random()*12-6;
+
+   score+=10;
+
+   updateScore();
+
+  }
+
+  if(
+   Math.abs(o.position.x-player.position.x)<1.3 &&
+   Math.abs(o.position.z-player.position.z)<1.8
+  ){
+
+   score=Math.max(0,score-30);
+
+   o.position.z=-70;
+
+   showToast("💥 برخورد!");
+
+   updateScore();
+
+  }
+
+ });
+
+ camera.lookAt(player.position);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   2 SPACE
+========================== */
+
+function space(){
+
+ setup3D();
+
+ scene.background=new THREE.Color(0x000014);
+
+ const starGeo=new THREE.BufferGeometry();
+ const positions=[];
+
+ for(let i=0;i<700;i++){
+
+  positions.push(
+   Math.random()*80-40,
+   Math.random()*60-30,
+   Math.random()*-80
+  );
+
+ }
+
+ starGeo.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute(
+   positions,3
+  )
+ );
+
+ scene.add(
+  new THREE.Points(
+   starGeo,
+   new THREE.PointsMaterial({
+    color:0xffffff,
+    size:.08
+   })
+  )
+ );
+
+
+ player=new THREE.Mesh(
+  new THREE.ConeGeometry(
+   .7,2,4
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0x00eaff,
+   emissive:0x004455
+  })
+ );
+
+ player.rotation.x=Math.PI/2;
+
+ player.position.z=5;
+
+ scene.add(player);
+
+
+ for(let i=0;i<12;i++){
+
+  const a=new THREE.Mesh(
+   new THREE.IcosahedronGeometry(
+    .5+Math.random(),
+    1
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0x888888
+   })
+  );
+
+  a.position.set(
+   Math.random()*12-6,
+   Math.random()*8-4,
+   -i*7
+  );
+
+  scene.add(a);
+  objects.push(a);
+
+ }
+
+ camera.position.set(0,2,12);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">◀</button>
+ <button class="control" onclick="press('right')">▶</button>
+ <button class="control" onclick="shoot()">🚀 شلیک</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "سفینه را حرکت بده و با شلیک شهاب‌سنگ‌ها را نابود کن.";
+
+ animateSpace();
+
+}
+
+
+function shoot(){
+
+ objects.sort((a,b)=>
+  a.position.z-b.position.z
+ );
+
+ if(objects.length){
+
+  const a=objects[0];
+
+  a.position.z=-80;
+
+  score+=100;
+
+  addXP(100);
+
+  updateScore();
+
+  showToast("💥 هدف نابود شد!");
+
+ }
+
+}
+
+
+function animateSpace(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateSpace
+ );
+
+ if(keys.left)
+  player.position.x-=.15;
+
+ if(keys.right)
+  player.position.x+=.15;
+
+ player.position.x=
+ Math.max(-7,Math.min(7,player.position.x));
+
+ objects.forEach(a=>{
+
+  a.position.z+=.16;
+  a.rotation.x+=.02;
+  a.rotation.y+=.03;
+
+  if(a.position.z>10){
+
+   a.position.z=-80;
+   a.position.x=Math.random()*14-7;
+  }
+
+ });
+
+ camera.lookAt(0,0,-20);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   3 PARKOUR
+========================== */
+
+function parkour(){
+
+ setup3D();
+
+ const ground=new THREE.Mesh(
+  new THREE.BoxGeometry(30,.4,100),
+  new THREE.MeshStandardMaterial({
+   color:0x101522
+  })
+ );
+
+ ground.position.y=-.3;
+
+ scene.add(ground);
+
+
+ player=new THREE.Mesh(
+  new THREE.BoxGeometry(1,2,1),
+  new THREE.MeshStandardMaterial({
+   color:0x00eaff
+  })
+ );
+
+ player.position.set(0,1,5);
+
+ scene.add(player);
+
+
+ for(let i=0;i<12;i++){
+
+  const p=new THREE.Mesh(
+   new THREE.BoxGeometry(
+    3, .5, 3
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0x7800ff
+   })
+  );
+
+  p.position.set(
+   Math.random()*8-4,
+   Math.random()*4,
+   -i*6
+  );
+
+  scene.add(p);
+  objects.push(p);
+
+ }
+
+ camera.position.set(0,6,12);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">⬅️</button>
+ <button class="control" onclick="jump()">🆙 پرش</button>
+ <button class="control" onclick="press('right')">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "روی سکوها فرود بیا.";
+
+ animateParkour();
+
+}
+
+
+let velocityY=0;
+
+function jump(){
+
+ if(player.position.y<=1.1){
+
+  velocityY=.25;
+
+ }
+
+}
+
+
+function animateParkour(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateParkour
+ );
+
+ if(keys.left)
+  player.position.x-=.12;
+
+ if(keys.right)
+  player.position.x+=.12;
+
+ velocityY-=.012;
+
+ player.position.y+=velocityY;
+
+ if(player.position.y<1){
+
+  player.position.y=1;
+  velocityY=0;
+
+ }
+
+ objects.forEach(p=>{
+
+  p.position.z+=.06;
+
+  if(p.position.z>12){
+
+   p.position.z=-70;
+
+   p.position.x=Math.random()*8-4;
+
+   p.position.y=Math.random()*4;
+
+   score+=20;
+
+   updateScore();
+
+  }
+
+ });
+
+ camera.lookAt(
+  player.position.x,
+  1,
+  player.position.z-5
+ );
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   4 BASKET
+========================== */
+
+function basket(){
+
+ setup3D();
+
+ scene.background=new THREE.Color(0x07111d);
+
+ const floor=new THREE.Mesh(
+  new THREE.PlaneGeometry(30,30),
+  new THREE.MeshStandardMaterial({
+   color:0x111827
+  })
+ );
+
+ floor.rotation.x=-Math.PI/2;
+
+ scene.add(floor);
+
+
+ const hoop=new THREE.Mesh(
+  new THREE.TorusGeometry(
+   1,.12,16,32
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0xff5500,
+   emissive:0x441100
+  })
+ );
+
+ hoop.position.set(0,4,-6);
+
+ scene.add(hoop);
+
+
+ const ball=new THREE.Mesh(
+  new THREE.SphereGeometry(.5,24,24),
+  new THREE.MeshStandardMaterial({
+   color:0xff6600
+  })
+ );
+
+ ball.position.set(0,1,4);
+
+ scene.add(ball);
+
+ player=ball;
+
+ camera.position.set(0,4,10);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="aimLeft()">⬅️</button>
+ <button class="control" onclick="throwBall()">🏀 پرتاب</button>
+ <button class="control" onclick="aimRight()">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "توپ را به سمت حلقه پرتاب کن.";
+
+ animateBasket();
+
+}
+
+
+let ballFlight=false;
+let ballT=0;
+
+function throwBall(){
+
+ if(ballFlight)return;
+
+ ballFlight=true;
+ ballT=0;
+
+}
+
+function aimLeft(){
+
+ if(!ballFlight)
+  player.position.x-=.4;
+
+}
+
+function aimRight(){
+
+ if(!ballFlight)
+  player.position.x+=.4;
+
+}
+
+
+function animateBasket(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateBasket
+ );
+
+ if(ballFlight){
+
+  ballT+=.025;
+
+  player.position.z=
+   4-10*ballT;
+
+  player.position.y=
+   1+5*ballT-5*ballT*ballT;
+
+  if(ballT>=1){
+
+   ballFlight=false;
+
+   const success=
+   Math.abs(player.position.x)<1;
+
+   if(success){
+
+    score+=500;
+
+    addXP(500);
+
+    showToast("🏀 گل شد! +500");
+
+   }else{
+
+    showToast("❌ پرتاب ناموفق");
+
+   }
+
+   updateScore();
+
+   player.position.set(
+    0,1,4
+   );
+
+  }
+
+ }
+
+ camera.lookAt(0,2,-4);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   5 TARGET
+========================== */
+
+function target(){
+
+ setup3D();
+
+ scene.background=new THREE.Color(0x09030c);
+
+ camera.position.set(0,2,12);
+
+ for(let i=0;i<8;i++){
+
+  const t=new THREE.Mesh(
+   new THREE.CylinderGeometry(
+    .8,.8,.15,32
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0xff1744,
+    emissive:0x330011
+   })
+  );
+
+  t.rotation.x=Math.PI/2;
+
+  t.position.set(
+   Math.random()*10-5,
+   Math.random()*5-2,
+   -i*6
+  );
+
+  scene.add(t);
+  objects.push(t);
+
+ }
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="shootTarget()">🏹 شلیک</button>
+ <button class="control" onclick="moveAim(-1)">⬅️</button>
+ <button class="control" onclick="moveAim(1)">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "نشانه را روی اهداف ببر و شلیک کن.";
+
+ player=new THREE.Mesh(
+  new THREE.SphereGeometry(.15),
+  new THREE.MeshBasicMaterial({
+   color:0x00ffff
+  })
+ );
+
+ player.position.z=3;
+
+ scene.add(player);
+
+ animateTarget();
+
+}
+
+
+function moveAim(n){
+
+ player.position.x+=n*.5;
+
+}
+
+
+function shootTarget(){
+
+ let nearest=null;
+ let d=999;
+
+ objects.forEach(o=>{
+
+  const dist=
+   Math.abs(o.position.x-player.position.x)+
+   Math.abs(o.position.y-player.position.y);
+
+  if(dist<d){
+
+   d=dist;
+   nearest=o;
+
+  }
+
+ });
+
+ if(nearest && d<1.5){
+
+  nearest.position.z=-60;
+
+  score+=200;
+
+  addXP(200);
+
+  updateScore();
+
+  showToast("🎯 هدف زده شد!");
+
+ }else{
+
+  showToast("❌ خطا!");
+
+ }
+
+}
+
+
+function animateTarget(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateTarget
+ );
+
+ objects.forEach(t=>{
+
+  t.position.z+=.08;
+
+  t.position.x+=
+   Math.sin(Date.now()*.002+t.position.z)*.01;
+
+  if(t.position.z>8){
+
+   t.position.z=-60;
+   t.position.x=Math.random()*10-5;
+   t.position.y=Math.random()*5-2;
+
+  }
+
+ });
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   6 SNOW
+========================== */
+
+function snow(){
+
+ setup3D();
+
+ scene.background=new THREE.Color(0x061426);
+
+ const ground=new THREE.Mesh(
+  new THREE.PlaneGeometry(40,100),
+  new THREE.MeshStandardMaterial({
+   color:0xeefaff
+  })
+ );
+
+ ground.rotation.x=-Math.PI/2;
+
+ scene.add(ground);
+
+ player=new THREE.Mesh(
+  new THREE.BoxGeometry(1.4,.4,2.2),
+  new THREE.MeshStandardMaterial({
+   color:0x00aaff
+  })
+ );
+
+ player.position.set(0,.3,5);
+
+ scene.add(player);
+
+ for(let i=0;i<15;i++){
+
+  const flag=new THREE.Mesh(
+   new THREE.ConeGeometry(
+    .3,2,12
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0xff2255
+   })
+  );
+
+  flag.position.set(
+   Math.random()*10-5,
+   1,
+   -i*6
+  );
+
+  scene.add(flag);
+  objects.push(flag);
+
+ }
+
+ camera.position.set(0,5,11);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">⬅️</button>
+ <button class="control" onclick="press('right')">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "بین پرچم‌ها حرکت کن.";
+
+ animateSnow();
+
+}
+
+
+function animateSnow(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateSnow
+ );
+
+ if(keys.left)
+  player.position.x-=.15;
+
+ if(keys.right)
+  player.position.x+=.15;
+
+ player.position.x=
+ Math.max(-6,Math.min(6,player.position.x));
+
+ objects.forEach(f=>{
+
+  f.position.z+=.13;
+
+  if(f.position.z>10){
+
+   f.position.z=-80;
+
+   f.position.x=Math.random()*10-5;
+
+   score+=30;
+
+   updateScore();
+
+  }
+
+ });
+
+ camera.lookAt(player.position);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   7 CUBE PUZZLE
+========================== */
+
+function cubePuzzle(){
+
+ setup3D();
+
+ scene.background=new THREE.Color(0x080808);
+
+ const group=new THREE.Group();
+
+ const colors=[
+  0xff0000,
+  0x00ff00,
+  0x0000ff,
+  0xffff00,
+  0xff6600,
+  0xffffff
+ ];
+
+ for(let x=-1;x<=1;x++){
+
+  for(let y=-1;y<=1;y++){
+
+   for(let z=-1;z<=1;z++){
+
+    const c=new THREE.Mesh(
+     new THREE.BoxGeometry(.9,.9,.9),
+     new THREE.MeshStandardMaterial({
+      color:
+       colors[
+        Math.floor(
+         Math.random()*colors.length
+        )
+       ]
+     })
     );
 
-
-    /* چرخش سکه */
-
-    coins.forEach(c=>{
-
-        c.rotation.z += .05;
-
-    });
-
-
-    /* حرکت */
-
-    if(keys.left)
-        player.position.x -= .12;
-
-    if(keys.right)
-        player.position.x += .12;
-
-    if(keys.forward)
-        player.position.z -= .15;
-
-    if(keys.backward)
-        player.position.z += .15;
-
-
-    /* محدودیت */
-
-    player.position.x =
-    Math.max(
-        -6,
-        Math.min(6,player.position.x)
+    c.position.set(
+     x,y,z
     );
 
+    group.add(c);
 
-    /* حرکت خودکار دنیا */
+   }
 
-    obstacles.forEach(o=>{
+  }
 
-        o.position.z += .06;
+ }
 
-        if(o.position.z>12){
+ scene.add(group);
 
-            o.position.z=-50;
+ player=group;
 
-            o.position.x=
-            (Math.random()*10)-5;
+ camera.position.set(
+  4,4,6
+ );
 
-        }
+ camera.lookAt(group.position);
 
-    });
+ document.getElementById("controls").innerHTML=`
 
+ <button class="control" onclick="rotateCube('x')">↕️</button>
+ <button class="control" onclick="rotateCube('y')">↔️</button>
+ <button class="control" onclick="rotateCube('z')">🔄</button>
+ <button class="control" onclick="mixCube()">🎲 مخلوط</button>
+ `;
 
-    coins.forEach(c=>{
+ document.getElementById("help").textContent=
+ "مکعب را بچرخان.";
 
-        c.position.z += .06;
-
-        if(c.position.z>12){
-
-            c.position.z=-50;
-
-            c.position.x=
-            (Math.random()*10)-5;
-
-        }
-
-
-        const distance =
-        player.position.distanceTo(
-            c.position
-        );
-
-        if(distance<1.4){
-
-            coinCount++;
-
-            score+=100;
-
-            c.position.z=-50;
-
-            c.position.x=
-            (Math.random()*10)-5;
-
-            updateHUD();
-
-            addXP(100);
-
-        }
-
-    });
-
-
-    /* برخورد */
-
-    obstacles.forEach(o=>{
-
-        const distance =
-        player.position.distanceTo(
-            o.position
-        );
-
-        if(distance<1.3){
-
-            score=Math.max(
-                0,
-                score-50
-            );
-
-            o.position.z=-50;
-
-            showToast(
-                "💥 برخورد کردی! -50 امتیاز"
-            );
-
-            updateHUD();
-
-        }
-
-    });
-
-
-    /* دوربین */
-
-    camera.position.x +=
-    (player.position.x-camera.position.x)*.08;
-
-    camera.position.z +=
-    ((player.position.z+8)-camera.position.z)*.08;
-
-    camera.lookAt(
-        player.position.x,
-        0,
-        player.position.z-5
-    );
-
-
-    renderer.render(
-        scene,
-        camera
-    );
+ animateCube();
 
 }
 
 
-/* =========================
-   CONTROLS
-========================= */
+function rotateCube(axis){
 
-function moveLeft(){
+ player.rotation[axis]+=
+ Math.PI/4;
 
-    keys.left=true;
+ score+=50;
 
-    setTimeout(()=>{
-        keys.left=false;
-    },250);
+ addXP(50);
 
-}
-
-function moveRight(){
-
-    keys.right=true;
-
-    setTimeout(()=>{
-        keys.right=false;
-    },250);
-
-}
-
-function moveForward(){
-
-    keys.forward=true;
-
-    setTimeout(()=>{
-        keys.forward=false;
-    },250);
-
-}
-
-function moveBackward(){
-
-    keys.backward=true;
-
-    setTimeout(()=>{
-        keys.backward=false;
-    },250);
+ updateScore();
 
 }
 
 
-/* کیبورد */
+function mixCube(){
+
+ player.rotation.x=
+ Math.random()*Math.PI;
+
+ player.rotation.y=
+ Math.random()*Math.PI;
+
+ player.rotation.z=
+ Math.random()*Math.PI;
+
+ showToast("🧊 مکعب مخلوط شد!");
+
+}
+
+
+function animateCube(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateCube
+ );
+
+ player.rotation.y+=.003;
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   8 ISLAND
+========================== */
+
+function island(){
+
+ setup3D();
+
+ const ground=new THREE.Mesh(
+  new THREE.CylinderGeometry(
+   12,15,1,32
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0x225522
+  })
+ );
+
+ ground.position.y=-.5;
+
+ scene.add(ground);
+
+
+ player=new THREE.Mesh(
+  new THREE.BoxGeometry(1,1,1),
+  new THREE.MeshStandardMaterial({
+   color:0x00eaff
+  })
+ );
+
+ player.position.set(0,.5,4);
+
+ scene.add(player);
+
+
+ const treasure=new THREE.Mesh(
+  new THREE.BoxGeometry(
+   1.5,1,1
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0xffcc00,
+   emissive:0x553300
+  })
+ );
+
+ treasure.position.set(
+  Math.random()*14-7,
+  .5,
+  Math.random()*-10
+ );
+
+ scene.add(treasure);
+
+ objects.push(treasure);
+
+ camera.position.set(0,12,15);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">⬅️</button>
+ <button class="control" onclick="press('up')">⬆️</button>
+ <button class="control" onclick="press('down')">⬇️</button>
+ <button class="control" onclick="press('right')">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "جزیره را بگرد و صندوق گنج را پیدا کن.";
+
+ animateIsland();
+
+}
+
+
+function animateIsland(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateIsland
+ );
+
+ if(keys.left)
+  player.position.x-=.12;
+
+ if(keys.right)
+  player.position.x+=.12;
+
+ if(keys.up)
+  player.position.z-=.12;
+
+ if(keys.down)
+  player.position.z+=.12;
+
+ if(objects[0]){
+
+  objects[0].rotation.y+=.03;
+
+  if(
+   player.position.distanceTo(
+    objects[0].position
+   )<1.5
+  ){
+
+   score+=1000;
+
+   addXP(1000);
+
+   showToast("🏆 گنج پیدا شد! +1000");
+
+   objects[0].position.set(
+    Math.random()*14-7,
+    .5,
+    Math.random()*-12
+   );
+
+   updateScore();
+
+  }
+
+ }
+
+ camera.lookAt(player.position);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   9 ZOMBIE ESCAPE
+========================== */
+
+function zombie(){
+
+ setup3D();
+
+ const ground=new THREE.Mesh(
+  new THREE.PlaneGeometry(30,60),
+  new THREE.MeshStandardMaterial({
+   color:0x101010
+  })
+ );
+
+ ground.rotation.x=-Math.PI/2;
+
+ scene.add(ground);
+
+
+ player=new THREE.Mesh(
+  new THREE.BoxGeometry(
+   1,1.8,1
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0x00eaff
+  })
+ );
+
+ player.position.set(
+  0,.9,7
+ );
+
+ scene.add(player);
+
+
+ for(let i=0;i<8;i++){
+
+  const z=new THREE.Mesh(
+   new THREE.BoxGeometry(
+    1.2,1.8,1.2
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0x44aa44
+   })
+  );
+
+  z.position.set(
+   Math.random()*12-6,
+   .9,
+   -i*7
+  );
+
+  scene.add(z);
+  objects.push(z);
+
+ }
+
+ camera.position.set(0,6,13);
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="press('left')">⬅️</button>
+ <button class="control" onclick="press('up')">⬆️</button>
+ <button class="control" onclick="press('right')">➡️</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "از زامبی‌ها دور شو.";
+
+ animateZombie();
+
+}
+
+
+function animateZombie(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateZombie
+ );
+
+ if(keys.left)
+  player.position.x-=.13;
+
+ if(keys.right)
+  player.position.x+=.13;
+
+ if(keys.up)
+  player.position.z-=.15;
+
+ player.position.x=
+ Math.max(-7,Math.min(7,player.position.x));
+
+ objects.forEach(z=>{
+
+  z.position.z+=.08;
+
+  z.position.x+=
+   Math.sign(
+    player.position.x-z.position.x
+   )*.01;
+
+  if(
+   player.position.distanceTo(z.position)<1.4
+  ){
+
+   score=Math.max(0,score-100);
+
+   z.position.z=-60;
+
+   showToast("🧟 نزدیک بود!");
+
+   updateScore();
+
+  }
+
+ });
+
+ camera.lookAt(player.position);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   10 DEFENSE
+========================== */
+
+function defense(){
+
+ setup3D();
+
+ const floor=new THREE.Mesh(
+  new THREE.PlaneGeometry(30,30),
+  new THREE.MeshStandardMaterial({
+   color:0x171717
+  })
+ );
+
+ floor.rotation.x=-Math.PI/2;
+
+ scene.add(floor);
+
+
+ const castle=new THREE.Mesh(
+  new THREE.BoxGeometry(
+   3,4,3
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0x6666ff,
+   emissive:0x111144
+  })
+ );
+
+ castle.position.set(
+  0,2,5
+ );
+
+ scene.add(castle);
+
+ player=castle;
+
+
+ for(let i=0;i<10;i++){
+
+  const enemy=new THREE.Mesh(
+   new THREE.BoxGeometry(
+    1,1.5,1
+   ),
+   new THREE.MeshStandardMaterial({
+    color:0xff2244
+   })
+  );
+
+  enemy.position.set(
+   Math.random()*12-6,
+   .75,
+   -10-Math.random()*10
+  );
+
+  scene.add(enemy);
+
+  objects.push(enemy);
+
+ }
+
+ camera.position.set(
+  0,9,16
+ );
+
+ document.getElementById("controls").innerHTML=`
+
+ <button class="control" onclick="buildTower()">🏰 برج</button>
+ <button class="control" onclick="attackEnemies()">⚡ حمله</button>
+ `;
+
+ document.getElementById("help").textContent=
+ "دشمن‌ها را قبل از رسیدن به قلعه متوقف کن.";
+
+ animateDefense();
+
+}
+
+
+function buildTower(){
+
+ const tower=new THREE.Mesh(
+  new THREE.CylinderGeometry(
+   .6,.8,3,12
+  ),
+  new THREE.MeshStandardMaterial({
+   color:0x00aaff,
+   emissive:0x003355
+  })
+ );
+
+ tower.position.set(
+  Math.random()*10-5,
+  1.5,
+  Math.random()*6-5
+ );
+
+ scene.add(tower);
+
+ showToast("🏰 برج ساخته شد!");
+
+ score+=100;
+
+ addXP(100);
+
+ updateScore();
+
+}
+
+
+function attackEnemies(){
+
+ let count=0;
+
+ objects.forEach(e=>{
+
+  if(e.position.z>-5){
+
+   e.position.z=-20;
+
+   count++;
+
+  }
+
+ });
+
+ if(count){
+
+  score+=count*150;
+
+  addXP(count*150);
+
+  updateScore();
+
+  showToast("⚡ "+count+" دشمن نابود شد!");
+
+ }else{
+
+  showToast("👀 هنوز دشمن نزدیک نیست");
+
+ }
+
+}
+
+
+function animateDefense(){
+
+ if(!gameRunning)return;
+
+ animation=requestAnimationFrame(
+  animateDefense
+ );
+
+ objects.forEach(e=>{
+
+  e.position.z+=.035;
+
+  e.rotation.y+=.02;
+
+  if(e.position.z>5){
+
+   e.position.z=-20;
+
+   score=Math.max(0,score-200);
+
+   showToast("🏰 دشمن به قلعه رسید!");
+
+   updateScore();
+
+  }
+
+ });
+
+ camera.lookAt(0,1,0);
+
+ renderer.render(scene,camera);
+
+}
+
+
+/* ==========================
+   BUTTON
+========================== */
+
+function press(k){
+
+ keys[k]=true;
+
+ setTimeout(()=>{
+  keys[k]=false;
+ },250);
+
+}
+
+
+function updateScore(){
+
+ const el=document.getElementById("score");
+
+ if(el)
+  el.textContent=
+  score.toLocaleString();
+
+ const gx=document.getElementById("gameXP");
+
+ if(gx)
+  gx.textContent=
+  xp.toLocaleString();
+
+}
+
+
+/* ==========================
+   LOGIN
+========================== */
+
+function login(){
+
+ content.innerHTML=`
+
+ <div class="gameTitle">
+ 🚀 ورود به NEXORA
+ </div>
+
+ <input id="name"
+ placeholder="نام کاربری"
+ style="
+ width:100%;
+ padding:15px;
+ margin-bottom:12px;
+ border-radius:12px;
+ background:#ffffff08;
+ border:1px solid #ffffff15;
+ color:white;
+ outline:none;
+ ">
+
+ <input
+ type="password"
+ placeholder="رمز عبور"
+ style="
+ width:100%;
+ padding:15px;
+ margin-bottom:15px;
+ border-radius:12px;
+ background:#ffffff08;
+ border:1px solid #ffffff15;
+ color:white;
+ outline:none;
+ ">
+
+ <button
+ class="btn"
+ style="width:100%"
+ onclick="doLogin()">
+ ورود 🚀
+ </button>
+
+ `;
+
+ modal.classList.add("show");
+
+}
+
+
+function doLogin(){
+
+ const name=
+ document.getElementById("name").value;
+
+ if(!name){
+
+  showToast("⚠️ نام کاربری را وارد کن");
+
+  return;
+
+ }
+
+ closeGame();
+
+ showToast(
+  "🔥 خوش آمدی "+name+"!"
+ );
+
+}
+
+
+/* ==========================
+   CHALLENGES
+========================== */
+
+function showChallenges(){
+
+ content.innerHTML=`
+
+ <div class="gameTitle">
+ 🔥 چالش‌های امروز
+ </div>
+
+ <div class="challenge">
+ 🎯 جمع کردن 100 XP
+ </div>
+
+ <div class="challenge">
+ 🏎️ بازی Neon Racer
+ </div>
+
+ <div class="challenge">
+ 🏆 گرفتن امتیاز بالای 500
+ </div>
+
+ <button
+ class="btn"
+ style="width:100%"
+ onclick="startGame(1)">
+ 🎮 شروع چالش
+ </button>
+
+ `;
+
+ modal.classList.add("show");
+
+}
+
+
+/* ==========================
+   RANK
+========================== */
+
+function showRank(){
+
+ content.innerHTML=`
+
+ <div class="gameTitle">
+ 👑 رتبه‌بندی
+ </div>
+
+ <div class="challenge">
+ 🥇 ShadowX — 98,420 XP
+ </div>
+
+ <div class="challenge">
+ 🥈 DarkWolf — 91,780 XP
+ </div>
+
+ <div class="challenge">
+ 🥉 Lightning — 87,350 XP
+ </div>
+
+ <div class="challenge">
+ ⭐ تو — ${xp.toLocaleString()} XP
+ </div>
+
+ `;
+
+ modal.classList.add("show");
+
+}
+
+
+/* ==========================
+   KEYBOARD
+========================== */
 
 document.addEventListener(
 "keydown",
 e=>{
 
-    if(e.key==="ArrowLeft")
-        keys.left=true;
+ if(e.key==="ArrowLeft")
+  keys.left=true;
 
-    if(e.key==="ArrowRight")
-        keys.right=true;
+ if(e.key==="ArrowRight")
+  keys.right=true;
 
-    if(e.key==="ArrowUp")
-        keys.forward=true;
+ if(e.key==="ArrowUp")
+  keys.up=true;
 
-    if(e.key==="ArrowDown")
-        keys.backward=true;
+ if(e.key==="ArrowDown")
+  keys.down=true;
 
 });
 
@@ -1518,99 +2407,35 @@ document.addEventListener(
 "keyup",
 e=>{
 
-    if(e.key==="ArrowLeft")
-        keys.left=false;
+ if(e.key==="ArrowLeft")
+  keys.left=false;
 
-    if(e.key==="ArrowRight")
-        keys.right=false;
+ if(e.key==="ArrowRight")
+  keys.right=false;
 
-    if(e.key==="ArrowUp")
-        keys.forward=false;
+ if(e.key==="ArrowUp")
+  keys.up=false;
 
-    if(e.key==="ArrowDown")
-        keys.backward=false;
+ if(e.key==="ArrowDown")
+  keys.down=false;
 
 });
 
 
-/* =========================
-   XP
-========================= */
-
-function addXP(amount){
-
-    XP+=amount;
-
-    document.getElementById(
-        "xp"
-    ).textContent=
-    XP.toLocaleString();
-
-}
-
-
-/* =========================
-   HUD
-========================= */
-
-function updateHUD(){
-
-    const s =
-    document.getElementById(
-        "gameScore"
-    );
-
-    const c =
-    document.getElementById(
-        "gameCoins"
-    );
-
-    if(s) s.textContent=score;
-
-    if(c) c.textContent=coinCount;
-
-}
-
-
-/* =========================
-   TOAST
-========================= */
-
-function showToast(text){
-
-    const toast =
-    document.getElementById("toast");
-
-    toast.textContent=text;
-
-    toast.classList.add("show");
-
-    setTimeout(()=>{
-
-        toast.classList.remove("show");
-
-    },2500);
-
-}
-
-
-/* =========================
-   ONLINE COUNTER
-========================= */
+/* ==========================
+   ONLINE
+========================== */
 
 let online=12847;
 
 setInterval(()=>{
 
-    online +=
-    Math.floor(
-        Math.random()*21
-    )-10;
+ online+=
+ Math.floor(Math.random()*21)-10;
 
-    document.getElementById(
-        "online"
-    ).textContent=
-    online.toLocaleString();
+ document.getElementById("online")
+ .textContent=
+ online.toLocaleString();
 
 },3000);
 
