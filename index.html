@@ -2,8 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ NEXORA | دنیای هیجان</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>⚡ NEXORA</title>
 
 <style>
 *{
@@ -15,87 +15,95 @@
 
 body{
     background:#05050b;
-    color:white;
+    color:#fff;
+    min-height:100vh;
     overflow-x:hidden;
 }
 
-/* پس‌زمینه */
-body::before{
-    content:"";
+/* پس زمینه */
+.bg{
     position:fixed;
     inset:0;
+    z-index:-5;
     background:
-      radial-gradient(circle at 20% 20%,rgba(0,140,255,.22),transparent 30%),
-      radial-gradient(circle at 80% 30%,rgba(170,0,255,.20),transparent 30%),
-      radial-gradient(circle at 50% 90%,rgba(0,255,200,.12),transparent 30%);
-    z-index:-2;
+    radial-gradient(circle at 15% 20%,#003cff55,transparent 28%),
+    radial-gradient(circle at 85% 25%,#9d00ff44,transparent 30%),
+    radial-gradient(circle at 50% 90%,#00ffe133,transparent 30%);
 }
 
 .grid{
     position:fixed;
     inset:0;
+    z-index:-4;
+    opacity:.35;
     background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    linear-gradient(#ffffff08 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
     background-size:45px 45px;
-    z-index:-1;
 }
 
 /* هدر */
 header{
-    width:100%;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(5,5,11,.72);
-    backdrop-filter:blur(15px);
     position:sticky;
     top:0;
-    z-index:20;
+    z-index:50;
+    height:75px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#05050bd9;
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid #ffffff12;
 }
 
 .logo{
     font-size:25px;
     font-weight:bold;
-    color:#00d9ff;
-    text-shadow:0 0 20px #00d9ff;
+    color:#00eaff;
+    text-shadow:0 0 20px #00eaff;
 }
 
 nav{
     display:flex;
-    gap:25px;
+    gap:28px;
 }
 
 nav a{
-    color:#bbb;
+    color:#aaa;
     text-decoration:none;
     transition:.3s;
 }
 
 nav a:hover{
     color:#00eaff;
-    text-shadow:0 0 15px #00eaff;
 }
 
 .login{
-    padding:11px 20px;
-    border-radius:12px;
-    color:white;
+    border:0;
+    color:#fff;
     text-decoration:none;
-    background:linear-gradient(135deg,#0066ff,#a000ff);
-    box-shadow:0 0 20px rgba(120,0,255,.4);
+    padding:11px 20px;
+    border-radius:13px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#006aff,#9b00ff);
+    box-shadow:0 0 25px #5b00ff55;
+    transition:.3s;
+}
+
+.login:hover{
+    transform:scale(1.07);
+    box-shadow:0 0 35px #8c00ff99;
 }
 
 /* هیرو */
 .hero{
-    min-height:650px;
+    min-height:620px;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:70px 20px;
+    padding:80px 20px;
 }
 
 .hero-content{
@@ -105,19 +113,25 @@ nav a:hover{
 .badge{
     display:inline-block;
     padding:9px 18px;
-    border:1px solid rgba(0,230,255,.4);
+    border:1px solid #00eaff55;
+    background:#00eaff0c;
     border-radius:50px;
     color:#00eaff;
-    background:rgba(0,220,255,.07);
     margin-bottom:25px;
-    animation:pulse 2s infinite;
+    box-shadow:0 0 25px #00eaff18;
 }
 
 .hero h1{
     font-size:clamp(45px,8vw,90px);
     line-height:1.1;
     margin-bottom:25px;
-    background:linear-gradient(90deg,#fff,#00eaff,#9d00ff,#fff);
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #00eaff,
+        #9c00ff,
+        #fff
+    );
     background-size:300%;
     -webkit-background-clip:text;
     color:transparent;
@@ -125,9 +139,9 @@ nav a:hover{
 }
 
 .hero p{
-    color:#aaa;
-    font-size:18px;
+    color:#999;
     line-height:2;
+    font-size:17px;
     margin-bottom:35px;
 }
 
@@ -139,28 +153,61 @@ nav a:hover{
 }
 
 .btn{
+    position:relative;
+    overflow:hidden;
     border:0;
-    cursor:pointer;
     padding:16px 30px;
-    border-radius:15px;
+    border-radius:16px;
     color:white;
     font-size:16px;
     font-weight:bold;
-    transition:.3s;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn:active{
+    transform:scale(.94);
+}
+
+.btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:80%;
+    height:100%;
+    transform:skewX(-25deg);
+    background:#ffffff55;
+    transition:.5s;
+}
+
+.btn:hover::before{
+    left:130%;
 }
 
 .primary{
-    background:linear-gradient(135deg,#007bff,#9c00ff);
-    box-shadow:0 0 30px rgba(0,140,255,.4);
+    background:linear-gradient(135deg,#006cff,#9c00ff);
+    box-shadow:
+    0 0 20px #006cff66,
+    inset 0 0 15px #ffffff18;
+}
+
+.primary:hover{
+    transform:translateY(-5px);
+    box-shadow:
+    0 10px 35px #006cff66,
+    0 0 45px #9c00ff55;
 }
 
 .secondary{
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.12);
+    background:#ffffff09;
+    border:1px solid #ffffff18;
 }
 
-.btn:hover{
-    transform:translateY(-5px) scale(1.03);
+.secondary:hover{
+    transform:translateY(-5px);
+    border-color:#00eaff88;
+    box-shadow:0 0 25px #00eaff22;
 }
 
 /* آمار */
@@ -174,27 +221,27 @@ nav a:hover{
 }
 
 .stat{
-    text-align:center;
     padding:30px 15px;
+    text-align:center;
     border-radius:22px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
+    background:#ffffff07;
+    border:1px solid #ffffff0d;
     backdrop-filter:blur(10px);
 }
 
 .stat strong{
     display:block;
-    font-size:32px;
     color:#00eaff;
+    font-size:32px;
     margin-bottom:10px;
     text-shadow:0 0 20px #00eaff;
 }
 
 .stat span{
-    color:#999;
+    color:#888;
 }
 
-/* بخش‌ها */
+/* بخش */
 section{
     padding:80px 7%;
 }
@@ -210,10 +257,10 @@ section{
 }
 
 .title p{
-    color:#888;
+    color:#777;
 }
 
-/* کارت‌ها */
+/* کارت */
 .cards{
     max-width:1150px;
     margin:auto;
@@ -223,51 +270,35 @@ section{
 }
 
 .card{
-    position:relative;
     padding:30px;
-    min-height:240px;
+    min-height:230px;
     border-radius:25px;
-    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
-    border:1px solid rgba(255,255,255,.09);
-    overflow:hidden;
-    transition:.4s;
-}
-
-.card::before{
-    content:"";
-    position:absolute;
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    background:#0066ff;
-    filter:blur(70px);
-    opacity:.25;
-    top:-40px;
-    left:-30px;
+    background:#ffffff07;
+    border:1px solid #ffffff0e;
+    transition:.35s;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    border-color:#00d9ff;
-    box-shadow:0 15px 50px rgba(0,180,255,.12);
+    transform:translateY(-9px);
+    border-color:#00eaff66;
+    box-shadow:0 15px 45px #00eaff12;
 }
 
 .icon{
-    font-size:48px;
-    margin-bottom:20px;
+    font-size:45px;
+    margin-bottom:18px;
 }
 
 .card h3{
     margin-bottom:12px;
-    font-size:22px;
 }
 
 .card p{
-    color:#999;
+    color:#888;
     line-height:1.9;
 }
 
-/* رتبه بندی */
+/* رتبه */
 .leaderboard{
     max-width:850px;
     margin:auto;
@@ -277,11 +308,11 @@ section{
     display:flex;
     align-items:center;
     gap:15px;
-    padding:18px;
+    padding:17px;
     margin-bottom:12px;
     border-radius:18px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.07);
+    background:#ffffff07;
+    border:1px solid #ffffff0d;
 }
 
 .rank{
@@ -291,7 +322,7 @@ section{
     align-items:center;
     justify-content:center;
     border-radius:12px;
-    background:rgba(0,220,255,.1);
+    background:#00eaff12;
     color:#00eaff;
     font-weight:bold;
 }
@@ -299,11 +330,11 @@ section{
 .avatar{
     width:45px;
     height:45px;
-    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,#007bff,#a000ff);
+    border-radius:50%;
+    background:linear-gradient(135deg,#006cff,#9c00ff);
 }
 
 .player-info{
@@ -319,54 +350,178 @@ section{
     font-weight:bold;
 }
 
-/* CTA */
-.cta{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 25px;
+/* پنجره */
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:#000000bb;
+    backdrop-filter:blur(12px);
+}
+
+.modal.show{
+    display:flex;
+    animation:fade .25s;
+}
+
+.modal-box{
+    position:relative;
+    width:min(500px,100%);
+    padding:30px;
+    border-radius:28px;
+    background:
+    linear-gradient(145deg,#11111ddd,#080810ee);
+    border:1px solid #00eaff33;
+    box-shadow:
+    0 0 70px #006cff25,
+    0 20px 80px #000;
+    animation:popup .3s;
+}
+
+.close{
+    position:absolute;
+    top:15px;
+    left:15px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    color:white;
+    background:#ffffff0d;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.close:hover{
+    background:#ff174455;
+}
+
+.modal-title{
     text-align:center;
-    border-radius:30px;
-    background:linear-gradient(135deg,rgba(0,100,255,.18),rgba(150,0,255,.18));
-    border:1px solid rgba(0,220,255,.15);
-}
-
-.cta h2{
-    font-size:38px;
-    margin-bottom:15px;
-}
-
-.cta p{
-    color:#aaa;
+    font-size:27px;
     margin-bottom:25px;
+    color:#00eaff;
+    text-shadow:0 0 20px #00eaff66;
+}
+
+/* فرم ورود */
+.input{
+    width:100%;
+    padding:15px;
+    margin-bottom:13px;
+    border-radius:13px;
+    border:1px solid #ffffff15;
+    outline:none;
+    background:#ffffff08;
+    color:white;
+    font-size:15px;
+}
+
+.input:focus{
+    border-color:#00eaff77;
+    box-shadow:0 0 15px #00eaff18;
+}
+
+.full{
+    width:100%;
+    margin-top:5px;
+}
+
+/* چالش */
+.challenge{
+    padding:17px;
+    margin-bottom:12px;
+    border-radius:17px;
+    background:#ffffff07;
+    border:1px solid #ffffff0d;
+}
+
+.challenge b{
+    display:block;
+    margin-bottom:8px;
+}
+
+.challenge span{
+    color:#888;
+    font-size:13px;
+}
+
+.progress{
+    height:7px;
+    margin-top:13px;
+    border-radius:10px;
+    background:#ffffff0c;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    width:65%;
+    background:linear-gradient(90deg,#00eaff,#9c00ff);
+}
+
+/* پیام */
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:50%;
+    transform:translateX(50%) translateY(100px);
+    z-index:200;
+    padding:15px 22px;
+    border-radius:15px;
+    background:#11111df2;
+    border:1px solid #00eaff44;
+    box-shadow:0 0 30px #00eaff22;
+    transition:.4s;
+}
+
+.toast.show{
+    transform:translateX(50%) translateY(0);
 }
 
 /* فوتر */
 footer{
     text-align:center;
-    padding:40px 20px;
-    border-top:1px solid rgba(255,255,255,.08);
-    color:#666;
+    padding:40px;
+    color:#555;
+    border-top:1px solid #ffffff0b;
 }
 
 /* انیمیشن */
 @keyframes gradient{
-    0%{background-position:0%}
+    0%{background-position:0}
     100%{background-position:300%}
 }
 
-@keyframes pulse{
-    0%,100%{box-shadow:0 0 0 rgba(0,220,255,0)}
-    50%{box-shadow:0 0 30px rgba(0,220,255,.25)}
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
 }
 
 /* موبایل */
 @media(max-width:800px){
+
     nav{
         display:none;
     }
 
     header{
-        padding:15px 20px;
+        padding:0 20px;
     }
 
     .stats{
@@ -382,11 +537,11 @@ footer{
     }
 
     .hero{
-        min-height:600px;
+        min-height:580px;
     }
 
-    .hero p{
-        font-size:15px;
+    .hero h1{
+        font-size:48px;
     }
 }
 </style>
@@ -394,9 +549,11 @@ footer{
 
 <body>
 
+<div class="bg"></div>
 <div class="grid"></div>
 
 <header>
+
     <div class="logo">⚡ NEXORA</div>
 
     <nav>
@@ -405,35 +562,46 @@ footer{
         <a href="#ranking">رتبه‌بندی</a>
     </nav>
 
-    <a href="#join" class="login">ورود 🚀</a>
+    <button class="login" onclick="openLogin()">
+        ورود 🚀
+    </button>
+
 </header>
 
-<main>
 
 <section class="hero" id="home">
+
     <div class="hero-content">
 
-        <div class="badge">🔥 نسل جدید سرگرمی آنلاین</div>
+        <div class="badge">
+            🔥 نسل جدید سرگرمی آنلاین
+        </div>
 
-        <h1>وارد دنیای هیجان شو</h1>
+        <h1>
+            وارد دنیای هیجان شو
+        </h1>
 
         <p>
-            رقابت کن، امتیاز بگیر، رکورد بزن و بین بهترین بازیکنان
-            قرار بگیر. اینجا جاییه که هر روز یک چالش جدید منتظرته!
+            رقابت کن، امتیاز بگیر، چالش انجام بده
+            و خودت را به رتبه اول برسان!
         </p>
 
         <div class="buttons">
-            <button class="btn primary" onclick="startGame()">
+
+            <button class="btn primary" onclick="openAdventure()">
                 🚀 شروع ماجراجویی
             </button>
 
-            <button class="btn secondary" onclick="showMessage()">
+            <button class="btn secondary" onclick="openChallenges()">
                 ⚡ مشاهده چالش‌ها
             </button>
+
         </div>
 
     </div>
+
 </section>
+
 
 <div class="stats">
 
@@ -443,7 +611,7 @@ footer{
     </div>
 
     <div class="stat">
-        <strong id="users">1,284,932</strong>
+        <strong>1,284,932</strong>
         <span>کاربر ثبت‌نام‌شده</span>
     </div>
 
@@ -454,66 +622,68 @@ footer{
 
 </div>
 
+
 <section id="features">
 
     <div class="title">
-        <h2>🔥 امکانات NEXORA</h2>
-        <p>همه‌چیز برای ساخت یک تجربه متفاوت</p>
+        <h2>🔥 امکانات</h2>
+        <p>چیزهایی که در NEXORA منتظر تو هستند</p>
     </div>
 
     <div class="cards">
 
-        <div class="card">
+        <div class="card" onclick="openChallenges()">
             <div class="icon">🏆</div>
-            <h3>رقابت جهانی</h3>
+            <h3>چالش‌ها</h3>
             <p>
-                با بازیکنان دیگر رقابت کن و برای رسیدن به رتبه اول تلاش کن.
+                چالش‌های مختلف را انجام بده و XP بگیر.
             </p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openRewards()">
             <div class="icon">🎁</div>
-            <h3>جوایز ویژه</h3>
+            <h3>جوایز</h3>
             <p>
-                با انجام مأموریت‌ها امتیاز جمع کن و جوایز مختلف دریافت کن.
+                امتیاز جمع کن و جوایز ویژه باز کن.
             </p>
         </div>
 
-        <div class="card">
-            <div class="icon">⚡</div>
-            <h3>چالش‌های روزانه</h3>
-            <p>
-                هر روز مأموریت‌های تازه برای امتحان کردن مهارت‌هایت داشته باش.
-            </p>
-        </div>
-
-        <div class="card">
+        <div class="card" onclick="openProfile()">
             <div class="icon">👤</div>
-            <h3>پروفایل اختصاصی</h3>
+            <h3>پروفایل</h3>
             <p>
-                پروفایل خودت را بساز، امتیازاتت را ببین و پیشرفتت را دنبال کن.
+                پروفایل اختصاصی خودت را مشاهده کن.
             </p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openRanking()">
+            <div class="icon">👑</div>
+            <h3>رتبه‌بندی</h3>
+            <p>
+                ببین چه کسی در صدر جدول قرار دارد.
+            </p>
+        </div>
+
+        <div class="card" onclick="showToast('🌎 سرورهای جهانی به‌زودی فعال می‌شوند')">
             <div class="icon">🌎</div>
-            <h3>جامعه بزرگ</h3>
+            <h3>بازیکنان جهانی</h3>
             <p>
-                با بازیکنان سراسر دنیا وارد رقابت و تعامل شو.
+                با بازیکنان سراسر دنیا رقابت کن.
             </p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="showToast('💎 سیستم XP فعال است!')">
             <div class="icon">💎</div>
-            <h3>سیستم امتیاز</h3>
+            <h3>سیستم XP</h3>
             <p>
-                با فعالیت بیشتر سطح خودت را بالا ببر و به امکانات جدید برس.
+                با فعالیت بیشتر سطح خودت را بالا ببر.
             </p>
         </div>
 
     </div>
 
 </section>
+
 
 <section id="ranking">
 
@@ -558,65 +728,378 @@ footer{
 
 </section>
 
-<section id="join">
 
-    <div class="cta">
+<footer>
+    ⚡ NEXORA © 2026
+</footer>
 
-        <h2>🚀 آماده‌ای؟</h2>
 
-        <p>
-            وارد NEXORA شو و ماجراجویی خودت را شروع کن.
-        </p>
+<!-- پنجره -->
+<div class="modal" id="modal">
 
-        <button class="btn primary" onclick="startGame()">
-            شروع کن ⚡
-        </button>
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
 
     </div>
 
-</section>
+</div>
 
-</main>
 
-<footer>
-    © 2026 NEXORA — ساخته شده برای هیجان بیشتر ⚡
-</footer>
+<div class="toast" id="toast"></div>
+
 
 <script>
 
-/* عدد آنلاین به صورت نمایشی */
+const modal = document.getElementById("modal");
+const content = document.getElementById("modalContent");
+
+
+function openModal(html){
+    content.innerHTML = html;
+    modal.classList.add("show");
+}
+
+
+function closeModal(){
+    modal.classList.remove("show");
+}
+
+
+modal.addEventListener("click",function(e){
+    if(e.target === modal){
+        closeModal();
+    }
+});
+
+
+/* ورود */
+
+function openLogin(){
+
+    openModal(`
+
+        <div class="modal-title">
+            🚀 ورود به NEXORA
+        </div>
+
+        <input
+            class="input"
+            id="username"
+            placeholder="نام کاربری"
+        >
+
+        <input
+            class="input"
+            id="password"
+            type="password"
+            placeholder="رمز عبور"
+        >
+
+        <button
+            class="btn primary full"
+            onclick="fakeLogin()"
+        >
+            ورود به حساب ⚡
+        </button>
+
+    `);
+}
+
+
+function fakeLogin(){
+
+    const name =
+        document.getElementById("username").value;
+
+    if(!name){
+
+        showToast("⚠️ اول نام کاربری را وارد کن");
+        return;
+
+    }
+
+    closeModal();
+
+    showToast(
+        "🔥 خوش آمدی " + name + "!"
+    );
+
+}
+
+
+/* چالش‌ها */
+
+function openChallenges(){
+
+    openModal(`
+
+        <div class="modal-title">
+            ⚡ چالش‌های امروز
+        </div>
+
+        <div class="challenge">
+
+            <b>🎯 چالش اول</b>
+
+            <span>
+                10 امتیاز جمع کن
+            </span>
+
+            <div class="progress">
+                <div></div>
+            </div>
+
+        </div>
+
+        <div class="challenge">
+
+            <b>🏆 چالش دوم</b>
+
+            <span>
+                یک رکورد جدید ثبت کن
+            </span>
+
+            <div class="progress">
+                <div style="width:35%"></div>
+            </div>
+
+        </div>
+
+        <div class="challenge">
+
+            <b>🔥 چالش ویژه</b>
+
+            <span>
+                امتیاز ویژه: +500 XP
+            </span>
+
+            <div class="progress">
+                <div style="width:15%"></div>
+            </div>
+
+        </div>
+
+        <button
+            class="btn primary full"
+            onclick="startChallenge()"
+        >
+            شروع چالش 🚀
+        </button>
+
+    `);
+
+}
+
+
+function startChallenge(){
+
+    closeModal();
+
+    showToast(
+        "🔥 چالش شروع شد! +500 XP جایزه"
+    );
+
+}
+
+
+/* ماجراجویی */
+
+function openAdventure(){
+
+    openModal(`
+
+        <div class="modal-title">
+            🚀 ماجراجویی
+        </div>
+
+        <div class="challenge">
+
+            <b>🌌 مرحله ۱</b>
+
+            <span>
+                وارد اولین مرحله شو
+            </span>
+
+        </div>
+
+        <div class="challenge">
+
+            <b>⚡ مرحله ۲</b>
+
+            <span>
+                قفل است — مرحله اول را کامل کن
+            </span>
+
+        </div>
+
+        <div class="challenge">
+
+            <b>👑 مرحله نهایی</b>
+
+            <span>
+                هنوز باز نشده
+            </span>
+
+        </div>
+
+        <button
+            class="btn primary full"
+            onclick="startChallenge()"
+        >
+            شروع مرحله اول 🎮
+        </button>
+
+    `);
+
+}
+
+
+/* جوایز */
+
+function openRewards(){
+
+    openModal(`
+
+        <div class="modal-title">
+            🎁 جوایز
+        </div>
+
+        <div class="challenge">
+            <b>💎 جایزه روزانه</b>
+            <span>100 XP</span>
+        </div>
+
+        <div class="challenge">
+            <b>🔥 جایزه 7 روزه</b>
+            <span>1000 XP</span>
+        </div>
+
+        <div class="challenge">
+            <b>👑 جایزه ویژه</b>
+            <span>به‌زودی</span>
+        </div>
+
+        <button
+            class="btn primary full"
+            onclick="showToast('🎁 جایزه روزانه دریافت شد!');closeModal()"
+        >
+            دریافت جایزه
+        </button>
+
+    `);
+
+}
+
+
+/* پروفایل */
+
+function openProfile(){
+
+    openModal(`
+
+        <div class="modal-title">
+            👤 پروفایل
+        </div>
+
+        <div style="text-align:center">
+
+            <div style="
+                width:90px;
+                height:90px;
+                margin:0 auto 20px;
+                border-radius:50%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:40px;
+                background:linear-gradient(135deg,#006cff,#9c00ff);
+            ">
+                😎
+            </div>
+
+            <h2>Player</h2>
+
+            <p style="color:#888;margin-top:10px">
+                سطح 25
+            </p>
+
+            <p style="color:#00ffb3;margin-top:10px">
+                12,580 XP
+            </p>
+
+        </div>
+
+    `);
+
+}
+
+
+/* رتبه‌بندی */
+
+function openRanking(){
+
+    openModal(`
+
+        <div class="modal-title">
+            👑 رتبه‌بندی
+        </div>
+
+        <div class="challenge">
+            🥇 ShadowX — 98,420 XP
+        </div>
+
+        <div class="challenge">
+            🥈 DarkWolf — 91,780 XP
+        </div>
+
+        <div class="challenge">
+            🥉 Lightning — 87,350 XP
+        </div>
+
+        <div class="challenge">
+            ⭐ Player — 12,580 XP
+        </div>
+
+    `);
+
+}
+
+
+/* پیام */
+
+function showToast(text){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },3000);
+
+}
+
+
+/* آنلاین نمایشی */
+
 let online = 12847;
 
-setInterval(() => {
+setInterval(()=>{
 
-    const change = Math.floor(Math.random() * 21) - 10;
+    online +=
+        Math.floor(Math.random()*21)-10;
 
-    online += change;
-
-    document.getElementById("online").textContent =
+    document.getElementById("online")
+        .textContent =
         online.toLocaleString("en-US");
 
 },3000);
-
-
-/* دکمه شروع */
-function startGame(){
-
-    alert(
-        "🚀 آماده‌ای!\n\nسیستم در حال آماده‌سازی اولین چالش است..."
-    );
-
-}
-
-
-/* دکمه چالش */
-function showMessage(){
-
-    alert(
-        "🔥 چالش‌های جدید به‌زودی فعال می‌شوند!"
-    );
-
-}
 
 </script>
 
