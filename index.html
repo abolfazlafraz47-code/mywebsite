@@ -2,3225 +2,1973 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>⚡ NEXORA GAME</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⚡ NEXORA GAME WORLD</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Tahoma,Arial,sans-serif;
-}
+*{box-sizing:border-box}
 
 body{
-    background:
-        radial-gradient(circle at 20% 10%,#143cff55,transparent 30%),
-        radial-gradient(circle at 80% 20%,#a000ff44,transparent 30%),
-        #03040a;
-    color:white;
-    min-height:100vh;
-    overflow-x:hidden;
+ margin:0;
+ background:#02030a;
+ color:#fff;
+ font-family:Tahoma,Arial,sans-serif;
+ overflow-x:hidden;
 }
 
-/* پس زمینه */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    background-image:
-        linear-gradient(#ffffff08 1px,transparent 1px),
-        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-    background-size:45px 45px;
-    mask-image:linear-gradient(to bottom,black,transparent);
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ background:
+ radial-gradient(circle at 15% 20%,#0066ff33,transparent 30%),
+ radial-gradient(circle at 85% 15%,#9d00ff30,transparent 30%),
+ radial-gradient(circle at 50% 90%,#00eaff20,transparent 35%);
 }
-
-/* هدر */
 
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    height:75px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 6%;
-
-    background:#05060cee;
-    backdrop-filter:blur(20px);
-
-    border-bottom:1px solid #ffffff15;
+ height:70px;
+ position:sticky;
+ top:0;
+ z-index:50;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 5%;
+ background:#050711dd;
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid #ffffff15;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:bold;
-    color:#00eaff;
-    text-shadow:
-        0 0 10px #00eaff,
-        0 0 35px #006aff;
+ font-size:25px;
+ font-weight:bold;
+ color:#00eaff;
+ text-shadow:0 0 25px #00eaff;
 }
-
-nav{
-    display:flex;
-    gap:25px;
-}
-
-nav button{
-    border:0;
-    background:none;
-    color:#aaa;
-    cursor:pointer;
-    font-size:14px;
-}
-
-nav button:hover{
-    color:#00eaff;
-}
-
-.login{
-    border:0;
-    color:white;
-    padding:12px 20px;
-    border-radius:14px;
-    cursor:pointer;
-
-    background:linear-gradient(
-        135deg,
-        #006aff,
-        #9500ff
-    );
-
-    box-shadow:0 0 25px #6600ff55;
-}
-
-/* هیرو */
-
-.hero{
-    min-height:570px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-    padding:70px 20px;
-}
-
-.heroContent{
-    max-width:850px;
-}
-
-.badge{
-    display:inline-block;
-    padding:10px 20px;
-    border:1px solid #00eaff55;
-    border-radius:50px;
-    color:#00eaff;
-    background:#00eaff0b;
-    margin-bottom:25px;
-}
-
-.hero h1{
-    font-size:clamp(45px,8vw,90px);
-    line-height:1.1;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #00eaff,
-            #9b00ff,
-            #ffffff
-        );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-    color:transparent;
-
-    animation:titleMove 5s linear infinite;
-}
-
-@keyframes titleMove{
-    from{
-        background-position:0;
-    }
-
-    to{
-        background-position:300%;
-    }
-}
-
-.hero p{
-    color:#888;
-    line-height:2;
-    margin:25px auto 30px;
-    max-width:650px;
-}
-
-.mainBtn{
-    border:0;
-    padding:15px 30px;
-    border-radius:15px;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            135deg,
-            #006aff,
-            #9b00ff
-        );
-
-    box-shadow:
-        0 10px 40px #006aff44;
-
-    transition:.3s;
-}
-
-.mainBtn:hover{
-    transform:translateY(-5px) scale(1.05);
-}
-
-/* بازی ها */
-
-.games{
-    padding:80px 6%;
-}
-
-.sectionTitle{
-    text-align:center;
-    margin-bottom:45px;
-}
-
-.sectionTitle h2{
-    font-size:40px;
-}
-
-.sectionTitle p{
-    color:#777;
-    margin-top:10px;
-}
-
-/* گرید */
-
-.gameGrid{
-    max-width:1250px;
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    gap:22px;
-
-    perspective:1600px;
-}
-
-/* کارت بازی */
-
-.gameCard{
-    position:relative;
-    height:320px;
-
-    overflow:hidden;
-
-    border-radius:24px;
-
-    background:#0b0d16;
-
-    border:1px solid #ffffff18;
-
-    cursor:pointer;
-
-    transform-style:preserve-3d;
-
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        box-shadow .45s,
-        border-color .3s;
-}
-
-.gameCard:hover{
-    transform:
-        rotateX(7deg)
-        rotateY(-7deg)
-        translateY(-15px)
-        translateZ(25px)
-        scale(1.025);
-
-    border-color:#00eaff77;
-
-    box-shadow:
-        0 35px 80px #000b,
-        0 0 35px #006aff33;
-}
-
-/* عکس */
-
-.gameImage{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    /* برش عکس */
-    object-position:center;
-
-    transition:
-        transform .6s,
-        filter .6s;
-}
-
-.gameCard:hover .gameImage{
-    transform:scale(1.12);
-    filter:saturate(1.25) brightness(1.05);
-}
-
-/* تاریک کردن پایین */
-
-.gameCard::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent 25%,
-            #0003 45%,
-            #000f 100%
-        );
-
-    pointer-events:none;
-}
-
-/* نور سه بعدی */
-
-.gameCard::before{
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    top:-100px;
-    right:-80px;
-
-    border-radius:50%;
-
-    background:#00eaff55;
-
-    filter:blur(50px);
-
-    z-index:2;
-
-    pointer-events:none;
-}
-
-/* متن */
-
-.gameInfo{
-    position:absolute;
-
-    right:20px;
-    left:20px;
-    bottom:20px;
-
-    z-index:4;
-
-    transform:translateZ(35px);
-}
-
-.gameIcon{
-    font-size:38px;
-    margin-bottom:8px;
-
-    filter:
-        drop-shadow(0 5px 10px #000);
-}
-
-.gameInfo h3{
-    font-size:19px;
-    margin-bottom:7px;
-}
-
-.gameInfo p{
-    color:#bbb;
-    font-size:12px;
-    line-height:1.7;
-}
-
-/* دکمه بازی */
-
-.play{
-    margin-top:12px;
-
-    width:100%;
-
-    border:0;
-    padding:10px;
-
-    border-radius:11px;
-
-    background:#ffffff16;
-    border:1px solid #ffffff20;
-
-    color:white;
-
-    cursor:pointer;
-}
-
-.play:hover{
-    background:#00eaff22;
-}
-
-/* آمار */
 
 .stats{
-    max-width:1000px;
-    margin:30px auto 80px;
-
-    padding:0 20px;
-
-    display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
+ display:flex;
+ gap:10px;
 }
 
 .stat{
-    padding:25px;
-    text-align:center;
-
-    background:#ffffff08;
-
-    border:
-        1px solid #ffffff12;
-
-    border-radius:20px;
+ padding:9px 14px;
+ border:1px solid #ffffff18;
+ border-radius:13px;
+ background:#ffffff08;
 }
 
-.stat strong{
-    display:block;
-    color:#00eaff;
-    font-size:30px;
-    margin-bottom:8px;
+.hero{
+ text-align:center;
+ padding:80px 20px 70px;
 }
 
-/* پنجره */
+.hero h1{
+ font-size:clamp(45px,8vw,85px);
+ margin:10px 0;
+ background:linear-gradient(90deg,#fff,#00eaff,#a000ff,#fff);
+ background-size:300%;
+ color:transparent;
+ -webkit-background-clip:text;
+ animation:move 5s linear infinite;
+}
+
+@keyframes move{
+ to{background-position:300%}
+}
+
+.hero p{
+ color:#888;
+ line-height:2;
+ max-width:700px;
+ margin:20px auto 30px;
+}
+
+button{
+ border:0;
+ cursor:pointer;
+ color:#fff;
+ font-family:inherit;
+}
+
+.mainBtn{
+ padding:15px 25px;
+ border-radius:15px;
+ background:linear-gradient(135deg,#006aff,#9500ff);
+ box-shadow:0 0 30px #6900ff44;
+ font-weight:bold;
+ transition:.2s;
+}
+
+.mainBtn:hover{
+ transform:translateY(-4px);
+ box-shadow:0 0 45px #6900ff77;
+}
+
+.games{
+ padding:50px 5% 100px;
+}
+
+.games h2{
+ text-align:center;
+ font-size:38px;
+}
+
+.gamesSub{
+ text-align:center;
+ color:#777;
+ margin-bottom:40px;
+}
+
+.grid{
+ max-width:1250px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:18px;
+}
+
+.card{
+ min-height:330px;
+ position:relative;
+ overflow:hidden;
+ border-radius:24px;
+ background:#090c16;
+ border:1px solid #ffffff15;
+ transform-style:preserve-3d;
+ transition:.35s;
+}
+
+.card:hover{
+ transform:perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-10px);
+ border-color:#00eaff66;
+ box-shadow:0 25px 70px #006aff22;
+}
+
+.pic{
+ height:190px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:95px;
+ position:relative;
+ overflow:hidden;
+}
+
+.pic:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(transparent,#050711);
+}
+
+.p1{background:linear-gradient(135deg,#09203f,#00aaff)}
+.p2{background:linear-gradient(135deg,#08002c,#5400b8)}
+.p3{background:linear-gradient(135deg,#06251d,#00a875)}
+.p4{background:linear-gradient(135deg,#3b1700,#ff7900)}
+.p5{background:linear-gradient(135deg,#28000c,#ff1744)}
+.p6{background:linear-gradient(135deg,#064e76,#bcecff)}
+.p7{background:linear-gradient(135deg,#170025,#7c00cc)}
+.p8{background:linear-gradient(135deg,#063c27,#00a86b)}
+.p9{background:linear-gradient(135deg,#170606,#6b1616)}
+.p10{background:linear-gradient(135deg,#151515,#555)}
+
+.cardBody{
+ padding:16px;
+}
+
+.card h3{
+ margin:0 0 8px;
+ font-size:18px;
+}
+
+.card p{
+ margin:0;
+ color:#888;
+ font-size:12px;
+ line-height:1.7;
+}
+
+.play{
+ position:absolute;
+ bottom:14px;
+ right:14px;
+ left:14px;
+ padding:11px;
+ border-radius:12px;
+ background:linear-gradient(90deg,#006aff,#8900ff);
+ font-weight:bold;
+}
 
 .modal{
-    position:fixed;
-    inset:0;
-
-    z-index:500;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:15px;
-
-    background:#000d;
-
-    backdrop-filter:blur(15px);
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:#000000dd;
+ backdrop-filter:blur(12px);
+ align-items:center;
+ justify-content:center;
+ padding:12px;
 }
 
 .modal.show{
-    display:flex;
+ display:flex;
 }
 
-.modalBox{
-    width:min(1000px,100%);
-
-    max-height:92vh;
-
-    overflow:auto;
-
-    position:relative;
-
-    padding:25px;
-
-    border-radius:25px;
-
-    background:#080a13;
-
-    border:1px solid #00eaff44;
-
-    box-shadow:
-        0 0 100px #006aff33;
+.box{
+ width:min(1000px,100%);
+ max-height:95vh;
+ overflow:auto;
+ background:#080a13;
+ border:1px solid #00eaff33;
+ border-radius:25px;
+ padding:20px;
+ box-shadow:0 0 100px #006aff22;
+ position:relative;
 }
 
 .close{
-    position:absolute;
-
-    top:12px;
-    left:12px;
-
-    width:42px;
-    height:42px;
-
-    border:0;
-    border-radius:50%;
-
-    background:#ffffff12;
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    z-index:20;
+ position:absolute;
+ top:10px;
+ left:10px;
+ width:42px;
+ height:42px;
+ border-radius:50%;
+ background:#ffffff12;
+ font-size:25px;
+ z-index:5;
 }
 
-.modalTitle{
-    text-align:center;
-    color:#00eaff;
-    font-size:28px;
-    margin-bottom:20px;
+.title{
+ text-align:center;
+ color:#00eaff;
+ font-size:26px;
+ margin:5px 0 15px;
 }
 
-/* محیط بازی */
-
-#gameArea{
-    position:relative;
-
-    width:100%;
-    height:530px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:#05070d;
-
-    border:1px solid #ffffff15;
-}
-
-#gameCanvas{
-    width:100%;
-    height:100%;
-    display:block;
+#game{
+ width:100%;
+ height:540px;
+ border-radius:20px;
+ background:#03050b;
+ border:1px solid #ffffff15;
+ display:block;
+ touch-action:none;
 }
 
 .hud{
-    position:absolute;
-
-    top:12px;
-    right:12px;
-    left:12px;
-
-    display:flex;
-    justify-content:space-between;
-
-    z-index:10;
-
-    pointer-events:none;
+ display:flex;
+ justify-content:space-between;
+ margin-bottom:10px;
 }
 
 .hud span{
-    padding:10px 15px;
-
-    background:#000b;
-
-    border-radius:12px;
-
-    border:1px solid #ffffff20;
+ padding:8px 13px;
+ border-radius:12px;
+ background:#ffffff0a;
 }
 
 .controls{
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-top:15px;
+ display:flex;
+ justify-content:center;
+ gap:9px;
+ margin-top:12px;
+ flex-wrap:wrap;
 }
 
 .control{
-    min-width:70px;
-
-    height:52px;
-
-    border:0;
-
-    border-radius:14px;
-
-    background:#ffffff10;
-
-    border:1px solid #ffffff15;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:18px;
+ min-width:70px;
+ height:48px;
+ border-radius:13px;
+ background:#ffffff0d;
+ border:1px solid #ffffff14;
+ font-size:18px;
 }
 
-.control:hover{
-    background:#00eaff22;
-    border-color:#00eaff55;
+.control:active{
+ transform:scale(.9);
 }
 
-.help{
-    color:#777;
-    text-align:center;
-    margin-top:10px;
+.info{
+ text-align:center;
+ color:#777;
+ font-size:13px;
+ margin-top:10px;
 }
 
-.challenge{
-    padding:18px;
-    margin-bottom:10px;
-
-    border-radius:15px;
-
-    background:#ffffff08;
-
-    border:1px solid #ffffff10;
+.upgrade{
+ margin-top:10px;
+ text-align:center;
 }
 
-/* موبایل */
+footer{
+ text-align:center;
+ color:#555;
+ padding:40px;
+ border-top:1px solid #ffffff0d;
+}
 
 @media(max-width:1050px){
-
-    .gameGrid{
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
+ .grid{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(max-width:700px){
-
-    nav{
-        display:none;
-    }
-
-    .gameGrid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .gameCard{
-        height:280px;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .hero{padding-top:55px}
 }
 
 @media(max-width:480px){
-
-    .gameGrid{
-        grid-template-columns:1fr;
-    }
-
-    .gameCard{
-        height:320px;
-    }
-
-    #gameArea{
-        height:430px;
-    }
-
-}
-
-/* موبایل کنترل لمسی */
-
-.noSelect{
-    user-select:none;
-    -webkit-user-select:none;
+ .grid{grid-template-columns:1fr}
+ #game{height:470px}
+ .stats{font-size:12px}
 }
 </style>
 </head>
 
-<body class="noSelect">
+<body>
 
 <header>
+ <div class="logo">⚡ NEXORA</div>
 
-    <div class="logo">
-        ⚡ NEXORA
-    </div>
-
-    <nav>
-        <button onclick="scrollGames()">🎮 بازی‌ها</button>
-        <button onclick="showChallenges()">🔥 چالش‌ها</button>
-        <button onclick="showRank()">👑 رتبه‌بندی</button>
-    </nav>
-
-    <button class="login" onclick="login()">
-        ورود 🚀
-    </button>
-
+ <div class="stats">
+  <div class="stat">🪙 <b id="coins">0</b></div>
+  <div class="stat">💎 <b id="xp">0</b> XP</div>
+ </div>
 </header>
 
 
 <section class="hero">
 
-    <div class="heroContent">
+ <div>🔥 دنیای بازی NEXORA</div>
 
-        <div class="badge">
-            🔥 NEXORA GAME WORLD
-        </div>
+ <h1>GAME WORLD</h1>
 
-        <h1>
-            دنیای بازی
-        </h1>
+ <p>
+ ده بازی متفاوت با مرحله، امتیاز، سکه، ارتقا و قوانین مخصوص خودشان.
+ </p>
 
-        <p>
-            بازی‌های متفاوت، محیط‌های سه‌بعدی،
-            مأموریت‌های مختلف و رکوردهای هیجان‌انگیز.
-        </p>
-
-        <button
-            class="mainBtn"
-            onclick="scrollGames()">
-
-            🎮 شروع بازی
-
-        </button>
-
-    </div>
+ <button class="mainBtn" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
+ 🎮 ورود به بازی‌ها
+ </button>
 
 </section>
 
 
 <section class="games" id="games">
 
-    <div class="sectionTitle">
-
-        <h2>
-            🎮 بازی‌ها
-        </h2>
-
-        <p>
-            هر بازی تصویر و سبک مخصوص خودش را دارد
-        </p>
-
-    </div>
-
-
-    <div class="gameGrid">
-
-
-        <!-- 1 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(1)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85"
-                alt="ماشین مسابقه">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏎️
-                </div>
-
-                <h3>
-                    NEON RACER
-                </h3>
-
-                <p>
-                    ماشین را کنترل کن و از دیوارها فرار کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(1)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 2 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(2)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1000&q=85"
-                alt="فضا">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🚀
-                </div>
-
-                <h3>
-                    SPACE ATTACK
-                </h3>
-
-                <p>
-                    سفینه را کنترل کن و شهاب‌سنگ‌ها را بزن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(2)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 3 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(3)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=85"
-                alt="پارکور">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏃
-                </div>
-
-                <h3>
-                    NEON PARKOUR
-                </h3>
-
-                <p>
-                    از سکوهای سه‌بعدی عبور کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(3)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 4 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(4)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1000&q=85"
-                alt="بسکتبال">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏀
-                </div>
-
-                <h3>
-                    BASKET PRO
-                </h3>
-
-                <p>
-                    توپ را به سمت حلقه پرتاب کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(4)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 5 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(5)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=85"
-                alt="هدف">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏹
-                </div>
-
-                <h3>
-                    TARGET MASTER
-                </h3>
-
-                <p>
-                    اهداف متحرک را پیدا کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(5)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 6 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(6)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=1000&q=85"
-                alt="برف">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏂
-                </div>
-
-                <h3>
-                    SNOW RUSH
-                </h3>
-
-                <p>
-                    در مسیر برفی حرکت کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(6)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 7 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(7)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1000&q=85"
-                alt="مکعب">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🧊
-                </div>
-
-                <h3>
-                    CUBE PUZZLE
-                </h3>
-
-                <p>
-                    مکعب سه‌بعدی را حل کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(7)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 8 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(8)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85"
-                alt="جزیره">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏝️
-                </div>
-
-                <h3>
-                    TREASURE ISLAND
-                </h3>
-
-                <p>
-                    در جزیره دنبال گنج بگرد.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(8)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 9 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(9)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1534809027769-b00d750a6bac?auto=format&fit=crop&w=1000&q=85"
-                alt="زامبی">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🧟
-                </div>
-
-                <h3>
-                    ZOMBIE ESCAPE
-                </h3>
-
-                <p>
-                    از دشمن‌ها فرار کن و امتیاز بگیر.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(9)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- 10 -->
-
-        <div
-            class="gameCard"
-            onclick="startGame(10)">
-
-            <img
-                class="gameImage"
-                src="https://images.unsplash.com/photo-1533158326339-7f3cf2404354?auto=format&fit=crop&w=1000&q=85"
-                alt="قلعه">
-
-            <div class="gameInfo">
-
-                <div class="gameIcon">
-                    🏰
-                </div>
-
-                <h3>
-                    CASTLE DEFENSE
-                </h3>
-
-                <p>
-                    از قلعه در برابر دشمنان دفاع کن.
-                </p>
-
-                <button
-                    class="play"
-                    onclick="event.stopPropagation();startGame(10)">
-
-                    ▶ بازی
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<h2>🎮 انتخاب بازی</h2>
+<div class="gamesSub">هر بازی سیستم مخصوص خودش را دارد</div>
+
+<div class="grid">
+
+<div class="card">
+ <div class="pic p1">🏎️</div>
+ <div class="cardBody">
+  <h3>🏎️ Neon Racer</h3>
+  <p>جاده عریض، شروع آرام و دیوارهای تدریجی.</p>
+ </div>
+ <button class="play" onclick="start(1)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p2">🚀</div>
+ <div class="cardBody">
+  <h3>🚀 Space Attack</h3>
+  <p>شهاب‌سنگ‌ها را نابود کن و زنده بمان.</p>
+ </div>
+ <button class="play" onclick="start(2)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p3">🏃</div>
+ <div class="cardBody">
+  <h3>🏃 Neon Parkour</h3>
+  <p>روی سکوها بپر؛ سقوط یعنی باخت.</p>
+ </div>
+ <button class="play" onclick="start(3)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p4">🏀</div>
+ <div class="cardBody">
+  <h3>🏀 Basket Pro</h3>
+  <p>توپ را داخل حلقه بینداز و ارتقا بگیر.</p>
+ </div>
+ <button class="play" onclick="start(4)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p5">🏹</div>
+ <div class="cardBody">
+  <h3>🏹 Target Master</h3>
+  <p>اهداف متحرک و مهمات محدود.</p>
+ </div>
+ <button class="play" onclick="start(5)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p6">🏂</div>
+ <div class="cardBody">
+  <h3>🏂 Snow Rush</h3>
+  <p>بین موانع برفی حرکت کن.</p>
+ </div>
+ <button class="play" onclick="start(6)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p7">🧊</div>
+ <div class="cardBody">
+  <h3>🧊 Cube Puzzle</h3>
+  <p>مکعب را بچرخان و مرحله را کامل کن.</p>
+ </div>
+ <button class="play" onclick="start(7)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p8">🏝️</div>
+ <div class="cardBody">
+  <h3>🏝️ Treasure Island</h3>
+  <p>جزیره را بگرد و گنج را پیدا کن.</p>
+ </div>
+ <button class="play" onclick="start(8)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p9">🧟</div>
+ <div class="cardBody">
+  <h3>🧟 Zombie Escape</h3>
+  <p>اگر زامبی به تو برسد، می‌بازی.</p>
+ </div>
+ <button class="play" onclick="start(9)">▶ شروع</button>
+</div>
+
+<div class="card">
+ <div class="pic p10">🏰</div>
+ <div class="cardBody">
+  <h3>🏰 Castle Defense</h3>
+  <p>دشمن‌ها را قبل از رسیدن به قلعه متوقف کن.</p>
+ </div>
+ <button class="play" onclick="start(10)">▶ شروع</button>
+</div>
+
+</div>
 </section>
 
 
-<div class="stats">
-
-    <div class="stat">
-        <strong id="online">
-            12,847
-        </strong>
-        بازیکن آنلاین
-    </div>
-
-    <div class="stat">
-        <strong>
-            10
-        </strong>
-        بازی
-    </div>
-
-    <div class="stat">
-        <strong id="xp">
-            0
-        </strong>
-        XP من
-    </div>
-
-</div>
-
-
-<footer style="
-    text-align:center;
-    padding:40px;
-    color:#555;
-">
-    ⚡ NEXORA GAME WORLD © 2026
+<footer>
+⚡ NEXORA GAME WORLD — 2026
 </footer>
 
 
-<!-- پنجره بازی -->
+<div class="modal" id="modal">
 
-<div
-    class="modal"
-    id="modal">
+<div class="box">
 
-    <div class="modalBox">
+<button class="close" onclick="closeGame()">×</button>
 
-        <button
-            class="close"
-            onclick="closeModal()">
+<div class="title" id="title"></div>
 
-            ×
+<div class="hud">
+ <span>⭐ امتیاز: <b id="score">0</b></span>
+ <span>🏆 مرحله: <b id="level">1</b></span>
+</div>
 
-        </button>
+<canvas id="game"></canvas>
 
-        <div id="modalContent"></div>
+<div class="controls" id="controls"></div>
 
-    </div>
+<div class="info" id="info"></div>
 
+<div class="upgrade" id="upgrade"></div>
+
+</div>
 </div>
 
 
 <script>
 
-/* ==========================
-   متغیرها
-========================== */
+/* =========================
+   DATA
+========================= */
 
-const modal =
-    document.getElementById("modal");
+let coins=Number(localStorage.getItem("nexoraCoins")||0);
+let xp=Number(localStorage.getItem("nexoraXP")||0);
 
-const modalContent =
-    document.getElementById("modalContent");
+let score=0;
+let level=1;
+let gameType=0;
+let running=false;
+let frame=0;
+let raf=0;
 
-let gameRunning = false;
+let player={x:0,y:0,w:45,h:45};
 
-let gameType = 0;
+let objects=[];
 
-let score = 0;
+let keys={};
 
-let xp = 0;
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-let animation;
+function save(){
+ localStorage.setItem("nexoraCoins",coins);
+ localStorage.setItem("nexoraXP",xp);
+ updateGlobal();
+}
 
-let canvas;
+function updateGlobal(){
+ document.getElementById("coins").textContent=coins;
+ document.getElementById("xp").textContent=xp;
+}
 
-let ctx;
-
-let keys = {};
-
-let player;
-
-let objects = [];
+updateGlobal();
 
 
-/* ==========================
-   اسکرول
-========================== */
+/* =========================
+   START
+========================= */
 
-function scrollGames(){
+function start(type){
 
-    document
-        .getElementById("games")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+ gameType=type;
+ running=true;
+ score=0;
+ level=1;
+ frame=0;
+ objects=[];
+
+ document.getElementById("modal").classList.add("show");
+
+ const names=[
+  "",
+  "🏎️ NEON RACER",
+  "🚀 SPACE ATTACK",
+  "🏃 NEON PARKOUR",
+  "🏀 BASKET PRO",
+  "🏹 TARGET MASTER",
+  "🏂 SNOW RUSH",
+  "🧊 CUBE PUZZLE",
+  "🏝️ TREASURE ISLAND",
+  "🧟 ZOMBIE ESCAPE",
+  "🏰 CASTLE DEFENSE"
+ ];
+
+ document.getElementById("title").textContent=names[type];
+
+ resize();
+
+ document.getElementById("controls").innerHTML="";
+ document.getElementById("upgrade").innerHTML="";
+
+ if(type===1) racer();
+ if(type===2) space();
+ if(type===3) parkour();
+ if(type===4) basket();
+ if(type===5) target();
+ if(type===6) snow();
+ if(type===7) cube();
+ if(type===8) treasure();
+ if(type===9) zombie();
+ if(type===10) castle();
+
+}
+
+function closeGame(){
+ running=false;
+ cancelAnimationFrame(raf);
+ document.getElementById("modal").classList.remove("show");
+}
+
+function resize(){
+
+ const r=canvas.getBoundingClientRect();
+
+ canvas.width=r.width*devicePixelRatio;
+ canvas.height=r.height*devicePixelRatio;
+
+ ctx.setTransform(
+  devicePixelRatio,0,0,devicePixelRatio,0,0
+ );
 
 }
 
 
-/* ==========================
-   باز کردن بازی
-========================== */
+/* =========================
+   COMMON
+========================= */
 
-function startGame(type){
+function W(){
+ return canvas.clientWidth;
+}
 
-    gameType = type;
+function H(){
+ return canvas.clientHeight;
+}
 
-    const names = {
+function text(t,x,y,size=20){
+ ctx.font=size+"px Tahoma";
+ ctx.fillStyle="#fff";
+ ctx.fillText(t,x,y);
+}
 
-        1:"🏎️ مسابقه ماشین",
+function rect(x,y,w,h,color){
+ ctx.fillStyle=color;
+ ctx.fillRect(x,y,w,h);
+}
 
-        2:"🚀 حمله فضایی",
+function circle(x,y,r,color){
+ ctx.beginPath();
+ ctx.arc(x,y,r,0,Math.PI*2);
+ ctx.fillStyle=color;
+ ctx.fill();
+}
 
-        3:"🏃 پارکور",
+function addReward(points,coinsAmount){
 
-        4:"🏀 بسکتبال",
+ score+=points;
+ xp+=points;
 
-        5:"🏹 تیراندازی",
+ coins+=coinsAmount;
 
-        6:"🏂 اسنوبرد",
+ save();
+ updateHUD();
+}
 
-        7:"🧊 مکعب",
+function updateHUD(){
+ document.getElementById("score").textContent=score;
+ document.getElementById("level").textContent=level;
+}
 
-        8:"🏝️ جزیره گنج",
+function lose(reason){
 
-        9:"🧟 فرار از زامبی",
+ running=false;
+ cancelAnimationFrame(raf);
 
-        10:"🏰 دفاع از قلعه"
+ document.getElementById("info").textContent=
+ "💥 "+reason+" | امتیاز: "+score;
 
-    };
+ coins=Math.max(0,coins);
+ save();
 
-    modalContent.innerHTML = `
+ setTimeout(()=>{
 
-        <div class="modalTitle">
-            ${names[type]}
-        </div>
+  if(confirm(
+   "باختی!\n\nامتیاز: "+score+
+   "\n\nدوباره بازی کنی؟"
+  )){
+   start(gameType);
+  }else{
+   closeGame();
+  }
 
-        <div id="gameArea">
+ },150);
 
-            <div class="hud">
+}
 
-                <span>
-                    ⭐ امتیاز:
-                    <b id="score">
-                        0
-                    </b>
-                </span>
+function distance(a,b){
+ return Math.hypot(a.x-b.x,a.y-b.y);
+}
 
-                <span>
-                    💎 XP:
-                    <b id="gameXP">
-                        ${xp}
-                    </b>
-                </span>
 
-            </div>
+/* =========================
+   1 CAR
+========================= */
 
-            <canvas id="gameCanvas"></canvas>
+function racer(){
 
-        </div>
+ player.x=W()/2;
+ player.y=H()-90;
 
-        <div
-            class="controls"
-            id="controls">
-        </div>
+ document.getElementById("info").textContent=
+ "اول مسیر خلوت است؛ بعد از چند ثانیه دیوارها ظاهر می‌شوند. برخورد = باخت.";
 
-        <div
-            class="help"
-            id="help">
-        </div>
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="move(-1)">⬅️</button>
+ <button class="control" onclick="move(1)">➡️</button>
+ `;
 
-    `;
+ objects=[];
 
-    modal.classList.add("show");
+ loopRacer();
+}
 
-    canvas =
-        document.getElementById("gameCanvas");
+function move(n){
+ player.x+=n*45;
+ player.x=Math.max(45,Math.min(W()-45,player.x));
+}
 
-    canvas.width =
-        canvas.clientWidth * devicePixelRatio;
+function loopRacer(){
 
-    canvas.height =
-        canvas.clientHeight * devicePixelRatio;
+ if(!running)return;
 
-    ctx =
-        canvas.getContext("2d");
+ raf=requestAnimationFrame(loopRacer);
 
-    ctx.scale(
-        devicePixelRatio,
-        devicePixelRatio
-    );
+ frame++;
 
-    gameRunning = true;
+ ctx.clearRect(0,0,W(),H());
 
-    score = 0;
+ /* road */
 
-    objects = [];
+ rect(0,0,W(),H(),"#101722");
 
-    createGame(type);
+ const roadW=W()*0.78;
+ const roadX=(W()-roadW)/2;
+
+ rect(roadX,0,roadW,H(),"#252b35");
+
+ /* road lines */
+
+ for(let y=(frame*4)%70-70;y<H();y+=70){
+  rect(W()/2-3,y,6,35,"#ffffffcc");
+ }
+
+ /* player */
+
+ drawCar(player.x,player.y);
+
+ /*
+   شروع بازی عمداً بدون دیوار است.
+   بعد از 300 فریم موانع ظاهر می‌شوند.
+ */
+
+ if(frame>300){
+
+  const spawnRate=
+   Math.max(35,85-level*5);
+
+  if(frame%spawnRate===0){
+
+   objects.push({
+    x:roadX+45+
+      Math.random()*(roadW-90),
+    y:-70,
+    w:55,
+    h:65,
+    speed:2+level*.35
+   });
+
+  }
+
+ }
+
+ objects.forEach(o=>{
+
+  o.y+=o.speed;
+
+  drawWall(o.x,o.y,o.w,o.h);
+
+  if(
+   Math.abs(player.x-o.x)<48 &&
+   Math.abs(player.y-o.y)<60
+  ){
+   lose("ماشین به دیوار خورد");
+  }
+
+ });
+
+ objects=objects.filter(o=>o.y<H()+100);
+
+ if(frame%1000===0){
+  level++;
+  addReward(20,1);
+ }
+
+}
+
+function drawCar(x,y){
+
+ ctx.save();
+ ctx.translate(x,y);
+
+ /* سایه */
+
+ ctx.fillStyle="#0008";
+ ctx.beginPath();
+ ctx.ellipse(0,20,30,12,0,0,Math.PI*2);
+ ctx.fill();
+
+ /* بدنه */
+
+ ctx.fillStyle="#00d9ff";
+ ctx.beginPath();
+ ctx.roundRect(-27,-25,54,55,12);
+ ctx.fill();
+
+ /* شیشه */
+
+ ctx.fillStyle="#071827";
+ ctx.beginPath();
+ ctx.roundRect(-19,-18,38,19,7);
+ ctx.fill();
+
+ /* چراغ */
+
+ rect(-24,10,8,6,"#fff");
+ rect(16,10,8,6,"#fff");
+
+ /* چرخ */
+
+ circle(-24,22,7,"#050505");
+ circle(24,22,7,"#050505");
+
+ ctx.restore();
+
+}
+
+function drawWall(x,y,w,h){
+
+ ctx.fillStyle="#a83d28";
+ ctx.fillRect(x-w/2,y-h/2,w,h);
+
+ for(let yy=y-h/2;yy<y+h/2;yy+=15){
+
+  for(let xx=x-w/2;xx<x+w/2;xx+=28){
+
+   ctx.strokeStyle="#5d1c16";
+   ctx.strokeRect(xx,yy,28,15);
+
+  }
+
+ }
 
 }
 
 
-/* ==========================
-   بستن
-========================== */
+/* =========================
+   2 SPACE
+========================= */
 
-function closeModal(){
+function space(){
 
-    gameRunning = false;
+ player.x=W()/2;
+ player.y=H()-80;
 
-    cancelAnimationFrame(animation);
+ document.getElementById("info").textContent=
+ "شهاب‌سنگ‌ها اول کم هستند و به‌مرور بیشتر می‌شوند.";
 
-    modal.classList.remove("show");
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="moveSpace(-1)">⬅️</button>
+ <button class="control" onclick="shoot()">🚀 شلیک</button>
+ <button class="control" onclick="moveSpace(1)">➡️</button>
+ `;
+
+ loopSpace();
+}
+
+function moveSpace(n){
+ player.x+=n*35;
+ player.x=Math.max(30,Math.min(W()-30,player.x));
+}
+
+function shoot(){
+
+ objects.forEach(o=>{
+
+  if(o.enemy &&
+   Math.abs(o.x-player.x)<45 &&
+   o.y<player.y
+  ){
+
+   o.dead=true;
+   addReward(15,1);
+
+  }
+
+ });
+
+}
+
+function loopSpace(){
+
+ if(!running)return;
+
+ raf=requestAnimationFrame(loopSpace);
+
+ frame++;
+
+ ctx.fillStyle="#020313";
+ ctx.fillRect(0,0,W(),H());
+
+ /* stars */
+
+ for(let i=0;i<70;i++){
+  let x=(i*83)%W();
+  let y=(i*137+frame*.3)%H();
+  circle(x,y,1,"#fff");
+ }
+
+ if(frame%90===0){
+
+  objects.push({
+   x:Math.random()*W(),
+   y:-30,
+   r:16+Math.random()*15,
+   speed:1+level*.2,
+   enemy:true
+  });
+
+ }
+
+ objects.forEach(o=>{
+
+  if(o.enemy){
+
+   o.y+=o.speed;
+
+   circle(o.x,o.y,o.r,"#777");
+   circle(o.x-5,o.y-4,3,"#333");
+   circle(o.x+5,o.y+4,4,"#333");
+
+   if(
+    Math.hypot(
+     o.x-player.x,
+     o.y-player.y
+    )<o.r+20
+   ){
+    lose("شهاب‌سنگ به سفینه خورد");
+   }
+
+  }
+
+ });
+
+ objects=objects.filter(o=>
+  !o.dead && o.y<H()+50
+ );
+
+ drawShip(player.x,player.y);
+
+ if(frame%900===0){
+  level++;
+  addReward(20,1);
+ }
+
+}
+
+function drawShip(x,y){
+
+ ctx.save();
+ ctx.translate(x,y);
+
+ ctx.fillStyle="#00eaff";
+
+ ctx.beginPath();
+ ctx.moveTo(0,-30);
+ ctx.lineTo(25,25);
+ ctx.lineTo(0,15);
+ ctx.lineTo(-25,25);
+ ctx.closePath();
+ ctx.fill();
+
+ ctx.fillStyle="#fff";
+ ctx.beginPath();
+ ctx.arc(0,-5,7,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.restore();
 
 }
 
 
-/* ==========================
-   امتیاز
-========================== */
+/* =========================
+   3 PARKOUR
+========================= */
 
-function updateScore(){
+function parkour(){
 
-    const el =
-        document.getElementById("score");
+ player.x=W()/2;
+ player.y=H()-90;
 
-    if(el)
-        el.textContent =
-            score.toLocaleString();
+ player.vy=0;
+ player.ground=true;
 
-    document.getElementById("xp")
-        .textContent =
-            xp.toLocaleString();
+ document.getElementById("info").textContent=
+ "روی سکوها بپر. اگر از مسیر خارج شوی، می‌بازی.";
 
-    const gx =
-        document.getElementById("gameXP");
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="moveParkour(-1)">⬅️</button>
+ <button class="control" onclick="jump()">🆙 پرش</button>
+ <button class="control" onclick="moveParkour(1)">➡️</button>
+ `;
 
-    if(gx)
-        gx.textContent =
-            xp.toLocaleString();
+ objects=[];
+
+ for(let i=0;i<5;i++){
+  objects.push({
+   x:80+i*160,
+   y:H()-80-i*55,
+   w:100,
+   h:15
+  });
+ }
+
+ loopParkour();
+}
+
+function moveParkour(n){
+ player.x+=n*35;
+}
+
+function jump(){
+
+ if(player.ground){
+  player.vy=-13;
+  player.ground=false;
+ }
+}
+
+function loopParkour(){
+
+ if(!running)return;
+
+ raf=requestAnimationFrame(loopParkour);
+
+ ctx.clearRect(0,0,W(),H());
+
+ rect(0,0,W(),H(),"#07121e");
+
+ player.vy+=.6;
+ player.y+=player.vy;
+
+ player.ground=false;
+
+ objects.forEach(p=>{
+
+  p.x-=1+level*.05;
+
+  rect(p.x,p.y,p.w,p.h,"#00eaff");
+
+  if(
+   player.x>p.x &&
+   player.x<p.x+p.w &&
+   player.y+22>=p.y &&
+   player.y+22<=p.y+20 &&
+   player.vy>=0
+  ){
+
+   player.y=p.y-22;
+   player.vy=0;
+   player.ground=true;
+
+  }
+
+  if(p.x+p.w<0){
+
+   p.x=W()+Math.random()*120;
+   p.y=100+Math.random()*(H()-180);
+
+   addReward(10,1);
+
+  }
+
+ });
+
+ circle(player.x,player.y,22,"#8a00ff");
+
+ if(player.y>H()+40){
+  lose("از سکو سقوط کردی");
+ }
 
 }
 
 
-/* ==========================
-   بازی‌ها
-========================== */
+/* =========================
+   4 BASKET
+========================= */
 
-function createGame(type){
+let basketBall;
+let basketPower=1;
 
-    if(type===1)
-        carGame();
+function basket(){
 
-    if(type===2)
-        spaceGame();
+ basketBall={
+  x:W()/2,
+  y:H()-80,
+  vx:0,
+  vy:0,
+  flying:false
+ };
 
-    if(type===3)
-        parkourGame();
+ document.getElementById("info").textContent=
+ "با پرتاب درست توپ را وارد حلقه کن. جایزه هر گل کم است.";
 
-    if(type===4)
-        basketGame();
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="basketAim(-1)">⬅️</button>
+ <button class="control" onclick="throwBasket()">🏀 پرتاب</button>
+ <button class="control" onclick="basketAim(1)">➡️</button>
+ `;
 
-    if(type===5)
-        targetGame();
+ loopBasket();
+}
 
-    if(type===6)
-        snowGame();
+function basketAim(n){
 
-    if(type===7)
-        cubeGame();
+ if(!basketBall.flying)
+  basketBall.x+=n*35;
 
-    if(type===8)
-        treasureGame();
+}
 
-    if(type===9)
-        zombieGame();
+function throwBasket(){
 
-    if(type===10)
-        castleGame();
+ if(basketBall.flying)return;
+
+ basketBall.flying=true;
+
+ basketBall.vx=
+  (W()/2-basketBall.x)*.02;
+
+ basketBall.vy=-12*basketPower;
+
+}
+
+function loopBasket(){
+
+ if(!running)return;
+
+ raf=requestAnimationFrame(loopBasket);
+
+ ctx.clearRect(0,0,W(),H());
+
+ rect(0,0,W(),H(),"#15100a");
+
+ /* زمین */
+
+ rect(0,H()-40,W(),40,"#7a431e");
+
+ /* حلقه */
+
+ const hx=W()/2;
+ const hy=130;
+
+ ctx.strokeStyle="#ff7b00";
+ ctx.lineWidth=8;
+
+ ctx.beginPath();
+ ctx.arc(hx,hy,40,0,Math.PI*2);
+ ctx.stroke();
+
+ rect(hx-50,hy-80,100,10,"#ddd");
+
+ if(basketBall.flying){
+
+  basketBall.x+=basketBall.vx;
+  basketBall.y+=basketBall.vy;
+  basketBall.vy+=.45;
+
+  if(
+   Math.abs(basketBall.x-hx)<30 &&
+   Math.abs(basketBall.y-hy)<25 &&
+   basketBall.vy>0
+  ){
+
+   addReward(40,2);
+
+   basketBall.flying=false;
+
+   basketBall.x=W()/2;
+   basketBall.y=H()-80;
+
+  }
+
+  if(basketBall.y>H()+50){
+
+   basketBall.flying=false;
+   basketBall.x=W()/2;
+   basketBall.y=H()-80;
+
+  }
+
+ }
+
+ circle(
+  basketBall.x,
+  basketBall.y,
+  18,
+  "#ff7900"
+ );
 
 }
 
 
-/* =====================================================
-   1 ماشین
-===================================================== */
+/* =========================
+   5 TARGET
+========================= */
 
-function carGame(){
+let ammo=10;
 
-    let carX =
-        canvas.clientWidth / 2;
+function target(){
 
-    let walls = [];
+ ammo=10;
 
-    for(let i=0;i<8;i++){
+ document.getElementById("info").textContent=
+ "۱۰ تیر داری. هدف‌های قرمز را بزن؛ هر مرحله سخت‌تر می‌شود.";
 
-        walls.push({
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="aimTarget(-1)">⬅️</button>
+ <button class="control" onclick="fireTarget()">🏹 شلیک</button>
+ <button class="control" onclick="aimTarget(1)">➡️</button>
+ `;
 
-            x:
-                Math.random() *
-                (canvas.clientWidth-100),
+ player.x=W()/2;
+ player.y=H()-70;
 
-            y:
-                -i*180,
+ objects=[];
 
-            w:80,
+ loopTarget();
+}
 
-            h:55
+function aimTarget(n){
+ player.x+=n*30;
+}
 
-        });
+function fireTarget(){
 
-    }
+ if(ammo<=0)return;
 
-    document.getElementById("controls")
-        .innerHTML = `
+ ammo--;
 
-        <button
-            class="control"
-            onclick="carXMove(-1)">
-            ⬅️
-        </button>
+ for(const o of objects){
 
-        <button
-            class="control"
-            onclick="carXMove(1)">
-            ➡️
-        </button>
+  if(
+   Math.abs(o.x-player.x)<45 &&
+   Math.abs(o.y-player.y)<120
+  ){
 
-    `;
+   o.dead=true;
 
-    document.getElementById("help")
-        .textContent =
-        "ماشین را بین دیوارها حرکت بده.";
+   addReward(20,1);
 
-    function draw(){
+   break;
 
-        if(!gameRunning)
-            return;
+  }
 
-        ctx.clearRect(
-            0,
-            0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+ }
 
-        /* جاده */
+ if(ammo===0 && objects.some(o=>!o.dead)){
+  lose("مهماتت تمام شد");
+ }
 
-        ctx.fillStyle="#111";
+}
 
-        ctx.fillRect(
-            0,
-            0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+function loopTarget(){
 
-        /* خطوط جاده */
+ if(!running)return;
 
-        ctx.strokeStyle="#ffffff55";
+ raf=requestAnimationFrame(loopTarget);
 
-        ctx.lineWidth=4;
+ ctx.clearRect(0,0,W(),H());
 
-        ctx.setLineDash([25,25]);
+ rect(0,0,W(),H(),"#10250f");
 
-        ctx.beginPath();
+ if(frame%75===0){
 
-        ctx.moveTo(
-            canvas.clientWidth/2,
-            0
-        );
+  objects.push({
+   x:50+Math.random()*(W()-100),
+   y:80+Math.random()*220,
+   r:22+level*2,
+   dx:(Math.random()>.5?1:-1)*(1+level*.1)
+  });
 
-        ctx.lineTo(
-            canvas.clientWidth/2,
-            canvas.clientHeight
-        );
+ }
 
-        ctx.stroke();
+ objects.forEach(o=>{
 
-        ctx.setLineDash([]);
+  o.x+=o.dx;
 
-        /* دیوارها */
+  if(o.x<30||o.x>W()-30)o.dx*=-1;
 
-        walls.forEach(w=>{
+  circle(o.x,o.y,o.r,"#ff1744");
+  circle(o.x,o.y,o.r*.55,"#fff");
+  circle(o.x,o.y,o.r*.2,"#ff1744");
 
-            w.y += 5;
+ });
 
-            if(w.y >
-                canvas.clientHeight){
+ objects=objects.filter(o=>!o.dead);
 
-                w.y=-100;
+ circle(player.x,player.y,8,"#00eaff");
 
-                w.x=
-                    Math.random() *
-                    (canvas.clientWidth-100);
-
-                score+=10;
-
-                xp+=10;
-
-                updateScore();
-
-            }
-
-            /* عکس مانند دیوار */
-
-            ctx.fillStyle="#9b4b25";
-
-            ctx.fillRect(
-                w.x,
-                w.y,
-                w.w,
-                w.h
-            );
-
-            ctx.strokeStyle="#52200f";
-
-            for(let yy=w.y;yy<w.y+w.h;yy+=18){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    w.x,
-                    yy
-                );
-
-                ctx.lineTo(
-                    w.x+w.w,
-                    yy
-                );
-
-                ctx.stroke();
-
-            }
-
-        });
-
-        /* ماشین */
-
-        ctx.save();
-
-        ctx.translate(
-            carX,
-            canvas.clientHeight-90
-        );
-
-        ctx.fillStyle="#00eaff";
-
-        ctx.shadowColor="#00eaff";
-
-        ctx.shadowBlur=25;
-
-        ctx.beginPath();
-
-        ctx.roundRect(
-            -35,
-            -55,
-            70,
-            110,
-            15
-        );
-
-        ctx.fill();
-
-        ctx.shadowBlur=0;
-
-        ctx.fillStyle="#071018";
-
-        ctx.fillRect(
-            -23,
-            -30,
-            46,
-            25
-        );
-
-        ctx.fillStyle="#111";
-
-        ctx.fillRect(
-            -42,
-            -35,
-            10,
-            28
-        );
-
-        ctx.fillRect(
-            32,
-            -35,
-            10,
-            28
-        );
-
-        ctx.fillRect(
-            -42,
-            10,
-            10,
-            28
-        );
-
-        ctx.fillRect(
-            32,
-            10,
-            10,
-            28
-        );
-
-        ctx.restore();
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-    window.carXMove=function(n){
-
-        carX += n*45;
-
-        carX =
-            Math.max(
-                45,
-                Math.min(
-                    canvas.clientWidth-45,
-                    carX
-                )
-            );
-
-    };
+ text("🏹 تیر: "+ammo,20,35,18);
 
 }
 
 
-/* =====================================================
-   2 فضا
-===================================================== */
+/* =========================
+   6 SNOW
+========================= */
 
-function spaceGame(){
+function snow(){
 
-    let shipX =
-        canvas.clientWidth/2;
+ player.x=W()/2;
+ player.y=H()-80;
 
-    let asteroids=[];
+ document.getElementById("info").textContent=
+ "بین پرچم‌ها حرکت کن. تعداد موانع به‌مرور زیاد می‌شود.";
 
-    for(let i=0;i<12;i++){
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="moveSnow(-1)">⬅️</button>
+ <button class="control" onclick="moveSnow(1)">➡️</button>
+ `;
 
-        asteroids.push({
+ loopSnow();
+}
 
-            x:Math.random()*canvas.clientWidth,
+function moveSnow(n){
+ player.x+=n*45;
+}
 
-            y:-Math.random()*1000,
+function loopSnow(){
 
-            size:15+Math.random()*20
+ if(!running)return;
 
-        });
+ raf=requestAnimationFrame(loopSnow);
 
-    }
+ ctx.clearRect(0,0,W(),H());
 
-    document.getElementById("controls")
-        .innerHTML=`
+ rect(0,0,W(),H(),"#d9f5ff");
 
-        <button class="control"
-            onclick="spaceMove(-1)">
-            ◀
-        </button>
+ const spawn=Math.max(50,110-level*7);
 
-        <button class="control"
-            onclick="fireLaser()">
-            🚀 شلیک
-        </button>
+ if(frame%spawn===0){
 
-        <button class="control"
-            onclick="spaceMove(1)">
-            ▶
-        </button>
+  objects.push({
+   x:40+Math.random()*(W()-80),
+   y:-40,
+   size:30
+  });
 
-    `;
+ }
 
-    document.getElementById("help")
-        .textContent=
-        "شهاب‌سنگ‌ها را بزن.";
+ objects.forEach(o=>{
 
-    function draw(){
+  o.y+=2+level*.15;
 
-        if(!gameRunning)
-            return;
+  circle(o.x,o.y,o.size,"#d9534f");
 
-        ctx.fillStyle="#020518";
+  if(
+   Math.abs(o.x-player.x)<35 &&
+   Math.abs(o.y-player.y)<45
+  ){
+   lose("به مانع برفی برخورد کردی");
+  }
 
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+ });
 
-        /* ستاره */
+ objects=objects.filter(o=>o.y<H()+50);
 
-        for(let i=0;i<80;i++){
+ circle(player.x,player.y,20,"#006aff");
 
-            ctx.fillStyle="#fff";
-
-            ctx.fillRect(
-                (i*83)%canvas.clientWidth,
-                (i*47)%canvas.clientHeight,
-                2,2
-            );
-
-        }
-
-        asteroids.forEach(a=>{
-
-            a.y+=3;
-
-            if(a.y>
-                canvas.clientHeight+50){
-
-                a.y=-50;
-
-                a.x=
-                    Math.random()*
-                    canvas.clientWidth;
-
-                score+=20;
-
-                xp+=20;
-
-                updateScore();
-
-            }
-
-            ctx.fillStyle="#777";
-
-            ctx.beginPath();
-
-            ctx.arc(
-                a.x,
-                a.y,
-                a.size,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fill();
-
-        });
-
-        /* سفینه */
-
-        ctx.fillStyle="#00eaff";
-
-        ctx.shadowColor="#00eaff";
-
-        ctx.shadowBlur=25;
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            shipX,
-            canvas.clientHeight-100
-        );
-
-        ctx.lineTo(
-            shipX-35,
-            canvas.clientHeight-40
-        );
-
-        ctx.lineTo(
-            shipX+35,
-            canvas.clientHeight-40
-        );
-
-        ctx.closePath();
-
-        ctx.fill();
-
-        ctx.shadowBlur=0;
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-    window.spaceMove=function(n){
-
-        shipX += n*45;
-
-        shipX =
-            Math.max(
-                35,
-                Math.min(
-                    canvas.clientWidth-35,
-                    shipX
-                )
-            );
-
-    };
-
-    window.fireLaser=function(){
-
-        let hit=false;
-
-        asteroids.forEach(a=>{
-
-            if(
-                Math.abs(a.x-shipX)<40 &&
-                a.y>
-                    canvas.clientHeight-350
-            ){
-
-                a.y=-100;
-
-                score+=100;
-
-                xp+=100;
-
-                updateScore();
-
-                hit=true;
-
-            }
-
-        });
-
-    };
+ if(frame%800===0){
+  level++;
+  addReward(15,1);
+ }
 
 }
 
 
-/* =====================================================
-   3 پارکور
-===================================================== */
+/* =========================
+   7 CUBE
+========================= */
 
-function parkourGame(){
+let cubeTurns=0;
 
-    let x=80;
+function cube(){
 
-    let y=canvas.clientHeight-100;
+ cubeTurns=0;
 
-    let velocity=0;
+ document.getElementById("info").textContent=
+ "هر بار مکعب را بچرخانی امتیاز می‌گیری؛ با تعداد حرکت محدود مرحله را تمام کن.";
 
-    let platforms=[];
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="turnCube('x')">↕️</button>
+ <button class="control" onclick="turnCube('y')">↔️</button>
+ <button class="control" onclick="turnCube('z')">🔄</button>
+ <button class="control" onclick="finishCube()">✅ پایان</button>
+ `;
 
-    for(let i=0;i<8;i++){
+ loopCube();
+}
 
-        platforms.push({
+function turnCube(axis){
 
-            x:i*150,
+ cubeTurns++;
 
-            y:canvas.clientHeight-
-              100-
-              Math.random()*120,
+ score+=5;
+ xp+=5;
 
-            w:100,
+ save();
+ updateHUD();
 
-            h:20
+ if(cubeTurns>=8){
+  finishCube();
+ }
 
-        });
+}
 
-    }
+function finishCube(){
 
-    document.getElementById("controls")
-        .innerHTML=`
+ if(cubeTurns>=5){
 
-        <button class="control"
-            onclick="parkMove(-1)">
-            ⬅️
-        </button>
+  coins+=2;
+  xp+=15;
 
-        <button class="control"
-            onclick="parkJump()">
-            🆙 پرش
-        </button>
+  save();
 
-        <button class="control"
-            onclick="parkMove(1)">
-            ➡️
-        </button>
+  showMessage(
+   "🧊 مرحله کامل شد!\n+2 🪙"
+  );
 
-    `;
+  level++;
 
-    document.getElementById("help")
-        .textContent=
-        "روی سکوها بپر.";
+  cubeTurns=0;
 
-    window.parkMove=function(n){
+ }else{
 
-        x+=n*30;
+  showMessage("حداقل ۵ حرکت انجام بده.");
 
-    };
+ }
 
-    window.parkJump=function(){
+}
 
-        if(y>=canvas.clientHeight-120)
-            velocity=-13;
+function loopCube(){
 
-    };
+ if(!running)return;
 
-    function draw(){
+ raf=requestAnimationFrame(loopCube);
 
-        if(!gameRunning)
-            return;
+ ctx.clearRect(0,0,W(),H());
 
-        ctx.fillStyle="#07101c";
+ rect(0,0,W(),H(),"#12091b");
 
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+ const size=130;
+ const x=W()/2;
+ const y=H()/2;
 
-        velocity+=.6;
+ ctx.save();
+ ctx.translate(x,y);
 
-        y+=velocity;
+ ctx.rotate(frame*.005);
 
-        if(y>
-            canvas.clientHeight-120){
+ const colors=[
+  "#ff1744",
+  "#00eaff",
+  "#ffd600",
+  "#00c853",
+  "#ff7900",
+  "#fff"
+ ];
 
-            y=
-                canvas.clientHeight-120;
+ let k=0;
 
-            velocity=0;
+ for(let yy=-1;yy<=1;yy++){
 
-        }
+  for(let xx=-1;xx<=1;xx++){
 
-        platforms.forEach(p=>{
+   rect(
+    xx*45-20,
+    yy*45-20,
+    40,
+    40,
+    colors[(k++)%colors.length]
+   );
 
-            p.x-=2;
+  }
 
-            if(p.x<-120){
+ }
 
-                p.x=
-                    canvas.clientWidth+100;
+ ctx.restore();
 
-                score+=25;
-
-                xp+=25;
-
-                updateScore();
-
-            }
-
-            ctx.fillStyle="#8b00ff";
-
-            ctx.fillRect(
-                p.x,
-                p.y,
-                p.w,
-                p.h
-            );
-
-        });
-
-        ctx.fillStyle="#00eaff";
-
-        ctx.shadowColor="#00eaff";
-
-        ctx.shadowBlur=20;
-
-        ctx.fillRect(
-            x,
-            y-50,
-            35,
-            50
-        );
-
-        ctx.shadowBlur=0;
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
+ text(
+  "حرکت‌ها: "+cubeTurns+"/8",
+  20,35,18
+ );
 
 }
 
 
-/* =====================================================
-   4 بسکتبال
-===================================================== */
+/* =========================
+   8 TREASURE
+========================= */
 
-function basketGame(){
+function treasure(){
 
-    let ballX =
-        canvas.clientWidth/2;
+ player.x=W()/2;
+ player.y=H()/2;
 
-    let ballY =
-        canvas.clientHeight-80;
+ objects=[];
 
-    let shooting=false;
+ for(let i=0;i<3;i++){
 
-    let t=0;
+  objects.push({
+   x:50+Math.random()*(W()-100),
+   y:80+Math.random()*(H()-160),
+   r:18
+  });
 
-    document.getElementById("controls")
-        .innerHTML=`
+ }
 
-        <button class="control"
-            onclick="basketLeft()">
-            ⬅️
-        </button>
+ document.getElementById("info").textContent=
+ "در جزیره حرکت کن و صندوق‌های گنج محدود را پیدا کن.";
 
-        <button class="control"
-            onclick="basketShoot()">
-            🏀 پرتاب
-        </button>
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="moveTreasure(0,-1)">⬆️</button>
+ <button class="control" onclick="moveTreasure(-1,0)">⬅️</button>
+ <button class="control" onclick="moveTreasure(1,0)">➡️</button>
+ <button class="control" onclick="moveTreasure(0,1)">⬇️</button>
+ `;
 
-        <button class="control"
-            onclick="basketRight()">
-            ➡️
-        </button>
+ loopTreasure();
+}
 
-    `;
+function moveTreasure(x,y){
 
-    document.getElementById("help")
-        .textContent=
-        "توپ را داخل حلقه بینداز.";
+ player.x+=x*35;
+ player.y+=y*35;
 
-    window.basketLeft=function(){
-        if(!shooting)
-            ballX-=30;
-    };
+}
 
-    window.basketRight=function(){
-        if(!shooting)
-            ballX+=30;
-    };
+function loopTreasure(){
 
-    window.basketShoot=function(){
+ if(!running)return;
 
-        if(shooting)
-            return;
+ raf=requestAnimationFrame(loopTreasure);
 
-        shooting=true;
+ ctx.clearRect(0,0,W(),H());
 
-        t=0;
+ rect(0,0,W(),H(),"#063d2a");
 
-    };
+ /* آب */
 
-    function draw(){
+ ctx.strokeStyle="#00b7ff";
+ ctx.lineWidth=10;
 
-        if(!gameRunning)
-            return;
+ for(let y=20;y<H();y+=35){
 
-        ctx.fillStyle="#111827";
+  ctx.beginPath();
+  ctx.moveTo(0,y);
+  ctx.lineTo(W(),y);
+  ctx.stroke();
 
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+ }
 
-        /* زمین */
+ objects.forEach(o=>{
 
-        ctx.fillStyle="#8b4513";
+  circle(o.x,o.y,o.r,"#ffd000");
 
-        ctx.fillRect(
-            0,
-            canvas.clientHeight-80,
-            canvas.clientWidth,
-            80
-        );
+  if(distance(player,o)<35){
 
-        /* حلقه */
+   o.dead=true;
 
-        const hoopX =
-            canvas.clientWidth/2;
+   addReward(30,2);
 
-        ctx.strokeStyle="#ff6600";
+   showMessage("💰 گنج پیدا شد!");
 
-        ctx.lineWidth=8;
+  }
 
-        ctx.beginPath();
+ });
 
-        ctx.arc(
-            hoopX,
-            130,
-            40,
-            0,
-            Math.PI*2
-        );
+ objects=objects.filter(o=>!o.dead);
 
-        ctx.stroke();
+ circle(player.x,player.y,18,"#fff");
 
-        /* توپ */
+ if(objects.length===0){
 
-        if(shooting){
+  level++;
 
-            t+=.025;
+  for(let i=0;i<3;i++){
 
-            ballX=
-                ballX+
-                (hoopX-ballX)*.05;
+   objects.push({
+    x:50+Math.random()*(W()-100),
+    y:80+Math.random()*(H()-160),
+    r:18
+   });
 
-            ballY=
-                canvas.clientHeight-80-
-                Math.sin(t*Math.PI)*300;
+  }
 
-            if(t>=1){
-
-                shooting=false;
-
-                score+=200;
-
-                xp+=200;
-
-                updateScore();
-
-                ballX=
-                    canvas.clientWidth/2;
-
-                ballY=
-                    canvas.clientHeight-80;
-
-            }
-
-        }
-
-        ctx.fillStyle="#ff6600";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            ballX,
-            ballY,
-            20,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
+ }
 
 }
 
 
-/* =====================================================
-   5 هدف
-===================================================== */
+/* =========================
+   9 ZOMBIE
+========================= */
 
-function targetGame(){
+function zombie(){
 
-    let targetX=100;
+ player.x=W()/2;
+ player.y=H()-70;
 
-    let targetY=100;
+ document.getElementById("info").textContent=
+ "زامبی‌ها کم شروع می‌شوند و با بالا رفتن مرحله بیشتر می‌شوند. برخورد = باخت.";
 
-    document.getElementById("controls")
-        .innerHTML=`
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="moveZombie(-1)">⬅️</button>
+ <button class="control" onclick="moveZombie(1)">➡️</button>
+ <button class="control" onclick="moveZombie(0,-1)">⬆️</button>
+ `;
 
-        <button class="control"
-            onclick="aimTarget(-1)">
-            ⬅️
-        </button>
+ objects=[];
 
-        <button class="control"
-            onclick="targetShoot()">
-            🏹 شلیک
-        </button>
+ loopZombie();
+}
 
-        <button class="control"
-            onclick="aimTarget(1)">
-            ➡️
-        </button>
+function moveZombie(x,y=0){
 
-    `;
+ player.x+=x*40;
 
-    document.getElementById("help")
-        .textContent=
-        "نشانه را روی هدف قرار بده.";
+ if(y)
+  player.y+=y*35;
 
-    function draw(){
+ player.x=Math.max(25,Math.min(W()-25,player.x));
+ player.y=Math.max(25,Math.min(H()-25,player.y));
 
-        if(!gameRunning)
-            return;
+}
 
-        ctx.fillStyle="#08020c";
+function loopZombie(){
 
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+ if(!running)return;
 
-        targetX+=2;
+ raf=requestAnimationFrame(loopZombie);
 
-        if(
-            targetX>
-            canvas.clientWidth-60
-        )
-            targetX=60;
+ ctx.clearRect(0,0,W(),H());
 
-        ctx.fillStyle="#ff1744";
+ rect(0,0,W(),H(),"#160b0b");
 
-        ctx.beginPath();
+ const spawn=
+  Math.max(70,160-level*12);
 
-        ctx.arc(
-            targetX,
-            targetY,
-            35,
-            0,
-            Math.PI*2
-        );
+ if(frame%spawn===0){
 
-        ctx.fill();
+  objects.push({
+   x:Math.random()*W(),
+   y:20,
+   speed:.4+level*.08
+  });
 
-        ctx.fillStyle="white";
+ }
 
-        ctx.beginPath();
+ objects.forEach(z=>{
 
-        ctx.arc(
-            targetX,
-            targetY,
-            20,
-            0,
-            Math.PI*2
-        );
+  let dx=player.x-z.x;
+  let dy=player.y-z.y;
+  let d=Math.hypot(dx,dy)||1;
 
-        ctx.fill();
+  z.x+=dx/d*z.speed;
+  z.y+=dy/d*z.speed;
 
-        ctx.fillStyle="#ff1744";
+  circle(z.x,z.y,20,"#3ca34a");
 
-        ctx.beginPath();
+  circle(z.x-6,z.y-4,3,"#111");
+  circle(z.x+6,z.y-4,3,"#111");
 
-        ctx.arc(
-            targetX,
-            targetY,
-            8,
-            0,
-            Math.PI*2
-        );
+  if(d<32){
 
-        ctx.fill();
+   lose("زامبی به تو رسید");
 
-        /* نشانه */
+  }
 
-        ctx.strokeStyle="#00eaff";
+ });
 
-        ctx.beginPath();
+ circle(player.x,player.y,19,"#00eaff");
 
-        ctx.arc(
-            canvas.clientWidth/2,
-            canvas.clientHeight-100,
-            25,
-            0,
-            Math.PI*2
-        );
-
-        ctx.stroke();
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-    window.aimTarget=function(n){
-
-        targetY+=n*20;
-
-    };
-
-    window.targetShoot=function(){
-
-        const dx=
-            targetX-
-            canvas.clientWidth/2;
-
-        const dy=
-            targetY-
-            (canvas.clientHeight-100);
-
-        if(
-            Math.abs(dx)<80 &&
-            Math.abs(dy)<100
-        ){
-
-            score+=250;
-
-            xp+=250;
-
-            updateScore();
-
-            targetX=
-                Math.random()*
-                canvas.clientWidth;
-
-            targetY=
-                70+
-                Math.random()*200;
-
-        }
-
-    };
+ if(frame%1000===0){
+  level++;
+  addReward(20,1);
+ }
 
 }
 
 
-/* =====================================================
-   6 برف
-===================================================== */
+/* =========================
+   10 CASTLE
+========================= */
 
-function snowGame(){
+let castleLevel=1;
+let castleHP=100;
 
-    let x=
-        canvas.clientWidth/2;
+function castle(){
 
-    let flags=[];
+ castleLevel=
+  Number(localStorage.getItem("castleLevel")||1);
 
-    for(let i=0;i<10;i++){
+ castleHP=100+castleLevel*30;
 
-        flags.push({
+ document.getElementById("info").textContent=
+ "دشمن‌های قرمز به سمت قلعه می‌آیند. اگر به قلعه برسند، می‌بازی.";
 
-            x:Math.random()*
-                canvas.clientWidth,
+ document.getElementById("controls").innerHTML=`
+ <button class="control" onclick="castleAttack()">⚡ حمله</button>
+ `;
 
-            y:-i*120
+ document.getElementById("upgrade").innerHTML=`
+ <button class="mainBtn" onclick="upgradeCastle()">
+ 🏰 ارتقای قلعه — 10 🪙
+ </button>
+ `;
 
-        });
+ objects=[];
 
-    }
+ loopCastle();
+}
 
-    document.getElementById("controls")
-        .innerHTML=`
+function upgradeCastle(){
 
-        <button class="control"
-            onclick="snowMove(-1)">
-            ⬅️
-        </button>
+ if(coins<10){
 
-        <button class="control"
-            onclick="snowMove(1)">
-            ➡️
-        </button>
+  showMessage("🪙 سکه کافی نداری!");
 
-    `;
+  return;
 
-    document.getElementById("help")
-        .textContent=
-        "بین پرچم‌ها حرکت کن.";
+ }
 
-    window.snowMove=function(n){
+ coins-=10;
 
-        x+=n*40;
+ castleLevel++;
 
-    };
+ castleHP+=50;
 
-    function draw(){
+ localStorage.setItem(
+  "castleLevel",
+  castleLevel
+ );
 
-        if(!gameRunning)
-            return;
+ save();
 
-        ctx.fillStyle="#bfe9ff";
+ showMessage(
+  "🏰 قلعه ارتقا یافت!\nسطح "+castleLevel
+ );
 
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
+}
 
-        flags.forEach(f=>{
+function castleAttack(){
 
-            f.y+=4;
+ let killed=0;
 
-            if(
-                f.y>
-                canvas.clientHeight
-            ){
+ objects.forEach(e=>{
 
-                f.y=-50;
+  if(e.x>W()/2-150 &&
+     e.x<W()/2+150 &&
+     e.y>H()/2){
 
-                f.x=
-                    Math.random()*
-                    canvas.clientWidth;
+   e.dead=true;
+   killed++;
 
-                score+=30;
+  }
 
-                xp+=30;
+ });
 
-                updateScore();
+ if(killed){
 
-            }
+  addReward(killed*15,killed);
 
-            ctx.fillStyle="#ff1744";
+  showMessage(
+   "⚡ "+killed+" دشمن متوقف شد"
+  );
 
-            ctx.fillRect(
-                f.x,
-                f.y,
-                25,
-                70
-            );
+ }
 
-        });
+}
 
-        /* اسنوبرد */
+function loopCastle(){
 
-        ctx.fillStyle="#111";
+ if(!running)return;
 
-        ctx.fillRect(
-            x-30,
-            canvas.clientHeight-90,
-            60,
-            12
-        );
+ raf=requestAnimationFrame(loopCastle);
 
-        ctx.fillStyle="#00aaff";
+ ctx.clearRect(0,0,W(),H());
 
-        ctx.beginPath();
+ rect(0,0,W(),H(),"#111827");
 
-        ctx.arc(
-            x,
-            canvas.clientHeight-110,
-            18,
-            0,
-            Math.PI*2
-        );
+ /* قلعه */
 
-        ctx.fill();
+ const cx=W()/2;
+ const cy=H()-100;
 
-        animation=
-            requestAnimationFrame(draw);
+ rect(
+  cx-100,
+  cy-80,
+  200,
+  100,
+  "#6262ff"
+ );
 
-    }
+ rect(
+  cx-120,
+  cy-120,
+  40,
+  140,
+  "#8585ff"
+ );
 
-    draw();
+ rect(
+  cx+80,
+  cy-120,
+  40,
+  140,
+  "#8585ff"
+ );
+
+ text(
+  "🏰 سطح "+castleLevel,
+  cx-60,
+  cy-145,
+  17
+ );
+
+ /* HP */
+
+ rect(
+  cx-100,
+  cy+30,
+  200,
+  12,
+  "#331111"
+ );
+
+ rect(
+  cx-100,
+  cy+30,
+  200*(castleHP/(100+castleLevel*30)),
+  12,
+  "#00d26a"
+ );
+
+ /* spawn */
+
+ const spawn=
+  Math.max(65,140-level*10);
+
+ if(frame%spawn===0){
+
+  objects.push({
+   x:Math.random()*W(),
+   y:-30,
+   speed:.35+level*.07
+  });
+
+ }
+
+ objects.forEach(e=>{
+
+  e.y+=e.speed;
+
+  /* حرکت به سمت قلعه */
+
+  e.x+=(cx-e.x)*.002;
+
+  rect(
+   e.x-17,
+   e.y-20,
+   34,
+   40,
+   "#e32636"
+  );
+
+  circle(e.x-7,e.y-5,3,"#111");
+  circle(e.x+7,e.y-5,3,"#111");
+
+  if(e.y>cy-70){
+
+   e.dead=true;
+
+   castleHP-=10;
+
+   if(castleHP<=0){
+
+    lose("دشمن‌ها قلعه را شکست دادند");
+
+   }
+
+  }
+
+ });
+
+ objects=objects.filter(e=>!e.dead);
+
+ if(frame%1000===0){
+
+  level++;
+
+  addReward(15,1);
+
+ }
 
 }
 
 
-/* =====================================================
-   7 مکعب
-===================================================== */
+/* =========================
+   MESSAGE
+========================= */
 
-function cubeGame(){
+function showMessage(msg){
 
-    let rotation=0;
-
-    document.getElementById("controls")
-        .innerHTML=`
-
-        <button class="control"
-            onclick="cubeRotate(-1)">
-            ↩️
-        </button>
-
-        <button class="control"
-            onclick="cubeRotate(1)">
-            ↪️
-        </button>
-
-        <button class="control"
-            onclick="cubeMix()">
-            🎲 مخلوط
-        </button>
-
-    `;
-
-    document.getElementById("help")
-        .textContent=
-        "مکعب سه‌بعدی را بچرخان.";
-
-    window.cubeRotate=function(n){
-
-        rotation+=n*.3;
-
-        score+=50;
-
-        xp+=50;
-
-        updateScore();
-
-    };
-
-    window.cubeMix=function(){
-
-        rotation=
-            Math.random()*Math.PI*2;
-
-    };
-
-    function draw(){
-
-        if(!gameRunning)
-            return;
-
-        ctx.fillStyle="#050505";
-
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
-
-        const cx=
-            canvas.clientWidth/2;
-
-        const cy=
-            canvas.clientHeight/2;
-
-        const size=130;
-
-        ctx.save();
-
-        ctx.translate(cx,cy);
-
-        ctx.rotate(rotation);
-
-        const colors=[
-            "#ff1744",
-            "#00eaff",
-            "#7c4dff",
-            "#00e676",
-            "#ffea00",
-            "#ff9100"
-        ];
-
-        let i=0;
-
-        for(let row=-1;row<=1;row++){
-
-            for(let col=-1;col<=1;col++){
-
-                ctx.fillStyle=
-                    colors[i%colors.length];
-
-                ctx.fillRect(
-                    col*85-38,
-                    row*85-38,
-                    75,
-                    75
-                );
-
-                ctx.strokeStyle="#000";
-
-                ctx.lineWidth=5;
-
-                ctx.strokeRect(
-                    col*85-38,
-                    row*85-38,
-                    75,
-                    75
-                );
-
-                i++;
-
-            }
-
-        }
-
-        ctx.restore();
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
+ setTimeout(()=>{
+  alert(msg);
+ },20);
 
 }
 
 
-/* =====================================================
-   8 گنج
-===================================================== */
+/* =========================
+   KEYBOARD
+========================= */
 
-function treasureGame(){
+document.addEventListener("keydown",e=>{
 
-    let px=
-        canvas.clientWidth/2;
+ if(e.key==="ArrowLeft"){
+  keys.left=true;
 
-    let py=
-        canvas.clientHeight/2;
+  if(gameType===1)move(-1);
+  if(gameType===2)moveSpace(-1);
+  if(gameType===3)moveParkour(-1);
+  if(gameType===5)aimTarget(-1);
+  if(gameType===6)moveSnow(-1);
+  if(gameType===9)moveZombie(-1);
+ }
 
-    let tx=
-        Math.random()*
-        canvas.clientWidth;
+ if(e.key==="ArrowRight"){
+  keys.right=true;
 
-    let ty=
-        Math.random()*
-        canvas.clientHeight;
+  if(gameType===1)move(1);
+  if(gameType===2)moveSpace(1);
+  if(gameType===3)moveParkour(1);
+  if(gameType===5)aimTarget(1);
+  if(gameType===6)moveSnow(1);
+  if(gameType===9)moveZombie(1);
+ }
 
-    document.getElementById("controls")
-        .innerHTML=`
+ if(e.key==="ArrowUp"){
 
-        <button class="control"
-            onclick="treasureMove(-1,0)">
-            ⬅️
-        </button>
+  if(gameType===3)jump();
 
-        <button class="control"
-            onclick="treasureMove(0,-1)">
-            ⬆️
-        </button>
+  if(gameType===8)
+   moveTreasure(0,-1);
 
-        <button class="control"
-            onclick="treasureMove(0,1)">
-            ⬇️
-        </button>
+ }
 
-        <button class="control"
-            onclick="treasureMove(1,0)">
-            ➡️
-        </button>
+ if(e.key==="ArrowDown"){
 
-    `;
+  if(gameType===8)
+   moveTreasure(0,1);
 
-    document.getElementById("help")
-        .textContent=
-        "جزیره را بگرد و گنج را پیدا کن.";
+ }
 
-    window.treasureMove=function(x,y){
+ if(e.code==="Space"){
 
-        px+=x*30;
-        py+=y*30;
+  if(gameType===2)shoot();
+  if(gameType===4)throwBasket();
+  if(gameType===5)fireTarget();
 
-        if(
-            Math.abs(px-tx)<40 &&
-            Math.abs(py-ty)<40
-        ){
+ }
 
-            score+=1000;
+});
 
-            xp+=1000;
-
-            updateScore();
-
-            tx=
-                Math.random()*
-                canvas.clientWidth;
-
-            ty=
-                Math.random()*
-                canvas.clientHeight;
-
-        }
-
-    };
-
-    function draw(){
-
-        if(!gameRunning)
-            return;
-
-        ctx.fillStyle="#247a3b";
-
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
-
-        /* آب */
-
-        ctx.strokeStyle="#00aaff55";
-
-        for(let i=0;i<15;i++){
-
-            ctx.beginPath();
-
-            ctx.arc(
-                i*90,
-                100,
-                70,
-                0,
-                Math.PI*2
-            );
-
-            ctx.stroke();
-
-        }
-
-        /* گنج */
-
-        ctx.fillStyle="#ffd000";
-
-        ctx.fillRect(
-            tx-20,
-            ty-15,
-            40,
-            30
-        );
-
-        /* بازیکن */
-
-        ctx.fillStyle="#00eaff";
-
-        ctx.shadowColor="#00eaff";
-
-        ctx.shadowBlur=20;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            px,
-            py,
-            20,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-        ctx.shadowBlur=0;
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-}
-
-
-/* =====================================================
-   9 زامبی
-===================================================== */
-
-function zombieGame(){
-
-    let x=
-        canvas.clientWidth/2;
-
-    let zombies=[];
-
-    for(let i=0;i<8;i++){
-
-        zombies.push({
-
-            x:Math.random()*
-                canvas.clientWidth,
-
-            y:-i*150
-
-        });
-
-    }
-
-    document.getElementById("controls")
-        .innerHTML=`
-
-        <button class="control"
-            onclick="zombieMove(-1)">
-            ⬅️
-        </button>
-
-        <button class="control"
-            onclick="zombieMove(1)">
-            ➡️
-        </button>
-
-    `;
-
-    document.getElementById("help")
-        .textContent=
-        "از زامبی‌ها دور شو.";
-
-    window.zombieMove=function(n){
-
-        x+=n*45;
-
-    };
-
-    function draw(){
-
-        if(!gameRunning)
-            return;
-
-        ctx.fillStyle="#090909";
-
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
-
-        zombies.forEach(z=>{
-
-            z.y+=2.5;
-
-            if(
-                z.y>
-                canvas.clientHeight
-            ){
-
-                z.y=-60;
-
-                z.x=
-                    Math.random()*
-                    canvas.clientWidth;
-
-                score+=30;
-
-                xp+=30;
-
-                updateScore();
-
-            }
-
-            ctx.fillStyle="#55aa55";
-
-            ctx.fillRect(
-                z.x-20,
-                z.y-25,
-                40,
-                50
-            );
-
-            ctx.fillStyle="#111";
-
-            ctx.fillRect(
-                z.x-13,
-                z.y-10,
-                8,8
-            );
-
-            ctx.fillRect(
-                z.x+5,
-                z.y-10,
-                8,8
-            );
-
-        });
-
-        ctx.fillStyle="#00eaff";
-
-        ctx.fillRect(
-            x-20,
-            canvas.clientHeight-100,
-            40,
-            60
-        );
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-}
-
-
-/* =====================================================
-   10 قلعه
-===================================================== */
-
-function castleGame(){
-
-    let enemies=[];
-
-    for(let i=0;i<10;i++){
-
-        enemies.push({
-
-            x:Math.random()*
-                canvas.clientWidth,
-
-            y:-i*100
-
-        });
-
-    }
-
-    document.getElementById("controls")
-        .innerHTML=`
-
-        <button class="control"
-            onclick="castleAttack()">
-            ⚡ حمله
-        </button>
-
-        <button class="control"
-            onclick="buildCastleTower()">
-            🏰 ساخت برج
-        </button>
-
-    `;
-
-    document.getElementById("help")
-        .textContent=
-        "دشمن‌ها را قبل از رسیدن به قلعه متوقف کن.";
-
-    window.castleAttack=function(){
-
-        enemies.forEach(e=>{
-
-            if(
-                e.y>
-                canvas.clientHeight-300
-            ){
-
-                e.y=-100;
-
-                score+=150;
-
-                xp+=150;
-
-                updateScore();
-
-            }
-
-        });
-
-    };
-
-    window.buildCastleTower=function(){
-
-        score+=100;
-
-        xp+=100;
-
-        updateScore();
-
-    };
-
-    function draw(){
-
-        if(!gameRunning)
-            return;
-
-        ctx.fillStyle="#121212";
-
-        ctx.fillRect(
-            0,0,
-            canvas.clientWidth,
-            canvas.clientHeight
-        );
-
-        /* قلعه */
-
-        ctx.fillStyle="#6666ff";
-
-        ctx.fillRect(
-            canvas.clientWidth/2-70,
-            canvas.clientHeight-150,
-            140,
-            150
-        );
-
-        /* برج */
-
-        ctx.fillRect(
-            canvas.clientWidth/2-110,
-            canvas.clientHeight-190,
-            45,
-            190
-        );
-
-        ctx.fillRect(
-            canvas.clientWidth/2+65,
-            canvas.clientHeight-190,
-            45,
-            190
-        );
-
-        enemies.forEach(e=>{
-
-            e.y+=1.5;
-
-            if(
-                e.y>
-                canvas.clientHeight
-            ){
-
-                e.y=-70;
-
-                e.x=
-                    Math.random()*
-                    canvas.clientWidth;
-
-                score=
-                    Math.max(
-                        0,
-                        score-100
-                    );
-
-                updateScore();
-
-            }
-
-            ctx.fillStyle="#ff1744";
-
-            ctx.fillRect(
-                e.x-20,
-                e.y-30,
-                40,
-                60
-            );
-
-        });
-
-        animation=
-            requestAnimationFrame(draw);
-
-    }
-
-    draw();
-
-}
-
-
-/* ==========================
-   ورود
-========================== */
-
-function login(){
-
-    modalContent.innerHTML=`
-
-        <div class="modalTitle">
-            🚀 ورود به NEXORA
-        </div>
-
-        <input
-            id="username"
-            placeholder="نام کاربری"
-            style="
-                width:100%;
-                padding:16px;
-                margin-bottom:12px;
-                border-radius:13px;
-                border:1px solid #ffffff15;
-                background:#ffffff08;
-                color:white;
-                outline:none;
-            "
-        >
-
-        <button
-            class="mainBtn"
-            style="width:100%"
-            onclick="doLogin()">
-
-            ورود 🚀
-
-        </button>
-
-    `;
-
-    modal.classList.add("show");
-
-}
-
-
-function doLogin(){
-
-    const name =
-        document.getElementById(
-            "username"
-        ).value.trim();
-
-    if(!name){
-
-        alert("نام کاربری را وارد کن.");
-
-        return;
-
-    }
-
-    closeModal();
-
-    alert(
-        "🔥 خوش آمدی "+name+"!"
-    );
-
-}
-
-
-/* ==========================
-   چالش
-========================== */
-
-function showChallenges(){
-
-    modalContent.innerHTML=`
-
-        <div class="modalTitle">
-            🔥 چالش‌های امروز
-        </div>
-
-        <div class="challenge">
-            🎯 گرفتن 1000 امتیاز
-        </div>
-
-        <div class="challenge">
-            🏎️ عبور از 20 دیوار
-        </div>
-
-        <div class="challenge">
-            🚀 نابودی 10 شهاب‌سنگ
-        </div>
-
-        <div class="challenge">
-            🏆 جمع کردن 5000 XP
-        </div>
-
-    `;
-
-    modal.classList.add("show");
-
-}
-
-
-/* ==========================
-   رتبه بندی
-========================== */
-
-function showRank(){
-
-    modalContent.innerHTML=`
-
-        <div class="modalTitle">
-            👑 رتبه‌بندی
-        </div>
-
-        <div class="challenge">
-            🥇 ShadowX — 98,420 XP
-        </div>
-
-        <div class="challenge">
-            🥈 DarkWolf — 91,780 XP
-        </div>
-
-        <div class="challenge">
-            🥉 Lightning — 87,350 XP
-        </div>
-
-        <div class="challenge">
-            ⭐ تو — ${xp.toLocaleString()} XP
-        </div>
-
-    `;
-
-    modal.classList.add("show");
-
-}
-
-
-/* ==========================
-   کیبورد
-========================== */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key==="ArrowLeft")
-            keys.left=true;
-
-        if(e.key==="ArrowRight")
-            keys.right=true;
-
-        if(e.key==="ArrowUp")
-            keys.up=true;
-
-        if(e.key==="ArrowDown")
-            keys.down=true;
-
-    }
-);
-
-document.addEventListener(
-    "keyup",
-    function(e){
-
-        if(e.key==="ArrowLeft")
-            keys.left=false;
-
-        if(e.key==="ArrowRight")
-            keys.right=false;
-
-        if(e.key==="ArrowUp")
-            keys.up=false;
-
-        if(e.key==="ArrowDown")
-            keys.down=false;
-
-    }
-);
-
-
-/* آنلاین نمایشی */
-
-let online=12847;
-
-setInterval(()=>{
-
-    online +=
-        Math.floor(
-            Math.random()*15
-        )-5;
-
-    document.getElementById("online")
-        .textContent =
-        online.toLocaleString();
-
-},3000);
+window.addEventListener("resize",()=>{
+ if(running)resize();
+});
 
 </script>
 
