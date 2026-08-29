@@ -7,12 +7,14 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Tahoma,Arial,sans-serif;
 background:#03050d;
 color:#fff;
 }
+
 body:before{
 content:"";
 position:fixed;
@@ -23,6 +25,7 @@ radial-gradient(circle at 15% 15%,#0066ff44,transparent 30%),
 radial-gradient(circle at 85% 20%,#a000ff33,transparent 30%),
 radial-gradient(circle at 50% 100%,#00eaff22,transparent 35%);
 }
+
 header{
 position:sticky;
 top:0;
@@ -36,17 +39,21 @@ background:#050711ee;
 backdrop-filter:blur(18px);
 border-bottom:1px solid #ffffff15;
 }
+
 .logo{
 font-size:24px;
 font-weight:bold;
 color:#00eaff;
 text-shadow:0 0 25px #00eaff;
 }
+
 .nav{
 display:flex;
 gap:7px;
 }
-.nav button,.control{
+
+.nav button,
+.control{
 border:1px solid #ffffff18;
 background:#ffffff09;
 color:#fff;
@@ -55,14 +62,18 @@ padding:10px 13px;
 font-family:inherit;
 cursor:pointer;
 }
-.nav button:hover,.control:hover{
+
+.nav button:hover,
+.control:hover{
 background:#00eaff18;
 border-color:#00eaff66;
 }
+
 .stats{
 display:flex;
 gap:7px;
 }
+
 .stat{
 background:#ffffff0a;
 border:1px solid #ffffff14;
@@ -70,11 +81,16 @@ border-radius:12px;
 padding:9px 12px;
 font-size:13px;
 }
+
 .hero{
 text-align:center;
 padding:70px 20px;
 }
-.hero small{color:#00eaff}
+
+.hero small{
+color:#00eaff;
+}
+
 .hero h1{
 font-size:clamp(45px,9vw,90px);
 margin:15px 0;
@@ -84,15 +100,20 @@ color:transparent;
 -webkit-background-clip:text;
 animation:grad 5s linear infinite;
 }
+
 @keyframes grad{
-to{background-position:300%}
+to{
+background-position:300%;
 }
+}
+
 .hero p{
 max-width:650px;
 margin:auto;
 line-height:2;
 color:#888;
 }
+
 .mainBtn{
 margin-top:25px;
 padding:14px 25px;
@@ -104,21 +125,31 @@ color:white;
 background:linear-gradient(135deg,#006aff,#9000ff);
 box-shadow:0 0 35px #6500ff44;
 cursor:pointer;
+transition:.2s;
 }
+
 .mainBtn:hover{
 transform:translateY(-3px);
 }
-.section,.games{
+
+.section,
+.games{
 padding:55px 5%;
 }
+
 .title{
 text-align:center;
 margin-bottom:30px;
 }
+
 .title h2{
 font-size:32px;
 }
-.title p{color:#777}
+
+.title p{
+color:#777;
+}
+
 .cards{
 max-width:1100px;
 margin:auto;
@@ -126,6 +157,7 @@ display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:18px;
 }
+
 .card{
 padding:25px;
 border:1px solid #ffffff14;
@@ -133,16 +165,22 @@ border-radius:22px;
 background:#ffffff07;
 transition:.25s;
 }
+
 .card:hover{
 transform:translateY(-7px);
 border-color:#00eaff55;
 }
-.icon{font-size:40px}
+
+.icon{
+font-size:40px;
+}
+
 .card p{
 color:#888;
 line-height:1.8;
 font-size:13px;
 }
+
 .gameGrid{
 max-width:1250px;
 margin:auto;
@@ -150,6 +188,7 @@ display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:17px;
 }
+
 .gameCard{
 position:relative;
 overflow:hidden;
@@ -159,11 +198,13 @@ background:#090c16;
 border:1px solid #ffffff15;
 transition:.25s;
 }
+
 .gameCard:hover{
 transform:translateY(-7px);
 box-shadow:0 25px 50px #0009;
 border-color:#00eaff55;
 }
+
 .gameImage{
 height:170px;
 display:flex;
@@ -172,12 +213,14 @@ justify-content:center;
 font-size:85px;
 position:relative;
 }
+
 .gameImage:after{
 content:"";
 position:absolute;
 inset:0;
 background:linear-gradient(transparent,#090c16);
 }
+
 .g1{background:linear-gradient(135deg,#05264e,#00aaff)}
 .g2{background:linear-gradient(135deg,#10002f,#6d00d9)}
 .g3{background:linear-gradient(135deg,#00352e,#00a47a)}
@@ -188,18 +231,22 @@ background:linear-gradient(transparent,#090c16);
 .g8{background:linear-gradient(135deg,#063d2b,#00aa70)}
 .g9{background:linear-gradient(135deg,#260505,#8d2020)}
 .g10{background:linear-gradient(135deg,#161616,#555)}
+
 .gameInfo{
 padding:14px;
 }
+
 .gameInfo h3{
 margin:0 0 8px;
 }
+
 .gameInfo p{
 font-size:12px;
 color:#888;
 line-height:1.7;
 margin:0 0 45px;
 }
+
 .play{
 position:absolute;
 bottom:13px;
@@ -214,6 +261,7 @@ font-family:inherit;
 font-weight:bold;
 cursor:pointer;
 }
+
 .rankBox{
 max-width:850px;
 margin:auto;
@@ -222,6 +270,7 @@ border-radius:22px;
 background:#ffffff07;
 border:1px solid #ffffff14;
 }
+
 .rankRow{
 display:grid;
 grid-template-columns:55px 1fr 130px;
@@ -232,10 +281,12 @@ margin:7px 0;
 border-radius:13px;
 background:#ffffff06;
 }
+
 .rankRow.me{
 border:1px solid #00eaff66;
 background:#00eaff0c;
 }
+
 .challengeGrid{
 max-width:1000px;
 margin:auto;
@@ -243,29 +294,35 @@ display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:15px;
 }
+
 .challenge{
 padding:20px;
 border-radius:18px;
 background:#ffffff07;
 border:1px solid #ffffff14;
 }
+
 .progress{
 height:8px;
 background:#ffffff12;
 border-radius:20px;
 overflow:hidden;
 }
+
 .progress div{
 height:100%;
 width:0;
 background:linear-gradient(90deg,#00eaff,#8700ff);
+transition:.4s;
 }
+
 footer{
 padding:40px;
 text-align:center;
 color:#555;
 border-top:1px solid #ffffff12;
 }
+
 .modal{
 display:none;
 position:fixed;
@@ -277,7 +334,11 @@ align-items:center;
 justify-content:center;
 padding:12px;
 }
-.modal.show{display:flex}
+
+.modal.show{
+display:flex;
+}
+
 .modalBox{
 width:min(1000px,100%);
 max-height:95vh;
@@ -288,6 +349,7 @@ border-radius:24px;
 background:#080b15;
 border:1px solid #00eaff33;
 }
+
 .close{
 position:absolute;
 left:12px;
@@ -300,22 +362,27 @@ background:#ffffff12;
 color:white;
 font-size:25px;
 cursor:pointer;
+z-index:5;
 }
+
 .modalTitle{
 text-align:center;
 color:#00eaff;
 }
+
 .hud{
 display:flex;
 justify-content:space-between;
 gap:8px;
 margin-bottom:10px;
 }
+
 .hud span{
 padding:8px 11px;
 border-radius:10px;
 background:#ffffff09;
 }
+
 canvas{
 width:100%;
 height:520px;
@@ -325,6 +392,7 @@ background:#02040a;
 border:1px solid #ffffff12;
 touch-action:none;
 }
+
 .controls{
 display:flex;
 justify-content:center;
@@ -332,9 +400,11 @@ flex-wrap:wrap;
 gap:8px;
 margin-top:12px;
 }
+
 .login{
 text-align:center;
 }
+
 .input{
 width:min(400px,100%);
 padding:14px;
@@ -346,26 +416,276 @@ color:#fff;
 font-family:inherit;
 outline:none;
 }
+
 .message{
 text-align:center;
 color:#777;
 font-size:13px;
 margin-top:10px;
 }
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.profileBox{
+width:min(650px,100%);
+max-height:94vh;
+overflow:auto;
+padding:28px;
+border-radius:28px;
+background:
+linear-gradient(145deg,#0b1020,#070912);
+border:1px solid #00eaff35;
+box-shadow:
+0 0 60px #006aff18,
+inset 0 0 40px #00eaff05;
+position:relative;
+}
+
+.profileTop{
+display:flex;
+align-items:center;
+gap:18px;
+padding:20px;
+border-radius:22px;
+background:linear-gradient(135deg,#00eaff0d,#9000ff0d);
+border:1px solid #ffffff12;
+}
+
+.avatar{
+width:85px;
+height:85px;
+flex-shrink:0;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+background:linear-gradient(135deg,#006aff,#9000ff);
+border:3px solid #00eaff88;
+box-shadow:0 0 30px #00eaff44;
+}
+
+.profileName{
+font-size:23px;
+font-weight:bold;
+margin-bottom:7px;
+}
+
+.profileRank{
+font-size:13px;
+color:#00eaff;
+}
+
+.profileEdit{
+display:flex;
+gap:8px;
+margin-top:15px;
+}
+
+.profileEdit input{
+flex:1;
+padding:12px;
+border:1px solid #ffffff18;
+border-radius:12px;
+background:#ffffff08;
+color:white;
+font-family:inherit;
+outline:none;
+}
+
+.profileEdit button{
+border:0;
+border-radius:12px;
+padding:10px 15px;
+background:linear-gradient(135deg,#006aff,#9000ff);
+color:white;
+font-family:inherit;
+font-weight:bold;
+cursor:pointer;
+}
+
+.profileStats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:16px;
+}
+
+.profileStat{
+padding:18px;
+border-radius:17px;
+background:#ffffff07;
+border:1px solid #ffffff12;
+transition:.2s;
+}
+
+.profileStat:hover{
+transform:translateY(-3px);
+border-color:#00eaff55;
+}
+
+.profileStatIcon{
+font-size:27px;
+margin-bottom:7px;
+}
+
+.profileStatValue{
+font-size:22px;
+font-weight:bold;
+}
+
+.profileStatLabel{
+font-size:11px;
+color:#777;
+margin-top:4px;
+}
+
+.profileProgress{
+margin-top:18px;
+padding:18px;
+border-radius:18px;
+background:#ffffff06;
+border:1px solid #ffffff10;
+}
+
+.profileProgressHead{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+font-size:13px;
+}
+
+.profileProgressBar{
+height:11px;
+background:#ffffff12;
+border-radius:20px;
+overflow:hidden;
+}
+
+.profileProgressBar div{
+height:100%;
+width:0;
+background:linear-gradient(90deg,#00eaff,#8700ff);
+box-shadow:0 0 15px #00eaff55;
+transition:width .5s;
+}
+
+.profileAchievements{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:16px;
+}
+
+.achievement{
+padding:14px 8px;
+text-align:center;
+border-radius:15px;
+background:#ffffff06;
+border:1px solid #ffffff10;
+font-size:12px;
+transition:.2s;
+}
+
+.achievement:hover{
+transform:translateY(-3px);
+border-color:#00eaff55;
+}
+
+.achievementIcon{
+font-size:28px;
+display:block;
+margin-bottom:6px;
+}
+
+.profileActions{
+display:flex;
+gap:10px;
+margin-top:18px;
+}
+
+.profileActions button{
+flex:1;
+margin-top:0;
+}
+
 @media(max-width:1050px){
-.gameGrid{grid-template-columns:repeat(3,1fr)}
+.gameGrid{
+grid-template-columns:repeat(3,1fr);
 }
+}
+
 @media(max-width:750px){
-.nav{display:none}
-.cards{grid-template-columns:1fr}
-.gameGrid{grid-template-columns:repeat(2,1fr)}
-.challengeGrid{grid-template-columns:1fr}
+
+.nav{
+display:none;
 }
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.gameGrid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.challengeGrid{
+grid-template-columns:1fr;
+}
+
+}
+
 @media(max-width:500px){
-.gameGrid{grid-template-columns:1fr}
-canvas{height:470px}
-.stats{font-size:10px}
-header{padding:0 2%}
+
+.gameGrid{
+grid-template-columns:1fr;
+}
+
+canvas{
+height:470px;
+}
+
+.stats{
+font-size:10px;
+}
+
+header{
+padding:0 2%;
+}
+
+.profileBox{
+padding:20px 15px;
+}
+
+.profileTop{
+padding:15px;
+}
+
+.avatar{
+width:70px;
+height:70px;
+font-size:34px;
+}
+
+.profileName{
+font-size:18px;
+}
+
+.profileStats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.profileAchievements{
+grid-template-columns:1fr 1fr;
+}
+
+.profileActions{
+flex-direction:column;
+}
+
 }
 </style>
 </head>
@@ -373,19 +693,41 @@ header{padding:0 2%}
 <body>
 
 <header>
+
 <div class="logo">⚡ NEXORA</div>
 
 <div class="nav">
-<button onclick="go('games')">🎮 بازی‌ها</button>
-<button onclick="go('ranking')">🏆 رتبه‌بندی</button>
-<button onclick="go('challenges')">🎯 چالش‌ها</button>
-<button onclick="openLogin()">👤 اکانت</button>
+
+<button onclick="go('games')">
+🎮 بازی‌ها
+</button>
+
+<button onclick="go('ranking')">
+🏆 رتبه‌بندی
+</button>
+
+<button onclick="go('challenges')">
+🎯 چالش‌ها
+</button>
+
+<button onclick="openProfile()">
+👤 پروفایل
+</button>
+
 </div>
 
 <div class="stats">
-<div class="stat">🪙 <b id="coins">0</b></div>
-<div class="stat">💎 <b id="xp">0</b></div>
+
+<div class="stat">
+🪙 <b id="coins">0</b>
 </div>
+
+<div class="stat">
+💎 <b id="xp">0</b>
+</div>
+
+</div>
+
 </header>
 
 
@@ -410,8 +752,11 @@ header{padding:0 2%}
 <section class="section">
 
 <div class="title">
+
 <h2>🚀 امکانات</h2>
+
 <p>همه چیز در یک سایت</p>
+
 </div>
 
 <div class="cards">
@@ -419,19 +764,25 @@ header{padding:0 2%}
 <div class="card">
 <div class="icon">🏆</div>
 <h3>رتبه‌بندی</h3>
-<p>رکورد خودت را ثبت کن و جایگاهت را ببین.</p>
+<p>
+رکورد خودت را ثبت کن و جایگاهت را ببین.
+</p>
 </div>
 
 <div class="card">
 <div class="icon">🎯</div>
 <h3>چالش‌ها</h3>
-<p>چالش‌های مختلف را کامل کن.</p>
+<p>
+چالش‌های مختلف را کامل کن.
+</p>
 </div>
 
 <div class="card">
 <div class="icon">🪙</div>
 <h3>سکه و XP</h3>
-<p>با بازی کردن سکه و XP به دست بیاور.</p>
+<p>
+با بازی کردن سکه و XP به دست بیاور.
+</p>
 </div>
 
 </div>
@@ -441,111 +792,262 @@ header{padding:0 2%}
 <section class="games" id="games">
 
 <div class="title">
+
 <h2>🎮 بازی‌ها</h2>
-<p>هر بازی گیم‌پلی مخصوص خودش را دارد</p>
+
+<p>
+هر بازی گیم‌پلی مخصوص خودش را دارد
+</p>
+
 </div>
 
 <div class="gameGrid">
 
+
 <div class="gameCard">
-<div class="gameImage g1">🏎️</div>
+
+<div class="gameImage g1">
+🏎️
+</div>
+
 <div class="gameInfo">
+
 <h3>Neon Racer</h3>
-<p>از دیوارهای جاده دور شو.</p>
-</div>
-<button class="play" onclick="startGame(1)">▶ بازی</button>
+
+<p>
+از دیوارهای جاده دور شو.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(1)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g2">🚀</div>
+
+<div class="gameImage g2">
+🚀
+</div>
+
 <div class="gameInfo">
+
 <h3>Space Attack</h3>
-<p>شهاب‌سنگ‌ها را نابود کن.</p>
-</div>
-<button class="play" onclick="startGame(2)">▶ بازی</button>
+
+<p>
+شهاب‌سنگ‌ها را نابود کن.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(2)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g3">🏃</div>
+
+<div class="gameImage g3">
+🏃
+</div>
+
 <div class="gameInfo">
+
 <h3>Neon Parkour</h3>
-<p>روی سکوها بپر.</p>
-</div>
-<button class="play" onclick="startGame(3)">▶ بازی</button>
+
+<p>
+روی سکوها بپر.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(3)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g4">🏀</div>
+
+<div class="gameImage g4">
+🏀
+</div>
+
 <div class="gameInfo">
+
 <h3>Basket Pro</h3>
-<p>توپ را داخل حلقه بینداز.</p>
-</div>
-<button class="play" onclick="startGame(4)">▶ بازی</button>
+
+<p>
+توپ را داخل حلقه بینداز.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(4)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g5">🏹</div>
+
+<div class="gameImage g5">
+🏹
+</div>
+
 <div class="gameInfo">
+
 <h3>Target Master</h3>
-<p>هدف‌های متحرک را بزن.</p>
-</div>
-<button class="play" onclick="startGame(5)">▶ بازی</button>
+
+<p>
+هدف‌های متحرک را بزن.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(5)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g6">🏂</div>
+
+<div class="gameImage g6">
+🏂
+</div>
+
 <div class="gameInfo">
+
 <h3>Snow Rush</h3>
-<p>در مسیر برفی حرکت کن.</p>
-</div>
-<button class="play" onclick="startGame(6)">▶ بازی</button>
+
+<p>
+در مسیر برفی حرکت کن.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(6)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g7">🧊</div>
+
+<div class="gameImage g7">
+🧊
+</div>
+
 <div class="gameInfo">
+
 <h3>Cube Puzzle</h3>
-<p>پازل را کامل کن.</p>
-</div>
-<button class="play" onclick="startGame(7)">▶ بازی</button>
+
+<p>
+پازل را کامل کن.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(7)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g8">🏝️</div>
+
+<div class="gameImage g8">
+🏝️
+</div>
+
 <div class="gameInfo">
+
 <h3>Treasure Island</h3>
-<p>صندوق‌های گنج را پیدا کن.</p>
-</div>
-<button class="play" onclick="startGame(8)">▶ بازی</button>
+
+<p>
+صندوق‌های گنج را پیدا کن.
+</p>
+
 </div>
 
+<button class="play" onclick="startGame(8)">
+▶ بازی
+</button>
+
+</div>
+
+
 <div class="gameCard">
-<div class="gameImage g9">🧟</div>
+
+<div class="gameImage g9">
+🧟
+</div>
+
 <div class="gameInfo">
+
 <h3>Zombie Escape</h3>
-<p>از زامبی‌ها فاصله بگیر.</p>
+
+<p>
+از زامبی‌ها فاصله بگیر.
+</p>
+
 </div>
-<button class="play" onclick="startGame(9)">▶ بازی</button>
+
+<button class="play" onclick="startGame(9)">
+▶ بازی
+</button>
+
 </div>
+
 
 <div class="gameCard">
-<div class="gameImage g10">🏰</div>
-<div class="gameInfo">
-<h3>Castle Defense</h3>
-<p>از قلعه دفاع کن و ارتقایش بده.</p>
+
+<div class="gameImage g10">
+🏰
 </div>
-<button class="play" onclick="startGame(10)">▶ بازی</button>
+
+<div class="gameInfo">
+
+<h3>Castle Defense</h3>
+
+<p>
+از قلعه دفاع کن و ارتقایش بده.
+</p>
+
+</div>
+
+<button class="play" onclick="startGame(10)">
+▶ بازی
+</button>
+
 </div>
 
 </div>
+
 </section>
 
 
 <section class="section" id="ranking">
 
 <div class="title">
+
 <h2>🏆 جدول رتبه‌بندی</h2>
-<p>برترین بازیکن‌ها</p>
+
+<p>
+برترین بازیکن‌ها
+</p>
+
 </div>
 
 <div class="rankBox" id="rankingList"></div>
@@ -556,123 +1058,502 @@ header{padding:0 2%}
 <section class="section" id="challenges">
 
 <div class="title">
+
 <h2>🎯 چالش‌ها</h2>
-<p>پیشرفتت را کامل کن</p>
+
+<p>
+پیشرفتت را کامل کن
+</p>
+
 </div>
 
 <div class="challengeGrid">
 
+
 <div class="challenge">
+
 <h3>🎮 اولین بازی</h3>
-<p>یک بازی انجام بده.</p>
+
+<p>
+یک بازی انجام بده.
+</p>
+
 <div class="progress">
 <div id="c1"></div>
 </div>
+
 </div>
 
+
 <div class="challenge">
+
 <h3>⭐ امتیاز 100</h3>
-<p>به 100 امتیاز برس.</p>
+
+<p>
+به 100 امتیاز برس.
+</p>
+
 <div class="progress">
 <div id="c2"></div>
 </div>
+
 </div>
 
+
 <div class="challenge">
+
 <h3>🪙 سکه</h3>
-<p>20 سکه جمع کن.</p>
+
+<p>
+20 سکه جمع کن.
+</p>
+
 <div class="progress">
 <div id="c3"></div>
 </div>
+
 </div>
 
+
 <div class="challenge">
+
 <h3>💎 XP</h3>
-<p>500 XP به دست بیاور.</p>
+
+<p>
+500 XP به دست بیاور.
+</p>
+
 <div class="progress">
 <div id="c4"></div>
 </div>
+
 </div>
 
 </div>
+
 </section>
 
 
 <footer>
-⚡ NEXORA<br>
+
+⚡ NEXORA
+
+<br>
+
 © 2026
+
 </footer>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div class="modal" id="loginModal">
 
 <div class="modalBox login">
 
-<button class="close" onclick="closeModal('loginModal')">×</button>
+<button class="close"
+onclick="closeModal('loginModal')">
+×
+</button>
 
-<h2>👤 اکانت NEXORA</h2>
+<h2>
+👤 اکانت NEXORA
+</h2>
 
 <p style="color:#777">
-نامت را وارد کن. این اطلاعات روی همین مرورگر ذخیره می‌شود.
+
+نامت را وارد کن.
+این اطلاعات روی همین مرورگر ذخیره می‌شود.
+
 </p>
 
 <input
 id="username"
 class="input"
 placeholder="نام بازیکن"
+maxlength="20"
 >
 
 <br>
 
-<button class="mainBtn" onclick="login()">
+<button class="mainBtn"
+onclick="login()">
+
 🚀 ذخیره اکانت
+
 </button>
 
 </div>
+
 </div>
 
 
-<!-- GAME -->
+<!-- =========================
+     PROFILE
+========================= -->
+
+<div class="modal" id="profileModal">
+
+<div class="profileBox">
+
+<button class="close"
+onclick="closeModal('profileModal')">
+×
+</button>
+
+<h2 class="modalTitle">
+👤 پروفایل NEXORA
+</h2>
+
+
+<div class="profileTop">
+
+<div class="avatar">
+⚡
+</div>
+
+<div>
+
+<div class="profileName"
+id="profileName">
+
+بازیکن
+
+</div>
+
+<div class="profileRank"
+id="profileRank">
+
+🎮 بازیکن تازه‌کار
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="profileEdit">
+
+<input
+id="profileNameInput"
+placeholder="نام جدید"
+maxlength="20"
+>
+
+<button onclick="changeProfileName()">
+✏️ تغییر
+</button>
+
+</div>
+
+
+<div class="profileStats">
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+🪙
+</div>
+
+<div class="profileStatValue"
+id="profileCoins">
+0
+</div>
+
+<div class="profileStatLabel">
+سکه
+</div>
+
+</div>
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+💎
+</div>
+
+<div class="profileStatValue"
+id="profileXP">
+0
+</div>
+
+<div class="profileStatLabel">
+XP
+</div>
+
+</div>
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+⭐
+</div>
+
+<div class="profileStatValue"
+id="profileBest">
+0
+</div>
+
+<div class="profileStatLabel">
+بهترین امتیاز
+</div>
+
+</div>
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+🎮
+</div>
+
+<div class="profileStatValue"
+id="profileGames">
+0
+</div>
+
+<div class="profileStatLabel">
+بازی انجام‌شده
+</div>
+
+</div>
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+🏰
+</div>
+
+<div class="profileStatValue"
+id="profileCastle">
+1
+</div>
+
+<div class="profileStatLabel">
+سطح قلعه
+</div>
+
+</div>
+
+
+<div class="profileStat">
+
+<div class="profileStatIcon">
+🏆
+</div>
+
+<div class="profileStatValue"
+id="profileLevel">
+1
+</div>
+
+<div class="profileStatLabel">
+سطح بازیکن
+</div>
+
+</div>
+
+</div>
+
+
+<div class="profileProgress">
+
+<div class="profileProgressHead">
+
+<span>
+💎 پیشرفت XP
+</span>
+
+<span id="profileXPText">
+0 / 100 XP
+</span>
+
+</div>
+
+<div class="profileProgressBar">
+
+<div id="profileXPBar"></div>
+
+</div>
+
+</div>
+
+
+<div class="profileAchievements">
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+🎮
+</span>
+
+اولین بازی
+
+</div>
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+🪙
+</span>
+
+20 سکه
+
+</div>
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+⭐
+</span>
+
+100 امتیاز
+
+</div>
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+💎
+</span>
+
+500 XP
+
+</div>
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+🏰
+</span>
+
+قلعه‌دار
+
+</div>
+
+
+<div class="achievement">
+
+<span class="achievementIcon">
+🔥
+</span>
+
+گیمر فعال
+
+</div>
+
+</div>
+
+
+<div class="profileActions">
+
+<button
+class="mainBtn"
+onclick="closeModal('profileModal')">
+
+🎮 ادامه
+
+</button>
+
+<button
+class="control"
+onclick="openLogin()">
+
+👤 اکانت
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     GAME
+========================= -->
 
 <div class="modal" id="gameModal">
 
 <div class="modalBox">
 
-<button class="close" onclick="closeGame()">×</button>
+<button class="close"
+onclick="closeGame()">
+×
+</button>
 
-<h2 class="modalTitle" id="gameTitle"></h2>
+<h2 class="modalTitle"
+id="gameTitle">
+</h2>
 
 <div class="hud">
-<span>⭐ <b id="score">0</b></span>
-<span>🏆 <b id="level">1</b></span>
-<span>🪙 <b id="gameCoins">0</b></span>
+
+<span>
+⭐ <b id="score">0</b>
+</span>
+
+<span>
+🏆 <b id="level">1</b>
+</span>
+
+<span>
+🪙 <b id="gameCoins">0</b>
+</span>
+
 </div>
 
 <canvas id="canvas"></canvas>
 
-<div class="controls" id="controls"></div>
+<div class="controls"
+id="controls">
+</div>
 
-<div class="message" id="message"></div>
+<div class="message"
+id="message">
+</div>
 
 </div>
+
 </div>
 
 
 <script>
 
-/* =========================================
+/* =========================
    SAVE SYSTEM
-   اطلاعات با localStorage حفظ می‌شوند
-========================================= */
+========================= */
 
-let coins=Number(localStorage.getItem("nexora_coins")||0);
-let xp=Number(localStorage.getItem("nexora_xp")||0);
-let playerName=localStorage.getItem("nexora_name")||"بازیکن";
-let totalGames=Number(localStorage.getItem("nexora_games")||0);
-let bestScore=Number(localStorage.getItem("nexora_best")||0);
-let castleLevel=Number(localStorage.getItem("nexora_castle")||1);
+let coins=
+Number(localStorage.getItem("nexora_coins")||0);
+
+let xp=
+Number(localStorage.getItem("nexora_xp")||0);
+
+let playerName=
+localStorage.getItem("nexora_name")||"بازیکن";
+
+let totalGames=
+Number(localStorage.getItem("nexora_games")||0);
+
+let bestScore=
+Number(localStorage.getItem("nexora_best")||0);
+
+let castleLevel=
+Number(localStorage.getItem("nexora_castle")||1);
+
 
 let currentGame=0;
 let score=0;
@@ -682,8 +1563,13 @@ let running=false;
 let animation=0;
 let objects=[];
 
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
+
+const canvas=
+document.getElementById("canvas");
+
+const ctx=
+canvas.getContext("2d");
+
 
 let player={
 x:0,
@@ -694,46 +1580,232 @@ ground:false
 };
 
 
-/* ذخیره */
+/* =========================
+   SAVE
+========================= */
 
 function saveData(){
 
-localStorage.setItem("nexora_coins",coins);
-localStorage.setItem("nexora_xp",xp);
-localStorage.setItem("nexora_name",playerName);
-localStorage.setItem("nexora_games",totalGames);
-localStorage.setItem("nexora_best",bestScore);
-localStorage.setItem("nexora_castle",castleLevel);
+localStorage.setItem(
+"nexora_coins",
+coins
+);
+
+localStorage.setItem(
+"nexora_xp",
+xp
+);
+
+localStorage.setItem(
+"nexora_name",
+playerName
+);
+
+localStorage.setItem(
+"nexora_games",
+totalGames
+);
+
+localStorage.setItem(
+"nexora_best",
+bestScore
+);
+
+localStorage.setItem(
+"nexora_castle",
+castleLevel
+);
 
 updateUI();
 
 }
 
 
-/* نمایش */
+/* =========================
+   UI
+========================= */
 
 function updateUI(){
 
-document.getElementById("coins").textContent=coins;
-document.getElementById("xp").textContent=xp;
-document.getElementById("gameCoins").textContent=coins;
+document.getElementById("coins")
+.textContent=coins;
+
+document.getElementById("xp")
+.textContent=xp;
+
+document.getElementById("gameCoins")
+.textContent=coins;
 
 updateRanking();
+
 updateChallenges();
+
+if(document.getElementById("profileModal")){
+
+updateProfile();
+
+}
 
 }
 
 
-/* رتبه‌بندی */
+/* =========================
+   PROFILE
+========================= */
+
+function getPlayerLevel(){
+
+return Math.max(
+1,
+Math.floor(xp/100)+1
+);
+
+}
+
+
+function getPlayerRank(){
+
+let lv=
+getPlayerLevel();
+
+if(lv>=20)
+return "👑 افسانه NEXORA";
+
+if(lv>=15)
+return "🔥 استاد بازی";
+
+if(lv>=10)
+return "⚡ گیمر حرفه‌ای";
+
+if(lv>=5)
+return "🏆 گیمر باتجربه";
+
+if(lv>=2)
+return "🎮 گیمر فعال";
+
+return "🌱 بازیکن تازه‌کار";
+
+}
+
+
+function updateProfile(){
+
+let name=
+playerName || "بازیکن";
+
+document.getElementById(
+"profileName"
+).textContent=name;
+
+document.getElementById(
+"profileNameInput"
+).value=name;
+
+document.getElementById(
+"profileCoins"
+).textContent=coins;
+
+document.getElementById(
+"profileXP"
+).textContent=xp;
+
+document.getElementById(
+"profileBest"
+).textContent=bestScore;
+
+document.getElementById(
+"profileGames"
+).textContent=totalGames;
+
+document.getElementById(
+"profileCastle"
+).textContent=castleLevel;
+
+
+let playerLevel=
+getPlayerLevel();
+
+document.getElementById(
+"profileLevel"
+).textContent=playerLevel;
+
+document.getElementById(
+"profileRank"
+).textContent=getPlayerRank();
+
+
+let currentXP=
+xp%100;
+
+document.getElementById(
+"profileXPText"
+).textContent=
+currentXP+" / 100 XP";
+
+document.getElementById(
+"profileXPBar"
+).style.width=
+currentXP+"%";
+
+}
+
+
+function openProfile(){
+
+updateProfile();
+
+document.getElementById(
+"profileModal"
+).classList.add("show");
+
+}
+
+
+function changeProfileName(){
+
+let input=
+document.getElementById(
+"profileNameInput"
+);
+
+let name=
+input.value.trim();
+
+if(!name){
+
+alert("❌ یک نام وارد کن.");
+
+return;
+
+}
+
+playerName=name;
+
+saveData();
+
+updateProfile();
+
+alert(
+"✅ نام پروفایل تغییر کرد!"
+);
+
+}
+
+
+/* =========================
+   RANKING
+========================= */
 
 function updateRanking(){
 
 let players=[
+
 ["🥇","Shadow",1250],
 ["🥈","NEXUS",980],
 ["🥉","PlayerX",760],
 ["4","Gamer",620],
 ["5","Robo",540]
+
 ];
 
 let html="";
@@ -741,48 +1813,71 @@ let html="";
 players.forEach(p=>{
 
 html+=`
+
 <div class="rankRow">
+
 <div>${p[0]}</div>
+
 <div>${p[1]}</div>
+
 <div>⭐ ${p[2]}</div>
+
 </div>
+
 `;
 
 });
 
+
 html+=`
+
 <div class="rankRow me">
+
 <div>👤</div>
+
 <div>${playerName}</div>
+
 <div>⭐ ${bestScore}</div>
+
 </div>
+
 `;
 
-document.getElementById("rankingList").innerHTML=html;
+document.getElementById(
+"rankingList"
+).innerHTML=html;
 
 }
 
 
-/* چالش‌ها */
+/* =========================
+   CHALLENGES
+========================= */
 
 function updateChallenges(){
 
-document.getElementById("c1").style.width=
+document.getElementById("c1")
+.style.width=
 Math.min(totalGames,1)*100+"%";
 
-document.getElementById("c2").style.width=
+document.getElementById("c2")
+.style.width=
 Math.min(bestScore,100)+"%";
 
-document.getElementById("c3").style.width=
+document.getElementById("c3")
+.style.width=
 Math.min(coins/20*100,100)+"%";
 
-document.getElementById("c4").style.width=
+document.getElementById("c4")
+.style.width=
 Math.min(xp/500*100,100)+"%";
 
 }
 
 
-/* مسیر */
+/* =========================
+   NAV
+========================= */
 
 function go(id){
 
@@ -794,26 +1889,35 @@ behavior:"smooth"
 }
 
 
-/* ورود */
+/* =========================
+   LOGIN
+========================= */
 
 function openLogin(){
 
-document.getElementById("username").value=playerName;
+document.getElementById(
+"username"
+).value=playerName;
 
-document.getElementById("loginModal")
-.classList.add("show");
+document.getElementById(
+"loginModal"
+).classList.add("show");
 
 }
+
 
 function login(){
 
 let name=
-document.getElementById("username")
-.value.trim();
+document.getElementById(
+"username"
+).value.trim();
 
 if(!name){
 
-alert("نام بازیکن را وارد کن.");
+alert(
+"نام بازیکن را وارد کن."
+);
 
 return;
 
@@ -825,12 +1929,17 @@ saveData();
 
 closeModal("loginModal");
 
-alert("✅ اکانت ذخیره شد!\nخوش آمدی "+playerName);
+alert(
+"✅ اکانت ذخیره شد!\nخوش آمدی "+
+playerName
+);
 
 }
 
 
-/* Modal */
+/* =========================
+   MODAL
+========================= */
 
 function closeModal(id){
 
@@ -840,75 +1949,126 @@ document.getElementById(id)
 }
 
 
-/* Canvas */
+/* =========================
+   CANVAS
+========================= */
 
 function resizeCanvas(){
 
-let r=canvas.getBoundingClientRect();
+let r=
+canvas.getBoundingClientRect();
 
-let dpr=window.devicePixelRatio||1;
+let dpr=
+window.devicePixelRatio||1;
 
-canvas.width=r.width*dpr;
-canvas.height=r.height*dpr;
+canvas.width=
+r.width*dpr;
 
-ctx.setTransform(dpr,0,0,dpr,0,0);
+canvas.height=
+r.height*dpr;
+
+ctx.setTransform(
+dpr,
+0,
+0,
+dpr,
+0,
+0
+);
 
 }
+
 
 function W(){
 return canvas.clientWidth;
 }
 
+
 function H(){
 return canvas.clientHeight;
 }
 
+
 function circle(x,y,r,c){
 
 ctx.beginPath();
-ctx.arc(x,y,r,0,Math.PI*2);
+
+ctx.arc(
+x,
+y,
+r,
+0,
+Math.PI*2
+);
+
 ctx.fillStyle=c;
+
 ctx.fill();
 
 }
 
+
 function rect(x,y,w,h,c){
 
 ctx.fillStyle=c;
-ctx.fillRect(x,y,w,h);
+
+ctx.fillRect(
+x,
+y,
+w,
+h
+);
 
 }
+
 
 function text(t,x,y,s=18){
 
-ctx.font=s+"px Tahoma";
+ctx.font=
+s+"px Tahoma";
+
 ctx.fillStyle="#fff";
-ctx.fillText(t,x,y);
+
+ctx.fillText(
+t,
+x,
+y
+);
 
 }
 
 
-/* بازی */
+/* =========================
+   START GAME
+========================= */
 
 function startGame(type){
 
 currentGame=type;
 
 score=0;
+
 level=1;
+
 frame=0;
+
 objects=[];
+
 running=true;
 
 totalGames++;
 
-document.getElementById("gameModal")
-.classList.add("show");
+document.getElementById(
+"gameModal"
+).classList.add("show");
 
 resizeCanvas();
 
+
 let names=[
+
 "",
+
 "🏎️ NEON RACER",
 "🚀 SPACE ATTACK",
 "🏃 NEON PARKOUR",
@@ -919,51 +2079,87 @@ let names=[
 "🏝️ TREASURE ISLAND",
 "🧟 ZOMBIE ESCAPE",
 "🏰 CASTLE DEFENSE"
+
 ];
 
-document.getElementById("gameTitle")
-.textContent=names[type];
 
-document.getElementById("message")
-.textContent="";
+document.getElementById(
+"gameTitle"
+).textContent=
+names[type];
 
-document.getElementById("controls").innerHTML="";
+document.getElementById(
+"message"
+).textContent="";
+
+document.getElementById(
+"controls"
+).innerHTML="";
+
 
 saveData();
 
+
 if(type===1)carGame();
+
 if(type===2)spaceGame();
+
 if(type===3)parkourGame();
+
 if(type===4)basketGame();
+
 if(type===5)targetGame();
+
 if(type===6)snowGame();
+
 if(type===7)cubeGame();
+
 if(type===8)treasureGame();
+
 if(type===9)zombieGame();
+
 if(type===10)castleGame();
 
 }
 
 
-/* پاداش */
+/* =========================
+   REWARD
+========================= */
 
 function reward(points,coinAmount){
 
 score+=points;
+
 xp+=points;
+
 coins+=coinAmount;
 
-if(score>bestScore)
+
+if(score>bestScore){
+
 bestScore=score;
-
-saveData();
-
-document.getElementById("score").textContent=score;
 
 }
 
 
-/* باخت */
+saveData();
+
+
+document.getElementById(
+"score"
+).textContent=score;
+
+document.getElementById(
+"level"
+).textContent=level;
+
+}
+
+
+/* =========================
+   LOSE
+========================= */
 
 function lose(reason){
 
@@ -971,22 +2167,30 @@ if(!running)return;
 
 running=false;
 
-cancelAnimationFrame(animation);
+cancelAnimationFrame(
+animation
+);
 
 saveData();
 
+
 setTimeout(()=>{
 
-let again=confirm(
+let again=
+confirm(
 "💥 باختی!\n\n"+
 reason+
-"\n\n⭐ امتیاز: "+score+
+"\n\n⭐ امتیاز: "+
+score+
 "\n\nدوباره بازی؟"
 );
 
+
 if(again){
 
-startGame(currentGame);
+startGame(
+currentGame
+);
 
 }else{
 
@@ -999,40 +2203,63 @@ closeGame();
 }
 
 
-/* بستن */
+/* =========================
+   CLOSE GAME
+========================= */
 
 function closeGame(){
 
 running=false;
 
-cancelAnimationFrame(animation);
+cancelAnimationFrame(
+animation
+);
 
-closeModal("gameModal");
+closeModal(
+"gameModal"
+);
 
 }
 
 
-/* =========================================
-   ماشین
-========================================= */
+/* =========================
+   CAR
+========================= */
 
 function carGame(){
 
 player.x=W()/2;
+
 player.y=H()-80;
 
-document.getElementById("message")
-.textContent=
+
+document.getElementById(
+"message"
+).textContent=
 "🏎️ اول مسیر خلوت است؛ بعداً موانع کم‌کم می‌آیند.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="carMove(-1)">⬅️</button>
-<button class="control" onclick="carMove(1)">➡️</button>
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="carMove(-1)">
+⬅️
+</button>
+
+<button class="control"
+onclick="carMove(1)">
+➡️
+</button>
+
 `;
+
 
 carLoop();
 
 }
+
 
 function carMove(n){
 
@@ -1040,27 +2267,57 @@ player.x+=n*45;
 
 player.x=Math.max(
 W()*.18,
-Math.min(W()*.82,player.x)
+Math.min(
+W()*.82,
+player.x
+)
 );
 
 }
+
 
 function carLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(carLoop);
+animation=
+requestAnimationFrame(
+carLoop
+);
 
 frame++;
 
-ctx.clearRect(0,0,W(),H());
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
 
-rect(0,0,W(),H(),"#101820");
+
+rect(
+0,
+0,
+W(),
+H(),
+"#101820"
+);
+
 
 let road=W()*.75;
-let rx=(W()-road)/2;
 
-rect(rx,0,road,H(),"#30343b");
+let rx=
+(W()-road)/2;
+
+
+rect(
+rx,
+0,
+road,
+H(),
+"#30343b"
+);
+
 
 for(
 let y=(frame*4)%75-75;
@@ -1068,83 +2325,160 @@ y<H();
 y+=75
 ){
 
-rect(W()/2-3,y,6,38,"#fff");
+rect(
+W()/2-3,
+y,
+6,
+38,
+"#fff"
+);
 
 }
+
 
 /* موانع دیرتر */
 
-if(frame>350 && frame%115===0){
+if(
+frame>350 &&
+frame%115===0
+){
 
 objects.push({
-x:rx+45+Math.random()*(road-90),
+
+x:
+rx+45+
+Math.random()*(road-90),
+
 y:-60,
-speed:1.5+level*.1
+
+speed:
+1.5+level*.1
+
 });
 
 }
+
 
 objects.forEach(o=>{
 
 o.y+=o.speed;
 
-rect(o.x-28,o.y-32,56,64,"#a83d28");
 
-for(let y=o.y-32;y<o.y+32;y+=16){
+rect(
+o.x-28,
+o.y-32,
+56,
+64,
+"#a83d28"
+);
 
-ctx.strokeStyle="#551d15";
-ctx.strokeRect(o.x-28,y,56,16);
+
+for(
+let y=o.y-32;
+y<o.y+32;
+y+=16
+){
+
+ctx.strokeStyle=
+"#551d15";
+
+ctx.strokeRect(
+o.x-28,
+y,
+56,
+16
+);
 
 }
 
+
 if(
-Math.abs(player.x-o.x)<45 &&
-Math.abs(player.y-o.y)<60
+Math.abs(
+player.x-o.x
+)<45 &&
+Math.abs(
+player.y-o.y
+)<60
 ){
 
-lose("ماشین به دیوار خورد.");
+lose(
+"ماشین به دیوار خورد."
+);
 
 }
 
 });
 
-objects=
-objects.filter(o=>o.y<H()+80);
 
-drawCar(player.x,player.y);
+objects=
+objects.filter(
+o=>o.y<H()+80
+);
+
+
+drawCar(
+player.x,
+player.y
+);
+
 
 if(frame%1300===0){
 
 level++;
 
-reward(20,1);
+reward(
+20,
+1
+);
 
 }
 
 }
 
 
-/* =========================================
-   سفینه
-========================================= */
+/* =========================
+   SPACE
+========================= */
 
 function spaceGame(){
 
 player.x=W()/2;
+
 player.y=H()-70;
 
-document.getElementById("message")
-.textContent="🚀 شهاب‌سنگ‌ها کم و آهسته هستند.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="spaceMove(-1)">⬅️</button>
-<button class="control" onclick="spaceShoot()">🚀 شلیک</button>
-<button class="control" onclick="spaceMove(1)">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🚀 شهاب‌سنگ‌ها کم و آهسته هستند.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="spaceMove(-1)">
+⬅️
+</button>
+
+<button class="control"
+onclick="spaceShoot()">
+🚀 شلیک
+</button>
+
+<button class="control"
+onclick="spaceMove(1)">
+➡️
+</button>
+
 `;
+
 
 spaceLoop();
 
 }
+
 
 function spaceMove(n){
 
@@ -1152,19 +2486,29 @@ player.x+=n*40;
 
 player.x=Math.max(
 25,
-Math.min(W()-25,player.x)
+Math.min(
+W()-25,
+player.x
+)
 );
 
 }
+
 
 function spaceShoot(){
 
 for(let o of objects){
 
-if(Math.abs(o.x-player.x)<45){
+if(
+Math.abs(o.x-player.x)<45
+){
 
 o.dead=true;
-reward(10,1);
+
+reward(
+10,
+1
+);
 
 break;
 
@@ -1174,17 +2518,33 @@ break;
 
 }
 
+
 function spaceLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(spaceLoop);
+animation=
+requestAnimationFrame(
+spaceLoop
+);
 
 frame++;
 
-rect(0,0,W(),H(),"#020313");
 
-for(let i=0;i<60;i++){
+rect(
+0,
+0,
+W(),
+H(),
+"#020313"
+);
+
+
+for(
+let i=0;
+i<60;
+i++
+){
 
 circle(
 (i*91)%W(),
@@ -1195,22 +2555,39 @@ circle(
 
 }
 
+
 if(frame%120===0){
 
 objects.push({
-x:30+Math.random()*(W()-60),
+
+x:
+30+
+Math.random()*
+(W()-60),
+
 y:-30,
+
 r:15,
+
 speed:.8
+
 });
 
 }
+
 
 objects.forEach(o=>{
 
 o.y+=o.speed;
 
-circle(o.x,o.y,o.r,"#777");
+
+circle(
+o.x,
+o.y,
+o.r,
+"#777"
+);
+
 
 if(
 Math.hypot(
@@ -1219,55 +2596,102 @@ o.y-player.y
 )<o.r+17
 ){
 
-lose("شهاب‌سنگ به سفینه خورد.");
+lose(
+"شهاب‌سنگ به سفینه خورد."
+);
 
 }
 
 });
 
-objects=objects.filter(o=>!o.dead&&o.y<H()+50);
 
-drawShip(player.x,player.y);
+objects=
+objects.filter(
+o=>!o.dead &&
+o.y<H()+50
+);
+
+
+drawShip(
+player.x,
+player.y
+);
 
 }
 
 
-/* =========================================
-   پارکور
-========================================= */
+/* =========================
+   PARKOUR
+========================= */
 
 function parkourGame(){
 
 player.x=80;
+
 player.y=H()-100;
+
 player.vy=0;
+
 player.ground=false;
 
 objects=[];
 
-for(let i=0;i<7;i++){
+
+for(
+let i=0;
+i<7;
+i++
+){
 
 objects.push({
+
 x:i*155+30,
-y:H()-75-(i%2)*45,
+
+y:
+H()-75-
+(i%2)*45,
+
 w:110,
+
 h:15
+
 });
 
 }
 
-document.getElementById("message")
-.textContent="🏃 سکوها نزدیک هستند؛ راحت بپر.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="parkMove(-1)">⬅️</button>
-<button class="control" onclick="parkJump()">🆙 پرش</button>
-<button class="control" onclick="parkMove(1)">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🏃 سکوها نزدیک هستند؛ راحت بپر.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="parkMove(-1)">
+⬅️
+</button>
+
+<button class="control"
+onclick="parkJump()">
+🆙 پرش
+</button>
+
+<button class="control"
+onclick="parkMove(1)">
+➡️
+</button>
+
 `;
+
 
 parkLoop();
 
 }
+
 
 function parkMove(n){
 
@@ -1275,37 +2699,69 @@ player.x+=n*35;
 
 }
 
+
 function parkJump(){
 
 if(player.ground){
 
 player.vy=-12;
+
 player.ground=false;
 
 }
 
 }
+
 
 function parkLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(parkLoop);
+animation=
+requestAnimationFrame(
+parkLoop
+);
 
-ctx.clearRect(0,0,W(),H());
+frame++;
 
-rect(0,0,W(),H(),"#07131d");
+
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
+
+
+rect(
+0,
+0,
+W(),
+H(),
+"#07131d"
+);
+
 
 player.vy+=.55;
+
 player.y+=player.vy;
 
 player.ground=false;
+
 
 objects.forEach(p=>{
 
 p.x-=1;
 
-rect(p.x,p.y,p.w,p.h,"#00eaff");
+
+rect(
+p.x,
+p.y,
+p.w,
+p.h,
+"#00eaff"
+);
+
 
 if(
 player.x>p.x &&
@@ -1316,177 +2772,324 @@ player.vy>=0
 ){
 
 player.y=p.y-20;
+
 player.vy=0;
+
 player.ground=true;
 
 }
 
-if(p.x+p.w<0){
+
+if(
+p.x+p.w<0
+){
 
 p.x=W()+100;
-p.y=H()-80-Math.random()*70;
 
-reward(8,1);
+p.y=
+H()-80-
+Math.random()*70;
+
+reward(
+8,
+1
+);
 
 }
 
 });
 
-circle(player.x,player.y,20,"#9d00ff");
 
-if(player.y>H()+40){
+circle(
+player.x,
+player.y,
+20,
+"#9d00ff"
+);
 
-lose("از سکو افتادی.");
+
+if(
+player.y>H()+40
+){
+
+lose(
+"از سکو افتادی."
+);
 
 }
 
 }
 
 
-/* =========================================
-   بسکتبال
-========================================= */
+/* =========================
+   BASKET
+========================= */
 
 let ball;
+
 
 function basketGame(){
 
 ball={
+
 x:W()/2,
+
 y:H()-65,
+
 vx:0,
+
 vy:0,
+
 flying:false
+
 };
 
-document.getElementById("message")
-.textContent="🏀 حلقه بزرگ است؛ راحت گل بزن.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="basketLeft()">⬅️</button>
-<button class="control" onclick="basketThrow()">🏀 پرتاب</button>
-<button class="control" onclick="basketRight()">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🏀 حلقه بزرگ است؛ راحت گل بزن.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="basketLeft()">
+⬅️
+</button>
+
+<button class="control"
+onclick="basketThrow()">
+🏀 پرتاب
+</button>
+
+<button class="control"
+onclick="basketRight()">
+➡️
+</button>
+
 `;
+
 
 basketLoop();
 
 }
 
+
 function basketLeft(){
 
-if(!ball.flying)ball.x-=35;
+if(!ball.flying)
+ball.x-=35;
 
 }
+
 
 function basketRight(){
 
-if(!ball.flying)ball.x+=35;
+if(!ball.flying)
+ball.x+=35;
 
 }
+
 
 function basketThrow(){
 
 if(ball.flying)return;
 
 ball.flying=true;
-ball.vx=(W()/2-ball.x)*.012;
+
+ball.vx=
+(W()/2-ball.x)*.012;
+
 ball.vy=-10;
 
 }
+
 
 function basketLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(basketLoop);
+animation=
+requestAnimationFrame(
+basketLoop
+);
 
-ctx.clearRect(0,0,W(),H());
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
 
-rect(0,0,W(),H(),"#251506");
 
-rect(0,H()-40,W(),40,"#85491f");
+rect(
+0,
+0,
+W(),
+H(),
+"#251506"
+);
+
+
+rect(
+0,
+H()-40,
+W(),
+40,
+"#85491f"
+);
+
 
 let hx=W()/2;
+
 let hy=135;
 
+
 ctx.strokeStyle="#ff7900";
+
 ctx.lineWidth=8;
 
+
 ctx.beginPath();
-ctx.arc(hx,hy,45,0,Math.PI*2);
+
+ctx.arc(
+hx,
+hy,
+45,
+0,
+Math.PI*2
+);
+
 ctx.stroke();
+
 
 if(ball.flying){
 
 ball.x+=ball.vx;
+
 ball.y+=ball.vy;
+
 ball.vy+=.35;
 
+
 if(
-Math.abs(ball.x-hx)<30 &&
-Math.abs(ball.y-hy)<25 &&
+Math.abs(
+ball.x-hx
+)<30 &&
+Math.abs(
+ball.y-hy
+)<25 &&
 ball.vy>0
 ){
 
-reward(30,2);
+reward(
+30,
+2
+);
 
 ball.flying=false;
+
 ball.x=W()/2;
+
 ball.y=H()-65;
 
 }
 
-if(ball.y>H()+30){
+
+if(
+ball.y>H()+30
+){
 
 ball.flying=false;
+
 ball.x=W()/2;
+
 ball.y=H()-65;
 
 }
 
 }
 
-circle(ball.x,ball.y,18,"#ff7900");
+
+circle(
+ball.x,
+ball.y,
+18,
+"#ff7900"
+);
 
 }
 
 
-/* =========================================
-   هدف
-========================================= */
+/* =========================
+   TARGET
+========================= */
 
 let ammo=12;
+
 
 function targetGame(){
 
 ammo=12;
+
 player.x=W()/2;
+
 player.y=H()-60;
+
 objects=[];
 
-document.getElementById("message")
-.textContent="🏹 هدف‌ها بزرگ و آرام هستند.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="targetAim(-1)">⬅️</button>
-<button class="control" onclick="targetFire()">🏹 شلیک</button>
-<button class="control" onclick="targetAim(1)">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🏹 هدف‌ها بزرگ و آرام هستند.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="targetAim(-1)">
+⬅️
+</button>
+
+<button class="control"
+onclick="targetFire()">
+🏹 شلیک
+</button>
+
+<button class="control"
+onclick="targetAim(1)">
+➡️
+</button>
+
 `;
+
 
 targetLoop();
 
 }
 
+
 function targetAim(n){
 
 player.x+=n*35;
 
+
 player.x=Math.max(
 25,
-Math.min(W()-25,player.x)
+Math.min(
+W()-25,
+player.x
+)
 );
 
 }
+
 
 function targetFire(){
 
@@ -1494,12 +3097,21 @@ if(ammo<=0)return;
 
 ammo--;
 
+
 for(let o of objects){
 
-if(Math.abs(o.x-player.x)<50){
+if(
+Math.abs(
+o.x-player.x
+)<50
+){
 
 o.dead=true;
-reward(15,1);
+
+reward(
+15,
+1
+);
 
 break;
 
@@ -1509,286 +3121,572 @@ break;
 
 }
 
+
 function targetLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(targetLoop);
+animation=
+requestAnimationFrame(
+targetLoop
+);
 
 frame++;
 
-ctx.clearRect(0,0,W(),H());
 
-rect(0,0,W(),H(),"#10220d");
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
+
+
+rect(
+0,
+0,
+W(),
+H(),
+"#10220d"
+);
+
 
 if(frame%100===0){
 
 objects.push({
-x:60+Math.random()*(W()-120),
-y:100+Math.random()*200,
+
+x:
+60+
+Math.random()*
+(W()-120),
+
+y:
+100+
+Math.random()*200,
+
 r:24
+
 });
 
 }
+
 
 objects.forEach(o=>{
 
-o.x+=Math.sin(frame/40)*.7;
+o.x+=
+Math.sin(frame/40)*.7;
 
-circle(o.x,o.y,o.r,"#ff1744");
-circle(o.x,o.y,o.r*.55,"#fff");
-circle(o.x,o.y,o.r*.2,"#ff1744");
+
+circle(
+o.x,
+o.y,
+o.r,
+"#ff1744"
+);
+
+circle(
+o.x,
+o.y,
+o.r*.55,
+"#fff"
+);
+
+circle(
+o.x,
+o.y,
+o.r*.2,
+"#ff1744"
+);
 
 });
 
-objects=objects.filter(o=>!o.dead);
 
-circle(player.x,player.y,10,"#00eaff");
+objects=
+objects.filter(
+o=>!o.dead
+);
 
-text("🏹 تیر: "+ammo,20,35);
+
+circle(
+player.x,
+player.y,
+10,
+"#00eaff"
+);
+
+
+text(
+"🏹 تیر: "+ammo,
+20,
+35
+);
 
 }
 
 
-/* =========================================
-   برفی
-========================================= */
+/* =========================
+   SNOW
+========================= */
 
 function snowGame(){
 
 player.x=W()/2;
+
 player.y=H()-70;
+
 objects=[];
 
-document.getElementById("message")
-.textContent="🏂 موانع کم و فاصله زیاد دارند.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="snowMove(-1)">⬅️</button>
-<button class="control" onclick="snowMove(1)">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🏂 موانع کم و فاصله زیاد دارند.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="snowMove(-1)">
+⬅️
+</button>
+
+<button class="control"
+onclick="snowMove(1)">
+➡️
+</button>
+
 `;
+
 
 snowLoop();
 
 }
 
+
 function snowMove(n){
 
 player.x+=n*45;
 
+
 player.x=Math.max(
 25,
-Math.min(W()-25,player.x)
+Math.min(
+W()-25,
+player.x
+)
 );
 
 }
+
 
 function snowLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(snowLoop);
+animation=
+requestAnimationFrame(
+snowLoop
+);
 
 frame++;
 
-rect(0,0,W(),H(),"#dff8ff");
+
+rect(
+0,
+0,
+W(),
+H(),
+"#dff8ff"
+);
+
 
 if(frame%120===0){
 
 objects.push({
-x:40+Math.random()*(W()-80),
+
+x:
+40+
+Math.random()*
+(W()-80),
+
 y:-30,
+
 r:22
+
 });
 
 }
+
 
 objects.forEach(o=>{
 
 o.y+=1.5;
 
-circle(o.x,o.y,o.r,"#d83d42");
+
+circle(
+o.x,
+o.y,
+o.r,
+"#d83d42"
+);
+
 
 if(
-Math.abs(o.x-player.x)<35 &&
-Math.abs(o.y-player.y)<40
+Math.abs(
+o.x-player.x
+)<35 &&
+Math.abs(
+o.y-player.y
+)<40
 ){
 
-lose("به مانع برخورد کردی.");
+lose(
+"به مانع برخورد کردی."
+);
 
 }
 
 });
 
-objects=objects.filter(o=>o.y<H()+50);
 
-circle(player.x,player.y,20,"#006aff");
+objects=
+objects.filter(
+o=>o.y<H()+50
+);
+
+
+circle(
+player.x,
+player.y,
+20,
+"#006aff"
+);
 
 }
 
 
-/* =========================================
-   مکعب
-========================================= */
+/* =========================
+   CUBE
+========================= */
 
 let cubeMoves=0;
+
 
 function cubeGame(){
 
 cubeMoves=0;
 
-document.getElementById("message")
-.textContent="🧊 فقط ۴ حرکت انجام بده.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="cubeTurn()">🔄 حرکت</button>
-<button class="control" onclick="cubeTurn()">↕️ چرخش</button>
-<button class="control" onclick="cubeFinish()">✅ تمام</button>
+document.getElementById(
+"message"
+).textContent=
+"🧊 فقط ۴ حرکت انجام بده.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="cubeTurn()">
+🔄 حرکت
+</button>
+
+<button class="control"
+onclick="cubeTurn()">
+↕️ چرخش
+</button>
+
+<button class="control"
+onclick="cubeFinish()">
+✅ تمام
+</button>
+
 `;
+
 
 cubeLoop();
 
 }
 
+
 function cubeTurn(){
 
 cubeMoves++;
 
-reward(3,0);
+reward(
+3,
+0
+);
 
 }
+
 
 function cubeFinish(){
 
 if(cubeMoves>=4){
 
 coins+=2;
+
 xp+=10;
 
 level++;
 
 saveData();
 
-alert("🧊 مرحله کامل شد!\n+2 🪙");
+
+alert(
+"🧊 مرحله کامل شد!\n+2 🪙"
+);
 
 cubeMoves=0;
 
 }else{
 
-alert("حداقل ۴ حرکت انجام بده.");
-
-}
-
-}
-
-function cubeLoop(){
-
-if(!running)return;
-
-animation=requestAnimationFrame(cubeLoop);
-
-frame++;
-
-ctx.clearRect(0,0,W(),H());
-
-rect(0,0,W(),H(),"#12091d");
-
-ctx.save();
-
-ctx.translate(W()/2,H()/2);
-
-ctx.rotate(frame*.004);
-
-let colors=[
-"#ff1744",
-"#00eaff",
-"#ffd600",
-"#00c853",
-"#ff7900",
-"#fff"
-];
-
-let i=0;
-
-for(let y=-1;y<=1;y++){
-
-for(let x=-1;x<=1;x++){
-
-rect(
-x*48-21,
-y*48-21,
-42,
-42,
-colors[i++%colors.length]
+alert(
+"حداقل ۴ حرکت انجام بده."
 );
 
 }
 
 }
 
-ctx.restore();
 
-text("حرکت: "+cubeMoves,20,35);
+function cubeLoop(){
+
+if(!running)return;
+
+animation=
+requestAnimationFrame(
+cubeLoop
+);
+
+frame++;
+
+
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
+
+
+rect(
+0,
+0,
+W(),
+H(),
+"#12091d"
+);
+
+
+ctx.save();
+
+
+ctx.translate(
+W()/2,
+H()/2
+);
+
+
+ctx.rotate(
+frame*.004
+);
+
+
+let colors=[
+
+"#ff1744",
+"#00eaff",
+"#ffd600",
+"#00c853",
+"#ff7900",
+"#fff"
+
+];
+
+
+let i=0;
+
+
+for(
+let y=-1;
+y<=1;
+y++
+){
+
+for(
+let x=-1;
+x<=1;
+x++
+){
+
+rect(
+x*48-21,
+y*48-21,
+42,
+42,
+colors[
+i++%colors.length
+]
+);
+
+}
 
 }
 
 
-/* =========================================
-   گنج
-========================================= */
+ctx.restore();
+
+
+text(
+"حرکت: "+cubeMoves,
+20,
+35
+);
+
+}
+
+
+/* =========================
+   TREASURE
+========================= */
 
 function treasureGame(){
 
 player.x=W()/2;
+
 player.y=H()/2;
+
 objects=[];
 
-for(let i=0;i<3;i++){
+
+for(
+let i=0;
+i<3;
+i++
+){
 
 objects.push({
-x:70+Math.random()*(W()-140),
-y:70+Math.random()*(H()-140)
+
+x:
+70+
+Math.random()*
+(W()-140),
+
+y:
+70+
+Math.random()*
+(H()-140)
+
 });
 
 }
 
-document.getElementById("message")
-.textContent="🏝️ به صندوق‌های طلایی نزدیک شو.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="treasureMove(0,-1)">⬆️</button>
-<button class="control" onclick="treasureMove(-1,0)">⬅️</button>
-<button class="control" onclick="treasureMove(1,0)">➡️</button>
-<button class="control" onclick="treasureMove(0,1)">⬇️</button>
+document.getElementById(
+"message"
+).textContent=
+"🏝️ به صندوق‌های طلایی نزدیک شو.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="treasureMove(0,-1)">
+⬆️
+</button>
+
+<button class="control"
+onclick="treasureMove(-1,0)">
+⬅️
+</button>
+
+<button class="control"
+onclick="treasureMove(1,0)">
+➡️
+</button>
+
+<button class="control"
+onclick="treasureMove(0,1)">
+⬇️
+</button>
+
 `;
+
 
 treasureLoop();
 
 }
 
+
 function treasureMove(x,y){
 
 player.x+=x*35;
+
 player.y+=y*35;
 
-player.x=Math.max(20,Math.min(W()-20,player.x));
-player.y=Math.max(20,Math.min(H()-20,player.y));
+
+player.x=Math.max(
+20,
+Math.min(
+W()-20,
+player.x
+)
+);
+
+
+player.y=Math.max(
+20,
+Math.min(
+H()-20,
+player.y
+)
+);
 
 }
+
 
 function treasureLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(treasureLoop);
+animation=
+requestAnimationFrame(
+treasureLoop
+);
 
-ctx.clearRect(0,0,W(),H());
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
 
-rect(0,0,W(),H(),"#063b29");
+
+rect(
+0,
+0,
+W(),
+H(),
+"#063b29"
+);
+
 
 objects.forEach(o=>{
 
-circle(o.x,o.y,20,"#ffd000");
+circle(
+o.x,
+o.y,
+20,
+"#ffd000"
+);
+
 
 if(
 Math.hypot(
@@ -1799,23 +3697,50 @@ player.y-o.y
 
 o.dead=true;
 
-reward(20,2);
+reward(
+20,
+2
+);
 
 }
 
 });
 
-objects=objects.filter(o=>!o.dead);
 
-circle(player.x,player.y,18,"#fff");
+objects=
+objects.filter(
+o=>!o.dead
+);
+
+
+circle(
+player.x,
+player.y,
+18,
+"#fff"
+);
+
 
 if(objects.length===0){
 
-for(let i=0;i<3;i++){
+for(
+let i=0;
+i<3;
+i++
+){
 
 objects.push({
-x:50+Math.random()*(W()-100),
-y:60+Math.random()*(H()-120)
+
+x:
+50+
+Math.random()*
+(W()-100),
+
+y:
+60+
+Math.random()*
+(H()-120)
+
 });
 
 }
@@ -1825,238 +3750,475 @@ y:60+Math.random()*(H()-120)
 }
 
 
-/* =========================================
-   زامبی
-========================================= */
+/* =========================
+   ZOMBIE
+========================= */
 
 function zombieGame(){
 
 player.x=W()/2;
+
 player.y=H()-60;
+
 objects=[];
 
-document.getElementById("message")
-.textContent="🧟 زامبی‌ها خیلی آرام هستند.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="zombieMove(-1,0)">⬅️</button>
-<button class="control" onclick="zombieMove(0,-1)">⬆️</button>
-<button class="control" onclick="zombieMove(0,1)">⬇️</button>
-<button class="control" onclick="zombieMove(1,0)">➡️</button>
+document.getElementById(
+"message"
+).textContent=
+"🧟 زامبی‌ها خیلی آرام هستند.";
+
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="zombieMove(-1,0)">
+⬅️
+</button>
+
+<button class="control"
+onclick="zombieMove(0,-1)">
+⬆️
+</button>
+
+<button class="control"
+onclick="zombieMove(0,1)">
+⬇️
+</button>
+
+<button class="control"
+onclick="zombieMove(1,0)">
+➡️
+</button>
+
 `;
+
 
 zombieLoop();
 
 }
 
+
 function zombieMove(x,y){
 
 player.x+=x*35;
+
 player.y+=y*35;
 
-player.x=Math.max(20,Math.min(W()-20,player.x));
-player.y=Math.max(20,Math.min(H()-20,player.y));
+
+player.x=Math.max(
+20,
+Math.min(
+W()-20,
+player.x
+)
+);
+
+
+player.y=Math.max(
+20,
+Math.min(
+H()-20,
+player.y
+)
+);
 
 }
+
 
 function zombieLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(zombieLoop);
+animation=
+requestAnimationFrame(
+zombieLoop
+);
 
 frame++;
 
-ctx.clearRect(0,0,W(),H());
 
-rect(0,0,W(),H(),"#160b0b");
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
+
+
+rect(
+0,
+0,
+W(),
+H(),
+"#160b0b"
+);
+
 
 if(frame%200===0){
 
 objects.push({
-x:30+Math.random()*(W()-60),
+
+x:
+30+
+Math.random()*
+(W()-60),
+
 y:30,
+
 speed:.28
+
 });
 
 }
+
 
 objects.forEach(z=>{
 
-let dx=player.x-z.x;
-let dy=player.y-z.y;
+let dx=
+player.x-z.x;
 
-let d=Math.hypot(dx,dy)||1;
+let dy=
+player.y-z.y;
 
-z.x+=dx/d*z.speed;
-z.y+=dy/d*z.speed;
+let d=
+Math.hypot(dx,dy)||1;
 
-circle(z.x,z.y,19,"#3ca34a");
 
-circle(z.x-6,z.y-4,3,"#111");
-circle(z.x+6,z.y-4,3,"#111");
+z.x+=
+dx/d*z.speed;
+
+z.y+=
+dy/d*z.speed;
+
+
+circle(
+z.x,
+z.y,
+19,
+"#3ca34a"
+);
+
+circle(
+z.x-6,
+z.y-4,
+3,
+"#111"
+);
+
+circle(
+z.x+6,
+z.y-4,
+3,
+"#111"
+);
+
 
 if(d<31){
 
-lose("زامبی به تو رسید.");
+lose(
+"زامبی به تو رسید."
+);
 
 }
 
 });
 
-circle(player.x,player.y,19,"#00eaff");
+
+circle(
+player.x,
+player.y,
+19,
+"#00eaff"
+);
 
 }
 
 
-/* =========================================
-   قلعه
-========================================= */
+/* =========================
+   CASTLE
+========================= */
 
 let castleHP=0;
+
 
 function castleGame(){
 
 castleLevel=
-Number(localStorage.getItem("nexora_castle")||1);
+Number(
+localStorage.getItem(
+"nexora_castle"
+)||1
+);
+
 
 castleHP=
-100+castleLevel*35;
+100+
+castleLevel*35;
 
 objects=[];
 
-document.getElementById("message")
-.textContent=
+
+document.getElementById(
+"message"
+).textContent=
 "🏰 دشمن‌ها آرام هستند. قلعه را دفاع و ارتقا بده.";
 
-document.getElementById("controls").innerHTML=`
-<button class="control" onclick="castleAttack()">⚡ حمله</button>
-<button class="control" onclick="upgradeCastle()">🏰 ارتقا 10🪙</button>
+
+document.getElementById(
+"controls"
+).innerHTML=`
+
+<button class="control"
+onclick="castleAttack()">
+⚡ حمله
+</button>
+
+<button class="control"
+onclick="upgradeCastle()">
+🏰 ارتقا 10🪙
+</button>
+
 `;
+
 
 castleLoop();
 
 }
 
+
 function upgradeCastle(){
 
 if(coins<10){
 
-alert("🪙 سکه کافی نداری.");
+alert(
+"🪙 سکه کافی نداری."
+);
 
 return;
 
 }
 
 coins-=10;
+
 castleLevel++;
+
 castleHP+=50;
 
 saveData();
 
+
 alert(
 "🏰 قلعه ارتقا یافت!\n"+
-"سطح: "+castleLevel
+"سطح: "+
+castleLevel
 );
 
 }
+
 
 function castleAttack(){
 
 let hits=0;
 
+
 objects.forEach(e=>{
 
 if(
 e.y>H()-300 &&
-Math.abs(e.x-W()/2)<180
+Math.abs(
+e.x-W()/2
+)<180
 ){
 
 e.dead=true;
+
 hits++;
 
 }
 
 });
 
+
 if(hits){
 
-reward(hits*12,hits);
+reward(
+hits*12,
+hits
+);
 
 }
 
 }
+
 
 function castleLoop(){
 
 if(!running)return;
 
-animation=requestAnimationFrame(castleLoop);
+animation=
+requestAnimationFrame(
+castleLoop
+);
 
 frame++;
 
-ctx.clearRect(0,0,W(),H());
 
-rect(0,0,W(),H(),"#111827");
+ctx.clearRect(
+0,
+0,
+W(),
+H()
+);
+
+
+rect(
+0,
+0,
+W(),
+H(),
+"#111827"
+);
+
 
 let cx=W()/2;
+
 let cy=H()-100;
 
-rect(cx-100,cy-75,200,95,"#5c63ff");
 
-rect(cx-125,cy-120,40,140,"#8188ff");
+rect(
+cx-100,
+cy-75,
+200,
+95,
+"#5c63ff"
+);
 
-rect(cx+85,cy-120,40,140,"#8188ff");
+
+rect(
+cx-125,
+cy-120,
+40,
+140,
+"#8188ff"
+);
+
+
+rect(
+cx+85,
+cy-120,
+40,
+140,
+"#8188ff"
+);
+
 
 text(
-"🏰 LV "+castleLevel,
+"🏰 LV "+
+castleLevel,
 cx-45,
 cy-135,
 17
 );
 
-let maxHP=100+castleLevel*35;
 
-rect(cx-100,cy+30,200,12,"#381111");
+let maxHP=
+100+
+castleLevel*35;
+
 
 rect(
 cx-100,
 cy+30,
-200*Math.max(0,castleHP/maxHP),
+200,
+12,
+"#381111"
+);
+
+
+rect(
+cx-100,
+cy+30,
+200*
+Math.max(
+0,
+castleHP/maxHP
+),
 12,
 "#00d26a"
 );
 
+
 if(frame%150===0){
 
 objects.push({
-x:30+Math.random()*(W()-60),
+
+x:
+30+
+Math.random()*
+(W()-60),
+
 y:-30,
+
 speed:.3
+
 });
 
 }
+
 
 objects.forEach(e=>{
 
-let dx=cx-e.x;
+let dx=
+cx-e.x;
+
 
 e.y+=e.speed;
-e.x+=dx*.0015;
 
-rect(e.x-16,e.y-20,32,40,"#e32636");
+e.x+=
+dx*.0015;
 
-circle(e.x-6,e.y-5,3,"#111");
-circle(e.x+6,e.y-5,3,"#111");
 
-if(e.y>cy-65){
+rect(
+e.x-16,
+e.y-20,
+32,
+40,
+"#e32636"
+);
+
+
+circle(
+e.x-6,
+e.y-5,
+3,
+"#111"
+);
+
+circle(
+e.x+6,
+e.y-5,
+3,
+"#111"
+);
+
+
+if(
+e.y>cy-65
+){
 
 e.dead=true;
+
 castleHP-=7;
+
 
 if(castleHP<=0){
 
-lose("دشمن‌ها قلعه را شکست دادند.");
+lose(
+"دشمن‌ها قلعه را شکست دادند."
+);
 
 }
 
@@ -2064,138 +4226,274 @@ lose("دشمن‌ها قلعه را شکست دادند.");
 
 });
 
-objects=objects.filter(e=>!e.dead);
+
+objects=
+objects.filter(
+e=>!e.dead
+);
 
 }
 
 
-/* =========================================
-   رسم ماشین و سفینه
-========================================= */
+/* =========================
+   DRAW CAR
+========================= */
 
 function drawCar(x,y){
 
 ctx.save();
 
-ctx.translate(x,y);
+ctx.translate(
+x,
+y
+);
+
 
 ctx.fillStyle="#0008";
 
+
 ctx.beginPath();
-ctx.ellipse(0,20,32,12,0,0,Math.PI*2);
+
+ctx.ellipse(
+0,
+20,
+32,
+12,
+0,
+0,
+Math.PI*2
+);
+
 ctx.fill();
+
 
 ctx.fillStyle="#00d9ff";
 
+
 ctx.beginPath();
-ctx.roundRect(-27,-25,54,55,12);
+
+ctx.roundRect(
+-27,
+-25,
+54,
+55,
+12
+);
+
 ctx.fill();
+
 
 ctx.fillStyle="#071827";
 
+
 ctx.beginPath();
-ctx.roundRect(-19,-18,38,19,7);
+
+ctx.roundRect(
+-19,
+-18,
+38,
+19,
+7
+);
+
 ctx.fill();
 
-circle(-23,22,7,"#050505");
-circle(23,22,7,"#050505");
+
+circle(
+-23,
+22,
+7,
+"#050505"
+);
+
+circle(
+23,
+22,
+7,
+"#050505"
+);
+
 
 ctx.restore();
 
 }
+
+
+/* =========================
+   DRAW SHIP
+========================= */
 
 function drawShip(x,y){
 
 ctx.save();
 
-ctx.translate(x,y);
+ctx.translate(
+x,
+y
+);
+
 
 ctx.fillStyle="#00eaff";
 
+
 ctx.beginPath();
 
-ctx.moveTo(0,-30);
-ctx.lineTo(25,25);
-ctx.lineTo(0,15);
-ctx.lineTo(-25,25);
+ctx.moveTo(
+0,
+-30
+);
+
+ctx.lineTo(
+25,
+25
+);
+
+ctx.lineTo(
+0,
+15
+);
+
+ctx.lineTo(
+-25,
+25
+);
+
 ctx.closePath();
 
 ctx.fill();
 
-circle(0,-5,7,"#fff");
+
+circle(
+0,
+-5,
+7,
+"#fff"
+);
+
 
 ctx.restore();
 
 }
 
 
-/* =========================================
-   کیبورد
-========================================= */
+/* =========================
+   KEYBOARD
+========================= */
 
-document.addEventListener("keydown",e=>{
+document.addEventListener(
+"keydown",
+e=>{
 
 if(!running)return;
 
+
 if(e.key==="ArrowLeft"){
 
-if(currentGame===1)carMove(-1);
-if(currentGame===2)spaceMove(-1);
-if(currentGame===3)parkMove(-1);
-if(currentGame===5)targetAim(-1);
-if(currentGame===6)snowMove(-1);
-if(currentGame===9)zombieMove(-1,0);
+if(currentGame===1)
+carMove(-1);
+
+if(currentGame===2)
+spaceMove(-1);
+
+if(currentGame===3)
+parkMove(-1);
+
+if(currentGame===5)
+targetAim(-1);
+
+if(currentGame===6)
+snowMove(-1);
+
+if(currentGame===9)
+zombieMove(-1,0);
 
 }
+
 
 if(e.key==="ArrowRight"){
 
-if(currentGame===1)carMove(1);
-if(currentGame===2)spaceMove(1);
-if(currentGame===3)parkMove(1);
-if(currentGame===5)targetAim(1);
-if(currentGame===6)snowMove(1);
-if(currentGame===9)zombieMove(1,0);
+if(currentGame===1)
+carMove(1);
+
+if(currentGame===2)
+spaceMove(1);
+
+if(currentGame===3)
+parkMove(1);
+
+if(currentGame===5)
+targetAim(1);
+
+if(currentGame===6)
+snowMove(1);
+
+if(currentGame===9)
+zombieMove(1,0);
 
 }
+
 
 if(e.key==="ArrowUp"){
 
-if(currentGame===3)parkJump();
-if(currentGame===8)treasureMove(0,-1);
-if(currentGame===9)zombieMove(0,-1);
+if(currentGame===3)
+parkJump();
+
+if(currentGame===8)
+treasureMove(0,-1);
+
+if(currentGame===9)
+zombieMove(0,-1);
 
 }
+
 
 if(e.key==="ArrowDown"){
 
-if(currentGame===8)treasureMove(0,1);
-if(currentGame===9)zombieMove(0,1);
+if(currentGame===8)
+treasureMove(0,1);
+
+if(currentGame===9)
+zombieMove(0,1);
 
 }
+
 
 if(e.code==="Space"){
 
-if(currentGame===2)spaceShoot();
-if(currentGame===4)basketThrow();
-if(currentGame===5)targetFire();
-if(currentGame===10)castleAttack();
+if(currentGame===2)
+spaceShoot();
+
+if(currentGame===4)
+basketThrow();
+
+if(currentGame===5)
+targetFire();
+
+if(currentGame===10)
+castleAttack();
 
 }
 
 });
 
 
-window.addEventListener("resize",()=>{
+/* =========================
+   RESIZE
+========================= */
 
-if(running)resizeCanvas();
+window.addEventListener(
+"resize",
+()=>{
+
+if(running)
+resizeCanvas();
 
 });
 
 
-/* =========================================
-   بارگذاری اطلاعات قبلی
-========================================= */
+/* =========================
+   LOAD DATA
+========================= */
 
 updateUI();
 
