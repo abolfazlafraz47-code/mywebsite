@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>⚡ NEXORA</title>
+<title>⚡ NEXORA 3D</title>
 
 <style>
 *{
@@ -14,64 +14,67 @@
 }
 
 body{
-    background:#05050b;
-    color:#fff;
-    min-height:100vh;
+    background:#03040a;
+    color:white;
     overflow-x:hidden;
 }
 
-/* پس زمینه */
+canvas{
+    display:block;
+}
+
+#gameCanvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+}
+
 .bg{
     position:fixed;
     inset:0;
-    z-index:-5;
+    z-index:-1;
+    pointer-events:none;
     background:
-    radial-gradient(circle at 15% 20%,#003cff55,transparent 28%),
-    radial-gradient(circle at 85% 25%,#9d00ff44,transparent 30%),
-    radial-gradient(circle at 50% 90%,#00ffe133,transparent 30%);
+      radial-gradient(circle at 20% 20%,#0066ff22,transparent 30%),
+      radial-gradient(circle at 80% 30%,#a000ff20,transparent 30%);
 }
 
-.grid{
-    position:fixed;
-    inset:0;
-    z-index:-4;
-    opacity:.35;
-    background-image:
-    linear-gradient(#ffffff08 1px,transparent 1px),
-    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-    background-size:45px 45px;
-}
+/* HEADER */
 
-/* هدر */
 header{
-    position:sticky;
+    position:fixed;
     top:0;
-    z-index:50;
+    right:0;
+    left:0;
     height:75px;
-    padding:0 7%;
+    z-index:20;
+    padding:0 6%;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:#05050bd9;
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid #ffffff12;
+    background:#03040acc;
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #ffffff10;
 }
 
 .logo{
+    color:#00eaff;
     font-size:25px;
     font-weight:bold;
-    color:#00eaff;
-    text-shadow:0 0 20px #00eaff;
+    text-shadow:0 0 25px #00eaff;
 }
 
 nav{
     display:flex;
-    gap:28px;
+    gap:25px;
 }
 
 nav a{
     color:#aaa;
     text-decoration:none;
+    cursor:pointer;
     transition:.3s;
 }
 
@@ -79,31 +82,25 @@ nav a:hover{
     color:#00eaff;
 }
 
-.login{
+.header-btn{
     border:0;
-    color:#fff;
-    text-decoration:none;
-    padding:11px 20px;
-    border-radius:13px;
+    padding:11px 18px;
+    border-radius:12px;
+    color:white;
     cursor:pointer;
-    background:linear-gradient(135deg,#006aff,#9b00ff);
-    box-shadow:0 0 25px #5b00ff55;
-    transition:.3s;
+    background:linear-gradient(135deg,#006aff,#9900ff);
+    box-shadow:0 0 25px #7300ff55;
 }
 
-.login:hover{
-    transform:scale(1.07);
-    box-shadow:0 0 35px #8c00ff99;
-}
+/* HERO */
 
-/* هیرو */
 .hero{
-    min-height:620px;
+    min-height:100vh;
+    padding:130px 20px 70px;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:80px 20px;
 }
 
 .hero-content{
@@ -112,26 +109,20 @@ nav a:hover{
 
 .badge{
     display:inline-block;
-    padding:9px 18px;
-    border:1px solid #00eaff55;
-    background:#00eaff0c;
+    padding:10px 18px;
     border-radius:50px;
     color:#00eaff;
+    border:1px solid #00eaff44;
+    background:#00eaff0b;
     margin-bottom:25px;
-    box-shadow:0 0 25px #00eaff18;
+    box-shadow:0 0 30px #00eaff12;
 }
 
-.hero h1{
+h1{
     font-size:clamp(45px,8vw,90px);
     line-height:1.1;
     margin-bottom:25px;
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #00eaff,
-        #9c00ff,
-        #fff
-    );
+    background:linear-gradient(90deg,#fff,#00eaff,#a000ff,#fff);
     background-size:300%;
     -webkit-background-clip:text;
     color:transparent;
@@ -139,7 +130,7 @@ nav a:hover{
 }
 
 .hero p{
-    color:#999;
+    color:#aaa;
     line-height:2;
     font-size:17px;
     margin-bottom:35px;
@@ -148,16 +139,16 @@ nav a:hover{
 .buttons{
     display:flex;
     justify-content:center;
-    gap:15px;
     flex-wrap:wrap;
+    gap:15px;
 }
 
 .btn{
     position:relative;
     overflow:hidden;
-    border:0;
     padding:16px 30px;
     border-radius:16px;
+    border:0;
     color:white;
     font-size:16px;
     font-weight:bold;
@@ -166,84 +157,35 @@ nav a:hover{
 }
 
 .btn:active{
-    transform:scale(.94);
-}
-
-.btn::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:80%;
-    height:100%;
-    transform:skewX(-25deg);
-    background:#ffffff55;
-    transition:.5s;
-}
-
-.btn:hover::before{
-    left:130%;
+    transform:scale(.93);
 }
 
 .primary{
-    background:linear-gradient(135deg,#006cff,#9c00ff);
-    box-shadow:
-    0 0 20px #006cff66,
-    inset 0 0 15px #ffffff18;
+    background:linear-gradient(135deg,#006aff,#9900ff);
+    box-shadow:0 0 35px #006aff55;
 }
 
 .primary:hover{
-    transform:translateY(-5px);
-    box-shadow:
-    0 10px 35px #006cff66,
-    0 0 45px #9c00ff55;
+    transform:translateY(-5px) scale(1.03);
+    box-shadow:0 0 50px #8700ff66;
 }
 
 .secondary{
-    background:#ffffff09;
+    background:#ffffff0a;
     border:1px solid #ffffff18;
 }
 
 .secondary:hover{
     transform:translateY(-5px);
-    border-color:#00eaff88;
-    box-shadow:0 0 25px #00eaff22;
+    border-color:#00eaff77;
 }
 
-/* آمار */
-.stats{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
+/* GAME SECTION */
 
-.stat{
-    padding:30px 15px;
-    text-align:center;
-    border-radius:22px;
-    background:#ffffff07;
-    border:1px solid #ffffff0d;
-    backdrop-filter:blur(10px);
-}
-
-.stat strong{
-    display:block;
-    color:#00eaff;
-    font-size:32px;
-    margin-bottom:10px;
-    text-shadow:0 0 20px #00eaff;
-}
-
-.stat span{
-    color:#888;
-}
-
-/* بخش */
-section{
-    padding:80px 7%;
+.games{
+    position:relative;
+    padding:100px 6%;
+    background:linear-gradient(#03040a00,#03040af2 15%,#03040aff);
 }
 
 .title{
@@ -252,7 +194,7 @@ section{
 }
 
 .title h2{
-    font-size:35px;
+    font-size:38px;
     margin-bottom:12px;
 }
 
@@ -260,97 +202,95 @@ section{
     color:#777;
 }
 
-/* کارت */
-.cards{
-    max-width:1150px;
+.game-grid{
+    max-width:1200px;
     margin:auto;
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:22px;
 }
 
-.card{
-    padding:30px;
-    min-height:230px;
-    border-radius:25px;
-    background:#ffffff07;
-    border:1px solid #ffffff0e;
+.game-card{
+    position:relative;
+    min-height:300px;
+    padding:28px;
+    border-radius:27px;
+    overflow:hidden;
+    cursor:pointer;
+    background:
+      linear-gradient(145deg,#ffffff0e,#ffffff04);
+    border:1px solid #ffffff12;
     transition:.35s;
 }
 
-.card:hover{
-    transform:translateY(-9px);
+.game-card:hover{
+    transform:translateY(-12px) perspective(700px) rotateX(3deg);
     border-color:#00eaff66;
-    box-shadow:0 15px 45px #00eaff12;
+    box-shadow:0 25px 70px #006aff22;
 }
 
-.icon{
-    font-size:45px;
-    margin-bottom:18px;
+.game-icon{
+    font-size:65px;
+    margin-bottom:20px;
+    filter:drop-shadow(0 0 20px #00eaff55);
 }
 
-.card h3{
+.game-card h3{
+    font-size:24px;
     margin-bottom:12px;
 }
 
-.card p{
+.game-card p{
     color:#888;
-    line-height:1.9;
+    line-height:1.8;
 }
 
-/* رتبه */
-.leaderboard{
-    max-width:850px;
-    margin:auto;
+.play{
+    position:absolute;
+    bottom:25px;
+    right:25px;
+    left:25px;
+    padding:13px;
+    border:0;
+    border-radius:13px;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(90deg,#006aff,#9b00ff);
 }
 
-.player{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:17px;
-    margin-bottom:12px;
-    border-radius:18px;
+/* STATS */
+
+.stats{
+    max-width:1100px;
+    margin:60px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.stat{
+    padding:28px;
+    text-align:center;
+    border-radius:20px;
     background:#ffffff07;
-    border:1px solid #ffffff0d;
+    border:1px solid #ffffff0c;
 }
 
-.rank{
-    width:45px;
-    height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:#00eaff12;
+.stat strong{
+    display:block;
     color:#00eaff;
-    font-weight:bold;
+    font-size:30px;
+    margin-bottom:10px;
+    text-shadow:0 0 20px #00eaff;
 }
 
-.avatar{
-    width:45px;
-    height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:linear-gradient(135deg,#006cff,#9c00ff);
-}
-
-.player-info{
-    flex:1;
-}
-
-.player-info small{
+.stat span{
     color:#777;
 }
 
-.score{
-    color:#00ffb3;
-    font-weight:bold;
-}
+/* MODAL */
 
-/* پنجره */
 .modal{
     position:fixed;
     inset:0;
@@ -359,26 +299,24 @@ section{
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:#000000bb;
-    backdrop-filter:blur(12px);
+    background:#000000cc;
+    backdrop-filter:blur(14px);
 }
 
 .modal.show{
     display:flex;
-    animation:fade .25s;
 }
 
 .modal-box{
     position:relative;
-    width:min(500px,100%);
+    width:min(850px,100%);
+    max-height:90vh;
+    overflow:auto;
     padding:30px;
     border-radius:28px;
-    background:
-    linear-gradient(145deg,#11111ddd,#080810ee);
+    background:#080914f5;
     border:1px solid #00eaff33;
-    box-shadow:
-    0 0 70px #006cff25,
-    0 20px 80px #000;
+    box-shadow:0 0 100px #006aff22;
     animation:popup .3s;
 }
 
@@ -386,54 +324,86 @@ section{
     position:absolute;
     top:15px;
     left:15px;
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
     border:0;
     border-radius:50%;
     color:white;
     background:#ffffff0d;
     cursor:pointer;
-    font-size:20px;
-}
-
-.close:hover{
-    background:#ff174455;
+    font-size:22px;
 }
 
 .modal-title{
     text-align:center;
-    font-size:27px;
-    margin-bottom:25px;
     color:#00eaff;
-    text-shadow:0 0 20px #00eaff66;
+    font-size:28px;
+    margin-bottom:25px;
 }
 
-/* فرم ورود */
-.input{
+/* 3D GAME */
+
+#threeGame{
+    position:relative;
     width:100%;
-    padding:15px;
-    margin-bottom:13px;
-    border-radius:13px;
-    border:1px solid #ffffff15;
-    outline:none;
-    background:#ffffff08;
+    height:500px;
+    overflow:hidden;
+    border-radius:22px;
+    background:#02030a;
+    border:1px solid #00eaff33;
+}
+
+#threeCanvas{
+    width:100%;
+    height:100%;
+}
+
+.hud{
+    position:absolute;
+    top:15px;
+    right:15px;
+    left:15px;
+    display:flex;
+    justify-content:space-between;
+    pointer-events:none;
+}
+
+.hud-box{
+    padding:10px 15px;
+    border-radius:12px;
+    background:#00000099;
+    border:1px solid #ffffff18;
+    backdrop-filter:blur(10px);
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:15px;
+}
+
+.control{
+    width:65px;
+    height:55px;
+    border:0;
+    border-radius:15px;
     color:white;
-    font-size:15px;
+    font-size:22px;
+    background:#ffffff0d;
+    border:1px solid #ffffff15;
+    cursor:pointer;
 }
 
-.input:focus{
-    border-color:#00eaff77;
-    box-shadow:0 0 15px #00eaff18;
+.control:active{
+    transform:scale(.9);
+    background:#00eaff22;
 }
 
-.full{
-    width:100%;
-    margin-top:5px;
-}
+/* CHALLENGES */
 
-/* چالش */
 .challenge{
-    padding:17px;
+    padding:18px;
     margin-bottom:12px;
     border-radius:17px;
     background:#ffffff07;
@@ -460,38 +430,38 @@ section{
 
 .progress div{
     height:100%;
-    width:65%;
-    background:linear-gradient(90deg,#00eaff,#9c00ff);
+    background:linear-gradient(90deg,#00eaff,#9b00ff);
 }
 
-/* پیام */
+/* TOAST */
+
 .toast{
     position:fixed;
+    z-index:300;
     bottom:25px;
     right:50%;
-    transform:translateX(50%) translateY(100px);
-    z-index:200;
+    transform:translate(50%,120px);
     padding:15px 22px;
     border-radius:15px;
-    background:#11111df2;
+    background:#10111cf5;
     border:1px solid #00eaff44;
     box-shadow:0 0 30px #00eaff22;
     transition:.4s;
 }
 
 .toast.show{
-    transform:translateX(50%) translateY(0);
+    transform:translate(50%,0);
 }
 
-/* فوتر */
 footer{
     text-align:center;
     padding:40px;
     color:#555;
-    border-top:1px solid #ffffff0b;
+    background:#03040a;
 }
 
-/* انیمیشن */
+/* ANIMATION */
+
 @keyframes gradient{
     0%{background-position:0}
     100%{background-position:300%}
@@ -499,49 +469,37 @@ footer{
 
 @keyframes popup{
     from{
-        transform:scale(.8);
         opacity:0;
+        transform:scale(.8);
     }
     to{
-        transform:scale(1);
         opacity:1;
+        transform:scale(1);
     }
 }
 
-@keyframes fade{
-    from{opacity:0}
-    to{opacity:1}
-}
+/* MOBILE */
 
-/* موبایل */
-@media(max-width:800px){
+@media(max-width:850px){
 
     nav{
         display:none;
     }
 
-    header{
-        padding:0 20px;
+    .game-grid{
+        grid-template-columns:1fr;
     }
 
     .stats{
         grid-template-columns:1fr;
     }
 
-    .cards{
-        grid-template-columns:1fr;
+    header{
+        padding:0 18px;
     }
 
-    section{
-        padding:60px 20px;
-    }
-
-    .hero{
-        min-height:580px;
-    }
-
-    .hero h1{
-        font-size:48px;
+    #threeGame{
+        height:430px;
     }
 }
 </style>
@@ -549,51 +507,174 @@ footer{
 
 <body>
 
+<canvas id="gameCanvas"></canvas>
 <div class="bg"></div>
-<div class="grid"></div>
+
 
 <header>
 
     <div class="logo">⚡ NEXORA</div>
 
     <nav>
-        <a href="#home">خانه</a>
-        <a href="#features">امکانات</a>
-        <a href="#ranking">رتبه‌بندی</a>
+        <a onclick="scrollToGames()">🎮 بازی‌ها</a>
+        <a onclick="openChallenges()">🔥 چالش‌ها</a>
+        <a onclick="openRanking()">👑 رتبه‌بندی</a>
     </nav>
 
-    <button class="login" onclick="openLogin()">
+    <button class="header-btn" onclick="openLogin()">
         ورود 🚀
     </button>
 
 </header>
 
 
-<section class="hero" id="home">
+<section class="hero">
 
     <div class="hero-content">
 
         <div class="badge">
-            🔥 نسل جدید سرگرمی آنلاین
+            🔥 NEXORA 3D WORLD
         </div>
 
         <h1>
-            وارد دنیای هیجان شو
+            دنیای جدید بازی
         </h1>
 
         <p>
-            رقابت کن، امتیاز بگیر، چالش انجام بده
-            و خودت را به رتبه اول برسان!
+            وارد دنیایی از بازی‌های هیجان‌انگیز شو،
+            رکورد بزن، XP بگیر و در جدول بهترین‌ها قرار بگیر.
         </p>
 
         <div class="buttons">
 
-            <button class="btn primary" onclick="openAdventure()">
-                🚀 شروع ماجراجویی
+            <button class="btn primary" onclick="scrollToGames()">
+                🎮 بازی‌ها
             </button>
 
             <button class="btn secondary" onclick="openChallenges()">
-                ⚡ مشاهده چالش‌ها
+                ⚡ چالش‌های امروز
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="games" id="games">
+
+    <div class="title">
+
+        <h2>🎮 بازی‌های NEXORA</h2>
+
+        <p>
+            یک بازی را انتخاب کن و وارد دنیای سه‌بعدی شو
+        </p>
+
+    </div>
+
+
+    <div class="game-grid">
+
+
+        <div class="game-card" onclick="open3DGame('racer')">
+
+            <div class="game-icon">🏎️</div>
+
+            <h3>NEON RACER</h3>
+
+            <p>
+                در جاده نئونی حرکت کن و سکه‌ها را جمع کن.
+            </p>
+
+            <button class="play">
+                ▶ بازی کن
+            </button>
+
+        </div>
+
+
+        <div class="game-card" onclick="open3DGame('cube')">
+
+            <div class="game-icon">🧊</div>
+
+            <h3>3D CUBE</h3>
+
+            <p>
+                مکعب سه‌بعدی را کنترل کن و امتیاز بگیر.
+            </p>
+
+            <button class="play">
+                ▶ بازی کن
+            </button>
+
+        </div>
+
+
+        <div class="game-card" onclick="open3DGame('runner')">
+
+            <div class="game-icon">🏃</div>
+
+            <h3>NEON RUN</h3>
+
+            <p>
+                از موانع عبور کن و تا جای ممکن زنده بمان.
+            </p>
+
+            <button class="play">
+                ▶ بازی کن
+            </button>
+
+        </div>
+
+
+        <div class="game-card" onclick="openChallenges()">
+
+            <div class="game-icon">🔥</div>
+
+            <h3>CHALLENGE</h3>
+
+            <p>
+                مأموریت‌های روزانه را کامل کن.
+            </p>
+
+            <button class="play">
+                ▶ مشاهده
+            </button>
+
+        </div>
+
+
+        <div class="game-card" onclick="showToast('🎁 جایزه روزانه آماده است!')">
+
+            <div class="game-icon">🎁</div>
+
+            <h3>DAILY REWARD</h3>
+
+            <p>
+                جایزه روزانه خودت را دریافت کن.
+            </p>
+
+            <button class="play">
+                ▶ دریافت
+            </button>
+
+        </div>
+
+
+        <div class="game-card" onclick="openRanking()">
+
+            <div class="game-icon">👑</div>
+
+            <h3>LEADERBOARD</h3>
+
+            <p>
+                ببین چه کسی در صدر جدول قرار دارد.
+            </p>
+
+            <button class="play">
+                ▶ رتبه‌بندی
             </button>
 
         </div>
@@ -612,129 +693,24 @@ footer{
 
     <div class="stat">
         <strong>1,284,932</strong>
-        <span>کاربر ثبت‌نام‌شده</span>
+        <span>کاربر</span>
     </div>
 
     <div class="stat">
-        <strong>24/7</strong>
-        <span>فعالیت شبانه‌روزی</span>
+        <strong id="xp">0</strong>
+        <span>XP من</span>
     </div>
 
 </div>
 
 
-<section id="features">
-
-    <div class="title">
-        <h2>🔥 امکانات</h2>
-        <p>چیزهایی که در NEXORA منتظر تو هستند</p>
-    </div>
-
-    <div class="cards">
-
-        <div class="card" onclick="openChallenges()">
-            <div class="icon">🏆</div>
-            <h3>چالش‌ها</h3>
-            <p>
-                چالش‌های مختلف را انجام بده و XP بگیر.
-            </p>
-        </div>
-
-        <div class="card" onclick="openRewards()">
-            <div class="icon">🎁</div>
-            <h3>جوایز</h3>
-            <p>
-                امتیاز جمع کن و جوایز ویژه باز کن.
-            </p>
-        </div>
-
-        <div class="card" onclick="openProfile()">
-            <div class="icon">👤</div>
-            <h3>پروفایل</h3>
-            <p>
-                پروفایل اختصاصی خودت را مشاهده کن.
-            </p>
-        </div>
-
-        <div class="card" onclick="openRanking()">
-            <div class="icon">👑</div>
-            <h3>رتبه‌بندی</h3>
-            <p>
-                ببین چه کسی در صدر جدول قرار دارد.
-            </p>
-        </div>
-
-        <div class="card" onclick="showToast('🌎 سرورهای جهانی به‌زودی فعال می‌شوند')">
-            <div class="icon">🌎</div>
-            <h3>بازیکنان جهانی</h3>
-            <p>
-                با بازیکنان سراسر دنیا رقابت کن.
-            </p>
-        </div>
-
-        <div class="card" onclick="showToast('💎 سیستم XP فعال است!')">
-            <div class="icon">💎</div>
-            <h3>سیستم XP</h3>
-            <p>
-                با فعالیت بیشتر سطح خودت را بالا ببر.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="ranking">
-
-    <div class="title">
-        <h2>👑 برترین بازیکنان</h2>
-        <p>رقابت برای رسیدن به رتبه اول</p>
-    </div>
-
-    <div class="leaderboard">
-
-        <div class="player">
-            <div class="rank">1</div>
-            <div class="avatar">👑</div>
-            <div class="player-info">
-                <b>ShadowX</b><br>
-                <small>سطح 99</small>
-            </div>
-            <div class="score">98,420 XP</div>
-        </div>
-
-        <div class="player">
-            <div class="rank">2</div>
-            <div class="avatar">🔥</div>
-            <div class="player-info">
-                <b>DarkWolf</b><br>
-                <small>سطح 94</small>
-            </div>
-            <div class="score">91,780 XP</div>
-        </div>
-
-        <div class="player">
-            <div class="rank">3</div>
-            <div class="avatar">⚡</div>
-            <div class="player-info">
-                <b>Lightning</b><br>
-                <small>سطح 91</small>
-            </div>
-            <div class="score">87,350 XP</div>
-        </div>
-
-    </div>
-
-</section>
-
-
 <footer>
-    ⚡ NEXORA © 2026
+    ⚡ NEXORA 3D © 2026
 </footer>
 
 
-<!-- پنجره -->
+<!-- MODAL -->
+
 <div class="modal" id="modal">
 
     <div class="modal-box">
@@ -751,31 +727,87 @@ footer{
 <div class="toast" id="toast"></div>
 
 
+<!-- THREE.JS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+
 <script>
 
-const modal = document.getElementById("modal");
-const content = document.getElementById("modalContent");
+/* =========================
+   GLOBAL
+========================= */
 
+const modal =
+document.getElementById("modal");
+
+const modalContent =
+document.getElementById("modalContent");
+
+let XP = 0;
+
+let currentGame = null;
+
+let gameAnimation;
+
+
+/* =========================
+   MODAL
+========================= */
 
 function openModal(html){
-    content.innerHTML = html;
-    modal.classList.add("show");
-}
 
+    modalContent.innerHTML = html;
+
+    modal.classList.add("show");
+
+}
 
 function closeModal(){
+
     modal.classList.remove("show");
+
+    if(gameAnimation){
+
+        cancelAnimationFrame(gameAnimation);
+
+        gameAnimation = null;
+
+    }
+
+    currentGame = null;
+
 }
 
+modal.addEventListener("click",e=>{
 
-modal.addEventListener("click",function(e){
     if(e.target === modal){
+
         closeModal();
+
     }
+
 });
 
 
-/* ورود */
+/* =========================
+   SCROLL
+========================= */
+
+function scrollToGames(){
+
+    document
+    .getElementById("games")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
 
 function openLogin(){
 
@@ -786,80 +818,102 @@ function openLogin(){
         </div>
 
         <input
-            class="input"
-            id="username"
-            placeholder="نام کاربری"
+        id="username"
+        class="input"
+        placeholder="نام کاربری"
+        style="
+        width:100%;
+        padding:15px;
+        margin-bottom:12px;
+        border-radius:12px;
+        background:#ffffff08;
+        border:1px solid #ffffff15;
+        color:white;
+        outline:none;
+        "
         >
 
         <input
-            class="input"
-            id="password"
-            type="password"
-            placeholder="رمز عبور"
+        id="password"
+        type="password"
+        class="input"
+        placeholder="رمز عبور"
+        style="
+        width:100%;
+        padding:15px;
+        margin-bottom:12px;
+        border-radius:12px;
+        background:#ffffff08;
+        border:1px solid #ffffff15;
+        color:white;
+        outline:none;
+        "
         >
 
         <button
-            class="btn primary full"
-            onclick="fakeLogin()"
-        >
-            ورود به حساب ⚡
+        class="btn primary"
+        style="width:100%"
+        onclick="login()">
+        ورود 🚀
         </button>
 
     `);
+
 }
 
 
-function fakeLogin(){
+function login(){
 
-    const name =
-        document.getElementById("username").value;
+    let name =
+    document.getElementById("username").value;
 
     if(!name){
 
-        showToast("⚠️ اول نام کاربری را وارد کن");
+        showToast("⚠️ نام کاربری را وارد کن");
+
         return;
 
     }
 
     closeModal();
 
-    showToast(
-        "🔥 خوش آمدی " + name + "!"
-    );
+    showToast("🔥 خوش آمدی "+name+"!");
 
 }
 
 
-/* چالش‌ها */
+/* =========================
+   CHALLENGES
+========================= */
 
 function openChallenges(){
 
     openModal(`
 
         <div class="modal-title">
-            ⚡ چالش‌های امروز
+            🔥 چالش‌های امروز
         </div>
 
         <div class="challenge">
 
-            <b>🎯 چالش اول</b>
+            <b>🎯 جمع کردن 10 سکه</b>
 
             <span>
-                10 امتیاز جمع کن
+                جایزه: +250 XP
             </span>
 
             <div class="progress">
-                <div></div>
+                <div style="width:70%"></div>
             </div>
 
         </div>
 
         <div class="challenge">
 
-            <b>🏆 چالش دوم</b>
+            <b>🏎️ بازی Neon Racer</b>
 
             <span>
-                یک رکورد جدید ثبت کن
+                یک بار بازی را کامل کن
             </span>
 
             <div class="progress">
@@ -870,10 +924,10 @@ function openChallenges(){
 
         <div class="challenge">
 
-            <b>🔥 چالش ویژه</b>
+            <b>👑 رکورد جدید</b>
 
             <span>
-                امتیاز ویژه: +500 XP
+                رکورد خودت را بشکن
             </span>
 
             <div class="progress">
@@ -883,10 +937,12 @@ function openChallenges(){
         </div>
 
         <button
-            class="btn primary full"
-            onclick="startChallenge()"
-        >
-            شروع چالش 🚀
+        class="btn primary"
+        style="width:100%"
+        onclick="open3DGame('racer')">
+
+        🎮 شروع چالش
+
         </button>
 
     `);
@@ -894,157 +950,16 @@ function openChallenges(){
 }
 
 
-function startChallenge(){
-
-    closeModal();
-
-    showToast(
-        "🔥 چالش شروع شد! +500 XP جایزه"
-    );
-
-}
-
-
-/* ماجراجویی */
-
-function openAdventure(){
-
-    openModal(`
-
-        <div class="modal-title">
-            🚀 ماجراجویی
-        </div>
-
-        <div class="challenge">
-
-            <b>🌌 مرحله ۱</b>
-
-            <span>
-                وارد اولین مرحله شو
-            </span>
-
-        </div>
-
-        <div class="challenge">
-
-            <b>⚡ مرحله ۲</b>
-
-            <span>
-                قفل است — مرحله اول را کامل کن
-            </span>
-
-        </div>
-
-        <div class="challenge">
-
-            <b>👑 مرحله نهایی</b>
-
-            <span>
-                هنوز باز نشده
-            </span>
-
-        </div>
-
-        <button
-            class="btn primary full"
-            onclick="startChallenge()"
-        >
-            شروع مرحله اول 🎮
-        </button>
-
-    `);
-
-}
-
-
-/* جوایز */
-
-function openRewards(){
-
-    openModal(`
-
-        <div class="modal-title">
-            🎁 جوایز
-        </div>
-
-        <div class="challenge">
-            <b>💎 جایزه روزانه</b>
-            <span>100 XP</span>
-        </div>
-
-        <div class="challenge">
-            <b>🔥 جایزه 7 روزه</b>
-            <span>1000 XP</span>
-        </div>
-
-        <div class="challenge">
-            <b>👑 جایزه ویژه</b>
-            <span>به‌زودی</span>
-        </div>
-
-        <button
-            class="btn primary full"
-            onclick="showToast('🎁 جایزه روزانه دریافت شد!');closeModal()"
-        >
-            دریافت جایزه
-        </button>
-
-    `);
-
-}
-
-
-/* پروفایل */
-
-function openProfile(){
-
-    openModal(`
-
-        <div class="modal-title">
-            👤 پروفایل
-        </div>
-
-        <div style="text-align:center">
-
-            <div style="
-                width:90px;
-                height:90px;
-                margin:0 auto 20px;
-                border-radius:50%;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:40px;
-                background:linear-gradient(135deg,#006cff,#9c00ff);
-            ">
-                😎
-            </div>
-
-            <h2>Player</h2>
-
-            <p style="color:#888;margin-top:10px">
-                سطح 25
-            </p>
-
-            <p style="color:#00ffb3;margin-top:10px">
-                12,580 XP
-            </p>
-
-        </div>
-
-    `);
-
-}
-
-
-/* رتبه‌بندی */
+/* =========================
+   RANKING
+========================= */
 
 function openRanking(){
 
     openModal(`
 
         <div class="modal-title">
-            👑 رتبه‌بندی
+            👑 رتبه‌بندی جهانی
         </div>
 
         <div class="challenge">
@@ -1060,7 +975,7 @@ function openRanking(){
         </div>
 
         <div class="challenge">
-            ⭐ Player — 12,580 XP
+            ⭐ Player — ${XP} XP
         </div>
 
     `);
@@ -1068,36 +983,634 @@ function openRanking(){
 }
 
 
-/* پیام */
+/* =========================
+   3D GAME
+========================= */
 
-function showToast(text){
+function open3DGame(type){
 
-    const toast =
-        document.getElementById("toast");
+    currentGame = type;
 
-    toast.textContent = text;
+    openModal(`
 
-    toast.classList.add("show");
+        <div class="modal-title">
+            ${type==="racer"?"🏎️ NEON RACER":
+              type==="cube"?"🧊 3D CUBE":
+              "🏃 NEON RUN"}
+        </div>
+
+        <div id="threeGame">
+
+            <div class="hud">
+
+                <div class="hud-box">
+                    ⭐ امتیاز:
+                    <span id="gameScore">0</span>
+                </div>
+
+                <div class="hud-box">
+                    💎 سکه:
+                    <span id="gameCoins">0</span>
+                </div>
+
+            </div>
+
+            <canvas id="threeCanvas"></canvas>
+
+        </div>
+
+        <div class="controls">
+
+            <button class="control"
+            onclick="moveLeft()">⬅️</button>
+
+            <button class="control"
+            onclick="moveForward()">⬆️</button>
+
+            <button class="control"
+            onclick="moveBackward()">⬇️</button>
+
+            <button class="control"
+            onclick="moveRight()">➡️</button>
+
+        </div>
+
+    `);
 
     setTimeout(()=>{
-        toast.classList.remove("show");
-    },3000);
+
+        startThreeGame(type);
+
+    },100);
 
 }
 
 
-/* آنلاین نمایشی */
+/* =========================
+   THREE GAME
+========================= */
 
-let online = 12847;
+let scene;
+let camera;
+let renderer;
+let player;
+let coins=[];
+let obstacles=[];
+let score=0;
+let coinCount=0;
+let keys={};
+
+function startThreeGame(type){
+
+    const canvas =
+    document.getElementById("threeCanvas");
+
+    scene =
+    new THREE.Scene();
+
+    scene.background =
+    new THREE.Color(0x02030a);
+
+    camera =
+    new THREE.PerspectiveCamera(
+        65,
+        canvas.clientWidth/canvas.clientHeight,
+        .1,
+        1000
+    );
+
+    renderer =
+    new THREE.WebGLRenderer({
+        canvas:canvas,
+        antialias:true
+    });
+
+    renderer.setSize(
+        canvas.clientWidth,
+        canvas.clientHeight
+    );
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio,2)
+    );
+
+
+    /* نور */
+
+    const ambient =
+    new THREE.AmbientLight(
+        0xffffff,
+        .7
+    );
+
+    scene.add(ambient);
+
+
+    const light =
+    new THREE.PointLight(
+        0x00eaff,
+        4,
+        100
+    );
+
+    light.position.set(
+        0,10,5
+    );
+
+    scene.add(light);
+
+
+    /* زمین */
+
+    const groundGeometry =
+    new THREE.PlaneGeometry(
+        80,80
+    );
+
+    const groundMaterial =
+    new THREE.MeshStandardMaterial({
+        color:0x080b15,
+        roughness:.7
+    });
+
+    const ground =
+    new THREE.Mesh(
+        groundGeometry,
+        groundMaterial
+    );
+
+    ground.rotation.x =
+    -Math.PI/2;
+
+    scene.add(ground);
+
+
+    /* خطوط نئون */
+
+    for(let i=-40;i<=40;i+=4){
+
+        const geo =
+        new THREE.BoxGeometry(
+            .04,.03,80
+        );
+
+        const mat =
+        new THREE.MeshBasicMaterial({
+            color:0x0066ff
+        });
+
+        const line =
+        new THREE.Mesh(geo,mat);
+
+        line.position.set(
+            i,.03,0
+        );
+
+        scene.add(line);
+
+    }
+
+
+    /* بازیکن */
+
+    const playerGeo =
+    new THREE.BoxGeometry(
+        1.5,.8,2
+    );
+
+    const playerMat =
+    new THREE.MeshStandardMaterial({
+        color:0x00eaff,
+        emissive:0x003344,
+        metalness:.7,
+        roughness:.25
+    });
+
+    player =
+    new THREE.Mesh(
+        playerGeo,
+        playerMat
+    );
+
+    player.position.set(
+        0,.5,5
+    );
+
+    scene.add(player);
+
+
+    /* سکه‌ها */
+
+    coins=[];
+
+    for(let i=0;i<18;i++){
+
+        const geo =
+        new THREE.TorusGeometry(
+            .35,.12,12,24
+        );
+
+        const mat =
+        new THREE.MeshStandardMaterial({
+            color:0xffd000,
+            emissive:0x996600,
+            metalness:.8
+        });
+
+        const coin =
+        new THREE.Mesh(
+            geo,
+            mat
+        );
+
+        coin.position.set(
+            (Math.random()*10)-5,
+            .8,
+            -(Math.random()*45)
+        );
+
+        coin.rotation.x =
+        Math.PI/2;
+
+        scene.add(coin);
+
+        coins.push(coin);
+
+    }
+
+
+    /* موانع */
+
+    obstacles=[];
+
+    for(let i=0;i<10;i++){
+
+        const geo =
+        new THREE.BoxGeometry(
+            1.5,1.5,1.5
+        );
+
+        const mat =
+        new THREE.MeshStandardMaterial({
+            color:0x9b00ff,
+            emissive:0x220033
+        });
+
+        const obstacle =
+        new THREE.Mesh(
+            geo,
+            mat
+        );
+
+        obstacle.position.set(
+            (Math.random()*10)-5,
+            .75,
+            -(Math.random()*50)
+        );
+
+        scene.add(obstacle);
+
+        obstacles.push(obstacle);
+
+    }
+
+
+    camera.position.set(
+        0,5,10
+    );
+
+    camera.lookAt(
+        player.position
+    );
+
+
+    score=0;
+    coinCount=0;
+
+    animate3D();
+
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+function animate3D(){
+
+    if(!currentGame) return;
+
+    gameAnimation =
+    requestAnimationFrame(
+        animate3D
+    );
+
+
+    /* چرخش سکه */
+
+    coins.forEach(c=>{
+
+        c.rotation.z += .05;
+
+    });
+
+
+    /* حرکت */
+
+    if(keys.left)
+        player.position.x -= .12;
+
+    if(keys.right)
+        player.position.x += .12;
+
+    if(keys.forward)
+        player.position.z -= .15;
+
+    if(keys.backward)
+        player.position.z += .15;
+
+
+    /* محدودیت */
+
+    player.position.x =
+    Math.max(
+        -6,
+        Math.min(6,player.position.x)
+    );
+
+
+    /* حرکت خودکار دنیا */
+
+    obstacles.forEach(o=>{
+
+        o.position.z += .06;
+
+        if(o.position.z>12){
+
+            o.position.z=-50;
+
+            o.position.x=
+            (Math.random()*10)-5;
+
+        }
+
+    });
+
+
+    coins.forEach(c=>{
+
+        c.position.z += .06;
+
+        if(c.position.z>12){
+
+            c.position.z=-50;
+
+            c.position.x=
+            (Math.random()*10)-5;
+
+        }
+
+
+        const distance =
+        player.position.distanceTo(
+            c.position
+        );
+
+        if(distance<1.4){
+
+            coinCount++;
+
+            score+=100;
+
+            c.position.z=-50;
+
+            c.position.x=
+            (Math.random()*10)-5;
+
+            updateHUD();
+
+            addXP(100);
+
+        }
+
+    });
+
+
+    /* برخورد */
+
+    obstacles.forEach(o=>{
+
+        const distance =
+        player.position.distanceTo(
+            o.position
+        );
+
+        if(distance<1.3){
+
+            score=Math.max(
+                0,
+                score-50
+            );
+
+            o.position.z=-50;
+
+            showToast(
+                "💥 برخورد کردی! -50 امتیاز"
+            );
+
+            updateHUD();
+
+        }
+
+    });
+
+
+    /* دوربین */
+
+    camera.position.x +=
+    (player.position.x-camera.position.x)*.08;
+
+    camera.position.z +=
+    ((player.position.z+8)-camera.position.z)*.08;
+
+    camera.lookAt(
+        player.position.x,
+        0,
+        player.position.z-5
+    );
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+function moveLeft(){
+
+    keys.left=true;
+
+    setTimeout(()=>{
+        keys.left=false;
+    },250);
+
+}
+
+function moveRight(){
+
+    keys.right=true;
+
+    setTimeout(()=>{
+        keys.right=false;
+    },250);
+
+}
+
+function moveForward(){
+
+    keys.forward=true;
+
+    setTimeout(()=>{
+        keys.forward=false;
+    },250);
+
+}
+
+function moveBackward(){
+
+    keys.backward=true;
+
+    setTimeout(()=>{
+        keys.backward=false;
+    },250);
+
+}
+
+
+/* کیبورد */
+
+document.addEventListener(
+"keydown",
+e=>{
+
+    if(e.key==="ArrowLeft")
+        keys.left=true;
+
+    if(e.key==="ArrowRight")
+        keys.right=true;
+
+    if(e.key==="ArrowUp")
+        keys.forward=true;
+
+    if(e.key==="ArrowDown")
+        keys.backward=true;
+
+});
+
+
+document.addEventListener(
+"keyup",
+e=>{
+
+    if(e.key==="ArrowLeft")
+        keys.left=false;
+
+    if(e.key==="ArrowRight")
+        keys.right=false;
+
+    if(e.key==="ArrowUp")
+        keys.forward=false;
+
+    if(e.key==="ArrowDown")
+        keys.backward=false;
+
+});
+
+
+/* =========================
+   XP
+========================= */
+
+function addXP(amount){
+
+    XP+=amount;
+
+    document.getElementById(
+        "xp"
+    ).textContent=
+    XP.toLocaleString();
+
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+function updateHUD(){
+
+    const s =
+    document.getElementById(
+        "gameScore"
+    );
+
+    const c =
+    document.getElementById(
+        "gameCoins"
+    );
+
+    if(s) s.textContent=score;
+
+    if(c) c.textContent=coinCount;
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(text){
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.textContent=text;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================
+   ONLINE COUNTER
+========================= */
+
+let online=12847;
 
 setInterval(()=>{
 
     online +=
-        Math.floor(Math.random()*21)-10;
+    Math.floor(
+        Math.random()*21
+    )-10;
 
-    document.getElementById("online")
-        .textContent =
-        online.toLocaleString("en-US");
+    document.getElementById(
+        "online"
+    ).textContent=
+    online.toLocaleString();
 
 },3000);
 
