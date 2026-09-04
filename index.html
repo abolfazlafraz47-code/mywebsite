@@ -3,241 +3,3944 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>⚡ NEXORA | Gaming Hub</title>
+<title>⚡ NEXORA ULTRA</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-    --bg:#050711;
-    --panel:#0b1020;
-    --panel2:#11182b;
-    --line:#202b48;
-    --cyan:#00eaff;
-    --purple:#9b5cff;
-    --pink:#ff3cac;
-    --green:#00ff9d;
-    --yellow:#ffd43b;
-    --text:#f5f7ff;
-    --muted:#8f9bb7;
-    --danger:#ff4d67;
+ --bg:#03050d;
+ --bg2:#070b17;
+ --card:#0b1120;
+ --card2:#10182b;
+ --line:#1d2943;
+ --cyan:#00eaff;
+ --purple:#8d5cff;
+ --pink:#ff3ca6;
+ --green:#00ff9d;
+ --yellow:#ffd43b;
+ --red:#ff4965;
+ --white:#f7f9ff;
+ --muted:#8490aa;
 }
 
+html{scroll-behavior:smooth}
+
 body{
-    font-family:"Vazirmatn",Tahoma,sans-serif;
-    background:
-      radial-gradient(circle at 10% 10%,rgba(0,234,255,.09),transparent 30%),
-      radial-gradient(circle at 90% 20%,rgba(155,92,255,.10),transparent 30%),
-      radial-gradient(circle at 50% 100%,rgba(255,60,172,.06),transparent 30%),
-      var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
+ font-family:Vazirmatn,Tahoma,sans-serif;
+ color:var(--white);
+ background:
+ radial-gradient(circle at 5% 0%,rgba(0,234,255,.12),transparent 25%),
+ radial-gradient(circle at 100% 10%,rgba(141,92,255,.14),transparent 28%),
+ radial-gradient(circle at 50% 100%,rgba(255,60,166,.08),transparent 30%),
+ var(--bg);
+ min-height:100vh;
+ overflow-x:hidden;
 }
 
 body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background-image:
-      linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-    background-size:45px 45px;
-    z-index:-1;
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:-1;
+ background-image:
+ linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+ background-size:42px 42px;
 }
+
+button,input{font-family:inherit}
 
 button{
-    font-family:inherit;
-    cursor:pointer;
-    border:0;
+ cursor:pointer;
+ border:0;
+ color:white;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#050812}
+::-webkit-scrollbar-thumb{
+ background:linear-gradient(var(--cyan),var(--purple));
+ border-radius:20px;
 }
 
 /* HEADER */
 
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    backdrop-filter:blur(20px);
-    background:rgba(5,7,17,.82);
-    border-bottom:1px solid rgba(0,234,255,.12);
+ position:sticky;
+ top:0;
+ z-index:1000;
+ background:rgba(3,5,13,.82);
+ backdrop-filter:blur(22px);
+ border-bottom:1px solid rgba(0,234,255,.13);
 }
 
-.header-inner{
-    max-width:1400px;
-    margin:auto;
-    padding:13px 20px;
-    display:flex;
-    align-items:center;
-    gap:20px;
+.header{
+ max-width:1450px;
+ margin:auto;
+ min-height:70px;
+ padding:10px 18px;
+ display:flex;
+ align-items:center;
+ gap:15px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:22px;
-    font-weight:900;
-    white-space:nowrap;
-    color:#fff;
-    text-shadow:0 0 20px var(--cyan);
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-size:22px;
+ font-weight:900;
+ white-space:nowrap;
+ text-shadow:0 0 22px var(--cyan);
 }
 
-.logo-icon{
-    width:43px;
-    height:43px;
-    border-radius:13px;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(135deg,var(--cyan),var(--purple));
-    box-shadow:0 0 25px rgba(0,234,255,.35);
+.logoIcon{
+ width:44px;
+ height:44px;
+ display:grid;
+ place-items:center;
+ border-radius:14px;
+ background:linear-gradient(135deg,var(--cyan),var(--purple));
+ box-shadow:0 0 30px rgba(0,234,255,.3);
 }
 
 .nav{
-    display:flex;
-    gap:7px;
-    flex:1;
-    overflow:auto;
+ display:flex;
+ gap:5px;
+ flex:1;
+ overflow-x:auto;
+ scrollbar-width:none;
 }
 
 .nav button{
-    background:transparent;
-    color:var(--muted);
-    padding:10px 13px;
-    border-radius:11px;
-    white-space:nowrap;
-    transition:.2s;
+ background:transparent;
+ color:var(--muted);
+ padding:10px 12px;
+ border-radius:11px;
+ white-space:nowrap;
+ transition:.2s;
 }
 
-.nav button:hover,
-.nav button.active{
-    color:#fff;
-    background:rgba(0,234,255,.09);
-    box-shadow:inset 0 -2px var(--cyan);
+.nav button:hover,.nav button.active{
+ color:#fff;
+ background:rgba(0,234,255,.08);
+ box-shadow:inset 0 -2px var(--cyan);
 }
 
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.headerRight{
+ display:flex;
+ align-items:center;
+ gap:7px;
 }
 
-.currency{
-    min-width:75px;
-    padding:8px 11px;
-    border-radius:12px;
-    background:rgba(255,255,255,.045);
-    border:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-    font-size:13px;
+.money{
+ min-width:72px;
+ padding:9px 10px;
+ border-radius:12px;
+ background:rgba(255,255,255,.045);
+ border:1px solid var(--line);
+ text-align:center;
+ font-size:13px;
 }
 
-.currency.coins{
-    color:var(--yellow);
+.money.coin{color:var(--yellow)}
+.money.diamond{color:#62eaff}
+
+.profileBtn{
+ padding:9px 13px;
+ border-radius:12px;
+ background:linear-gradient(135deg,rgba(0,234,255,.13),rgba(141,92,255,.15));
+ border:1px solid rgba(0,234,255,.25);
+ font-weight:800;
+ transition:.2s;
 }
 
-.currency.diamonds{
-    color:#61e9ff;
-}
-
-.profile-btn{
-    padding:8px 12px;
-    border-radius:12px;
-    color:white;
-    background:linear-gradient(135deg,rgba(0,234,255,.14),rgba(155,92,255,.14));
-    border:1px solid rgba(0,234,255,.25);
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-weight:700;
-    transition:.2s;
-}
-
-.profile-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(0,234,255,.18);
+.profileBtn:hover{
+ transform:translateY(-2px);
+ box-shadow:0 0 22px rgba(0,234,255,.15);
 }
 
 /* MAIN */
 
 main{
-    max-width:1400px;
-    margin:auto;
-    padding:25px 20px 80px;
+ max-width:1450px;
+ margin:auto;
+ padding:22px 18px 80px;
 }
+
+/* HERO */
 
 .hero{
-    position:relative;
-    min-height:430px;
-    border:1px solid var(--line);
-    border-radius:30px;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 80% 20%,rgba(0,234,255,.18),transparent 28%),
-      radial-gradient(circle at 20% 70%,rgba(155,92,255,.16),transparent 30%),
-      linear-gradient(135deg,#090e1d,#080b16);
-    display:flex;
-    align-items:center;
-    padding:55px;
-    margin-bottom:25px;
+ position:relative;
+ min-height:450px;
+ border-radius:30px;
+ overflow:hidden;
+ border:1px solid var(--line);
+ background:
+ radial-gradient(circle at 75% 20%,rgba(0,234,255,.2),transparent 25%),
+ radial-gradient(circle at 15% 80%,rgba(141,92,255,.17),transparent 28%),
+ linear-gradient(135deg,#080d1c,#060914);
+ display:flex;
+ align-items:center;
+ padding:55px;
+ box-shadow:0 25px 80px rgba(0,0,0,.25);
 }
 
-.hero:after{
-    content:"NEXORA";
-    position:absolute;
-    left:-30px;
-    bottom:-80px;
-    font-size:190px;
-    font-weight:900;
-    color:rgba(255,255,255,.018);
-    pointer-events:none;
+.heroGrid{
+ position:absolute;
+ inset:0;
+ opacity:.12;
+ background-image:
+ linear-gradient(rgba(0,234,255,.3) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(0,234,255,.3) 1px,transparent 1px);
+ background-size:45px 45px;
+ transform:perspective(500px) rotateX(55deg) scale(1.6);
+ transform-origin:bottom;
 }
 
-.hero-content{
-    position:relative;
-    z-index:2;
-    max-width:720px;
+.heroContent{
+ position:relative;
+ z-index:3;
+ max-width:750px;
 }
 
-.badge{
-    display:inline-flex;
-    gap:8px;
-    padding:8px 13px;
-    border-radius:30px;
-    color:var(--cyan);
-    background:rgba(0,234,255,.08);
-    border:1px solid rgba(0,234,255,.2);
-    font-size:13px;
-    margin-bottom:20px;
+.liveBadge{
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ padding:8px 13px;
+ border-radius:30px;
+ border:1px solid rgba(0,255,157,.25);
+ background:rgba(0,255,157,.06);
+ color:var(--green);
+ font-size:12px;
+ margin-bottom:20px;
+}
+
+.dot{
+ width:8px;
+ height:8px;
+ background:var(--green);
+ border-radius:50%;
+ box-shadow:0 0 14px var(--green);
 }
 
 .hero h1{
-    font-size:clamp(45px,8vw,90px);
-    line-height:1;
-    font-weight:900;
-    letter-spacing:-4px;
-    background:linear-gradient(90deg,#fff,var(--cyan),#b58cff);
-    -webkit-background-clip:text;
-    color:transparent;
-    margin-bottom:18px;
+ font-size:clamp(50px,9vw,100px);
+ line-height:.95;
+ font-weight:900;
+ letter-spacing:-5px;
+ background:linear-gradient(90deg,#fff,var(--cyan),#c3a9ff,var(--pink));
+ -webkit-background-clip:text;
+ color:transparent;
+ margin-bottom:20px;
 }
 
 .hero p{
-    color:var(--muted);
-    font-size:17px;
-   
+ color:var(--muted);
+ line-height:2;
+ font-size:16px;
+ max-width:650px;
+}
+
+.heroBtns{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:25px;
+}
+
+.btn{
+ padding:13px 19px;
+ border-radius:13px;
+ font-weight:800;
+ transition:.2s;
+}
+
+.btn:hover{transform:translateY(-3px)}
+
+.primary{
+ background:linear-gradient(135deg,var(--cyan),var(--purple));
+ box-shadow:0 0 28px rgba(0,234,255,.2);
+}
+
+.secondary{
+ background:rgba(255,255,255,.045);
+ border:1px solid var(--line);
+}
+
+.heroCore{
+ position:absolute;
+ left:8%;
+ width:260px;
+ height:260px;
+ border-radius:50%;
+ background:
+ radial-gradient(circle,#fff 0 2%,var(--cyan) 4%,var(--purple) 28%,transparent 68%);
+ filter:blur(1px);
+ opacity:.65;
+ animation:core 5s ease-in-out infinite;
+}
+
+@keyframes core{
+ 0%,100%{transform:translateY(0) rotate(0)}
+ 50%{transform:translateY(-22px) rotate(15deg)}
+}
+
+/* TOP CARDS */
+
+.topGrid{
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:12px;
+ margin-top:15px;
+}
+
+.statCard{
+ padding:17px;
+ border:1px solid var(--line);
+ border-radius:18px;
+ background:rgba(10,16,31,.85);
+ position:relative;
+ overflow:hidden;
+}
+
+.statCard:after{
+ content:"";
+ position:absolute;
+ width:90px;
+ height:90px;
+ left:-40px;
+ bottom:-45px;
+ border-radius:50%;
+ background:var(--glow);
+ opacity:.1;
+ filter:blur(20px);
+}
+
+.statIcon{font-size:24px}
+.statLabel{
+ color:var(--muted);
+ font-size:11px;
+ margin-top:7px;
+}
+.statValue{
+ font-size:21px;
+ font-weight:900;
+ margin-top:2px;
+}
+
+/* SECTION */
+
+.section{
+ margin-top:35px;
+ scroll-margin-top:95px;
+}
+
+.sectionHead{
+ display:flex;
+ align-items:end;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:15px;
+}
+
+.title{
+ font-size:25px;
+ font-weight:900;
+}
+
+.subtitle{
+ color:var(--muted);
+ font-size:12px;
+ margin-top:4px;
+}
+
+/* SEARCH */
+
+.searchBox{
+ display:flex;
+ gap:8px;
+ align-items:center;
+ width:min(380px,100%);
+}
+
+.searchBox input{
+ width:100%;
+ padding:11px 13px;
+ border-radius:12px;
+ outline:0;
+ background:#090f1e;
+ border:1px solid var(--line);
+ color:#fff;
+}
+
+.searchBox input:focus{border-color:var(--cyan)}
+
+/* GAMES */
+
+.games{
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:14px;
+}
+
+.game{
+ min-height:245px;
+ border-radius:20px;
+ padding:17px;
+ border:1px solid var(--line);
+ background:linear-gradient(145deg,#0d1527,#080c18);
+ position:relative;
+ overflow:hidden;
+ transition:.25s;
+}
+
+.game:hover{
+ transform:translateY(-7px);
+ border-color:rgba(0,234,255,.4);
+ box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.gameIcon{
+ width:58px;
+ height:58px;
+ display:grid;
+ place-items:center;
+ font-size:29px;
+ border-radius:17px;
+ background:rgba(255,255,255,.055);
+ margin-bottom:14px;
+}
+
+.game h3{font-size:16px}
+.game p{
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.8;
+ min-height:43px;
+ margin-top:5px;
+}
+
+.gameInfo{
+ display:flex;
+ justify-content:space-between;
+ color:var(--muted);
+ font-size:10px;
+ margin-top:9px;
+}
+
+.play{
+ width:100%;
+ margin-top:12px;
+ padding:10px;
+ border-radius:11px;
+ background:rgba(0,234,255,.08);
+ border:1px solid rgba(0,234,255,.17);
+ font-weight:800;
+}
+
+.play:hover{
+ background:rgba(0,234,255,.17);
+}
+
+/* PANELS */
+
+.panel{
+ background:rgba(10,16,31,.86);
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:20px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+ display:grid;
+ grid-template-columns:1.5fr 1fr 1fr;
+ gap:14px;
+}
+
+.player{
+ display:flex;
+ gap:14px;
+ align-items:center;
+}
+
+.avatar{
+ width:70px;
+ height:70px;
+ display:grid;
+ place-items:center;
+ border-radius:20px;
+ font-size:37px;
+ background:linear-gradient(135deg,rgba(0,234,255,.17),rgba(141,92,255,.2));
+ border:1px solid rgba(0,234,255,.25);
+}
+
+.playerName{
+ font-size:21px;
+ font-weight:900;
+}
+
+.small{
+ color:var(--muted);
+ font-size:11px;
+}
+
+.progress{
+ height:8px;
+ margin-top:9px;
+ border-radius:20px;
+ background:#1a2338;
+ overflow:hidden;
+}
+
+.progress div{
+ height:100%;
+ border-radius:inherit;
+ background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+ transition:.5s;
+}
+
+.rows{
+ display:grid;
+ gap:8px;
+ margin-top:15px;
+}
+
+.row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:10px;
+ border-radius:11px;
+ background:rgba(255,255,255,.035);
+ font-size:12px;
+}
+
+.muted{color:var(--muted)}
+.green{color:var(--green)}
+.yellow{color:var(--yellow)}
+.cyan{color:var(--cyan)}
+.pink{color:var(--pink)}
+
+/* MISSIONS */
+
+.missions{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:13px;
+}
+
+.mission{
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:16px;
+ background:rgba(10,16,31,.8);
+}
+
+.missionTop{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.mission h3{font-size:14px}
+.mission p{
+ color:var(--muted);
+ font-size:10px;
+ margin-top:4px;
+ line-height:1.7;
+}
+
+.reward{
+ color:var(--yellow);
+ font-size:11px;
+ margin-top:10px;
+}
+
+/* RANK */
+
+.ranking{
+ display:grid;
+ gap:9px;
+}
+
+.rank{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:12px;
+ border-radius:14px;
+ background:rgba(255,255,255,.035);
+}
+
+.rank.you{
+ border-color:rgba(0,234,255,.3);
+ background:rgba(0,234,255,.05);
+}
+
+.rankNumber{
+ width:35px;
+ text-align:center;
+ font-weight:900;
+}
+
+.rankAvatar{
+ width:38px;
+ height:38px;
+ display:grid;
+ place-items:center;
+ border-radius:11px;
+ background:#18213a;
+}
+
+.rankInfo{flex:1}
+.rankName{font-size:13px;font-weight:800}
+.rankScore{font-size:10px;color:var(--yellow)}
+
+/* BUTTON */
+
+.smallBtn{
+ padding:8px 11px;
+ border-radius:10px;
+ background:rgba(255,255,255,.05);
+ border:1px solid var(--line);
+ color:#fff;
+ font-size:11px;
+}
+
+.smallBtn:hover{border-color:var(--cyan)}
+.smallBtn:disabled{opacity:.4;cursor:not-allowed}
+
+/* MODAL */
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:5000;
+ background:rgba(0,0,0,.74);
+ backdrop-filter:blur(14px);
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+}
+
+.modal.show{display:flex}
+
+.modalBox{
+ width:min(900px,100%);
+ max-height:92vh;
+ overflow:auto;
+ border-radius:25px;
+ background:#080d1b;
+ border:1px solid #263555;
+ box-shadow:0 30px 100px rgba(0,0,0,.7);
+ animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+ from{opacity:0;transform:scale(.94) translateY(10px)}
+ to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+.modalHead{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:17px 20px;
+ border-bottom:1px solid var(--line);
+}
+
+.modalTitle{
+ font-size:19px;
+ font-weight:900;
+}
+
+.close{
+ width:38px;
+ height:38px;
+ border-radius:11px;
+ background:rgba(255,255,255,.06);
+ color:white;
+}
+
+.modalBody{padding:20px}
+
+/* PROFILE */
+
+.cover{
+ padding:25px;
+ border-radius:20px;
+ border:1px solid var(--line);
+ background:
+ radial-gradient(circle at 80% 20%,rgba(0,234,255,.15),transparent 28%),
+ linear-gradient(135deg,#101a30,#090e1d);
+}
+
+.profileTop{
+ display:flex;
+ gap:17px;
+ align-items:center;
+}
+
+.bigAvatar{
+ width:95px;
+ height:95px;
+ display:grid;
+ place-items:center;
+ font-size:51px;
+ border-radius:27px;
+ background:linear-gradient(135deg,var(--cyan),var(--purple));
+ box-shadow:0 0 40px rgba(0,234,255,.18);
+}
+
+.profileName{
+ font-size:28px;
+ font-weight:900;
+}
+
+.profileStats{
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:9px;
+ margin-top:18px;
+}
+
+.profileStat{
+ text-align:center;
+ padding:12px;
+ border-radius:14px;
+ background:rgba(255,255,255,.045);
+ border:1px solid var(--line);
+}
+
+.profileStat b{
+ display:block;
+ font-size:17px;
+}
+.profileStat span{
+ color:var(--muted);
+ font-size:10px;
+}
+
+.actionGrid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ margin-top:15px;
+}
+
+.action{
+ text-align:right;
+ padding:15px;
+ border-radius:15px;
+ background:rgba(255,255,255,.04);
+ border:1px solid var(--line);
+}
+
+.action:hover{border-color:rgba(0,234,255,.35)}
+.action b{display:block}
+.action span{
+ color:var(--muted);
+ font-size:10px;
+}
+
+/* SHOP */
+
+.shop{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:13px;
+}
+
+.item{
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:15px;
+ background:rgba(255,255,255,.035);
+}
+
+.itemIcon{
+ height:90px;
+ display:grid;
+ place-items:center;
+ font-size:46px;
+ background:rgba(0,234,255,.035);
+ border-radius:14px;
+ margin-bottom:11px;
+}
+
+.item h3{font-size:14px}
+.item p{
+ color:var(--muted);
+ font-size:10px;
+ min-height:30px;
+ margin-top:4px;
+}
+
+.price{
+ color:var(--yellow);
+ font-weight:900;
+ font-size:12px;
+ margin:10px 0;
+}
+
+/* ACHIEVEMENTS */
+
+.badges{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ margin-top:12px;
+}
+
+.badgeCard{
+ padding:13px;
+ border-radius:14px;
+ border:1px solid var(--line);
+ background:rgba(255,255,255,.035);
+}
+
+.badgeCard.locked{opacity:.35}
+.badgeCard b{display:block;font-size:13px}
+.badgeCard span{font-size:10px;color:var(--muted)}
+
+/* DAILY */
+
+.daily{
+ text-align:center;
+ padding:15px;
+}
+
+.gift{
+ font-size:85px;
+ margin:15px;
+ animation:gift 2s infinite ease-in-out;
+}
+
+@keyframes gift{
+ 0%,100%{transform:translateY(0) rotate(0)}
+ 50%{transform:translateY(-10px) rotate(4deg)}
+}
+
+.rewardBox{
+ margin:20px auto;
+ max-width:480px;
+ padding:20px;
+ border-radius:18px;
+ background:rgba(255,255,255,.04);
+ border:1px solid var(--line);
+ font-size:19px;
+}
+
+/* SETTINGS */
+
+.setting{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:16px 5px;
+ border-bottom:1px solid var(--line);
+}
+
+.setting:last-child{border-bottom:0}
+
+.setting b{display:block}
+.setting span{
+ color:var(--muted);
+ font-size:10px;
+}
+
+.switch{
+ width:48px;
+ height:27px;
+ padding:3px;
+ border-radius:30px;
+ background:#222b41;
+}
+
+.switch i{
+ display:block;
+ width:21px;
+ height:21px;
+ background:white;
+ border-radius:50%;
+ transition:.2s;
+}
+
+.switch.on{
+ background:linear-gradient(90deg,var(--cyan),var(--purple));
+}
+
+.switch.on i{transform:translateX(-21px)}
+
+.input{
+ width:100%;
+ padding:13px;
+ background:#0b1222;
+ border:1px solid var(--line);
+ color:white;
+ outline:0;
+ border-radius:12px;
+}
+
+.input:focus{border-color:var(--cyan)}
+
+/* GAME */
+
+.gameBox{
+ width:min(1050px,100%);
+}
+
+.hud{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-bottom:12px;
+}
+
+.hudItem{
+ padding:9px 12px;
+ border-radius:10px;
+ border:1px solid var(--line);
+ background:rgba(255,255,255,.04);
+ font-size:12px;
+}
+
+#canvas{
+ display:block;
+ width:100%;
+ height:auto;
+ border-radius:16px;
+ border:1px solid #263657;
+ background:#02040a;
+}
+
+.controls{
+ display:flex;
+ justify-content:center;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:10px;
+}
+
+.control{
+ padding:10px 15px;
+ border-radius:11px;
+ background:#111a2f;
+ border:1px solid var(--line);
+}
+
+.gameMessage{
+ text-align:center;
+ min-height:25px;
+ color:var(--muted);
+ margin-top:10px;
+}
+
+/* NOTIFICATIONS */
+
+.notification{
+ padding:14px;
+ border:1px solid var(--line);
+ border-radius:14px;
+ margin-bottom:9px;
+ background:rgba(255,255,255,.035);
+}
+
+.notification b{display:block}
+.notification p{
+ color:var(--muted);
+ font-size:11px;
+ margin-top:4px;
+}
+
+/* TOAST */
+
+#toasts{
+ position:fixed;
+ left:17px;
+ bottom:17px;
+ z-index:9000;
+ width:min(360px,calc(100% - 34px));
+ display:grid;
+ gap:8px;
+}
+
+.toast{
+ padding:13px 15px;
+ border-radius:14px;
+ background:#10182b;
+ border:1px solid rgba(0,234,255,.3);
+ box-shadow:0 15px 45px rgba(0,0,0,.4);
+ font-size:12px;
+ animation:toastIn .25s ease;
+}
+
+@keyframes toastIn{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1150px){
+ .games{grid-template-columns:repeat(4,1fr)}
+ .topGrid{grid-template-columns:repeat(3,1fr)}
+ .missions{grid-template-columns:repeat(2,1fr)}
+ .dashboard{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:800px){
+
+ .header{
+  flex-wrap:wrap;
+ }
+
+ .logo{width:100%}
+
+ .headerRight{
+  position:absolute;
+  left:12px;
+  top:13px;
+ }
+
+ .profileBtn span{display:none}
+
+ .nav{
+  width:100%;
+  order:3;
+ }
+
+ .hero{
+  padding:30px 22px;
+  min-height:430px;
+ }
+
+ .heroCore{
+  left:-80px;
+  opacity:.25;
+ }
+
+ .games{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+ .dashboard{
+  grid-template-columns:1fr;
+ }
+
+ .profileStats{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+ .actionGrid{
+  grid-template-columns:1fr 1fr;
+ }
+
+ .shop{
+  grid-template-columns:1fr 1fr;
+ }
+
+ .badges{
+  grid-template-columns:1fr 1fr;
+ }
+}
+
+@media(max-width:480px){
+
+ main{padding:12px 10px 50px}
+
+ .topGrid{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+ .games{
+  grid-template-columns:1fr;
+ }
+
+ .missions{
+  grid-template-columns:1fr;
+ }
+
+ .shop{
+  grid-template-columns:1fr;
+ }
+
+ .actionGrid{
+  grid-template-columns:1fr;
+ }
+
+ .badges{
+  grid-template-columns:1fr;
+ }
+
+ .hero h1{
+  font-size:55px;
+ }
+
+ .money{
+  min-width:55px;
+  padding:7px;
+  font-size:11px;
+ }
+}
+
+/* NO ANIMATION */
+
+.noAnim *,
+.noAnim *:before,
+.noAnim *:after{
+ animation:none!important;
+ transition:none!important;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header">
+
+    <div class="logo">
+        <div class="logoIcon">⚡</div>
+        NEXORA
+    </div>
+
+    <nav class="nav">
+        <button class="active" onclick="scrollToSection('home')">🏠 خانه</button>
+        <button onclick="scrollToSection('games')">🎮 بازی‌ها</button>
+        <button onclick="openProfile()">👤 پروفایل</button>
+        <button onclick="openShop()">🛒 فروشگاه</button>
+        <button onclick="openMissions()">🎯 مأموریت</button>
+        <button onclick="openDaily()">🎁 جایزه</button>
+        <button onclick="openNotifications()">🔔 اعلان</button>
+        <button onclick="openSettings()">⚙️ تنظیمات</button>
+    </nav>
+
+    <div class="headerRight">
+
+        <div class="money coin">
+            🪙 <b id="coins">0</b>
+        </div>
+
+        <div class="money diamond">
+            💎 <b id="diamonds">0</b>
+        </div>
+
+        <button class="profileBtn" onclick="openProfile()">
+            👤 <span id="headerName">Player</span>
+        </button>
+
+    </div>
+
+</div>
+</header>
+
+<main id="home">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="heroGrid"></div>
+
+    <div class="heroContent">
+
+        <div class="liveBadge">
+            <span class="dot"></span>
+            NEXORA ULTRA ONLINE
+        </div>
+
+        <h1>NEXORA</h1>
+
+        <p>
+            مرکز گیمینگ نئونی خودت را بساز، بازی کن،
+            XP بگیر، لول آپ شو، مأموریت‌ها را کامل کن،
+            آیتم بخر و رکورد خودت را ثبت کن.
+        </p>
+
+        <div class="heroBtns">
+
+            <button class="btn primary" onclick="scrollToSection('games')">
+                🎮 شروع بازی
+            </button>
+
+            <button class="btn secondary" onclick="openDaily()">
+                🎁 جایزه روزانه
+            </button>
+
+            <button class="btn secondary" onclick="openShop()">
+                🛒 فروشگاه
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="heroCore"></div>
+
+</section>
+
+<!-- STATS -->
+
+<div class="topGrid">
+
+    <div class="statCard" style="--glow:#00eaff">
+        <div class="statIcon">⭐</div>
+        <div class="statLabel">سطح</div>
+        <div class="statValue" id="level">1</div>
+    </div>
+
+    <div class="statCard" style="--glow:#8d5cff">
+        <div class="statIcon">⚡</div>
+        <div class="statLabel">XP</div>
+        <div class="statValue" id="xp">0</div>
+    </div>
+
+    <div class="statCard" style="--glow:#ffd43b">
+        <div class="statIcon">🏆</div>
+        <div class="statLabel">بهترین رکورد</div>
+        <div class="statValue" id="best">0</div>
+    </div>
+
+    <div class="statCard" style="--glow:#00ff9d">
+        <div class="statIcon">🎮</div>
+        <div class="statLabel">بازی‌ها</div>
+        <div class="statValue" id="gamesPlayed">0</div>
+    </div>
+
+    <div class="statCard" style="--glow:#ff3ca6">
+        <div class="statIcon">🔥</div>
+        <div class="statLabel">استریک</div>
+        <div class="statValue"><span id="streak">1</span> روز</div>
+    </div>
+
+</div>
+
+<!-- GAMES -->
+
+<section class="section" id="games">
+
+<div class="sectionHead">
+
+    <div>
+        <div class="title">🎮 بازی‌های NEXORA</div>
+        <div class="subtitle">یکی را انتخاب کن و رکورد بزن</div>
+    </div>
+
+    <div class="searchBox">
+        <input
+            id="gameSearch"
+            placeholder="🔎 جست‌وجوی بازی..."
+            oninput="searchGames()"
+        >
+    </div>
+
+</div>
+
+<div class="games" id="gamesGrid">
+
+    <div class="game" data-name="Neon Racer">
+        <div class="gameIcon">🏎️</div>
+        <h3>Neon Racer</h3>
+        <p>از موانع عبور کن و رکوردت را بالا ببر.</p>
+        <div class="gameInfo">
+            <span>⚡ سرعت</span>
+            <span>⭐ آسان</span>
+        </div>
+        <button class="play" onclick="startGame('car')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Space Attack">
+        <div class="gameIcon">🚀</div>
+        <h3>Space Attack</h3>
+        <p>دشمنان فضایی را نابود کن و امتیاز بگیر.</p>
+        <div class="gameInfo">
+            <span>🔥 اکشن</span>
+            <span>⭐ متوسط</span>
+        </div>
+        <button class="play" onclick="startGame('space')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Neon Parkour">
+        <div class="gameIcon">🏃</div>
+        <h3>Neon Parkour</h3>
+        <p>روی سکوهای نئونی بپر و سقوط نکن.</p>
+        <div class="gameInfo">
+            <span>⚡ سرعت</span>
+            <span>⭐ سخت</span>
+        </div>
+        <button class="play" onclick="startGame('parkour')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Basket Pro">
+        <div class="gameIcon">🏀</div>
+        <h3>Basket Pro</h3>
+        <p>حرکت درست را انتخاب کن و گل بزن.</p>
+        <div class="gameInfo">
+            <span>🏀 ورزشی</span>
+            <span>⭐ آسان</span>
+        </div>
+        <button class="play" onclick="startGame('basket')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Target Master">
+        <div class="gameIcon">🎯</div>
+        <h3>Target Master</h3>
+        <p>هدف‌ها را قبل از تمام شدن زمان بزن.</p>
+        <div class="gameInfo">
+            <span>🎯 مهارتی</span>
+            <span>⭐ متوسط</span>
+        </div>
+        <button class="play" onclick="startGame('target')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Snow Rush">
+        <div class="gameIcon">❄️</div>
+        <h3>Snow Rush</h3>
+        <p>در مسیر یخی از موانع فرار کن.</p>
+        <div class="gameInfo">
+            <span>❄️ برفی</span>
+            <span>⭐ سخت</span>
+        </div>
+        <button class="play" onclick="startGame('snow')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Cube Puzzle">
+        <div class="gameIcon">🧊</div>
+        <h3>Cube Puzzle</h3>
+        <p>مکعب‌ها را یکی‌یکی پیدا و کامل کن.</p>
+        <div class="gameInfo">
+            <span>🧠 فکری</span>
+            <span>⭐ آسان</span>
+        </div>
+        <button class="play" onclick="startGame('cube')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Treasure Island">
+        <div class="gameIcon">🏝️</div>
+        <h3>Treasure Island</h3>
+        <p>گنج‌های مخفی جزیره را پیدا کن.</p>
+        <div class="gameInfo">
+            <span>💰 گنج</span>
+            <span>⭐ متوسط</span>
+        </div>
+        <button class="play" onclick="startGame('treasure')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Zombie Escape">
+        <div class="gameIcon">🧟</div>
+        <h3>Zombie Escape</h3>
+        <p>از دشمنان فرار کن و تا جای ممکن دوام بیاور.</p>
+        <div class="gameInfo">
+            <span>🧟 بقا</span>
+            <span>⭐ سخت</span>
+        </div>
+        <button class="play" onclick="startGame('zombie')">▶ بازی</button>
+    </div>
+
+    <div class="game" data-name="Castle Defense">
+        <div class="gameIcon">🏰</div>
+        <h3>Castle Defense</h3>
+        <p>از قلعه در برابر موج دشمنان دفاع کن.</p>
+        <div class="gameInfo">
+            <span>🏰 دفاع</span>
+            <span>⭐ سخت</span>
+        </div>
+        <button class="play" onclick="startGame('castle')">▶ بازی</button>
+    </div>
+
+</div>
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="section">
+
+<div class="sectionHead">
+    <div>
+        <div class="title">📊 داشبورد بازیکن</div>
+        <div class="subtitle">وضعیت لحظه‌ای حساب تو</div>
+    </div>
+</div>
+
+<div class="dashboard">
+
+    <div class="panel">
+
+        <div class="player">
+
+            <div class="avatar" id="miniAvatar">😎</div>
+
+            <div style="flex:1">
+
+                <div class="playerName" id="miniName">Player</div>
+
+                <div class="small">
+                    Level <span id="miniLevel">1</span>
+                    •
+                    <span id="xpProgressText">0 / 500 XP</span>
+                </div>
+
+                <div class="progress">
+                    <div id="xpBar" style="width:0%"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="rows">
+
+            <div class="row">
+                <span class="muted">وضعیت سیستم</span>
+                <b class="green">● ONLINE</b>
+            </div>
+
+            <div class="row">
+                <span class="muted">بازیکنان آنلاین</span>
+                <b id="online">1,428</b>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <b>💰 دارایی‌ها</b>
+
+        <div class="rows">
+
+            <div class="row">
+                <span>🪙 سکه</span>
+                <b class="yellow" id="dashCoins">0</b>
+            </div>
+
+            <div class="row">
+                <span>💎 الماس</span>
+                <b class="cyan" id="dashDiamonds">0</b>
+            </div>
+
+            <div class="row">
+                <span>🎒 آیتم</span>
+                <b id="inventoryCount">0</b>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <b>📈 آمار</b>
+
+        <div class="rows">
+
+            <div class="row">
+                <span>🎮 امروز</span>
+                <b id="todayGames">0</b>
+            </div>
+
+            <div class="row">
+                <span>🏆 رتبه</span>
+                <b>#<span id="rank">128</span></b>
+            </div>
+
+            <div class="row">
+                <span>⚡ XP</span>
+                <b class="cyan" id="dashXP">0</b>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+<!-- MISSIONS -->
+
+<section class="section" id="missions">
+
+<div class="sectionHead">
+    <div>
+        <div class="title">🎯 مأموریت‌های روزانه</div>
+        <div class="subtitle">با کامل کردن مأموریت‌ها جایزه بگیر</div>
+    </div>
+
+    <button class="smallBtn" onclick="openMissions()">مشاهده کامل</button>
+</div>
+
+<div class="missions" id="missionPreview"></div>
+
+</section>
+
+<!-- RANKING -->
+
+<section class="section" id="ranking">
+
+<div class="sectionHead">
+    <div>
+        <div class="title">🏆 رتبه‌بندی NEXORA</div>
+        <div class="subtitle">رقابت شبیه‌سازی‌شده بازیکنان</div>
+    </div>
+</div>
+
+<div class="panel">
+
+<div class="ranking">
+
+    <div class="rank">
+        <div class="rankNumber">🥇</div>
+        <div class="rankAvatar">👑</div>
+        <div class="rankInfo">
+            <div class="rankName">ShadowX</div>
+            <div class="rankScore">9850 امتیاز</div>
+        </div>
+    </div>
+
+    <div class="rank">
+        <div class="rankNumber">🥈</div>
+        <div class="rankAvatar">🔥</div>
+        <div class="rankInfo">
+            <div class="rankName">DarkWolf</div>
+            <div class="rankScore">9210 امتیاز</div>
+        </div>
+    </div>
+
+    <div class="rank">
+        <div class="rankNumber">🥉</div>
+        <div class="rankAvatar">⚡</div>
+        <div class="rankInfo">
+            <div class="rankName">NeoBoy</div>
+            <div class="rankScore">8700 امتیاز</div>
+        </div>
+    </div>
+
+    <div class="rank you">
+        <div class="rankNumber">#<span id="yourRank">128</span></div>
+        <div class="rankAvatar" id="rankAvatar">😎</div>
+        <div class="rankInfo">
+            <div class="rankName" id="rankName">Player</div>
+            <div class="rankScore">
+                <span id="rankScore">0</span> امتیاز
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+</section>
+
+</main>
+
+<!-- PROFILE MODAL -->
+
+<div class="modal" id="profileModal" onclick="outside(event,'profileModal')">
+
+<div class="modalBox">
+
+<div class="modalHead">
+    <div class="modalTitle">👤 پروفایل حرفه‌ای</div>
+    <button class="close" onclick="closeModal('profileModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div class="cover">
+
+<div class="profileTop">
+
+<div class="bigAvatar" id="profileAvatar">😎</div>
+
+<div>
+    <div class="profileName" id="profileName">Player</div>
+
+    <div class="small">
+        NEXORA ULTRA PLAYER • LEVEL
+        <span id="profileLevel">1</span>
+    </div>
+
+</div>
+
+</div>
+
+<div class="progress">
+    <div id="profileXPBar" style="width:0%"></div>
+</div>
+
+<div class="small" style="margin-top:7px">
+    <span id="profileXP">0</span> / 500 XP
+</div>
+
+</div>
+
+<div class="profileStats">
+
+<div class="profileStat">
+    <b id="profileCoins">0</b>
+    <span>🪙 سکه</span>
+</div>
+
+<div class="profileStat">
+    <b id="profileDiamonds">0</b>
+    <span>💎 الماس</span>
+</div>
+
+<div class="profileStat">
+    <b id="profileGames">0</b>
+    <span>🎮 بازی</span>
+</div>
+
+<div class="profileStat">
+    <b id="profileBest">0</b>
+    <span>🏆 رکورد</span>
+</div>
+
+<div class="profileStat">
+    <b id="profileItems">0</b>
+    <span>🎒 آیتم</span>
+</div>
+
+</div>
+
+<div class="actionGrid">
+
+<button class="action" onclick="editName()">
+    <b>✏️ تغییر نام</b>
+    <span>نام پروفایل</span>
+</button>
+
+<button class="action" onclick="openShop()">
+    <b>🛒 فروشگاه</b>
+    <span>خرید آیتم</span>
+</button>
+
+<button class="action" onclick="openDaily()">
+    <b>🎁 جایزه</b>
+    <span>جایزه روزانه</span>
+</button>
+
+<button class="action" onclick="openMissions()">
+    <b>🎯 مأموریت</b>
+    <span>انجام مأموریت</span>
+</button>
+
+<button class="action" onclick="openNotifications()">
+    <b>🔔 اعلان‌ها</b>
+    <span>پیام‌های NEXORA</span>
+</button>
+
+<button class="action" onclick="openSettings()">
+    <b>⚙️ تنظیمات</b>
+    <span>تنظیمات حساب</span>
+</button>
+
+</div>
+
+<h3 style="margin-top:22px">🏅 اچیومنت‌ها</h3>
+
+<div class="badges" id="badges"></div>
+
+</div>
+</div>
+</div>
+
+<!-- SHOP -->
+
+<div class="modal" id="shopModal" onclick="outside(event,'shopModal')">
+
+<div class="modalBox">
+
+<div class="modalHead">
+    <div class="modalTitle">🛒 فروشگاه NEXORA</div>
+    <button class="close" onclick="closeModal('shopModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div style="display:flex;gap:8px;margin-bottom:15px">
+    <div class="money coin">
+        🪙 <b id="shopCoins">0</b>
+    </div>
+
+    <div class="money diamond">
+        💎 <b id="shopDiamonds">0</b>
+    </div>
+</div>
+
+<div class="shop" id="shop"></div>
+
+</div>
+</div>
+</div>
+
+<!-- DAILY -->
+
+<div class="modal" id="dailyModal" onclick="outside(event,'dailyModal')">
+
+<div class="modalBox" style="max-width:600px">
+
+<div class="modalHead">
+    <div class="modalTitle">🎁 جایزه روزانه</div>
+    <button class="close" onclick="closeModal('dailyModal')">✕</button>
+</div>
+
+<div class="modalBody daily">
+
+<div class="gift">🎁</div>
+
+<h2 id="dailyTitle">جایزه آماده است!</h2>
+
+<p class="muted" style="margin-top:8px">
+    هر روز یک جایزه ویژه دریافت کن.
+</p>
+
+<div class="rewardBox">
+    🪙 +100 &nbsp; 💎 +3 &nbsp; ⚡ +100 XP
+</div>
+
+<button class="btn primary" id="dailyButton" onclick="claimDaily()">
+    🎁 دریافت جایزه
+</button>
+
+<div class="small" id="dailyStatus" style="margin-top:13px"></div>
+
+</div>
+</div>
+</div>
+
+<!-- MISSIONS -->
+
+<div class="modal" id="missionsModal" onclick="outside(event,'missionsModal')">
+
+<div class="modalBox">
+
+<div class="modalHead">
+    <div class="modalTitle">🎯 مأموریت‌ها</div>
+    <button class="close" onclick="closeModal('missionsModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div class="missions" id="missionsFull"></div>
+
+</div>
+</div>
+</div>
+
+<!-- NOTIFICATIONS -->
+
+<div class="modal" id="notificationsModal" onclick="outside(event,'notificationsModal')">
+
+<div class="modalBox" style="max-width:650px">
+
+<div class="modalHead">
+    <div class="modalTitle">🔔 اعلان‌های NEXORA</div>
+    <button class="close" onclick="closeModal('notificationsModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div class="notification">
+    <b>⚡ سیستم NEXORA فعال شد</b>
+    <p>حساب تو آماده بازی است.</p>
+</div>
+
+<div class="notification">
+    <b>🎁 جایزه روزانه</b>
+    <p>برای دریافت جایزه روزانه وارد بخش جایزه شو.</p>
+</div>
+
+<div class="notification">
+    <b>🎯 مأموریت جدید</b>
+    <p>مأموریت‌ها را کامل کن و XP و سکه بگیر.</p>
+</div>
+
+<div class="notification">
+    <b>🏆 رتبه‌بندی</b>
+    <p>با افزایش رکورد، رتبه شبیه‌سازی‌شده تو بهتر می‌شود.</p>
+</div>
+
+<div class="notification">
+    <b>🛒 فروشگاه</b>
+    <p>آیتم‌های مختلف در فروشگاه منتظر تو هستند.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- SETTINGS -->
+
+<div class="modal" id="settingsModal" onclick="outside(event,'settingsModal')">
+
+<div class="modalBox" style="max-width:600px">
+
+<div class="modalHead">
+    <div class="modalTitle">⚙️ تنظیمات</div>
+    <button class="close" onclick="closeModal('settingsModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div class="setting">
+
+<div>
+    <b>✨ انیمیشن‌ها</b>
+    <span>افکت‌های متحرک سایت</span>
+</div>
+
+<button class="switch on" id="animationSwitch" onclick="toggleAnimation()">
+    <i></i>
+</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+    <b>🔊 صدا</b>
+    <span>صدای بازی و پاداش</span>
+</div>
+
+<button class="switch on" id="soundSwitch" onclick="toggleSound()">
+    <i></i>
+</button>
+
+</div>
+
+<div class="setting">
+
+<div>
+    <b>💾 ذخیره خودکار</b>
+    <span>اطلاعات روی همین مرورگر ذخیره می‌شود</span>
+</div>
+
+<b class="green">فعال</b>
+
+</div>
+
+<div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
+
+<button class="smallBtn" onclick="editName()">
+    ✏️ تغییر نام
+</button>
+
+<button class="smallBtn" onclick="resetData()" style="color:var(--red)">
+    🗑️ حذف همه اطلاعات
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- NAME -->
+
+<div class="modal" id="nameModal">
+
+<div class="modalBox" style="max-width:430px">
+
+<div class="modalHead">
+    <div class="modalTitle">✏️ تغییر نام</div>
+    <button class="close" onclick="closeModal('nameModal')">✕</button>
+</div>
+
+<div class="modalBody">
+
+<input
+ id="nameInput"
+ class="input"
+ maxlength="18"
+ placeholder="نام جدید..."
+>
+
+<button
+ class="btn primary"
+ style="width:100%;margin-top:12px"
+ onclick="saveName()"
+>
+    💾 ذخیره نام
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- GAME -->
+
+<div class="modal" id="gameModal">
+
+<div class="modalBox gameBox">
+
+<div class="modalHead">
+    <div class="modalTitle" id="gameTitle">🎮 بازی</div>
+    <button class="close" onclick="closeGame()">✕</button>
+</div>
+
+<div class="modalBody">
+
+<div class="hud">
+
+<div class="hudItem">
+    🏆 امتیاز: <b id="gameScore">0</b>
+</div>
+
+<div class="hudItem">
+    ⭐ لول: <b id="gameLevel">1</b>
+</div>
+
+<div class="hudItem">
+    🪙 سکه این بازی: <b id="earnedCoins">0</b>
+</div>
+
+</div>
+
+<canvas id="canvas" width="900" height="500"></canvas>
+
+<div class="controls" id="controls"></div>
+
+<div class="gameMessage" id="gameMessage">
+    برای شروع بازی روی شروع دوباره بزن.
+</div>
+
+<div style="text-align:center;margin-top:10px">
+
+<button class="btn primary" onclick="restartGame()">
+    🔄 شروع / دوباره
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+
+/* =========================
+   STORAGE
+========================= */
+
+const K={
+ coins:"nexora_ultra_coins",
+ diamonds:"nexora_ultra_diamonds",
+ xp:"nexora_ultra_xp",
+ name:"nexora_ultra_name",
+ games:"nexora_ultra_games",
+ best:"nexora_ultra_best",
+ inventory:"nexora_ultra_inventory",
+ daily:"nexora_ultra_daily",
+ streak:"nexora_ultra_streak",
+ todayGames:"nexora_ultra_today_games",
+ todayCoins:"nexora_ultra_today_coins",
+ todayDiamonds:"nexora_ultra_today_diamonds",
+ missions:"nexora_ultra_missions",
+ animation:"nexora_ultra_animation",
+ sound:"nexora_ultra_sound"
+};
+
+let data={
+ coins:+localStorage.getItem(K.coins)||0,
+ diamonds:+localStorage.getItem(K.diamonds)||0,
+ xp:+localStorage.getItem(K.xp)||0,
+ name:localStorage.getItem(K.name)||"Player",
+ games:+localStorage.getItem(K.games)||0,
+ best:+localStorage.getItem(K.best)||0,
+ inventory:JSON.parse(localStorage.getItem(K.inventory)||"[]"),
+ daily:localStorage.getItem(K.daily)||"",
+ streak:+localStorage.getItem(K.streak)||1,
+ todayGames:+localStorage.getItem(K.todayGames)||0,
+ todayCoins:+localStorage.getItem(K.todayCoins)||0,
+ todayDiamonds:+localStorage.getItem(K.todayDiamonds)||0,
+ missions:JSON.parse(localStorage.getItem(K.missions)||"{}"),
+ animation:localStorage.getItem(K.animation)!=="false",
+ sound:localStorage.getItem(K.sound)!=="false"
+};
+
+function save(){
+
+ localStorage.setItem(K.coins,data.coins);
+ localStorage.setItem(K.diamonds,data.diamonds);
+ localStorage.setItem(K.xp,data.xp);
+ localStorage.setItem(K.name,data.name);
+ localStorage.setItem(K.games,data.games);
+ localStorage.setItem(K.best,data.best);
+ localStorage.setItem(K.inventory,JSON.stringify(data.inventory));
+ localStorage.setItem(K.daily,data.daily);
+ localStorage.setItem(K.streak,data.streak);
+ localStorage.setItem(K.todayGames,data.todayGames);
+ localStorage.setItem(K.todayCoins,data.todayCoins);
+ localStorage.setItem(K.todayDiamonds,data.todayDiamonds);
+ localStorage.setItem(K.missions,JSON.stringify(data.missions));
+ localStorage.setItem(K.animation,data.animation);
+ localStorage.setItem(K.sound,data.sound);
+}
+
+/* =========================
+   DATE
+========================= */
+
+function today(){
+
+ const d=new Date();
+
+ return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+const counterDay=localStorage.getItem("nexora_counter_day");
+
+if(counterDay!==today()){
+
+ data.todayGames=0;
+ data.todayCoins=0;
+ data.todayDiamonds=0;
+
+ localStorage.setItem("nexora_counter_day",today());
+
+ save();
+}
+
+/* =========================
+   LEVEL
+========================= */
+
+function level(){
+ return Math.floor(data.xp/500)+1;
+}
+
+function currentXP(){
+ return data.xp%500;
+}
+
+/* =========================
+   UI
+========================= */
+
+function updateUI(){
+
+ const lv=level();
+ const xp=currentXP();
+ const percent=xp/500*100;
+
+ document.getElementById("coins").textContent=data.coins;
+ document.getElementById("diamonds").textContent=data.diamonds;
+ document.getElementById("headerName").textContent=data.name;
+
+ document.getElementById("level").textContent=lv;
+ document.getElementById("xp").textContent=data.xp;
+ document.getElementById("best").textContent=data.best;
+ document.getElementById("gamesPlayed").textContent=data.games;
+ document.getElementById("streak").textContent=data.streak;
+
+ document.getElementById("miniName").textContent=data.name;
+ document.getElementById("miniLevel").textContent=lv;
+ document.getElementById("xpProgressText").textContent=
+  `${xp} / 500 XP`;
+ document.getElementById("xpBar").style.width=percent+"%";
+
+ document.getElementById("dashCoins").textContent=data.coins;
+ document.getElementById("dashDiamonds").textContent=data.diamonds;
+ document.getElementById("dashXP").textContent=data.xp;
+ document.getElementById("inventoryCount").textContent=data.inventory.length;
+ document.getElementById("todayGames").textContent=data.todayGames;
+
+ let rank=Math.max(1,130-Math.floor(data.best/100));
+
+ document.getElementById("rank").textContent=rank;
+ document.getElementById("yourRank").textContent=rank;
+ document.getElementById("rankName").textContent=data.name;
+ document.getElementById("rankScore").textContent=data.best;
+
+ updateProfile();
+ updateMissions();
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function scrollToSection(id){
+
+ const el=document.getElementById(id);
+
+ if(el){
+  el.scrollIntoView({behavior:"smooth"});
+ }
+
+ document.querySelectorAll(".nav button")
+ .forEach(b=>b.classList.remove("active"));
+}
+
+/* =========================
+   MODALS
+========================= */
+
+function open(id){
+ document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.remove("show");
+}
+
+function outside(e,id){
+ if(e.target.id===id){
+  closeModal(id);
+ }
+}
+
+function openProfile(){
+
+ closeModal("shopModal");
+ closeModal("dailyModal");
+ closeModal("missionsModal");
+ closeModal("notificationsModal");
+ closeModal("settingsModal");
+
+ updateProfile();
+ open("profileModal");
+}
+
+function openShop(){
+
+ closeModal("profileModal");
+
+ renderShop();
+ open("shopModal");
+}
+
+function openDaily(){
+
+ closeModal("profileModal");
+
+ updateDaily();
+ open("dailyModal");
+}
+
+function openMissions(){
+
+ closeModal("profileModal");
+
+ updateMissions(true);
+ open("missionsModal");
+}
+
+function openNotifications(){
+
+ closeModal("profileModal");
+
+ open("notificationsModal");
+}
+
+function openSettings(){
+
+ closeModal("profileModal");
+
+ updateSettings();
+ open("settingsModal");
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+function updateProfile(){
+
+ const lv=level();
+ const xp=currentXP();
+
+ document.getElementById("profileName").textContent=data.name;
+ document.getElementById("profileLevel").textContent=lv;
+
+ document.getElementById("profileCoins").textContent=data.coins;
+ document.getElementById("profileDiamonds").textContent=data.diamonds;
+ document.getElementById("profileGames").textContent=data.games;
+ document.getElementById("profileBest").textContent=data.best;
+ document.getElementById("profileItems").textContent=data.inventory.length;
+
+ document.getElementById("profileXP").textContent=xp;
+ document.getElementById("profileXPBar").style.width=
+  (xp/500*100)+"%";
+
+ renderBadges();
+}
+
+function editName(){
+
+ document.getElementById("nameInput").value=data.name;
+
+ closeModal("profileModal");
+ closeModal("settingsModal");
+
+ open("nameModal");
+
+ setTimeout(()=>{
+  document.getElementById("nameInput").focus();
+ },100);
+}
+
+function saveName(){
+
+ let n=document.getElementById("nameInput").value.trim();
+
+ if(n.length<2){
+  toast("❌ نام باید حداقل ۲ حرف باشد.");
+  return;
+ }
+
+ data.name=n.substring(0,18);
+
+ save();
+ updateUI();
+
+ closeModal("nameModal");
+
+ toast("✅ نام با موفقیت تغییر کرد.");
+}
+
+/* =========================
+   BADGES
+========================= */
+
+function renderBadges(){
+
+ const list=[
+  ["🎮","اولین بازی",data.games>=1],
+  ["🪙","شکارچی سکه",data.coins>=50],
+  ["🏆","رکورد ۱۰۰",data.best>=100],
+  ["💎","الماس‌دار",data.diamonds>=10],
+  ["🔥","بازیکن حرفه‌ای",data.games>=10],
+  ["⚡","Level 5",level()>=5],
+  ["👑","Level 10",level()>=10],
+  ["🎯","ماموریت‌چی",Object.keys(data.missions).length>=2],
+  ["🎒","کلکسیونر",data.inventory.length>=3]
+ ];
+
+ document.getElementById("badges").innerHTML=
+ list.map(x=>`
+
+ <div class="badgeCard ${x[2]?"":"locked"}">
+  <b>${x[0]} ${x[1]}</b>
+  <span>${x[2]?"باز شده ✓":"قفل 🔒"}</span>
+ </div>
+
+ `).join("");
+}
+
+/* =========================
+   SHOP
+========================= */
+
+const shopItems=[
+ {
+  id:"avatar",
+  icon:"😎",
+  name:"Neon Avatar",
+  desc:"آواتار نئونی ویژه",
+  currency:"coin",
+  price:50
+ },
+ {
+  id:"crown",
+  icon:"👑",
+  name:"Golden Crown",
+  desc:"تاج طلایی کلکسیونی",
+  currency:"diamond",
+  price:10
+ },
+ {
+  id:"robot",
+  icon:"🤖",
+  name:"Nexo Robot",
+  desc:"ربات مخصوص NEXORA",
+  currency:"coin",
+  price:100
+ },
+ {
+  id:"dragon",
+  icon:"🐉",
+  name:"Cyber Dragon",
+  desc:"آیتم افسانه‌ای",
+  currency:"diamond",
+  price:25
+ },
+ {
+  id:"rocket",
+  icon:"🚀",
+  name:"Neon Rocket",
+  desc:"آیتم فضایی",
+  currency:"coin",
+  price:150
+ },
+ {
+  id:"castle",
+  icon:"🏰",
+  name:"Golden Castle",
+  desc:"اسکین قلعه",
+  currency:"diamond",
+  price:20
+ },
+ {
+  id:"gem",
+  icon:"💠",
+  name:"Crystal",
+  desc:"کریستال کلکسیونی",
+  currency:"coin",
+  price:200
+ },
+ {
+  id:"wolf",
+  icon:"🐺",
+  name:"Cyber Wolf",
+  desc:"آیتم ویژه",
+  currency:"diamond",
+  price:30
+ },
+ {
+  id:"fire",
+  icon:"🔥",
+  name:"Fire Aura",
+  desc:"افکت آتشین",
+  currency:"coin",
+  price:250
+ }
+];
+
+function renderShop(){
+
+ document.getElementById("shopCoins").textContent=data.coins;
+ document.getElementById("shopDiamonds").textContent=data.diamonds;
+
+ document.getElementById("shop").innerHTML=
+ shopItems.map(item=>{
+
+  let owned=data.inventory.includes(item.id);
+  let symbol=item.currency==="coin"?"🪙":"💎";
+
+  return `
+
+  <div class="item">
+
+   <div class="itemIcon">${item.icon}</div>
+
+   <h3>${item.name}</h3>
+
+   <p>${item.desc}</p>
+
+   <div class="price">
+    ${symbol} ${item.price}
+   </div>
+
+   <button
+    class="smallBtn"
+    style="width:100%"
+    ${owned?"disabled":""}
+    onclick="buy('${item.id}')"
+   >
+    ${owned?"✓ خریداری شده":"خرید آیتم"}
+   </button>
+
+  </div>
+
+  `;
+
+ }).join("");
+}
+
+function buy(id){
+
+ const item=shopItems.find(x=>x.id===id);
+
+ if(!item)return;
+
+ if(data.inventory.includes(id)){
+  toast("این آیتم را قبلاً داری.");
+  return;
+ }
+
+ if(item.currency==="coin"){
+
+  if(data.coins<item.price){
+   toast("🪙 سکه کافی نیست.");
+   return;
+  }
+
+  data.coins-=item.price;
+
+ }else{
+
+  if(data.diamonds<item.price){
+   toast("💎 الماس کافی نیست.");
+   return;
+  }
+
+  data.diamonds-=item.price;
+ }
+
+ data.inventory.push(id);
+
+ save();
+ updateUI();
+ renderShop();
+
+ toast(`🎉 ${item.name} خریداری شد.`);
+}
+
+/* =========================
+   DAILY
+========================= */
+
+function updateDaily(){
+
+ const claimed=data.daily===today();
+
+ const btn=document.getElementById("dailyButton");
+
+ btn.disabled=claimed;
+
+ btn.textContent=
+  claimed?"✓ جایزه دریافت شده":"🎁 دریافت جایزه";
+
+ document.getElementById("dailyTitle").textContent=
+  claimed?"امروز جایزه‌ات را گرفتی!":"جایزه امروز آماده است!";
+
+ document.getElementById("dailyStatus").textContent=
+  claimed
+  ?"فردا دوباره برگرد 🔥"
+  :"امروز هنوز جایزه‌ات را دریافت نکرده‌ای.";
+}
+
+function claimDaily(){
+
+ if(data.daily===today()){
+  toast("🎁 جایزه امروز قبلاً دریافت شده.");
+  return;
+ }
+
+ data.coins+=100;
+ data.diamonds+=3;
+ data.xp+=100;
+
+ data.todayCoins+=100;
+ data.todayDiamonds+=3;
+
+ data.daily=today();
+ data.streak++;
+
+ save();
+ updateUI();
+ updateDaily();
+
+ toast("🎁 +100 سکه | +3 الماس | +100 XP");
+
+ playSound();
+}
+
+/* =========================
+   MISSIONS
+========================= */
+
+const missions=[
+ {
+  id:"play",
+  icon:"🎮",
+  name:"شروع کار",
+  desc:"حداقل ۱ بازی انجام بده",
+  target:1,
+  get:()=>data.games,
+  coin:30,
+  xp:50
+ },
+ {
+  id:"score",
+  icon:"🏆",
+  name:"رکوردزن",
+  desc:"به امتیاز ۱۰۰ برس",
+  target:100,
+  get:()=>data.best,
+  coin:50,
+  xp:80
+ },
+ {
+  id:"coins",
+  icon:"🪙",
+  name:"جمع‌کننده",
+  desc:"۵۰ سکه داشته باش",
+  target:50,
+  get:()=>data.coins,
+  coin:40,
+  xp:60
+ },
+ {
+  id:"xp",
+  icon:"⚡",
+  name:"XP Hunter",
+  desc:"۵۰۰ XP کسب کن",
+  target:500,
+  get:()=>data.xp,
+  coin:70,
+  xp:100
+ }
+];
+
+function missionHTML(m){
+
+ const value=Math.min(m.get(),m.target);
+ const complete=value>=m.target;
+ const claimed=!!data.missions[m.id];
+
+ return `
+
+ <div class="mission">
+
+  <div class="missionTop">
+
+   <div>
+    <h3>${m.icon} ${m.name}</h3>
+    <p>${m.desc}</p>
+   </div>
+
+   <b>${value}/${m.target}</b>
+
+  </div>
+
+  <div class="progress">
+   <div style="width:${value/m.target*100}%"></div>
+  </div>
+
+  <div class="reward">
+   🎁 +${m.coin} 🪙 +${m.xp} XP
+  </div>
+
+  <button
+   class="smallBtn"
+   style="width:100%;margin-top:10px"
+   ${!complete||claimed?"disabled":""}
+   onclick="claimMission('${m.id}')"
+  >
+   ${claimed?"✓ دریافت شده":
+     complete?"🎁 دریافت جایزه":
+     "🔒 ادامه بده"}
+  </button>
+
+ </div>
+
+ `;
+}
+
+function updateMissions(full=false){
+
+ const html=missions.map(m=>missionHTML(m)).join("");
+
+ document.getElementById(
+  full?"missionsFull":"missionPreview"
+ ).innerHTML=html;
+}
+
+function claimMission(id){
+
+ const m=missions.find(x=>x.id===id);
+
+ if(!m)return;
+
+ if(data.missions[id])return;
+
+ if(m.get()<m.target){
+  toast("🔒 مأموریت هنوز کامل نشده.");
+  return;
+ }
+
+ data.coins+=m.coin;
+ data.xp+=m.xp;
+ data.todayCoins+=m.coin;
+
+ data.missions[id]=true;
+
+ save();
+ updateUI();
+
+ if(document.getElementById("missionsModal").classList.contains("show")){
+  updateMissions(true);
+ }
+
+ toast(`🎯 مأموریت کامل شد! +${m.coin} 🪙`);
+
+ playSound();
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+function updateSettings(){
+
+ document.getElementById("animationSwitch")
+ .classList.toggle("on",data.animation);
+
+ document.getElementById("soundSwitch")
+ .classList.toggle("on",data.sound);
+
+ document.body.classList.toggle("noAnim",!data.animation);
+}
+
+function toggleAnimation(){
+
+ data.animation=!data.animation;
+
+ save();
+ updateSettings();
+
+ toast(
+  data.animation
+  ?"✨ انیمیشن روشن شد"
+  :"انیمیشن خاموش شد"
+ );
+}
+
+function toggleSound(){
+
+ data.sound=!data.sound;
+
+ save();
+ updateSettings();
+
+ toast(
+  data.sound
+  ?"🔊 صدا روشن شد"
+  :"🔇 صدا خاموش شد"
+ );
+}
+
+function resetData(){
+
+ if(!confirm("تمام اطلاعات NEXORA پاک شود؟")){
+  return;
+ }
+
+ Object.values(K).forEach(k=>{
+  localStorage.removeItem(k);
+ });
+
+ localStorage.removeItem("nexora_counter_day");
+
+ location.reload();
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchGames(){
+
+ const q=document.getElementById("gameSearch")
+ .value.toLowerCase();
+
+ document.querySelectorAll(".game")
+ .forEach(card=>{
+
+  const name=card.dataset.name.toLowerCase();
+
+  card.style.display=
+   name.includes(q)?"block":"none";
+
+ });
+}
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(text){
+
+ const box=document.createElement("div");
+
+ box.className="toast";
+ box.textContent=text;
+
+ document.getElementById("toasts").appendChild(box);
+
+ setTimeout(()=>{
+
+  box.style.opacity="0";
+
+  setTimeout(()=>box.remove(),300);
+
+ },2800);
+}
+
+/* =========================
+   SOUND
+========================= */
+
+function playSound(){
+
+ if(!data.sound)return;
+
+ try{
+
+  const AC=
+   window.AudioContext||
+   window.webkitAudioContext;
+
+  if(!AC)return;
+
+  const audio=new AC();
+
+  const osc=audio.createOscillator();
+  const gain=audio.createGain();
+
+  osc.frequency.value=600;
+  gain.gain.value=.035;
+
+  osc.connect(gain);
+  gain.connect(audio.destination);
+
+  osc.start();
+
+  setTimeout(()=>{
+   osc.stop();
+   audio.close();
+  },120);
+
+ }catch(e){}
+}
+
+/* =========================
+   ONLINE SIMULATION
+========================= */
+
+setInterval(()=>{
+
+ const n=1200+Math.floor(Math.random()*600);
+
+ document.getElementById("online")
+ .textContent=n.toLocaleString("en-US");
+
+},4000);
+
+/* =========================
+   GAME ENGINE
+========================= */
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+let type="";
+let running=false;
+let score=0;
+let earned=0;
+let gameLv=1;
+let frame=0;
+let timer=0;
+let animationFrame=null;
+let keys={};
+let game={};
+
+const gameNames={
+ car:"🏎️ Neon Racer",
+ space:"🚀 Space Attack",
+ parkour:"🏃 Neon Parkour",
+ basket:"🏀 Basket Pro",
+ target:"🎯 Target Master",
+ snow:"❄️ Snow Rush",
+ cube:"🧊 Cube Puzzle",
+ treasure:"🏝️ Treasure Island",
+ zombie:"🧟 Zombie Escape",
+ castle:"🏰 Castle Defense"
+};
+
+function startGame(t){
+
+ type=t;
+
+ running=false;
+ score=0;
+ earned=0;
+ gameLv=1;
+ frame=0;
+ timer=0;
+
+ document.getElementById("gameTitle")
+ .textContent=gameNames[t];
+
+ document.getElementById("gameModal")
+ .classList.add("show");
+
+ setupControls();
+
+ resetCanvas();
+
+ document.getElementById("gameMessage")
+ .textContent="برای شروع روی «شروع / دوباره» بزن.";
+
+ updateHUD();
+}
+
+function closeGame(){
+
+ running=false;
+
+ if(animationFrame)
+  cancelAnimationFrame(animationFrame);
+
+ document.getElementById("gameModal")
+ .classList.remove("show");
+}
+
+function restartGame(){
+
+ running=true;
+
+ score=0;
+ earned=0;
+ gameLv=1;
+ frame=0;
+
+ setupState();
+
+ gameLoop();
+}
+
+function setupControls(){
+
+ const c=document.getElementById("controls");
+
+ c.innerHTML="";
+
+ if(type==="car"||type==="snow"||type==="zombie"){
+
+  c.innerHTML=`
+   <button class="control"
+    onpointerdown="keys.ArrowLeft=true"
+    onpointerup="keys.ArrowLeft=false">
+    ⬅️ چپ
+   </button>
+
+   <button class="control"
+    onpointerdown="keys.ArrowRight=true"
+    onpointerup="keys.ArrowRight=false">
+    راست ➡️
+   </button>
+  `;
+
+ }else if(type==="space"){
+
+  c.innerHTML=`
+   <button class="control"
+    onpointerdown="keys.ArrowLeft=true"
+    onpointerup="keys.ArrowLeft=false">⬅️</button>
+
+   <button class="control"
+    onpointerdown="keys.Space=true"
+    onpointerup="keys.Space=false">🚀 شلیک</button>
+
+   <button class="control"
+    onpointerdown="keys.ArrowRight=true"
+    onpointerup="keys.ArrowRight=false">➡️</button>
+  `;
+
+ }else if(type==="parkour"){
+
+  c.innerHTML=`
+   <button class="control"
+    onclick="jump()">🦘 پرش</button>
+
+   <button class="control"
+    onpointerdown="keys.ArrowLeft=true"
+    onpointerup="keys.ArrowLeft=false">⬅️</button>
+
+   <button class="control"
+    onpointerdown="keys.ArrowRight=true"
+    onpointerup="keys.ArrowRight=false">➡️</button>
+  `;
+
+ }else{
+
+  c.innerHTML=`
+   <button class="control" onclick="gameAction()">
+    🎯 انجام حرکت
+   </button>
+  `;
+ }
+}
+
+function jump(){
+
+ keys.Space=true;
+
+ setTimeout(()=>{
+  keys.Space=false;
+ },150);
+}
+
+/* =========================
+   STATE
+========================= */
+
+function setupState(){
+
+ game={};
+
+ if(type==="car"){
+  game.player={x:430,y:410,w:45,h:70};
+  game.obs=[];
+ }
+
+ if(type==="space"){
+  game.player={x:430,y:420,w:35,h:35};
+  game.enemies=[];
+  game.bullets=[];
+ }
+
+ if(type==="parkour"){
+
+  game.player={
+   x:80,y:400,w:35,h:45,vy:0
+  };
+
+  game.platforms=[
+   {x:20,y:450,w:190,h:20},
+   {x:280,y:390,w:150,h:20},
+   {x:510,y:330,w:150,h:20},
+   {x:740,y:270,w:140,h:20}
+  ];
+ }
+
+ if(type==="basket"){
+  timer=30;
+ }
+
+ if(type==="target"){
+
+  timer=30;
+
+  game.target={
+   x:450,
+   y:240,
+   r:35
+  };
+ }
+
+ if(type==="snow"){
+
+  game.player={
+   x:430,y:410,w:45,h:55
+  };
+
+  game.obs=[];
+ }
+
+ if(type==="cube"){
+
+  game.cubes=[];
+
+  for(let i=0;i<16;i++){
+
+   game.cubes.push({
+    x:100+(i%4)*180,
+    y:80+Math.floor(i/4)*95,
+    s:60,
+    hit:false
+   });
+
+  }
+ }
+
+ if(type==="treasure"){
+
+  game.player={
+   x:430,y:420,s:35
+  };
+
+  newTreasure();
+ }
+
+ if(type==="zombie"){
+
+  game.player={
+   x:430,y:410,w:35,h:35
+  };
+
+  game.zombies=[];
+ }
+
+ if(type==="castle"){
+
+  game.hp=100;
+  game.enemies=[];
+ }
+}
+
+function newTreasure(){
+
+ game.treasure={
+  x:60+Math.random()*780,
+  y:70+Math.random()*360
+ };
+}
+
+/* =========================
+   LOOP
+========================= */
+
+function gameLoop(){
+
+ if(!running)return;
+
+ updateGame();
+ drawGame();
+ updateHUD();
+
+ animationFrame=requestAnimationFrame(gameLoop);
+}
+
+function updateGame(){
+
+ frame++;
+
+ if(type==="car")updateCar();
+ if(type==="space")updateSpace();
+ if(type==="parkour")updateParkour();
+ if(type==="basket")updateBasket();
+ if(type==="target")updateTarget();
+ if(type==="snow")updateSnow();
+ if(type==="cube")updateCube();
+ if(type==="treasure")updateTreasure();
+ if(type==="zombie")updateZombie();
+ if(type==="castle")updateCastle();
+
+ gameLv=Math.floor(score/100)+1;
+}
+
+function resetCanvas(){
+
+ ctx.fillStyle="#02040a";
+ ctx.fillRect(0,0,900,500);
+}
+
+function updateHUD(){
+
+ document.getElementById("gameScore")
+ .textContent=score;
+
+ document.getElementById("gameLevel")
+ .textContent=gameLv;
+
+ document.getElementById("earnedCoins")
+ .textContent=earned;
+}
+
+/* =========================
+   CAR
+========================= */
+
+function updateCar(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=7;
+ if(keys.ArrowRight)p.x+=7;
+
+ p.x=Math.max(275,Math.min(580,p.x));
+
+ if(frame%35===0){
+
+  game.obs.push({
+   x:285+Math.random()*290,
+   y:-80,
+   w:45,
+   h:65
+  });
+ }
+
+ game.obs.forEach(o=>o.y+=6);
+
+ for(const o of game.obs){
+
+  if(collide(p,o)){
+   endGame();
+   return;
+  }
+ }
+
+ game.obs=game.obs.filter(o=>o.y<530);
+
+ if(frame%8===0)score++;
+ if(frame%35===0)earned++;
+}
+
+function drawCar(){
+
+ ctx.fillStyle="#10192c";
+ ctx.fillRect(255,0,390,500);
+
+ ctx.strokeStyle="#33415f";
+ ctx.lineWidth=4;
+
+ for(let y=-50;y<500;y+=75){
+
+  ctx.beginPath();
+  ctx.moveTo(450,y+(frame%75));
+  ctx.lineTo(450,y+35+(frame%75));
+  ctx.stroke();
+ }
+
+ ctx.fillStyle="#00eaff";
+
+ ctx.fillRect(
+  game.player.x,
+  game.player.y,
+  game.player.w,
+  game.player.h
+ );
+
+ ctx.fillStyle="#06111b";
+ ctx.fillRect(
+  game.player.x+8,
+  game.player.y+9,
+  29,
+  18
+ );
+
+ game.obs.forEach(o=>{
+
+  ctx.fillStyle="#ff3ca6";
+
+  ctx.fillRect(
+   o.x,o.y,o.w,o.h
+  );
+
+ });
+}
+
+/* =========================
+   SPACE
+========================= */
+
+function updateSpace(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=6;
+ if(keys.ArrowRight)p.x+=6;
+
+ p.x=Math.max(15,Math.min(850,p.x));
+
+ if(frame%40===0){
+
+  game.enemies.push({
+   x:20+Math.random()*850,
+   y:-30
+  });
+
+ }
+
+ if(keys.Space&&frame%8===0){
+
+  game.bullets.push({
+   x:p.x+16,
+   y:p.y
+  });
+
+ }
+
+ game.bullets.forEach(b=>b.y-=10);
+ game.enemies.forEach(e=>e.y+=3);
+
+ for(const b of game.bullets){
+
+  for(const e of game.enemies){
+
+   if(
+    Math.abs(b.x-e.x)<28 &&
+    Math.abs(b.y-e.y)<28
+   ){
+
+    e.dead=true;
+    b.dead=true;
+
+    score+=20;
+    earned+=2;
+   }
+  }
+ }
+
+ game.bullets=game.bullets.filter(b=>!b.dead&&b.y>-20);
+ game.enemies=game.enemies.filter(e=>!e.dead&&e.y<530);
+
+ for(const e of game.enemies){
+
+  if(
+   Math.abs(p.x-e.x)<30&&
+   Math.abs(p.y-e.y)<30
+  ){
+   endGame();
+   return;
+  }
+ }
+}
+
+function drawSpace(){
+
+ for(let i=0;i<90;i++){
+
+  ctx.fillStyle="rgba(255,255,255,.45)";
+
+  ctx.fillRect(
+   (i*83)%900,
+   (i*47+frame*2)%500,
+   2,2
+  );
+ }
+
+ ctx.fillStyle="#00eaff";
+
+ ctx.beginPath();
+
+ ctx.moveTo(
+  game.player.x+17,
+  game.player.y
+ );
+
+ ctx.lineTo(
+  game.player.x,
+  game.player.y+35
+ );
+
+ ctx.lineTo(
+  game.player.x+35,
+  game.player.y+35
+ );
+
+ ctx.closePath();
+ ctx.fill();
+
+ game.enemies.forEach(e=>{
+
+  ctx.fillStyle="#ff3ca6";
+
+  ctx.beginPath();
+  ctx.arc(e.x,e.y,17,0,Math.PI*2);
+  ctx.fill();
+
+ });
+
+ ctx.fillStyle="#fff";
+
+ game.bullets.forEach(b=>{
+  ctx.fillRect(b.x,b.y,4,15);
+ });
+}
+
+/* =========================
+   PARKOUR
+========================= */
+
+function updateParkour(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=4;
+ if(keys.ArrowRight)p.x+=4;
+
+ if(keys.Space&&p.y>=405){
+  p.vy=-12;
+  keys.Space=false;
+ }
+
+ p.vy+=.6;
+ p.y+=p.vy;
+
+ if(p.y>405){
+  p.y=405;
+  p.vy=0;
+ }
+
+ game.platforms.forEach(x=>x.x-=3);
+
+ if(game.platforms[0].x+game.platforms[0].w<0){
+
+  game.platforms.shift();
+
+  const last=game.platforms.at(-1);
+
+  game.platforms.push({
+   x:last.x+230,
+   y:180+Math.random()*250,
+   w:130+Math.random()*80,
+   h:20
+  });
+ }
+
+ score++;
+
+ if(frame%80===0)earned++;
+
+ if(p.y>500)endGame();
+}
+
+function drawParkour(){
+
+ game.platforms.forEach(p=>{
+
+  ctx.fillStyle="#00ff9d";
+  ctx.fillRect(p.x,p.y,p.w,p.h);
+
+ });
+
+ ctx.fillStyle="#8d5cff";
+
+ ctx.fillRect(
+  game.player.x,
+  game.player.y,
+  game.player.w,
+  game.player.h
+ );
+}
+
+/* =========================
+   BASKET
+========================= */
+
+function updateBasket(){
+
+ if(frame%60===0){
+  timer--;
+ }
+
+ if(timer<=0){
+  endGame();
+ }
+}
+
+function gameAction(){
+
+ if(!running)return;
+
+ if(type==="basket"){
+
+  if(Math.random()>.35){
+
+   score+=25;
+   earned+=3;
+
+   toast("🏀 گل شد! +25");
+
+  }else{
+
+   score+=5;
+
+   toast("😅 نزدیک بود!");
+  }
+ }
+
+ if(type==="target"){
+
+  score+=20;
+  earned+=2;
+
+  game.target={
+   x:60+Math.random()*780,
+   y:70+Math.random()*350,
+   r:25+Math.random()*20
+  };
+
+  toast("🎯 هدف زده شد!");
+ }
+
+ if(type==="cube"){
+
+  const available=game.cubes.filter(c=>!c.hit);
+
+  if(!available.length){
+
+   endGame();
+   return;
+  }
+
+  const c=available[
+   Math.floor(Math.random()*available.length)
+  ];
+
+  c.hit=true;
+
+  score+=15;
+  earned++;
+
+  if(game.cubes.every(c=>c.hit)){
+   endGame();
+  }
+ }
+
+ if(type==="castle"){
+
+  if(game.enemies.length){
+
+   game.enemies[0].hp=0;
+
+   score+=25;
+   earned+=2;
+
+   toast("🏰 دشمن نابود شد!");
+
+  }
+ }
+}
+
+function drawBasket(){
+
+ ctx.strokeStyle="#fff";
+ ctx.lineWidth=8;
+
+ ctx.beginPath();
+ ctx.arc(450,170,55,0,Math.PI*2);
+ ctx.stroke();
+
+ ctx.fillStyle="#ff7b22";
+
+ ctx.beginPath();
+ ctx.arc(450,360,28,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle="#fff";
+ ctx.font="bold 24px Vazirmatn";
+
+ ctx.fillText(
+  "روی انجام حرکت بزن!",
+  325,80
+ );
+
+ ctx.font="18px Vazirmatn";
+
+ ctx.fillText(
+  "⏱️ "+timer,
+  420,450
+ );
+}
+
+/* =========================
+   TARGET
+========================= */
+
+function updateTarget(){
+
+ if(frame%60===0)timer--;
+
+ if(timer<=0)endGame();
+}
+
+function drawTarget(){
+
+ ctx.fillStyle="#ff3ca6";
+
+ ctx.beginPath();
+
+ ctx.arc(
+  game.target.x,
+  game.target.y,
+  game.target.r,
+  0,
+  Math.PI*2
+ );
+
+ ctx.fill();
+
+ ctx.fillStyle="#fff";
+
+ ctx.beginPath();
+
+ ctx.arc(
+  game.target.x,
+  game.target.y,
+  11,
+  0,
+  Math.PI*2
+ );
+
+ ctx.fill();
+
+ ctx.font="bold 22px Vazirmatn";
+ ctx.fillStyle="#fff";
+
+ ctx.fillText(
+  "🎯 هدف را بزن!",
+  350,55
+ );
+
+ ctx.font="17px Vazirmatn";
+
+ ctx.fillText(
+  "زمان: "+timer,
+  410,470
+ );
+}
+
+/* =========================
+   SNOW
+========================= */
+
+function updateSnow(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=7;
+ if(keys.ArrowRight)p.x+=7;
+
+ p.x=Math.max(20,Math.min(835,p.x));
+
+ if(frame%30===0){
+
+  game.obs.push({
+   x:20+Math.random()*840,
+   y:-30,
+   s:30
+  });
+
+ }
+
+ game.obs.forEach(o=>o.y+=5);
+
+ for(const o of game.obs){
+
+  if(
+   Math.abs(p.x-o.x)<35&&
+   Math.abs(p.y-o.y)<40
+  ){
+   endGame();
+   return;
+  }
+ }
+
+ game.obs=game.obs.filter(o=>o.y<530);
+
+ score++;
+
+ if(frame%70===0)earned++;
+}
+
+function drawSnow(){
+
+ ctx.fillStyle="#dff7ff";
+ ctx.fillRect(0,0,900,500);
+
+ ctx.fillStyle="#b6d8e9";
+ ctx.fillRect(0,450,900,50);
+
+ ctx.fillStyle="#00a8cc";
+
+ ctx.fillRect(
+  game.player.x,
+  game.player.y,
+  game.player.w,
+  game.player.h
+ );
+
+ game.obs.forEach(o=>{
+
+  ctx.fillStyle="#fff";
+
+  ctx.beginPath();
+  ctx.arc(o.x,o.y,o.s,0,Math.PI*2);
+  ctx.fill();
+
+ });
+}
+
+/* =========================
+   CUBE
+========================= */
+
+function updateCube(){}
+
+function drawCube(){
+
+ game.cubes.forEach(c=>{
+
+  ctx.fillStyle=
+   c.hit
+   ?"rgba(0,255,157,.12)"
+   :"#17233e";
+
+  ctx.fillRect(c.x,c.y,c.s,c.s);
+
+  ctx.strokeStyle="#334667";
+  ctx.strokeRect(c.x,c.y,c.s,c.s);
+
+  ctx.fillStyle=c.hit?"#00ff9d":"#00eaff";
+
+  ctx.font="27px Arial";
+
+  ctx.fillText(
+   c.hit?"✓":"?",
+   c.x+20,
+   c.y+39
+  );
+
+ });
+}
+
+/* =========================
+   TREASURE
+========================= */
+
+function updateTreasure(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=5;
+ if(keys.ArrowRight)p.x+=5;
+ if(keys.ArrowUp)p.y-=5;
+ if(keys.ArrowDown)p.y+=5;
+
+ p.x=Math.max(0,Math.min(865,p.x));
+ p.y=Math.max(0,Math.min(465,p.y));
+
+ if(
+  Math.abs(p.x-game.treasure.x)<45&&
+  Math.abs(p.y-game.treasure.y)<45
+ ){
+
+  score+=100;
+  earned+=10;
+
+  newTreasure();
+
+  toast("💎 گنج پیدا شد! +100 امتیاز");
+ }
+}
+
+function drawTreasure(){
+
+ ctx.fillStyle="#0b4255";
+ ctx.fillRect(0,0,900,500);
+
+ ctx.fillStyle="#00ff9d";
+
+ ctx.fillRect(
+  game.player.x,
+  game.player.y,
+  game.player.s,
+  game.player.s
+ );
+
+ ctx.font="38px Arial";
+
+ ctx.fillText(
+  "💎",
+  game.treasure.x,
+  game.treasure.y
+ );
+
+ ctx.fillStyle="#fff";
+ ctx.font="19px Vazirmatn";
+
+ ctx.fillText(
+  "با کلیدهای جهت‌دار به سمت گنج برو",
+  280,40
+ );
+}
+
+/* =========================
+   ZOMBIE
+========================= */
+
+function updateZombie(){
+
+ const p=game.player;
+
+ if(keys.ArrowLeft)p.x-=6;
+ if(keys.ArrowRight)p.x+=6;
+
+ p.x=Math.max(20,Math.min(845,p.x));
+
+ if(frame%45===0){
+
+  game.zombies.push({
+   x:20+Math.random()*850,
+   y:-30
+  });
+
+ }
+
+ game.zombies.forEach(z=>{
+
+  const dx=p.x-z.x;
+  const dy=p.y-z.y;
+  const d=Math.sqrt(dx*dx+dy*dy);
+
+  if(d>1){
+   z.x+=(dx/d)*1.7;
+   z.y+=(dy/d)*1.7;
+  }
+
+  if(d<35){
+   endGame();
+  }
+
+ });
+
+ score++;
+
+ if(frame%100===0)earned++;
+}
+
+function drawZombie(){
+
+ ctx.fillStyle="#050608";
+ ctx.fillRect(0,0,900,500);
+
+ ctx.fillStyle="#00ff9d";
+
+ ctx.fillRect(
+  game.player.x,
+  game.player.y,
+  game.player.w,
+  game.player.h
+ );
+
+ game.zombies.forEach(z=>{
+
+  ctx.font="34px Arial";
+
+  ctx.fillText(
+   "🧟",
+   z.x-17,
+   z.y+12
+  );
+
+ });
+}
+
+/* =========================
+   CASTLE
+========================= */
+
+function updateCastle(){
+
+ if(frame%50===0){
+
+  game.enemies.push({
+   x:850,
+   y:100+Math.random()*300,
+   hp:30
+  });
+
+ }
+
+ game.enemies.forEach(e=>{
+
+  e.x-=1.5;
+
+  if(e.x<130){
+   game.hp-=10;
+   e.x=-100;
+  }
+
+ });
+
+ game.enemies=
+  game.enemies.filter(e=>e.x>-50&&e.hp>0);
+
+ if(game.hp<=0){
+  endGame();
+  return;
+ }
+
+ score++;
+
+ if(frame%100===0)earned++;
+}
+
+function drawCastle(){
+
+ ctx.fillStyle="#090e1d";
+ ctx.fillRect(0,0,900,500);
+
+ ctx.fillStyle="#714dff";
+ ctx.fillRect(40,180,100,270);
+
+ ctx.fillStyle="#9d7aff";
+ ctx.fillRect(50,135,25,65);
+ ctx.fillRect(105,135,25,65);
+
+ ctx.fillStyle="#00eaff";
+ ctx.fillRect(0,455,900,45);
+
+ game.enemies.forEach(e=>{
+
+  ctx.fillStyle="#ff4965";
+
+  ctx.beginPath();
+  ctx.arc(e.x,e.y,22,0,Math.PI*2);
+  ctx.fill();
+
+ });
+
+ ctx.fillStyle="#fff";
+ ctx.font="20px Vazirmatn";
+
+ ctx.fillText(
+  "❤️ HP قلعه: "+Math.max(0,game.hp),
+  365,40
+ );
+}
+
+/* =========================
+   COLLISION
+========================= */
+
+function collide(a,b){
+
+ return(
+  a.x<b.x+b.w&&
+  a.x+a.w>b.x&&
+  a.y<b.y+b.h&&
+  a.y+a.h>b.y
+ );
+}
+
+/* =========================
+   DRAW SWITCH
+========================= */
+
+function drawGame(){
+
+ resetCanvas();
+
+ if(type==="car")drawCar();
+ if(type==="space")drawSpace();
+ if(type==="parkour")drawParkour();
+ if(type==="basket")drawBasket();
+ if(type==="target")drawTarget();
+ if(type==="snow")drawSnow();
+ if(type==="cube")drawCube();
+ if(type==="treasure")drawTreasure();
+ if(type==="zombie")drawZombie();
+ if(type==="castle")drawCastle();
+}
+
+/* =========================
+   END GAME
+========================= */
+
+function endGame(){
+
+ if(!running)return;
+
+ running=false;
+
+ if(animationFrame)
+  cancelAnimationFrame(animationFrame);
+
+ const xpGain=Math.max(10,Math.floor(score/2));
+
+ data.games++;
+ data.todayGames++;
+
+ data.coins+=earned;
+ data.todayCoins+=earned;
+
+ data.xp+=xpGain;
+
+ let newRecord=false;
+
+ if(score>data.best){
+
+  data.best=score;
+  newRecord=true;
+ }
+
+ save();
+ updateUI();
+
+ document.getElementById("gameMessage").textContent=
+  `🏁 تمام شد • +${earned} 🪙 • +${xpGain} XP`+
+  (newRecord?" • 🏆 رکورد جدید!":"");
+
+ if(newRecord)
+  toast("🏆 رکورد جدید ثبت شد!");
+
+ else
+  toast(`🎮 بازی تمام شد! +${earned} سکه`);
+
+ playSound();
+}
+
+/* =========================
+   KEYBOARD
+========================= */
+
+window.addEventListener("keydown",e=>{
+
+ keys[e.code]=true;
+ keys[e.key]=true;
+
+ if([
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "Space"
+ ].includes(e.code)){
+  e.preventDefault();
+ }
+});
+
+window.addEventListener("keyup",e=>{
+
+ keys[e.code]=false;
+ keys[e.key]=false;
+});
+
+/* =========================
+   ESC
+========================= */
+
+window.addEventListener("keydown",e=>{
+
+ if(e.key==="Escape"){
+
+  document.querySelectorAll(".modal")
+  .forEach(m=>m.classList.remove("show"));
+
+  running=false;
+ }
+});
+
+/* =========================
+   INIT
+========================= */
+
+document.body.classList.toggle("noAnim",!data.animation);
+
+updateUI();
+updateMissions();
+updateSettings();
+
+setTimeout(()=>{
+
+ toast(
+  "⚡ به NEXORA ULTRA خوش آمدی "+data.name+"!"
+ );
+
+},700);
+
+</script>
+
+</body>
+</html>
