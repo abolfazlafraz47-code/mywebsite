@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ NEXORA</title>
+
+<title>فروش روباکس</title>
 
 <style>
 *{
@@ -14,418 +15,278 @@
 }
 
 body{
-    min-height:100vh;
-    color:#fff;
     background:
-    radial-gradient(circle at 10% 10%,#142d67,transparent 30%),
-    radial-gradient(circle at 90% 10%,#49135f,transparent 30%),
-    #050811;
+        radial-gradient(circle at top right,#dff6ff 0,#f5fbff 35%,#eef7ff 100%);
+    color:#17324d;
+    min-height:100vh;
 }
 
-button{
-    border:0;
-    padding:11px 16px;
-    border-radius:12px;
-    background:#192441;
+.header{
+    width:100%;
+    padding:35px 15px 25px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:32px;
+    color:#0878c9;
+    margin-bottom:10px;
+    font-weight:900;
+}
+
+.header p{
+    font-size:15px;
+    color:#58718a;
+}
+
+.contacts{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.contact{
+    text-decoration:none;
     color:#fff;
-    cursor:pointer;
+    background:linear-gradient(135deg,#1599ed,#0874c6);
+    padding:12px 20px;
+    border-radius:14px;
     font-weight:bold;
+    box-shadow:0 7px 20px rgba(0,120,200,.18);
     transition:.2s;
 }
 
-button:hover{
+.contact:hover{
     transform:translateY(-2px);
-    background:#2b3c68;
-}
-
-.primary{
-    background:linear-gradient(135deg,#00c8ff,#7047ff);
-}
-
-.danger{
-    background:#641f2c;
-}
-
-.green{
-    background:#164c30;
-}
-
-.orange{
-    background:#634315;
-}
-
-header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:#050811ee;
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #29385d;
-}
-
-.nav{
-    max-width:1300px;
-    margin:auto;
-    padding:13px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:bold;
-    color:#61efff;
-    text-shadow:0 0 20px #00cfff;
-}
-
-.stats{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.stat{
-    background:#10182d;
-    border:1px solid #2c3b61;
-    padding:9px 12px;
-    border-radius:12px;
-}
-
-.status{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:#10182d;
-    border:1px solid #2c3b61;
-    padding:9px 13px;
-    border-radius:12px;
-}
-
-.dot{
-    width:11px;
-    height:11px;
-    border-radius:50%;
-    background:#ff3030;
-    box-shadow:0 0 15px #ff3030;
-}
-
-.dot.greenDot{
-    background:#35ff78;
-    box-shadow:0 0 15px #35ff78;
 }
 
 .container{
-    max-width:1300px;
+    width:min(1100px,94%);
     margin:auto;
-    padding:25px 15px;
+    padding-bottom:50px;
 }
 
-.hero{
-    padding:42px 25px;
-    border-radius:27px;
-    border:1px solid #354776;
-    background:linear-gradient(135deg,#13234add,#080d1ee8);
-    box-shadow:0 20px 70px #0007;
-}
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:12px;
-}
-
-.hero h1 span{
-    color:#61f5ff;
-}
-
-.hero p{
-    color:#aab5d0;
+.info{
+    background:#fff;
+    border:1px solid #dcecf7;
+    border-radius:20px;
+    padding:18px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 8px 30px rgba(25,100,150,.07);
     line-height:2;
 }
 
-.actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:18px;
+.info strong{
+    color:#0878c9;
 }
 
-.title{
-    font-size:25px;
-    margin:35px 0 15px;
-}
-
-.grid{
+.products{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
 
 .card{
-    background:#0c1328f2;
-    border:1px solid #2b3b66;
+    background:rgba(255,255,255,.96);
+    border:1px solid #dcecf7;
     border-radius:20px;
     padding:20px;
+    box-shadow:0 8px 25px rgba(30,100,150,.08);
+    transition:.2s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#19a4ef,#7dd7ff);
 }
 
 .card:hover{
-    border-color:#5d72b4;
+    transform:translateY(-4px);
+    box-shadow:0 14px 35px rgba(20,110,170,.15);
 }
 
-.icon{
-    font-size:43px;
-    margin-bottom:8px;
+.robux{
+    font-size:22px;
+    font-weight:900;
+    color:#0878c9;
+    margin-bottom:12px;
 }
 
-.card p{
-    color:#929db8;
-    line-height:1.8;
-    font-size:13px;
+.gift{
+    color:#0a9a66;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
 }
 
 .price{
-    color:#ffd94a;
-    margin:12px 0;
+    font-size:20px;
+    font-weight:900;
+    color:#263b50;
+    margin-bottom:17px;
 }
 
-.locked{
-    border-color:#713442;
-}
-
-.lock{
-    color:#ff7777;
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-.profile{
-    display:none;
-    margin-top:18px;
-}
-
-.profile.show{
-    display:block;
-}
-
-.profileTop{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.avatar{
-    width:82px;
-    height:82px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    font-size:35px;
-    background:linear-gradient(135deg,#00cfff,#7545ff);
-    border:2px solid #536bab;
-}
-
-.avatar img{
+.select-btn{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    border:0;
+    border-radius:13px;
+    padding:12px;
+    background:linear-gradient(135deg,#1599ed,#0874c6);
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
 }
 
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:100;
-    background:#000c;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
+.select-btn:hover{
+    filter:brightness(1.07);
 }
+
+/* MODAL */
 
 .modal{
-    width:100%;
-    max-width:500px;
-    max-height:92vh;
-    overflow:auto;
-    background:#090f20;
-    border:1px solid #405582;
-    border-radius:24px;
-    padding:23px;
-}
-
-.modal h2{
-    margin-bottom:15px;
-}
-
-input,
-select{
-    width:100%;
-    padding:13px;
-    margin-bottom:10px;
-    border-radius:12px;
-    border:1px solid #354873;
-    background:#060a15;
-    color:white;
-    outline:none;
-}
-
-.msg{
-    min-height:25px;
-    color:#ff7070;
-    line-height:1.7;
-}
-
-.notification{
-    display:none;
     position:fixed;
-    bottom:18px;
-    left:18px;
-    z-index:500;
-    max-width:350px;
-    padding:14px 17px;
-    border-radius:15px;
-    background:#111b36;
-    border:1px solid #465b91;
-    box-shadow:0 10px 40px #0008;
-}
-
-.admin{
+    inset:0;
+    background:rgba(0,20,40,.55);
     display:none;
-    margin-top:25px;
-}
-
-.admin.show{
-    display:block;
-}
-
-.adminHeader{
-    display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
 }
 
-.adminTitle{
-    font-size:27px;
-    color:#62edff;
-}
-
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:12px;
-    margin-bottom:20px;
-}
-
-.dashboardBox{
-    padding:17px;
-    border-radius:17px;
-    border:1px solid #30436e;
-    background:#10192f;
-}
-
-.dashboardBox b{
-    display:block;
-    font-size:25px;
-    margin-top:7px;
-}
-
-.searchBox{
-    margin-bottom:15px;
-}
-
-.userCard{
-    border:1px solid #2d3f68;
-    background:#0d162c;
-    border-radius:18px;
-    padding:17px;
-    margin-top:12px;
-}
-
-.userTop{
+.modal.show{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
 }
 
-.userName{
-    font-size:18px;
-}
-
-.userStats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
-    gap:7px;
-    margin-top:13px;
-}
-
-.miniStat{
-    padding:9px;
-    border-radius:10px;
-    background:#151f39;
-    color:#c4cee2;
-    text-align:center;
-    font-size:12px;
-}
-
-.badge{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:8px;
-    font-size:11px;
-}
-
-.badgeGreen{
-    color:#65ff9a;
-    background:#103d26;
-}
-
-.badgeRed{
-    color:#ff7777;
-    background:#451923;
-}
-
-.adminTools{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-    margin-top:13px;
-}
-
-.adminTools button{
-    font-size:12px;
-}
-
-footer{
-    text-align:center;
-    padding:45px;
-    color:#66718b;
-}
-
-.empty{
+.modal-box{
+    width:min(440px,100%);
+    background:#fff;
+    border-radius:25px;
     padding:25px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+    animation:popup .2s ease;
+}
+
+@keyframes popup{
+    from{
+        transform:scale(.9);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.modal-title{
     text-align:center;
-    color:#8792ac;
-    border:1px dashed #354873;
-    border-radius:15px;
+    font-size:22px;
+    font-weight:900;
+    color:#0878c9;
+    margin-bottom:18px;
+}
+
+.selected{
+    background:#f0f9ff;
+    border:1px solid #cceafa;
+    border-radius:16px;
+    padding:15px;
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.selected-name{
+    font-size:18px;
+    font-weight:900;
+    color:#0878c9;
+}
+
+.selected-price{
+    margin-top:7px;
+    font-weight:bold;
+    color:#455d71;
+}
+
+.choose-text{
+    text-align:center;
+    color:#687f92;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.rubika-btn{
+    display:block;
+    width:100%;
+    border:0;
+    text-decoration:none;
+    text-align:center;
+    color:white;
+    background:linear-gradient(135deg,#10a4ed,#0876c7);
+    padding:14px;
+    border-radius:14px;
+    margin-top:10px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.rubika-btn:hover{
+    filter:brightness(1.07);
+}
+
+.close-btn{
+    width:100%;
+    margin-top:12px;
+    padding:12px;
+    border:0;
+    border-radius:13px;
+    background:#edf3f7;
+    color:#506579;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.status{
+    text-align:center;
+    font-size:13px;
+    color:#0b8b62;
+    min-height:20px;
+    margin-top:10px;
+}
+
+.footer{
+    text-align:center;
+    color:#71879a;
+    font-size:13px;
+    margin-top:25px;
+    line-height:2;
 }
 
 @media(max-width:650px){
 
-    .hero h1{
-        font-size:29px;
+    .products{
+        grid-template-columns:1fr;
     }
 
-    .status{
-        width:100%;
-        justify-content:center;
+    .header h1{
+        font-size:27px;
+    }
+
+    .card{
+        padding:18px;
     }
 
 }
@@ -434,2162 +295,672 @@ footer{
 
 <body>
 
-<header>
+<header class="header">
 
-<div class="nav">
+    <h1>🛒 فروش روباکس</h1>
 
-<div class="logo">⚡ NEXORA</div>
+    <p>
+        پکیج موردنظرت رو انتخاب کن و برای ثبت سفارش به روبیکا پیام بده
+    </p>
 
-<div class="stats">
+    <div class="contacts">
 
-<div class="stat">
-🪙 <b id="coins">0</b>
-</div>
+        <a
+            class="contact"
+            href="https://rubika.ir/page/REZALAST1"
+            target="_blank"
+            rel="noopener"
+        >
+            💬 @REZALAST1
+        </a>
 
-<div class="stat">
-💎 <b id="diamonds">0</b>
-</div>
+        <a
+            class="contact"
+            href="https://rubika.ir/page/A87hskgd"
+            target="_blank"
+            rel="noopener"
+        >
+            💬 @A87hskgd
+        </a>
 
-<div class="stat">
-⭐ Level <b id="level">1</b>
-</div>
-
-</div>
-
-<div class="status">
-
-<span class="dot" id="statusDot"></span>
-
-<span id="statusText">
-اکانت شما تأیید نشده است
-</span>
-
-</div>
-
-<button onclick="openAuth()">
-👤 حساب
-</button>
-
-</div>
+    </div>
 
 </header>
 
 
-<div class="container">
+<main class="container">
+
+    <div class="info">
+
+        📌 ابتدا پکیج موردنظر را انتخاب کن،
+        سپس یکی از آیدی‌های روبیکا را بزن.
+
+        <br>
+
+        متن سفارش به‌صورت خودکار
+        <strong>کپی</strong>
+        می‌شود.
+
+    </div>
 
 
-<section class="hero">
-
-<h1>
-به <span>NEXORA</span> خوش آمدی ⚡
-</h1>
-
-<p>
-بازی کن، XP بگیر، سکه جمع کن و آیتم‌های ویژه بخر.
-</p>
-
-<div class="actions">
-
-<button class="primary" onclick="openAuth()">
-🚀 ورود / ثبت‌نام
-</button>
-
-<button onclick="toggleProfile()">
-👤 پروفایل
-</button>
-
-<button onclick="missions()">
-🎯 مأموریت‌ها
-</button>
-
-<button onclick="ranking()">
-🏆 رتبه‌بندی
-</button>
-
-<button onclick="inventory()">
-🎒 کوله‌پشتی
-</button>
-
-<button onclick="daily()">
-🎁 جایزه روزانه
-</button>
-
-<button onclick="settings()">
-⚙️ تنظیمات
-</button>
-
-<button onclick="openAdmin()">
-👑 مدیریت
-</button>
-
-</div>
-
-</section>
+    <section class="products">
 
 
-<!-- PROFILE -->
+        <!-- 80 -->
 
-<section class="profile card" id="profile">
+        <div class="card">
 
-<div class="profileTop">
+            <div class="robux">
+                80 روباکس
+            </div>
 
-<div class="avatar" id="avatar">
-👤
-</div>
+            <div class="price">
+                272,000 تومان
+            </div>
 
-<div>
+            <button
+                class="select-btn"
+                onclick="selectPackage('80 روباکس','272,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
 
-<h2 id="profileName">
-مهمان
-</h2>
+        </div>
 
-<div id="profileStatus">
-🔴 اکانت شما تأیید نشده است
-</div>
 
-<div>
-⭐ سطح:
-<b id="profileLevel">1</b>
-</div>
+        <!-- 40 -->
 
-</div>
+        <div class="card">
 
-</div>
+            <div class="robux">
+                40 روباکس
+            </div>
 
-<div class="actions">
+            <div class="price">
+                136,000 تومان
+            </div>
 
-<button onclick="selectFile()">
-📁 انتخاب فایل
-</button>
+            <button
+                class="select-btn"
+                onclick="selectPackage('40 روباکس','136,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
 
-<input
-id="avatarInput"
-type="file"
-accept="image/*"
-style="display:none"
-onchange="changeAvatar(event)"
+        </div>
+
+
+        <!-- 160 -->
+
+        <div class="card">
+
+            <div class="robux">
+                160 روباکس
+            </div>
+
+            <div class="price">
+                544,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('160 روباکس','544,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 120 -->
+
+        <div class="card">
+
+            <div class="robux">
+                120 روباکس
+            </div>
+
+            <div class="price">
+                408,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('120 روباکس','408,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 300 + 240 -->
+
+        <div class="card">
+
+            <div class="robux">
+                300 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 240 روباکس هدیه
+            </div>
+
+            <div class="price">
+                816,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('300 + 240 روباکس هدیه','816,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 200 -->
+
+        <div class="card">
+
+            <div class="robux">
+                200 روباکس
+            </div>
+
+            <div class="price">
+                680,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('200 روباکس','680,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 80 + 400 -->
+
+        <div class="card">
+
+            <div class="robux">
+                80 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 400 روباکس هدیه
+            </div>
+
+            <div class="price">
+                1,360,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('80 + 400 روباکس هدیه','1,360,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 40 + 320 -->
+
+        <div class="card">
+
+            <div class="robux">
+                40 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 320 روباکس هدیه
+            </div>
+
+            <div class="price">
+                1,088,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('40 + 320 روباکس هدیه','1,088,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 300 + 1700 -->
+
+        <div class="card">
+
+            <div class="robux">
+                300 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 1700 روباکس هدیه
+            </div>
+
+            <div class="price">
+                5,440,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('300 + 1700 روباکس هدیه','5,440,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 200 + 800 -->
+
+        <div class="card">
+
+            <div class="robux">
+                200 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 800 روباکس هدیه
+            </div>
+
+            <div class="price">
+                2,720,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('200 + 800 روباکس هدیه','2,720,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 750 + 4500 -->
+
+        <div class="card">
+
+            <div class="robux">
+                750 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 4500 روباکس هدیه
+            </div>
+
+            <div class="price">
+                13,600,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('750 + 4500 روباکس هدیه','13,600,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 475 + 3150 -->
+
+        <div class="card">
+
+            <div class="robux">
+                475 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 3150 روباکس هدیه
+            </div>
+
+            <div class="price">
+                9,520,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('475 + 3150 روباکس هدیه','9,520,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 1500 + 22500 -->
+
+        <div class="card">
+
+            <div class="robux">
+                1500 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 22500 روباکس هدیه
+            </div>
+
+            <div class="price">
+                54,400,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('1500 + 22500 روباکس هدیه','54,400,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+        <!-- 1000 + 10000 -->
+
+        <div class="card">
+
+            <div class="robux">
+                1000 روباکس
+            </div>
+
+            <div class="gift">
+                🎁 + 10000 روباکس هدیه
+            </div>
+
+            <div class="price">
+                27,200,000 تومان
+            </div>
+
+            <button
+                class="select-btn"
+                onclick="selectPackage('1000 + 10000 روباکس هدیه','27,200,000 تومان')"
+            >
+                انتخاب پکیج
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+    <div class="footer">
+
+        برای ثبت سفارش، بعد از انتخاب پکیج
+        روی یکی از آیدی‌های روبیکا بزن.
+
+    </div>
+
+</main>
+
+
+<!-- پنجره انتخاب روبیکا -->
+
+<div
+    class="modal"
+    id="modal"
 >
 
-<button
-id="logoutButton"
-class="danger"
-onclick="logout()"
-style="display:none">
-
-🚪 خروج از اکانت
-
-</button>
-
-</div>
-
-</section>
+    <div class="modal-box">
 
 
-<!-- GAMES -->
-
-<h2 class="title">
-🎮 بازی‌ها
-</h2>
-
-<section class="grid">
+        <div class="modal-title">
+            📦 ثبت سفارش
+        </div>
 
 
-<div class="card">
-<div class="icon">🏎️</div>
-<h3>Neon Racer</h3>
-<p>مسابقه بده و سکه بگیر.</p>
-<button onclick="game('Neon Racer',100,40)">🎮 بازی</button>
-</div>
+        <div class="selected">
+
+            <div
+                class="selected-name"
+                id="selectedName"
+            ></div>
+
+            <div
+                class="selected-price"
+                id="selectedPrice"
+            ></div>
+
+        </div>
 
 
-<div class="card">
-<div class="icon">🚀</div>
-<h3>Space Attack</h3>
-<p>در نبرد فضایی امتیاز بگیر.</p>
-<button onclick="game('Space Attack',120,50)">🎮 بازی</button>
-</div>
+        <div class="choose-text">
+            یکی از آیدی‌های روبیکا را انتخاب کن
+        </div>
 
 
-<div class="card">
-<div class="icon">🏃</div>
-<h3>Neon Parkour</h3>
-<p>از موانع عبور کن.</p>
-<button onclick="game('Neon Parkour',90,35)">🎮 بازی</button>
-</div>
+        <!-- آیدی اول -->
+
+        <a
+            class="rubika-btn"
+            href="https://rubika.ir/page/REZALAST1"
+            target="_blank"
+            rel="noopener"
+            onclick="copyAndOpen(event,'https://rubika.ir/page/REZALAST1')"
+        >
+            💬 @REZALAST1
+        </a>
 
 
-<div class="card">
-<div class="icon">🏀</div>
-<h3>Basket Pro</h3>
-<p>توپ را وارد سبد کن.</p>
-<button onclick="game('Basket Pro',80,30)">🎮 بازی</button>
-</div>
+        <!-- آیدی دوم -->
+
+        <a
+            class="rubika-btn"
+            href="https://rubika.ir/page/A87hskgd"
+            target="_blank"
+            rel="noopener"
+            onclick="copyAndOpen(event,'https://rubika.ir/page/A87hskgd')"
+        >
+            💬 @A87hskgd
+        </a>
 
 
-<div class="card">
-<div class="icon">🎯</div>
-<h3>Target Master</h3>
-<p>هدف‌ها را بزن.</p>
-<button onclick="game('Target Master',110,45)">🎮 بازی</button>
-</div>
+        <div
+            class="status"
+            id="status"
+        ></div>
 
 
-<div class="card">
-<div class="icon">❄️</div>
-<h3>Snow Rush</h3>
-<p>در مسیر یخی حرکت کن.</p>
-<button onclick="game('Snow Rush',100,40)">🎮 بازی</button>
-</div>
+        <button
+            class="close-btn"
+            onclick="closeModal()"
+        >
+            بستن
+        </button>
 
-
-<div class="card">
-<div class="icon">🧩</div>
-<h3>Cube Puzzle</h3>
-<p>پازل را کامل کن.</p>
-<button onclick="game('Cube Puzzle',130,55)">🎮 بازی</button>
-</div>
-
-
-<div class="card">
-<div class="icon">🧟</div>
-<h3>Zombie Escape</h3>
-<p>فرار کن و جایزه بگیر.</p>
-<button onclick="game('Zombie Escape',150,60)">🎮 بازی</button>
-</div>
-
-</section>
-
-
-<!-- SHOP -->
-
-<h2 class="title">
-🛒 فروشگاه
-</h2>
-
-<section class="grid">
-
-
-<div class="card locked">
-<div class="icon">👑</div>
-<h3>VIP</h3>
-<p>دسترسی ویژه.</p>
-<div class="price">🪙 5000</div>
-<div class="lock">🔒 فقط اکانت تأییدشده</div>
-<button onclick="buy('VIP',5000,true)">خرید</button>
-</div>
-
-
-<div class="card locked">
-<div class="icon">⚡</div>
-<h3>Mega Boost</h3>
-<p>تقویت بازی.</p>
-<div class="price">🪙 3500</div>
-<div class="lock">🔒 فقط اکانت تأییدشده</div>
-<button onclick="buy('Mega Boost',3500,true)">خرید</button>
-</div>
-
-
-<div class="card locked">
-<div class="icon">💎</div>
-<h3>Diamond Pack</h3>
-<p>بسته الماس.</p>
-<div class="price">🪙 7000</div>
-<div class="lock">🔒 فقط اکانت تأییدشده</div>
-<button onclick="buy('Diamond Pack',7000,true)">خرید</button>
-</div>
-
-
-<div class="card locked">
-<div class="icon">🔥</div>
-<h3>Legendary</h3>
-<p>آیتم افسانه‌ای.</p>
-<div class="price">🪙 9000</div>
-<div class="lock">🔒 فقط اکانت تأییدشده</div>
-<button onclick="buy('Legendary',9000,true)">خرید</button>
-</div>
-
-
-<div class="card locked">
-<div class="icon">🛡️</div>
-<h3>Ultra Shield</h3>
-<p>محافظ ویژه.</p>
-<div class="price">🪙 6000</div>
-<div class="lock">🔒 فقط اکانت تأییدشده</div>
-<button onclick="buy('Ultra Shield',6000,true)">خرید</button>
-</div>
-
-
-<div class="card">
-<div class="icon">🪙</div>
-<h3>Coin Booster</h3>
-<p>تقویت سکه.</p>
-<div class="price">🪙 500</div>
-<button onclick="buy('Coin Booster',500,false)">خرید</button>
-</div>
-
-
-<div class="card">
-<div class="icon">⭐</div>
-<h3>XP Booster</h3>
-<p>تقویت XP.</p>
-<div class="price">🪙 700</div>
-<button onclick="buy('XP Booster',700,false)">خرید</button>
-</div>
-
-
-<div class="card">
-<div class="icon">🎁</div>
-<h3>Lucky Box</h3>
-<p>جعبه شانس.</p>
-<div class="price">🪙 900</div>
-<button onclick="buy('Lucky Box',900,false)">خرید</button>
-</div>
-
-</section>
-
-
-<!-- ADMIN PANEL -->
-
-<section class="admin card" id="adminPanel">
-
-<div class="adminHeader">
-
-<div>
-
-<div class="adminTitle">
-👑 NEXORA CONTROL CENTER
-</div>
-
-<p style="color:#8d99b5;margin-top:7px">
-مرکز مدیریت کامل کاربران
-</p>
+    </div>
 
 </div>
-
-<button class="danger" onclick="adminLogout()">
-🚪 خروج مدیر
-</button>
-
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div class="dashboard">
-
-<div class="dashboardBox">
-👥 کل کاربران
-<b id="totalUsers">0</b>
-</div>
-
-<div class="dashboardBox">
-🟢 تأیید شده
-<b id="verifiedUsers">0</b>
-</div>
-
-<div class="dashboardBox">
-🔴 تأیید نشده
-<b id="unverifiedUsers">0</b>
-</div>
-
-<div class="dashboardBox">
-🪙 مجموع سکه
-<b id="totalCoins">0</b>
-</div>
-
-</div>
-
-
-<!-- SEARCH -->
-
-<div class="searchBox">
-
-<input
-id="userSearch"
-placeholder="🔎 جستجوی نام کاربری..."
-oninput="renderUsers()"
->
-
-</div>
-
-
-<div id="usersList"></div>
-
-</section>
-
-
-<footer>
-⚡ NEXORA ULTRA CONTROL
-</footer>
-
-</div>
-
-
-<!-- AUTH MODAL -->
-
-<div class="overlay" id="authModal">
-
-<div class="modal">
-
-<h2 id="authTitle">
-🔐 ورود
-</h2>
-
-<input
-id="username"
-placeholder="نام کاربری"
->
-
-<input
-id="password"
-type="password"
-placeholder="رمز عبور"
->
-
-<div class="msg" id="authMsg"></div>
-
-<button
-class="primary"
-style="width:100%"
-onclick="submitAuth()"
-id="authButton">
-
-ورود
-
-</button>
-
-<button
-style="width:100%;margin-top:8px"
-onclick="switchMode()"
-id="switchButton">
-
-📝 ثبت‌نام
-
-</button>
-
-<button
-style="width:100%;margin-top:8px"
-onclick="closeModal('authModal')">
-
-بستن
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ADMIN LOGIN -->
-
-<div class="overlay" id="adminModal">
-
-<div class="modal">
-
-<h2>
-👑 ورود مدیریت
-</h2>
-
-<p style="color:#909bb5;margin-bottom:15px">
-برای ورود فقط رمز مدیریت لازم است.
-</p>
-
-<input
-id="adminPassword"
-type="password"
-placeholder="رمز عبور مدیریت"
->
-
-<div class="msg" id="adminMsg"></div>
-
-<button
-class="primary"
-style="width:100%"
-onclick="adminLogin()">
-
-🔐 ورود به پنل
-
-</button>
-
-<button
-style="width:100%;margin-top:8px"
-onclick="closeModal('adminModal')">
-
-بستن
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- INFO -->
-
-<div class="overlay" id="infoModal">
-
-<div class="modal">
-
-<h2 id="infoTitle"></h2>
-
-<div id="infoContent"></div>
-
-<button
-style="width:100%;margin-top:15px"
-onclick="closeModal('infoModal')">
-
-بستن
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- EDIT USER -->
-
-<div class="overlay" id="editModal">
-
-<div class="modal">
-
-<h2>
-✏️ ویرایش کاربر
-</h2>
-
-<div id="editUserName"
-style="color:#60eaff;margin-bottom:15px">
-</div>
-
-<input
-id="editCoins"
-type="number"
-placeholder="سکه"
->
-
-<input
-id="editDiamonds"
-type="number"
-placeholder="الماس"
->
-
-<input
-id="editXP"
-type="number"
-placeholder="XP"
->
-
-<input
-id="editLevel"
-type="number"
-placeholder="Level"
->
-
-<input
-id="editItems"
-placeholder="آیتم‌ها با , جدا شوند"
->
-
-<div class="msg" id="editMsg"></div>
-
-<button
-class="primary"
-style="width:100%"
-onclick="saveEditedUser()">
-
-💾 ذخیره تغییرات
-
-</button>
-
-<button
-style="width:100%;margin-top:8px"
-onclick="closeModal('editModal')">
-
-بستن
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="notification" id="notification"></div>
 
 
 <script>
 
-/* =========================================
-   DATABASE
-========================================= */
-
-const USERS_KEY = "NEXORA_USERS_DATABASE";
-const CURRENT_KEY = "NEXORA_CURRENT_USER";
-
-const ADMIN_PASSWORD = "qwertyuiop";
-
-let users =
-JSON.parse(
-localStorage.getItem(USERS_KEY) || "[]"
-);
-
-let current = null;
-
-let authMode = "login";
-
-let adminLogged = false;
-
-let editingUserId = null;
+let selectedPackage = "";
+let selectedPrice = "";
 
 
-/* =========================================
-   DOM
-========================================= */
+/* انتخاب پکیج */
 
-const $ = id =>
-document.getElementById(id);
+function selectPackage(name, price){
 
+    selectedPackage = name;
 
-/* =========================================
-   LOAD CURRENT USER
-========================================= */
+    selectedPrice = price;
 
-const savedId =
-localStorage.getItem(CURRENT_KEY);
+    document.getElementById("selectedName").textContent =
+        name;
 
-if(savedId){
+    document.getElementById("selectedPrice").textContent =
+        price;
 
-    current =
-    users.find(
-        u => u.id === savedId
-    ) || null;
+    document.getElementById("status").textContent =
+        "";
+
+    document.getElementById("modal").classList.add("show");
 }
 
 
-/* =========================================
-   DATABASE SAVE
-========================================= */
+/* ساخت متن سفارش */
 
-function saveDatabase(){
+function getOrderText(){
 
-    localStorage.setItem(
-        USERS_KEY,
-        JSON.stringify(users)
-    );
+    return "سلام، من پکیج " +
+        selectedPackage +
+        " به قیمت " +
+        selectedPrice +
+        " تومان را می‌خواهم.";
+
 }
 
 
-function saveCurrent(){
+/* کپی متن سفارش */
 
-    if(current){
+async function copyOrder(){
 
-        localStorage.setItem(
-            CURRENT_KEY,
-            current.id
-        );
+    const text = getOrderText();
+
+
+    /* روش اصلی */
+
+    try{
+
+        if(
+            navigator.clipboard &&
+            window.isSecureContext
+        ){
+
+            await navigator.clipboard.writeText(text);
+
+            return true;
+        }
+
+    }catch(error){
+
+        console.log("Clipboard error:",error);
+
+    }
+
+
+    /* روش جایگزین */
+
+    try{
+
+        const textarea =
+            document.createElement("textarea");
+
+        textarea.value = text;
+
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "0";
+
+        document.body.appendChild(textarea);
+
+        textarea.focus();
+        textarea.select();
+
+        const result =
+            document.execCommand("copy");
+
+        textarea.remove();
+
+        return result;
+
+    }catch(error){
+
+        console.log("Fallback copy error:",error);
+
+        return false;
+    }
+
+}
+
+
+/* کپی + باز کردن صفحه روبیکا */
+
+async function copyAndOpen(event, link){
+
+    event.preventDefault();
+
+
+    const copied =
+        await copyOrder();
+
+
+    if(copied){
+
+        document.getElementById("status").textContent =
+            "✅ متن سفارش کپی شد؛ در حال باز کردن روبیکا...";
 
     }else{
 
-        localStorage.removeItem(
-            CURRENT_KEY
-        );
+        document.getElementById("status").textContent =
+            "⚠️ کپی خودکار انجام نشد.";
+
     }
+
+
+    /*
+       بعد از کپی، صفحه روبیکا باز می‌شود.
+    */
+
+    setTimeout(function(){
+
+        window.location.href = link;
+
+    },350);
+
 }
 
 
-/* =========================================
-   UI UPDATE
-========================================= */
+/* بستن پنجره */
 
-function updateUI(){
+function closeModal(){
 
-    if(!current){
-
-        $("coins").textContent = "0";
-
-        $("diamonds").textContent = "0";
-
-        $("level").textContent = "1";
-
-        $("statusText").textContent =
-        "اکانت شما تأیید نشده است";
-
-        $("statusDot")
-        .classList
-        .remove("greenDot");
-
-        $("logoutButton")
-        .style.display = "none";
-
-        return;
-    }
-
-
-    $("coins").textContent =
-    current.coins;
-
-    $("diamonds").textContent =
-    current.diamonds;
-
-    $("level").textContent =
-    current.level;
-
-    $("profileName").textContent =
-    current.username;
-
-    $("profileLevel").textContent =
-    current.level;
-
-
-    if(current.verified){
-
-        $("statusText").textContent =
-        "اکانت شما تأیید شده است";
-
-        $("statusDot")
-        .classList
-        .add("greenDot");
-
-        $("profileStatus").innerHTML =
-        '<span style="color:#55ff91">🟢 اکانت شما تأیید شده است</span>';
-
-    }else{
-
-        $("statusText").textContent =
-        "اکانت شما تأیید نشده است";
-
-        $("statusDot")
-        .classList
-        .remove("greenDot");
-
-        $("profileStatus").innerHTML =
-        '<span style="color:#ff6c6c">🔴 اکانت شما تأیید نشده است</span>';
-    }
-
-
-    if(current.avatar){
-
-        $("avatar").innerHTML =
-        `<img src="${current.avatar}">`;
-
-    }else{
-
-        $("avatar").innerHTML = "👤";
-    }
-
-
-    $("logoutButton")
-    .style.display = "inline-block";
-}
-
-
-/* =========================================
-   AUTH
-========================================= */
-
-function openAuth(){
-
-    $("authModal").style.display = "flex";
-
-    $("authMsg").textContent = "";
-}
-
-
-function switchMode(){
-
-    authMode =
-    authMode === "login"
-    ? "register"
-    : "login";
-
-
-    $("authTitle").textContent =
-    authMode === "login"
-    ? "🔐 ورود"
-    : "📝 ثبت‌نام";
-
-
-    $("authButton").textContent =
-    authMode === "login"
-    ? "ورود"
-    : "ثبت‌نام";
-
-
-    $("switchButton").textContent =
-    authMode === "login"
-    ? "📝 ثبت‌نام"
-    : "🔐 ورود";
-
-
-    $("authMsg").textContent = "";
-}
-
-
-/* =========================================
-   LOGIN / REGISTER
-========================================= */
-
-function submitAuth(){
-
-    const name =
-    $("username").value.trim();
-
-    const pass =
-    $("password").value;
-
-
-    if(name.length < 3){
-
-        $("authMsg").textContent =
-        "❌ نام کاربری حداقل ۳ کاراکتر باشد.";
-
-        return;
-    }
-
-
-    if(pass.length < 4){
-
-        $("authMsg").textContent =
-        "❌ رمز عبور حداقل ۴ کاراکتر باشد.";
-
-        return;
-    }
-
-
-    if(authMode === "register"){
-
-        const exists =
-        users.some(
-            u =>
-            u.username.toLowerCase()
-            ===
-            name.toLowerCase()
-        );
-
-
-        if(exists){
-
-            $("authMsg").textContent =
-            "❌ این نام کاربری قبلاً وجود دارد.";
-
-            return;
-        }
-
-
-        const newUser = {
-
-            id:
-            Date.now().toString(36)
-            +
-            Math.random()
-            .toString(36)
-            .slice(2),
-
-            username:name,
-
-            password:pass,
-
-            verified:false,
-
-            coins:500,
-
-            diamonds:10,
-
-            xp:0,
-
-            level:1,
-
-            avatar:"",
-
-            inventory:[],
-
-            missions:[],
-
-            daily:"",
-
-            createdAt:
-            new Date().toISOString()
-
-        };
-
-
-        users.push(newUser);
-
-        current = newUser;
-
-        saveDatabase();
-
-        saveCurrent();
-
-        updateUI();
-
-        $("profile")
-        .classList
-        .add("show");
-
-        closeModal("authModal");
-
-        notify(
-        "🎉 حساب با موفقیت ساخته شد!"
-        );
-
-        if(adminLogged){
-            renderUsers();
-        }
-
-        return;
-    }
-
-
-    const found =
-    users.find(
-        u =>
-        u.username.toLowerCase()
-        ===
-        name.toLowerCase()
-    );
-
-
-    if(!found){
-
-        $("authMsg").textContent =
-        "❌ این حساب پیدا نشد.";
-
-        return;
-    }
-
-
-    if(found.password !== pass){
-
-        $("authMsg").textContent =
-        "❌ رمز عبور اشتباه است.";
-
-        return;
-    }
-
-
-    current = found;
-
-    saveCurrent();
-
-    updateUI();
-
-    $("profile")
-    .classList
-    .add("show");
-
-    closeModal("authModal");
-
-    notify(
-    "✅ ورود موفق بود!"
-    );
-}
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-function logout(){
-
-    current = null;
-
-    saveCurrent();
-
-    $("profile")
-    .classList
-    .remove("show");
-
-    updateUI();
-
-    notify(
-    "🚪 از اکانت خارج شدی."
-    );
-}
-
-
-/* =========================================
-   PROFILE
-========================================= */
-
-function toggleProfile(){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    $("profile")
-    .classList
-    .toggle("show");
-}
-
-
-function selectFile(){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-    $("avatarInput").click();
-}
-
-
-function changeAvatar(event){
-
-    if(!current)return;
-
-
-    const file =
-    event.target.files[0];
-
-    if(!file)return;
-
-
-    if(!file.type.startsWith("image/")){
-
-        notify(
-        "❌ لطفاً یک فایل تصویری انتخاب کن."
-        );
-
-        return;
-    }
-
-
-    const reader =
-    new FileReader();
-
-
-    reader.onload = function(){
-
-        current.avatar =
-        reader.result;
-
-        updateCurrent();
-
-        notify(
-        "📁 فایل پروفایل ذخیره شد."
-        );
-    };
-
-
-    reader.readAsDataURL(file);
-}
-
-
-/* =========================================
-   UPDATE USER
-========================================= */
-
-function updateCurrent(){
-
-    if(!current)return;
-
-
-    const index =
-    users.findIndex(
-        u => u.id === current.id
-    );
-
-
-    if(index !== -1){
-
-        users[index] = current;
-    }
-
-
-    saveDatabase();
-
-    saveCurrent();
-
-    updateUI();
-
-
-    if(adminLogged){
-
-        renderUsers();
-
-        updateDashboard();
-    }
-}
-
-
-/* =========================================
-   GAMES
-========================================= */
-
-function game(name,coinReward,xpReward){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    openInfo(
-        "🎮 " + name,
-        `
-        <div class="card">
-
-        <div style="
-        font-size:60px;
-        text-align:center;
-        margin-bottom:15px">
-
-        🎮
-
-        </div>
-
-        <h3>
-        ${escapeHTML(name)}
-        </h3>
-
-        <p style="margin-top:10px">
-        بازی آماده است!
-        </p>
-
-        <button
-        class="primary"
-        style="width:100%;margin-top:15px"
-        onclick="finishGame(${coinReward},${xpReward})">
-
-        🏆 پایان بازی
-
-        </button>
-
-        </div>
-        `
-    );
-}
-
-
-function finishGame(coinsReward,xpReward){
-
-    if(!current)return;
-
-
-    current.coins += coinsReward;
-
-    current.xp += xpReward;
-
-
-    while(
-        current.xp >= current.level * 1000
-    ){
-
-        current.xp -=
-        current.level * 1000;
-
-        current.level++;
-    }
-
-
-    updateCurrent();
-
-    closeModal("infoModal");
-
-    notify(
-    `🏆 +${coinsReward} 🪙 | +${xpReward} XP`
-    );
-}
-
-
-/* =========================================
-   SHOP
-========================================= */
-
-function buy(name,price,locked){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    if(
-        locked &&
-        !current.verified
-    ){
-
-        openInfo(
-        "🔒 آیتم قفل است",
-        `
-        <div class="card">
-
-        <h3>🔴 اکانت تأیید نشده</h3>
-
-        <p style="margin-top:10px">
-        ابتدا باید مدیر اکانت شما را تأیید کند.
-        </p>
-
-        </div>
-        `
-        );
-
-        return;
-    }
-
-
-    if(current.coins < price){
-
-        notify(
-        "❌ سکه کافی نداری."
-        );
-
-        return;
-    }
-
-
-    current.coins -= price;
-
-    current.inventory.push(name);
-
-
-    if(name === "Diamond Pack"){
-
-        current.diamonds += 100;
-    }
-
-
-    updateCurrent();
-
-    notify(
-    `🛒 ${name} خریداری شد!`
-    );
-}
-
-
-/* =========================================
-   DAILY
-========================================= */
-
-function daily(){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    const day =
-    new Date()
-    .toISOString()
-    .slice(0,10);
-
-
-    if(current.daily === day){
-
-        notify(
-        "⏰ جایزه امروز را گرفتی."
-        );
-
-        return;
-    }
-
-
-    current.daily = day;
-
-    current.coins += 300;
-
-    current.diamonds += 5;
-
-    updateCurrent();
-
-    notify(
-    "🎁 +300 🪙 | +5 💎"
-    );
-}
-
-
-/* =========================================
-   INVENTORY
-========================================= */
-
-function inventory(){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    if(current.inventory.length === 0){
-
-        openInfo(
-        "🎒 کوله‌پشتی",
-        `
-        <div class="empty">
-        🎒 کوله‌پشتی خالی است.
-        </div>
-        `
-        );
-
-        return;
-    }
-
-
-    let html = "";
-
-
-    current.inventory.forEach(item=>{
-
-        html += `
-        <div class="card"
-        style="margin-bottom:10px">
-
-        🎁 ${escapeHTML(item)}
-
-        </div>
-        `;
-    });
-
-
-    openInfo(
-    "🎒 کوله‌پشتی",
-    html
-    );
-}
-
-
-/* =========================================
-   MISSIONS
-========================================= */
-
-function missions(){
-
-    if(!current){
-
-        openAuth();
-
-        return;
-    }
-
-
-    openInfo(
-    "🎯 مأموریت‌ها",
-    `
-    <div class="card">
-    🎮 انجام یک بازی
-    <br><br>
-    جایزه: 🪙 200
-    </div>
-
-    <div class="card" style="margin-top:10px">
-    🪙 جمع کردن سکه
-    <br><br>
-    جایزه: 🪙 400
-    </div>
-
-    <div class="card" style="margin-top:10px">
-    🎁 جایزه روزانه
-    <br><br>
-    جایزه: 🪙 300
-    </div>
-    `
-    );
-}
-
-
-/* =========================================
-   RANKING
-========================================= */
-
-function ranking(){
-
-    const sorted =
-    [...users].sort(
-        (a,b)=>
-        b.level-a.level ||
-        b.xp-a.xp ||
-        b.coins-a.coins
-    );
-
-
-    let html = "";
-
-
-    sorted.forEach((u,i)=>{
-
-        html += `
-        <div class="userCard">
-
-        🏆 #${i+1}
-
-        <b>
-        ${escapeHTML(u.username)}
-        </b>
-
-        <br><br>
-
-        ⭐ Level ${u.level}
-        |
-        🪙 ${u.coins}
-
-        </div>
-        `;
-    });
-
-
-    if(!html){
-
-        html =
-        `<div class="empty">
-        هنوز کاربری وجود ندارد.
-        </div>`;
-    }
-
-
-    openInfo(
-    "🏆 رتبه‌بندی",
-    html
-    );
-}
-
-
-/* =========================================
-   SETTINGS
-========================================= */
-
-function settings(){
-
-    openInfo(
-    "⚙️ تنظیمات",
-    `
-    <div class="card">
-
-    <h3>💾 ذخیره‌سازی</h3>
-
-    <p style="margin-top:10px">
-    اطلاعات این نسخه روی همین مرورگر ذخیره می‌شود.
-    </p>
-
-    </div>
-    `
-    );
-}
-
-
-/* =========================================
-   ADMIN LOGIN
-========================================= */
-
-function openAdmin(){
-
-    $("adminModal").style.display = "flex";
-
-    $("adminMsg").textContent = "";
-}
-
-
-function adminLogin(){
-
-    const pass =
-    $("adminPassword").value;
-
-
-    if(pass !== ADMIN_PASSWORD){
-
-        $("adminMsg").textContent =
-        "❌ رمز مدیریت اشتباه است.";
-
-        return;
-    }
-
-
-    adminLogged = true;
-
-    $("adminPassword").value = "";
-
-    closeModal("adminModal");
-
-    $("adminPanel")
-    .classList
-    .add("show");
-
-    updateDashboard();
-
-    renderUsers();
-
-    $("adminPanel")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-
-    notify(
-    "👑 پنل مدیریت فعال شد."
-    );
-}
-
-
-/* =========================================
-   ADMIN LOGOUT
-========================================= */
-
-function adminLogout(){
-
-    adminLogged = false;
-
-    $("adminPanel")
-    .classList
-    .remove("show");
-
-    notify(
-    "🚪 از پنل مدیریت خارج شدی."
-    );
-}
-
-
-/* =========================================
-   DASHBOARD
-========================================= */
-
-function updateDashboard(){
-
-    const total =
-    users.length;
-
-
-    const verified =
-    users.filter(
-        u => u.verified
-    ).length;
-
-
-    const unverified =
-    total - verified;
-
-
-    const totalCoins =
-    users.reduce(
-        (sum,u)=>
-        sum + Number(u.coins || 0),
-        0
-    );
-
-
-    $("totalUsers").textContent =
-    total;
-
-
-    $("verifiedUsers").textContent =
-    verified;
-
-
-    $("unverifiedUsers").textContent =
-    unverified;
-
-
-    $("totalCoins").textContent =
-    totalCoins;
-}
-
-
-/* =========================================
-   RENDER ALL USERS
-========================================= */
-
-function renderUsers(){
-
-    if(!adminLogged)return;
-
-
-    const search =
-    $("userSearch")
-    .value
-    .trim()
-    .toLowerCase();
-
-
-    const filtered =
-    users.filter(
-        u =>
-        u.username
-        .toLowerCase()
-        .includes(search)
-    );
-
-
-    if(filtered.length === 0){
-
-        $("usersList").innerHTML =
-        `
-        <div class="empty">
-        🔎 کاربری پیدا نشد.
-        </div>
-        `;
-
-        updateDashboard();
-
-        return;
-    }
-
-
-    $("usersList").innerHTML = "";
-
-
-    filtered.forEach(user=>{
-
-        const card =
-        document.createElement("div");
-
-        card.className =
-        "userCard";
-
-
-        const verified =
-        user.verified;
-
-
-        card.innerHTML = `
-
-        <div class="userTop">
-
-        <div>
-
-        <div class="userName">
-        👤 ${escapeHTML(user.username)}
-        </div>
-
-        <div style="margin-top:6px">
-
-        ${
-        verified
-        ?
-        `<span class="badge badgeGreen">
-        🟢 تأیید شده
-        </span>`
-        :
-        `<span class="badge badgeRed">
-        🔴 تأیید نشده
-        </span>`
-        }
-
-        </div>
-
-        </div>
-
-        <div>
-        ⭐ Level ${user.level}
-        </div>
-
-        </div>
-
-
-        <div class="userStats">
-
-        <div class="miniStat">
-        🪙 سکه
-        <br>
-        <b>${user.coins}</b>
-        </div>
-
-        <div class="miniStat">
-        💎 الماس
-        <br>
-        <b>${user.diamonds}</b>
-        </div>
-
-        <div class="miniStat">
-        ⭐ XP
-        <br>
-        <b>${user.xp}</b>
-        </div>
-
-        <div class="miniStat">
-        🎒 آیتم
-        <br>
-        <b>${user.inventory.length}</b>
-        </div>
-
-        </div>
-
-
-        <div class="adminTools">
-
-        <button
-        class="green"
-        onclick="toggleVerify('${user.id}')">
-
-        ${
-        verified
-        ?
-        "🔴 لغو تأیید"
-        :
-        "🟢 تأیید حساب"
-        }
-
-        </button>
-
-
-        <button
-        onclick="editUser('${user.id}')">
-
-        ✏️ ویرایش
-
-        </button>
-
-
-        <button
-        onclick="viewUser('${user.id}')">
-
-        👁️ مشاهده
-
-        </button>
-
-
-        <button
-        class="danger"
-        onclick="deleteUser('${user.id}')">
-
-        🗑️ حذف
-
-        </button>
-
-        </div>
-
-        `;
-
-
-        $("usersList")
-        .appendChild(card);
-    });
-
-
-    updateDashboard();
-}
-
-
-/* =========================================
-   VERIFY
-========================================= */
-
-function toggleVerify(id){
-
-    if(!adminLogged)return;
-
-
-    const user =
-    users.find(
-        u => u.id === id
-    );
-
-
-    if(!user)return;
-
-
-    user.verified =
-    !user.verified;
-
-
-    if(
-        current &&
-        current.id === id
-    ){
-
-        current = user;
-
-        saveCurrent();
-
-        updateUI();
-    }
-
-
-    saveDatabase();
-
-    renderUsers();
-
-    notify(
-    user.verified
-    ?
-    "🟢 حساب تأیید شد."
-    :
-    "🔴 تأیید حساب لغو شد."
-    );
-}
-
-
-/* =========================================
-   VIEW USER
-========================================= */
-
-function viewUser(id){
-
-    const user =
-    users.find(
-        u => u.id === id
-    );
-
-
-    if(!user)return;
-
-
-    let items =
-    user.inventory.length
-    ?
-    user.inventory
-    .map(
-        x => "🎁 " + escapeHTML(x)
-    )
-    .join("<br>")
-    :
-    "🎒 خالی";
-
-
-    openInfo(
-    "👁️ اطلاعات کاربر",
-    `
-
-    <div class="card">
-
-    <h3>
-    👤 ${escapeHTML(user.username)}
-    </h3>
-
-    <p style="margin-top:12px">
-
-    وضعیت:
-    ${
-    user.verified
-    ? "🟢 تأیید شده"
-    : "🔴 تأیید نشده"
-    }
-
-    </p>
-
-    <p>
-    🪙 سکه:
-    ${user.coins}
-    </p>
-
-    <p>
-    💎 الماس:
-    ${user.diamonds}
-    </p>
-
-    <p>
-    ⭐ XP:
-    ${user.xp}
-    </p>
-
-    <p>
-    🏆 Level:
-    ${user.level}
-    </p>
-
-    <hr style="
-    border-color:#273858;
-    margin:15px 0">
-
-    <h3>
-    🎒 آیتم‌ها
-    </h3>
-
-    <p style="margin-top:10px">
-    ${items}
-    </p>
-
-    </div>
-    `
-    );
-}
-
-
-/* =========================================
-   EDIT USER
-========================================= */
-
-function editUser(id){
-
-    if(!adminLogged)return;
-
-
-    const user =
-    users.find(
-        u => u.id === id
-    );
-
-
-    if(!user)return;
-
-
-    editingUserId = id;
-
-
-    $("editUserName").textContent =
-    "👤 " + user.username;
-
-
-    $("editCoins").value =
-    user.coins;
-
-
-    $("editDiamonds").value =
-    user.diamonds;
-
-
-    $("editXP").value =
-    user.xp;
-
-
-    $("editLevel").value =
-    user.level;
-
-
-    $("editItems").value =
-    user.inventory.join(",");
-
-
-    $("editMsg").textContent = "";
-
-
-    $("editModal").style.display =
-    "flex";
-}
-
-
-/* =========================================
-   SAVE EDITED USER
-========================================= */
-
-function saveEditedUser(){
-
-    if(!adminLogged)return;
-
-
-    const user =
-    users.find(
-        u => u.id === editingUserId
-    );
-
-
-    if(!user)return;
-
-
-    user.coins =
-    Math.max(
-        0,
-        Number($("editCoins").value) || 0
-    );
-
-
-    user.diamonds =
-    Math.max(
-        0,
-        Number($("editDiamonds").value) || 0
-    );
-
-
-    user.xp =
-    Math.max(
-        0,
-        Number($("editXP").value) || 0
-    );
-
-
-    user.level =
-    Math.max(
-        1,
-        Number($("editLevel").value) || 1
-    );
-
-
-    user.inventory =
-    $("editItems")
-    .value
-    .split(",")
-    .map(x=>x.trim())
-    .filter(Boolean);
-
-
-    if(
-        current &&
-        current.id === user.id
-    ){
-
-        current = user;
-
-        saveCurrent();
-
-        updateUI();
-    }
-
-
-    saveDatabase();
-
-    closeModal("editModal");
-
-    renderUsers();
-
-    notify(
-    "💾 اطلاعات کاربر ذخیره شد."
-    );
-}
-
-
-/* =========================================
-   DELETE USER
-========================================= */
-
-function deleteUser(id){
-
-    if(!adminLogged)return;
-
-
-    const user =
-    users.find(
-        u => u.id === id
-    );
-
-
-    if(!user)return;
-
-
-    if(
-    !confirm(
-    `آیا حساب ${user.username} حذف شود؟`
-    )
-    ){
-
-        return;
-    }
-
-
-    users =
-    users.filter(
-        u => u.id !== id
-    );
-
-
-    if(
-        current &&
-        current.id === id
-    ){
-
-        current = null;
-
-        saveCurrent();
-
-        $("profile")
+    document
+        .getElementById("modal")
         .classList
         .remove("show");
 
-        updateUI();
+}
+
+
+/* کلیک روی فضای بیرون مودال */
+
+document
+    .getElementById("modal")
+    .addEventListener("click",function(event){
+
+        if(event.target === this){
+
+            closeModal();
+
+        }
+
+    });
+
+
+/* کلید ESC */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        closeModal();
+
     }
 
-
-    saveDatabase();
-
-    renderUsers();
-
-    notify(
-    "🗑️ حساب حذف شد."
-    );
-}
-
-
-/* =========================================
-   INFO MODAL
-========================================= */
-
-function openInfo(title,content){
-
-    $("infoTitle").textContent =
-    title;
-
-    $("infoContent").innerHTML =
-    content;
-
-    $("infoModal").style.display =
-    "flex";
-}
-
-
-function closeModal(id){
-
-    $(id).style.display =
-    "none";
-}
-
-
-/* =========================================
-   NOTIFICATION
-========================================= */
-
-let notificationTimer;
-
-
-function notify(text){
-
-    $("notification").textContent =
-    text;
-
-    $("notification").style.display =
-    "block";
-
-
-    clearTimeout(
-    notificationTimer
-    );
-
-
-    notificationTimer =
-    setTimeout(
-        ()=>{
-            $("notification").style.display =
-            "none";
-        },
-        3000
-    );
-}
-
-
-/* =========================================
-   SECURITY DISPLAY
-========================================= */
-
-function escapeHTML(text){
-
-    return String(text)
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;")
-
-    .replaceAll("'","&#039;");
-}
-
-
-/* =========================================
-   START
-========================================= */
-
-updateUI();
-
-if(current){
-
-    $("profile")
-    .classList
-    .add("show");
-}
+});
 
 </script>
 
