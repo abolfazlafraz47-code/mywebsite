@@ -2,13 +2,11 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>⚡ NEXORA</title>
 
 <style>
-
 *{
 box-sizing:border-box;
 margin:0;
@@ -22,15 +20,15 @@ background:
 radial-gradient(circle at 10% 10%,#173a72,transparent 30%),
 radial-gradient(circle at 90% 10%,#541460,transparent 30%),
 #050811;
-color:#fff
+color:white
 }
 
 button{
 border:0;
-padding:11px 15px;
-border-radius:12px;
-background:#192542;
-color:#fff;
+padding:12px 16px;
+border-radius:13px;
+background:#182541;
+color:white;
 font-weight:bold;
 cursor:pointer;
 transition:.2s
@@ -38,17 +36,16 @@ transition:.2s
 
 button:hover{
 transform:translateY(-2px);
-background:#2c3e6c
+filter:brightness(1.2)
 }
 
 .primary{
-background:linear-gradient(
-135deg,#00d5ff,#7145ff
-)
+background:linear-gradient(135deg,#00d5ff,#7145ff);
+box-shadow:0 0 20px #00cfff33
 }
 
 .green{
-background:#145b35
+background:#145d38
 }
 
 .red{
@@ -61,7 +58,7 @@ top:0;
 z-index:50;
 background:#050811ee;
 backdrop-filter:blur(15px);
-border-bottom:1px solid #293a61
+border-bottom:1px solid #293b67
 }
 
 .nav{
@@ -128,8 +125,7 @@ padding:22px 15px
 padding:40px 25px;
 border-radius:27px;
 border:1px solid #354978;
-background:
-linear-gradient(135deg,#14264bdd,#090e20ee);
+background:linear-gradient(135deg,#14264bdd,#090e20ee);
 box-shadow:0 20px 70px #0008
 }
 
@@ -161,8 +157,7 @@ font-size:25px
 
 .grid{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(210px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
 gap:15px
 }
 
@@ -176,17 +171,6 @@ padding:20px
 .gameCard{
 position:relative;
 overflow:hidden
-}
-
-.gameCard:after{
-content:"";
-position:absolute;
-width:100px;
-height:100px;
-background:#00d9ff22;
-filter:blur(25px);
-right:-30px;
-top:-30px
 }
 
 .icon{
@@ -211,6 +195,8 @@ font-size:12px;
 margin:9px 0
 }
 
+/* PROFILE */
+
 .profile{
 display:none;
 margin-top:18px
@@ -227,18 +213,17 @@ gap:15px
 }
 
 .avatar{
-width:82px;
-height:82px;
+width:90px;
+height:90px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-font-size:35px;
-background:linear-gradient(
-135deg,#00d5ff,#7546ff
-);
-border:2px solid #526ba4
+font-size:38px;
+background:linear-gradient(135deg,#00d5ff,#7546ff);
+border:3px solid #62eaff;
+box-shadow:0 0 25px #00d9ff55
 }
 
 .avatar img{
@@ -246,6 +231,32 @@ width:100%;
 height:100%;
 object-fit:cover
 }
+
+/* PHOTO BUTTON */
+
+.photoButton{
+position:relative;
+overflow:hidden;
+background:linear-gradient(
+135deg,
+#00cfff,
+#7145ff,
+#c52cff
+);
+box-shadow:
+0 0 15px #00d9ff55,
+0 0 35px #7145ff33
+}
+
+.photoButton input{
+position:absolute;
+inset:0;
+opacity:0;
+cursor:pointer;
+margin:0
+}
+
+/* MODALS */
 
 .overlay{
 display:none;
@@ -276,7 +287,7 @@ margin-bottom:10px;
 border-radius:12px;
 border:1px solid #344a78;
 background:#060a15;
-color:#fff;
+color:white;
 outline:none
 }
 
@@ -323,8 +334,7 @@ border:1px solid #30446e
 height:400px;
 border-radius:20px;
 border:1px solid #354b7a;
-background:
-radial-gradient(circle,#15254a,#060a16);
+background:radial-gradient(circle,#15254a,#060a16);
 position:relative;
 overflow:hidden
 }
@@ -346,15 +356,25 @@ font-size:65px
 
 .playObject{
 position:absolute;
-width:55px;
-height:55px;
+width:58px;
+height:58px;
 border-radius:15px;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:30px;
 cursor:pointer;
-user-select:none
+user-select:none;
+animation:pop .15s
+}
+
+@keyframes pop{
+from{
+transform:scale(.5)
+}
+to{
+transform:scale(1)
+}
 }
 
 .gameMessage{
@@ -383,6 +403,8 @@ z-index:30;
 background:#5e1c2b
 }
 
+/* ADMIN */
+
 .admin{
 display:none;
 margin-top:25px
@@ -399,8 +421,7 @@ color:#62f3ff
 
 .dashboard{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(145px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
 gap:12px;
 margin:20px 0
 }
@@ -436,8 +457,7 @@ flex-wrap:wrap
 
 .userStats{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(90px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
 gap:7px;
 margin-top:13px
 }
@@ -496,7 +516,6 @@ height:330px
 }
 
 }
-
 </style>
 </head>
 
@@ -528,10 +547,7 @@ height:330px
 
 <div class="status">
 
-<span
-id="statusDot"
-class="dot">
-</span>
+<span id="statusDot" class="dot"></span>
 
 <span id="statusText">
 اکانت شما تأیید نشده است
@@ -562,9 +578,7 @@ class="dot">
 
 <div class="actions">
 
-<button
-class="primary"
-onclick="openAuth()">
+<button class="primary" onclick="openAuth()">
 🚀 ورود / ثبت‌نام
 </button>
 
@@ -597,15 +611,11 @@ onclick="openAuth()">
 </section>
 
 
-<section
-id="profile"
-class="profile card">
+<section id="profile" class="profile card">
 
 <div class="profileTop">
 
-<div
-class="avatar"
-id="avatar">
+<div class="avatar" id="avatar">
 👤
 </div>
 
@@ -630,24 +640,27 @@ id="avatar">
 
 <div class="actions">
 
-<button onclick="chooseFile()">
-📁 انتخاب عکس پروفایل
-</button>
+<label class="photoButton" style="display:inline-block">
+
+🖼️ انتخاب عکس از گالری
 
 <input
 id="fileInput"
 type="file"
 accept="image/*"
-style="display:none"
 onchange="uploadAvatar(event)"
 >
+
+</label>
 
 <button
 id="logoutButton"
 class="red"
 onclick="logout()"
 style="display:none">
+
 🚪 خروج
+
 </button>
 
 </div>
@@ -661,275 +674,48 @@ style="display:none">
 
 <section class="grid">
 
+<script>
 
+const games=[
+["racer","🏎️","Neon Racer","روی مسیر کلیک کن و امتیاز بگیر!","120"],
+["space","🚀","Space Attack","هدف‌های فضایی را بزن!","150"],
+["parkour","🏃","Neon Parkour","از موانع عبور کن!","110"],
+["basket","🏀","Basket Pro","توپ‌ها را وارد سبد کن!","100"],
+["target","🎯","Target Master","هدف‌ها را پیدا کن!","130"],
+["snow","❄️","Snow Rush","کریستال‌های یخی را جمع کن!","120"],
+["cube","🧩","Cube Puzzle","مکعب درست را پیدا کن!","140"],
+["zombie","🧟","Zombie Escape","راه خروج را پیدا کن!","160"],
+["castle","🏰","Castle Defense","از قلعه دفاع کن!","180"],
+["treasure","🏝️","Treasure Island","گنج مخفی را پیدا کن!","170"]
+];
+
+document.write(
+games.map(g=>`
 <div class="card gameCard">
 
-<div class="icon">
-🏎️
-</div>
+<div class="icon">${g[1]}</div>
 
-<h3>
-Neon Racer
-</h3>
+<h3>${g[2]}</h3>
 
-<p>
-ماشین نئون را کنترل کن و امتیاز بگیر.
-</p>
+<p>${g[3]}</p>
 
 <div class="price">
-🪙 تا 120 سکه
+🪙 تا ${g[4]} سکه
 </div>
 
 <button
 class="primary"
-onclick="openGame('racer')">
+onclick="openGame('${g[0]}')">
+
 🎮 بازی کردن
+
 </button>
 
 </div>
+`).join("")
+);
 
-
-<div class="card gameCard">
-
-<div class="icon">
-🚀
-</div>
-
-<h3>
-Space Attack
-</h3>
-
-<p>
-هدف‌های فضایی را بزن.
-</p>
-
-<div class="price">
-🪙 تا 150 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('space')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🏃
-</div>
-
-<h3>
-Neon Parkour
-</h3>
-
-<p>
-از موانع عبور کن.
-</p>
-
-<div class="price">
-🪙 تا 110 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('parkour')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🏀
-</div>
-
-<h3>
-Basket Pro
-</h3>
-
-<p>
-توپ‌ها را وارد سبد کن.
-</p>
-
-<div class="price">
-🪙 تا 100 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('basket')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🎯
-</div>
-
-<h3>
-Target Master
-</h3>
-
-<p>
-هدف‌های متحرک را پیدا کن.
-</p>
-
-<div class="price">
-🪙 تا 130 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('target')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-❄️
-</div>
-
-<h3>
-Snow Rush
-</h3>
-
-<p>
-در مسیر یخی حرکت کن.
-</p>
-
-<div class="price">
-🪙 تا 120 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('snow')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🧩
-</div>
-
-<h3>
-Cube Puzzle
-</h3>
-
-<p>
-مکعب‌های درست را پیدا کن.
-</p>
-
-<div class="price">
-🪙 تا 140 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('cube')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🧟
-</div>
-
-<h3>
-Zombie Escape
-</h3>
-
-<p>
-راه خروج را پیدا کن.
-</p>
-
-<div class="price">
-🪙 تا 160 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('zombie')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🏰
-</div>
-
-<h3>
-Castle Defense
-</h3>
-
-<p>
-از قلعه دفاع کن.
-</p>
-
-<div class="price">
-🪙 تا 180 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('castle')">
-🎮 بازی کردن
-</button>
-
-</div>
-
-
-<div class="card gameCard">
-
-<div class="icon">
-🏝️
-</div>
-
-<h3>
-Treasure Island
-</h3>
-
-<p>
-گنج‌های مخفی را پیدا کن.
-</p>
-
-<div class="price">
-🪙 تا 170 سکه
-</div>
-
-<button
-class="primary"
-onclick="openGame('treasure')">
-🎮 بازی کردن
-</button>
-
-</div>
+</script>
 
 </section>
 
@@ -940,198 +726,76 @@ onclick="openGame('treasure')">
 
 <section class="grid">
 
-
 <div class="card">
-
 <div class="icon">👑</div>
-
 <h3>VIP</h3>
-
-<p>
-آیتم ویژه حساب‌های تأییدشده.
-</p>
-
-<div class="price">
-🪙 5000
+<p>آیتم ویژه</p>
+<div class="price">🪙 5000</div>
+<div class="lock">🔒 تأیید حساب لازم است</div>
+<button onclick="buy('VIP',5000,true)">خرید</button>
 </div>
-
-<div class="lock">
-🔒 حساب تأییدشده لازم است
-</div>
-
-<button
-onclick="buy('VIP',5000,true)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">⚡</div>
-
 <h3>Mega Boost</h3>
-
-<p>
-تقویت‌کننده ویژه.
-</p>
-
-<div class="price">
-🪙 3500
+<p>تقویت‌کننده ویژه</p>
+<div class="price">🪙 3500</div>
+<div class="lock">🔒 تأیید حساب لازم است</div>
+<button onclick="buy('Mega Boost',3500,true)">خرید</button>
 </div>
-
-<div class="lock">
-🔒 حساب تأییدشده لازم است
-</div>
-
-<button
-onclick="buy('Mega Boost',3500,true)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">💎</div>
-
 <h3>Diamond Pack</h3>
-
-<p>
-بسته الماس.
-</p>
-
-<div class="price">
-🪙 7000
+<p>بسته الماس</p>
+<div class="price">🪙 7000</div>
+<div class="lock">🔒 تأیید حساب لازم است</div>
+<button onclick="buy('Diamond Pack',7000,true)">خرید</button>
 </div>
-
-<div class="lock">
-🔒 حساب تأییدشده لازم است
-</div>
-
-<button
-onclick="buy('Diamond Pack',7000,true)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">🔥</div>
-
 <h3>Legendary</h3>
-
-<p>
-آیتم افسانه‌ای.
-</p>
-
-<div class="price">
-🪙 9000
+<p>آیتم افسانه‌ای</p>
+<div class="price">🪙 9000</div>
+<div class="lock">🔒 تأیید حساب لازم است</div>
+<button onclick="buy('Legendary',9000,true)">خرید</button>
 </div>
-
-<div class="lock">
-🔒 حساب تأییدشده لازم است
-</div>
-
-<button
-onclick="buy('Legendary',9000,true)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">🛡️</div>
-
 <h3>Ultra Shield</h3>
-
-<p>
-محافظ ویژه.
-</p>
-
-<div class="price">
-🪙 6000
+<p>محافظ ویژه</p>
+<div class="price">🪙 6000</div>
+<div class="lock">🔒 تأیید حساب لازم است</div>
+<button onclick="buy('Ultra Shield',6000,true)">خرید</button>
 </div>
-
-<div class="lock">
-🔒 حساب تأییدشده لازم است
-</div>
-
-<button
-onclick="buy('Ultra Shield',6000,true)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">🪙</div>
-
 <h3>Coin Booster</h3>
-
-<div class="price">
-🪙 500
+<div class="price">🪙 500</div>
+<button onclick="buy('Coin Booster',500,false)">خرید</button>
 </div>
-
-<button
-onclick="buy('Coin Booster',500,false)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">⭐</div>
-
 <h3>XP Booster</h3>
-
-<div class="price">
-🪙 700
+<div class="price">🪙 700</div>
+<button onclick="buy('XP Booster',700,false)">خرید</button>
 </div>
-
-<button
-onclick="buy('XP Booster',700,false)">
-خرید
-</button>
-
-</div>
-
 
 <div class="card">
-
 <div class="icon">🎁</div>
-
 <h3>Lucky Box</h3>
-
-<div class="price">
-🪙 900
-</div>
-
-<button
-onclick="buy('Lucky Box',900,false)">
-خرید
-</button>
-
+<div class="price">🪙 900</div>
+<button onclick="buy('Lucky Box',900,false)">خرید</button>
 </div>
 
 </section>
 
 
-<!-- ADMIN -->
-
-<section
-id="adminPanel"
-class="admin card">
+<section id="adminPanel" class="admin card">
 
 <div style="
 display:flex;
@@ -1141,20 +805,16 @@ gap:10px;
 flex-wrap:wrap">
 
 <div>
-
 <div class="adminTitle">
 👑 NEXORA ADMIN CENTER
 </div>
 
 <p>
-مدیریت تمام حساب‌های ثبت‌شده
+تمام حساب‌های ثبت‌شده
 </p>
-
 </div>
 
-<button
-class="red"
-onclick="adminLogout()">
+<button class="red" onclick="adminLogout()">
 🚪 خروج مدیر
 </button>
 
@@ -1204,9 +864,7 @@ oninput="renderUsers()">
 
 <!-- AUTH -->
 
-<div
-id="authModal"
-class="overlay">
+<div id="authModal" class="overlay">
 
 <div class="modal">
 
@@ -1216,39 +874,40 @@ class="overlay">
 
 <br>
 
-<input
-id="username"
-placeholder="نام کاربری">
+<input id="username" placeholder="نام کاربری">
 
 <input
 id="password"
 type="password"
 placeholder="رمز عبور">
 
-<div
-id="authMsg"
-class="msg">
-</div>
+<div id="authMsg" class="msg"></div>
 
 <button
 class="primary"
 style="width:100%"
 onclick="submitAuth()"
 id="authButton">
+
 ورود
+
 </button>
 
 <button
 style="width:100%;margin-top:8px"
 onclick="switchMode()"
 id="switchButton">
+
 📝 ثبت‌نام
+
 </button>
 
 <button
 style="width:100%;margin-top:8px"
 onclick="closeModal('authModal')">
+
 بستن
+
 </button>
 
 </div>
@@ -1258,23 +917,21 @@ onclick="closeModal('authModal')">
 
 <!-- GAME -->
 
-<div
-id="gameModal"
-class="overlay">
+<div id="gameModal" class="overlay">
 
 <div class="modal gameModal">
 
 <button
 class="gameClose"
 onclick="closeGame()">
+
 ✕
+
 </button>
 
 <div class="gameHeader">
 
-<div
-id="gameTitle"
-class="gameTitle">
+<div id="gameTitle" class="gameTitle">
 🎮 بازی
 </div>
 
@@ -1293,17 +950,11 @@ class="gameTitle">
 </div>
 
 
-<div
-id="gameArea"
-class="gameArea">
+<div id="gameArea" class="gameArea">
 
-<div
-id="startScreen"
-class="startScreen">
+<div id="startScreen" class="startScreen">
 
-<div
-id="gameIcon"
-class="big">
+<div id="gameIcon" class="big">
 🎮
 </div>
 
@@ -1314,27 +965,28 @@ class="big">
 <button
 class="primary"
 onclick="startGame()">
+
 🚀 شروع بازی
+
 </button>
 
 </div>
 
 
-<div
-id="gameMessage"
-class="gameMessage">
+<div id="gameMessage" class="gameMessage">
 
 <h2 id="gameResult">
 🏆
 </h2>
 
-<p id="gameReward">
-</p>
+<p id="gameReward"></p>
 
 <button
 class="primary"
 onclick="startGame()">
+
 🔄 دوباره بازی کن
+
 </button>
 
 </div>
@@ -1348,9 +1000,7 @@ onclick="startGame()">
 
 <!-- ADMIN LOGIN -->
 
-<div
-id="adminModal"
-class="overlay">
+<div id="adminModal" class="overlay">
 
 <div class="modal">
 
@@ -1365,22 +1015,23 @@ id="adminPassword"
 type="password"
 placeholder="رمز مدیریت">
 
-<div
-id="adminMsg"
-class="msg">
-</div>
+<div id="adminMsg" class="msg"></div>
 
 <button
 class="primary"
 style="width:100%"
 onclick="adminLogin()">
+
 🔐 ورود
+
 </button>
 
 <button
 style="width:100%;margin-top:8px"
 onclick="closeModal('adminModal')">
+
 بستن
+
 </button>
 
 </div>
@@ -1390,9 +1041,7 @@ onclick="closeModal('adminModal')">
 
 <!-- EDIT -->
 
-<div
-id="editModal"
-class="overlay">
+<div id="editModal" class="overlay">
 
 <div class="modal">
 
@@ -1406,25 +1055,13 @@ class="overlay">
 
 <br><br>
 
-<input
-id="editCoins"
-type="number"
-placeholder="سکه">
+<input id="editCoins" type="number" placeholder="سکه">
 
-<input
-id="editDiamonds"
-type="number"
-placeholder="الماس">
+<input id="editDiamonds" type="number" placeholder="الماس">
 
-<input
-id="editXP"
-type="number"
-placeholder="XP">
+<input id="editXP" type="number" placeholder="XP">
 
-<input
-id="editLevel"
-type="number"
-placeholder="Level">
+<input id="editLevel" type="number" placeholder="Level">
 
 <input
 id="editItems"
@@ -1434,13 +1071,17 @@ placeholder="آیتم‌ها با , جدا شوند">
 class="primary"
 style="width:100%"
 onclick="saveUser()">
+
 💾 ذخیره
+
 </button>
 
 <button
 style="width:100%;margin-top:8px"
 onclick="closeModal('editModal')">
+
 بستن
+
 </button>
 
 </div>
@@ -1450,9 +1091,7 @@ onclick="closeModal('editModal')">
 
 <!-- INFO -->
 
-<div
-id="infoModal"
-class="overlay">
+<div id="infoModal" class="overlay">
 
 <div class="modal">
 
@@ -1465,7 +1104,9 @@ class="overlay">
 <button
 style="width:100%;margin-top:15px"
 onclick="closeModal('infoModal')">
+
 بستن
+
 </button>
 
 </div>
@@ -1473,25 +1114,22 @@ onclick="closeModal('infoModal')">
 </div>
 
 
-<div
-id="notification"
-class="notification">
-</div>
+<div id="notification" class="notification"></div>
 
 
 <script>
 
+/* =====================
+   VARIABLES
+===================== */
+
 const API="/api";
 
-let token =
-localStorage.getItem(
-"NEXORA_TOKEN"
-) || "";
+let token=
+localStorage.getItem("NEXORA_TOKEN")||"";
 
-let adminToken =
-localStorage.getItem(
-"NEXORA_ADMIN_TOKEN"
-) || "";
+let adminToken=
+localStorage.getItem("NEXORA_ADMIN_TOKEN")||"";
 
 let current=null;
 
@@ -1501,10 +1139,24 @@ let adminUsers=[];
 
 let editingId=null;
 
+let selectedGame=null;
 
-/* =========================
+let gameRunning=false;
+
+let gameEnded=false;
+
+let gameScore=0;
+
+let gameTime=30;
+
+let gameTimer=null;
+
+let spawnTimer=null;
+
+
+/* =====================
    HELPERS
-========================= */
+===================== */
 
 function $(id){
 return document.getElementById(id);
@@ -1514,83 +1166,72 @@ function closeModal(id){
 $(id).style.display="none";
 }
 
-function escapeHTML(text){
-return String(text)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-}
-
 function notify(text){
 
 $("notification").textContent=text;
 
 $("notification").style.display="block";
 
-clearTimeout(window.nt);
+clearTimeout(window.notifyTimer);
 
-window.nt=setTimeout(()=>{
+window.notifyTimer=setTimeout(()=>{
 $("notification").style.display="none";
 },3000);
 }
 
 
-/* =========================
-   USER API
-========================= */
+/* =====================
+   API
+===================== */
 
-async function api(
-url,
-options={}
-){
+async function api(url,options={}){
 
-options.headers =
-options.headers || {};
+options.headers=options.headers||{};
 
-options.headers[
-"Content-Type"
-]="application/json";
+options.headers["Content-Type"]=
+"application/json";
 
 if(token){
-options.headers.Authorization =
+
+options.headers.Authorization=
 "Bearer "+token;
+
 }
 
-const r =
-await fetch(
-API+url,
-options
-);
+const r=
+await fetch(API+url,options);
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
+
 throw new Error(
-data.error || "خطا"
+data.error||"خطا"
 );
+
 }
 
 return data;
 }
 
 
-/* =========================
-   LOAD
-========================= */
+/* =====================
+   LOAD ACCOUNT
+===================== */
 
 async function loadMe(){
 
 if(!token){
+
 updateUI();
+
 return;
 }
 
 try{
 
-const data =
+const data=
 await api("/me");
 
 current=data.user;
@@ -1604,32 +1245,34 @@ logout();
 }
 
 
-/* =========================
+/* =====================
    AUTH
-========================= */
+===================== */
 
 function openAuth(){
-$("authModal").style.display="flex";
+
+$("authModal")
+.style.display="flex";
 }
 
 function switchMode(){
 
-authMode =
+authMode=
 authMode==="login"
 ?"register"
 :"login";
 
-$("authTitle").textContent =
+$("authTitle").textContent=
 authMode==="login"
 ?"🔐 ورود"
 :"📝 ثبت‌نام";
 
-$("authButton").textContent =
+$("authButton").textContent=
 authMode==="login"
 ?"ورود"
 :"ثبت‌نام";
 
-$("switchButton").textContent =
+$("switchButton").textContent=
 authMode==="login"
 ?"📝 ثبت‌نام"
 :"🔐 ورود";
@@ -1639,15 +1282,15 @@ $("authMsg").textContent="";
 
 async function submitAuth(){
 
-const username =
+const username=
 $("username").value.trim();
 
-const password =
+const password=
 $("password").value;
 
 try{
 
-const r =
+const r=
 await fetch(
 API+
 (
@@ -1668,15 +1311,24 @@ password
 }
 );
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
+
 throw new Error(data.error);
 }
 
 token=data.token;
+
 current=data.user;
+
+
+/*
+مهم:
+توکن ورود داخل localStorage ذخیره می‌شود.
+پس با بستن سایت از بین نمی‌رود.
+*/
 
 localStorage.setItem(
 "NEXORA_TOKEN",
@@ -1689,13 +1341,15 @@ updateUI();
 
 notify(
 authMode==="login"
-?"✅ ورود موفق!"
-:"🎉 حساب با موفقیت ساخته شد!"
+?
+"✅ ورود موفق!"
+:
+"🎉 حساب ساخته شد!"
 );
 
 }catch(e){
 
-$("authMsg").textContent =
+$("authMsg").textContent=
 "❌ "+e.message;
 }
 }
@@ -1703,6 +1357,7 @@ $("authMsg").textContent =
 function logout(){
 
 token="";
+
 current=null;
 
 localStorage.removeItem(
@@ -1714,28 +1369,28 @@ $("profile")
 
 updateUI();
 
-notify("🚪 خارج شدی.");
+notify("🚪 از حساب خارج شدی.");
 }
 
 
-/* =========================
+/* =====================
    UI
-========================= */
+===================== */
 
 function updateUI(){
 
-$("coins").textContent =
-current?.coins || 0;
+$("coins").textContent=
+current?.coins||0;
 
-$("diamonds").textContent =
-current?.diamonds || 0;
+$("diamonds").textContent=
+current?.diamonds||0;
 
-$("level").textContent =
-current?.level || 1;
+$("level").textContent=
+current?.level||1;
 
 if(!current){
 
-$("statusText").textContent =
+$("statusText").textContent=
 "اکانت شما تأیید نشده است";
 
 $("statusDot")
@@ -1750,8 +1405,7 @@ $("profileName")
 $("profileLevel")
 .textContent="1";
 
-$("avatar")
-.innerHTML="👤";
+$("avatar").innerHTML="👤";
 
 return;
 }
@@ -1770,42 +1424,45 @@ $("logoutButton")
 
 if(current.verified){
 
-$("statusText").textContent =
+$("statusText").textContent=
 "اکانت شما تأیید شده است";
 
 $("statusDot")
 .classList.add("ok");
 
-$("profileStatus").innerHTML =
+$("profileStatus").innerHTML=
 '<span style="color:#55ff91">🟢 اکانت شما تأیید شده است</span>';
 
 }else{
 
-$("statusText").textContent =
+$("statusText").textContent=
 "اکانت شما تأیید نشده است";
 
 $("statusDot")
 .classList.remove("ok");
 
-$("profileStatus").innerHTML =
+$("profileStatus").innerHTML=
 '<span style="color:#ff7070">🔴 اکانت شما تأیید نشده است</span>';
 }
 
 if(current.avatar){
 
-$("avatar").innerHTML =
-`<img src="${current.avatar}">`;
+$("avatar").innerHTML=
+`<img src="${current.avatar}" alt="پروفایل">`;
 
 }else{
 
 $("avatar").innerHTML="👤";
+
 }
 }
 
 function toggleProfile(){
 
 if(!current){
+
 openAuth();
+
 return;
 }
 
@@ -1814,33 +1471,48 @@ $("profile")
 }
 
 
-/* =========================
+/* =====================
    AVATAR
-========================= */
+===================== */
 
-function chooseFile(){
+async function uploadAvatar(event){
 
-if(!current){
-openAuth();
-return;
-}
-
-$("fileInput").click();
-}
-
-async function uploadAvatar(e){
-
-const file=e.target.files[0];
+const file=
+event.target.files[0];
 
 if(!file)return;
 
-const form=new FormData();
+if(!file.type.startsWith("image/")){
 
-form.append("avatar",file);
+notify("❌ فقط عکس انتخاب کن.");
+
+return;
+}
+
+if(file.size>5*1024*1024){
+
+notify(
+"❌ حجم عکس باید کمتر از ۵ مگابایت باشد."
+);
+
+return;
+}
 
 try{
 
-const r =
+/*
+عکس مستقیماً برای سرور ارسال می‌شود.
+*/
+
+const form=
+new FormData();
+
+form.append(
+"avatar",
+file
+);
+
+const r=
 await fetch(
 API+"/avatar",
 {
@@ -1853,142 +1525,141 @@ body:form
 }
 );
 
-const data=await r.json();
+const data=
+await r.json();
 
 if(!r.ok){
-throw new Error(data.error);
+
+throw new Error(
+data.error||"خطا"
+);
 }
 
 current.avatar=data.avatar;
 
 updateUI();
 
-notify("📁 عکس ذخیره شد.");
+notify(
+"🖼️ عکس پروفایل ذخیره شد!"
+);
 
 }catch(e){
 
-notify("❌ "+e.message);
+notify(
+"❌ "+e.message
+);
 }
+
+event.target.value="";
 }
 
 
-/* =========================
+/* =====================
    GAMES
-========================= */
+===================== */
 
-const games={
+const gameInfo={
 
 racer:{
 title:"🏎️ Neon Racer",
 icon:"🏎️",
-description:
-"روی مسیر کلیک کن و امتیاز بگیر!",
+description:"روی ماشین‌ها کلیک کن!",
 reward:120
 },
 
 space:{
 title:"🚀 Space Attack",
 icon:"🚀",
-description:
-"هدف‌های فضایی را شکار کن!",
+description:"فضایی‌ها را بزن!",
 reward:150
 },
 
 parkour:{
 title:"🏃 Neon Parkour",
 icon:"🏃",
-description:
-"روی موانع درست کلیک کن!",
+description:"موانع را رد کن!",
 reward:110
 },
 
 basket:{
 title:"🏀 Basket Pro",
 icon:"🏀",
-description:
-"توپ را بزن تا امتیاز بگیری!",
+description:"توپ‌ها را بزن!",
 reward:100
 },
 
 target:{
 title:"🎯 Target Master",
 icon:"🎯",
-description:
-"هدف قرمز را پیدا کن!",
+description:"هدف‌ها را پیدا کن!",
 reward:130
 },
 
 snow:{
 title:"❄️ Snow Rush",
 icon:"❄️",
-description:
-"کریستال‌های یخی را جمع کن!",
+description:"کریستال‌های یخی را جمع کن!",
 reward:120
 },
 
 cube:{
 title:"🧩 Cube Puzzle",
 icon:"🧩",
-description:
-"مکعب درست را پیدا کن!",
+description:"مکعب درست را انتخاب کن!",
 reward:140
 },
 
 zombie:{
 title:"🧟 Zombie Escape",
 icon:"🧟",
-description:
-"راه خروج را پیدا کن!",
+description:"زombieها را جا بگذار!",
 reward:160
 },
 
 castle:{
 title:"🏰 Castle Defense",
 icon:"🏰",
-description:
-"به دشمن‌ها اجازه ورود نده!",
+description:"از قلعه دفاع کن!",
 reward:180
 },
 
 treasure:{
 title:"🏝️ Treasure Island",
 icon:"🏝️",
-description:
-"گنج را پیدا کن!",
+description:"گنج‌ها را پیدا کن!",
 reward:170
 }
 
 };
 
-let selectedGame=null;
-let gameRunning=false;
-let gameScore=0;
-let gameTime=30;
-let gameTimer=null;
-let spawnTimer=null;
-let gameEnded=false;
-
 function openGame(type){
 
 if(!current){
+
 openAuth();
+
 return;
 }
 
 selectedGame=type;
 
-const g=games[type];
+const g=
+gameInfo[type];
 
-$("gameTitle").textContent=g.title;
+$("gameTitle")
+.textContent=g.title;
 
-$("gameIcon").textContent=g.icon;
+$("gameIcon")
+.textContent=g.icon;
 
 $("gameDescription")
 .textContent=g.description;
 
-$("gameScore").textContent="0";
+$("gameScore")
+.textContent="0";
 
-$("gameTime").textContent="30";
+$("gameTime")
+.textContent="30";
 
 $("startScreen")
 .style.display="flex";
@@ -2003,6 +1674,7 @@ $("gameModal")
 function closeGame(){
 
 clearInterval(gameTimer);
+
 clearInterval(spawnTimer);
 
 gameRunning=false;
@@ -2016,14 +1688,19 @@ function startGame(){
 if(!selectedGame)return;
 
 clearInterval(gameTimer);
+
 clearInterval(spawnTimer);
 
 gameRunning=true;
+
 gameEnded=false;
+
 gameScore=0;
+
 gameTime=30;
 
 $("gameScore").textContent="0";
+
 $("gameTime").textContent="30";
 
 $("startScreen")
@@ -2036,12 +1713,13 @@ $("gameArea")
 .querySelectorAll(".playObject")
 .forEach(x=>x.remove());
 
-gameTimer=setInterval(()=>{
+gameTimer=
+setInterval(()=>{
 
 gameTime--;
 
-$("gameTime").textContent=
-gameTime;
+$("gameTime")
+.textContent=gameTime;
 
 if(gameTime<=0){
 
@@ -2051,7 +1729,8 @@ endGame();
 
 },1000);
 
-spawnTimer=setInterval(
+spawnTimer=
+setInterval(
 spawnObject,
 650
 );
@@ -2063,90 +1742,80 @@ function spawnObject(){
 
 if(!gameRunning)return;
 
-const area=$("gameArea");
+const area=
+$("gameArea");
 
-const old =
+const old=
 area.querySelectorAll(
 ".playObject"
 );
 
 if(old.length>8){
+
 old[0].remove();
 }
 
-const obj =
+const obj=
 document.createElement("div");
 
 obj.className="playObject";
 
-const type=selectedGame;
-
-if(type==="racer"){
+if(selectedGame==="racer")
 obj.textContent="🏎️";
-}
 
-else if(type==="space"){
+else if(selectedGame==="space")
 obj.textContent="👾";
-}
 
-else if(type==="parkour"){
+else if(selectedGame==="parkour")
 obj.textContent="🟦";
-}
 
-else if(type==="basket"){
+else if(selectedGame==="basket")
 obj.textContent="🏀";
-}
 
-else if(type==="target"){
+else if(selectedGame==="target")
 obj.textContent="🎯";
-}
 
-else if(type==="snow"){
+else if(selectedGame==="snow")
 obj.textContent="💎";
-}
 
-else if(type==="cube"){
+else if(selectedGame==="cube")
 obj.textContent=
-Math.random()>0.5
+Math.random()>.5
 ?"🟩"
 :"🟥";
-}
 
-else if(type==="zombie"){
+else if(selectedGame==="zombie")
 obj.textContent="🧟";
-}
 
-else if(type==="castle"){
+else if(selectedGame==="castle")
 obj.textContent="⚔️";
-}
 
-else{
+else
 obj.textContent="💰";
-}
 
-const maxX =
-area.clientWidth-65;
-
-const maxY =
-area.clientHeight-65;
-
-obj.style.left =
+const maxX=
 Math.max(
 5,
-Math.random()*maxX
-)+"px";
+area.clientWidth-65
+);
 
-obj.style.top =
+const maxY=
 Math.max(
 5,
-Math.random()*maxY
-)+"px";
+area.clientHeight-65
+);
+
+obj.style.left=
+Math.random()*maxX+"px";
+
+obj.style.top=
+Math.random()*maxY+"px";
 
 obj.onclick=()=>{
 
 if(!gameRunning)return;
 
-gameScore +=
+gameScore+=
 selectedGame==="target"
 ?15
 :10;
@@ -2162,72 +1831,71 @@ area.appendChild(obj);
 
 async function endGame(){
 
-if(!gameRunning || gameEnded)return;
+if(!gameRunning||gameEnded)return;
 
 gameRunning=false;
+
 gameEnded=true;
 
 clearInterval(gameTimer);
+
 clearInterval(spawnTimer);
 
 $("gameArea")
 .querySelectorAll(".playObject")
 .forEach(x=>x.remove());
 
-const base =
-games[selectedGame].reward;
+const maxReward=
+gameInfo[selectedGame].reward;
 
-const earned =
+const earned=
 Math.min(
-base,
+maxReward,
 Math.max(
 10,
-Math.floor(
-gameScore/2
-)
+Math.floor(gameScore/2)
 )
 );
 
-const xpEarned =
+const xpEarned=
 Math.max(
 5,
-Math.floor(
-earned/3
-)
+Math.floor(earned/3)
 );
 
 $("gameResult")
-.textContent =
+.textContent=
 gameScore>=50
 ?"🏆 عالی بود!"
 :"🎮 بازی تمام شد!";
 
 $("gameReward")
-innerHTML =
-`
+innerHTML=`
 امتیاز:
 <b>${gameScore}</b>
+
 <br><br>
+
 🪙 +${earned} سکه
+
 <br>
+
 ⭐ +${xpEarned} XP
 `;
 
 $("gameMessage")
 .style.display="flex";
 
-if(current){
+current.coins+=earned;
 
-current.coins += earned;
-
-current.xp += xpEarned;
+current.xp+=xpEarned;
 
 while(
-current.xp >=
+current.xp>=
 current.level*1000
 ){
 
-current.xp -=
+current.xp-=
 current.level*1000;
 
 current.level++;
@@ -2244,21 +1912,22 @@ notify(
 );
 }
 }
-}
 
 
-/* =========================
+/* =====================
    SAVE
-========================= */
+===================== */
 
 async function saveMe(){
 
-const data =
+const data=
 await api(
 "/me",
 {
 method:"PUT",
-body:JSON.stringify({
+
+body:
+JSON.stringify({
 
 coins:current.coins,
 
@@ -2282,9 +1951,9 @@ updateUI();
 }
 
 
-/* =========================
+/* =====================
    SHOP
-========================= */
+===================== */
 
 async function buy(
 name,
@@ -2293,7 +1962,9 @@ locked
 ){
 
 if(!current){
+
 openAuth();
+
 return;
 }
 
@@ -2304,7 +1975,7 @@ locked &&
 
 showInfo(
 "🔒 آیتم قفل است",
-"برای خرید این آیتم باید ابتدا مدیر حساب شما را تأیید کند."
+"برای خرید این آیتم باید حساب شما توسط مدیر تأیید شود."
 );
 
 return;
@@ -2326,7 +1997,9 @@ current.coins-=price;
 current.inventory.push(name);
 
 if(name==="Diamond Pack"){
+
 current.diamonds+=100;
+
 }
 
 try{
@@ -2340,24 +2013,26 @@ notify(
 }catch{
 
 notify(
-"❌ خطا در خرید."
+"❌ خرید ذخیره نشد."
 );
 }
 }
 
 
-/* =========================
+/* =====================
    DAILY
-========================= */
+===================== */
 
 async function daily(){
 
 if(!current){
+
 openAuth();
+
 return;
 }
 
-const today =
+const today=
 new Date()
 .toISOString()
 .slice(0,10);
@@ -2365,7 +2040,7 @@ new Date()
 if(current.daily===today){
 
 notify(
-"⏰ جایزه امروز را قبلاً گرفتی."
+"⏰ جایزه امروز را گرفتی."
 );
 
 return;
@@ -2385,45 +2060,47 @@ notify(
 }
 
 
-/* =========================
+/* =====================
    MISSIONS
-========================= */
+===================== */
 
 function showMissions(){
 
 showInfo(
-"🎯 مأموریت‌های امروز",
+"🎯 مأموریت‌ها",
 `
 <div class="user">
 🎮 سه بازی انجام بده
 <br>
-🪙 150 سکه
+🪙 پاداش: 150 سکه
 </div>
 
 <div class="user">
-🏆 حداقل 100 امتیاز بگیر
+🏆 امتیاز بالا بگیر
 <br>
-⭐ 100 XP
+⭐ پاداش: 100 XP
 </div>
 
 <div class="user">
-🎁 جایزه روزانه را دریافت کن
+🎁 جایزه روزانه
 <br>
-💎 5 الماس
+💎 پاداش: 5 الماس
 </div>
 `
 );
 }
 
 
-/* =========================
+/* =====================
    INVENTORY
-========================= */
+===================== */
 
 function inventory(){
 
 if(!current){
+
 openAuth();
+
 return;
 }
 
@@ -2441,53 +2118,66 @@ showInfo(
 "🎒 کوله‌پشتی",
 current.inventory
 .map(
-x=>"🎁 "+escapeHTML(x)
+x=>"🎁 "+x
 )
 .join("<br>")
 );
 }
 
 
-/* =========================
+/* =====================
    RANKING
-========================= */
+===================== */
 
 async function ranking(){
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/users"
 );
 
-const data =
+const data=
 await r.json();
 
-let users=data.users||[];
+let users=
+data.users||[];
 
 users.sort(
 (a,b)=>
-b.level-a.level ||
-b.xp-a.xp ||
+b.level-a.level||
+b.xp-a.xp||
 b.coins-a.coins
 );
 
 let html="";
 
-users.slice(0,20)
+users
+.slice(0,20)
 .forEach((u,i)=>{
 
 html+=`
 <div class="user">
+
 🏆 #${i+1}
-<b>${escapeHTML(u.username)}</b>
+
+<b>
+${escapeHTML(u.username)}
+</b>
+
 <br><br>
+
 ⭐ Level ${u.level}
+
 &nbsp; | &nbsp;
+
 🪙 ${u.coins}
+
 &nbsp; | &nbsp;
+
 💎 ${u.diamonds}
+
 </div>
 `;
 
@@ -2495,7 +2185,8 @@ html+=`
 
 showInfo(
 "🏆 رتبه‌بندی",
-html || "هنوز کاربری وجود ندارد."
+html||
+"هنوز کاربری ثبت نشده است."
 );
 
 }catch{
@@ -2507,9 +2198,9 @@ notify(
 }
 
 
-/* =========================
+/* =====================
    ADMIN
-========================= */
+===================== */
 
 function openAdmin(){
 
@@ -2519,33 +2210,41 @@ $("adminModal")
 
 async function adminLogin(){
 
-const password =
+const password=
 $("adminPassword").value;
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/login",
 {
 method:"POST",
+
 headers:{
 "Content-Type":
 "application/json"
 },
+
 body:
-JSON.stringify({password})
+JSON.stringify({
+password
+})
 }
 );
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
-throw new Error(data.error);
+
+throw new Error(
+data.error
+);
 }
 
-adminToken=data.token;
+adminToken=
+data.token;
 
 localStorage.setItem(
 "NEXORA_ADMIN_TOKEN",
@@ -2570,7 +2269,8 @@ notify(
 
 }catch(e){
 
-$("adminMsg").textContent=
+$("adminMsg")
+.textContent=
 "❌ "+e.message;
 }
 }
@@ -2581,7 +2281,7 @@ if(!adminToken)return;
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/users",
 {
@@ -2593,13 +2293,15 @@ Authorization:
 );
 
 if(!r.ok){
+
 throw new Error();
 }
 
-const data =
+const data=
 await r.json();
 
-adminUsers=data.users||[];
+adminUsers=
+data.users||[];
 
 renderUsers();
 
@@ -2609,9 +2311,6 @@ updateDashboard();
 
 adminLogout();
 
-notify(
-"❌ دسترسی مدیریت منقضی شده است."
-);
 }
 }
 
@@ -2627,32 +2326,34 @@ u=>u.verified
 
 const coins=
 adminUsers.reduce(
-(a,u)=>a+Number(u.coins),
+(a,u)=>
+a+Number(u.coins),
 0
 );
 
-$("totalUsers").textContent=
-total;
+$("totalUsers")
+.textContent=total;
 
-$("verifiedUsers").textContent=
-verified;
+$("verifiedUsers")
+.textContent=verified;
 
-$("unverifiedUsers").textContent=
+$("unverifiedUsers")
+.textContent=
 total-verified;
 
-$("totalCoins").textContent=
-coins;
+$("totalCoins")
+.textContent=coins;
 }
 
 function renderUsers(){
 
-const search =
+const search=
 $("searchUser")
 .value
 .trim()
 .toLowerCase();
 
-const users =
+const users=
 adminUsers.filter(
 u=>
 u.username
@@ -2662,22 +2363,9 @@ u.username
 
 $("usersList").innerHTML="";
 
-if(!users.length){
-
-$("usersList").innerHTML=
-`
-<div class="user"
-style="text-align:center">
-🔎 کاربری پیدا نشد.
-</div>
-`;
-
-return;
-}
-
 users.forEach(u=>{
 
-const div =
+const div=
 document.createElement("div");
 
 div.className="user";
@@ -2714,7 +2402,6 @@ u.verified
 
 </div>
 
-
 <div class="userStats">
 
 <div class="mini">
@@ -2735,7 +2422,6 @@ u.verified
 
 </div>
 
-
 <div class="actions">
 
 <button
@@ -2750,20 +2436,20 @@ u.verified
 
 </button>
 
-<button
-onclick="editUser(${u.id})">
+<button onclick="editUser(${u.id})">
 ✏️ ویرایش
 </button>
 
-<button
-onclick="viewUser(${u.id})">
+<button onclick="viewUser(${u.id})">
 👁️ مشاهده
 </button>
 
 <button
 class="red"
 onclick="deleteUser(${u.id})">
+
 🗑️ حذف
+
 </button>
 
 </div>
@@ -2775,13 +2461,13 @@ $("usersList")
 }
 
 
-/* =========================
+/* =====================
    VERIFY
-========================= */
+===================== */
 
 async function toggleVerify(id){
 
-const u =
+const u=
 adminUsers.find(
 x=>x.id===id
 );
@@ -2790,17 +2476,20 @@ if(!u)return;
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/users/"+id,
 {
 method:"PUT",
+
 headers:{
 "Content-Type":
 "application/json",
+
 Authorization:
 "Bearer "+adminToken
 },
+
 body:
 JSON.stringify({
 
@@ -2820,17 +2509,20 @@ inventory:u.inventory
 }
 );
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
-throw new Error(data.error);
+
+throw new Error(
+data.error
+);
 }
 
 await loadAdmin();
 
 if(
-current &&
+current&&
 current.id===id
 ){
 
@@ -2844,23 +2536,25 @@ data.user.verified
 ?
 "🟢 حساب تأیید شد."
 :
-"🔴 تأیید حساب لغو شد."
+"🔴 تأیید لغو شد."
 );
 
 }catch(e){
 
-notify("❌ "+e.message);
+notify(
+"❌ "+e.message
+);
 }
 }
 
 
-/* =========================
+/* =====================
    EDIT
-========================= */
+===================== */
 
 function editUser(id){
 
-const u =
+const u=
 adminUsers.find(
 x=>x.id===id
 );
@@ -2869,17 +2563,21 @@ if(!u)return;
 
 editingId=id;
 
-$("editName").textContent=
+$("editName")
+.textContent=
 "👤 "+u.username;
 
-$("editCoins").value=u.coins;
+$("editCoins").value=
+u.coins;
 
 $("editDiamonds").value=
 u.diamonds;
 
-$("editXP").value=u.xp;
+$("editXP").value=
+u.xp;
 
-$("editLevel").value=u.level;
+$("editLevel").value=
+u.level;
 
 $("editItems").value=
 u.inventory.join(",");
@@ -2890,7 +2588,7 @@ $("editModal")
 
 async function saveUser(){
 
-const u =
+const u=
 adminUsers.find(
 x=>x.id===editingId
 );
@@ -2899,17 +2597,20 @@ if(!u)return;
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/users/"+editingId,
 {
 method:"PUT",
+
 headers:{
 "Content-Type":
 "application/json",
+
 Authorization:
 "Bearer "+adminToken
 },
+
 body:
 JSON.stringify({
 
@@ -2946,11 +2647,14 @@ $("editItems")
 }
 );
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
-throw new Error(data.error);
+
+throw new Error(
+data.error
+);
 }
 
 closeModal("editModal");
@@ -2958,7 +2662,7 @@ closeModal("editModal");
 await loadAdmin();
 
 if(
-current &&
+current&&
 current.id===editingId
 ){
 
@@ -2980,13 +2684,13 @@ notify(
 }
 
 
-/* =========================
+/* =====================
    VIEW
-========================= */
+===================== */
 
 function viewUser(id){
 
-const u =
+const u=
 adminUsers.find(
 x=>x.id===id
 );
@@ -3004,7 +2708,6 @@ showInfo(
 
 <br>
 
-وضعیت:
 ${
 u.verified
 ?"🟢 تأیید شده"
@@ -3040,11 +2743,7 @@ ${u.level}
 ${
 u.inventory.length
 ?
-u.inventory
-.map(
-x=>"🎁 "+escapeHTML(x)
-)
-.join("<br>")
+u.inventory.join("<br>")
 :
 "خالی"
 }
@@ -3055,13 +2754,13 @@ x=>"🎁 "+escapeHTML(x)
 }
 
 
-/* =========================
+/* =====================
    DELETE
-========================= */
+===================== */
 
 async function deleteUser(id){
 
-const u =
+const u=
 adminUsers.find(
 x=>x.id===id
 );
@@ -3077,11 +2776,12 @@ if(
 
 try{
 
-const r =
+const r=
 await fetch(
 API+"/admin/users/"+id,
 {
 method:"DELETE",
+
 headers:{
 Authorization:
 "Bearer "+adminToken
@@ -3089,19 +2789,14 @@ Authorization:
 }
 );
 
-const data =
+const data=
 await r.json();
 
 if(!r.ok){
-throw new Error(data.error);
-}
 
-if(
-current &&
-current.id===id
-){
-
-logout();
+throw new Error(
+data.error
+);
 }
 
 await loadAdmin();
@@ -3119,9 +2814,9 @@ notify(
 }
 
 
-/* =========================
+/* =====================
    ADMIN LOGOUT
-========================= */
+===================== */
 
 function adminLogout(){
 
@@ -3136,9 +2831,9 @@ $("adminPanel")
 }
 
 
-/* =========================
+/* =====================
    INFO
-========================= */
+===================== */
 
 function showInfo(
 title,
@@ -3156,14 +2851,37 @@ $("infoModal")
 }
 
 
-/* =========================
+/* =====================
+   ESCAPE
+===================== */
+
+function escapeHTML(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+
+/* =====================
    START
-========================= */
+===================== */
+
+/*
+با باز شدن سایت، توکن قبلی خوانده می‌شود.
+بنابراین اگر کاربر قبلاً وارد شده باشد،
+حسابش دوباره لود می‌شود.
+*/
 
 loadMe();
 
 if(adminToken){
+
 loadAdmin();
+
 }
 
 </script>
