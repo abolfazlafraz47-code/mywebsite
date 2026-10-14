@@ -2,119 +2,157 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ABOL BOT | پنل مدیریت ربات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABOL BOT | ربات‌ساز روبیکا</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
+ background:#090d18;
+ color:#f1f5f9;
  font-family:Tahoma,Arial,sans-serif;
- background:#0b1020;
- color:#f1f5f9
 }
+
 header{
- background:#111a30;
- padding:18px;
- border-bottom:1px solid #283653;
- display:flex;
- justify-content:space-between;
- align-items:center;
- flex-wrap:wrap;
- gap:12px
+ padding:20px;
+ background:#111827;
+ border-bottom:1px solid #263247;
+ text-align:center;
 }
-.logo{font-size:23px;font-weight:bold;color:#a78bfa}
+
+.logo{
+ font-size:27px;
+ font-weight:bold;
+ color:#a78bfa;
+}
+
+.container{
+ width:100%;
+ max-width:750px;
+ margin:auto;
+ padding:18px;
+}
+
+.card{
+ background:#131c2e;
+ border:1px solid #29364d;
+ border-radius:16px;
+ padding:20px;
+ margin:18px 0;
+}
+
+h2{font-size:19px}
+
+p{
+ color:#a9b6cc;
+ line-height:2;
+ font-size:14px;
+}
+
+label{
+ display:block;
+ margin:15px 0 8px;
+}
+
+input[type=text],
+input[type=password]{
+ width:100%;
+ padding:14px;
+ background:#090d18;
+ color:white;
+ border:1px solid #34445f;
+ border-radius:10px;
+ outline:none;
+ font-family:inherit;
+}
+
+input:focus{
+ border-color:#a78bfa;
+}
+
 button{
  border:0;
  border-radius:10px;
- padding:12px 15px;
- cursor:pointer;
+ padding:13px 15px;
+ background:#7c3aed;
+ color:white;
  font-family:inherit;
  font-weight:bold;
- background:#7c3aed;
- color:white
+ cursor:pointer;
 }
-button:hover{opacity:.85}
-.container{
- max-width:1100px;
- margin:auto;
- padding:20px
+
+button:disabled{
+ opacity:.5;
+ cursor:not-allowed;
 }
-.hero{
- padding:25px;
- background:linear-gradient(120deg,#312e81,#581c87);
- border-radius:18px;
- margin-bottom:20px
+
+button:hover:not(:disabled){
+ filter:brightness(1.15);
 }
-.hero h1{font-size:25px}
-.muted{color:#a8b4ce;line-height:2}
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:15px
-}
-.card{
- background:#141e33;
- border:1px solid #293854;
- border-radius:15px;
- padding:20px;
- margin-bottom:15px
-}
-.card h3{margin-top:0}
-.icon{font-size:28px}
-.stat{font-size:28px;color:#c4b5fd;font-weight:bold}
-input,select{
- width:100%;
- padding:13px;
- margin:8px 0 15px;
- border-radius:9px;
- border:1px solid #334155;
- background:#0b1020;
- color:white;
- font-family:inherit
-}
-label{display:block;color:#cbd5e1}
-.row{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
- padding:12px 0;
- border-bottom:1px solid #293854
-}
-.switch{width:20px;height:20px;accent-color:#8b5cf6}
-.page{display:none}
-.page.active{display:block}
-.nav{
+
+.actions{
  display:flex;
  flex-wrap:wrap;
- gap:8px;
- margin:20px 0
+ gap:10px;
+ margin-top:16px;
 }
-.nav button{background:#1e293b}
-.nav button.active{background:#7c3aed}
-.small{font-size:12px;color:#94a3b8}
-.badge{
- display:inline-block;
- padding:5px 9px;
- border-radius:8px;
- background:#164e3b;
- color:#86efac;
- font-size:12px
+
+.secondary{background:#334155}
+.stop{background:#991b1b}
+
+.status{
+ padding:13px;
+ margin-top:15px;
+ border-radius:10px;
+ background:#202b40;
+ line-height:2;
+ font-size:13px;
+ overflow-wrap:anywhere;
 }
-.danger{background:#991b1b}
+
+.good{background:#123c30}
+.bad{background:#492027}
+
+.option{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ padding:13px 0;
+ border-bottom:1px solid #29364d;
+}
+
+.option input{
+ width:20px;
+ height:20px;
+ accent-color:#8b5cf6;
+}
+
+#log{
+ background:#090d18;
+ border-radius:10px;
+ padding:12px;
+ min-height:80px;
+ max-height:220px;
+ overflow:auto;
+ font-size:12px;
+ line-height:2;
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+}
+
+.small{
+ font-size:12px;
+ color:#8796ae;
+}
+
 footer{
  text-align:center;
- padding:25px;
- color:#64748b
-}
-#notice{
- display:none;
- padding:12px;
- margin:12px 0;
- border-radius:9px;
- background:#164e3b;
- line-height:1.8
+ color:#64748b;
+ padding:20px;
+ font-size:12px;
 }
 </style>
 </head>
@@ -123,290 +161,480 @@ footer{
 
 <header>
  <div class="logo">🤖 ABOL BOT</div>
- <button onclick="showPage('create')">＋ افزودن ربات</button>
+ <p>پنل اتصال و مدیریت ربات روبیکا</p>
 </header>
 
-<div class="container">
+<main class="container">
 
- <section class="hero">
-  <h1>پنل مدیریت ربات‌های روبیکا 👑</h1>
-  <p class="muted">
-   ربات‌ها و تنظیماتشان را از یک پنل مدیریت کن.
-   این نسخه نمایشی است و هنوز به سرور روبیکا متصل نشده است.
+ <section class="card">
+  <h2>🔐 اتصال ربات</h2>
+
+  <p>
+   توکن رباتت را وارد کن.
+   توکن در حافظه موقت این صفحه نگهداری می‌شود
+   و در کد این سایت به فضای ذخیره‌سازی دائمی
+   یا سرور صاحب سایت ارسال نمی‌شود.
   </p>
-  <button onclick="showPage('create')">ساخت ربات جدید</button>
- </section>
 
- <div id="notice"></div>
+  <label for="token">توکن ربات روبیکا</label>
 
- <div class="nav">
-  <button class="active" data-page="home" onclick="showPage('home')">🏠 خانه</button>
-  <button data-page="bots" onclick="showPage('bots')">🤖 ربات‌های من</button>
-  <button data-page="create" onclick="showPage('create')">＋ افزودن ربات</button>
-  <button data-page="settings" onclick="showPage('settings')">⚙️ تنظیمات</button>
- </div>
+  <input
+   id="token"
+   type="password"
+   placeholder="توکن ربات را وارد کن"
+   autocomplete="off"
+   spellcheck="false"
+  >
 
- <section id="home" class="page active">
-  <div class="grid">
-   <div class="card">
-    <div class="icon">🤖</div>
-    <p class="muted">تعداد ربات‌های ثبت‌شده</p>
-    <div class="stat" id="botCount">۰</div>
-   </div>
-   <div class="card">
-    <div class="icon">🛡️</div>
-    <p class="muted">تنظیمات امنیتی</p>
-    <div class="stat">۴</div>
-   </div>
-   <div class="card">
-    <div class="icon">⚙️</div>
-    <p class="muted">وضعیت اتصال</p>
-    <div>نسخه نمایشی</div>
-   </div>
+  <div class="actions">
+   <button id="connectBtn" onclick="connectBot()">
+    بررسی و اتصال
+   </button>
+
+   <button class="secondary" onclick="toggleToken()">
+    نمایش / مخفی
+   </button>
   </div>
 
-  <div class="card">
-   <h3>🚀 شروع کار</h3>
-   <p class="muted">
-    از بخش افزودن ربات، نام و شناسه رباتت را ثبت کن.
-    سپس می‌توانی تنظیمات نمایشی آن را مدیریت کنی.
-   </p>
-   <button onclick="showPage('create')">شروع کن</button>
+  <div id="status" class="status">
+   وضعیت: هنوز متصل نشده است.
   </div>
  </section>
 
- <section id="bots" class="page">
-  <div class="card">
-   <h2>🤖 ربات‌های من</h2>
-   <p class="muted">ربات‌های ثبت‌شده در این مرورگر نمایش داده می‌شوند.</p>
-   <div id="botList"></div>
+ <section class="card">
+  <h2>⚙️ تنظیمات ربات</h2>
+
+  <div class="option">
+   <label for="autoReply">پاسخ به سلام</label>
+   <input id="autoReply" type="checkbox" checked>
+  </div>
+
+  <div class="option">
+   <label for="welcome">پیام خوشامدگویی به کاربران جدید</label>
+   <input id="welcome" type="checkbox">
+  </div>
+
+  <div class="option">
+   <label for="helpCommand">پاسخ به دستور /help</label>
+   <input id="helpCommand" type="checkbox" checked>
+  </div>
+
+  <label for="welcomeText">متن خوشامدگویی</label>
+
+  <input
+   id="welcomeText"
+   type="text"
+   maxlength="300"
+   value="سلام! به ربات ما خوش آمدی 🌹"
+  >
+
+  <p class="small">
+   تنظیمات این قسمت در همین صفحه اعمال می‌شوند.
+   این گزینه‌ها به‌تنهایی امکانات مدیریتی گروه
+   مانند حذف لینک یا اخراج کاربر را فعال نمی‌کنند.
+  </p>
+
+  <div class="actions">
+   <button id="startBtn" onclick="startBot()" disabled>
+    ▶️ شروع دریافت پیام‌ها
+   </button>
+
+   <button id="stopBtn" class="stop" onclick="stopBot()" disabled>
+    ⏹️ توقف
+   </button>
   </div>
  </section>
 
- <section id="create" class="page">
-  <div class="card">
-   <h2>＋ افزودن ربات</h2>
-   <p class="muted">
-    اطلاعات نمایشی ربات را وارد کن.
-    برای امنیت، توکن ربات را در این صفحه وارد نکن.
-   </p>
+ <section class="card">
+  <h2>📟 گزارش اجرای ربات</h2>
+  <div id="log">هنوز گزارشی ثبت نشده است.</div>
 
-   <form id="botForm">
-    <label>نام ربات</label>
-    <input id="botName" placeholder="مثلاً ABOL Manager" required maxlength="50">
+  <div class="actions">
+   <button class="secondary" onclick="clearLog()">
+    پاک‌کردن گزارش
+   </button>
 
-    <label>شناسه ربات</label>
-    <input id="botUsername" placeholder="مثلاً my_manager_bot" required maxlength="50">
-
-    <label>نوع ربات</label>
-    <select id="botType">
-     <option value="مدیریت گروه">مدیریت گروه</option>
-     <option value="پاسخ‌گوی خودکار">پاسخ‌گوی خودکار</option>
-     <option value="ربات سرگرمی">ربات سرگرمی</option>
-    </select>
-
-    <button type="submit">ثبت ربات</button>
-   </form>
+   <button class="stop" onclick="disconnectBot()">
+    قطع اتصال و پاک‌کردن توکن
+   </button>
   </div>
  </section>
 
- <section id="settings" class="page">
-  <div class="card">
-   <h2>🛡️ تنظیمات مدیریت گروه</h2>
-   <p class="muted">
-    این گزینه‌ها در نسخه فعلی فقط ذخیره می‌شوند.
-    برای اعمالشان روی گروه باید سرور ربات پیاده‌سازی شود.
-   </p>
-
-   <div class="row">
-    <label for="antiLink">ضدلینک</label>
-    <input class="switch" type="checkbox" id="antiLink">
-   </div>
-
-   <div class="row">
-    <label for="antiSpam">ضداسپم</label>
-    <input class="switch" type="checkbox" id="antiSpam">
-   </div>
-
-   <div class="row">
-    <label for="welcome">پیام خوشامدگویی</label>
-    <input class="switch" type="checkbox" id="welcome">
-   </div>
-
-   <div class="row">
-    <label for="warnings">سیستم اخطار</label>
-    <input class="switch" type="checkbox" id="warnings">
-   </div>
-
-   <label for="welcomeText">متن خوشامدگویی</label>
-   <input id="welcomeText" maxlength="300" placeholder="سلام! به گروه خوش آمدی 🌹">
-
-   <button onclick="saveSettings()">ذخیره تنظیمات</button>
-  </div>
+ <section class="card">
+  <h2>🛡️ نکات امنیتی</h2>
+  <p>
+   • توکن در localStorage یا sessionStorage ذخیره نمی‌شود.
+   <br>
+   • درخواست‌های API مستقیماً از مرورگر به سرویس روبیکا می‌روند.
+   <br>
+   • با بستن صفحه، متغیر توکن در اجرای صفحه از بین می‌رود.
+   <br>
+   • اجرای ربات با بستن صفحه متوقف می‌شود.
+   <br>
+   • اگر API روبیکا درخواست مستقیم مرورگر را به علت CORS رد کند،
+   این نسخه بدون یک واسط سازگار کار نخواهد کرد.
+  </p>
  </section>
 
-</div>
+</main>
 
 <footer>
  ABOL BOT © 2026
- <br><br>
- پنل نمایشی مدیریت ربات روبیکا
 </footer>
 
 <script>
+"use strict";
+
+/*
+  توکن فقط در حافظه موقت جاوااسکریپت نگهداری می‌شود.
+  هیچ localStorage یا sessionStorage استفاده نشده است.
+  هیچ درخواست به سرور صاحب سایت ارسال نمی‌شود.
+*/
+
+let botToken = "";
+let botRunning = false;
+let polling = false;
+let nextOffset = null;
+let lastError = "";
+let abortController = null;
+
+const API_BASE = "https://botapi.rubika.ir/v3/";
+
 const $ = id => document.getElementById(id);
 
-function readBots(){
- try{
-  return JSON.parse(localStorage.getItem("abol_bots") || "[]");
- }catch(e){
-  return [];
+function log(message) {
+ const box = $("log");
+
+ if (box.textContent === "هنوز گزارشی ثبت نشده است.") {
+  box.textContent = "";
  }
+
+ const line =
+  "[" + new Date().toLocaleTimeString("fa-IR") + "] " +
+  String(message);
+
+ box.textContent += line + "\n";
+ box.scrollTop = box.scrollHeight;
 }
 
-function saveBots(bots){
- localStorage.setItem("abol_bots",JSON.stringify(bots));
+function clearLog() {
+ $("log").textContent = "گزارش پاک شد.";
 }
 
-function showNotice(text){
- $("notice").textContent=text;
- $("notice").style.display="block";
- window.scrollTo({top:0,behavior:"smooth"});
+function setStatus(message, type = "") {
+ const box = $("status");
+
+ box.textContent = message;
+ box.className = "status" + (type ? " " + type : "");
 }
 
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>{
-  p.classList.toggle("active",p.id===id);
- });
+function toggleToken() {
+ const input = $("token");
 
- document.querySelectorAll(".nav button").forEach(b=>{
-  b.classList.toggle("active",b.dataset.page===id);
- });
-
- $("notice").style.display="none";
-
- if(id==="bots") renderBots();
- if(id==="home") updateStats();
+ input.type = input.type === "password"
+  ? "text"
+  : "password";
 }
 
-function updateStats(){
- $("botCount").textContent=readBots().length;
+function tokenIsValidFormat(token) {
+ return typeof token === "string" &&
+        token.trim().length > 0 &&
+        !/\s/.test(token);
 }
 
-function renderBots(){
- const bots=readBots();
- const list=$("botList");
- list.replaceChildren();
+/*
+  درخواست فقط به API روبیکا ارسال می‌شود.
+  پاسخ خام یا توکن در گزارش چاپ نمی‌شود.
+*/
+async function apiRequest(method, payload = {}, signal) {
+ if (!botToken) {
+  throw new Error("ابتدا توکن را وارد کن.");
+ }
 
- if(!bots.length){
-  const p=document.createElement("p");
-  p.className="muted";
-  p.textContent="هنوز رباتی ثبت نکرده‌ای.";
-  list.appendChild(p);
+ const response = await fetch(
+  API_BASE + encodeURIComponent(botToken) + "/" + method,
+  {
+   method: "POST",
+   headers: {
+    "Content-Type": "application/json"
+   },
+   body: JSON.stringify(payload),
+   cache: "no-store",
+   signal
+  }
+ );
+
+ if (!response.ok) {
+  throw new Error(
+   "API با کد HTTP " + response.status + " پاسخ داد."
+  );
+ }
+
+ const data = await response.json();
+
+ if (
+  data &&
+  typeof data === "object" &&
+  data.status === "ERROR"
+ ) {
+  throw new Error("سرویس روبیکا درخواست را نپذیرفت.");
+ }
+
+ return data;
+}
+
+async function connectBot() {
+ if (botRunning) {
+  setStatus("ابتدا ربات را متوقف کن.", "bad");
   return;
  }
 
- bots.forEach(bot=>{
-  const card=document.createElement("div");
-  card.className="card";
+ const enteredToken = $("token").value.trim();
 
-  const title=document.createElement("h3");
-  title.textContent="🤖 "+bot.name;
+ if (!tokenIsValidFormat(enteredToken)) {
+  setStatus("توکن را بررسی کن و دوباره وارد کن.", "bad");
+  return;
+ }
 
-  const username=document.createElement("p");
-  username.className="muted";
-  username.textContent="شناسه: "+bot.username;
+ botToken = enteredToken;
+ $("connectBtn").disabled = true;
 
-  const type=document.createElement("p");
-  type.textContent="نوع: "+bot.type;
+ setStatus("در حال بررسی اتصال به روبیکا...");
 
-  const badge=document.createElement("span");
-  badge.className="badge";
-  badge.textContent="ثبت‌شده در مرورگر";
+ try {
+  /*
+    getMe برای بررسی توکن استفاده می‌شود.
+    شکل دقیق پاسخ به نسخه API وابسته است.
+  */
+  const result = await apiRequest("getMe", {});
 
-  const br=document.createElement("br");
-  const br2=document.createElement("br");
+  setStatus(
+   "درخواست بررسی به API ارسال شد. پاسخ دریافت شد. " +
+   "برای اطمینان از اعتبار توکن، پاسخ سرویس را بررسی کن.",
+   "good"
+  );
 
-  const del=document.createElement("button");
-  del.className="danger";
-  del.textContent="حذف";
-  del.onclick=()=>{
-   if(!confirm("این ربات نمایشی حذف شود؟")) return;
-   saveBots(readBots().filter(b=>b.id!==bot.id));
-   renderBots();
-   updateStats();
-   showNotice("ربات نمایشی حذف شد.");
-  };
+  log("پاسخ بررسی اتصال دریافت شد.");
 
-  card.append(title,username,type,badge,br,br2,del);
-  list.appendChild(card);
- });
+  $("startBtn").disabled = false;
+
+ } catch (error) {
+  botToken = "";
+
+  setStatus(
+   "اتصال ناموفق بود. ممکن است توکن نامعتبر باشد، " +
+   "یا مرورگر درخواست را به علت CORS مسدود کرده باشد. " +
+   "جزئیات: " + error.message,
+   "bad"
+  );
+
+  log("بررسی اتصال ناموفق بود.");
+ } finally {
+  $("connectBtn").disabled = false;
+ }
 }
 
-$("botForm").addEventListener("submit",e=>{
- e.preventDefault();
+function extractUpdates(response) {
+ if (Array.isArray(response?.updates)) {
+  return response.updates;
+ }
 
- const name=$("botName").value.trim();
- const username=$("botUsername").value.trim();
- const type=$("botType").value;
+ if (Array.isArray(response?.data?.updates)) {
+  return response.data.updates;
+ }
 
- if(!name||!username){
-  showNotice("نام و شناسه را وارد کن.");
+ return [];
+}
+
+async function sendMessage(chatId, text) {
+ if (!chatId || !text || !botToken) return;
+
+ try {
+  await apiRequest("sendMessage", {
+   chat_id: String(chatId),
+   text: String(text)
+  });
+
+  log("پیام پاسخ ارسال شد.");
+
+ } catch (error) {
+  log("ارسال پاسخ ناموفق بود: " + error.message);
+ }
+}
+
+function getReply(update) {
+ const message = update?.new_message || {};
+ const text = String(message.text || "").trim();
+
+ if (!text) return null;
+
+ if (
+  text === "/start" ||
+  update.type === "StartedBot"
+ ) {
+  return "سلام! ربات فعال است 🤖\nبرای راهنما /help را بفرست.";
+ }
+
+ if (text === "/help" && $("helpCommand").checked) {
+  return "دستورهای ربات:\n/start شروع\n/help راهنما";
+ }
+
+ if (
+  (text === "سلام" || text === "salam") &&
+  $("autoReply").checked
+ ) {
+  return "سلام! 👋";
+ }
+
+ return null;
+}
+
+async function processUpdate(update) {
+ if (!update || typeof update !== "object") return;
+
+ const message = update.new_message || {};
+ const chatId = update.chat_id || message.chat_id;
+
+ if (!chatId) return;
+
+ /*
+   جلوگیری از پاسخ به پیام‌های ارسالی توسط خود ربات،
+   در صورتی که فیلد sender_type در رویداد وجود داشته باشد.
+ */
+ if (message.sender_type === "Bot") return;
+
+ const reply = getReply(update);
+
+ if (reply) {
+  await sendMessage(chatId, reply);
+ }
+}
+
+async function startBot() {
+ if (!botToken) {
+  setStatus("ابتدا توکن را وارد و اتصال را بررسی کن.", "bad");
   return;
  }
 
- if(!/^[a-zA-Z0-9_]+$/.test(username)){
-  showNotice("شناسه فقط می‌تواند شامل حروف انگلیسی، عدد و زیرخط باشد.");
-  return;
+ if (botRunning) return;
+
+ botRunning = true;
+ polling = true;
+ nextOffset = null;
+ abortController = new AbortController();
+
+ $("startBtn").disabled = true;
+ $("stopBtn").disabled = false;
+
+ setStatus("ربات در حال دریافت پیام‌هاست.", "good");
+ log("دریافت پیام‌ها شروع شد.");
+
+ try {
+  while (botRunning && polling) {
+   try {
+    const payload = { limit: 10 };
+
+    if (nextOffset) {
+     payload.offset_id = nextOffset;
+    }
+
+    const response = await apiRequest(
+     "getUpdates",
+     payload,
+     abortController.signal
+    );
+
+    const updates = extractUpdates(response);
+
+    for (const update of updates) {
+     if (!botRunning) break;
+
+     await processUpdate(update);
+    }
+
+    if (response?.next_offset_id) {
+     nextOffset = String(response.next_offset_id);
+    } else if (response?.data?.next_offset_id) {
+     nextOffset = String(response.data.next_offset_id);
+    }
+
+    lastError = "";
+
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+   } catch (error) {
+    if (!botRunning) break;
+
+    if (error.name === "AbortError") break;
+
+    if (error.message !== lastError) {
+     log("خطای دریافت پیام: " + error.message);
+     lastError = error.message;
+    }
+
+    /*
+      اگر API خطا بدهد، درخواست‌ها با فاصله تکرار می‌شوند.
+      خطای CORS ممکن است نیازمند اجرای درخواست از سرور باشد.
+    */
+    await new Promise(resolve => setTimeout(resolve, 5000));
+   }
+  }
+ } finally {
+  polling = false;
+  botRunning = false;
+  abortController = null;
+
+  $("startBtn").disabled = !botToken;
+  $("stopBtn").disabled = true;
+
+  if (botToken) {
+   setStatus("اجرای ربات متوقف شده است.");
+  }
+ }
+}
+
+function stopBot() {
+ botRunning = false;
+ polling = false;
+
+ if (abortController) {
+  abortController.abort();
  }
 
- const bots=readBots();
+ setStatus("درخواست توقف ثبت شد.");
+ log("توقف ربات درخواست شد.");
+}
 
- if(bots.some(b=>b.username.toLowerCase()===username.toLowerCase())){
-  showNotice("این شناسه قبلاً در این مرورگر ثبت شده است.");
-  return;
+function disconnectBot() {
+ stopBot();
+
+ botToken = "";
+ nextOffset = null;
+ lastError = "";
+
+ $("token").value = "";
+ $("startBtn").disabled = true;
+ $("stopBtn").disabled = true;
+
+ setStatus("توکن از حافظه موقت صفحه پاک شد.");
+ log("توکن از متغیرهای برنامه پاک شد.");
+}
+
+/*
+  هنگام خروج از صفحه، توکن از متغیر برنامه پاک می‌شود.
+  این کار تضمین نمی‌کند که مرورگر همه نسخه‌های حافظه
+  را فوراً از حافظه فیزیکی پاک کند.
+*/
+window.addEventListener("pagehide", () => {
+ botRunning = false;
+ polling = false;
+ botToken = "";
+ nextOffset = null;
+
+ if (abortController) {
+  abortController.abort();
  }
-
- bots.push({
-  id:Date.now().toString(),
-  name,
-  username,
-  type
- });
-
- saveBots(bots);
- $("botForm").reset();
- updateStats();
- showNotice("ربات نمایشی ثبت شد؛ هنوز به روبیکا متصل نیست.");
- showPage("bots");
 });
-
-function saveSettings(){
- const settings={
-  antiLink:$("antiLink").checked,
-  antiSpam:$("antiSpam").checked,
-  welcome:$("welcome").checked,
-  warnings:$("warnings").checked,
-  welcomeText:$("welcomeText").value
- };
-
- localStorage.setItem("abol_settings",JSON.stringify(settings));
- showNotice("تنظیمات نمایشی ذخیره شد.");
-}
-
-function loadSettings(){
- try{
-  const s=JSON.parse(localStorage.getItem("abol_settings")||"{}");
-  $("antiLink").checked=!!s.antiLink;
-  $("antiSpam").checked=!!s.antiSpam;
-  $("welcome").checked=!!s.welcome;
-  $("warnings").checked=!!s.warnings;
-  $("welcomeText").value=s.welcomeText||"";
- }catch(e){}
-}
-
-updateStats();
-loadSettings();
 </script>
 
 </body>
