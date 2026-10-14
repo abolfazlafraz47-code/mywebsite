@@ -2,158 +2,73 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ABOL BOT | ربات‌ساز روبیکا</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ABOL BOT</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
- margin:0;
- background:#090d18;
- color:#f1f5f9;
- font-family:Tahoma,Arial,sans-serif;
+ margin:0;background:#080d19;color:#f8fafc;
+ font-family:Tahoma,Arial,sans-serif
 }
-
 header{
- padding:20px;
- background:#111827;
- border-bottom:1px solid #263247;
- text-align:center;
+ padding:22px;text-align:center;
+ background:#111a2d;border-bottom:1px solid #28354c
 }
-
-.logo{
- font-size:27px;
- font-weight:bold;
- color:#a78bfa;
-}
-
-.container{
- width:100%;
- max-width:750px;
- margin:auto;
- padding:18px;
-}
-
+.logo{font-size:27px;font-weight:bold;color:#a78bfa}
+.container{max-width:760px;margin:auto;padding:16px}
 .card{
- background:#131c2e;
- border:1px solid #29364d;
- border-radius:16px;
- padding:20px;
- margin:18px 0;
+ background:#121c30;border:1px solid #293752;
+ padding:20px;border-radius:17px;margin:18px 0
 }
-
 h2{font-size:19px}
-
-p{
- color:#a9b6cc;
- line-height:2;
- font-size:14px;
+p{color:#aab8cf;line-height:2;font-size:13px}
+input{
+ width:100%;padding:14px;margin:10px 0;
+ border:1px solid #364763;border-radius:10px;
+ background:#080d19;color:white;font-family:inherit
 }
-
-label{
- display:block;
- margin:15px 0 8px;
-}
-
-input[type=text],
-input[type=password]{
- width:100%;
- padding:14px;
- background:#090d18;
- color:white;
- border:1px solid #34445f;
- border-radius:10px;
- outline:none;
- font-family:inherit;
-}
-
-input:focus{
- border-color:#a78bfa;
-}
-
 button{
- border:0;
- border-radius:10px;
- padding:13px 15px;
- background:#7c3aed;
- color:white;
- font-family:inherit;
- font-weight:bold;
- cursor:pointer;
+ border:0;border-radius:10px;padding:13px 16px;
+ background:#7c3aed;color:white;
+ font-family:inherit;font-weight:bold;cursor:pointer
 }
-
-button:disabled{
- opacity:.5;
- cursor:not-allowed;
-}
-
-button:hover:not(:disabled){
- filter:brightness(1.15);
-}
-
-.actions{
- display:flex;
- flex-wrap:wrap;
- gap:10px;
- margin-top:16px;
-}
-
+button:disabled{opacity:.5}
 .secondary{background:#334155}
-.stop{background:#991b1b}
-
+.danger{background:#991b1b}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
 .status{
- padding:13px;
- margin-top:15px;
- border-radius:10px;
- background:#202b40;
- line-height:2;
- font-size:13px;
- overflow-wrap:anywhere;
+ padding:13px;margin-top:14px;border-radius:10px;
+ background:#202c42;line-height:2;overflow-wrap:anywhere
 }
-
-.good{background:#123c30}
-.bad{background:#492027}
-
-.option{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:12px;
- padding:13px 0;
- border-bottom:1px solid #29364d;
+.good{background:#123a2e}
+.bad{background:#48232b}
+.profile{
+ display:flex;align-items:center;gap:14px;
+ margin-top:18px;padding:16px;
+ border-radius:13px;background:#0b1425;
+ border:1px solid #35415a
 }
-
-.option input{
- width:20px;
- height:20px;
- accent-color:#8b5cf6;
+.avatar{
+ width:65px;height:65px;flex-shrink:0;
+ border-radius:50%;background:#312e81;
+ display:flex;align-items:center;justify-content:center;
+ font-size:30px
 }
-
-#log{
- background:#090d18;
- border-radius:10px;
- padding:12px;
- min-height:80px;
- max-height:220px;
- overflow:auto;
- font-size:12px;
- line-height:2;
- white-space:pre-wrap;
- overflow-wrap:anywhere;
+.info{min-width:0}
+.info h3{margin:0 0 8px;overflow-wrap:anywhere}
+.info p{margin:4px 0}
+.badge{
+ display:inline-block;background:#164e3b;
+ color:#86efac;padding:5px 9px;border-radius:8px;
+ font-size:11px
 }
-
-.small{
- font-size:12px;
- color:#8796ae;
+pre{
+ white-space:pre-wrap;overflow-wrap:anywhere;
+ background:#080d19;padding:12px;border-radius:9px;
+ color:#cbd5e1;font-size:12px;direction:ltr;text-align:left
 }
-
-footer{
- text-align:center;
- color:#64748b;
- padding:20px;
- font-size:12px;
-}
+footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
 </style>
 </head>
 
@@ -168,472 +83,248 @@ footer{
 
  <section class="card">
   <h2>🔐 اتصال ربات</h2>
-
   <p>
-   توکن رباتت را وارد کن.
-   توکن در حافظه موقت این صفحه نگهداری می‌شود
-   و در کد این سایت به فضای ذخیره‌سازی دائمی
-   یا سرور صاحب سایت ارسال نمی‌شود.
+   توکن ربات را وارد کن تا اطلاعاتی که API ارائه می‌دهد
+   دریافت شود. توکن در حافظه موقت این صفحه نگهداری می‌شود.
   </p>
 
-  <label for="token">توکن ربات روبیکا</label>
-
-  <input
-   id="token"
-   type="password"
-   placeholder="توکن ربات را وارد کن"
-   autocomplete="off"
-   spellcheck="false"
-  >
+  <input id="token" type="password"
+   placeholder="توکن ربات روبیکا"
+   autocomplete="off" spellcheck="false">
 
   <div class="actions">
-   <button id="connectBtn" onclick="connectBot()">
-    بررسی و اتصال
-   </button>
-
-   <button class="secondary" onclick="toggleToken()">
-    نمایش / مخفی
-   </button>
+   <button id="connect" onclick="connectBot()">🔗 بررسی و اتصال</button>
+   <button class="secondary" onclick="toggleToken()">👁 نمایش توکن</button>
+   <button class="danger" onclick="disconnectBot()">قطع اتصال</button>
   </div>
 
   <div id="status" class="status">
    وضعیت: هنوز متصل نشده است.
   </div>
+
+  <div id="profile"></div>
  </section>
 
  <section class="card">
-  <h2>⚙️ تنظیمات ربات</h2>
-
-  <div class="option">
-   <label for="autoReply">پاسخ به سلام</label>
-   <input id="autoReply" type="checkbox" checked>
-  </div>
-
-  <div class="option">
-   <label for="welcome">پیام خوشامدگویی به کاربران جدید</label>
-   <input id="welcome" type="checkbox">
-  </div>
-
-  <div class="option">
-   <label for="helpCommand">پاسخ به دستور /help</label>
-   <input id="helpCommand" type="checkbox" checked>
-  </div>
-
-  <label for="welcomeText">متن خوشامدگویی</label>
-
-  <input
-   id="welcomeText"
-   type="text"
-   maxlength="300"
-   value="سلام! به ربات ما خوش آمدی 🌹"
-  >
-
-  <p class="small">
-   تنظیمات این قسمت در همین صفحه اعمال می‌شوند.
-   این گزینه‌ها به‌تنهایی امکانات مدیریتی گروه
-   مانند حذف لینک یا اخراج کاربر را فعال نمی‌کنند.
-  </p>
-
-  <div class="actions">
-   <button id="startBtn" onclick="startBot()" disabled>
-    ▶️ شروع دریافت پیام‌ها
-   </button>
-
-   <button id="stopBtn" class="stop" onclick="stopBot()" disabled>
-    ⏹️ توقف
-   </button>
-  </div>
- </section>
-
- <section class="card">
-  <h2>📟 گزارش اجرای ربات</h2>
-  <div id="log">هنوز گزارشی ثبت نشده است.</div>
-
-  <div class="actions">
-   <button class="secondary" onclick="clearLog()">
-    پاک‌کردن گزارش
-   </button>
-
-   <button class="stop" onclick="disconnectBot()">
-    قطع اتصال و پاک‌کردن توکن
-   </button>
-  </div>
- </section>
-
- <section class="card">
-  <h2>🛡️ نکات امنیتی</h2>
+  <h2>📋 پاسخ API</h2>
   <p>
-   • توکن در localStorage یا sessionStorage ذخیره نمی‌شود.
-   <br>
-   • درخواست‌های API مستقیماً از مرورگر به سرویس روبیکا می‌روند.
-   <br>
-   • با بستن صفحه، متغیر توکن در اجرای صفحه از بین می‌رود.
-   <br>
-   • اجرای ربات با بستن صفحه متوقف می‌شود.
-   <br>
-   • اگر API روبیکا درخواست مستقیم مرورگر را به علت CORS رد کند،
-   این نسخه بدون یک واسط سازگار کار نخواهد کرد.
+   اگر اطلاعات ربات نمایش داده نشد، این قسمت به تشخیص
+   مشکل اتصال کمک می‌کند. توکن در گزارش نمایش داده نمی‌شود.
+  </p>
+  <pre id="debug">هنوز پاسخی دریافت نشده است.</pre>
+ </section>
+
+ <section class="card">
+  <h2>🛡️ حفظ امنیت</h2>
+  <p>
+   توکن را فقط در سایت مورد اعتمادت وارد کن.
+   این صفحه توکن را در localStorage یا sessionStorage ذخیره
+   نمی‌کند و کدی برای ارسال توکن به صاحب سایت ندارد.
+   با بستن صفحه، متغیر توکن از بین می‌رود.
+  </p>
+  <p>
+   درخواست API برای احراز هویت مستقیماً به روبیکا ارسال می‌شود.
+   اگر مرورگر درخواست را به دلیل CORS مسدود کند، اتصال مستقیم
+   از این صفحه امکان‌پذیر نخواهد بود.
   </p>
  </section>
 
 </main>
 
-<footer>
- ABOL BOT © 2026
-</footer>
+<footer>ABOL BOT © 2026</footer>
 
 <script>
 "use strict";
 
-/*
-  توکن فقط در حافظه موقت جاوااسکریپت نگهداری می‌شود.
-  هیچ localStorage یا sessionStorage استفاده نشده است.
-  هیچ درخواست به سرور صاحب سایت ارسال نمی‌شود.
-*/
-
 let botToken = "";
-let botRunning = false;
-let polling = false;
-let nextOffset = null;
-let lastError = "";
-let abortController = null;
 
 const API_BASE = "https://botapi.rubika.ir/v3/";
 
 const $ = id => document.getElementById(id);
 
-function log(message) {
- const box = $("log");
-
- if (box.textContent === "هنوز گزارشی ثبت نشده است.") {
-  box.textContent = "";
- }
-
- const line =
-  "[" + new Date().toLocaleTimeString("fa-IR") + "] " +
-  String(message);
-
- box.textContent += line + "\n";
- box.scrollTop = box.scrollHeight;
+function setStatus(message, type=""){
+ $("status").textContent = message;
+ $("status").className = "status" + (type ? " " + type : "");
 }
 
-function clearLog() {
- $("log").textContent = "گزارش پاک شد.";
-}
-
-function setStatus(message, type = "") {
- const box = $("status");
-
- box.textContent = message;
- box.className = "status" + (type ? " " + type : "");
-}
-
-function toggleToken() {
+function toggleToken(){
  const input = $("token");
-
- input.type = input.type === "password"
-  ? "text"
-  : "password";
+ input.type = input.type === "password" ? "text" : "password";
 }
 
-function tokenIsValidFormat(token) {
- return typeof token === "string" &&
-        token.trim().length > 0 &&
-        !/\s/.test(token);
+function showDebug(data){
+ // هیچ توکنی در این بخش قرار داده نمی‌شود.
+ $("debug").textContent = JSON.stringify(data,null,2);
 }
 
-/*
-  درخواست فقط به API روبیکا ارسال می‌شود.
-  پاسخ خام یا توکن در گزارش چاپ نمی‌شود.
-*/
-async function apiRequest(method, payload = {}, signal) {
- if (!botToken) {
-  throw new Error("ابتدا توکن را وارد کن.");
- }
+function extractBot(data){
+ const candidates = [
+  data?.data?.bot,
+  data?.data,
+  data?.bot,
+  data?.result?.bot,
+  data?.result
+ ];
 
- const response = await fetch(
-  API_BASE + encodeURIComponent(botToken) + "/" + method,
-  {
-   method: "POST",
-   headers: {
-    "Content-Type": "application/json"
-   },
-   body: JSON.stringify(payload),
-   cache: "no-store",
-   signal
+ for(const item of candidates){
+  if(item && typeof item === "object" && !Array.isArray(item)){
+   if(
+    item.bot_id || item.id || item.bot_title ||
+    item.username || item.name
+   ){
+    return item;
+   }
   }
- );
-
- if (!response.ok) {
-  throw new Error(
-   "API با کد HTTP " + response.status + " پاسخ داد."
-  );
- }
-
- const data = await response.json();
-
- if (
-  data &&
-  typeof data === "object" &&
-  data.status === "ERROR"
- ) {
-  throw new Error("سرویس روبیکا درخواست را نپذیرفت.");
- }
-
- return data;
-}
-
-async function connectBot() {
- if (botRunning) {
-  setStatus("ابتدا ربات را متوقف کن.", "bad");
-  return;
- }
-
- const enteredToken = $("token").value.trim();
-
- if (!tokenIsValidFormat(enteredToken)) {
-  setStatus("توکن را بررسی کن و دوباره وارد کن.", "bad");
-  return;
- }
-
- botToken = enteredToken;
- $("connectBtn").disabled = true;
-
- setStatus("در حال بررسی اتصال به روبیکا...");
-
- try {
-  /*
-    getMe برای بررسی توکن استفاده می‌شود.
-    شکل دقیق پاسخ به نسخه API وابسته است.
-  */
-  const result = await apiRequest("getMe", {});
-
-  setStatus(
-   "درخواست بررسی به API ارسال شد. پاسخ دریافت شد. " +
-   "برای اطمینان از اعتبار توکن، پاسخ سرویس را بررسی کن.",
-   "good"
-  );
-
-  log("پاسخ بررسی اتصال دریافت شد.");
-
-  $("startBtn").disabled = false;
-
- } catch (error) {
-  botToken = "";
-
-  setStatus(
-   "اتصال ناموفق بود. ممکن است توکن نامعتبر باشد، " +
-   "یا مرورگر درخواست را به علت CORS مسدود کرده باشد. " +
-   "جزئیات: " + error.message,
-   "bad"
-  );
-
-  log("بررسی اتصال ناموفق بود.");
- } finally {
-  $("connectBtn").disabled = false;
- }
-}
-
-function extractUpdates(response) {
- if (Array.isArray(response?.updates)) {
-  return response.updates;
- }
-
- if (Array.isArray(response?.data?.updates)) {
-  return response.data.updates;
- }
-
- return [];
-}
-
-async function sendMessage(chatId, text) {
- if (!chatId || !text || !botToken) return;
-
- try {
-  await apiRequest("sendMessage", {
-   chat_id: String(chatId),
-   text: String(text)
-  });
-
-  log("پیام پاسخ ارسال شد.");
-
- } catch (error) {
-  log("ارسال پاسخ ناموفق بود: " + error.message);
- }
-}
-
-function getReply(update) {
- const message = update?.new_message || {};
- const text = String(message.text || "").trim();
-
- if (!text) return null;
-
- if (
-  text === "/start" ||
-  update.type === "StartedBot"
- ) {
-  return "سلام! ربات فعال است 🤖\nبرای راهنما /help را بفرست.";
- }
-
- if (text === "/help" && $("helpCommand").checked) {
-  return "دستورهای ربات:\n/start شروع\n/help راهنما";
- }
-
- if (
-  (text === "سلام" || text === "salam") &&
-  $("autoReply").checked
- ) {
-  return "سلام! 👋";
  }
 
  return null;
 }
 
-async function processUpdate(update) {
- if (!update || typeof update !== "object") return;
+function displayProfile(bot){
+ const root = $("profile");
+ root.replaceChildren();
 
- const message = update.new_message || {};
- const chatId = update.chat_id || message.chat_id;
+ const card = document.createElement("div");
+ card.className = "profile";
 
- if (!chatId) return;
+ const avatar = document.createElement("div");
+ avatar.className = "avatar";
+ avatar.textContent = "🤖";
 
- /*
-   جلوگیری از پاسخ به پیام‌های ارسالی توسط خود ربات،
-   در صورتی که فیلد sender_type در رویداد وجود داشته باشد.
- */
- if (message.sender_type === "Bot") return;
+ const info = document.createElement("div");
+ info.className = "info";
 
- const reply = getReply(update);
+ const title = document.createElement("h3");
+ title.textContent =
+  bot.bot_title || bot.name || bot.title || "ربات روبیکا";
 
- if (reply) {
-  await sendMessage(chatId, reply);
- }
+ const id = document.createElement("p");
+ id.textContent = "شناسه: " +
+  (bot.bot_id || bot.id || "در پاسخ API موجود نیست");
+
+ const username = document.createElement("p");
+ const handle = bot.username || bot.bot_username;
+ username.textContent = "نام کاربری: " +
+  (handle ? (String(handle).startsWith("@") ? handle : "@"+handle)
+  : "در پاسخ API موجود نیست");
+
+ const badge = document.createElement("span");
+ badge.className = "badge";
+ badge.textContent = "پاسخ API دریافت شد";
+
+ info.append(title,id,username,badge);
+ card.append(avatar,info);
+ root.appendChild(card);
 }
 
-async function startBot() {
- if (!botToken) {
-  setStatus("ابتدا توکن را وارد و اتصال را بررسی کن.", "bad");
+async function connectBot(){
+ if($("connect").disabled) return;
+
+ const token = $("token").value.trim();
+
+ if(!token){
+  setStatus("ابتدا توکن ربات را وارد کن.","bad");
   return;
  }
 
- if (botRunning) return;
+ if(/\s/.test(token)){
+  setStatus("توکن دارای فاصله است؛ آن را بررسی کن.","bad");
+  return;
+ }
 
- botRunning = true;
- polling = true;
- nextOffset = null;
- abortController = new AbortController();
+ botToken = token;
+ $("connect").disabled = true;
+ $("profile").replaceChildren();
+ $("debug").textContent = "در حال ارسال درخواست به API روبیکا...";
+ setStatus("در حال بررسی توکن و دریافت اطلاعات ربات...");
 
- $("startBtn").disabled = true;
- $("stopBtn").disabled = false;
-
- setStatus("ربات در حال دریافت پیام‌هاست.", "good");
- log("دریافت پیام‌ها شروع شد.");
-
- try {
-  while (botRunning && polling) {
-   try {
-    const payload = { limit: 10 };
-
-    if (nextOffset) {
-     payload.offset_id = nextOffset;
-    }
-
-    const response = await apiRequest(
-     "getUpdates",
-     payload,
-     abortController.signal
-    );
-
-    const updates = extractUpdates(response);
-
-    for (const update of updates) {
-     if (!botRunning) break;
-
-     await processUpdate(update);
-    }
-
-    if (response?.next_offset_id) {
-     nextOffset = String(response.next_offset_id);
-    } else if (response?.data?.next_offset_id) {
-     nextOffset = String(response.data.next_offset_id);
-    }
-
-    lastError = "";
-
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-   } catch (error) {
-    if (!botRunning) break;
-
-    if (error.name === "AbortError") break;
-
-    if (error.message !== lastError) {
-     log("خطای دریافت پیام: " + error.message);
-     lastError = error.message;
-    }
-
-    /*
-      اگر API خطا بدهد، درخواست‌ها با فاصله تکرار می‌شوند.
-      خطای CORS ممکن است نیازمند اجرای درخواست از سرور باشد.
-    */
-    await new Promise(resolve => setTimeout(resolve, 5000));
+ try{
+  const response = await fetch(
+   API_BASE + encodeURIComponent(botToken) + "/getMe",
+   {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:"{}",
+    cache:"no-store"
    }
-  }
- } finally {
-  polling = false;
-  botRunning = false;
-  abortController = null;
+  );
 
-  $("startBtn").disabled = !botToken;
-  $("stopBtn").disabled = true;
+  let result;
 
-  if (botToken) {
-   setStatus("اجرای ربات متوقف شده است.");
+  try{
+   result = await response.json();
+  }catch{
+   throw new Error("پاسخ API قابل خواندن به‌صورت JSON نیست.");
   }
+
+  showDebug({
+   httpStatus:response.status,
+   response:result
+  });
+
+  if(!response.ok){
+   throw new Error("خطای HTTP: "+response.status);
+  }
+
+  if(
+   result.status === "ERROR" ||
+   result.ok === false ||
+   result.error
+  ){
+   throw new Error(
+    result.error_message ||
+    result.message ||
+    "API درخواست را نپذیرفت."
+   );
+  }
+
+  const bot = extractBot(result);
+
+  if(bot){
+   displayProfile(bot);
+   setStatus("پاسخ API دریافت شد و اطلاعات ربات نمایش داده شد.","good");
+  }else{
+   setStatus(
+    "پاسخ دریافت شد، اما اطلاعات قابل‌شناسایی ربات در آن نبود. " +
+    "بخش پاسخ API را بررسی کن.",
+    "bad"
+   );
+  }
+
+ }catch(error){
+  botToken = "";
+
+  $("token").value = "";
+
+  setStatus(
+   "اتصال ناموفق بود. ممکن است توکن نامعتبر باشد، " +
+   "ساختار API متفاوت باشد یا مرورگر درخواست را با CORS مسدود کرده باشد. " +
+   "خطا: "+error.message,
+   "bad"
+  );
+
+  if(error instanceof TypeError){
+   showDebug({
+    error:"Network/CORS",
+    message:"مرورگر نتوانست پاسخ API را بخواند."
+   });
+  }
+
+ }finally{
+  $("connect").disabled = false;
  }
 }
 
-function stopBot() {
- botRunning = false;
- polling = false;
-
- if (abortController) {
-  abortController.abort();
- }
-
- setStatus("درخواست توقف ثبت شد.");
- log("توقف ربات درخواست شد.");
-}
-
-function disconnectBot() {
- stopBot();
-
+function disconnectBot(){
  botToken = "";
- nextOffset = null;
- lastError = "";
-
  $("token").value = "";
- $("startBtn").disabled = true;
- $("stopBtn").disabled = true;
-
+ $("profile").replaceChildren();
+ $("debug").textContent = "اتصال قطع شد.";
  setStatus("توکن از حافظه موقت صفحه پاک شد.");
- log("توکن از متغیرهای برنامه پاک شد.");
 }
 
-/*
-  هنگام خروج از صفحه، توکن از متغیر برنامه پاک می‌شود.
-  این کار تضمین نمی‌کند که مرورگر همه نسخه‌های حافظه
-  را فوراً از حافظه فیزیکی پاک کند.
-*/
-window.addEventListener("pagehide", () => {
- botRunning = false;
- polling = false;
+window.addEventListener("pagehide",()=>{
  botToken = "";
- nextOffset = null;
-
- if (abortController) {
-  abortController.abort();
- }
 });
 </script>
 
