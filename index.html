@@ -1,332 +1,37 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ABOL BOT</title>
+import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
 
-<style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#080d19;color:#f8fafc;
- font-family:Tahoma,Arial,sans-serif
-}
-header{
- padding:22px;text-align:center;
- background:#111a2d;border-bottom:1px solid #28354c
-}
-.logo{font-size:27px;font-weight:bold;color:#a78bfa}
-.container{max-width:760px;margin:auto;padding:16px}
-.card{
- background:#121c30;border:1px solid #293752;
- padding:20px;border-radius:17px;margin:18px 0
-}
-h2{font-size:19px}
-p{color:#aab8cf;line-height:2;font-size:13px}
-input{
- width:100%;padding:14px;margin:10px 0;
- border:1px solid #364763;border-radius:10px;
- background:#080d19;color:white;font-family:inherit
-}
-button{
- border:0;border-radius:10px;padding:13px 16px;
- background:#7c3aed;color:white;
- font-family:inherit;font-weight:bold;cursor:pointer
-}
-button:disabled{opacity:.5}
-.secondary{background:#334155}
-.danger{background:#991b1b}
-.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
-.status{
- padding:13px;margin-top:14px;border-radius:10px;
- background:#202c42;line-height:2;overflow-wrap:anywhere
-}
-.good{background:#123a2e}
-.bad{background:#48232b}
-.profile{
- display:flex;align-items:center;gap:14px;
- margin-top:18px;padding:16px;
- border-radius:13px;background:#0b1425;
- border:1px solid #35415a
-}
-.avatar{
- width:65px;height:65px;flex-shrink:0;
- border-radius:50%;background:#312e81;
- display:flex;align-items:center;justify-content:center;
- font-size:30px
-}
-.info{min-width:0}
-.info h3{margin:0 0 8px;overflow-wrap:anywhere}
-.info p{margin:4px 0}
-.badge{
- display:inline-block;background:#164e3b;
- color:#86efac;padding:5px 9px;border-radius:8px;
- font-size:11px
-}
-pre{
- white-space:pre-wrap;overflow-wrap:anywhere;
- background:#080d19;padding:12px;border-radius:9px;
- color:#cbd5e1;font-size:12px;direction:ltr;text-align:left
-}
-footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
-</style>
-</head>
+import { renderErrorPage } from "./lib/error-page";
+import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
-<body>
-
-<header>
- <div class="logo">🤖 ABOL BOT</div>
- <p>پنل اتصال و مدیریت ربات روبیکا</p>
-</header>
-
-<main class="container">
-
- <section class="card">
-  <h2>🔐 اتصال ربات</h2>
-  <p>
-   توکن ربات را وارد کن تا اطلاعاتی که API ارائه می‌دهد
-   دریافت شود. توکن در حافظه موقت این صفحه نگهداری می‌شود.
-  </p>
-
-  <input id="token" type="password"
-   placeholder="توکن ربات روبیکا"
-   autocomplete="off" spellcheck="false">
-
-  <div class="actions">
-   <button id="connect" onclick="connectBot()">🔗 بررسی و اتصال</button>
-   <button class="secondary" onclick="toggleToken()">👁 نمایش توکن</button>
-   <button class="danger" onclick="disconnectBot()">قطع اتصال</button>
-  </div>
-
-  <div id="status" class="status">
-   وضعیت: هنوز متصل نشده است.
-  </div>
-
-  <div id="profile"></div>
- </section>
-
- <section class="card">
-  <h2>📋 پاسخ API</h2>
-  <p>
-   اگر اطلاعات ربات نمایش داده نشد، این قسمت به تشخیص
-   مشکل اتصال کمک می‌کند. توکن در گزارش نمایش داده نمی‌شود.
-  </p>
-  <pre id="debug">هنوز پاسخی دریافت نشده است.</pre>
- </section>
-
- <section class="card">
-  <h2>🛡️ حفظ امنیت</h2>
-  <p>
-   توکن را فقط در سایت مورد اعتمادت وارد کن.
-   این صفحه توکن را در localStorage یا sessionStorage ذخیره
-   نمی‌کند و کدی برای ارسال توکن به صاحب سایت ندارد.
-   با بستن صفحه، متغیر توکن از بین می‌رود.
-  </p>
-  <p>
-   درخواست API برای احراز هویت مستقیماً به روبیکا ارسال می‌شود.
-   اگر مرورگر درخواست را به دلیل CORS مسدود کند، اتصال مستقیم
-   از این صفحه امکان‌پذیر نخواهد بود.
-  </p>
- </section>
-
-</main>
-
-<footer>ABOL BOT © 2026</footer>
-
-<script>
-"use strict";
-
-let botToken = "";
-
-const API_BASE = "https://botapi.rubika.ir/v3/";
-
-const $ = id => document.getElementById(id);
-
-function setStatus(message, type=""){
- $("status").textContent = message;
- $("status").className = "status" + (type ? " " + type : "");
-}
-
-function toggleToken(){
- const input = $("token");
- input.type = input.type === "password" ? "text" : "password";
-}
-
-function showDebug(data){
- // هیچ توکنی در این بخش قرار داده نمی‌شود.
- $("debug").textContent = JSON.stringify(data,null,2);
-}
-
-function extractBot(data){
- const candidates = [
-  data?.data?.bot,
-  data?.data,
-  data?.bot,
-  data?.result?.bot,
-  data?.result
- ];
-
- for(const item of candidates){
-  if(item && typeof item === "object" && !Array.isArray(item)){
-   if(
-    item.bot_id || item.id || item.bot_title ||
-    item.username || item.name
-   ){
-    return item;
-   }
+const errorMiddleware = createMiddleware().server(async ({ next }) => {
+  try {
+    return await next();
+  } catch (error) {
+    if (error != null && typeof error === "object" && "statusCode" in error) {
+      throw error;
+    }
+    console.error(error);
+    return new Response(renderErrorPage(), {
+      status: 500,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
   }
- }
-
- return null;
-}
-
-function displayProfile(bot){
- const root = $("profile");
- root.replaceChildren();
-
- const card = document.createElement("div");
- card.className = "profile";
-
- const avatar = document.createElement("div");
- avatar.className = "avatar";
- avatar.textContent = "🤖";
-
- const info = document.createElement("div");
- info.className = "info";
-
- const title = document.createElement("h3");
- title.textContent =
-  bot.bot_title || bot.name || bot.title || "ربات روبیکا";
-
- const id = document.createElement("p");
- id.textContent = "شناسه: " +
-  (bot.bot_id || bot.id || "در پاسخ API موجود نیست");
-
- const username = document.createElement("p");
- const handle = bot.username || bot.bot_username;
- username.textContent = "نام کاربری: " +
-  (handle ? (String(handle).startsWith("@") ? handle : "@"+handle)
-  : "در پاسخ API موجود نیست");
-
- const badge = document.createElement("span");
- badge.className = "badge";
- badge.textContent = "پاسخ API دریافت شد";
-
- info.append(title,id,username,badge);
- card.append(avatar,info);
- root.appendChild(card);
-}
-
-async function connectBot(){
- if($("connect").disabled) return;
-
- const token = $("token").value.trim();
-
- if(!token){
-  setStatus("ابتدا توکن ربات را وارد کن.","bad");
-  return;
- }
-
- if(/\s/.test(token)){
-  setStatus("توکن دارای فاصله است؛ آن را بررسی کن.","bad");
-  return;
- }
-
- botToken = token;
- $("connect").disabled = true;
- $("profile").replaceChildren();
- $("debug").textContent = "در حال ارسال درخواست به API روبیکا...";
- setStatus("در حال بررسی توکن و دریافت اطلاعات ربات...");
-
- try{
-  const response = await fetch(
-   API_BASE + encodeURIComponent(botToken) + "/getMe",
-   {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:"{}",
-    cache:"no-store"
-   }
-  );
-
-  let result;
-
-  try{
-   result = await response.json();
-  }catch{
-   throw new Error("پاسخ API قابل خواندن به‌صورت JSON نیست.");
-  }
-
-  showDebug({
-   httpStatus:response.status,
-   response:result
-  });
-
-  if(!response.ok){
-   throw new Error("خطای HTTP: "+response.status);
-  }
-
-  if(
-   result.status === "ERROR" ||
-   result.ok === false ||
-   result.error
-  ){
-   throw new Error(
-    result.error_message ||
-    result.message ||
-    "API درخواست را نپذیرفت."
-   );
-  }
-
-  const bot = extractBot(result);
-
-  if(bot){
-   displayProfile(bot);
-   setStatus("پاسخ API دریافت شد و اطلاعات ربات نمایش داده شد.","good");
-  }else{
-   setStatus(
-    "پاسخ دریافت شد، اما اطلاعات قابل‌شناسایی ربات در آن نبود. " +
-    "بخش پاسخ API را بررسی کن.",
-    "bad"
-   );
-  }
-
- }catch(error){
-  botToken = "";
-
-  $("token").value = "";
-
-  setStatus(
-   "اتصال ناموفق بود. ممکن است توکن نامعتبر باشد، " +
-   "ساختار API متفاوت باشد یا مرورگر درخواست را با CORS مسدود کرده باشد. " +
-   "خطا: "+error.message,
-   "bad"
-  );
-
-  if(error instanceof TypeError){
-   showDebug({
-    error:"Network/CORS",
-    message:"مرورگر نتوانست پاسخ API را بخواند."
-   });
-  }
-
- }finally{
-  $("connect").disabled = false;
- }
-}
-
-function disconnectBot(){
- botToken = "";
- $("token").value = "";
- $("profile").replaceChildren();
- $("debug").textContent = "اتصال قطع شد.";
- setStatus("توکن از حافظه موقت صفحه پاک شد.");
-}
-
-window.addEventListener("pagehide",()=>{
- botToken = "";
 });
-</script>
 
-</body>
-</html>
+// Start installs this automatically when src/start.ts is absent; defining the
+// file opts out, so re-add it explicitly to keep server functions protected
+// from cross-site requests.
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === "serverFn",
+});
+
+// requestMiddleware runs on every request; functionMiddleware only on server functions, where
+// client sendContext is unvalidated input. Append to these arrays, never replace them.
+// Enabling Lovable Cloud adds functionMiddleware: [attachSupabaseAuth], the bearer token that
+// requireSupabaseAuth server functions need. Add it by hand only if Lovable Cloud or a
+// user-managed Supabase project is connected, no middleware here sets Authorization, and the
+// project did not intentionally replace it.
+export const startInstance = createStart(() => ({
+  functionMiddleware: [attachSupabaseAuth],
+  requestMiddleware: [errorMiddleware, csrfMiddleware],
+}));
