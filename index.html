@@ -1,1 +1,404 @@
-https://id-preview--4b0b24e8-e6ea-4be2-ad0b-1c2f74caadac.lovable.app/?__lovable_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9%2EeyJ1c2VyX2lkIjoiTFJvZ1JNcFpBVmZDV2VGbUJkZUxCdjc3SHc3MiIsInByb2plY3RfaWQiOiI0YjBiMjRlOC1lNmVhLTRiZTItYWQwYi0xYzJmNzRjYWFkYWMiLCJhY2Nlc3NfdHlwZSI6InByb2plY3QiLCJsb2dpbl9zZXNzaW9uX2lkIjoiNGNhYWQ1MzMtZTkyYS00ZmRlLTgwODUtYjc1OTFkZGFmZThmIiwiaXNzIjoibG92YWJsZS1hcGkiLCJzdWIiOiI0YjBiMjRlOC1lNmVhLTRiZTItYWQwYi0xYzJmNzRjYWFkYWMiLCJhdWQiOlsibG92YWJsZS1hcHAiXSwiZXhwIjoxNzk1MTkwNDMyLCJuYmYiOjE3OTUxMDQwMzIsImlhdCI6MTc5NTEwNDAzMn0%2EYIOWv5kh_UhmSePDfRftvx9elA5JL9tWw1WII0L1vIaD51RaaTOrkA-Q-uhX9oCZGOwCR1Wg3bXXBf6dIcrRWeSAvVpX-ALjc0iCz-S4WxQvDbV6GhXYwS9x2Gok_q59MN-SenbkqLzIyc6wPG2lFOkUcZxLw6fMMpatA4Rdv2n4FhzD5Vqp-3jtqTgqRIEURu8WB2BzxyuAdV24FW3K6AC3hR9_L9f8Hj-n2pWfmfG66wFC753zv0manRSxQB8F5Du2QHZPSI65SLmAbekOFhb_EAcqO9PsXV-puIsVOKTmYTRrWosqDRL7Qme0sX9jbYukQ8l939w9LL--dTXnoEH5gLYKWT9mqdLWxa92jbZtsoKmjxPyW4HT0eOV7LxiUsl7Gh2jutLf1uE0vWGqoeJ_YQL1k5igMCDUrUaQA8pAvZZbkXvgvT0UUSncnanKhEwrougbqqfERoThA5BU1y8qazh1xKkQ266Hl94JWQqvF94ixN96PHakiRrF8bzv
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  ArrowRight,
+  Ban,
+  BadgeCheck,
+  Check,
+  Search,
+  ShieldCheck,
+  Trash2,
+  TriangleAlert,
+  X,
+} from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserAvatar } from "@/components/chat/UserAvatar";
+import { VerifiedBadge } from "@/components/chat/VerifiedBadge";
+import { StatsTab } from "@/components/admin/StatsTab";
+import { BanDialog, WarnDialog, type ModTarget } from "@/components/admin/ModerationDialogs";
+import { useIsOnline } from "@/hooks/use-presence";
+import { checkIsAdmin, REPORT_REASONS, REPORT_STATUS, type ReportReason } from "@/lib/moderation";
+import { formatDayLabel, formatTime } from "@/lib/chat";
+import { cn } from "@/lib/utils";
+
+export const Route = createFileRoute("/_authenticated/admin")({
+  beforeLoad: async ({ context }) => {
+    if (!(await checkIsAdmin(context.user.id))) throw redirect({ to: "/chat" });
+  },
+  head: () => ({
+    meta: [
+      { title: "پنل مدیریت — گپ" },
+      { name: "description", content: "مدیریت کاربران، گزارش‌ها و اخطارها در گپ." },
+      { property: "og:title", content: "پنل مدیریت — گپ" },
+      { property: "og:description", content: "مدیریت کاربران، گزارش‌ها و اخطارها در گپ." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: AdminPage,
+});
+
+const fa = (n: number) => n.toLocaleString("fa-IR");
+
+function AdminPage() {
+  const { user } = Route.useRouteContext();
+  const [tab, setTab] = useState("stats");
+  const [warn, setWarn] = useState<ModTarget | null>(null);
+  const [ban, setBan] = useState<ModTarget | null>(null);
+
+  return (
+    <div className="min-h-dvh bg-background">
+      <header className="sticky top-0 z-10 flex items-center gap-2 border-b bg-card px-2 py-2">
+        <Link
+          to="/chat"
+          className="flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted"
+          aria-label="بازگشت"
+        >
+          <ArrowRight className="size-5" />
+        </Link>
+        <ShieldCheck className="size-5 text-verified" />
+        <h1 className="font-bold">پنل مدیریت</h1>
+      </header>
+      <div className="mx-auto max-w-5xl px-4 py-5">
+        <Tabs value={tab} onValueChange={setTab} dir="rtl">
+          <TabsList className="mb-5 grid h-11 w-full grid-cols-3">
+            <TabsTrigger value="stats" className="h-9">
+              داشبورد
+            </TabsTrigger>
+            <TabsTrigger value="reports" className="h-9">
+              گزارش‌ها
+            </TabsTrigger>
+            <TabsTrigger value="users" className="h-9">
+              کاربران
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="stats">
+            <StatsTab onOpenReports={() => setTab("reports")} />
+          </TabsContent>
+          <TabsContent value="reports">
+            <ReportsTab adminId={user.id} onWarn={setWarn} onBan={setBan} />
+          </TabsContent>
+          <TabsContent value="users">
+            <UsersTab myId={user.id} onWarn={setWarn} onBan={setBan} />
+          </TabsContent>
+        </Tabs>
+      </div>
+      <WarnDialog target={warn} adminId={user.id} onClose={() => setWarn(null)} />
+      <BanDialog target={ban} adminId={user.id} onClose={() => setBan(null)} />
+    </div>
+  );
+}
+
+function ReportsTab({
+  adminId,
+  onWarn,
+  onBan,
+}: {
+  adminId: string;
+  onWarn: (t: ModTarget) => void;
+  onBan: (t: ModTarget) => void;
+}) {
+  const qc = useQueryClient();
+  const [status, setStatus] = useState<"open" | "resolved" | "dismissed" | "all">("open");
+  const { data: reports = [], isLoading } = useQuery({
+    queryKey: ["admin", "reports", status],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("admin_reports", { _status: status });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  useEffect(() => {
+    const channel = supabase
+      .channel(`reports-${Math.random().toString(36).slice(2)}`)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "reports" }, () => {
+        toast.info("گزارش جدیدی ثبت شد");
+        qc.invalidateQueries({ queryKey: ["admin"] });
+      })
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [qc]);
+
+  async function setReportStatus(id: string, s: "resolved" | "dismissed") {
+    const { error } = await supabase
+      .from("reports")
+      .update({ status: s, handled_by: adminId, handled_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) {
+      toast.error("انجام نشد");
+      return;
+    }
+    qc.invalidateQueries({ queryKey: ["admin"] });
+  }
+
+  async function deleteMessage(messageId: string) {
+    const { error } = await supabase.from("messages").delete().eq("id", messageId);
+    if (error) toast.error("حذف پیام انجام نشد");
+    else toast.success("پیام حذف شد");
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {(["open", "resolved", "dismissed", "all"] as const).map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => setStatus(s)}
+            className={cn(
+              "rounded-full border px-3 py-1.5 text-sm",
+              status === s
+                ? "border-primary bg-primary-soft font-semibold text-primary"
+                : "hover:bg-muted",
+            )}
+          >
+            {s === "all" ? "همه" : REPORT_STATUS[s]}
+          </button>
+        ))}
+      </div>
+      {isLoading ? null : reports.length === 0 ? (
+        <p className="rounded-2xl border bg-card p-8 text-center text-sm text-muted-foreground">
+          گزارشی نیست 🎉
+        </p>
+      ) : (
+        reports.map((r) => {
+          const name = r.reported_name || r.reported_username;
+          return (
+            <article key={r.id} className="rounded-2xl border bg-card p-4 shadow-soft">
+              <div className="flex items-start gap-3">
+                <UserAvatar path={r.reported_avatar} name={name} className="size-11" />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-1.5 font-bold">
+                    {name}
+                    <span className="text-xs font-normal text-muted-foreground" dir="ltr">
+                      @{r.reported_username}
+                    </span>
+                    {r.reported_banned && (
+                      <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-xs text-destructive">
+                        مسدود
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-1 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                    <span className="rounded-full bg-destructive/10 px-2 py-0.5 font-semibold text-destructive">
+                      {REPORT_REASONS[r.reason as ReportReason] ?? r.reason}
+                    </span>
+                    <span>{fa(r.reported_warning_count)} اخطار قبلی</span>
+                    <span>{REPORT_STATUS[r.status as keyof typeof REPORT_STATUS]}</span>
+                  </div>
+                </div>
+                <span className="shrink-0 text-xs text-muted-foreground">
+                  {formatDayLabel(r.created_at)} {formatTime(r.created_at)}
+                </span>
+              </div>
+              {r.message_content && (
+                <blockquote
+                  className="mt-3 rounded-xl border-s-4 border-destructive/50 bg-muted px-3 py-2 text-sm leading-6"
+                  dir="auto"
+                >
+                  {r.message_content}
+                  {r.conversation_name && (
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      در: {r.conversation_name}
+                    </div>
+                  )}
+                </blockquote>
+              )}
+              {r.details && <p className="mt-2 text-sm">توضیح گزارش‌دهنده: {r.details}</p>}
+              <p className="mt-2 text-xs text-muted-foreground">
+                گزارش‌دهنده: {r.reporter_name || r.reporter_username} (
+                <span dir="ltr">@{r.reporter_username}</span>)
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  onClick={() => onWarn({ id: r.reported_id, name, reportId: r.id })}
+                >
+                  <TriangleAlert /> اخطار
+                </Button>
+                {!r.reported_banned && (
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => onBan({ id: r.reported_id, name, reportId: r.id })}
+                  >
+                    <Ban /> مسدود
+                  </Button>
+                )}
+                {r.message_id && (
+                  <Button size="sm" variant="outline" onClick={() => deleteMessage(r.message_id)}>
+                    <Trash2 /> حذف پیام
+                  </Button>
+                )}
+                {r.status === "open" && (
+                  <>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setReportStatus(r.id, "resolved")}
+                    >
+                      <Check /> رسیدگی شد
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setReportStatus(r.id, "dismissed")}
+                    >
+                      <X /> رد گزارش
+                    </Button>
+                  </>
+                )}
+              </div>
+            </article>
+          );
+        })
+      )}
+    </div>
+  );
+}
+
+function UsersTab({
+  myId,
+  onWarn,
+  onBan,
+}: {
+  myId: string;
+  onWarn: (t: ModTarget) => void;
+  onBan: (t: ModTarget) => void;
+}) {
+  const qc = useQueryClient();
+  const [term, setTerm] = useState("");
+  const [search, setSearch] = useState("");
+  useEffect(() => {
+    const t = setTimeout(() => setSearch(term.trim()), 300);
+    return () => clearTimeout(t);
+  }, [term]);
+
+  const { data: users = [] } = useQuery({
+    queryKey: ["admin", "users", search],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("admin_list_users", { _search: search });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  async function run(p: PromiseLike<{ error: unknown }>, ok: string) {
+    const { error } = await p;
+    if (error) {
+      toast.error("انجام نشد");
+      return;
+    }
+    toast.success(ok);
+    qc.invalidateQueries({ queryKey: ["admin"] });
+    qc.invalidateQueries({ queryKey: ["verified-ids"] });
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="relative">
+        <Search className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          value={term}
+          onChange={(e) => setTerm(e.target.value)}
+          placeholder="جستجوی کاربر…"
+          className="h-11 pr-10"
+        />
+      </div>
+      {users.map((u) => {
+        const name = u.display_name || u.username;
+        return (
+          <div key={u.id} className="rounded-2xl border bg-card p-4 shadow-soft">
+            <div className="flex items-center gap-3">
+              <OnlineAvatar id={u.id} path={u.avatar_url} name={name} />
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1 font-bold">
+                  <span className="truncate">{name}</span>
+                  <VerifiedBadge userId={u.id} />
+                </div>
+                <div className="truncate text-xs text-muted-foreground" dir="ltr">
+                  @{u.username}
+                </div>
+              </div>
+              {u.banned && (
+                <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-xs text-destructive">
+                  مسدود
+                </span>
+              )}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
+              <span>{fa(u.message_count)} پیام</span>
+              <span className={u.report_count ? "font-semibold text-destructive" : ""}>
+                {fa(u.report_count)} گزارش
+              </span>
+              <span>{fa(u.warning_count)} اخطار</span>
+              <span>عضویت: {formatDayLabel(u.created_at)}</span>
+            </div>
+            {u.id !== myId && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button size="sm" variant="outline" onClick={() => onWarn({ id: u.id, name })}>
+                  <TriangleAlert /> اخطار
+                </Button>
+                {u.banned ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() =>
+                      run(supabase.rpc("admin_unban_user", { _user: u.id }), "رفع مسدودی انجام شد")
+                    }
+                  >
+                    رفع مسدودی
+                  </Button>
+                ) : (
+                  !u.is_admin && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-destructive"
+                      onClick={() => onBan({ id: u.id, name })}
+                    >
+                      <Ban /> مسدود
+                    </Button>
+                  )
+                )}
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() =>
+                    run(
+                      supabase.rpc("admin_set_verified", { _user: u.id, _value: !u.is_admin }),
+                      u.is_admin ? "تیک آبی برداشته شد" : "تیک آبی و دسترسی مدیریت داده شد",
+                    )
+                  }
+                >
+                  <BadgeCheck className="text-verified" />
+                  {u.is_admin ? "برداشتن تیک آبی" : "دادن تیک آبی"}
+                </Button>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function OnlineAvatar({ id, path, name }: { id: string; path: string | null; name: string }) {
+  const online = useIsOnline(id);
+  return (
+    <div className="relative">
+      <UserAvatar path={path} name={name} className="size-11" />
+      {online && (
+        <span className="absolute bottom-0 left-0 size-3 rounded-full bg-online ring-2 ring-card" />
+      )}
+    </div>
+  );
+}
